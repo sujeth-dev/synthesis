@@ -69,7 +69,13 @@ function skillsLeft(nodes: SkillNode[], stateMap: Map<string, LearnerSkillState>
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default async function Dashboard() {
+export default async function Dashboard({
+  searchParams,
+}: {
+  searchParams?: { view?: string }
+}) {
+  const viewAll = searchParams?.view === 'all'
+
   const cookieStore = cookies()
   const token = cookieStore.get('synaptic_token')?.value
   if (!token) redirect('/login')
@@ -112,8 +118,18 @@ export default async function Dashboard() {
 
   const top4Upcoming = upcomingSchedules.slice(0, 4).map(s => {
     const node = allNodes.find(n => n.id === s.skill_id)
-    const { label } = deriveUrgency(s.due_at, now)
-    return { id: s.skill_id, nodeLabel: node?.label ?? s.skill_id, urgencyLabel: label }
+    const { label, days_until_due } = deriveUrgency(s.due_at, now)
+    return { id: s.skill_id, nodeLabel: node?.label ?? s.skill_id, urgencyLabel: label, soonEnough: days_until_due <= 1 }
+  })
+
+  // ── All dues (full list, for ?view=all) ─────────────────────────────────────
+  const allDuesItems = learnedSchedules.map(s => {
+    const node = allNodes.find(n => n.id === s.skill_id)
+    const { label, urgency } = deriveUrgency(s.due_at, now)
+    return { id: s.skill_id, nodeLabel: node?.label ?? s.skill_id, urgencyLabel: label, urgency }
+  }).sort((a, b) => {
+    const order: Record<string, number> = { overdue: 0, due_today: 1, due_soon: 2, upcoming: 3 }
+    return (order[a.urgency] ?? 4) - (order[b.urgency] ?? 4)
   })
 
   // ── Phase data ──────────────────────────────────────────────────────────────
@@ -167,6 +183,15 @@ export default async function Dashboard() {
             </p>
           </div>
           <div className="flex items-center gap-2">
+            {/* All dues toggle */}
+            {learnedSchedules.length > 0 && (
+              <Link
+                href={viewAll ? '/dashboard' : '/dashboard?view=all'}
+                className="px-4 py-2.5 rounded-xl border border-[var(--border)] text-c-faint hover:text-c-muted text-[13px] font-mono transition-all"
+              >
+                {viewAll ? '← Back' : `All dues (${learnedSchedules.length})`}
+              </Link>
+            )}
             {/* Review slot — amber if urgent, muted badge if upcoming, hidden if neither */}
             {urgentCount > 0 ? (
               <Link
@@ -320,7 +345,7 @@ export default async function Dashboard() {
         </div>
 
         {/* ── Urgent Reviews ───────────────────────────────────────────────── */}
-        {urgentCount > 0 && (
+        {urgentCount > 0 && !viewAll && (
           <div className="rounded-2xl border border-[#fbbf24]/30 bg-c-bg2 overflow-hidden mb-4 animate-slide-up">
             <div className="px-6 pt-4 pb-3 flex items-center justify-between border-b border-[var(--border)]">
               <div className="flex items-center gap-2">
@@ -358,7 +383,7 @@ export default async function Dashboard() {
         )}
 
         {/* ── Upcoming Reviews ─────────────────────────────────────────────── */}
-        {upcomingCount > 0 && (
+        {upcomingCount > 0 && !viewAll && (
           <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden mb-6 animate-slide-up">
             <div className="px-6 pt-4 pb-3 flex items-center justify-between border-b border-[var(--border)]">
               <div className="flex items-center gap-2">
@@ -373,7 +398,53 @@ export default async function Dashboard() {
               {top4Upcoming.map(skill => (
                 <div key={skill.id} className="px-6 py-3 flex items-center justify-between">
                   <span className="text-[14px] text-c-muted truncate mr-4">{skill.nodeLabel}</span>
-                  <span className="text-[12px] font-mono text-c-faint flex-shrink-0">{skill.urgencyLabel}</span>
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    <span className="text-[12px] font-mono text-c-faint">{skill.urgencyLabel}</span>
+                    {skill.soonEnough && (
+                      <Link
+                        href={`/learn/skill/${skill.id}`}
+                        className="px-3 py-1 rounded-lg text-[12px] font-mono text-[#fbbf24] bg-[#fbbf24]/10 hover:bg-[#fbbf24]/20 border border-[#fbbf24]/20 transition-all"
+                      >
+                        Review now →
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── All dues view ─────────────────────────────────────────────────── */}
+        {viewAll && (
+          <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden mb-6 animate-slide-up">
+            <div className="px-6 pt-4 pb-3 flex items-center justify-between border-b border-[var(--border)]">
+              <div className="flex items-center gap-2">
+                <p className="text-[14px] font-semibold text-c-text">All dues</p>
+                <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-[var(--bg3)] text-c-muted border border-[var(--border)]">
+                  {allDuesItems.length}
+                </span>
+              </div>
+            </div>
+            <div className="divide-y divide-[var(--border)]">
+              {allDuesItems.map(skill => (
+                <div key={skill.id} className="px-6 py-3 flex items-center justify-between">
+                  <span className="text-[14px] text-c-text truncate mr-4">{skill.nodeLabel}</span>
+                  <div className="flex items-center gap-4 flex-shrink-0">
+                    <span className={`text-[12px] font-mono ${skill.urgency === 'overdue' ? 'text-[#f87171]' : skill.urgency === 'due_today' ? 'text-[#fbbf24]' : 'text-c-faint'}`}>
+                      {skill.urgencyLabel}
+                    </span>
+                    <Link
+                      href={`/learn/skill/${skill.id}`}
+                      className={`px-3 py-1 rounded-lg text-[12px] font-mono border transition-all ${
+                        skill.urgency === 'overdue' || skill.urgency === 'due_today'
+                          ? 'text-[#fbbf24] bg-[#fbbf24]/10 hover:bg-[#fbbf24]/20 border-[#fbbf24]/20'
+                          : 'text-c-purple bg-c-purple/10 hover:bg-c-purple/20 border-c-purple/20'
+                      }`}
+                    >
+                      Review →
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
