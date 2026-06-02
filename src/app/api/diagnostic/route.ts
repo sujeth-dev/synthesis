@@ -11,20 +11,17 @@ import {
 import type { LearnerSkillState } from '@/types'
 
 export async function POST(req: NextRequest) {
-  const user = getCurrentUser()
+  const user = await getCurrentUser()
   if (!user) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
 
   const { results } = await req.json()
-  // results: Array<{ question_id, skill_id, correct, latency_ms, graph_placement_weight }>
 
   const placement = placeLearner(results)
   const allNodes  = getAllNodes().filter(n => !n.deprecated)
 
-  // Build a temporary skill map to determine blocking
   const tempMap = new Map<string, number>()
-  for (const [sid, score] of Object.entries(placement.skill_scores)) tempMap.set(sid, score)
+  for (const [sid, score] of Object.entries(placement.skill_scores)) tempMap.set(sid, score as number)
 
-  // Initialise all 31 skill states
   const skillStates: LearnerSkillState[] = allNodes.map(node => {
     const initialPKnow = placement.skill_scores[node.id]
     const prereqs      = getHardPrereqs(node.id)
@@ -32,14 +29,14 @@ export async function POST(req: NextRequest) {
     return initSkillState(user.id, node.id, initialPKnow, blocked)
   })
 
-  // Initialise SM-2 schedules for all nodes
   const schedules = allNodes.map(n => initSM2(user.id, n.id))
 
-  // Persist everything
-  bulkUpsertSkillStates(skillStates)
-  bulkUpsertReviewSchedules(schedules)
-  upsertMotivationState(initMotivationState(user.id))
-  setDiagnosticDone(user.id, placement.entry_node)
+  await Promise.all([
+    bulkUpsertSkillStates(skillStates),
+    bulkUpsertReviewSchedules(schedules),
+    upsertMotivationState(initMotivationState(user.id)),
+    setDiagnosticDone(user.id, placement.entry_node),
+  ])
 
   return NextResponse.json({ entry_node: placement.entry_node, skill_count: skillStates.length })
 }

@@ -5,12 +5,14 @@ import { getAllNodes, getAllEdges } from '@/lib/graph'
 import type { MasteryState } from '@/types'
 
 export async function GET() {
-  const user = getCurrentUser()
+  const user = await getCurrentUser()
   if (!user) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
 
-  const nodes       = getAllNodes()
-  const edges       = getAllEdges()
-  const skillStates = getAllSkillStates(user.id)
+  const [nodes, edges, skillStates] = await Promise.all([
+    Promise.resolve(getAllNodes()),
+    Promise.resolve(getAllEdges()),
+    getAllSkillStates(user.id),
+  ])
 
   const stateMap = new Map(skillStates.map(s => [s.skill_id, s]))
 

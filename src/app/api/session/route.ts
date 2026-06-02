@@ -25,24 +25,27 @@ function loadQuestions(skillId: string): Question[] {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = getCurrentUser()
+    const user = await getCurrentUser()
     if (!user) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
 
     const { action, session_id, seen_skills = [], seen_question_ids = [], mode } = await req.json()
 
     if (action === 'start') {
-      const session = createSession(user.id)
+      const session = await createSession(user.id)
       return NextResponse.json({ session_id: session.id })
     }
 
     if (action === 'next') {
       if (!session_id) return NextResponse.json({ error: 'session_id required' }, { status: 400 })
-      const session = getSession(session_id)
+      const session = await getSession(session_id)
       if (!session || session.learner_id !== user.id) return NextResponse.json({ error: 'Invalid session' }, { status: 403 })
 
-      let allStates = getAllSkillStates(user.id)
-      const allSchedules = getReviewSchedules(user.id)
-      const motivation   = getMotivationState(user.id)
+      const [allStatesRaw, allSchedules, motivation] = await Promise.all([
+        getAllSkillStates(user.id),
+        getReviewSchedules(user.id),
+        getMotivationState(user.id),
+      ])
+      let allStates = allStatesRaw
 
       // Auto-sync: initialize states for any new nodes added after onboarding
       const allNodeIds  = new Set(getAllNodes().filter(n => !n.deprecated).map(n => n.id))
@@ -56,8 +59,10 @@ export async function POST(req: NextRequest) {
           return initSkillState(user.id, id, undefined, blocked)
         })
         const newSchedules = newNodeIds.map(id => initSM2(user.id, id))
-        bulkUpsertSkillStates(newStates)
-        bulkUpsertReviewSchedules(newSchedules)
+        await Promise.all([
+          bulkUpsertSkillStates(newStates),
+          bulkUpsertReviewSchedules(newSchedules),
+        ])
         allStates = [...allStates, ...newStates]
       }
 
@@ -66,7 +71,6 @@ export async function POST(req: NextRequest) {
       const skillStates     = new Map(allStates.map(s => [s.skill_id, s]))
       const reviewSchedules = new Map(allSchedules.map(s => [s.skill_id, s]))
 
-      // Load question files via fs — reliable with dynamic paths, correct array format
       const questionsCache = new Map<string, Question[]>()
       for (const sid of Array.from(skillStates.keys())) {
         const qs = loadQuestions(sid)
@@ -86,7 +90,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === 'end') {
-      if (session_id) endSession(session_id)
+      if (session_id) await endSession(session_id)
       return NextResponse.json({ ok: true })
     }
 

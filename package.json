@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",
+    "@supabase/supabase-js": "^2.106.2",
     "@xyflow/react": "^12.10.2",
     "bcryptjs": "^2.4.3",
-    "better-sqlite3": "^12.8.0",
     "clsx": "^2.1.1",
     "cookies-next": "^4.2.1",
     "jsonwebtoken": "^9.0.2",
@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
-    "@types/better-sqlite3": "^7.6.11",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
     "@types/react": "^18",

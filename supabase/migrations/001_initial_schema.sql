@@ -1,9 +1,10 @@
--- Synaptic — Supabase Schema
--- Only needed if you switch to Supabase (DB_BACKEND=supabase in .env.local)
+-- Synaptic — Supabase Schema (Custom JWT Auth)
+-- Run this in Supabase SQL Editor: Dashboard → SQL Editor → paste → Run
 
 CREATE TABLE IF NOT EXISTS learner_profiles (
-  id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id               TEXT PRIMARY KEY,
   email            TEXT UNIQUE NOT NULL,
+  password_hash    TEXT NOT NULL,
   display_name     TEXT,
   created_at       TIMESTAMPTZ DEFAULT now(),
   diagnostic_done  BOOLEAN DEFAULT false,
@@ -13,8 +14,16 @@ CREATE TABLE IF NOT EXISTS learner_profiles (
   graph_version    TEXT DEFAULT '1.0.0'
 );
 
+-- Auth sessions for custom JWT tokens
+CREATE TABLE IF NOT EXISTS auth_sessions (
+  token        TEXT PRIMARY KEY,
+  learner_id   TEXT NOT NULL REFERENCES learner_profiles(id) ON DELETE CASCADE,
+  expires_at   TIMESTAMPTZ NOT NULL,
+  created_at   TIMESTAMPTZ DEFAULT now()
+);
+
 CREATE TABLE IF NOT EXISTS learner_skill_states (
-  learner_id          UUID REFERENCES learner_profiles(id) ON DELETE CASCADE,
+  learner_id          TEXT NOT NULL REFERENCES learner_profiles(id) ON DELETE CASCADE,
   skill_id            TEXT NOT NULL,
   p_know              FLOAT DEFAULT 0.1,
   p_slip              FLOAT DEFAULT 0.1,
@@ -31,7 +40,7 @@ CREATE TABLE IF NOT EXISTS learner_skill_states (
 );
 
 CREATE TABLE IF NOT EXISTS review_schedules (
-  learner_id       UUID REFERENCES learner_profiles(id) ON DELETE CASCADE,
+  learner_id       TEXT NOT NULL REFERENCES learner_profiles(id) ON DELETE CASCADE,
   skill_id         TEXT NOT NULL,
   interval_days    INT DEFAULT 1,
   ease_factor      FLOAT DEFAULT 2.5,
@@ -42,11 +51,11 @@ CREATE TABLE IF NOT EXISTS review_schedules (
 );
 
 CREATE TABLE IF NOT EXISTS attempt_events (
-  id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  learner_id       UUID REFERENCES learner_profiles(id) ON DELETE CASCADE,
+  id               TEXT PRIMARY KEY,
+  learner_id       TEXT NOT NULL REFERENCES learner_profiles(id) ON DELETE CASCADE,
   skill_id         TEXT NOT NULL,
   question_id      TEXT NOT NULL,
-  session_id       UUID,
+  session_id       TEXT,
   correct          BOOLEAN NOT NULL,
   latency_ms       INT,
   revision_count   INT DEFAULT 0,
@@ -57,8 +66,8 @@ CREATE TABLE IF NOT EXISTS attempt_events (
 );
 
 CREATE TABLE IF NOT EXISTS sessions (
-  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  learner_id    UUID REFERENCES learner_profiles(id) ON DELETE CASCADE,
+  id            TEXT PRIMARY KEY,
+  learner_id    TEXT NOT NULL REFERENCES learner_profiles(id) ON DELETE CASCADE,
   started_at    TIMESTAMPTZ DEFAULT now(),
   ended_at      TIMESTAMPTZ,
   tasks_count   INT DEFAULT 0,
@@ -67,7 +76,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 );
 
 CREATE TABLE IF NOT EXISTS motivation_states (
-  learner_id                  UUID PRIMARY KEY REFERENCES learner_profiles(id),
+  learner_id                  TEXT PRIMARY KEY REFERENCES learner_profiles(id) ON DELETE CASCADE,
   state                       TEXT DEFAULT 'neutral',
   consecutive_errors          INT DEFAULT 0,
   slow_response_streak        INT DEFAULT 0,
@@ -75,18 +84,18 @@ CREATE TABLE IF NOT EXISTS motivation_states (
   updated_at                  TIMESTAMPTZ DEFAULT now()
 );
 
--- Enable RLS
-ALTER TABLE learner_profiles     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE learner_skill_states ENABLE ROW LEVEL SECURITY;
-ALTER TABLE review_schedules     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE attempt_events       ENABLE ROW LEVEL SECURITY;
-ALTER TABLE sessions             ENABLE ROW LEVEL SECURITY;
-ALTER TABLE motivation_states    ENABLE ROW LEVEL SECURITY;
+CREATE TABLE IF NOT EXISTS implementation_intentions (
+  learner_id   TEXT PRIMARY KEY REFERENCES learner_profiles(id) ON DELETE CASCADE,
+  study_time   TEXT,
+  duration_min INT DEFAULT 25,
+  days_of_week TEXT,
+  created_at   TIMESTAMPTZ DEFAULT now()
+);
 
--- Policies
-CREATE POLICY "self" ON learner_profiles     USING (id = auth.uid());
-CREATE POLICY "self" ON learner_skill_states USING (learner_id = auth.uid());
-CREATE POLICY "self" ON review_schedules     USING (learner_id = auth.uid());
-CREATE POLICY "self" ON attempt_events       USING (learner_id = auth.uid());
-CREATE POLICY "self" ON sessions             USING (learner_id = auth.uid());
-CREATE POLICY "self" ON motivation_states    USING (learner_id = auth.uid());
+-- Indexes
+CREATE INDEX IF NOT EXISTS idx_lss_mastery ON learner_skill_states(learner_id, mastery_state);
+CREATE INDEX IF NOT EXISTS idx_lss_pknow   ON learner_skill_states(learner_id, p_know);
+CREATE INDEX IF NOT EXISTS idx_rs_due      ON review_schedules(learner_id, due_at);
+CREATE INDEX IF NOT EXISTS idx_ae_learner  ON attempt_events(learner_id, attempted_at);
+CREATE INDEX IF NOT EXISTS idx_as_token    ON auth_sessions(token);
+CREATE INDEX IF NOT EXISTS idx_as_expires  ON auth_sessions(expires_at);

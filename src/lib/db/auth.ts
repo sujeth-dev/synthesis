@@ -1,13 +1,8 @@
-/**
- * Local authentication using bcryptjs + JWT
- * Replaces Supabase Auth entirely for local mode
- */
-
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { getDb, generateId } from '@/lib/db'
 
-const JWT_SECRET = process.env.JWT_SECRET || 'synaptic-local-dev-secret-change-in-production'
+const JWT_SECRET    = process.env.JWT_SECRET || 'synaptic-local-dev-secret-change-in-production'
 const JWT_EXPIRES_IN = '30d'
 
 export interface AuthUser {
@@ -23,27 +18,32 @@ export async function registerUser(
   displayName?: string,
 ): Promise<{ user: AuthUser; token: string } | { error: string }> {
   const db = getDb()
+  const normalizedEmail = email.toLowerCase().trim()
 
-  const existing = db.prepare('SELECT id FROM learner_profiles WHERE email = ?').get(email)
+  const { data: existing } = await db
+    .from('learner_profiles')
+    .select('id')
+    .eq('email', normalizedEmail)
+    .maybeSingle()
   if (existing) return { error: 'Email already registered' }
 
   const hash = await bcrypt.hash(password, 10)
   const id   = generateId()
   const name = displayName || email.split('@')[0]
 
-  db.prepare(`
-    INSERT INTO learner_profiles (id, email, password_hash, display_name)
-    VALUES (?, ?, ?, ?)
-  `).run(id, email.toLowerCase().trim(), hash, name)
+  await db.from('learner_profiles').insert({
+    id,
+    email: normalizedEmail,
+    password_hash: hash,
+    display_name:  name,
+  })
 
-  db.prepare(`
-    INSERT INTO motivation_states (learner_id) VALUES (?)
-  `).run(id)
+  await db.from('motivation_states').insert({ learner_id: id })
 
   const token = signToken(id)
-  saveSession(id, token)
+  await saveSession(id, token)
 
-  return { user: { id, email, display_name: name }, token }
+  return { user: { id, email: normalizedEmail, display_name: name }, token }
 }
 
 // ── Login
@@ -51,11 +51,11 @@ export async function loginUser(
   email: string,
   password: string,
 ): Promise<{ user: AuthUser; token: string } | { error: string }> {
-  const db = getDb()
-
-  const row = db.prepare(`
-    SELECT id, email, display_name, password_hash FROM learner_profiles WHERE email = ?
-  `).get(email.toLowerCase().trim()) as any
+  const { data: row } = await getDb()
+    .from('learner_profiles')
+    .select('id, email, display_name, password_hash')
+    .eq('email', email.toLowerCase().trim())
+    .maybeSingle()
 
   if (!row) return { error: 'Invalid email or password' }
 
@@ -63,31 +63,31 @@ export async function loginUser(
   if (!valid) return { error: 'Invalid email or password' }
 
   const token = signToken(row.id)
-  saveSession(row.id, token)
+  await saveSession(row.id, token)
 
-  return {
-    user: { id: row.id, email: row.email, display_name: row.display_name },
-    token,
-  }
+  return { user: { id: row.id, email: row.email, display_name: row.display_name }, token }
 }
 
-// ── Verify token (called from API routes)
-export function verifyToken(token: string): AuthUser | null {
+// ── Verify token (called from session.ts)
+export async function verifyToken(token: string): Promise<AuthUser | null> {
   try {
     const payload = jwt.verify(token, JWT_SECRET) as any
     const db = getDb()
 
-    // Check session is still valid
-    const session = db.prepare(`
-      SELECT learner_id FROM auth_sessions
-      WHERE token = ? AND expires_at > datetime('now')
-    `).get(token) as any
+    const { data: session } = await db
+      .from('auth_sessions')
+      .select('learner_id')
+      .eq('token', token)
+      .gt('expires_at', new Date().toISOString())
+      .maybeSingle()
 
     if (!session) return null
 
-    const user = db.prepare(`
-      SELECT id, email, display_name FROM learner_profiles WHERE id = ?
-    `).get(payload.sub) as any
+    const { data: user } = await db
+      .from('learner_profiles')
+      .select('id, email, display_name')
+      .eq('id', payload.sub)
+      .maybeSingle()
 
     if (!user) return null
     return { id: user.id, email: user.email, display_name: user.display_name }
@@ -96,17 +96,9 @@ export function verifyToken(token: string): AuthUser | null {
   }
 }
 
-// ── Get user from request cookies/headers
-export function getUserFromRequest(req: Request): AuthUser | null {
-  const auth = req.headers.get('authorization') || ''
-  const token = auth.replace('Bearer ', '')
-  if (!token) return null
-  return verifyToken(token)
-}
-
 // ── Logout
-export function logoutUser(token: string) {
-  getDb().prepare('DELETE FROM auth_sessions WHERE token = ?').run(token)
+export async function logoutUser(token: string) {
+  await getDb().from('auth_sessions').delete().eq('token', token)
 }
 
 // ── Helpers
@@ -114,10 +106,10 @@ function signToken(userId: string): string {
   return jwt.sign({ sub: userId }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN })
 }
 
-function saveSession(learnerId: string, token: string) {
+async function saveSession(learnerId: string, token: string) {
   const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-  getDb().prepare(`
-    INSERT OR REPLACE INTO auth_sessions (token, learner_id, expires_at)
-    VALUES (?, ?, ?)
-  `).run(token, learnerId, expiresAt)
+  await getDb().from('auth_sessions').upsert(
+    { token, learner_id: learnerId, expires_at: expiresAt },
+    { onConflict: 'token' },
+  )
 }

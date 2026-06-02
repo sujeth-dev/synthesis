@@ -79,15 +79,17 @@ export default async function Dashboard({
   const cookieStore = cookies()
   const token = cookieStore.get('synaptic_token')?.value
   if (!token) redirect('/login')
-  const user = verifyToken(token)
+  const user = await verifyToken(token)
   if (!user) redirect('/login')
 
-  const profile = getLearnerProfile(user.id)
+  const profile = await getLearnerProfile(user.id)
   if (!profile) redirect('/login')
   if (!profile.diagnostic_done) redirect('/learn/diagnostic')
 
-  const allStates = getAllSkillStates(user.id)
-  const schedules = getReviewSchedules(user.id)
+  const [allStates, schedules] = await Promise.all([
+    getAllSkillStates(user.id),
+    getReviewSchedules(user.id),
+  ])
   const allNodes  = getAllNodes()
   const allEdges  = getAllEdges()
 

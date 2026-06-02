@@ -9,15 +9,17 @@ export default async function ProfilePage() {
   const cookieStore = cookies()
   const token = cookieStore.get('synaptic_token')?.value
   if (!token) redirect('/login')
-  const user = verifyToken(token)
+  const user = await verifyToken(token)
   if (!user) redirect('/login')
 
-  const profile = getLearnerProfile(user.id)
+  const profile = await getLearnerProfile(user.id)
   if (!profile) redirect('/login')
 
-  const skillStates = getAllSkillStates(user.id)
-  const sessions    = getRecentSessions(user.id, 10)
-  const attempts    = getRecentAttempts(user.id, 200)
+  const [skillStates, sessions, attempts] = await Promise.all([
+    getAllSkillStates(user.id),
+    getRecentSessions(user.id, 10),
+    getRecentAttempts(user.id, 200),
+  ])
   const allNodes    = getAllNodes()
 
   const mastered      = skillStates.filter(s => s.mastery_state === 'mastered').length
