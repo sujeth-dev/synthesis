@@ -9,7 +9,8 @@
     "lint": "next lint",
     "validate": "node scripts/validate-content.js",
     "db:init": "node scripts/init-db.js",
-    "db:reset": "node scripts/reset-db.js"
+    "db:reset": "node scripts/reset-db.js",
+    "db:seed": "node scripts/seed.js"
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",
