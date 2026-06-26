@@ -373,6 +373,119 @@ This is what makes content production genuinely hard. It is not writing question
 
 ---
 
-*Document: interfaces | Version: 1.0 | Last updated: 2026-06-26*
+## When Interactivity Hurts: The ROI Gate
+
+Interactivity is not always better. Every interactive construct has a cost — time consumed, cognitive mode switched, flow potentially broken. The benefit must clear a threshold or plain practice is the right choice.
+
+**The core tension:**
+
+```
+DEPTH          ←————————————————→  COVERAGE
+(understand it fully)              (cover more ground)
+
+FLOW           ←————————————————→  INTERVENTION
+(don't break momentum)             (break the rut before it deepens)
+
+LONG TERM      ←————————————————→  SHORT TERM
+(mastery)                          (pass the exam in 60 days)
+```
+
+The correct side of each axis depends on context. The interactivity ROI gate is Engine 6's check before any construct is selected.
+
+---
+
+### The Four Context Modifiers
+
+**Modifier 1 — Exam Countdown**
+
+| Time to exam | What is available |
+|---|---|
+| 180+ days | Full construct and environment library |
+| 90 days | Heavy interactive constructs (teaching simulation, Broken Machine) weight down 40% |
+| 45 days | Countdown Mode. Heavy constructs locked. Only Tapas, Repair Crew, Blueprint, Error Journal. |
+| 30 days | Near-pure practice. Sub-5-minute constructs only. |
+| 7 days | Mock test mode only. No constructs. |
+
+The reasoning: at 45 days, what the exam demands is speed and accuracy on known material — not the ability to teach it to someone. The construct that was essential 3 months ago becomes a liability today.
+
+**Modifier 2 — Flow Protection**
+
+If the learner is in flow, the engine does not interrupt it.
+
+Flow signals (all must be present):
+- Correct answer rate > 70% over last 5 questions
+- Time per question within learner's normal range
+- No hint requests, no pauses, no abandonment signals
+
+Rule: if flow signals are active → no construct activates mid-session. A construct can only appear at a natural breakpoint: end of a concept, start of a new one, or after a clear failure pattern emerges.
+
+**Modifier 3 — Session Time Remaining**
+
+| Time remaining | What is available |
+|---|---|
+| 20+ min | Full construct library (within other constraints) |
+| 10–20 min | Medium constructs only (Tapas, Blueprint, Repair Crew) |
+| < 10 min | No constructs. Rapid review only. |
+
+Starting a Feynman teaching simulation with 8 minutes left is wrong — the learner is cut off mid-construct, which is worse than not starting it.
+
+**Modifier 4 — Motivation State**
+
+| State | Construct restriction |
+|---|---|
+| Active | Full library available |
+| Struggling | No challenge constructs (no Tapas, no Socratic). Repair Crew or Blueprint only. |
+| Bored | Increase challenge — Tapas Mode or a new concept. No review constructs. |
+| Disengaged | No construct. Shortest possible session. Return the next day. |
+
+---
+
+### When to Use vs. When Not To
+
+```
+Is the learner in flow?
+    YES → Do not interrupt. Wait for natural breakpoint.
+    NO  ↓
+
+Is exam in < 45 days?
+    YES → Only Tapas, Repair, Blueprint, Error Journal
+    NO  ↓
+
+Is session time > 15 min remaining?
+    NO  → No heavy constructs
+    YES ↓
+
+Is motivation state = Struggling?
+    YES → No Tapas, no Socratic. Repair Crew or Blueprint only.
+    NO  ↓
+
+Does the topic have required content assets?
+    NO  → Construct eliminated regardless
+    YES ↓
+
+Has this construct run recently for this concept?
+    YES → Suppress it, pick next best
+    NO  ↓
+
+Does construct ROI clear the threshold for this learner?
+    NO  → Plain practice
+    YES → Construct activates
+```
+
+---
+
+### The Underlying Principle
+
+The construct is always in service of the session goal. The session goal changes by context.
+
+- 180 days from exam: goal is deep understanding → constructs serve this directly
+- 45 days from exam: goal is coverage and speed → depth constructs are off-goal
+- Knowledge track, no deadline: goal is mastery → constructs are the primary mechanism, not an interruption
+
+The construct is not good or bad. It is right or wrong for this session goal at this moment.
+
+---
+
+*Document: interfaces | Version: 1.1 | Last updated: 2026-06-26*
 *Extends: `03-constructs.md` (what constructs are) and `06-users.md` (learner profile dimensions)*
-*Informs: session engine (Layer 1–5 selection logic), content production pipeline (asset requirements)*
+*Informs: Engine 6 (02-engines.md), library production (09-library.md), content pipeline*

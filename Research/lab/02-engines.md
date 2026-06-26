@@ -292,4 +292,142 @@ Start with option 1 (author-tagged). It requires more content work but is immedi
 
 ---
 
-*Document: engines | Version: 1.0 | Last updated: 2026-06-25*
+## Engine 6 — Orchestration (Experience Selection)
+
+**Problem it solves:** Given everything the other five engines know, what is the right experience to deliver right now — which construct, which environment, which character, which game format, and should interactivity run at all?
+
+The five engines each answer one specific question. None of them answer the meta-question: given all of this simultaneously, what does the learner actually experience? Engine 6 is the conductor. It reads all other engine outputs and selects from the library of environments, characters, and game formats.
+
+Engine 6 produces nothing new. It synthesises existing signals and routes to an experience. That is why it is architecturally simple — and intellectually the most important layer.
+
+---
+
+### What It Reads
+
+```
+From Engine 1 (BKT):        p_known, orbit_stage
+From Engine 2 (SM-2):       next_due, overdue_count
+From Engine 3 (Session):    task_type, time_remaining
+From Engine 4 (Motivation): motivation_state, flow_detected
+From Engine 5 (Error):      dominant_error_type
+From Context:               exam_days_remaining, track, subject
+From Learner Profile:       construct_affinities, interest_tags, challenge_preference
+From Content Layer:         content_assets_available (which constructs have assets for this concept)
+```
+
+---
+
+### What It Outputs
+
+```
+{
+  construct:       which construct activates (or null — plain practice)
+  environment:     which environment to load
+  character:       which character to instantiate (or null)
+  game_format:     which game format runs
+  draft_space:     always true
+  interactivity:   boolean — does any construct run at all?
+  reason:          why this decision — required for debugging
+}
+```
+
+The `reason` field is not optional. Every Engine 6 decision must be fully explainable. When it makes a wrong selection, the reason field tells you which rule or weight produced it.
+
+---
+
+### The Selection Cascade
+
+Engine 6 does not pick from N options at once. It eliminates down through layers until one remains.
+
+```
+All constructs in the library (N)
+        ↓
+Layer 1: Hard constraints          → eliminates ~80% (orbit stage, subject, motivation state, track, time)
+        ↓
+Layer 2: Interactivity ROI gate    → should any construct run at all given current context?
+        ↓
+Layer 3: Content availability      → eliminates constructs whose assets don't exist for this topic
+        ↓
+Layer 4: Learner state weighting   → weights remaining by error type, construct affinity, history
+        ↓
+Layer 5: Variety enforcement       → suppresses recently-used constructs
+        ↓
+Layer 6: Exploration               → 10–15% of selections try something outside the top weight
+        ↓
+        1 construct selected
+```
+
+**Layer 2 — Interactivity ROI Gate (critical):**
+
+Before any construct is selected, the engine asks: should interactivity run at all right now? Interactivity has a cost — time, cognitive mode switch, flow disruption. The benefit must clear a threshold.
+
+| Condition | Decision |
+|---|---|
+| Learner in flow state | No construct. Wait for natural breakpoint. |
+| Exam < 45 days | Heavy constructs locked. Only Tapas, Repair, Blueprint, Error Journal. |
+| Exam < 7 days | No constructs. Mock test / exam simulation only. |
+| Session time remaining < 10 min | No construct. Rapid review only. |
+| Motivation state = Struggling | No challenge constructs. Repair or Blueprint only. |
+| All above clear | Proceed to Layer 3. |
+
+The construct cost table determines "heavy" vs "light":
+
+| Construct | Time cost | Weight under pressure |
+|---|---|---|
+| Blueprint Mode | 2 min | Always available |
+| Error Journal review | 3 min | Always available |
+| Repair Crew | 5–8 min | Medium |
+| Feynman Loop (basic) | 5 min | Medium |
+| Feynman Loop (simulation) | 12–15 min | Heavy — exam < 90 days: locked |
+| Tapas Mode | 10–15 min | Medium |
+| Broken Machine | 15–25 min | Heavy — exam < 45 days: locked |
+| Echo Chamber | 20+ min | Very heavy — knowledge track Stage 6+ only |
+
+---
+
+### Alternatives
+
+| Approach | How it works | Weakness |
+|---|---|---|
+| **Rule-based cascade (Version 1)** | Explicit if/else decision tree. Fully deterministic and debuggable. | Rigid. Cannot discover that something unexpected works better for a specific learner. |
+| **Weighted scoring (Version 2)** | Each valid construct gets a score. Weights are learnable from outcome data. | Requires outcome signal data. Delayed reward problem. |
+| **Bandit (Version 3)** | Exploration/exploitation over the valid construct set. Self-optimising. | Needs thousands of sessions per construct type to learn reliably. |
+| **RL agent** | Full sequential decision policy. | Data requirements extreme. Reward delay weeks. Very hard to trust or debug. |
+
+---
+
+### Decision: Rule-based now
+
+Version 1 is deterministic. Given the same inputs, it always produces the same output. This is essential for Phase 1 — when the system makes a wrong selection, you need to trace exactly which rule fired and why.
+
+Version 1 also generates the data that trains Version 2. Every Engine 6 decision is logged: what was selected, what context triggered it, what the learner outcome was. Without this log, there is nothing to train on.
+
+**Upgrade to Version 2 (weighted scoring):**
+Trigger: 10,000+ sessions with Engine 6 decisions logged and outcome signals recorded. At that point, the weights can be fitted from real data rather than set by rule.
+
+**Upgrade to Version 3 (bandit):**
+Trigger: 50,000+ sessions, multiple construct types each with 5,000+ observations. The bandit needs enough data per arm to explore meaningfully.
+
+---
+
+### Metrics
+
+- Construct selection distribution (are all constructs being selected, or is one dominating?)
+- Post-construct p_known improvement vs. plain practice baseline (does the construct add value?)
+- Session completion rate by construct type (which constructs cause abandonment?)
+- Next-day return rate by construct type (which constructs bring learners back?)
+- Flow disruption rate (how often does a construct interrupt detected flow — and what is the outcome when it does?)
+
+---
+
+### Open Questions for Engine 6
+
+- [ ] Flow detection: what exact signals define flow state? (correct rate threshold? time-per-question variance? combination?) This must be defined before the flow protection rule can be enforced.
+- [ ] How does Engine 6 handle the cold-start problem for new constructs? (A new construct has no affinity data — does it get exploration priority?)
+- [ ] Should learners be able to override Engine 6? ("I want to do Tapas Mode today" — even if Engine 6 wouldn't select it.) What are the limits of learner override?
+- [ ] When Engine 6 selects no construct (plain practice), is that logged as a decision? It must be — otherwise the baseline is invisible in the data.
+- [ ] How does Engine 6 interact with session resumption? (Learner abandoned mid-Feynman simulation yesterday — does today's session resume the construct or start fresh?)
+
+---
+
+*Document: engines | Version: 1.1 | Last updated: 2026-06-26*
