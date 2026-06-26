@@ -1,0 +1,158 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1.5rem 1.5rem 2.5rem;font-family:var(--font-sans)}
+.section-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1rem}
+.orbit-table{width:100%;border-collapse:collapse;margin-bottom:2.5rem}
+.orbit-table tr{border-bottom:0.5px solid var(--color-border-tertiary)}
+.orbit-table tr:last-child{border-bottom:none}
+.orbit-table td{padding:10px 8px;vertical-align:top;font-size:13px}
+.td-num{color:var(--color-text-tertiary);font-size:11px;width:28px;padding-top:12px}
+.td-stage{font-weight:500;color:var(--color-text-primary);width:90px;padding-top:11px}
+.td-line{color:var(--color-text-secondary);line-height:1.55}
+.td-signal{color:var(--color-text-tertiary);font-size:11px;font-style:italic;padding-top:12px;width:160px;text-align:right}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:2rem 0}
+.construct-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2rem}
+.c-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.1rem 1.15rem 1rem;cursor:pointer;transition:border-color 0.15s,background 0.15s}
+.c-card:hover{border-color:var(--color-border-secondary);background:var(--color-background-secondary)}
+.c-tag{font-size:10px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:0.4rem}
+.c-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:0.3rem}
+.c-origin{font-size:11px;color:var(--color-text-tertiary);margin-bottom:0.45rem;font-style:italic}
+.c-body{font-size:13px;color:var(--color-text-secondary);line-height:1.55}
+.tag-purple{color:#534AB7}
+.tag-teal{color:#0F6E56}
+.tag-amber{color:#854F0B}
+.tag-coral{color:#993C1D}
+.tag-pink{color:#993556}
+@media(prefers-color-scheme:dark){
+  .tag-purple{color:#AFA9EC}
+  .tag-teal{color:#5DCAA5}
+  .tag-amber{color:#FAC775}
+  .tag-coral{color:#F0997B}
+  .tag-pink{color:#ED93B1}
+}
+.quote-block{border-left:2px solid var(--color-border-secondary);padding:0.6rem 1rem;margin-bottom:2rem;border-radius:0}
+.quote-block p{font-size:13px;color:var(--color-text-secondary);line-height:1.65;font-style:italic}
+.quote-block span{font-size:11px;color:var(--color-text-tertiary);display:block;margin-top:4px}
+</style>
+
+<div class="wrap">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Learning Orbit — stripped and expanded</h2>
+
+  <p class="section-label">Learning Orbit — stripped</p>
+
+  <table class="orbit-table">
+    <tr>
+      <td class="td-num">01</td>
+      <td class="td-stage">Encounter</td>
+      <td class="td-line">First exposure. Anchored to what the learner already knows. No testing — only contact.</td>
+      <td class="td-signal">Plant the seed</td>
+    </tr>
+    <tr>
+      <td class="td-num">02</td>
+      <td class="td-stage">Practice</td>
+      <td class="td-line">Immediate low-stakes application. Errors are signal, not score.</td>
+      <td class="td-signal">Test the grip</td>
+    </tr>
+    <tr>
+      <td class="td-num">03</td>
+      <td class="td-stage">Return</td>
+      <td class="td-line">The concept orbits back — timed by forgetting, not by calendar.</td>
+      <td class="td-signal">Fight the fade</td>
+    </tr>
+    <tr>
+      <td class="td-num">04</td>
+      <td class="td-stage">Apply</td>
+      <td class="td-line">Used inside a real problem. The concept must be recognised, not just recalled.</td>
+      <td class="td-signal">Test the transfer</td>
+    </tr>
+    <tr>
+      <td class="td-num">05</td>
+      <td class="td-stage">Build</td>
+      <td class="td-line">Woven into something larger. The learner feels how it connects to other blocks.</td>
+      <td class="td-signal">Find the neighbours</td>
+    </tr>
+    <tr>
+      <td class="td-num">06</td>
+      <td class="td-stage">Teach</td>
+      <td class="td-line">Explain it out loud. If you can't teach it, you don't own it.</td>
+      <td class="td-signal">Prove the depth</td>
+    </tr>
+    <tr>
+      <td class="td-num">07</td>
+      <td class="td-stage">Mastery</td>
+      <td class="td-line">Settled — but still orbiting. Nothing gets marked permanently complete.</td>
+      <td class="td-signal">Widen the orbit</td>
+    </tr>
+  </table>
+
+  <div class="divider"></div>
+
+  <p class="section-label">New constructs — built on the orbit</p>
+
+  <div class="quote-block">
+    <p>Every great learning tradition — Feynman, Socrates, Gurukul, Spaced Repetition — discovered the same thing. Knowledge only becomes yours when it survives contact with forgetting, contradiction, and teaching.</p>
+    <span>The constructs below are what that looks like inside TheDen.</span>
+  </div>
+
+  <div class="construct-grid">
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about the Feynman Loop construct in TheDen')">
+      <div class="c-tag tag-purple">Feynman Method</div>
+      <div class="c-title">Feynman Loop</div>
+      <div class="c-origin">Richard Feynman — "If you can't explain it simply, you don't understand it."</div>
+      <div class="c-body">After every major concept, the engine asks: explain this to a 12-year-old. It evaluates clarity, not vocabulary. Jargon is penalised. Simple, accurate language is rewarded. If the explanation fails — the engine doesn't say "wrong." It says: let's go back one block.</div>
+    </div>
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about Socratic Pressure in TheDen')">
+      <div class="c-tag tag-teal">Socratic Method</div>
+      <div class="c-title">Socratic Pressure</div>
+      <div class="c-origin">Socrates — knowledge revealed through questions, not answers.</div>
+      <div class="c-body">The engine never confirms an answer immediately. It asks: why do you think that? What breaks this? When does it fail? The learner has to defend their understanding before it gets stamped as known. Confidence earned through pressure lasts.</div>
+    </div>
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about Shruti Mode in TheDen')">
+      <div class="c-tag tag-amber">Gurukul / Vedic Tradition</div>
+      <div class="c-title">Shruti Mode</div>
+      <div class="c-origin">Sanskrit — "that which is heard." Knowledge transmitted through repetition and rhythm.</div>
+      <div class="c-body">Certain foundational concepts — syntax rules, algorithms, formulas — are returned repeatedly in micro-bursts across sessions. Not tested. Just heard again. Like a mantra, repetition builds unconscious fluency. The learner stops thinking about it and starts using it.</div>
+    </div>
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about the Ebbinghaus Engine in TheDen')">
+      <div class="c-tag tag-coral">Spaced Repetition Science</div>
+      <div class="c-title">Ebbinghaus Engine</div>
+      <div class="c-origin">Hermann Ebbinghaus — the forgetting curve, 1885.</div>
+      <div class="c-body">The engine models each concept's decay rate individually. A concept mastered under stress decays faster than one earned through deep practice. Return intervals are not fixed — they're recalculated after every interaction. The orbit tightens when the learner struggles. It widens when they're solid.</div>
+    </div>
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about the Aristotle Chain in TheDen')">
+      <div class="c-tag tag-purple">Aristotelian Logic</div>
+      <div class="c-title">Aristotle Chain</div>
+      <div class="c-origin">Aristotle — first principles reasoning, causes before effects.</div>
+      <div class="c-body">Before a learner touches advanced concepts, the engine verifies the chain of reasoning beneath it. Not just dependencies — but the logical why. Why does this exist? What problem does it solve? Understanding the cause makes the concept unforgettable. Memorising the effect makes it fragile.</div>
+    </div>
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about Tapas Mode in TheDen')">
+      <div class="c-tag tag-pink">Indian Ascetic Tradition</div>
+      <div class="c-title">Tapas Mode</div>
+      <div class="c-origin">Sanskrit — "heat through discipline." Mastery through deliberate struggle.</div>
+      <div class="c-body">When a learner is ready, the engine removes scaffolding. No hints. No partial credit. A hard problem, clean slate, full pressure. Struggle is not a bug here — it's the feature. Research shows that retrieval under difficulty embeds knowledge deeper than any supported practice session.</div>
+    </div>
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about Echo Chamber construct in TheDen')">
+      <div class="c-tag tag-teal">Peer Learning Science</div>
+      <div class="c-title">Echo Chamber</div>
+      <div class="c-origin">Vygotsky — the zone of proximal development. Learning accelerates between peers.</div>
+      <div class="c-body">The learner teaches another learner — or a simulated peer. The engine plays the confused student: asking naïve questions, making plausible errors. The learner has to catch them, correct them, and explain. Teaching a peer reveals blind spots that no test ever finds.</div>
+    </div>
+
+    <div class="c-card" onclick="sendPrompt('Tell me more about the Anamnesis construct in TheDen')">
+      <div class="c-tag tag-amber">Platonic Philosophy</div>
+      <div class="c-title">Anamnesis</div>
+      <div class="c-origin">Plato — all learning is remembering. Knowledge is drawn out, not poured in.</div>
+      <div class="c-body">The engine never tells the learner something they're close to figuring out. It asks a sequence of questions that leads them to the answer themselves. The moment of self-discovery is encoded differently in memory than received information. What you discover, you own.</div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc 3 — The Economy | Master Research Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0f0a;
+  --paper: #f2f0e8;
+  --cream: #f8f6ee;
+  --accent: #1a6b3a;
+  --accent2: #8b1a1a;
+  --gold: #c9880a;
+  --blue: #1a3f7a;
+  --purple: #5b1a8b;
+  --mid: #4a4a38;
+  --line: rgba(15,15,10,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'Libre Baskerville',Georgia,serif;
+  font-size:16.5px;line-height:1.8;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.5;
+}
+#pgbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2));z-index:9998;width:0%;}
+
+/* HEADER */
+header{background:var(--ink);color:var(--paper);padding:100px 40px 70px;position:relative;overflow:hidden;}
+header::before{content:'03';position:absolute;right:-20px;top:-40px;font-family:'Playfair Display',serif;font-size:280px;font-weight:900;color:rgba(255,255,255,0.025);line-height:1;pointer-events:none;}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2));}
+.series-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.series-tag::before{content:'';display:block;width:32px;height:1px;background:var(--gold);}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:900;line-height:1.0;max-width:760px;margin-bottom:8px;}
+header h1 em{color:var(--accent);font-style:italic;}
+.header-desc{font-family:'Libre Baskerville',serif;font-size:1.05rem;color:rgba(242,240,232,0.65);max-width:620px;margin:24px 0 40px;line-height:1.7;font-style:italic;}
+.doc-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:40px;}
+.doc-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.45);text-decoration:none;border-radius:2px;transition:all .2s;}
+.doc-link.active{border-color:var(--accent);color:#4dbb7a;}
+.doc-link:not(.active):hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.7);}
+.header-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1);}
+.hstat .n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;}
+.hstat .l{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
+
+/* NAV */
+nav{background:var(--cream);border-bottom:1px solid var(--line);padding:0 40px;position:sticky;top:0;z-index:100;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+nav a{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:15px 18px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+nav a:hover,nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* WRAP */
+.wrap{max-width:860px;margin:0 auto;padding:80px 40px;}
+
+/* SECTIONS */
+.sec{margin-bottom:80px;opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.sec.vis{opacity:1;transform:translateY(0);}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.sec-tag::after{content:'';flex:1;height:1px;background:var(--line);}
+.sec h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:700;line-height:1.15;margin-bottom:28px;}
+.sec h2 em{color:var(--accent);font-style:italic;}
+.sec h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin:44px 0 14px;padding-left:16px;border-left:3px solid var(--accent);}
+.sec h4{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin:28px 0 10px;}
+.sec p{margin-bottom:18px;color:#1a200f;}
+.sec p:last-child{margin-bottom:0;}
+
+/* PULLQUOTE */
+.pullquote{margin:40px 0;padding:32px 40px;border-left:4px solid var(--gold);background:var(--cream);border-radius:0 4px 4px 0;}
+.pullquote p{font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;line-height:1.65;margin:0 0 12px !important;color:var(--ink) !important;}
+.pullquote cite{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--mid);text-transform:uppercase;}
+
+/* RESEARCHER */
+.researcher{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:11px;padding:4px 12px 4px 8px;border-radius:20px;margin:0 4px 4px 0;letter-spacing:.06em;vertical-align:middle;}
+.researcher::before{content:'◆';color:var(--gold);font-size:8px;}
+
+/* CONCEPT */
+.concept{background:var(--ink);color:var(--paper);padding:36px 40px;margin:36px 0;border-radius:3px;position:relative;overflow:hidden;}
+.concept::before{content:'KEY CONCEPT';position:absolute;top:16px;right:20px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,0.2);}
+.concept h4{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:12px !important;}
+.concept p{color:rgba(242,240,232,0.82) !important;margin-bottom:10px !important;}
+.concept p:last-child{margin-bottom:0 !important;}
+
+/* STUDY */
+.study{border:1px solid var(--line);border-top:3px solid var(--accent);padding:24px 28px;margin:28px 0;border-radius:0 0 3px 3px;background:var(--cream);}
+.study-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.study h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px !important;}
+.study p{font-size:.88rem;color:var(--mid) !important;line-height:1.55;margin:0 !important;}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:28px 0;}
+.card{background:var(--cream);border:1px solid var(--line);padding:22px;border-radius:3px;border-top:3px solid var(--accent);transition:transform .2s,box-shadow .2s;}
+.card:nth-child(2n){border-top-color:var(--accent2);}
+.card:nth-child(3n){border-top-color:var(--gold);}
+.card:nth-child(4n){border-top-color:var(--blue);}
+.card:nth-child(5n){border-top-color:var(--purple);}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.08);}
+.card .cn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;margin-bottom:8px;}
+.card h4{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:8px !important;}
+.card p{font-size:.83rem;color:var(--mid);line-height:1.5;margin:0 !important;}
+
+/* TIMELINE */
+.timeline{margin:36px 0;position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:32px;}
+.tl-item::before{content:'';position:absolute;left:-30px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--paper);box-shadow:0 0 0 2px var(--accent);}
+.tl-year{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--accent);margin-bottom:4px;}
+.tl-item h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:6px !important;}
+.tl-item p{font-size:.86rem;color:var(--mid);line-height:1.5;margin:0 !important;}
+
+/* DIAGRAM */
+.diagram{margin:36px 0;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--cream);}
+.diagram-title{background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:12px 20px;}
+.diagram-body{padding:28px;}
+
+/* STAT ROW */
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin:28px 0;}
+.stat-box{flex:1;min-width:140px;background:var(--cream);border:1px solid var(--line);padding:20px;border-radius:3px;text-align:center;}
+.stat-box .sn{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--accent);}
+.stat-box .sl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* CROSSREF */
+.crossref{display:inline-flex;align-items:center;gap:6px;background:rgba(26,107,58,.1);color:var(--accent);font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:.06em;border:1px solid rgba(26,107,58,.2);vertical-align:middle;text-decoration:none;cursor:default;}
+.crossref::before{content:'→';font-size:9px;}
+
+/* IMPL */
+.impl{border:1px dashed var(--gold);background:rgba(201,136,10,.05);padding:24px 28px;margin:28px 0;border-radius:3px;}
+.impl-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.impl p{font-size:.88rem;color:#2a2010 !important;line-height:1.55;margin:0 0 8px !important;}
+.impl p:last-child{margin-bottom:0 !important;}
+
+/* WARNING */
+.warning{border:1px solid rgba(139,26,26,.3);background:rgba(139,26,26,.04);padding:24px 28px;margin:28px 0;border-radius:3px;}
+.warning-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+.warning p{font-size:.88rem;color:#2a1010 !important;line-height:1.55;margin:0 0 8px !important;}
+.warning p:last-child{margin-bottom:0 !important;}
+
+/* COMPARE TABLE */
+.compare{width:100%;border-collapse:collapse;margin:28px 0;font-size:.88rem;}
+.compare th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:12px 16px;background:var(--ink);color:var(--paper);text-align:left;}
+.compare td{padding:12px 16px;border-bottom:1px solid var(--line);color:var(--mid);vertical-align:top;}
+.compare tr:nth-child(even) td{background:var(--cream);}
+.compare .good{color:var(--accent);font-weight:700;}
+.compare .bad{color:var(--accent2);font-weight:700;}
+.compare .mid-c{color:var(--gold);font-weight:700;}
+
+/* SKILL MATRIX */
+.skill-matrix{margin:28px 0;}
+.skill-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.skill-name{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;min-width:200px;color:var(--ink);}
+.skill-bar{flex:1;height:10px;background:rgba(15,15,10,0.08);border-radius:5px;overflow:hidden;}
+.skill-fill{height:100%;border-radius:5px;transition:width 1s ease;}
+.skill-fill.high{background:var(--accent);}
+.skill-fill.mid-f{background:var(--gold);}
+.skill-fill.low{background:var(--accent2);}
+.skill-trend{font-family:'DM Mono',monospace;font-size:10px;min-width:60px;text-align:right;}
+.skill-trend.up{color:var(--accent);}
+.skill-trend.down{color:var(--accent2);}
+.skill-trend.flat{color:var(--gold);}
+
+/* WAVE CHART */
+.wave-container{margin:28px 0;position:relative;}
+.wave-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.wave-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.wave-period{font-family:'DM Mono',monospace;font-size:10px;min-width:100px;color:var(--mid);}
+.wave-tech{flex:1;padding:10px 14px;font-family:'DM Mono',monospace;font-size:11px;border-radius:2px;border-left:3px solid;}
+.wave-impact{font-family:'DM Mono',monospace;font-size:10px;min-width:80px;text-align:right;letter-spacing:.06em;}
+
+/* SECTOR GRID */
+.sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:28px 0;}
+.sector-card{padding:18px;background:var(--cream);border:1px solid var(--line);border-radius:3px;border-top:3px solid;}
+.sector-card h5{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:700;margin-bottom:6px;}
+.sector-card p{font-size:.78rem;color:var(--mid);line-height:1.4;margin:0 !important;}
+.sector-card .stag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+
+/* GLOBE MAP */
+.region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin:28px 0;}
+.region-card{background:var(--cream);border:1px solid var(--line);padding:22px;border-radius:3px;border-left:4px solid var(--accent);}
+.region-card:nth-child(2){border-left-color:var(--accent2);}
+.region-card:nth-child(3){border-left-color:var(--gold);}
+.region-card:nth-child(4){border-left-color:var(--blue);}
+.region-card:nth-child(5){border-left-color:var(--purple);}
+.region-card .rname{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;}
+.region-card h4{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:8px !important;}
+.region-card p{font-size:.82rem;color:var(--mid);line-height:1.45;margin:0 !important;}
+.region-stat{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--accent);margin-bottom:4px;}
+
+/* HFLOW */
+.hflow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;}
+.hflow-node{flex:1;min-width:120px;background:#fff;border:1.5px solid var(--ink);padding:16px 14px;text-align:center;position:relative;}
+.hflow-node:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--accent);background:var(--cream);padding:2px;z-index:1;}
+.hflow-node.hl{background:var(--accent);color:white;}
+.hflow-node.hl2{background:var(--accent2);color:white;}
+.hflow-node.hlg{background:var(--gold);color:white;}
+.hflow-node.hlb{background:var(--blue);color:white;}
+.hflow-node .nt{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;margin-bottom:4px;}
+.hflow-node .nv{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;line-height:1.2;}
+
+/* VFLOW */
+.vflow{display:flex;flex-direction:column;align-items:center;gap:0;margin:24px auto;max-width:520px;}
+.vflow-node{width:100%;background:#fff;border:1.5px solid var(--ink);padding:16px 20px;display:flex;align-items:center;gap:14px;transition:transform .2s,box-shadow .2s;}
+.vflow-node:hover{transform:translateX(4px);box-shadow:-4px 0 0 var(--accent);}
+.vflow-conn{width:2px;height:24px;background:var(--ink);position:relative;}
+.vflow-conn::after{content:'▼';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--ink);}
+.vflow-icon{font-size:1.3rem;flex-shrink:0;}
+.vflow-text h5{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:3px;}
+.vflow-text p{font-size:.78rem;color:var(--mid);line-height:1.4;margin:0 !important;}
+
+/* POLICY CARDS */
+.policy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:28px 0;}
+.policy-card{background:var(--cream);border:1px solid var(--line);padding:24px;border-radius:3px;}
+.policy-card .country{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.policy-card h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:10px !important;}
+.policy-card p{font-size:.83rem;color:var(--mid);line-height:1.5;margin:0 0 8px !important;}
+.policy-card .verdict{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;padding:4px 10px;border-radius:20px;display:inline-block;margin-top:6px;}
+.verdict.works{background:rgba(26,107,58,.12);color:var(--accent);}
+.verdict.partial{background:rgba(201,136,10,.12);color:var(--gold);}
+.verdict.fails{background:rgba(139,26,26,.12);color:var(--accent2);}
+
+hr.div{border:none;height:1px;background:var(--line);margin:0;}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--paper);padding:48px 40px;}
+.footer-inner{max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;}
+.footer-doc h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:16px;}
+.footer-doc p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.5;max-width:300px;}
+.doc-nav{display:flex;flex-direction:column;gap:8px;}
+.doc-nav a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.doc-nav a:hover{color:var(--gold);}
+.doc-nav a.current{color:#4dbb7a;}
+
+@media(max-width:640px){
+  .wrap{padding:60px 24px;}header{padding:70px 24px 56px;}nav{padding:0 16px;}
+  .hflow{flex-direction:column;}
+  .hflow-node:not(:last-child)::after{content:'↓';right:50%;bottom:-14px;top:auto;transform:translateX(50%);}
+  .footer-inner{flex-direction:column;}
+  .skill-name{min-width:140px;}
+}
+</style>
+</head>
+<body>
+<div id="pgbar"></div>
+
+<!-- ══════════════════════════════ HEADER -->
+<header>
+  <div class="series-tag">Master Research Series · Document 3 of 5</div>
+  <h1>The <em>Economy</em></h1>
+  <p class="header-desc">Jobs, skills, automation, credentialing disruption, geographic shifts, economic structure changes, and the future of work — the world the learner graduates into, and how fast it is changing.</p>
+  <div class="doc-links">
+    <a class="doc-link" href="#">Doc 1 — The Human</a>
+    <a class="doc-link" href="#">Doc 2 — The System</a>
+    <a class="doc-link active" href="#">Doc 3 — The Economy</a>
+    <a class="doc-link" href="#">Doc 4 — The Strategy</a>
+    <a class="doc-link" href="#">Doc 5 — The Master</a>
+  </div>
+  <div class="header-stats">
+    <div class="hstat"><div class="n">1B</div><div class="l">People need reskilling by 2030</div></div>
+    <div class="hstat"><div class="n">2.5yr</div><div class="l">Half-life of technical skills</div></div>
+    <div class="hstat"><div class="n">65%</div><div class="l">Current students will work in jobs that don't exist yet</div></div>
+    <div class="hstat"><div class="n">50%+</div><div class="l">Global workforce in informal economy</div></div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ NAV -->
+<nav id="sitenav">
+  <a href="#automation-history">Automation History</a>
+  <a href="#task-model">Task Model</a>
+  <a href="#at-risk">At-Risk Jobs</a>
+  <a href="#augmentation">Augmentation</a>
+  <a href="#skills-matter">Skills That Matter</a>
+  <a href="#skills-decline">Declining Skills</a>
+  <a href="#half-life">Skills Half-Life</div></a>
+  <a href="#sectors">Sectoral Shifts</a>
+  <a href="#geography">Geography of Work</a>
+  <a href="#work-structure">Work Structure</a>
+  <a href="#economic-structure">Economic Structure</a>
+  <a href="#inequality-econ">Inequality</a>
+  <a href="#credential-disruption">Credential Disruption</a>
+  <a href="#career-lifecycle">Career Lifecycle</a>
+  <a href="#global-context">Global Context</a>
+  <a href="#policy-responses">Policy Responses</a>
+  <a href="#frameworks">Frameworks</a>
+  <a href="#synthesis">Synthesis</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════ 1. AUTOMATION HISTORY -->
+<div class="sec" id="automation-history">
+  <div class="sec-tag">Chapter 1</div>
+  <h2>The History of <em>Automation Waves</em></h2>
+  <p>Every generation believes its automation wave is uniquely disruptive. Every previous generation was both right and wrong — jobs were disrupted, new ones emerged, but the transition was never smooth and the distribution of gains and losses was never fair. Understanding the pattern is essential for calibrating both alarm and complacency about AI.</p>
+
+  <div class="wave-container">
+    <div class="wave-label">Automation Waves — Technology, Impact, and Labor Market Response</div>
+
+    <div class="wave-row">
+      <div class="wave-period">1760s–1840s</div>
+      <div class="wave-tech" style="border-color:var(--accent);background:rgba(26,107,58,.06);">
+        <strong>Steam and Mechanization.</strong> Textiles, mining, transport. Handloom weavers, skilled artisans, and agriculture workers displaced. The Luddite movement — skilled textile workers destroying machines — was a rational response to genuine economic destruction. Outcome: new factory jobs, urbanization, enormous productivity gains, but decades of hardship for displaced workers before stabilization.
+      </div>
+      <div class="wave-impact" style="color:var(--gold);">High</div>
+    </div>
+    <div class="wave-row">
+      <div class="wave-period">1870s–1920s</div>
+      <div class="wave-tech" style="border-color:var(--gold);background:rgba(201,136,10,.06);">
+        <strong>Electrification and Mass Production.</strong> Ford's assembly line, electrified factories. Eliminated craft manufacturing at scale, created factory worker class. <span class="researcher">David Autor</span> identifies this as the first wave of "hollowing out" — high-skill and unskilled work persisted while mid-skill craft work was automated. Outcome: massive productivity, rising wages, 40-hour work week, labor movement.
+      </div>
+      <div class="wave-impact" style="color:var(--gold);">Very High</div>
+    </div>
+    <div class="wave-row">
+      <div class="wave-period">1950s–1980s</div>
+      <div class="wave-tech" style="border-color:var(--blue);background:rgba(26,63,122,.06);">
+        <strong>Computerization of Routine Work.</strong> Mainframes then PCs eliminated clerical workers, bookkeepers, switchboard operators, and many middle-management information-processing roles. White-collar routine work was automated just as blue-collar physical work had been. Outcome: new tech sector, knowledge economy expansion, but start of manufacturing employment decline in developed economies.
+      </div>
+      <div class="wave-impact" style="color:var(--gold);">High</div>
+    </div>
+    <div class="wave-row">
+      <div class="wave-period">1990s–2010s</div>
+      <div class="wave-tech" style="border-color:var(--accent2);background:rgba(139,26,26,.06);">
+        <strong>Internet, Globalization, and Offshoring.</strong> The internet enabled global supply chains and the offshoring of knowledge work to lower-wage economies. Call centers to India, software development to Eastern Europe, manufacturing to China. Labor arbitrage, not automation, drove this wave. Outcome: massive productivity, consumer price reductions, but severe dislocation in manufacturing communities that proved politically destabilizing.
+      </div>
+      <div class="wave-impact" style="color:var(--accent2);">Severe</div>
+    </div>
+    <div class="wave-row">
+      <div class="wave-period">2020s–</div>
+      <div class="wave-tech" style="border-color:var(--purple);background:rgba(91,26,139,.06);">
+        <strong>AI and Foundation Models.</strong> For the first time, automation reaches non-routine cognitive work — the territory previously thought safe from automation. Legal research, code generation, content creation, diagnosis assistance, financial analysis. This wave is qualitatively different: previous automation replaced human muscle and routine cognition; this wave replaces judgment-adjacent cognitive tasks. Timeline, scope, and distribution of impact remain contested. <a class="crossref" href="#">→ Section: Task Model</a>
+      </div>
+      <div class="wave-impact" style="color:var(--accent2);">Unknown — Potentially Very High</div>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>The Consistent Pattern Across All Waves</h4>
+    <p>Every automation wave follows the same arc: (1) a new technology automates a class of tasks, displacing workers who performed them; (2) the technology raises aggregate productivity and creates new tasks and roles that did not previously exist; (3) the transition period is painful and the gains are unequally distributed — owners of capital and holders of complementary skills benefit first and most; workers in disrupted occupations bear the costs.</p>
+    <p>The critical variable is the length and severity of the transition. When transitions are fast and disruption is concentrated geographically or demographically, the social and political fallout can be severe — as with deindustrialization in the US Rust Belt and UK manufacturing towns. The policy question is not whether AI will create new jobs (it almost certainly will), but whether the transition can be managed equitably and how long it will take. <a class="crossref" href="#">→ Section: Policy Responses</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 2. TASK MODEL -->
+<div class="sec" id="task-model">
+  <div class="sec-tag">Chapter 2</div>
+  <h2>The <em>Task-Based Model</em> of Labor</h2>
+  <p>The most analytically useful framework for understanding which jobs are vulnerable to automation is not the occupational level — "Will accountants be automated?" — but the task level — "Which tasks within accounting are automatable?" <span class="researcher">David Autor, Frank Levy, and Richard Murnane</span> developed this framework in their landmark 2003 paper, and it remains the dominant analytical tool in labor economics.</p>
+
+  <h3>The Four-Task Taxonomy</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Type 01 — At Risk</div>
+      <h4>Routine Cognitive Tasks</h4>
+      <p>Rule-based mental work that follows explicit, codifiable procedures. Data entry, bookkeeping, basic legal research, standard report generation, form processing. Automatable by current AI systems. Represents a very large fraction of existing white-collar employment.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Type 02 — At Risk</div>
+      <h4>Routine Manual Tasks</h4>
+      <p>Repetitive physical tasks performed in controlled, predictable environments. Assembly line work, packaging, sorting, some transportation. Robotic automation has already displaced much of this; remaining niches are shrinking.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Type 03 — More Resilient</div>
+      <h4>Non-Routine Cognitive Tasks</h4>
+      <p>Problem-solving, creativity, and judgment in unstructured environments. Research, strategy, diagnosis, design, negotiation. These require flexibility, contextual understanding, and reasoning under uncertainty. Current AI systems can assist but not replace for complex, high-stakes versions. The boundary is moving rapidly.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Type 04 — More Resilient</div>
+      <h4>Non-Routine Manual Tasks</h4>
+      <p>Physical work in unpredictable, variable environments requiring manual dexterity and situational judgment. Plumbing, electrical work, nursing, cosmetology, childcare. Counterintuitively among the most automation-resistant categories — robotics for unstructured physical environments remains extremely difficult.</p>
+    </div>
+  </div>
+
+  <h3>The Hollowing-Out Phenomenon</h3>
+  <p>The task model explains the "hollowing out" of labor markets — the documented tendency of automation to eliminate middle-skill, middle-income jobs while leaving high-skill cognitive jobs and low-skill manual service jobs relatively intact. This is because middle-skill jobs disproportionately consist of routine tasks (both cognitive and manual), while the extremes are more non-routine.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Labor Market Polarization — The Hollowing-Out Effect</div>
+    <div class="diagram-body">
+      <div class="hflow">
+        <div class="hflow-node hl">
+          <div class="nt">Growing</div>
+          <div class="nv">High-Skill Cognitive (Professionals, Managers, Creatives)</div>
+        </div>
+        <div class="hflow-node hl2" style="background:rgba(139,26,26,.15);color:var(--ink);border-color:var(--accent2);">
+          <div class="nt">Shrinking</div>
+          <div class="nv">Middle-Skill Routine (Clerks, Assemblers, Data Processors)</div>
+        </div>
+        <div class="hflow-node hlg" style="background:rgba(201,136,10,.15);color:var(--ink);border-color:var(--gold);">
+          <div class="nt">Stable / Growing</div>
+          <div class="nv">Low-Skill Manual Services (Care, Maintenance, Food)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warning">
+    <div class="warning-label">The AI Boundary Problem</div>
+    <p>The task-based model was developed when the cognitive-routine boundary was relatively stable. AI is moving that boundary rapidly and unpredictably. Tasks thought to be non-routine cognitive — generating legal arguments, writing code, producing medical diagnoses — are proving more automatable than the framework predicted. The model remains useful, but the category boundaries must be constantly re-evaluated as AI capability grows.</p>
+    <p><span class="researcher">Daron Acemoglu</span> has argued that AI is currently creating fewer new tasks and more task displacement than previous automation waves — which would be historically anomalous and economically concerning. This remains an active empirical debate. <a class="crossref" href="#">Doc 1 — The Human</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 3. AT-RISK JOBS -->
+<div class="sec" id="at-risk">
+  <div class="sec-tag">Chapter 3</div>
+  <h2>Which Jobs Are Actually <em>At Risk</em></h2>
+  <p>The 2013 <span class="researcher">Frey & Osborne</span> study — claiming 47% of US jobs were at high risk of automation — generated enormous attention and enormous criticism. Understanding its methodology, findings, and limitations is essential for calibrating realistic assessments.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">47%</div><div class="sl">US jobs at high automation risk (Frey & Osborne 2013)</div></div>
+    <div class="stat-box"><div class="sn">9%</div><div class="sl">Jobs at high risk per OECD (2016) — same data, different method</div></div>
+    <div class="stat-box"><div class="sn">14%</div><div class="sl">Jobs highly automatable per McKinsey (2017)</div></div>
+    <div class="stat-box"><div class="sn">~60%</div><div class="sl">Jobs with 30%+ of tasks automatable (McKinsey 2023)</div></div>
+  </div>
+
+  <p>The massive divergence between estimates (9% to 47%) reflects methodological differences: whether automation risk is assessed at the occupational level (Frey & Osborne) or the task level within occupations (OECD). Task-level analysis produces lower at-risk estimates because even heavily automated occupations typically retain some non-automatable tasks. The task-level estimates are more analytically credible — but the occupational disruption may be equally severe even if whole-occupation elimination is less common.</p>
+
+  <h3>The Highest-Risk Occupational Categories</h3>
+  <table class="compare">
+    <tr><th>Category</th><th>Examples</th><th>Primary Risk</th><th>Timeline</th></tr>
+    <tr><td>Data Processing</td><td>Data entry clerks, bookkeepers, payroll</td><td class="bad">Very High</td><td>Ongoing now</td></tr>
+    <tr><td>Transportation</td><td>Truck drivers, taxi, delivery</td><td class="bad">High</td><td>5–15 years</td></tr>
+    <tr><td>Routine Customer Service</td><td>Call centers, basic support</td><td class="bad">Very High</td><td>Ongoing now</td></tr>
+    <tr><td>Basic Legal Work</td><td>Paralegals, contract review, legal research</td><td class="bad">High</td><td>3–10 years</td></tr>
+    <tr><td>Financial Processing</td><td>Loan officers, insurance underwriters</td><td class="mid-c">Moderate</td><td>5–10 years</td></tr>
+    <tr><td>Radiologists</td><td>Image interpretation (narrow AI)</td><td class="mid-c">Partial</td><td>Ongoing</td></tr>
+    <tr><td>Junior Programmers</td><td>Boilerplate code, debugging, testing</td><td class="mid-c">Moderate</td><td>3–7 years</td></tr>
+    <tr><td>Content Creation (generic)</td><td>Stock copywriting, basic journalism</td><td class="bad">High</td><td>Ongoing now</td></tr>
+    <tr><td>Teaching (routine)</td><td>Lecture delivery, drill-based instruction</td><td class="mid-c">Partial</td><td>10–20 years</td></tr>
+    <tr><td>Strategic Management</td><td>C-suite, complex decision-making</td><td class="good">Low</td><td>Distant</td></tr>
+  </table>
+
+  <h3>The Augmentation vs Replacement Debate</h3>
+  <p>For most occupations, the more accurate framing is not "will this job be automated?" but "how will this job change as AI handles more of its task content?" A radiologist augmented by AI image analysis may become dramatically more productive — reviewing ten times as many scans with better accuracy — without being replaced. But if one AI-augmented radiologist can now do the work of ten, then the demand for radiologists may fall by 90%, even if no individual radiologist is "replaced."</p>
+
+  <p>This is the <strong>productivity paradox of augmentation</strong>: technology that makes workers more productive may reduce overall labor demand even while enhancing the productivity of remaining workers. The economic outcome depends entirely on how demand responds to lower costs — if cheaper radiology leads to much more radiology being performed, employment may hold. If demand is relatively inelastic, employment falls. <a class="crossref" href="#">→ Section: Economic Structure</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 4. AUGMENTATION -->
+<div class="sec" id="augmentation">
+  <div class="sec-tag">Chapter 4</div>
+  <h2><em>Augmentation</em> — The Human-AI Partnership</h2>
+  <p>The most durable economic position for the next decade is not competing against AI — it is combining human judgment, relationships, and contextual understanding with AI's speed, scale, and pattern recognition. Understanding what humans do that AI cannot replicate at scale is the prerequisite for identifying durable economic value.</p>
+
+  <h3>What Humans Bring to the Partnership</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Human Advantage 01</div>
+      <h4>Embodied Contextual Judgment</h4>
+      <p>Humans understand situations holistically — cultural context, emotional subtext, power dynamics, unstated goals — in ways that require embodied, socially situated experience to develop. A human negotiator reads the room; an AI reads the transcript. These are not equivalent.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Human Advantage 02</div>
+      <h4>Accountability and Trust</h4>
+      <p>Humans can be held responsible for decisions in a way that AI systems currently cannot. In high-stakes contexts — medical treatment, legal representation, financial advice, leadership — the requirement for accountable human judgment is partly legal, partly psychological, and partly ethical. People want a person they can trust and, if necessary, blame.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Human Advantage 03</div>
+      <h4>Novel Problem Formulation</h4>
+      <p>AI excels at solving well-defined problems. Humans excel at recognizing that the problem being solved is the wrong problem — at reframing situations in ways that reveal new possibilities. Strategic insight, entrepreneurial vision, and genuine scientific creativity all involve this kind of problem reframing that AI cannot yet reliably perform.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Human Advantage 04</div>
+      <h4>Interpersonal Influence</h4>
+      <p>The ability to inspire, persuade, mentor, comfort, and lead in complex social situations. Effective leadership, therapy, teaching at its best, and sales of complex solutions all involve relationship dynamics that AI can support but not replace. The economic value of these capabilities is rising as AI handles more cognitive routine work.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Human Advantage 05</div>
+      <h4>Values and Ethics Under Uncertainty</h4>
+      <p>When the right answer is not clear and the stakes are high, societies want human judgment that can be questioned, challenged, and evolved through democratic processes. The governance of AI itself requires human value judgment that cannot be delegated to AI.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Human Advantage 06</div>
+      <h4>Physical Dexterity in Unstructured Environments</h4>
+      <p>Plumbing, childcare, massage, surgery requiring tactile judgment, construction in complex environments — these require the integration of perception, fine motor control, and real-time adaptation that robotics cannot yet match economically outside of highly controlled environments.</p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"The most valuable professionals of the next decade will be those who can effectively direct, verify, and add judgment to AI outputs — not those who compete with AI on the tasks AI can already do."</p>
+    <cite>Erik Brynjolfsson, The Coming Wave of AI (2023)</cite>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 5. SKILLS THAT MATTER -->
+<div class="sec" id="skills-matter">
+  <div class="sec-tag">Chapter 5</div>
+  <h2>Skills That Will <em>Matter</em></h2>
+  <p>The skills economy of the next decade rewards a specific combination: deep domain expertise, human judgment capabilities, and the ability to work effectively with AI. Neither pure technical skill nor pure soft skill is sufficient independently. The premium is on integration.</p>
+
+  <h3>The Durable Skills Stack</h3>
+
+  <div class="skill-matrix">
+    <div class="wave-label">Skill Value Assessment — Durability vs Current Demand (2024→2030)</div>
+
+    <div class="skill-row">
+      <div class="skill-name">Learning how to learn</div>
+      <div class="skill-bar"><div class="skill-fill high" style="width:97%;"></div></div>
+      <div class="skill-trend up">↑ Critical</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Critical judgment & reasoning</div>
+      <div class="skill-bar"><div class="skill-fill high" style="width:94%;"></div></div>
+      <div class="skill-trend up">↑ Rising</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Complex communication</div>
+      <div class="skill-bar"><div class="skill-fill high" style="width:90%;"></div></div>
+      <div class="skill-trend up">↑ Rising</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">AI fluency & direction</div>
+      <div class="skill-bar"><div class="skill-fill high" style="width:92%;"></div></div>
+      <div class="skill-trend up">↑ New & Critical</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Systems thinking</div>
+      <div class="skill-bar"><div class="skill-fill high" style="width:88%;"></div></div>
+      <div class="skill-trend up">↑ Rising</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Emotional intelligence</div>
+      <div class="skill-bar"><div class="skill-fill high" style="width:85%;"></div></div>
+      <div class="skill-trend up">↑ Rising</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Deep domain expertise + AI</div>
+      <div class="skill-bar"><div class="skill-fill high" style="width:96%;"></div></div>
+      <div class="skill-trend up">↑ Premium</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Data literacy (not coding)</div>
+      <div class="skill-bar"><div class="skill-fill mid-f" style="width:78%;"></div></div>
+      <div class="skill-trend up">↑ Rising</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Cross-cultural collaboration</div>
+      <div class="skill-bar"><div class="skill-fill mid-f" style="width:75%;"></div></div>
+      <div class="skill-trend up">↑ Rising</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Standard coding (alone)</div>
+      <div class="skill-bar"><div class="skill-fill mid-f" style="width:55%;"></div></div>
+      <div class="skill-trend flat">→ Transforming</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Routine data analysis</div>
+      <div class="skill-bar"><div class="skill-fill low" style="width:35%;"></div></div>
+      <div class="skill-trend down">↓ Automating</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-name">Generic content production</div>
+      <div class="skill-bar"><div class="skill-fill low" style="width:20%;"></div></div>
+      <div class="skill-trend down">↓ Rapidly Automating</div>
+    </div>
+  </div>
+
+  <h3>The Meta-Skill That Supersedes All Others</h3>
+  <p>Learning how to learn — <strong>metalearning</strong> — is the master skill of the AI era. In a world where the half-life of specific technical skills is 2.5 years, the ability to rapidly acquire new skills is more economically valuable than any particular skill set. This is the skill that enables all other career adaptation.</p>
+
+  <p>Metalearning encompasses: accurate self-assessment of knowledge gaps, efficient selection of learning strategies, the ability to find and evaluate information quality, deliberate practice discipline, and the metacognitive monitoring to know when you've actually learned something versus when you merely feel like you have. <a class="crossref" href="#">Doc 1 — The Human</a><a class="crossref" href="#">Doc 2 — The System</a></p>
+
+  <div class="concept">
+    <h4>Domain Expertise + AI = Extraordinary Leverage</h4>
+    <p>The highest economic premium is currently going to people who combine deep domain expertise with sophisticated AI use. A mediocre lawyer using AI is still a mediocre lawyer. An expert lawyer using AI — who understands which outputs to trust, which to verify, how to prompt for their specific legal domain, and how to integrate AI output into client strategy — has extraordinary productivity leverage.</p>
+    <p>This has a counterintuitive implication for education: <strong>depth of domain expertise matters more in the AI era, not less.</strong> The person without domain expertise cannot evaluate AI outputs for accuracy or usefulness. The domain expert can use AI as a force multiplier. This challenges the narrative that AI makes experts obsolete — in many domains, it makes genuine expertise more valuable because more work can be done per expert, and the threshold for meaningful contribution rises. <a class="crossref" href="#">Doc 2 — The System</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 6. SKILLS DECLINE -->
+<div class="sec" id="skills-decline">
+  <div class="sec-tag">Chapter 6</div>
+  <h2>Skills That Will <em>Decline in Value</em></h2>
+  <p>Understanding which capabilities are being automated is as important as understanding which are becoming more valuable. Investing learning time in declining skills is not neutral — it displaces time from durable skills.</p>
+
+  <table class="compare">
+    <tr><th>Skill / Capability</th><th>Why It's Declining</th><th>Speed</th><th>What Replaces It</th></tr>
+    <tr><td>Pure information recall</td><td>AI retrieves and synthesizes information faster and more accurately</td><td class="bad">Very Fast</td><td>Information evaluation & judgment</td></tr>
+    <tr><td>Routine text production</td><td>LLMs produce competent first drafts at zero marginal cost</td><td class="bad">Very Fast</td><td>Editing, voice, strategic communication</td></tr>
+    <tr><td>Basic translation</td><td>Machine translation quality now exceeds most human translators for standard text</td><td class="bad">Already happened</td><td>Cultural interpretation, specialized domains</td></tr>
+    <tr><td>Standard image creation</td><td>Text-to-image models produce professional-quality images on demand</td><td class="bad">Rapid</td><td>Creative direction, brand identity, art direction</td></tr>
+    <tr><td>Data entry & processing</td><td>OCR, AI parsing, and RPA have automated most of this</td><td class="bad">Already happened</td><td>Data strategy and interpretation</td></tr>
+    <tr><td>Boilerplate legal work</td><td>Contract review and standard document generation automating rapidly</td><td class="mid-c">Fast</td><td>Strategic legal judgment, client relationships</td></tr>
+    <tr><td>Scheduled reporting</td><td>Automated dashboards and AI-generated narratives replace analyst reports</td><td class="mid-c">Fast</td><td>Insight generation, decision support</td></tr>
+    <tr><td>L1 technical support</td><td>AI chatbots handle the vast majority of first-line support tickets</td><td class="bad">Very Fast</td><td>Complex technical problem-solving</td></tr>
+    <tr><td>Generic educational tutoring</td><td>AI tutors provide unlimited explanations at zero marginal cost</td><td class="mid-c">Moderate</td><td>Mentorship, motivation, accountability</td></tr>
+  </table>
+
+  <div class="warning">
+    <div class="warning-label">The Reskilling Urgency</div>
+    <p>Workers currently employed primarily in declining-skill roles face genuine economic insecurity. The critical question is not whether these roles will be disrupted — they will — but whether the workers in them can acquire sufficient durable skills to navigate the transition. The answer depends on age, proximity to retirement, access to reskilling resources, and — critically — whether they have developed the metalearning capacity to acquire new skills rapidly. Workers who have never been required to learn rapidly are at highest risk. <a class="crossref" href="#">→ Section: Policy Responses</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 7. SKILLS HALF-LIFE -->
+<div class="sec" id="half-life">
+  <div class="sec-tag">Chapter 7</div>
+  <h2>The <em>Half-Life</em> of Skills</h2>
+  <p>Perhaps the most important single data point for anyone designing education and training: the average half-life of a specific technical skill is now approximately <strong>2.5 years</strong>. This is an IBM Institute for Business Value estimate; specific domain estimates vary widely, but the directional finding — that technical skills are becoming obsolete faster than at any previous point in history — is consistent across sources.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">2.5yr</div><div class="sl">Average technical skill half-life</div></div>
+    <div class="stat-box"><div class="sn">5yr</div><div class="sl">Typical time to develop deep domain expertise</div></div>
+    <div class="stat-box"><div class="sn">20+ yr</div><div class="sl">Half-life of interpersonal and judgment skills</div></div>
+    <div class="stat-box"><div class="sn">~∞</div><div class="sl">Half-life of metalearning capability</div></div>
+  </div>
+
+  <h3>Durable vs Perishable Skills</h3>
+  <div class="diagram">
+    <div class="diagram-title">Skill Durability Spectrum</div>
+    <div class="diagram-body">
+      <div class="vflow" style="max-width:100%;">
+        <div class="vflow-node" style="border-left:4px solid var(--accent);">
+          <div class="vflow-icon">♾️</div>
+          <div class="vflow-text">
+            <h5>Permanent Skills (Never Obsolete)</h5>
+            <p>Learning agility, emotional intelligence, ethical reasoning, creative problem formulation, leadership under uncertainty, genuine relationship building. These become more valuable as AI handles more routine cognitive work.</p>
+          </div>
+        </div>
+        <div class="vflow-conn"></div>
+        <div class="vflow-node" style="border-left:4px solid var(--gold);">
+          <div class="vflow-icon">📅</div>
+          <div class="vflow-text">
+            <h5>Long-Cycle Skills (10–20 year half-life)</h5>
+            <p>Deep domain expertise (medicine, law, engineering), strategic thinking within a domain, senior-level judgment. These require years to build and change slowly — their value derives from depth, not currency.</p>
+          </div>
+        </div>
+        <div class="vflow-conn"></div>
+        <div class="vflow-node" style="border-left:4px solid var(--blue);">
+          <div class="vflow-icon">🔄</div>
+          <div class="vflow-text">
+            <h5>Medium-Cycle Skills (3–7 year half-life)</h5>
+            <p>Platform-specific expertise, mid-level technical skills, domain-specific methodologies. Valuable but require regular reinvestment and updating. Examples: specific programming frameworks, particular analytics tools, regulatory knowledge.</p>
+          </div>
+        </div>
+        <div class="vflow-conn"></div>
+        <div class="vflow-node" style="border-left:4px solid var(--accent2);">
+          <div class="vflow-icon">⚡</div>
+          <div class="vflow-text">
+            <h5>Short-Cycle Skills (1–2 year half-life)</h5>
+            <p>Specific AI tools and prompting techniques, particular platform features, current best practices in fast-moving technical areas. High current value, rapidly obsoleting. Require continuous refresh investment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Implication for Learning Platform Design</div>
+    <p>The skill half-life reality fundamentally changes the economics and design of learning. A platform that teaches someone a skill with a 2.5-year half-life must re-engage them every 2–3 years to remain relevant. This is actually an extraordinary business model opportunity: learners who understand that skills decay and who develop the habit of continuous reskilling are lifelong customers. The platform that earns trust in the first reskilling cycle and delivers real outcomes retains them through subsequent cycles. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 8. SECTORAL SHIFTS -->
+<div class="sec" id="sectors">
+  <div class="sec-tag">Chapter 8</div>
+  <h2>Sectoral <em>Transformation</em></h2>
+  <p>Automation and AI are not hitting all sectors simultaneously or with equal intensity. Understanding which sectors are transforming rapidly, which are lagging, and why — determines where the largest skill gaps will emerge and where educational investment will have the greatest economic return.</p>
+
+  <div class="sector-grid">
+    <div class="sector-card" style="border-top-color:var(--accent);">
+      <div class="stag" style="color:var(--accent);">Rapidly Transforming</div>
+      <h5>Finance & Banking</h5>
+      <p>Algorithmic trading, automated underwriting, AI-driven fraud detection, and robo-advisory have already transformed the sector. Remaining human roles concentrate on relationship management, complex structuring, and regulatory compliance.</p>
+    </div>
+    <div class="sector-card" style="border-top-color:var(--gold);">
+      <div class="stag" style="color:var(--gold);">Rapidly Transforming</div>
+      <h5>Legal</h5>
+      <p>Document review, contract analysis, legal research, and routine drafting are automating rapidly. Partnership-track attorneys face structural job reduction. Judgment, strategy, and client relationships remain human.</p>
+    </div>
+    <div class="sector-card" style="border-top-color:var(--blue);">
+      <div class="stag" style="color:var(--blue);">Transforming</div>
+      <h5>Healthcare</h5>
+      <p>AI diagnostics (imaging, pathology), drug discovery, and administrative automation are progressing. But the sector is simultaneously expanding due to aging demographics. Net employment likely grows while role composition shifts dramatically.</p>
+    </div>
+    <div class="sector-card" style="border-top-color:var(--purple);">
+      <div class="stag" style="color:var(--purple);">Transforming</div>
+      <h5>Software Development</h5>
+      <p>Junior and boilerplate coding is automating. Senior engineering judgment, system architecture, and AI direction/verification roles are growing. The floor of the profession is rising — entry-level programming is harder to enter.</p>
+    </div>
+    <div class="sector-card" style="border-top-color:var(--accent2);">
+      <div class="stag" style="color:var(--accent2);">Transforming</div>
+      <h5>Education</h5>
+      <p>The sector most directly affected by this analysis. AI tutors, adaptive content, and automated assessment change the teacher's role from content delivery to learning facilitation, motivation, and relationship. Structural employment changes will lag technology by 10–15 years due to institutional inertia. <a class="crossref" href="#">Doc 2 — The System</a></p>
+    </div>
+    <div class="sector-card" style="border-top-color:var(--accent);">
+      <div class="stag" style="color:var(--accent);">Expanding</div>
+      <h5>Green Energy & Climate</h5>
+      <p>The energy transition represents the largest job creation opportunity of the next 30 years. Solar, wind, grid modernization, EV infrastructure, building retrofitting. Largely non-automatable physical installation work, plus new engineering and policy roles.</p>
+    </div>
+    <div class="sector-card" style="border-top-color:var(--gold);">
+      <div class="stag" style="color:var(--gold);">Resistant</div>
+      <h5>Construction & Trades</h5>
+      <p>Among the least automated sectors despite decades of predictions. Unstructured physical environments, irregular tasks, and the economics of robotic deployment keep skilled trades relatively safe. Significant labor shortage in many markets.</p>
+    </div>
+    <div class="sector-card" style="border-top-color:var(--blue);">
+      <div class="stag" style="color:var(--blue);">Resistant</div>
+      <h5>Care Work</h5>
+      <p>Childcare, elderly care, and social work are among the most automation-resistant occupational categories. They require physical presence, emotional attunement, and relationship continuity that robots cannot provide at acceptable cost or quality.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 9. GEOGRAPHY -->
+<div class="sec" id="geography">
+  <div class="sec-tag">Chapter 9</div>
+  <h2>The <em>Geography</em> of Work Is Changing</h2>
+  <p>Remote work, global talent markets, and the reversal of offshoring trends are creating a geographic redistribution of economic opportunity that is as significant as any technological shift. For learners in developing economies, this represents the most important educational opportunity in a generation — if they can acquire the right skills and credentials.</p>
+
+  <div class="region-grid">
+    <div class="region-card">
+      <div class="rname">United States & Western Europe</div>
+      <h4>Reshoring and Talent Competition</h4>
+      <div class="region-stat">↑</div>
+      <p>Automation is making US and European manufacturing more cost-competitive, reversing some offshoring. But this means fewer jobs than before — automation-enabled reshoring creates factory output without factory employment. Simultaneously, the global remote talent market is now competing with domestic knowledge workers on price for the first time.</p>
+    </div>
+    <div class="region-card">
+      <div class="rname">South & Southeast Asia</div>
+      <h4>The Biggest Opportunity and Risk</h4>
+      <div class="region-stat">2B+</div>
+      <p>India, Indonesia, Vietnam, Philippines, Bangladesh collectively represent over 2 billion people and a massive youth demographic. The middle layer of the global economy — call centers, business process outsourcing, standard software development — that provided ladder rungs into the formal economy is automating. The economic models that worked for previous Asian development are disrupted. New higher-skill paths are essential but challenging to scale.</p>
+    </div>
+    <div class="region-card">
+      <div class="rname">Sub-Saharan Africa</div>
+      <h4>The Demographic Dividend — or Crisis</h4>
+      <div class="region-stat">1.3B</div>
+      <p>1.3 billion people will enter the African workforce by 2050 — the largest labor market expansion in human history. The traditional development path — manufacturing export industries — is being automated before African countries can use it. New models — knowledge economy participation via remote work, leapfrogging infrastructure — are possible but require radical educational transformation. The gap between need and current educational capacity is enormous. <a class="crossref" href="#">Doc 2 — The System</a></p>
+    </div>
+    <div class="region-card">
+      <div class="rname">Latin America</div>
+      <h4>Remote Work Access — Partially Realized</h4>
+      <div class="region-stat">~$20/hr</div>
+      <p>Latin America has a structural advantage: time zone compatibility with North American markets, growing English proficiency, and cultural familiarity. Brazilian, Colombian, Argentine, and Mexican knowledge workers have begun accessing the global remote labor market. Average knowledge worker wages have risen significantly in tech hubs. The constraint: English language skills, internet access quality, and verifiable credentials.</p>
+    </div>
+    <div class="region-card">
+      <div class="rname">Eastern Europe & Central Asia</div>
+      <h4>Engineering Talent Arbitage — Maturing</h4>
+      <div class="region-stat">5M+</div>
+      <p>Poland, Romania, Ukraine, Georgia, Kazakhstan have produced large developer talent pools that export services globally. This model is maturing — wages are rising toward Western levels in competitive specialties, reducing the arbitrage opportunity. Next stage requires moving up the value chain: software architecture, AI engineering, product management.</p>
+    </div>
+  </div>
+
+  <h3>Geographic Arbitrage — The Individual Opportunity</h3>
+  <p><strong>Geographic arbitrage</strong> is the strategy of earning in a high-wage currency market (US dollars, euros) while living in a lower-cost geography. A software developer in Lagos earning $80,000 USD remotely from a US company has extraordinary purchasing power relative to local alternatives. This is already happening at scale in some markets and represents one of the most powerful individual wealth-building strategies available to high-skill workers in developing economies.</p>
+
+  <p>The constraint is credentials and trust: US companies need to trust that a developer in Lagos can do the work, communicate effectively, and collaborate reliably. Building credentialing systems that can verify these capabilities — and building track records that establish trust — is precisely the gap that a well-designed learning platform can fill. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 10. WORK STRUCTURE -->
+<div class="sec" id="work-structure">
+  <div class="sec-tag">Chapter 10</div>
+  <h2>How Work <em>Structure</em> Is Changing</h2>
+  <p>Beyond which jobs exist, the structure of employment — how work is organized, contracted, compensated, and controlled — is undergoing fundamental changes that have direct implications for what skills and credentials workers need.</p>
+
+  <h3>The End of the Lifetime Job</h3>
+  <p>The postwar employment model — join a company in your 20s, work your way up the hierarchy over 40 years, retire with a pension — is structurally dead in most of the developed world. The average US worker now changes jobs every 4.1 years; the number is lower in Europe due to stronger labor protections, but the trend is the same. This structural shift has several causes: globalization, the financialization of corporations (quarterly earnings pressure reducing long-term investment in employees), and the rise of project-based work.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">4.1yr</div><div class="sl">Average US job tenure</div></div>
+    <div class="stat-box"><div class="sn">36%</div><div class="sl">US workforce in gig / freelance economy</div></div>
+    <div class="stat-box"><div class="sn">12–15</div><div class="sl">Average number of jobs in a modern career</div></div>
+    <div class="stat-box"><div class="sn">50%</div><div class="sl">Global workforce in informal economy</div></div>
+  </div>
+
+  <h3>The Gig Economy — Freedom vs Precarity</h3>
+  <p>The gig economy encompasses everything from Uber drivers to high-paid independent consultants. It is not one thing. High-skill independent workers — management consultants, software contractors, freelance designers — often earn substantial premiums over equivalent employees and genuinely value autonomy. Low-skill gig workers — delivery drivers, TaskRabbit workers — often earn below minimum wage on a risk-adjusted basis, with no benefits, no job security, and algorithmic management that can terminate them with no recourse.</p>
+
+  <p>The critical variable determining whether gig work is empowering or exploitative is bargaining power — which is a direct function of skill scarcity. Rare, in-demand skills produce gig premiums; abundant, replaceable skills produce gig poverty. This is another reason why skill development is the primary economic lever available to individuals navigating the new labor market.</p>
+
+  <h3>Remote Work as a Permanent Structural Shift</h3>
+  <p>The COVID-19 pandemic forced a 5-year adoption curve of remote work into 18 months. The result was permanent: a significant fraction of knowledge work has shifted to hybrid or fully remote arrangements that will not revert. This has second-order effects on commercial real estate, urban geography, compensation structures, and — critically — the global talent market, which is now meaningfully more open to workers in lower-cost geographies. <a class="crossref" href="#">→ Section: Geography</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 11. ECONOMIC STRUCTURE -->
+<div class="sec" id="economic-structure">
+  <div class="sec-tag">Chapter 11</div>
+  <h2><em>Economic Structure</em> — How the Rules Are Changing</h2>
+  <p>The macroeconomic structure of the global economy has shifted in ways that directly affect who captures the value produced by education and skill development. Understanding these structural shifts is essential for designing learning systems that produce real economic outcomes for real learners.</p>
+
+  <h3>Winner-Takes-All Economics</h3>
+  <p><span class="researcher">Robert Frank & Philip Cook (The Winner-Take-All Society, 1995)</span> identified a structural shift in how economic value is distributed: in markets where scale is possible (digital products, platforms, media), the top performers capture dramatically disproportionate value while the rest receive very little. A book read by everyone has effectively zero competition from the second-best book. A platform used by everyone has effectively zero competition from the second-best platform.</p>
+
+  <p>This pattern is now extending into labor markets for knowledge work. The top 5% of programmers, designers, consultants, and marketers earn dramatically more than the next 25%, who in turn earn dramatically more than the bottom 70%. AI amplifies this by giving top performers tools to be even more productive — widening the gap between the exceptional and the adequate.</p>
+
+  <h3>The Declining Labor Share of GDP</h3>
+  <p>One of the most important and least discussed structural facts of the past 40 years: in most developed economies, the share of national income going to labor (wages, salaries, benefits) has declined significantly while the share going to capital (profits, returns on investment) has increased. In the US, the labor share of income fell from approximately 65% in the 1970s to approximately 56% by the 2010s. Technology that replaces labor while augmenting capital returns is a primary driver.</p>
+
+  <div class="concept">
+    <h4>The Asset vs Income Shift</h4>
+    <p>In an economy where the labor share is declining and returns to capital are rising, the most important economic distinction is not between high-wage and low-wage workers — it is between people who own assets (capital, intellectual property, equity) and people who only earn wages. A software engineer earning $250,000 at a tech company with no equity is in a structurally different position from a software engineer earning $100,000 with meaningful equity in a growing company.</p>
+    <p>This has profound implications for education and career design: the goal should not only be earning capacity but wealth-building capacity. Technical skills that can be converted to equity participation, freelance premiums, intellectual property, or proprietary market position are structurally more valuable than the same skills deployed purely for salary. Educational platforms that teach only skills and not the economics of how to capture value from those skills are incomplete. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+
+  <h3>Platform Economics and Value Capture</h3>
+  <p>Platform companies — Uber, Airbnb, Amazon Marketplace, Upwork — aggregate supply and demand, taking a fee from every transaction. The platform's value comes from the network it creates and manages, not from producing any good or service directly. Workers on platforms face a fundamental power asymmetry: the platform can adjust prices, algorithms, and terms unilaterally; the individual worker has no equivalent leverage. Understanding platform economics is essential for evaluating whether a gig opportunity is genuinely good for the worker or primarily good for the platform.</p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 12. INEQUALITY -->
+<div class="sec" id="inequality-econ">
+  <div class="sec-tag">Chapter 12</div>
+  <h2>Economic <em>Inequality</em> and the Skills Gap</h2>
+  <p>Income inequality has risen in most developed economies over the past 40 years. Multiple forces are at work, and education/skills policy occupies a contested position in both the diagnosis and the proposed solutions.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">+85%</div><div class="sl">Rise in top 1% income share (US, 1980–2020)</div></div>
+    <div class="stat-box"><div class="sn">$51K</div><div class="sl">Median US wage (2023)</div></div>
+    <div class="stat-box"><div class="sn">$36M</div><div class="sl">Average Fortune 500 CEO compensation (2023)</div></div>
+    <div class="stat-box"><div class="sn">700×</div><div class="sl">Ratio of CEO to median worker pay</div></div>
+  </div>
+
+  <h3>The Skills Gap — Real, Misdiagnosed, or Both?</h3>
+  <p>Employers consistently report difficulty finding workers with the skills they need. Workers consistently report difficulty finding good jobs. This apparent paradox has competing explanations:</p>
+
+  <p>The <strong>genuine skills gap view</strong>: rapid technological change has created demand for skills that educational systems are too slow to supply. There is a genuine mismatch between the skills workers have and the skills employers need. The solution is better, faster, more adaptable education and training.</p>
+
+  <p>The <strong>wage expectation view</strong>: there is no skills gap — only a wage gap. Employers who claim they cannot find skilled workers are actually unwilling to pay the market-clearing wage for those workers, and prefer to describe the problem as a skills shortage rather than a compensation problem. <span class="researcher">Peter Cappelli (Why Good People Can't Get Jobs)</span> argues this view with supporting evidence.</p>
+
+  <p>The <strong>specificity view</strong>: employers are demanding highly specific, immediately deployable skills rather than general capabilities they would need to develop. This specificity requirement shifts training costs from employers to workers, who must pay for ever-more-specific credentials. The solution is for employers to invest more in training.</p>
+
+  <p>All three views are partially true. Effective policy requires distinguishing between them in specific labor market contexts.</p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 13. CREDENTIAL DISRUPTION -->
+<div class="sec" id="credential-disruption">
+  <div class="sec-tag">Chapter 13</div>
+  <h2>Credentialing <em>Disruption</em> — What's Real</h2>
+  <p>One of the most consequential potential shifts in the labor market is the movement from degree-based to skills-based hiring. Major technology companies — Google, IBM, Apple, Microsoft — have publicly announced that they no longer require degrees for many positions. Is this real? And does it matter at scale?</p>
+
+  <h3>The Skills-Based Hiring Movement</h3>
+  <p>The Business Roundtable's "Multiple Pathways" initiative, the Obama and Trump administrations' "Pledge to America's Workers," and the growing press coverage of degree-free hiring create an impression of rapid change. The empirical evidence is more cautious. Research by <span class="researcher">Harvard Business School's Accenture/Burning Glass study (2022)</span> found that while many employers publicly removed degree requirements, actual hiring behavior changed much more slowly — hiring managers continued to favor degree holders even when the job posting did not require one.</p>
+
+  <p>The gap between stated policy and actual hiring behavior exists because: (1) degree requirements are a simple, legible filter that reduces hiring manager cognitive load; (2) alternative credentials lack the institutional trust infrastructure to substitute easily; (3) degree holders still dominate applicant pools for many positions; and (4) removing degree requirements without providing alternative filters may actually increase hiring costs.</p>
+
+  <h3>Where Alternative Credentials Are Actually Working</h3>
+  <table class="compare">
+    <tr><th>Credential Type</th><th>Employer Acceptance</th><th>Why It Works</th></tr>
+    <tr><td>AWS / GCP / Azure Certifications</td><td class="good">Strong</td><td>Vendor-backed, standardized, demonstrably validates specific skills. Tech employers trust the vendor's certification process.</td></tr>
+    <tr><td>GitHub Portfolio (Software)</td><td class="good">Strong in Tech</td><td>Direct evidence of capability. Senior engineering hiring is heavily portfolio-driven. Transparent and forgery-resistant.</td></tr>
+    <tr><td>Bootcamp Graduates (Top Programs)</td><td class="mid-c">Moderate</td><td>Programs with strong employer partnerships and outcomes data have built track records. Employer trust is pipeline-specific.</td></tr>
+    <tr><td>Coursera / edX Professional Certs</td><td class="mid-c">Growing Slowly</td><td>Google and IBM certificates gaining traction. Still primarily used as supplements to degrees, not replacements.</td></tr>
+    <tr><td>Self-Taught (No Credential)</td><td class="bad">Weak Except Portfolio</td><td>Without a verifiable proof of learning, self-teaching is invisible to most employers. Portfolio is the only substitute.</td></tr>
+  </table>
+
+  <div class="impl">
+    <div class="impl-label">The Trust-Building Strategy</div>
+    <p>Alternative credentials gain employer trust through documented outcomes, not through content quality alone. The question employers ask is not "is this a good learning program?" but "do graduates of this program perform well in our jobs?" Answering that question requires: tracking graduate employment, measuring performance in those roles, building relationships with employers who can provide that data, and publishing the results. This is a multi-year process. It cannot be accelerated by improving the curriculum. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 14. CAREER LIFECYCLE -->
+<div class="sec" id="career-lifecycle">
+  <div class="sec-tag">Chapter 14</div>
+  <h2>The New <em>Career Lifecycle</em></h2>
+  <p>The linear career — education phase → single employer career → retirement — is functionally obsolete for most workers in developed economies and increasingly for workers globally. The replacement model is non-linear, multi-phase, and requires a fundamentally different relationship to learning and identity.</p>
+
+  <div class="vflow">
+    <div class="vflow-node">
+      <div class="vflow-icon">🎓</div>
+      <div class="vflow-text">
+        <h5>Foundation (Ages 15–25)</h5>
+        <p>Core skills, metalearning capabilities, initial credentials. Critical importance of building the ability to learn rapidly — this capacity will be used repeatedly. Career starts earlier, experimentally, before full credential completion.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🔍</div>
+      <div class="vflow-text">
+        <h5>Exploration & Specialization (Ages 22–35)</h5>
+        <p>Multiple role experiments, identification of strongest skill-interest intersections, building a professional network, developing a public professional identity. Likely 3–5 employers and possibly 2 domain pivots.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">⚡</div>
+      <div class="vflow-text">
+        <h5>Peak Productivity (Ages 30–50)</h5>
+        <p>Deep expertise combined with network leverage. The most economically productive phase. Requires proactive upskilling every 3–5 years to prevent expertise from decaying. First major career pivot often occurs here.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🔄</div>
+      <div class="vflow-text">
+        <h5>Reinvention Phase (Ages 45–60)</h5>
+        <p>Previously career-ending disruption is now a required phase of most careers. Workers with strong metalearning capabilities navigate this transition to new domains. Those without it face severe economic risk.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🌱</div>
+      <div class="vflow-text">
+        <h5>Portfolio Phase (Ages 55+)</h5>
+        <p>Multiple income streams, mentorship, consulting, part-time work in areas of expertise. Retirement in the traditional sense (stop working at 65) is declining — by choice for some, by necessity for many who cannot afford to stop.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Personal Brand as Infrastructure</h3>
+  <p>In a labor market characterized by frequent transitions and remote work, <strong>professional reputation is the new job security</strong>. A worker who is well-known in their domain — through published work, conference presentations, active professional community participation, or social media presence — can find new positions far more quickly than an equivalent worker who is invisible professionally. Building and maintaining a public professional identity is not a vanity project; it is career risk management.</p>
+
+  <p>This has a direct implication for learning platforms: the most valuable platforms will be those that help learners not only acquire skills but become visible and credible practitioners of those skills — through portfolio projects, professional community integration, and verifiable track records of performance. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 15. GLOBAL CONTEXT -->
+<div class="sec" id="global-context">
+  <div class="sec-tag">Chapter 15</div>
+  <h2>The <em>Global Economic</em> Context</h2>
+  <p>Understanding the economic forces at work globally — not just in developed economies — is essential for building learning systems with genuinely transformative impact. The numbers are stark and demand attention.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">$3/day</div><div class="sl">Income threshold for global poverty (World Bank)</div></div>
+    <div class="stat-box"><div class="sn">700M</div><div class="sl">People living in extreme poverty globally</div></div>
+    <div class="stat-box"><div class="sn">2B</div><div class="sl">People with no formal bank account</div></div>
+    <div class="stat-box"><div class="sn">5.4B</div><div class="sl">Smartphone users globally (2023)</div></div>
+  </div>
+
+  <h3>The Leapfrogging Opportunity</h3>
+  <p>Developing economies have a historical pattern of leapfrogging infrastructure stages: Kenya went from minimal banking infrastructure directly to mobile money (M-Pesa); large parts of Africa went from no fixed-line telephony to mobile broadband. The same pattern is possible in education: rather than building the institutional infrastructure of Western universities — which took centuries — developing economies could potentially adopt next-generation learning systems that produce verified, economically recognized skills without the institutional overhead.</p>
+
+  <p>This requires: functional smartphone penetration (happening), sufficient connectivity (rapidly improving), high-quality multilingual educational content (available), local cultural relevance in content and pedagogy (mostly missing), and most critically — credential recognition by employers in the local and global economy (the hardest problem). <a class="crossref" href="#">Doc 2 — The System</a></p>
+
+  <h3>Returns on Education in Developing Economies</h3>
+  <p>The economic return on education is substantially higher in developing economies than in developed ones — an additional year of schooling in low-income countries raises wages by 10–12% on average, compared to 6–8% in high-income countries (<span class="researcher">Psacharopoulos & Patrinos, 2018</span>). This means that improving education quality and access in developing economies produces far greater economic impact per dollar invested than equivalent improvements in developed economies. The global impact case for building genuinely transformative learning systems is overwhelming.</p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 16. POLICY RESPONSES -->
+<div class="sec" id="policy-responses">
+  <div class="sec-tag">Chapter 16</div>
+  <h2>Policy <em>Responses</em> to Economic Disruption</h2>
+  <p>How governments are responding to labor market disruption — and the evidence on what works — matters for understanding both the context in which learning platforms operate and the opportunities available for partnership, funding, and recognition.</p>
+
+  <div class="policy-grid">
+    <div class="policy-card">
+      <div class="country">Germany</div>
+      <h4>Dual Apprenticeship System</h4>
+      <p>Half school, half employer-based training, legally structured, jointly funded. Produces the lowest youth unemployment in Europe and strong skills alignment with employer needs. Requires deep employer engagement and government coordination that most countries cannot replicate quickly.</p>
+      <span class="verdict works">Works Well</span>
+    </div>
+    <div class="policy-card">
+      <div class="country">Singapore</div>
+      <h4>SkillsFuture</h4>
+      <p>Every citizen over 25 receives S$500 learning credit, refreshed periodically. Creates a demand-pull for skills training. 500,000+ take courses annually. Integrated with national workforce strategy and employer incentives for staff training. The most comprehensive individual lifelong learning entitlement globally.</p>
+      <span class="verdict works">Works Well</span>
+    </div>
+    <div class="policy-card">
+      <div class="country">Denmark</div>
+      <h4>Flexicurity</h4>
+      <p>Easy to hire and fire (flexibility for employers) combined with generous unemployment benefits and mandatory retraining support (security for workers). Workers can lose a job and receive 90% of previous wages for up to 2 years while retraining. Requires high tax capacity and social trust to implement.</p>
+      <span class="verdict works">Works in Context</span>
+    </div>
+    <div class="policy-card">
+      <div class="country">United States</div>
+      <h4>Workforce Development (WIA/WIOA)</h4>
+      <p>Federally funded, state-administered workforce development programs. Fragmented, underfunded ($4B annually for a country of 330M), poorly coordinated with actual employer needs. Most retraining programs produce modest wage gains and have inconsistent completion rates. The gap between need and provision is vast.</p>
+      <span class="verdict fails">Largely Fails</span>
+    </div>
+    <div class="policy-card">
+      <div class="country">Various</div>
+      <h4>Universal Basic Income (Pilots)</h4>
+      <p>Finland, Kenya (GiveDirectly), Stockton CA, and others have piloted UBI. Results: small positive effects on wellbeing, entrepreneurship, and health. Minimal negative effects on work effort (the main objection). Too small to draw strong conclusions about labor market effects at scale, but the evidence does not support the fear that UBI eliminates work motivation.</p>
+      <span class="verdict partial">Mixed / Promising</span>
+    </div>
+    <div class="policy-card">
+      <div class="country">Various</div>
+      <h4>Income Share Agreements (ISAs)</h4>
+      <p>Learners pay tuition only after employment above a threshold. Aligns incentive between platform and learner. Lambda School (now Bloom Institute) demonstrated both the promise and the pitfalls — ISA terms were changed unilaterally, and regulatory challenges emerged. Model is sound; implementation is complex and requires regulatory clarity.</p>
+      <span class="verdict partial">Promising, Complex</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 17. FRAMEWORKS -->
+<div class="sec" id="frameworks">
+  <div class="sec-tag">Chapter 17</div>
+  <h2>Analytical <em>Frameworks</em> for Understanding Economic Change</h2>
+  <p>Several theoretical frameworks help explain the dynamics described throughout this document. Fluency with these frameworks enables more precise analysis of specific labor market situations and more effective communication with economists and policymakers.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Framework 01</div>
+      <h4>Kondratiev Waves</h4>
+      <p>50–60 year economic super-cycles driven by general-purpose technologies (steam, electricity, information technology, AI). Each wave creates a long boom as the technology diffuses through the economy, followed by restructuring as productivity gains plateau. We are likely in the early expansion phase of the AI wave — meaning the main productivity gains are ahead, not behind.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Framework 02</div>
+      <h4>General Purpose Technology Theory</h4>
+      <p><span class="researcher">Bresnahan & Trajtenberg (1995)</span>: GPTs — technologies that affect the entire economy — require complementary innovations and organizational change before their productivity effects fully materialize. Electricity took 30–40 years to transform manufacturing. AI's full economic impact will take similarly long to realize. The disruption comes before the productivity gains are evenly distributed.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Framework 03</div>
+      <h4>Human Capital Theory</h4>
+      <p>Education is investment in productive capacity. Returns to this investment (the wage premium) can be measured and compared to alternative investments. The theory implies that individuals should invest in education up to the point where the marginal return equals the marginal cost. In an era of rapidly changing skill values, the investment calculation must be revisited constantly.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Framework 04</div>
+      <h4>Signaling Theory</h4>
+      <p>Education as costly signal of pre-existing ability rather than skill producer. The empirical question — how much of the degree premium is signaling vs genuine skill development — has enormous policy implications. If mostly signaling, education spending is partially zero-sum; if mostly human capital, it is positive sum. The evidence suggests a significant signaling component, especially at elite institutions. <a class="crossref" href="#">Doc 2 — The System</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Framework 05</div>
+      <h4>Institutional Economics</h4>
+      <p><span class="researcher">Douglas North</span>: institutions — formal rules, informal norms, enforcement mechanisms — shape economic outcomes and change slowly due to path dependence. Educational credentials are institutions. Their value is determined by the institutional system that recognizes them, not by their intrinsic quality. Building new credential institutions requires building new institutional frameworks, not just new content.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Framework 06</div>
+      <h4>Political Economy</h4>
+      <p>Economic outcomes are shaped by power as well as by markets. Who benefits from current educational and credentialing arrangements? Who has the political power to resist change? Understanding political economy helps explain why obviously suboptimal educational and credentialing arrangements persist, and what coalition of interests would need to shift to enable reform. <a class="crossref" href="#">Doc 2 — The System</a></p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 18. SYNTHESIS -->
+<div class="sec" id="synthesis">
+  <div class="sec-tag">Chapter 18</div>
+  <h2>Synthesis — What <em>The Economy</em> Demands</h2>
+  <p>The economic analysis across all preceding chapters converges on several inescapable conclusions about what learners need, what employers need, and what learning platforms must provide to be economically relevant.</p>
+
+  <div class="concept">
+    <h4>The Single Most Important Insight from Doc 3</h4>
+    <p>The economy doesn't reward knowing things anymore. It rewards <strong>demonstrating capability, adapting faster than obsolescence, and building trust with the people who make hiring and buying decisions.</strong> Knowledge has become abundant and cheap. Verified capability is scarce and valuable. Institutional trust is rarer still and extraordinarily powerful.</p>
+    <p>The education-to-employment pipeline must therefore produce three things, in this order of difficulty: genuine, demonstrable skills → verifiable proof of those skills that employers trust → placement in economic situations where those skills create real value. Most current platforms produce weak versions of the first, almost nothing of the second, and treat the third as someone else's problem. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+
+  <h3>The Five Economic Realities Any Platform Must Address</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Reality 01</div>
+      <h4>Skills Decay Faster Than Credentials</h4>
+      <p>A credential is a one-time event; skills require continuous maintenance. Any platform that earns a learner's trust by helping them through one transition has an opportunity to be their lifelong learning partner — if it builds for continuity rather than acquisition.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Reality 02</div>
+      <h4>The Trust Gap Is the Critical Bottleneck</h4>
+      <p>The learning is cheap; the trust is expensive. Building employer recognition for platform credentials requires years of outcome tracking, relationship building, and track record accumulation. Starting this process immediately — even before the technology is perfect — is the right strategy.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Reality 03</div>
+      <h4>Geography Creates Asymmetric Opportunity</h4>
+      <p>The marginal value of a verified remote-work credential is far higher in Lagos than in London. Platforms focused on emerging markets — where the skills gap is largest, institutional alternatives are weakest, and economic returns on skill development are highest — have the greatest impact opportunity and potentially the least competition.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Reality 04</div>
+      <h4>Metalearning Is the Biggest Market</h4>
+      <p>Every knowledge worker on Earth needs to reskill every 3–5 years for the foreseeable future. The platform that earns the role of "where I go when I need to learn something new" — not just for one skill but as a default — has an extraordinarily durable business model.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Reality 05</div>
+      <h4>Outcomes Must Be Measurable to Be Credible</h4>
+      <p>Any platform that cannot answer "what percentage of your graduates are employed in their target field within 6 months, at what salary, and how does their employer-reported performance compare to degree holders?" cannot build the institutional trust needed for credential recognition. Outcomes measurement is not a reporting exercise — it is a product requirement.</p>
+    </div>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Bridge to Doc 4</div>
+    <p>Doc 1 established what the human brain needs to learn. Doc 2 established what the institutional system does and doesn't do. Doc 3 has established what the economy demands and rewards. Doc 4 will synthesize all three into a concrete strategic framework: how to build a learning platform that is aligned with human cognition, supplementary to institutional systems, and economically relevant enough to matter. <a class="crossref" href="#">Doc 4 — The Strategy</a></p>
+  </div>
+</div>
+
+</div><!-- end .wrap -->
+
+<!-- ══════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-doc">
+      <h4>Doc 3 — The Economy</h4>
+      <p>Jobs, skills, automation, credentialing disruption, geographic shifts, economic structure, and the future of work. What the world the learner graduates into actually demands.</p>
+    </div>
+    <div class="doc-nav">
+      <a href="#">Doc 1 — The Human</a>
+      <a href="#">Doc 2 — The System</a>
+      <a class="current" href="#">← Doc 3 — The Economy (current)</a>
+      <a href="#">Doc 4 — The Strategy (coming)</a>
+      <a href="#">Doc 5 — The Master (coming)</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pgbar').style.width=(s/h*100)+'%';
+});
+
+// Animate skill bars
+const skillObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.skill-fill').forEach((bar,i)=>{
+        const w=bar.style.width;
+        bar.style.width='0%';
+        setTimeout(()=>{bar.style.width=w;},100+i*60);
+      });
+    }
+  });
+},{threshold:.2});
+document.querySelectorAll('.skill-matrix').forEach(m=>skillObs.observe(m));
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      const kids=e.target.querySelectorAll('.card,.study,.vflow-node,.hflow-node,.stat-box,.tl-item,.wave-row,.sector-card,.region-card,.policy-card');
+      kids.forEach((k,i)=>{
+        k.style.opacity='0';k.style.transform='translateY(16px)';
+        k.style.transition=`opacity .45s ease ${i*.06}s,transform .45s ease ${i*.06}s`;
+        setTimeout(()=>{k.style.opacity='1';k.style.transform='translateY(0)';},80+i*60);
+      });
+    }
+  });
+},{threshold:.07});
+document.querySelectorAll('.sec').forEach(s=>obs.observe(s));
+
+const navLinks=document.querySelectorAll('nav a');
+const secEls=document.querySelectorAll('.sec');
+const navObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.getAttribute('id');
+      navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});
+    }
+  });
+},{threshold:.3});
+secEls.forEach(s=>navObs.observe(s));
+</script>
+</body>
+</html>

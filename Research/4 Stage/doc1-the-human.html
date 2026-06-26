@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc 1 — The Human | Master Research Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d14;
+  --paper: #f5f1e8;
+  --cream: #faf7f0;
+  --accent: #c0392b;
+  --accent2: #1a3f7a;
+  --gold: #c9880a;
+  --green: #1a6b4a;
+  --mid: #5a5a6e;
+  --line: rgba(13,13,20,0.12);
+  --light-line: rgba(13,13,20,0.06);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 16.5px;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* NOISE */
+body::before {
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.6;
+}
+
+/* PROGRESS */
+#pgbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2));z-index:9998;width:0%;transition:width .1s}
+
+/* HEADER */
+header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 100px 40px 70px;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content:'01';
+  position:absolute;right:-20px;top:-40px;
+  font-family:'Playfair Display',serif;
+  font-size:280px;font-weight:900;
+  color:rgba(255,255,255,0.03);
+  line-height:1;pointer-events:none;
+  user-select:none;
+}
+header::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2));
+}
+.series-tag {
+  font-family:'DM Mono',monospace;font-size:11px;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.series-tag::before {
+  content:'';display:block;width:32px;height:1px;background:var(--gold);
+}
+header h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,6vw,5.5rem);
+  font-weight:900;line-height:1.0;
+  max-width:760px;margin-bottom:8px;
+}
+header h1 em{color:var(--accent);font-style:italic;}
+.header-desc {
+  font-family:'Libre Baskerville',serif;
+  font-size:1.05rem;color:rgba(245,241,232,0.65);
+  max-width:600px;margin:24px 0 40px;
+  line-height:1.7;font-style:italic;
+}
+.doc-links {
+  display:flex;gap:12px;flex-wrap:wrap;margin-top:40px;
+}
+.doc-link {
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.15em;text-transform:uppercase;
+  padding:8px 16px;border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.45);text-decoration:none;
+  border-radius:2px;transition:all .2s;
+}
+.doc-link.active {
+  border-color:var(--accent);color:var(--accent);
+}
+.doc-link:not(.active):hover {
+  border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.7);
+}
+.header-stats {
+  display:flex;gap:32px;flex-wrap:wrap;
+  padding-top:40px;border-top:1px solid rgba(255,255,255,0.1);
+}
+.hstat .n {
+  font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;
+}
+.hstat .l {
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.12em;color:rgba(255,255,255,0.4);text-transform:uppercase;
+}
+
+/* NAV */
+nav {
+  background:var(--cream);border-bottom:1px solid var(--line);
+  padding:0 40px;position:sticky;top:0;z-index:100;
+  display:flex;gap:0;overflow-x:auto;
+  scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav a {
+  font-family:'DM Mono',monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mid);text-decoration:none;
+  padding:15px 18px;border-bottom:2px solid transparent;
+  white-space:nowrap;transition:all .2s;flex-shrink:0;
+}
+nav a:hover,nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* CONTENT WRAPPER */
+.wrap {
+  max-width:860px;margin:0 auto;padding:80px 40px;
+}
+
+/* SECTION */
+.sec {
+  margin-bottom:80px;
+  opacity:0;transform:translateY(28px);
+  transition:opacity .65s ease,transform .65s ease;
+}
+.sec.vis{opacity:1;transform:translateY(0);}
+
+.sec-tag {
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.22em;color:var(--accent);
+  text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-tag::after{content:'';flex:1;height:1px;background:var(--line);}
+
+.sec h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.7rem,3vw,2.6rem);
+  font-weight:700;line-height:1.15;
+  margin-bottom:28px;
+}
+.sec h2 em{color:var(--accent);font-style:italic;}
+
+.sec h3 {
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:700;
+  margin:44px 0 14px;
+  padding-left:16px;
+  border-left:3px solid var(--accent);
+}
+
+.sec h4 {
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;font-weight:700;
+  margin:28px 0 10px;color:var(--ink);
+}
+
+.sec p{margin-bottom:18px;color:#1e1e2e;}
+.sec p:last-child{margin-bottom:0;}
+
+/* PULLQUOTE */
+.pullquote {
+  margin:40px 0;padding:32px 40px;
+  border-left:4px solid var(--gold);
+  background:var(--cream);
+  border-radius:0 4px 4px 0;
+}
+.pullquote p {
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-style:italic;
+  line-height:1.65;margin:0 0 12px !important;
+  color:var(--ink) !important;
+}
+.pullquote cite {
+  font-family:'DM Mono',monospace;font-size:11px;
+  letter-spacing:.1em;color:var(--mid);
+  text-transform:uppercase;
+}
+
+/* RESEARCHER */
+.researcher {
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ink);color:var(--paper);
+  font-family:'DM Mono',monospace;font-size:11px;
+  padding:4px 12px 4px 8px;border-radius:20px;
+  margin:0 4px 4px 0;letter-spacing:.06em;
+  vertical-align:middle;
+}
+.researcher::before {
+  content:'◆';color:var(--gold);font-size:8px;
+}
+
+/* KEY CONCEPT */
+.concept {
+  background:var(--ink);color:var(--paper);
+  padding:36px 40px;margin:36px 0;
+  border-radius:3px;position:relative;overflow:hidden;
+}
+.concept::before {
+  content:'KEY CONCEPT';
+  position:absolute;top:16px;right:20px;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:.2em;color:rgba(255,255,255,0.2);
+}
+.concept h4 {
+  font-family:'Playfair Display',serif;font-size:1.2rem;
+  font-weight:700;color:var(--gold);margin-bottom:12px !important;
+}
+.concept p{color:rgba(245,241,232,0.82) !important;margin-bottom:10px !important;}
+.concept p:last-child{margin-bottom:0 !important;}
+
+/* STUDY BOX */
+.study {
+  border:1px solid var(--line);
+  border-top:3px solid var(--accent2);
+  padding:24px 28px;margin:28px 0;
+  border-radius:0 0 3px 3px;
+  background:var(--cream);
+}
+.study-label {
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent2);margin-bottom:10px;
+}
+.study h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px !important;}
+.study p{font-size:.88rem;color:var(--mid) !important;line-height:1.55;margin:0 !important;}
+
+/* GRID CARDS */
+.card-grid {
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:16px;margin:28px 0;
+}
+.card {
+  background:var(--cream);border:1px solid var(--line);
+  padding:22px;border-radius:3px;
+  border-top:3px solid var(--accent);
+  transition:transform .2s,box-shadow .2s;
+}
+.card:nth-child(2){border-top-color:var(--accent2);}
+.card:nth-child(3){border-top-color:var(--gold);}
+.card:nth-child(4){border-top-color:var(--green);}
+.card:nth-child(5){border-top-color:#7b2d8b;}
+.card:nth-child(6){border-top-color:#2d7b7b;}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.08);}
+.card .cn {
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.15em;color:var(--mid);
+  text-transform:uppercase;margin-bottom:8px;
+}
+.card h4{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:8px !important;}
+.card p{font-size:.83rem;color:var(--mid);line-height:1.5;margin:0 !important;}
+
+/* DIAGRAM — MEMORY STAGES */
+.diagram {
+  margin:36px 0;border:1px solid var(--line);
+  border-radius:4px;overflow:hidden;
+  background:var(--cream);
+}
+.diagram-title {
+  background:var(--ink);color:var(--paper);
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;
+  padding:12px 20px;
+}
+.diagram-body{padding:28px;}
+
+/* FLOW HORIZONTAL */
+.hflow {
+  display:flex;align-items:stretch;gap:0;
+  flex-wrap:wrap;
+}
+.hflow-node {
+  flex:1;min-width:120px;
+  background:#fff;border:1.5px solid var(--ink);
+  padding:16px 14px;text-align:center;
+  position:relative;
+}
+.hflow-node:not(:last-child)::after {
+  content:'→';
+  position:absolute;right:-14px;top:50%;
+  transform:translateY(-50%);
+  font-size:16px;color:var(--accent);
+  background:var(--cream);padding:2px;
+  z-index:1;
+}
+.hflow-node.hl{background:var(--accent);color:white;}
+.hflow-node.hl2{background:var(--accent2);color:white;}
+.hflow-node.hlg{background:var(--gold);color:white;}
+.hflow-node .nt{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;margin-bottom:4px;}
+.hflow-node .nv{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;line-height:1.2;}
+
+/* VFLOW */
+.vflow{display:flex;flex-direction:column;align-items:center;gap:0;margin:24px auto;max-width:500px;}
+.vflow-node {
+  width:100%;background:#fff;
+  border:1.5px solid var(--ink);
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
+  transition:transform .2s,box-shadow .2s;
+}
+.vflow-node:hover{transform:translateX(4px);box-shadow:-4px 0 0 var(--accent);}
+.vflow-conn{width:2px;height:24px;background:var(--ink);position:relative;}
+.vflow-conn::after{content:'▼';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--ink);}
+.vflow-icon{font-size:1.3rem;flex-shrink:0;}
+.vflow-text h5{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:3px;}
+.vflow-text p{font-size:.78rem;color:var(--mid);line-height:1.4;margin:0 !important;}
+
+/* SPECTRUM BAR */
+.spectrum{margin:28px 0;}
+.spectrum-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;}
+.spectrum-bar{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--green),var(--gold),var(--accent));margin-bottom:8px;position:relative;}
+.spectrum-ends{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:var(--mid);}
+
+/* STAT BLOCK */
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin:28px 0;}
+.stat-box{
+  flex:1;min-width:140px;
+  background:var(--cream);border:1px solid var(--line);
+  padding:20px;border-radius:3px;text-align:center;
+}
+.stat-box .sn{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--accent);}
+.stat-box .sl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* CROSSREF */
+.crossref {
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(26,63,122,.1);color:var(--accent2);
+  font-family:'DM Mono',monospace;font-size:10px;
+  padding:3px 10px;border-radius:20px;
+  letter-spacing:.06em;border:1px solid rgba(26,63,122,.2);
+  vertical-align:middle;cursor:default;
+  text-decoration:none;
+}
+.crossref::before{content:'→';font-size:9px;}
+
+/* IMPLICATION BOX */
+.impl{
+  border:1px dashed var(--gold);
+  background:rgba(201,136,10,.05);
+  padding:24px 28px;margin:28px 0;
+  border-radius:3px;
+}
+.impl-label{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.impl p{font-size:.88rem;color:#2a2010 !important;line-height:1.55;margin:0 0 8px !important;}
+.impl p:last-child{margin-bottom:0 !important;}
+
+/* HR */
+hr.div{border:none;height:1px;background:var(--line);margin:0;}
+
+/* FOOTER */
+footer{
+  background:var(--ink);color:var(--paper);
+  padding:48px 40px;
+}
+.footer-inner{
+  max-width:860px;margin:0 auto;
+  display:flex;justify-content:space-between;
+  align-items:flex-start;flex-wrap:wrap;gap:32px;
+}
+.footer-doc h4{
+  font-family:'Playfair Display',serif;font-size:1.1rem;
+  font-weight:700;margin-bottom:16px;
+}
+.footer-doc p{
+  font-size:.82rem;color:rgba(255,255,255,.45);
+  line-height:1.5;max-width:300px;
+}
+.doc-nav{display:flex;flex-direction:column;gap:8px;}
+.doc-nav a{
+  font-family:'DM Mono',monospace;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);text-decoration:none;
+  transition:color .2s;
+}
+.doc-nav a:hover{color:var(--gold);}
+.doc-nav a.current{color:var(--accent);}
+
+/* TOOLTIP */
+abbr[title]{cursor:help;text-decoration:underline dotted var(--gold);}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .wrap{padding:60px 24px;}
+  header{padding:70px 24px 56px;}
+  nav{padding:0 16px;}
+  .hflow{flex-direction:column;}
+  .hflow-node:not(:last-child)::after{content:'↓';right:50%;bottom:-14px;top:auto;transform:translateX(50%);}
+  .footer-inner{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div id="pgbar"></div>
+
+<!-- ══════════════════════════════ HEADER -->
+<header>
+  <div class="series-tag">Master Research Series · Document 1 of 5</div>
+  <h1>The <em>Human</em></h1>
+  <p class="header-desc">Brain, memory, cognition, attention, motivation, emotion, identity, and habit — everything about how a human being actually learns at the biological and psychological level.</p>
+
+  <div class="doc-links">
+    <a class="doc-link active" href="#">Doc 1 — The Human</a>
+    <a class="doc-link" href="#">Doc 2 — The System</a>
+    <a class="doc-link" href="#">Doc 3 — The Economy</a>
+    <a class="doc-link" href="#">Doc 4 — The Strategy</a>
+    <a class="doc-link" href="#">Doc 5 — The Master</a>
+  </div>
+
+  <div class="header-stats">
+    <div class="hstat"><div class="n">20</div><div class="l">Core Topics</div></div>
+    <div class="hstat"><div class="n">60+</div><div class="l">Key Studies Referenced</div></div>
+    <div class="hstat"><div class="n">14</div><div class="l">Foundational Researchers</div></div>
+    <div class="hstat"><div class="n">∞</div><div class="l">Implications for Design</div></div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ NAV -->
+<nav id="sitenav">
+  <a href="#memory">Memory</a>
+  <a href="#working-memory">Working Memory</a>
+  <a href="#clt">Cognitive Load</a>
+  <a href="#neuroplasticity">Neuroplasticity</a>
+  <a href="#sleep">Sleep</a>
+  <a href="#attention">Attention</a>
+  <a href="#forgetting">Forgetting Curve</a>
+  <a href="#spacing">Spaced Repetition</a>
+  <a href="#retrieval">Retrieval Practice</a>
+  <a href="#interleaving">Interleaving</a>
+  <a href="#flow">Flow State</a>
+  <a href="#emotion">Emotion</a>
+  <a href="#dopamine">Dopamine</a>
+  <a href="#motivation">Motivation</a>
+  <a href="#identity">Identity</a>
+  <a href="#metacognition">Metacognition</a>
+  <a href="#habit">Habit</a>
+  <a href="#age">Age Differences</a>
+  <a href="#implications">Implications</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════ 1. MEMORY -->
+<div class="sec" id="memory">
+  <div class="sec-tag">Chapter 1</div>
+  <h2>How <em>Memory</em> Works</h2>
+  <p>Memory is not a hard drive. It is not a recording. It is a <strong>reconstructive process</strong> — each time you remember something, your brain partially rebuilds it, incorporating new context, emotional state, and beliefs. This single insight demolishes dozens of assumptions that education systems are built on.</p>
+
+  <p>The <span class="researcher">Atkinson–Shiffrin Model (1968)</span> gave us the first useful architecture: sensory memory → short-term memory → long-term memory. Information enters through the senses, briefly held in a sensory buffer (less than a second for vision, 3–4 seconds for sound), then either fades or is transferred to short-term memory if it receives attention. From short-term memory, with sufficient processing, it may encode into long-term memory — which, for practical purposes, has unlimited capacity and indefinite duration.</p>
+
+  <h3>The Three Stages of Memory Formation</h3>
+
+  <div class="diagram">
+    <div class="diagram-title">Memory Encoding → Storage → Retrieval</div>
+    <div class="diagram-body">
+      <div class="hflow">
+        <div class="hflow-node hl">
+          <div class="nt">Stage 1</div>
+          <div class="nv">Encoding</div>
+        </div>
+        <div class="hflow-node hl2">
+          <div class="nt">Stage 2</div>
+          <div class="nv">Storage & Consolidation</div>
+        </div>
+        <div class="hflow-node hlg">
+          <div class="nt">Stage 3</div>
+          <div class="nv">Retrieval</div>
+        </div>
+        <div class="hflow-node">
+          <div class="nt">Outcome</div>
+          <div class="nv">Reconsolidation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Encoding</h4>
+  <p><strong>Encoding</strong> is the conversion of experience into a neural representation. It is not passive — the brain actively selects, compresses, and integrates. The depth of encoding directly determines how well information is retained. <span class="researcher">Craik & Lockhart (1972)</span> called this <em>levels of processing</em>: shallow processing (noticing the appearance of a word) creates weak traces; deep processing (thinking about what a word means and connecting it to existing knowledge) creates strong, durable traces.</p>
+
+  <p>This explains why highlighting text is nearly useless. It is the shallowest possible engagement with material. The student sees the words, the hand moves, the brain barely participates. Compare this to explaining a concept to someone else — the act of retrieval, reformulation, and verbal production creates deep encoding. <a class="crossref" href="#">Doc 2 — System</a></p>
+
+  <h4>Storage and Consolidation</h4>
+  <p>After encoding, memories undergo <strong>consolidation</strong> — a process of stabilization and integration that occurs over hours, days, and even years. The <strong>hippocampus</strong> acts as a temporary staging area, holding newly encoded information and gradually transferring it to the neocortex for long-term storage. This is a slow, fragile process — easily disrupted by stress, alcohol, sleep deprivation, and distraction.</p>
+
+  <p>Critically, <strong>sleep is not downtime</strong> — it is when consolidation actively occurs. During slow-wave sleep, the hippocampus replays the day's experiences to the neocortex. During REM sleep, emotional memories are processed and integrated. This is why all-night studying is neurologically self-defeating. <a class="crossref" href="#">→ Section: Sleep</a></p>
+
+  <h4>Retrieval</h4>
+  <p>Retrieval is the process of accessing stored information. Here is the critical and counterintuitive insight: <strong>retrieval is not just reading out a memory — it is a learning event in itself.</strong> Every time you successfully retrieve a memory, you strengthen the neural pathways that lead to it, making future retrieval easier and more reliable. This is the mechanism behind retrieval practice, and it is one of the most robustly replicated findings in cognitive psychology. <a class="crossref" href="#">→ Section: Retrieval Practice</a></p>
+
+  <div class="pullquote">
+    <p>"Memory is not a place where the past is stored but a process by which the past is reconstructed in light of the present."</p>
+    <cite>Daniel Schacter, The Seven Sins of Memory (2001)</cite>
+  </div>
+
+  <h3>Types of Long-Term Memory</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Explicit / Declarative</div>
+      <h4>Episodic Memory</h4>
+      <p>Personal experiences with time and place. "What I did last Tuesday." Highly context-dependent. The most fragile form of memory — prone to distortion, suggestion, and forgetting.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Explicit / Declarative</div>
+      <h4>Semantic Memory</h4>
+      <p>Facts, concepts, and knowledge about the world. "Paris is the capital of France." Slower to form but more stable. The primary target of formal education.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Implicit / Non-Declarative</div>
+      <h4>Procedural Memory</h4>
+      <p>Skills, habits, and routines. "How to ride a bicycle." Stored in the basal ganglia and cerebellum. Extremely durable — patients with severe amnesia can still acquire new skills.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Implicit / Non-Declarative</div>
+      <h4>Priming</h4>
+      <p>Exposure to one stimulus influences response to a later related stimulus, without conscious awareness. Shapes learning context in ways learners don't notice or report.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Hybrid</div>
+      <h4>Prospective Memory</h4>
+      <p>Remembering to do something in the future. "Take medication at 3pm." Frequently fails under cognitive load — a critical issue in self-directed learning design.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Implicit</div>
+      <h4>Emotional Memory</h4>
+      <p>Memories encoded with strong emotional content are more vivid and more durable, mediated by the amygdala. Fear, surprise, and excitement all enhance consolidation significantly.</p>
+    </div>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Because memory is reconstructive and encoding-depth dependent, any learning system that asks students to passively consume content is biologically misaligned with how memory forms. Every design decision must ask: what cognitive operation is the learner performing right now, and how deep is that processing?</p>
+    <p>Retrieval, explanation, application, and generation all produce far stronger encoding than reading, watching, or listening alone. <a class="crossref" href="#">Doc 2 — System</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 2. WORKING MEMORY -->
+<div class="sec" id="working-memory">
+  <div class="sec-tag">Chapter 2</div>
+  <h2>Working Memory — The <em>Bottleneck</em> of Learning</h2>
+  <p>If there is one concept that should reshape every piece of educational content ever designed, it is working memory. Working memory is the mental workspace where conscious thinking happens — where you hold information while you manipulate it, connect it, and reason about it. And it is brutally, almost comically limited.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">4</div><div class="sl">Chunks of info held simultaneously</div></div>
+    <div class="stat-box"><div class="sn">15–30s</div><div class="sl">Duration without rehearsal</div></div>
+    <div class="stat-box"><div class="sn">~120ms</div><div class="sl">Speed of chunk access</div></div>
+    <div class="stat-box"><div class="sn">∞</div><div class="sl">Long-term memory capacity</div></div>
+  </div>
+
+  <p><span class="researcher">George Miller (1956)</span> famously identified the capacity as "7 plus or minus 2" items — but more rigorous subsequent research by <span class="researcher">Nelson Cowan (2001)</span> revised this downward to approximately <strong>four chunks</strong> for meaningful information. A "chunk" is a meaningful unit — it can be a single letter, a word, a phone number, or an entire chess position, depending on expertise.</p>
+
+  <h3>The Baddeley–Hitch Model</h3>
+  <p><span class="researcher">Baddeley & Hitch (1974)</span> replaced the simple short-term memory concept with a richer architecture that remains the dominant model:</p>
+
+  <div class="vflow">
+    <div class="vflow-node">
+      <div class="vflow-icon">🎛</div>
+      <div class="vflow-text">
+        <h5>Central Executive</h5>
+        <p>Attentional controller. Coordinates the other systems. Manages switching between tasks, inhibiting irrelevant information, and updating the current contents of working memory.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🔤</div>
+      <div class="vflow-text">
+        <h5>Phonological Loop</h5>
+        <p>Stores and rehearses verbal and acoustic information. Inner speech. Limited to about 2 seconds of articulation. The system that lets you remember a phone number by saying it repeatedly.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🖼</div>
+      <div class="vflow-text">
+        <h5>Visuospatial Sketchpad</h5>
+        <p>Stores and manipulates visual and spatial information. Mental imagery. Used when navigating, when visualizing a chess board, or when mentally rotating an object.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🔗</div>
+      <div class="vflow-text">
+        <h5>Episodic Buffer</h5>
+        <p>Added in 2000. Integrates information from all subsystems and from long-term memory into coherent, multi-dimensional episodes. The interface between working and long-term memory.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>The Critical Role of Chunking</h3>
+  <p>The reason experts can handle seemingly enormous complexity is not that their working memory is larger — it is that they hold far more information per chunk. A chess grandmaster looking at a board doesn't see 32 pieces; they see 6 or 7 familiar patterns. A fluent reader doesn't see individual letters; they see words as single units. A structural engineer doesn't calculate each force from scratch; they perceive structural load configurations as single conceptual objects.</p>
+
+  <p>This is the mechanism behind expertise: the progressive compilation of individual elements into larger, more powerful chunks stored in long-term memory, freeing working memory for higher-order reasoning. <a class="crossref" href="#">→ Section: Neuroplasticity</a></p>
+
+  <div class="concept">
+    <h4>The Expertise Reversal Effect</h4>
+    <p>Here is a deeply counterintuitive finding: instructional techniques that work brilliantly for novices can actively harm experts, and vice versa. <span class="researcher">Kalyuga et al. (2003)</span> called this the <em>expertise reversal effect</em>.</p>
+    <p>Novices need worked examples, step-by-step guidance, and reduced redundancy because their working memory is under heavy load. Experts need open-ended problems and minimal guidance — too much scaffolding actually forces them to process redundant information, creating load without benefit.</p>
+    <p>This means a single fixed curriculum is always poorly calibrated for at least part of its audience. Any adaptive system must model learner expertise continuously. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Every instructional design choice is, at its core, a decision about working memory. Too much new information at once overloads the system and nothing encodes. Too little challenges nothing and no learning occurs. The design goal is to maintain cognitive load in the optimal zone — enough challenge to drive encoding, not so much that the system collapses.</p>
+    <p>Multimedia learning, segmentation, signaling, pre-training, and worked examples are all validated techniques for managing this. Most educational content ignores all of them. <a class="crossref" href="#">Doc 2 — System</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 3. COGNITIVE LOAD -->
+<div class="sec" id="clt">
+  <div class="sec-tag">Chapter 3</div>
+  <h2><em>Cognitive Load</em> Theory</h2>
+  <p><span class="researcher">John Sweller (1988)</span> built one of the most practically important theories in educational psychology on a single premise: <strong>learning is architecture for the long-term storage of information, and the bottleneck of that architecture is working memory.</strong> Every instructional design decision either respects this constraint or violates it.</p>
+
+  <h3>Three Types of Cognitive Load</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Type 01 — Unavoidable</div>
+      <h4>Intrinsic Load</h4>
+      <p>The inherent complexity of the material being learned — its element interactivity. Calculus has high intrinsic load. Alphabetical order has low intrinsic load. This cannot be reduced without changing the material itself, but it can be managed through sequencing and prior knowledge building.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Type 02 — Harmful</div>
+      <h4>Extraneous Load</h4>
+      <p>Load imposed by poor instructional design — irrelevant graphics, split attention between related sources, redundant explanations, confusing layout. This load consumes working memory without contributing to learning. It should be eliminated entirely.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Type 03 — Useful</div>
+      <h4>Germane Load</h4>
+      <p>Load deliberately generated to support schema formation — the cognitive effort of understanding, organizing, and connecting information. This is the productive cognitive work of learning. Design should maximize this once extraneous load is removed.</p>
+    </div>
+  </div>
+
+  <h3>Implications of the Split-Attention Effect</h3>
+  <p>One of Sweller's most important empirical discoveries: when learners must mentally integrate physically or temporally separated but related sources of information, the act of integration itself consumes working memory. A diagram with a separate legend creates more cognitive load than the same diagram with labels embedded directly. A code example separated from its explanation creates more load than an example with inline comments.</p>
+
+  <div class="study">
+    <div class="study-label">Key Study</div>
+    <h4>Sweller & Chandler (1994) — Split Attention in Technical Instruction</h4>
+    <p>Students learning from geometry diagrams with integrated text performed significantly better than students using separate text descriptions. The integrated format eliminated the mental search and integration process, freeing working memory for actual geometric reasoning. Effect sizes were large and have been replicated across dozens of domains.</p>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Audit every piece of educational content for extraneous load. Decorative images, complex navigation, information placed far from where it is needed, and any requirement to hold context from one place while reading another — all of these are cognitive load violations. In digital learning environments, these violations are pervasive and almost never measured.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 4. NEUROPLASTICITY -->
+<div class="sec" id="neuroplasticity">
+  <div class="sec-tag">Chapter 4</div>
+  <h2><em>Neuroplasticity</em> — The Brain Changes</h2>
+  <p>For most of the 20th century, neuroscience held that the adult brain was largely fixed — the connections made in childhood were permanent and adult learning was merely the activation of existing structures. This was wrong. <span class="researcher">Michael Merzenich</span>, <span class="researcher">Eric Kandel</span>, and decades of subsequent research have established that the brain is physically reorganized by experience throughout the entire lifespan.</p>
+
+  <p><strong>Neuroplasticity</strong> is the brain's ability to reorganize itself by forming new neural connections in response to learning, experience, and injury. It operates through several distinct mechanisms:</p>
+
+  <h3>Mechanisms of Neuroplasticity</h3>
+
+  <h4>Synaptic Plasticity — Long-Term Potentiation (LTP)</h4>
+  <p>When two neurons fire together repeatedly, the synaptic connection between them strengthens. <span class="researcher">Donald Hebb (1949)</span> articulated this as "neurons that fire together, wire together." LTP is the cellular mechanism of learning — it is how repeated practice literally changes the physical structure of the brain. This is not metaphor. The connections between relevant neurons become physically thicker, more efficient, and more easily activated.</p>
+
+  <h4>Structural Plasticity</h4>
+  <p>Beyond synaptic changes, the brain can generate new neurons (neurogenesis), particularly in the hippocampus — the memory formation center. Exercise, learning, and environmental enrichment all stimulate hippocampal neurogenesis. Chronic stress, alcohol, and sleep deprivation suppress it. This is why physical exercise is genuinely cognitive, not just physical.</p>
+
+  <h4>Myelination</h4>
+  <p>Myelin is the fatty sheath that wraps neural axons, dramatically increasing signal transmission speed. <span class="researcher">Daniel Coyle (The Talent Code)</span> identifies myelination as a core mechanism of skill acquisition. Deliberate practice — targeted, effortful, slightly beyond current ability — triggers myelin production on the relevant neural circuits. This is the biological basis for why struggle matters in learning.</p>
+
+  <div class="concept">
+    <h4>The Critical Period and Sensitive Period</h4>
+    <p>Plasticity is not uniform across the lifespan. <strong>Critical periods</strong> are windows of time during which specific neural circuits require certain experiences to develop normally. The classic example is binocular vision — if both eyes are not used together during early childhood, the brain fails to develop proper depth perception, and this cannot be fully recovered later.</p>
+    <p><strong>Sensitive periods</strong> are windows where the brain is particularly receptive to certain types of learning, but the window does not close completely. Language acquisition is the most important sensitive period — children acquire language effortlessly up to puberty, with increasing difficulty thereafter. This is not a social or motivational phenomenon; it is a neurological one. <a class="crossref" href="#">→ Section: Age Differences</a></p>
+  </div>
+
+  <div class="pullquote">
+    <p>"Every time you learn something new, the physical structure of the brain changes. You are not just filling a container — you are rebuilding the container itself."</p>
+    <cite>Eric Kandel, Nobel Laureate in Physiology or Medicine (2000)</cite>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Neuroplasticity means that every learner, regardless of age, prior failure, or perceived ability, can genuinely change their brain through targeted practice. But it also means that effortless exposure produces minimal plasticity. The struggle, the error, the effortful retrieval — these are not bugs in the learning experience. They are the mechanism. Systems that eliminate all difficulty in the name of engagement are eliminating the signal that drives neural change. <a class="crossref" href="#">→ Section: Desirable Difficulties</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 5. SLEEP -->
+<div class="sec" id="sleep">
+  <div class="sec-tag">Chapter 5</div>
+  <h2><em>Sleep</em> and Memory Consolidation</h2>
+  <p>Sleep is not the absence of brain activity. It is a radically different mode of brain activity — one that serves functions impossible during wakefulness, chief among them the consolidation and integration of newly acquired memories. This is among the most consequential and most ignored findings in educational neuroscience.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">40%</div><div class="sl">Performance loss from one night of poor sleep</div></div>
+    <div class="stat-box"><div class="sn">2×</div><div class="sl">Memory consolidation improvement after sleep vs wakefulness</div></div>
+    <div class="stat-box"><div class="sn">7–9h</div><div class="sl">Required sleep for full consolidation in adults</div></div>
+    <div class="stat-box"><div class="sn">8–10h</div><div class="sl">Required sleep for adolescents</div></div>
+  </div>
+
+  <h3>What Happens During Sleep</h3>
+
+  <h4>Slow-Wave Sleep (SWS) — Declarative Memory Consolidation</h4>
+  <p>During deep slow-wave sleep, the hippocampus repeatedly replays the neural patterns encoding the day's experiences to the neocortex. This replay — called <strong>hippocampal-neocortical dialogue</strong> — gradually transfers memories from the hippocampus (temporary) to distributed neocortical networks (permanent). <span class="researcher">Jan Born and colleagues</span> have shown this process is selective: emotionally important and cognitively significant experiences receive preferential consolidation.</p>
+
+  <h4>REM Sleep — Procedural and Emotional Memory</h4>
+  <p>REM sleep serves multiple critical functions: procedural memory consolidation (skills and sequences), emotional memory processing (integrating emotional experiences without the hormonal charge), and creative integration — the brain forms associations between distant, seemingly unrelated memories. This is the neurological basis for "sleeping on a problem." Novel solutions reliably emerge after REM sleep because the brain has searched across its entire memory store for useful connections.</p>
+
+  <h4>Sleep Spindles and Learning</h4>
+  <p>Sleep spindles — brief bursts of neural oscillation during NREM sleep — are directly linked to memory consolidation. Individuals with more sleep spindles after learning retain more. <span class="researcher">Matthew Walker (Why We Sleep, 2017)</span> argues that sleep spindle density is a neurological predictor of learning capacity and that modern society's chronic sleep deprivation represents an unacknowledged cognitive crisis.</p>
+
+  <div class="study">
+    <div class="study-label">Key Study</div>
+    <h4>Walker et al. (2002) — Sleep Spindles and Motor Learning</h4>
+    <p>Participants trained on a motor sequence task in the morning and tested 12 hours later, either with or without intervening sleep. Sleep led to a 20% performance improvement; wakefulness led to no improvement. The improvement correlated specifically with NREM sleep spindle density during the intervening night.</p>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Any learning system that encourages late-night cramming, marathon sessions without sleep, or schedules intensive learning without recovery time is operating against neuroscience. Optimal scheduling concentrates new learning in morning and afternoon, ensures sleep before testing, and distributes practice across multiple days. The most important feature an adaptive learning system could implement is <strong>a sleep-aware scheduling engine</strong> — one that refuses to schedule critical retrieval practice sessions too close together without intervening sleep. <a class="crossref" href="#">→ Section: Spaced Repetition</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 6. ATTENTION -->
+<div class="sec" id="attention">
+  <div class="sec-tag">Chapter 6</div>
+  <h2><em>Attention</em> — The Gatekeeper</h2>
+  <p>Nothing enters memory that does not first receive attention. Attention is the selective filter that determines what gets processed and what disappears. Understanding attention is prerequisite to understanding why students fail to learn even when the content is in front of them.</p>
+
+  <h3>The Attentional Systems</h3>
+
+  <h4>The Alerting Network</h4>
+  <p>Maintains general readiness and vigilance. Modulated by norepinephrine (noradrenaline). This is what determines baseline arousal — too low (boredom, drowsiness) and the brain is not primed to process; too high (anxiety, panic) and the brain is overwhelmed. The <strong>Yerkes-Dodson inverted-U relationship</strong>: optimal performance occurs at moderate arousal. <a class="crossref" href="#">→ Section: Emotion and Learning</a></p>
+
+  <h4>The Orienting Network</h4>
+  <p>Selects information for focused attention. Located in the posterior parietal cortex and superior temporal gyrus. This is what allows you to "spotlight" one thing — one voice in a noisy room, one line of text on a page. Critically, it operates on novelty and salience: new, unexpected, or biologically relevant stimuli automatically capture it. This is why notifications are so destructive to learning — they are deliberately engineered to capture the orienting network.</p>
+
+  <h4>The Executive Control Network</h4>
+  <p>Manages top-down, voluntary attention. Located in the prefrontal cortex and anterior cingulate. This is the network responsible for sustained focus, goal-directed attention, and inhibition of distractors. It is the most metabolically expensive attentional system and the most easily fatigued. <span class="researcher">Roy Baumeister's ego depletion model</span> (later debated but directionally supported) suggests that executive control is a limited resource that depletes with use and recovers with rest.</p>
+
+  <h3>Attention and Digital Technology</h3>
+  <p>The relationship between digital technology and sustained attention is among the most contested and consequential questions in contemporary cognitive science. <span class="researcher">Gloria Mark (Attention Span, 2023)</span> documents the average time spent on a screen before switching has declined from 2.5 minutes in 2004 to around 47 seconds in recent research. Whether this represents a fundamental change in attentional capacity or simply a behavioral response to environmental design is debated — but the behavioral reality is clear.</p>
+
+  <p>Multitasking is neurologically impossible for cognitive tasks. What feels like multitasking is actually rapid task-switching, each switch carrying a cognitive cost called the <strong>switch cost</strong> or <strong>attention residue</strong> — the partial persistence of previous task engagement in working memory during the supposedly new task. Students studying with a phone nearby perform measurably worse even if they do not use it.</p>
+
+  <div class="study">
+    <div class="study-label">Key Study</div>
+    <h4>Ward et al. (2017) — The Mere Presence of a Smartphone</h4>
+    <p>800 participants were assigned to do working memory and fluid intelligence tasks with their smartphone either on the desk face down, in their pocket, or in another room. The group with phones in another room significantly outperformed those with phones on the desk — even though no one in either group used their phone during the task. The mere presence of the device consumed attentional resources.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 7. FORGETTING CURVE -->
+<div class="sec" id="forgetting">
+  <div class="sec-tag">Chapter 7</div>
+  <h2>The <em>Forgetting Curve</em></h2>
+  <p><span class="researcher">Hermann Ebbinghaus</span>, studying himself over years in the 1880s, produced one of the most consequential datasets in the history of psychology: a precise mathematical description of how memory decays over time. The result — the <strong>forgetting curve</strong> — shows that without review or use, memory follows an exponential decay function.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">58%</div><div class="sl">Forgotten within 20 minutes</div></div>
+    <div class="stat-box"><div class="sn">67%</div><div class="sl">Forgotten within 24 hours</div></div>
+    <div class="stat-box"><div class="sn">80%</div><div class="sl">Forgotten within 31 days</div></div>
+    <div class="stat-box"><div class="sn">~20%</div><div class="sl">Retained after 1 month without review</div></div>
+  </div>
+
+  <p>These numbers refer to the amount of <em>effort required to relearn</em> material, not just what can be consciously recalled. Even when information appears completely forgotten, relearning it takes substantially less time than original learning — the so-called <strong>savings effect</strong>. Some neural traces persist even when recall fails entirely.</p>
+
+  <h3>The Stability and Retrievability Model</h3>
+  <p><span class="researcher">Piotr Wozniak</span>, building on Ebbinghaus, separated memory into two dimensions: <strong>retrievability</strong> (how easily a memory can be accessed right now) and <strong>stability</strong> (how resistant it is to forgetting over time). These are different. A recently learned fact has high retrievability but low stability — easy to recall now, gone tomorrow. A well-practiced fact has both high retrievability and high stability.</p>
+
+  <p>The key insight: <strong>reviewing material just before it is forgotten maximizes the stability gain from that review.</strong> Review too early (while still easily recalled) and you waste effort and gain little stability. Review too late (after significant forgetting) and you must partially relearn. The optimal review moment is the edge of forgetting — which is what spaced repetition algorithms attempt to find. <a class="crossref" href="#">→ Section: Spaced Repetition</a></p>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Traditional education's review architecture is essentially broken. Teach a topic, test on Friday, never revisit. By the time a comprehensive exam arrives, 80% of the material has decayed. The logical response — spacing review across time, testing before forgetting, and interleaving across topics — is known, validated, and almost entirely absent from formal educational design. <a class="crossref" href="#">Doc 2 — System</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 8. SPACED REPETITION -->
+<div class="sec" id="spacing">
+  <div class="sec-tag">Chapter 8</div>
+  <h2><em>Spaced Repetition</em> — The Most Underused Tool in Learning</h2>
+  <p>Spaced repetition is the practice of reviewing material at increasing intervals over time, timed to coincide with the moment just before the memory would decay. It is one of the most robustly replicated phenomena in cognitive psychology — effect sizes are consistently large, across all ages, all types of material, and all learner demographics. And it is almost entirely absent from formal education.</p>
+
+  <p>The spacing effect was first documented by <span class="researcher">Ebbinghaus (1885)</span>, rigorously confirmed by <span class="researcher">Dempster (1988)</span>, and converted into practical algorithms by <span class="researcher">Piotr Wozniak (SuperMemo, 1987)</span> and subsequently by the Anki algorithm (based on SM-2). The core finding: <strong>distributing study over time produces dramatically better long-term retention than the same total study time massed together (cramming).</strong></p>
+
+  <h3>Why Spacing Works</h3>
+  <h4>The Encoding Variability Hypothesis</h4>
+  <p>Spaced practice exposes learning to a greater variety of encoding contexts — different times of day, different emotional states, different surrounding experiences. This variability creates more retrieval cues, making the memory accessible from more angles.</p>
+
+  <h4>The Study-Phase Retrieval Theory</h4>
+  <p>When a memory has partially faded, retrieving it requires more effort. That effortful retrieval is itself a learning event — it strengthens the memory more than easy retrieval of a freshly learned item. Spacing creates the conditions for this effortful retrieval.</p>
+
+  <h4>The Consolidation Theory</h4>
+  <p>Sleep-based consolidation can only work on material that has been encoded before sleep. Spaced practice ensures that material is revisited after sleep has had an opportunity to consolidate the prior session — each review builds on a more stable foundation than the one before it.</p>
+
+  <div class="study">
+    <div class="study-label">Key Study</div>
+    <h4>Cepeda et al. (2006) — Meta-analysis of 254 Spacing Studies</h4>
+    <p>Across 254 experiments covering a century of spacing research, spaced practice outperformed massed practice in 96% of cases. The optimal spacing interval for long-term retention was approximately 10–20% of the test-retention interval — so if you need to remember something for a year, review it roughly every 5–7 weeks.</p>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Any adaptive learning system that does not implement a spaced repetition scheduling engine is leaving its single most powerful retention mechanism on the table. The algorithm is not complicated — SuperMemo's SM-2 is open, well-documented, and proven. The challenge is behavioral: students resist spaced review because it feels harder and less satisfying than massed study, even while producing dramatically better outcomes. This is a motivation and UX design problem, not a technical one. <a class="crossref" href="#">→ Section: Desirable Difficulties</a><a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 9. RETRIEVAL PRACTICE -->
+<div class="sec" id="retrieval">
+  <div class="sec-tag">Chapter 9</div>
+  <h2><em>Retrieval Practice</em> — Testing as Learning</h2>
+  <p>The testing effect is perhaps the most important practical finding in educational psychology, and simultaneously one of the most comprehensively ignored. The core finding: <strong>testing yourself on material — attempting to retrieve it from memory — produces significantly better long-term retention than spending the same time studying the same material.</strong></p>
+
+  <p>This seems paradoxical only until you understand memory mechanics. Retrieval is not merely a measure of learning — it is a driver of learning. Each successful retrieval attempt strengthens the neural pathway to that memory, making future retrieval easier and more reliable. Each failed retrieval attempt followed by correct information is an even more powerful learning event — the surprise of being wrong creates a strong prediction error signal that drives deep re-encoding.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">50%</div><div class="sl">More retained after retrieval vs restudying (typical effect)</div></div>
+    <div class="stat-box"><div class="sn">1.5×</div><div class="sl">Benefit even with feedback on incorrect answers</div></div>
+    <div class="stat-box"><div class="sn">High</div><div class="sl">Effect holds across all ages, materials, and formats</div></div>
+  </div>
+
+  <h3>Forms of Retrieval Practice</h3>
+  <h4>Free Recall</h4>
+  <p>Writing down everything you know about a topic without prompts — the most effortful and most effective form. Creates the deepest encoding. The blank-page recall exercise, practiced before and after studying, is one of the highest-yield study techniques known. <span class="researcher">Roediger & Karpicke (2006)</span> showed free recall after a single study session outperformed restudying the same text four times over.</p>
+
+  <h4>Cued Recall</h4>
+  <p>Answering questions from prompts — flashcards, fill-in-the-blank, short answer questions. Easier than free recall, still substantially more effective than restudying. The format of most standard testing.</p>
+
+  <h4>Recognition</h4>
+  <p>Multiple choice. The weakest form of retrieval practice — selecting from options requires less reconstruction than generation. Still more effective than rereading, but substantially less powerful than cued or free recall. The dominance of multiple choice in educational testing may be driven by grading convenience rather than learning effectiveness.</p>
+
+  <div class="concept">
+    <h4>The Pretesting Effect</h4>
+    <p>Attempting to retrieve information <em>before</em> learning it — even on material you have never seen — produces better subsequent learning than standard study. <span class="researcher">Kornell et al. (2009)</span> showed that struggling to generate answers to unknown questions, followed immediately by the correct answers, created stronger encoding than reading the correct answers passively.</p>
+    <p>The failure itself is productive. The prediction error generated by being wrong creates a high-priority encoding signal. This is the neurological basis for why curiosity-driven, problem-first learning designs work: encountering a problem before being given the solution creates the cognitive gap that the solution then fills powerfully. <a class="crossref" href="#">Doc 2 — System</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 10. INTERLEAVING -->
+<div class="sec" id="interleaving">
+  <div class="sec-tag">Chapter 10</div>
+  <h2>Interleaving and <em>Desirable Difficulties</em></h2>
+  <p><span class="researcher">Robert Bjork</span> introduced the concept of <strong>desirable difficulties</strong> — learning conditions that feel harder, produce worse immediate performance, but generate significantly better long-term retention and transfer. This concept is critical because it identifies the fundamental confusion that plagues educational design: we mistake performance during learning for learning itself, and optimize for the wrong signal.</p>
+
+  <h3>Interleaving vs Blocking</h3>
+  <p><strong>Blocked practice</strong>: study all of topic A, then all of topic B, then all of topic C. Feels organized, efficient, and satisfying. Produces good performance during practice. Produces poor retention and transfer.</p>
+  <p><strong>Interleaved practice</strong>: mix problems from different topics within the same session — ABCABCABC rather than AAABBBCCC. Feels disorganized and difficult. Produces worse immediate performance. Produces dramatically better long-term retention and the ability to apply knowledge to new problems.</p>
+
+  <div class="study">
+    <div class="study-label">Key Study</div>
+    <h4>Kornell & Bjork (2008) — Inductive Learning in Artists' Styles</h4>
+    <p>Participants studied paintings by different artists in either blocked or interleaved sequences, then were tested on new paintings by the same artists. Interleaved study produced dramatically better classification accuracy. Critically, 78% of participants believed blocked study was more effective — despite performing worse. This metacognitive illusion is the core obstacle to implementing interleaving in practice.</p>
+  </div>
+
+  <h3>Why Interleaving Works</h3>
+  <p>Blocked practice allows the brain to solve each problem using the answer from the previous problem — a shallow contextual priming effect. Interleaving forces the brain to identify which strategy applies to each problem, retrieve that strategy, apply it, and then do the same for a different type of problem. This discrimination process is effortful and productive — it builds the categorical knowledge needed to apply skills to novel situations.</p>
+
+  <p>Transfer — the ability to apply learned skills to new problems in new contexts — is the ultimate goal of education. And interleaving is the primary training condition that produces transfer. Blocked practice produces context-dependent performance: competence in the training context, failure in new contexts. This explains a significant portion of the "skills gap" employers report: students can pass domain-specific tests but cannot apply their knowledge to real problems. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>The natural student preference — "let me finish one topic before starting another" — is a metacognitive illusion that produces worse outcomes. Adaptive learning systems should override this preference with intelligent interleaving, while providing transparency about why the system is mixing topics. Without explanation, students will experience interleaving as poor design rather than deliberate pedagogy, and disengage.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 11. FLOW STATE -->
+<div class="sec" id="flow">
+  <div class="sec-tag">Chapter 11</div>
+  <h2><em>Flow State</em> — Optimal Experience</h2>
+  <p><span class="researcher">Mihaly Csikszentmihalyi</span> spent decades studying optimal experience — states of deep, effortless absorption in a task. He called this <strong>flow</strong>: a state characterized by complete concentration, loss of self-consciousness, distorted sense of time, intrinsic reward, and effortless action that feels simultaneously easy and challenging.</p>
+
+  <p>Flow is not mystical — it has a clear neurological profile. During flow, the prefrontal cortex undergoes <strong>transient hypofrontality</strong>: the executive control and self-monitoring functions partially deactivate, removing the internal critic and freeing cognitive resources for task performance. This is associated with increased theta and alpha wave activity, altered dopamine and norepinephrine release, and subjective reports of heightened performance.</p>
+
+  <h3>The Conditions for Flow</h3>
+  <div class="diagram">
+    <div class="diagram-title">The Flow Channel — Challenge vs Skill</div>
+    <div class="diagram-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center;">
+        <div style="background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);padding:16px;border-radius:3px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">High Challenge / Low Skill</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:700;">Anxiety</div>
+          <div style="font-size:.78rem;color:var(--mid);margin-top:6px;">Overwhelm, shutdown, disengagement</div>
+        </div>
+        <div style="background:rgba(26,106,74,.15);border:1px solid rgba(26,106,74,.4);padding:16px;border-radius:3px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Matched Challenge &amp; Skill</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:700;">Flow</div>
+          <div style="font-size:.78rem;color:var(--mid);margin-top:6px;">Absorption, progress, intrinsic reward</div>
+        </div>
+        <div style="background:rgba(201,136,10,.1);border:1px solid rgba(201,136,10,.3);padding:16px;border-radius:3px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Low Challenge / High Skill</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:700;">Boredom</div>
+          <div style="font-size:.78rem;color:var(--mid);margin-top:6px;">Disengagement, seeking stimulation elsewhere</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>The flow channel is narrow — maintaining it requires continuous calibration of difficulty to skill. As skill grows, challenge must grow proportionally. This is precisely what adaptive difficulty systems attempt to model — and why a real-time learner state model is essential, not optional. A system that cannot accurately track skill cannot maintain the flow channel. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Flow-state learning is intrinsically motivating — learners in flow continue without external incentives because the experience itself is rewarding. This is the ideal state for learning. But it is fragile: interruptions destroy it (another reason notifications are toxic), and it requires precisely calibrated challenge. Designing for flow means designing for continuous, low-friction difficulty adjustment — not once at the beginning of a lesson, but moment-to-moment throughout.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 12. EMOTION -->
+<div class="sec" id="emotion">
+  <div class="sec-tag">Chapter 12</div>
+  <h2>Emotion, Stress, and <em>Learning</em></h2>
+  <p>The brain does not separate cognition from emotion. The <strong>amygdala</strong> — the brain's primary emotional processing center — has direct bidirectional connections with the hippocampus and prefrontal cortex. Emotional state is not a backdrop to learning; it is a gating mechanism that determines whether learning occurs at all.</p>
+
+  <h3>How Positive Emotion Enhances Learning</h3>
+  <p>Curiosity, surprise, and mild positive affect all enhance learning. <span class="researcher">Gruber et al. (2014)</span> showed that during states of curiosity, hippocampal activity increased and subsequent memory was stronger — not just for the target information but for incidentally encountered information, suggesting that curiosity creates a generalized state of enhanced memory formation. Dopamine release during positive anticipation tags incoming information as worth encoding. <a class="crossref" href="#">→ Section: Dopamine</a></p>
+
+  <h3>How Chronic Stress Impairs Learning</h3>
+  <p>Acute moderate stress can enhance memory formation — the stress hormones cortisol and adrenaline, at moderate doses, enhance amygdala function and hippocampal consolidation. This is why emotionally charged events are remembered more vividly than neutral ones.</p>
+
+  <p>Chronic stress — the kind experienced by students in high-stakes, unsupportive, or threatening learning environments — is neurologically devastating. Prolonged cortisol elevation damages hippocampal neurons, reduces neurogenesis, and impairs prefrontal cortex function (reducing working memory, attention, and executive function). <span class="researcher">Bruce McEwen's</span> research established that chronic stress literally shrinks the hippocampus.</p>
+
+  <div class="pullquote">
+    <p>"Emotions are not separate from learning. They are the scaffold on which learning is built. A student who feels unsafe cannot learn optimally — not as a matter of attitude, but of biology."</p>
+    <cite>Mary Helen Immordino-Yang, Emotions, Learning and the Brain (2015)</cite>
+  </div>
+
+  <h3>Stereotype Threat</h3>
+  <p><span class="researcher">Claude Steele & Joshua Aronson (1995)</span> demonstrated that <strong>stereotype threat</strong> — awareness of a negative stereotype about one's group that is relevant to the performance domain — produces measurable performance decrements and cognitive load. When students from stereotyped groups are reminded of their group identity before a test, they perform significantly worse — not due to ability differences but due to anxiety consuming working memory.</p>
+
+  <p>This is a direct relevance to educational design: learning environments, assessment language, and instructor behavior that activate stereotype threat are literally harming student performance through a well-understood cognitive mechanism. <a class="crossref" href="#">Doc 2 — System</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 13. DOPAMINE -->
+<div class="sec" id="dopamine">
+  <div class="sec-tag">Chapter 13</div>
+  <h2><em>Dopamine</em>, Motivation, and Reward</h2>
+  <p>Dopamine is one of the most misunderstood neurotransmitters in popular discussion and one of the most important for understanding learning and motivation. The popular conception — dopamine as a "pleasure chemical" released when something good happens — is incomplete to the point of being misleading.</p>
+
+  <p><span class="researcher">Wolfram Schultz</span> and colleagues discovered in the 1990s that dopamine neurons respond not to rewards themselves, but to <strong>reward prediction errors</strong>: the difference between the reward received and the reward predicted. Unexpected rewards produce large dopamine spikes. Expected rewards produce little or none. Unexpected absence of expected rewards produces a dopamine dip below baseline.</p>
+
+  <h3>The Prediction Error Signal</h3>
+  <div class="diagram">
+    <div class="diagram-title">Dopamine Prediction Error Dynamics</div>
+    <div class="diagram-body">
+      <div class="hflow">
+        <div class="hflow-node hl">
+          <div class="nt">Unexpected Reward</div>
+          <div class="nv">Large dopamine spike → strong learning signal</div>
+        </div>
+        <div class="hflow-node">
+          <div class="nt">Expected Reward</div>
+          <div class="nv">Minimal dopamine → weak encoding</div>
+        </div>
+        <div class="hflow-node hl2">
+          <div class="nt">Expected Reward Missing</div>
+          <div class="nv">Dopamine dip → strong avoidance learning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>This has profound implications for gamification and reward design in education. A predictable reward — "you always get a gold star when you complete a lesson" — rapidly loses its dopaminergic signal value. The brain adapts: the star becomes the baseline, and its presence produces no signal while its absence produces disappointment. Variable reward schedules — the same mechanism that makes slot machines and social media feeds compulsive — maintain dopamine signaling because the reward remains partially unpredictable.</p>
+
+  <h3>Dopamine and Curiosity</h3>
+  <p><span class="researcher">Charan Ranganath and colleagues</span> showed that curiosity states — the subjective experience of wanting to know something — are accompanied by increased dopamine activity in the nucleus accumbens and hippocampus. Crucially, this dopamine activity enhances not just the encoding of the sought-for information but of all information encountered during the curiosity state. Curious learners remember more of everything — including incidental information with no intrinsic importance.</p>
+
+  <p>This mechanism explains why narrative, mystery, and problem-first design approaches work: by generating curiosity before delivering information, you prime the dopaminergic system to enhance encoding of the forthcoming material. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+
+  <h3>Dopamine Depletion and Modern Learning Environments</h3>
+  <p>Social media platforms, games, and entertainment apps are optimized by massive engineering teams to maximize dopamine prediction error responses — variable rewards, social validation, novelty. The brain learns to anticipate high-dopamine experiences from these platforms. Studying — which offers delayed, uncertain, modest rewards — cannot compete for attentional resources with platforms that offer immediate, variable, intense dopaminergic stimulation. This is not a discipline problem. It is a neurological competition.</p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 14. MOTIVATION -->
+<div class="sec" id="motivation">
+  <div class="sec-tag">Chapter 14</div>
+  <h2>Intrinsic Motivation and <em>Self-Determination Theory</em></h2>
+  <p><span class="researcher">Edward Deci and Richard Ryan</span> spent four decades building <strong>Self-Determination Theory (SDT)</strong> — the most comprehensive and empirically validated theory of human motivation. Its central proposition: human beings have three innate psychological needs. When these needs are satisfied, intrinsic motivation, wellbeing, and learning flourish. When they are frustrated, motivation deteriorates into either controlled external compliance or amotivation — and learning suffers profoundly.</p>
+
+  <h3>The Three Core Needs</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Need 01</div>
+      <h4>Autonomy</h4>
+      <p>The need to experience oneself as the origin of one's own behavior — not controlled by external pressure. Autonomy does not mean doing whatever you want; it means experiencing your choices as genuinely your own, even within constraints. Perceived autonomy is the strongest predictor of sustained intrinsic motivation.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Need 02</div>
+      <h4>Competence</h4>
+      <p>The need to feel effective — to master challenges and see growth. This requires optimal challenge (neither too easy nor too hard), clear feedback about progress, and the absence of controlling evaluations that threaten the sense of self. Competence need fulfillment is directly tied to the flow state mechanism. <a class="crossref" href="#">→ Section: Flow</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Need 03</div>
+      <h4>Relatedness</h4>
+      <p>The need to feel connected to others — to care and be cared for. Even in solo learning contexts, relatedness to the instructor, to a learning community, or to the broader purpose of the knowledge, significantly predicts engagement and persistence.</p>
+    </div>
+  </div>
+
+  <h3>The Undermining Effect of External Rewards</h3>
+  <p>One of the most important and controversial findings from SDT: <strong>external rewards can undermine intrinsic motivation for activities that were already intrinsically motivating.</strong> <span class="researcher">Deci (1971)</span> showed that paying people to solve puzzles they had previously enjoyed doing for free reduced their subsequent voluntary engagement with the puzzles — even after the payment stopped.</p>
+
+  <p>The mechanism: when external rewards are introduced for an intrinsically motivating activity, the individual's perception of causality shifts. They begin to perceive their behavior as caused by the reward rather than by their own interest. The activity transforms from something they do because they want to into something they do to get the reward — and when the reward is absent, so is the motivation.</p>
+
+  <p>This has enormous implications for educational gamification, grades, and incentive systems. Badge-and-point systems can produce short-term engagement while quietly destroying long-term intrinsic motivation. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+
+  <h3>The Spectrum of Motivation</h3>
+  <div class="spectrum">
+    <div class="spectrum-label">Motivation Regulation Spectrum (SDT)</div>
+    <div class="spectrum-bar"></div>
+    <div class="spectrum-ends">
+      <span>Amotivation</span>
+      <span>External Regulation</span>
+      <span>Introjected</span>
+      <span>Identified</span>
+      <span>Integrated</span>
+      <span>Intrinsic</span>
+    </div>
+  </div>
+  <p style="font-size:.85rem;color:var(--mid);">Most education systems operate on external regulation — compliance driven by grades and enforcement. The goal is to shift learners toward identified and integrated motivation — doing things because they genuinely value them, even if not intrinsically enjoyable in the moment.</p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 15. IDENTITY -->
+<div class="sec" id="identity">
+  <div class="sec-tag">Chapter 15</div>
+  <h2>Identity and <em>Learning</em></h2>
+  <p>The most profound and most underappreciated determinant of educational outcomes is not intelligence, not access, not even pedagogy. It is identity — the answer to "what kind of person am I?" The question of whether an individual believes that people like them succeed in a domain determines whether they persist through difficulty, seek help, and ultimately achieve.</p>
+
+  <h3>Growth Mindset vs Fixed Mindset</h3>
+  <p><span class="researcher">Carol Dweck</span> identified two fundamental implicit theories of intelligence that people hold about themselves and others:</p>
+
+  <p>A <strong>fixed mindset</strong> holds that intelligence and ability are fixed traits — you either have them or you don't. Under this view, effort is a sign of weakness (smart people don't need to try), failure is evidence of permanent inadequacy, and challenge is a threat to self-image rather than an opportunity. Fixed mindset students avoid challenges, give up quickly under difficulty, and interpret criticism as personal attack.</p>
+
+  <p>A <strong>growth mindset</strong> holds that intelligence and ability are developable through effort and strategy. Under this view, challenge is interesting, effort is the mechanism of growth, failure is information, and criticism is useful. Growth mindset students seek challenge, persist under difficulty, and improve over time.</p>
+
+  <div class="study">
+    <div class="study-label">Key Study</div>
+    <h4>Blackwell, Trzesniewski, & Dweck (2007) — Mindset Intervention in Adolescents</h4>
+    <p>Seventh-grade students in New York were randomly assigned to either a study skills workshop or a study skills workshop plus a mindset intervention. The control group showed declining math grades over two years; the growth mindset group reversed this decline. Teacher reports confirmed behavioral changes — increased motivation, effort, and persistence — without knowing which students had received the intervention.</p>
+  </div>
+
+  <h3>Identity-Based Motivation</h3>
+  <p><span class="researcher">Daphna Oyserman</span> extended this with <strong>identity-based motivation</strong>: behavior is most strongly driven by what is consistent with one's identity. "I am a person who doesn't do math" is not merely a preference — it is a self-definition that generates automatic motivation to avoid mathematical activity and disengage from mathematical instruction.</p>
+
+  <p>This mechanism explains several otherwise puzzling phenomena. Students who are objectively capable of learning material sometimes put in near-zero effort — not because they are lazy, but because engagement conflicts with their self-concept. Socioeconomic and cultural identity factors that create identity threat in academic environments produce genuine neurological responses that impair performance. <a class="crossref" href="#">→ Section: Emotion</a><a class="crossref" href="#">Doc 2 — System</a></p>
+
+  <div class="pullquote">
+    <p>"The most important belief a student can have is that their intellectual abilities are not fixed — that who they are today is not who they must be tomorrow. Without this belief, no curriculum, no teacher, no technology can reach them."</p>
+    <cite>Carol Dweck, Mindset (2006)</cite>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 16. METACOGNITION -->
+<div class="sec" id="metacognition">
+  <div class="sec-tag">Chapter 16</div>
+  <h2><em>Metacognition</em> — Thinking About Thinking</h2>
+  <p>Metacognition is the capacity to monitor, evaluate, and regulate one's own cognitive processes. It is thinking about one's own thinking. It is among the strongest predictors of academic achievement — more predictive than IQ in several studies — and one of the most teachable cognitive capacities.</p>
+
+  <p><span class="researcher">John Flavell (1979)</span> identified two components: <strong>metacognitive knowledge</strong> (knowing about one's own cognitive processes and strategies) and <strong>metacognitive regulation</strong> (using that knowledge to plan, monitor, and evaluate learning).</p>
+
+  <h3>The Illusion of Knowing</h3>
+  <p>One of the most consequential metacognitive failures is the <strong>illusion of knowing</strong> — the subjective sense of having learned something that you have not actually encoded durably. This occurs when material feels familiar (because of recent exposure) but cannot actually be retrieved independently. Students finishing a textbook chapter often feel they have learned it — and often cannot recall more than 20% of it 24 hours later.</p>
+
+  <p>Familiarity and retrievability are neurologically distinct. The hippocampus supports recollection (detailed memory with context); the perirhinal cortex supports familiarity (a sense of having encountered something without detail). Students routinely confuse familiarity for learning. This is why rereading — the most common study technique — is so spectacularly ineffective: it generates familiarity without building retrievability.</p>
+
+  <h3>Calibration and Self-Assessment</h3>
+  <p>Well-calibrated metacognition means accurately knowing what you know and don't know. Research consistently finds that novices are <em>more</em> overconfident in their knowledge than experts — <span class="researcher">Kruger & Dunning (1999)</span> formalized this as the <strong>Dunning-Kruger effect</strong>. Experts more accurately predict their own performance because their domain knowledge gives them the context to assess what they don't know. Novices lack this context, so they systematically underestimate the complexity of what they're learning.</p>
+
+  <div class="impl">
+    <div class="impl-label">Design Implication</div>
+    <p>Learner self-reports of comprehension are unreliable, especially for novices. Any adaptive learning system that calibrates difficulty based on how confident learners say they feel is using a broken signal. The learner state model must use behavioral indicators — retrieval accuracy, response latency, error type, revision behavior — not subjective confidence ratings. Simultaneously, metacognitive training — teaching learners to test themselves, identify genuine gaps, and plan accordingly — should be a first-class component of any learning design. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 17. HABIT -->
+<div class="sec" id="habit">
+  <div class="sec-tag">Chapter 17</div>
+  <h2>Habit Formation and <em>Behavioral Design</em></h2>
+  <p>Learning at scale is not a one-time event — it is a behavioral pattern sustained over time. Understanding habit formation is therefore not optional for learning system design. The habits of studying, reviewing, practicing, and seeking feedback must become automatic — requiring minimal deliberate effort to initiate.</p>
+
+  <p>The neuroscience of habit centers on the <strong>basal ganglia</strong> — specifically the striatum — which gradually takes over the control of well-practiced behavioral sequences from the prefrontal cortex. This is the mechanism of automaticity: what initially requires deliberate attention eventually runs without conscious oversight, freeing cognitive resources for higher-order tasks.</p>
+
+  <h3>The Habit Loop</h3>
+  <p><span class="researcher">Ann Graybiel</span> and colleagues identified the basic habit structure as a three-component loop: <strong>cue → routine → reward</strong>. <span class="researcher">Charles Duhigg (The Power of Habit)</span> popularized this; <span class="researcher">BJ Fogg (Tiny Habits)</span> refined it for behavior design. The cue triggers the routine; the reward consolidates the habit.</p>
+
+  <div class="vflow">
+    <div class="vflow-node">
+      <div class="vflow-icon">🔔</div>
+      <div class="vflow-text">
+        <h5>Cue (Trigger)</h5>
+        <p>A specific context, time, location, emotional state, or preceding action that reliably precedes the desired behavior. The more specific and consistent, the faster the habit forms.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">⚙️</div>
+      <div class="vflow-text">
+        <h5>Routine (Behavior)</h5>
+        <p>The target behavior itself — studying, reviewing flashcards, writing retrieval notes. Must be made as frictionless as possible, especially initially. BJ Fogg's key insight: start tiny. Two minutes is valid.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">✨</div>
+      <div class="vflow-text">
+        <h5>Reward (Reinforcement)</h5>
+        <p>The consequence that consolidates the habit. Most powerful when immediate and varied. Progress visibility, social acknowledgment, competence feedback — these are all genuine rewards if they satisfy the underlying motivation.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Implementation Intentions</h3>
+  <p><span class="researcher">Peter Gollwitzer (1999)</span> showed that forming specific "when-then" plans — "When I sit down with my coffee at 8am, then I will open my flashcards" — more than doubled follow-through compared to goal intention alone ("I intend to study every morning"). The specificity turns a vague intention into a pre-made decision, reducing the cognitive load and motivational cost of initiating the behavior each time.</p>
+
+  <p>This is a trivially cheap intervention with large effect sizes. Any learning platform that does not build implementation intention prompts into its onboarding is leaving one of the highest-leverage behavioral design tools unused. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 18. AGE DIFFERENCES -->
+<div class="sec" id="age">
+  <div class="sec-tag">Chapter 18</div>
+  <h2>Age Differences in <em>Learning</em></h2>
+  <p>Neuroplasticity varies across the lifespan in ways that have direct implications for instructional design, especially for adaptive platforms serving learners across age groups.</p>
+
+  <h3>Children (0–12)</h3>
+  <p>The child brain is maximally plastic — the first twelve years see explosive synaptic growth followed by strategic pruning. Children acquire language, social norms, emotional regulation patterns, and fundamental cognitive schemas with an ease that will never return. Learning is largely implicit — children absorb vast amounts of knowledge without intentional study. Working memory capacity is substantially lower than in adults; attention spans are shorter; sleep requirements are higher.</p>
+
+  <h3>Adolescents (12–24)</h3>
+  <p>The teenage brain undergoes a second major reorganization — substantial synaptic pruning, dramatic increases in myelination, and a prolonged maturation of the prefrontal cortex that does not complete until roughly age 25. The limbic system (emotion, reward) matures before the prefrontal cortex (judgment, planning, impulse control). This creates the adolescent pattern: intense emotional responses, risk-seeking, peer-sensitivity, and difficulty with long-term planning.</p>
+
+  <p>The adolescent dopamine system is particularly sensitive — novel, social, and high-intensity stimuli generate stronger dopamine responses than in adults. This is the neurological reason adolescents are especially vulnerable to social media and gaming addiction, and especially receptive to social-status-based learning motivators.</p>
+
+  <h3>Adults (25+)</h3>
+  <p>Adult neuroplasticity, while reduced relative to childhood, remains substantial. Adults can acquire new languages, skills, and knowledge throughout life. The key differences: adult learners bring extensive prior knowledge (a significant advantage for building schemas but also a source of resistance when prior knowledge is wrong), have stronger metacognitive capacity, are more intrinsically motivated and self-directed, but have reduced working memory capacity and are more affected by stress and sleep deprivation.</p>
+
+  <p><span class="researcher">Malcolm Knowles's</span> <strong>andragogy</strong> framework describes adult learning as fundamentally different from child learning: adults are self-directed, bring experience they need to integrate with new learning, are motivated by immediate problem-relevance, and need to understand why they are learning something before they will engage with it. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 19. ZONE OF PROXIMAL DEVELOPMENT -->
+<div class="sec" id="zpd">
+  <div class="sec-tag">Chapter 19</div>
+  <h2>Vygotsky and the <em>Zone of Proximal Development</em></h2>
+  <p><span class="researcher">Lev Vygotsky</span> made several foundational contributions to learning science, but none more practically consequential than the <strong>Zone of Proximal Development (ZPD)</strong>: the space between what a learner can do independently and what they can do with guidance from a more capable other.</p>
+
+  <p>The ZPD is not a fixed property of a learner — it is a dynamic space created by the interaction between current ability and the potential created by appropriate support. Learning happens in the ZPD. Instruction aimed below it produces boredom; instruction aimed above it produces frustration. Instruction targeted precisely within it, with scaffolding that is gradually withdrawn as competence grows, produces maximal learning.</p>
+
+  <h3>Scaffolding</h3>
+  <p><span class="researcher">Wood, Bruner & Ross (1976)</span> coined the term <strong>scaffolding</strong> for the temporary support provided by a more expert other that enables performance beyond current independent capability. Crucially, good scaffolding is dynamic: it is continuously adjusted downward as competence increases, aiming always to keep the learner working at the edge of their current ability rather than beyond it or below it.</p>
+
+  <p>This is exactly the adaptive challenge problem. An LLM that provides a complete worked example when a learner is stuck is providing support. But the same LLM providing a complete worked example when the learner could figure it out with a small hint is doing the learner's thinking for them — removing the productive struggle that drives encoding. The calibration of scaffold intensity to actual need is the core pedagogical challenge of AI tutoring. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ══════════════════════════════ 20. IMPLICATIONS -->
+<div class="sec" id="implications">
+  <div class="sec-tag">Chapter 20</div>
+  <h2>Synthesis — <em>Implications</em> for Learning System Design</h2>
+  <p>Taken together, the preceding 19 chapters paint a consistent and demanding picture of what genuine learning requires. The following are the non-negotiable design principles that emerge from the biology and psychology of human learning.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Principle 01</div>
+      <h4>Generate, Don't Consume</h4>
+      <p>Every interaction must involve the learner producing something — retrieving, explaining, generating, applying — not passively reading, watching, or listening. Passive exposure produces shallow encoding. Active generation produces deep encoding and durability.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Principle 02</div>
+      <h4>Space and Interleave</h4>
+      <p>Schedule review at increasing intervals across topics. Never let a learner "finish" a topic and move on permanently. The forgetting curve will erase everything within weeks. Spaced, interleaved review is not optional — it is the core retention architecture.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Principle 03</div>
+      <h4>Model the Learner State Continuously</h4>
+      <p>Don't ask learners how confident they feel — their metacognitive reports are unreliable. Track behavioral signals: retrieval accuracy, latency, error patterns, revision behavior. Build a real-time model of their actual knowledge state, not their perceived knowledge state.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Principle 04</div>
+      <h4>Maintain the Flow Channel</h4>
+      <p>Challenge must match skill at every moment. Too easy: boredom, disengagement, no encoding. Too hard: anxiety, shutdown, no encoding. Real-time difficulty calibration is the mechanism for keeping learners in the zone where learning actually occurs.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Principle 05</div>
+      <h4>Protect Autonomy to Sustain Motivation</h4>
+      <p>External rewards, while powerful short-term, undermine intrinsic motivation when overused. Design for identified and integrated motivation — help learners connect learning to their own goals and values. Give genuine choices. Provide meaningful rationales for constraints.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Principle 06</div>
+      <h4>Build Identity, Not Just Skills</h4>
+      <p>The strongest predictor of persistence is whether a learner believes they are the kind of person who can succeed in the domain. Every interaction either reinforces or undermines this belief. Design for competence experiences, not just challenge. Make progress visible. Celebrate growth, not just achievement.</p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>The Central Tension</h4>
+    <p>Everything the human brain needs for durable learning — effort, struggle, desirable difficulty, interleaving, spaced repetition, effortful retrieval — is in direct conflict with what produces engagement metrics, satisfaction scores, and short-term retention feelings. Learners feel they are learning most when reviewing familiar material (fluent processing). They are actually learning most when retrieving difficult material (disfluent processing).</p>
+    <p>Any platform that optimizes for learner satisfaction over learning outcomes will systematically give learners what they prefer rather than what they need. Solving this tension — making genuinely effective practice also feel compelling — is the core product design challenge of adaptive learning. It requires behavioral science, not just cognitive science, and outcome accountability structures, not just engagement metrics. <a class="crossref" href="#">Doc 2 — System</a><a class="crossref" href="#">Doc 4 — Strategy</a></p>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">The Master Synthesis</div>
+    <p>The human brain is not a vessel to be filled. It is a prediction machine that strengthens the neural representations it uses, weakens those it doesn't, reconstructs memories through active retrieval, and motivates behavior through a complex system of prediction, error, identity, and need fulfillment. Every piece of educational technology ever built either works with this biology or against it. Most work against it. The opportunity — for the first time in history — is to build systems sophisticated enough to work with it. That requires understanding everything in this document not as interesting research but as hard engineering constraints.</p>
+    <p>Continue to <a class="crossref" href="#">Doc 2 — The System</a> to see how these biological realities interact with the institutional apparatus of education — and why that apparatus so consistently violates them.</p>
+  </div>
+</div>
+
+</div><!-- end .wrap -->
+
+<!-- ══════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-doc">
+      <h4>Doc 1 — The Human</h4>
+      <p>Brain, memory, cognition, motivation, behavior, emotion, identity, and habit. The biological and psychological foundation of everything else in this series.</p>
+    </div>
+    <div class="doc-nav">
+      <a class="current" href="#">← Doc 1 — The Human (current)</a>
+      <a href="#">Doc 2 — The System (coming)</a>
+      <a href="#">Doc 3 — The Economy (coming)</a>
+      <a href="#">Doc 4 — The Strategy (coming)</a>
+      <a href="#">Doc 5 — The Master (coming)</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pgbar').style.width=(s/h*100)+'%';
+});
+
+// Reveal on scroll
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      const kids=e.target.querySelectorAll('.card,.study,.vflow-node,.hflow-node,.stat-box');
+      kids.forEach((k,i)=>{
+        k.style.opacity='0';k.style.transform='translateY(16px)';
+        k.style.transition=`opacity .45s ease ${i*.07}s,transform .45s ease ${i*.07}s`;
+        setTimeout(()=>{k.style.opacity='1';k.style.transform='translateY(0)';},80+i*70);
+      });
+    }
+  });
+},{threshold:.08});
+document.querySelectorAll('.sec').forEach(s=>obs.observe(s));
+
+// Active nav
+const navLinks=document.querySelectorAll('nav a');
+const secEls=document.querySelectorAll('.sec');
+const navObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.getAttribute('id');
+      navLinks.forEach(a=>{
+        const active=a.getAttribute('href')==='#'+id;
+        a.classList.toggle('active',active);
+      });
+    }
+  });
+},{threshold:.3});
+secEls.forEach(s=>navObs.observe(s));
+</script>
+</body>
+</html>

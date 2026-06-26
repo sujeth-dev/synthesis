@@ -1,0 +1,137 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1.5rem 1.5rem 2.5rem;font-family:var(--font-sans)}
+.section-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1rem}
+.subject-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.tab{font-size:12px;padding:5px 12px;border:0.5px solid var(--color-border-tertiary);border-radius:20px;cursor:pointer;color:var(--color-text-secondary);transition:all 0.15s;background:transparent}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-secondary)}
+.panel{margin-bottom:1.5rem}
+.construct-row{border-bottom:0.5px solid var(--color-border-tertiary);padding:1rem 0;display:grid;grid-template-columns:160px 1fr 120px;gap:16px;align-items:start;cursor:pointer;transition:background 0.12s}
+.construct-row:last-child{border-bottom:none}
+.construct-row:hover{background:var(--color-background-secondary);margin:0 -1rem;padding:1rem}
+.row-left{}
+.row-tag{font-size:10px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:3px}
+.row-name{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.row-body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.row-signal{font-size:11px;color:var(--color-text-tertiary);font-style:italic;text-align:right;line-height:1.5;padding-top:2px}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1.5rem 0}
+.tag-purple{color:#534AB7}
+.tag-teal{color:#0F6E56}
+.tag-amber{color:#854F0B}
+.tag-coral{color:#993C1D}
+.tag-pink{color:#993556}
+.tag-blue{color:#185FA5}
+@media(prefers-color-scheme:dark){
+  .tag-purple{color:#AFA9EC}
+  .tag-teal{color:#5DCAA5}
+  .tag-amber{color:#FAC775}
+  .tag-coral{color:#F0997B}
+  .tag-pink{color:#ED93B1}
+  .tag-blue{color:#85B7EB}
+}
+.hint{font-size:12px;color:var(--color-text-tertiary);margin-bottom:1.25rem;line-height:1.5}
+</style>
+
+<div class="wrap">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">TheDen subject constructs — new ways to teach any subject</h2>
+
+  <p class="section-label">New constructs — by subject</p>
+  <p class="hint">Each construct is a teaching mode the engine activates based on subject type, complexity level, and learner state. Tap a subject to explore.</p>
+
+  <div class="subject-tabs" id="tabs"></div>
+  <div class="panel" id="panel"></div>
+</div>
+
+<script>
+const data = {
+  "Code & Logic": {
+    color:"tag-purple",
+    constructs:[
+      {tag:"tag-purple", name:"Broken Machine", body:"The learner receives code that almost works — one subtle bug. No explanation. They must find it, understand why it broke, and fix it. Diagnosis before construction. Error-reading is a skill most platforms never teach.", signal:"Learn by fixing, not building"},
+      {tag:"tag-purple", name:"Shrink It", body:"Take a working 40-line solution. Now make it 20. Then 10. Compression forces deep understanding — you cannot shrink what you don't understand. Each reduction reveals what was essential and what was noise.", signal:"Less is more understood"},
+      {tag:"tag-teal", name:"Two Paths", body:"The engine shows two solutions to the same problem — one elegant, one brute force. No labels. The learner decides which is better and why. There is no single right answer. The debate is the lesson.", signal:"Judgment over memorisation"},
+      {tag:"tag-amber", name:"Live Trace", body:"Instead of reading code, the learner traces it — stepping through line by line, predicting the output of each step before it runs. Prediction forces active thinking. Passive reading fools you into thinking you understood.", signal:"Predict before you execute"},
+      {tag:"tag-coral", name:"The Interview Room", body:"The engine plays a senior engineer. The learner explains their solution. The engine pushes back: why this approach? What's the time complexity? What breaks it at scale? Real interview pressure as a learning mode.", signal:"Defend what you built"}
+    ]
+  },
+  "Mathematics": {
+    color:"tag-teal",
+    constructs:[
+      {tag:"tag-teal", name:"Why Before How", body:"Before teaching any formula, the engine shows the problem it was invented to solve. The quadratic formula exists because people needed to calculate land area. Context turns abstract symbols into living tools.", signal:"Origin before operation"},
+      {tag:"tag-purple", name:"Estimation Arena", body:"No calculators. No exact answers. The learner estimates — and the engine rewards closeness, reasoning quality, and confidence calibration. Fermi thinking. The skill most math education destroys by obsessing over precision.", signal:"Approximate to understand"},
+      {tag:"tag-amber", name:"Visual Proof", body:"Every theorem gets drawn before it gets proved. The learner sees Pythagoras as squares on triangles before they see a²+b²=c². The visual is the intuition. The formula is the compression of the intuition.", signal:"See it before you solve it"},
+      {tag:"tag-coral", name:"Break the Rule", body:"The engine introduces a rule — then asks: when does this fail? Learners find the boundary conditions. Division by zero. Negative square roots. The exceptions reveal the shape of the rule better than the rule itself.", signal:"Find the edge to know the centre"},
+      {tag:"tag-teal", name:"Story Problem Flip", body:"Instead of giving a word problem to solve, the learner gets an answer and must write the story that produces it. Inverse problems build much deeper mathematical thinking than forward problems.", signal:"Reverse the question"}
+    ]
+  },
+  "Language & Writing": {
+    color:"tag-amber",
+    constructs:[
+      {tag:"tag-amber", name:"Sentence Autopsy", body:"One great sentence — taken apart word by word. Why this word and not that one? Why this order? What changes if you move the verb? Grammar learned through dissection of excellent writing, not rules in a vacuum.", signal:"Admire then analyse"},
+      {tag:"tag-purple", name:"Voice Transplant", body:"Rewrite this paragraph in the style of Hemingway. Now Kafka. Now a tweet. Style imitation is the oldest writing school. You cannot imitate what you haven't truly read. The engine evaluates fidelity to the voice.", signal:"Become them to find yourself"},
+      {tag:"tag-teal", name:"Cut to the Bone", body:"Take 200 words. Make it 100. Then 50. Then one sentence. Then one word. Compression reveals what the writing was actually about. Most writers don't know their own thesis until they're forced to compress it.", signal:"The essence survives the cut"},
+      {tag:"tag-coral", name:"Argue the Opposite", body:"Write the best possible case for a position you disagree with. Steelman, not strawman. The engine evaluates how strongly you represent the other side. Intellectual honesty as a writing skill.", signal:"Understand before you oppose"},
+      {tag:"tag-amber", name:"Dead Metaphor Hunt", body:"Find every dead metaphor in this text — phrases so overused they've become invisible. 'Touching base.' 'Low-hanging fruit.' 'Move the needle.' Replace each with something alive. Sharpens language instinct permanently.", signal:"Kill the clichés"}
+    ]
+  },
+  "Science & Systems": {
+    color:"tag-coral",
+    constructs:[
+      {tag:"tag-coral", name:"Thought Experiment Room", body:"Einstein didn't have a particle accelerator. He had a chair and a question: what would I see if I rode a beam of light? The engine puts the learner in imaginary scenarios where intuition is the only instrument. Physics before equations.", signal:"Imagine your way in"},
+      {tag:"tag-teal", name:"Scale Shift", body:"Understand something at one scale — then shift. How does this work at the atomic level? The planetary level? The human scale? Many concepts break at different scales. The breaks reveal what's fundamental and what's emergent.", signal:"Zoom out, then in"},
+      {tag:"tag-purple", name:"Model vs Reality", body:"Here is a model. Here is where reality diverges from it. The learner identifies the gap and reasons about why the model fails. All models are wrong — the question is when and how. This is scientific thinking.", signal:"Find where the map lies"},
+      {tag:"tag-amber", name:"Second Order", body:"Every effect has effects. The engine asks: what happens next? And then what? And then? Learners trace consequences three steps deep. Systems thinking is just the discipline of not stopping at the first answer.", signal:"Never stop at step one"},
+      {tag:"tag-coral", name:"The Anomaly", body:"Here is data that doesn't fit the theory. Explain it. History of science is mostly anomalies that forced paradigm shifts. Learning to sit with contradiction without flinching is the most underrated scientific skill.", signal:"The exception is the lesson"}
+    ]
+  },
+  "History & Ideas": {
+    color:"tag-pink",
+    constructs:[
+      {tag:"tag-pink", name:"You Were There", body:"The learner is placed inside a historical moment — not as observer, but as decision-maker. It is 1939. You are an advisor. What do you recommend? Decisions made under the original constraints, not with hindsight. Empathy as historical method.", signal:"Decide before you judge"},
+      {tag:"tag-purple", name:"Primary Source First", body:"Before any interpretation, the learner reads the original — the speech, the letter, the manifesto. Then the engine shows what historians said about it. The gap between the source and the interpretation is where critical thinking lives.", signal:"Hear it before you hear about it"},
+      {tag:"tag-teal", name:"Idea Genealogy", body:"Every big idea came from somewhere. Democracy came from Athens but also from Iroquois confederacy. The engine traces intellectual lineage — who influenced whom, what was stolen, what was rediscovered independently. Ideas are not born alone.", signal:"Follow the roots"},
+      {tag:"tag-amber", name:"Counter-History", body:"What if the printing press was never invented? What if Genghis Khan died at 20? Counterfactuals force the learner to understand what was contingent versus what was inevitable. Causation understood through its removal.", signal:"Remove the cause to see it"},
+      {tag:"tag-pink", name:"The Losing Side", body:"Every historical event gets taught from the winning narrative. The engine deliberately presents the losing side first — their logic, their goals, their reasonable expectations. History without empathy for losers is propaganda.", signal:"Start with the defeated"}
+    ]
+  },
+  "Creative & Design": {
+    color:"tag-blue",
+    constructs:[
+      {tag:"tag-blue", name:"One Constraint", body:"Design a poster with one colour. Write a story with no adjectives. Compose music with three notes. Constraints don't limit creativity — they ignite it. The engine assigns a single rule and the learner makes something within it.", signal:"Limits are the canvas"},
+      {tag:"tag-purple", name:"Steal Like An Artist", body:"Find three works that influenced this design. Now find what the designer took from each. Influence mapping teaches that originality is always recombination. The engine evaluates how consciously the learner can trace lineage.", signal:"Know your influences"},
+      {tag:"tag-teal", name:"Critique Swap", body:"The learner critiques their own work as if it belongs to someone else. Then critiques someone else's as if it's their own. Perspective shift dismantles defensive attachment. You see your blind spots when you don't know whose work it is.", signal:"Lose ownership to see clearly"},
+      {tag:"tag-amber", name:"Function First", body:"Before aesthetics, explain the problem this design solves. Who is it for? What does it need to do? What must it never do? The engine evaluates whether the design brief is understood before a single visual decision is made.", signal:"Solve before you style"},
+      {tag:"tag-blue", name:"100 Versions", body:"Generate 10 quick ideas. Then 10 more. Then 10 more. The engine forces quantity before quality. The first ideas are always the obvious ones. Ideas 60–80 are where the interesting territory lives. Fluency before judgment.", signal:"Exhaust the obvious first"}
+    ]
+  }
+};
+
+const subjects = Object.keys(data);
+let cur = subjects[0];
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML = subjects.map(s=>
+    `<div class="tab${s===cur?' active':''}" onclick="setSubject('${s}')">${s}</div>`
+  ).join('');
+}
+
+function renderPanel(){
+  const d = data[cur];
+  document.getElementById('panel').innerHTML = d.constructs.map(c=>`
+    <div class="construct-row" onclick="sendPrompt('Tell me more about the ${c.name} construct in TheDen for ${cur}')">
+      <div class="row-left">
+        <div class="row-tag ${c.tag}">${cur}</div>
+        <div class="row-name">${c.name}</div>
+      </div>
+      <div class="row-body">${c.body}</div>
+      <div class="row-signal">${c.signal}</div>
+    </div>
+  `).join('');
+}
+
+function setSubject(s){ cur=s; renderTabs(); renderPanel(); }
+
+renderTabs();
+renderPanel();
+</script>

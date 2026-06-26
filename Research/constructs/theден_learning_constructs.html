@@ -1,0 +1,138 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .page { padding: 2rem 1.5rem 3rem; max-width: 680px; }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 0.5rem; }
+  .hero-title { font-size: 26px; font-weight: 500; color: var(--color-text-primary); line-height: 1.25; margin-bottom: 0.5rem; }
+  .hero-sub { font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 2rem; max-width: 520px; }
+  .divider { height: 1px; background: var(--color-border-tertiary); margin: 1.5rem 0; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 1.25rem; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .card { border: 1px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.1rem 1.15rem 1rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .card:hover { border-color: var(--color-border-secondary); background: var(--color-background-secondary); }
+  .card-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 0.45rem; }
+  .card-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.3rem; }
+  .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.55; }
+  .tag-purple { color: #534AB7; }
+  .tag-teal   { color: #0F6E56; }
+  .tag-amber  { color: #854F0B; }
+  .tag-coral  { color: #993C1D; }
+  @media (prefers-color-scheme: dark) {
+    .tag-purple { color: #AFA9EC; }
+    .tag-teal   { color: #5DCAA5; }
+    .tag-amber  { color: #FAC775; }
+    .tag-coral  { color: #F0997B; }
+  }
+  .philosophy { border-left: 2px solid var(--color-border-secondary); padding: 0.75rem 1rem; margin-bottom: 2rem; }
+  .philosophy p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; }
+  .philosophy strong { color: var(--color-text-primary); font-weight: 500; }
+  .contrast-block { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 2rem; }
+  .contrast-col { border: 1px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 1rem; }
+  .contrast-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 0.75rem; }
+  .contrast-item { font-size: 13px; color: var(--color-text-secondary); padding: 0.25rem 0; }
+  .contrast-item + .contrast-item { border-top: 1px solid var(--color-border-tertiary); }
+  .contrast-col.right .contrast-item { color: var(--color-text-primary); font-weight: 500; }
+  .closing { font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; }
+  .closing strong { color: var(--color-text-primary); font-weight: 500; }
+</style>
+<div class="page">
+  <p class="eyebrow">TheDen — Product Philosophy</p>
+  <h1 class="hero-title">A Learning Operating System.<br>Not another quiz app.</h1>
+  <p class="hero-sub">Most platforms optimize questions. TheDen optimizes the journey — a fundamentally different idea that changes what every feature means and how every engine is built.</p>
+
+  <div class="philosophy">
+    <p><strong>The core principle:</strong> The AI isn't a grader. It's an architect, a guide, a repair crew, a GPS, and a city planner — all working simultaneously on one learner's knowledge.</p>
+  </div>
+
+  <div class="divider"></div>
+  <p class="section-label">The 11 Learning Constructs</p>
+
+  <div class="grid">
+    <div class="card" onclick="sendPrompt('Tell me more about the Flow construct in TheDen')">
+      <div class="card-tag tag-purple">01 — Navigation</div>
+      <div class="card-title">Flow</div>
+      <div class="card-body">One continuous path forward. No menus, no chapter decisions — just the next right step, automatically. Flow orchestrates everything: where you are, what to do, when to try again differently.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about Building Blocks in TheDen')">
+      <div class="card-tag tag-teal">02 — Structure</div>
+      <div class="card-title">Building Blocks</div>
+      <div class="card-body">Knowledge isn't chapters. It's blocks — each one resting on the ones below it. If Loops is weak, the engine doesn't move forward. It repairs Variables first. Every concept becomes a living object with mastery, confidence, and dependencies.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about City Construction in TheDen')">
+      <div class="card-tag tag-purple">03 — Visualization</div>
+      <div class="card-title">City Construction</div>
+      <div class="card-body">Knowledge rendered as a city — not a syllabus. Districts are subjects. Roads are relationships. Bridges are prerequisites. Learners don't complete chapters; they explore and build a world.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about Knowledge GPS in TheDen')">
+      <div class="card-tag tag-teal">04 — Location</div>
+      <div class="card-title">Knowledge GPS</div>
+      <div class="card-body">Always knows exactly where the learner is in their knowledge — not what page they're on. "You are here" inside the graph, not inside a unit.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about Knowledge Compass in TheDen')">
+      <div class="card-tag tag-amber">05 — Direction</div>
+      <div class="card-title">Knowledge Compass</div>
+      <div class="card-body">GPS shows location. Compass shows direction. Given what you know, here's the highest-leverage next concept — chosen by the engine, not a curriculum doc.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about the Construction Crane in TheDen')">
+      <div class="card-tag tag-coral">06 — Prerequisite Rescue</div>
+      <div class="card-title">Construction Crane</div>
+      <div class="card-body">When a learner is stuck on Graphs, the engine doesn't stay on Graphs. It identifies the missing material — Trees, Recursion — fetches it, and brings the learner back once the foundation is solid.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about the Repair Crew construct in TheDen')">
+      <div class="card-tag tag-coral">07 — Diagnosis</div>
+      <div class="card-title">Repair Crew</div>
+      <div class="card-body">Not revision. Structural diagnosis. A failed question isn't about Graphs — it's about Recursion underneath. The crew finds the real fault and fixes it. Then Graphs becomes easy.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about Blueprint Mode in TheDen')">
+      <div class="card-tag tag-purple">08 — Orientation</div>
+      <div class="card-title">Blueprint Mode</div>
+      <div class="card-body">Before learning begins, show the entire building — what exists, what's built, what's left to construct. Learners never discover their map by accident.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about X-Ray Mode in TheDen')">
+      <div class="card-tag tag-teal">09 — Visibility</div>
+      <div class="card-title">X-Ray Mode</div>
+      <div class="card-body">Not a score. A scan. Understanding, reasoning, confidence, and speed — each rendered as its own signal. Learners see exactly why they struggle, not just that they do.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about Knowledge Gravity in TheDen')">
+      <div class="card-tag tag-amber">10 — Connection</div>
+      <div class="card-title">Knowledge Gravity</div>
+      <div class="card-body">Learn Binary Trees — the engine immediately surfaces BST, Heap, Trie, Graphs. Knowledge clusters by gravity, not by curriculum order. Nothing stays isolated.</div>
+    </div>
+    <div class="card" onclick="sendPrompt('Tell me more about Learning Orbit in TheDen')">
+      <div class="card-tag tag-amber">11 — Retention</div>
+      <div class="card-title">Learning Orbit</div>
+      <div class="card-body">Nothing disappears after the test. Every concept keeps orbiting — through practice, application, project, interview, revision, and back again. Mastery is earned over time, not in a sitting.</div>
+    </div>
+    <div class="card" style="border-style: dashed; cursor: default; display: flex; align-items: center; justify-content: center;">
+      <div style="text-align: center;">
+        <div style="font-size: 22px; color: var(--color-text-tertiary); margin-bottom: 0.3rem;">+</div>
+        <div class="card-body" style="text-align: center;">More constructs emerge as the system learns</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <p class="section-label">The Difference</p>
+
+  <div class="contrast-block">
+    <div class="contrast-col">
+      <div class="contrast-label">Every other platform</div>
+      <div class="contrast-item">Course → Lessons → Quiz → Certificate</div>
+      <div class="contrast-item">Chapters, not concepts</div>
+      <div class="contrast-item">Scores, not signals</div>
+      <div class="contrast-item">AI grades answers</div>
+      <div class="contrast-item">Fixed syllabus</div>
+    </div>
+    <div class="contrast-col right">
+      <div class="contrast-label">TheDen</div>
+      <div class="contrast-item">Knowledge World → Adaptive Flow → Mastery</div>
+      <div class="contrast-item">Living knowledge graph</div>
+      <div class="contrast-item">X-Ray visibility</div>
+      <div class="contrast-item">AI architects the journey</div>
+      <div class="contrast-item">Continuous construction</div>
+    </div>
+  </div>
+
+  <p class="closing">These aren't features. They're <strong>constructs</strong> — design principles that every engine in the platform follows. Evaluation, sequencing, knowledge tracing, recommendations, visualization — all of them express the same philosophy. That's what gives TheDen a distinctive identity instead of feeling like a quiz app with AI bolted on.</p>
+</div>

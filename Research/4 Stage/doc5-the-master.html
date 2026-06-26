@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc 5 — The Master | Master Research Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #080810;
+  --paper: #f8f6f0;
+  --cream: #fdfcf8;
+  --accent: #b8341a;
+  --accent2: #1a3f7a;
+  --gold: #c9880a;
+  --green: #1a6b3a;
+  --purple: #5b1a8b;
+  --teal: #0a6b6b;
+  --mid: #3a3848;
+  --line: rgba(8,8,16,0.11);
+  --light: rgba(8,8,16,0.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'Libre Baskerville',Georgia,serif;font-size:16.5px;line-height:1.85;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.6;}
+#pgbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2),var(--purple));z-index:9998;width:0%;}
+
+/* ── HEADER ── */
+header{background:var(--ink);color:var(--paper);padding:100px 40px 70px;position:relative;overflow:hidden;}
+header::before{content:'05';position:absolute;right:-20px;top:-40px;font-family:'Playfair Display',serif;font-size:280px;font-weight:900;color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;}
+.header-gradient{position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2),var(--purple),var(--teal));}
+.series-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.series-tag::before{content:'';display:block;width:32px;height:1px;background:var(--gold);}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:900;line-height:1.0;max-width:780px;margin-bottom:8px;}
+header h1 em{color:var(--gold);font-style:italic;}
+.header-desc{font-family:'Libre Baskerville',serif;font-size:1.05rem;color:rgba(248,246,240,0.6);max-width:640px;margin:24px 0 40px;line-height:1.75;font-style:italic;}
+.doc-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:40px;}
+.doc-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.45);text-decoration:none;border-radius:2px;transition:all .2s;}
+.doc-link.active{border-color:var(--gold);color:var(--gold);}
+.doc-link:not(.active):hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.7);}
+.header-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:40px;border-top:1px solid rgba(255,255,255,0.08);}
+.hstat .n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;}
+.hstat .l{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,0.35);text-transform:uppercase;}
+
+/* ── NAV ── */
+nav{background:var(--cream);border-bottom:1px solid var(--line);padding:0 40px;position:sticky;top:0;z-index:100;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+nav a{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:15px 18px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+nav a:hover,nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* ── WRAP ── */
+.wrap{max-width:880px;margin:0 auto;padding:80px 40px;}
+
+/* ── SECTIONS ── */
+.sec{margin-bottom:88px;opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.sec.vis{opacity:1;transform:translateY(0);}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.sec-tag::after{content:'';flex:1;height:1px;background:var(--line);}
+.sec h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.2vw,2.7rem);font-weight:700;line-height:1.12;margin-bottom:28px;}
+.sec h2 em{color:var(--accent);font-style:italic;}
+.sec h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin:48px 0 16px;padding-left:18px;border-left:3px solid var(--accent);}
+.sec h4{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin:28px 0 10px;}
+.sec p{margin-bottom:20px;color:#1a1828;max-width:780px;}
+.sec p:last-child{margin-bottom:0;}
+
+/* ── PULLQUOTE ── */
+.pullquote{margin:44px 0;padding:36px 44px;border-left:4px solid var(--gold);background:var(--cream);border-radius:0 4px 4px 0;}
+.pullquote p{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;line-height:1.65;margin:0 0 12px !important;color:var(--ink) !important;}
+.pullquote cite{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--mid);text-transform:uppercase;}
+
+/* ── RESEARCHER ── */
+.researcher{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:11px;padding:4px 12px 4px 8px;border-radius:20px;margin:0 4px 4px 0;letter-spacing:.06em;vertical-align:middle;}
+.researcher::before{content:'◆';color:var(--gold);font-size:8px;}
+
+/* ── THEOREM BOX (key synthesis) ── */
+.theorem{background:var(--ink);color:var(--paper);padding:44px 48px;margin:44px 0;border-radius:4px;position:relative;overflow:hidden;}
+.theorem::before{content:'SYNTHESIS';position:absolute;top:18px;right:22px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;color:rgba(255,255,255,0.18);}
+.theorem h4{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--gold);margin-bottom:16px;}
+.theorem p{color:rgba(248,246,240,0.82) !important;margin-bottom:12px !important;font-size:1.02rem;line-height:1.8;}
+.theorem p strong{color:var(--gold);}
+.theorem p:last-child{margin-bottom:0 !important;}
+
+/* ── INSIGHT BOX ── */
+.insight{border:1px solid var(--gold);background:rgba(201,136,10,.04);padding:28px 32px;margin:32px 0;border-radius:3px;position:relative;}
+.insight::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);border-radius:3px 0 0 3px;}
+.insight-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.insight p{font-size:.92rem;color:#2a2000 !important;line-height:1.65;margin:0 0 10px !important;}
+.insight p:last-child{margin-bottom:0 !important;}
+
+/* ── CROSSREF ── */
+.crossref{display:inline-flex;align-items:center;gap:6px;background:rgba(184,52,26,.08);color:var(--accent);font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:.06em;border:1px solid rgba(184,52,26,.18);vertical-align:middle;text-decoration:none;cursor:default;}
+.crossref::before{content:'→';font-size:9px;}
+
+/* ── STAT ROW ── */
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin:32px 0;}
+.stat-box{flex:1;min-width:140px;background:var(--cream);border:1px solid var(--line);padding:22px;border-radius:3px;text-align:center;transition:transform .2s,box-shadow .2s;}
+.stat-box:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.07);}
+.stat-box .sn{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--accent);}
+.stat-box .sl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* ── BIG DIAGRAM ── */
+.diagram{margin:40px 0;border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+.diagram-title{background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:13px 22px;}
+.diagram-body{padding:30px;background:var(--cream);}
+
+/* ── UNIFIED MAP ── */
+.unified-map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin:0;}
+.um-cell{padding:18px 16px;text-align:center;}
+.um-cell .um-doc{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;opacity:.7;margin-bottom:6px;}
+.um-cell .um-title{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:6px;line-height:1.2;}
+.um-cell .um-body{font-size:.75rem;opacity:.8;line-height:1.4;}
+.um-cell.d1{background:rgba(184,52,26,.12);border:1px solid rgba(184,52,26,.2);}
+.um-cell.d2{background:rgba(26,63,122,.12);border:1px solid rgba(26,63,122,.2);}
+.um-cell.d3{background:rgba(26,107,58,.12);border:1px solid rgba(26,107,58,.2);}
+.um-arrow{display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);padding:10px 0;}
+.um-synthesis{background:var(--ink);color:var(--paper);grid-column:1/-1;padding:22px;text-align:center;margin-top:2px;}
+.um-synthesis .um-doc{color:var(--gold);}
+.um-synthesis .um-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--paper);}
+.um-synthesis .um-body{font-size:.82rem;color:rgba(248,246,240,.7);margin-top:6px;}
+
+/* ── THREAD CARDS ── */
+.thread-grid{display:flex;flex-direction:column;gap:0;margin:36px 0;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden;}
+.thread{display:grid;grid-template-columns:260px 1fr;gap:0;border-bottom:1px solid var(--line);}
+.thread:last-child{border-bottom:none;}
+.thread-left{padding:24px 24px;background:var(--light);border-right:1px solid var(--line);}
+.thread-left .tl-src{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.thread-left h4{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:6px;}
+.thread-left p{font-size:.78rem;color:var(--mid);line-height:1.4;margin:0;}
+.thread-right{padding:24px 28px;}
+.thread-right .tr-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.thread-right p{font-size:.86rem;color:#1a1828;line-height:1.6;margin:0;}
+
+/* ── PRINCIPLE TABLE ── */
+.p-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:.86rem;}
+.p-table th{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;padding:12px 16px;background:var(--ink);color:var(--paper);text-align:left;}
+.p-table td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--mid);}
+.p-table tr:nth-child(even) td{background:var(--cream);}
+.p-table .src{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--accent);}
+.p-table .strong-cell{font-weight:700;color:var(--ink);}
+
+/* ── FAILURE ANATOMY ── */
+.failure-anatomy{margin:36px 0;}
+.fa-row{display:grid;grid-template-columns:40px 1fr 1fr 1fr;gap:1px;margin-bottom:1px;}
+.fa-num{background:var(--ink);color:var(--paper);font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.fa-cell{padding:14px 16px;font-size:.8rem;line-height:1.45;}
+.fa-cell h5{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;margin-bottom:4px;}
+.fa-cell p{color:var(--mid);margin:0;}
+.fa-head{background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:10px 16px;display:flex;align-items:center;}
+.fa-cell.why{background:rgba(184,52,26,.06);}
+.fa-cell.lesson{background:rgba(201,136,10,.06);}
+.fa-cell.fix{background:rgba(26,107,58,.06);}
+
+/* ── HUMAN ECONOMY BRIDGE ── */
+.bridge{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;margin:36px 0;}
+.bridge-side{background:var(--cream);border:1px solid var(--line);padding:22px;border-radius:3px;}
+.bridge-side .bs-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;}
+.bridge-side h4{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:8px;}
+.bridge-side p{font-size:.8rem;color:var(--mid);line-height:1.45;margin:0;}
+.bridge-arrow{font-size:1.8rem;color:var(--gold);text-align:center;flex-shrink:0;}
+
+/* ── FUTURE SCENARIOS ── */
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:32px 0;}
+.scenario{background:var(--cream);border:1px solid var(--line);padding:24px;border-radius:3px;border-top:4px solid;}
+.scenario .sc-name{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;}
+.scenario h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:10px;}
+.scenario p{font-size:.82rem;color:var(--mid);line-height:1.5;margin:0 0 10px !important;}
+.scenario .sc-prob{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;}
+
+/* ── BIG CALL TO ACTION ── */
+.cta-block{background:var(--ink);color:var(--paper);padding:72px 48px;margin:56px 0;border-radius:4px;text-align:center;position:relative;overflow:hidden;}
+.cta-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,136,10,.12),transparent 60%);pointer-events:none;}
+.cta-block .cta-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+.cta-block h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,3rem);font-weight:900;line-height:1.15;max-width:700px;margin:0 auto 28px;}
+.cta-block h2 em{color:var(--accent);font-style:italic;}
+.cta-block p{font-size:.96rem;color:rgba(248,246,240,.65);line-height:1.8;max-width:580px;margin:0 auto 16px;}
+.cta-block p strong{color:var(--paper);}
+
+/* ── READING MAP ── */
+.reading-map{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:36px 0;}
+.rm-card{background:var(--cream);border:1px solid var(--line);padding:16px;border-radius:3px;text-align:center;border-top:3px solid;}
+.rm-card .rm-n{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
+.rm-card h5{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:6px;}
+.rm-card p{font-size:.75rem;color:var(--mid);line-height:1.35;margin:0;}
+.rm-arrow{display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;}
+
+/* ── FINAL STATEMENT ── */
+.final-statement{max-width:720px;margin:60px auto 0;text-align:center;}
+.final-statement h3{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:900;line-height:1.2;margin-bottom:28px;}
+.final-statement h3 em{color:var(--accent);}
+.final-statement p{font-family:'Libre Baskerville',serif;font-size:1rem;color:var(--mid);line-height:1.85;margin-bottom:20px;}
+.final-line{font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:var(--gold);padding-top:32px;border-top:1px solid var(--line);margin-top:40px;display:block;}
+
+hr.div{border:none;height:1px;background:var(--line);margin:0;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:var(--paper);padding:56px 40px;}
+.footer-inner{max-width:880px;margin:0 auto;}
+.footer-series{text-align:center;margin-bottom:48px;}
+.footer-series h4{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:16px;}
+.footer-series p{font-size:.88rem;color:rgba(255,255,255,.4);max-width:560px;margin:0 auto;}
+.footer-docs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:40px;}
+.footer-doc-item{padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:3px;text-align:center;}
+.footer-doc-item .fdi-n{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px;}
+.footer-doc-item h5{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:4px;}
+.footer-doc-item p{font-size:.72rem;color:rgba(255,255,255,.35);line-height:1.3;margin:0;}
+.footer-doc-item.current{border-color:var(--gold);}
+.footer-doc-item.current h5{color:var(--gold);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,.08);}
+.footer-bottom span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.25);}
+
+@media(max-width:700px){
+  .wrap{padding:60px 24px;}
+  header{padding:70px 24px 56px;}
+  nav{padding:0 16px;}
+  .unified-map{grid-template-columns:1fr;}
+  .reading-map{grid-template-columns:repeat(2,1fr);}
+  .footer-docs{grid-template-columns:repeat(2,1fr);}
+  .thread{grid-template-columns:1fr;}
+  .thread-left{border-right:none;border-bottom:1px solid var(--line);}
+  .bridge{grid-template-columns:1fr;}.bridge-arrow{display:none;}
+  .fa-row{grid-template-columns:30px 1fr;}
+  .fa-cell.lesson,.fa-cell.fix{display:none;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div id="pgbar"></div>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header>
+  <div class="series-tag">Master Research Series · Document 5 of 5 · The Synthesis</div>
+  <h1>The <em>Master</em></h1>
+  <p class="header-desc">Not a summary. A synthesis — every insight from all four documents woven into one unified theory of the problem, the human, the system, the economy, and what must be built to change all three.</p>
+
+  <div class="doc-links">
+    <a class="doc-link" href="#">Doc 1 — The Human</a>
+    <a class="doc-link" href="#">Doc 2 — The System</a>
+    <a class="doc-link" href="#">Doc 3 — The Economy</a>
+    <a class="doc-link" href="#">Doc 4 — The Strategy</a>
+    <a class="doc-link active" href="#">Doc 5 — The Master</a>
+  </div>
+
+  <div class="header-stats">
+    <div class="hstat"><div class="n">5</div><div class="l">Documents synthesized</div></div>
+    <div class="hstat"><div class="n">154</div><div class="l">Topics researched</div></div>
+    <div class="hstat"><div class="n">1</div><div class="l">Unified theory</div></div>
+    <div class="hstat"><div class="n">∞</div><div class="l">Implications</div></div>
+  </div>
+</header>
+<div style="height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2),var(--purple),var(--teal));"></div>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav id="sitenav">
+  <a href="#what-this-is">What This Is</a>
+  <a href="#the-central-problem">Central Problem</a>
+  <a href="#five-threads">Five Threads</a>
+  <a href="#the-unified-theory">Unified Theory</a>
+  <a href="#the-gap">The Gap</a>
+  <a href="#edtech-failures">Why EdTech Fails</a>
+  <a href="#human-economy">Human-Economy Bridge</a>
+  <a href="#the-equation">The Equation</a>
+  <a href="#who-wins">Who Wins</a>
+  <a href="#global-imperative">Global Imperative</a>
+  <a href="#the-hardest-parts">Hardest Parts</a>
+  <a href="#future-scenarios">Future Scenarios</a>
+  <a href="#the-principles">Master Principles</a>
+  <a href="#reading-order">Reading Order</a>
+  <a href="#final-word">Final Word</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════════════════ 1. WHAT THIS IS ═══════════════════ -->
+<div class="sec" id="what-this-is">
+  <div class="sec-tag">Preface</div>
+  <h2>What This Document <em>Is</em></h2>
+
+  <p>The four preceding documents — The Human, The System, The Economy, The Strategy — were each built as deep, self-contained research references. This document is different. It does not summarize them. It synthesizes them. The goal is to weave the disparate threads of neuroscience, institutional sociology, labor economics, and platform strategy into a single, unified theory of what is actually happening in education and the economy, why almost all attempts to change it have failed, and what a genuinely different approach would look like.</p>
+
+  <p>Every assertion here is traceable to evidence in one of the preceding four documents. The cross-references are not decorative — they are load-bearing. This document only makes sense as the fifth in the series. Its insights are emergent: they arise from the combination of the four preceding perspectives, and none of them would be visible from any single perspective alone.</p>
+
+  <div class="reading-map">
+    <div class="rm-card" style="border-top-color:var(--accent);">
+      <div class="rm-n">Doc 1</div>
+      <h5>The Human</h5>
+      <p>Brain, memory, motivation, identity. How biology constrains and enables learning.</p>
+    </div>
+    <div class="rm-arrow">+</div>
+    <div class="rm-card" style="border-top-color:var(--accent2);">
+      <div class="rm-n">Doc 2</div>
+      <h5>The System</h5>
+      <p>Education's true functions, history, credentials, and institutional resistance.</p>
+    </div>
+    <div class="rm-arrow">+</div>
+    <div class="rm-card" style="border-top-color:var(--green);">
+      <div class="rm-n">Doc 3</div>
+      <h5>The Economy</h5>
+      <p>Automation, skill decay, credential disruption, geographic opportunity.</p>
+    </div>
+    <div class="rm-arrow">+</div>
+    <div class="rm-card" style="border-top-color:var(--purple);">
+      <div class="rm-n">Doc 4</div>
+      <h5>The Strategy</h5>
+      <p>Full-stack architecture, build phases, business models, north-star metrics.</p>
+    </div>
+    <div class="rm-arrow">=</div>
+    <div class="rm-card" style="border-top-color:var(--gold);">
+      <div class="rm-n">Doc 5</div>
+      <h5>The Master</h5>
+      <p>The unified theory. One framework. One diagnosis. One direction.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 2. CENTRAL PROBLEM ═══════════════════ -->
+<div class="sec" id="the-central-problem">
+  <div class="sec-tag">Chapter 1</div>
+  <h2>The <em>Central Problem</em> — Stated Precisely</h2>
+
+  <p>Before synthesis, precision. The problem being solved must be stated with more care than it usually receives. "Education is broken" is too vague. "AI will fix learning" is too optimistic. The precise statement of the problem is this:</p>
+
+  <div class="theorem">
+    <h4>The Precise Problem Statement</h4>
+    <p>Across the world, hundreds of millions of people lack the verified, economically recognized capabilities they need to participate fully in the modern economy. The knowledge to develop those capabilities is now essentially free. The technology to teach them adaptively is available. The bottleneck is <strong>not content, not technology, and not individual potential</strong> — it is the absence of a complete system that translates raw human potential through appropriate learning into verified, trusted, economically consequential competence.</p>
+    <p>The system that could do this does not yet exist at scale. Every existing institution addresses fragments of the problem. No existing institution addresses the whole.</p>
+  </div>
+
+  <p>This precise framing changes the design problem entirely. If the bottleneck were content, the solution would be more and better content. If it were technology, the solution would be better technology. If it were individual potential, the solution would be better selection. None of these are the bottleneck, and optimizing for any of them while the real bottleneck is unaddressed produces the pattern we observe: sophisticated products, unimpressive outcomes, disappointed learners, skeptical employers.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">~$0</div><div class="sl">Marginal cost of one high-quality explanation (2024)</div></div>
+    <div class="stat-box"><div class="sn">300M+</div><div class="sl">Youth currently out of school globally</div></div>
+    <div class="stat-box"><div class="sn">5%</div><div class="sl">MOOC completion rate despite free, high-quality content</div></div>
+    <div class="stat-box"><div class="sn">~$0</div><div class="sl">Economic impact of most EdTech on target beneficiaries</div></div>
+  </div>
+
+  <p>The juxtaposition of these four numbers contains the entire problem. Content is free. Need is massive. The technology works. The outcomes are negligible. Something is missing between the free content and the needed outcomes. That something is a system — specifically, the behavioral, credentialing, accountability, and institutional components that have never been successfully assembled at scale outside of traditional universities, and which traditional universities provide only to the minority of the world wealthy enough to attend them.</p>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 3. FIVE THREADS ═══════════════════ -->
+<div class="sec" id="five-threads">
+  <div class="sec-tag">Chapter 2</div>
+  <h2>Five <em>Threads</em>, One Fabric</h2>
+
+  <p>The four documents contain dozens of distinct arguments. But beneath them run five deep structural threads that, when woven together, produce the unified theory. Each thread is invisible without the document that established it. Together, they are the complete picture.</p>
+
+  <div class="thread-grid">
+    <div class="thread">
+      <div class="thread-left">
+        <div class="tl-src">From Doc 1 — The Human</div>
+        <h4>Thread 1: Biology Is Destiny</h4>
+        <p>The human brain encodes through active generation, spaced retrieval, and effortful struggle — not passive exposure. This is not a preference. It is a constraint.</p>
+      </div>
+      <div class="thread-right">
+        <div class="tr-label">What This Means for Everything</div>
+        <p>Any learning system that prioritizes the learner's subjective comfort over the conditions neuroscience prescribes will produce worse outcomes than one that prioritizes biology. The entire content-as-entertainment model of EdTech — engaging videos, smooth UX, satisfying completion animations — is structurally miscalibrated to how human memory actually forms. The feeling of learning and the fact of learning are inversely correlated in most consumer learning products. This is not a minor design flaw — it is the primary mechanism of EdTech failure. <a class="crossref" href="#">Doc 1 — Human</a></p>
+      </div>
+    </div>
+
+    <div class="thread">
+      <div class="thread-left">
+        <div class="tl-src">From Doc 2 — The System</div>
+        <h4>Thread 2: Credentials Are Social, Not Educational</h4>
+        <p>The economic value of education credentials comes from institutional trust and social signaling, not primarily from the skills they certify. Trust is the product.</p>
+      </div>
+      <div class="thread-right">
+        <div class="tr-label">What This Means for Everything</div>
+        <p>This is the insight that makes alternative credentials so hard to build. You cannot create institutional trust by making better content. Trust is a social phenomenon built through track records, network effects, and the accumulated endorsement of people and institutions that others already trust. A platform with perfect pedagogy and zero institutional recognition is economically inert. The trust infrastructure — employer relationships, outcome data, institutional partnerships — must be built in parallel with, and given equal priority to, the technology. This is the most persistently neglected lesson in EdTech history. <a class="crossref" href="#">Doc 2 — System</a></p>
+      </div>
+    </div>
+
+    <div class="thread">
+      <div class="thread-left">
+        <div class="tl-src">From Doc 3 — The Economy</div>
+        <h4>Thread 3: Skills Decay, Metalearning Compounds</h4>
+        <p>The half-life of technical skills is ~2.5 years. The value of learning agility has no half-life. The economy is becoming a continuous learning machine.</p>
+      </div>
+      <div class="thread-right">
+        <div class="tr-label">What This Means for Everything</div>
+        <p>The goal of education is no longer to equip someone for a career. It is to make someone capable of navigating an indefinite series of career transitions, each requiring rapid acquisition of new skills. This reframes the educational mission from one-time skill development to permanent metalearning capacity — and it reframes the business model from a one-time credential toward a lifelong learning partnership. The platform that earns a learner's trust in their first reskilling cycle and helps them through subsequent cycles has a relationship worth far more than any single enrollment. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+      </div>
+    </div>
+
+    <div class="thread">
+      <div class="thread-left">
+        <div class="tl-src">From Doc 4 — The Strategy</div>
+        <h4>Thread 4: The Full Stack Is Non-Negotiable</h4>
+        <p>The complete system — biology-aligned pedagogy + learner state model + behavioral architecture + credentialing + institutional integration — must all function. Partial systems produce partial outcomes.</p>
+      </div>
+      <div class="thread-right">
+        <div class="tr-label">What This Means for Everything</div>
+        <p>There is no version of the solution that works by building only the interesting parts. The learner state model is unsexy engineering. Employer relationship management is slow sales work. Psychometric assessment design is an arcane technical discipline. Outcome tracking databases are unglamorous data infrastructure. These are not optional components that can be added later when the platform has scale — they are the components that make scale meaningful. A platform with millions of users and no outcome validation is a failure masquerading as success. The full stack is the minimum viable product for genuine impact. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+      </div>
+    </div>
+
+    <div class="thread">
+      <div class="thread-left">
+        <div class="tl-src">Emergent from Synthesis</div>
+        <h4>Thread 5: The Beneficiary and the Market Are Not Aligned</h4>
+        <p>The people who most need transformative learning systems are not the people who currently generate revenue for EdTech companies. This structural misalignment is the root cause of EdTech's impact deficit.</p>
+      </div>
+      <div class="thread-right">
+        <div class="tr-label">What This Means for Everything</div>
+        <p>EdTech companies are built by people in rich countries, funded by capital in rich countries, and optimized for users in rich countries who already have significant educational advantages. The learner in Lagos or Dhaka or Nairobi who would benefit most from a well-built adaptive learning platform with economic credentialing generates the least venture capital interest, the least design attention, and the least product investment. This is not cruelty — it is a market structure failure. Solving it requires either business model innovation (ISAs in high-impact markets), policy partnership (government contracts for workforce development), or deliberate mission alignment that accepts lower near-term returns for higher long-term impact. Any serious claim to transformative educational impact must reckon with this misalignment. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 4. UNIFIED THEORY ═══════════════════ -->
+<div class="sec" id="the-unified-theory">
+  <div class="sec-tag">Chapter 3</div>
+  <h2>The <em>Unified Theory</em></h2>
+
+  <p>Five threads, woven. The unified theory of education, learning, and economic opportunity — as it actually exists in 2024, not as we wish it existed — can be stated as follows:</p>
+
+  <div class="theorem">
+    <h4>The Unified Theory of Learning and Economic Opportunity</h4>
+    <p>Human beings have an extraordinary capacity to develop capability through active, effortful, well-calibrated practice — but this capacity requires specific conditions (spaced retrieval, appropriate challenge, emotional safety, motivational alignment, and identity support) that most learning environments do not provide. <a class="crossref" href="#">Doc 1</a></p>
+    <p>Education systems were not built to optimize for these conditions. They were built to sort populations, produce social compliance, and issue credentials that function as labor market signals — not primarily to produce the deepest possible learning. Their persistence is not because they are educationally optimal; it is because they perform social functions that have proven extremely difficult to replace. <a class="crossref" href="#">Doc 2</a></p>
+    <p>The economy is undergoing a structural transformation that is decoupling the credentials institutions produce from the capabilities the economy needs, while simultaneously shortening the shelf life of any specific skill set. The demand for continuous learning has never been higher; the supply of trustworthy, accessible, economically credentialed learning has never been further from meeting that demand. <a class="crossref" href="#">Doc 3</a></p>
+    <p>The gap between what humans need to develop capability, what institutions currently provide, and what the economy actually rewards — is <strong>the design space for the most important educational innovation of the next twenty years.</strong> Closing that gap requires not better content, not smarter tutors, and not prettier interfaces. It requires a complete system: biology-aligned pedagogy, continuous knowledge modeling, behavioral consequence architecture, cheating-resistant credentialing, institutional trust infrastructure, and economic outcome accountability — all functioning together, deployed for the learners who need it most. <a class="crossref" href="#">Doc 4</a></p>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">The Unified Map — Three Documents, One Convergence</div>
+    <div class="diagram-body">
+      <div class="unified-map">
+        <div class="um-cell d1">
+          <div class="um-doc">Doc 1 — The Human</div>
+          <div class="um-title">Biology requires active generation, spaced retrieval, appropriate challenge, motivation, and identity</div>
+          <div class="um-body">Most learning fails at this layer. Passive consumption dominates. The feeling of learning is not learning.</div>
+        </div>
+        <div class="um-cell d2">
+          <div class="um-doc">Doc 2 — The System</div>
+          <div class="um-title">Institutions provide sorting, signaling, accountability, and community — not primarily learning optimization</div>
+          <div class="um-body">Technology cannot disrupt this without replicating its non-educational functions. Content delivery is the least important function.</div>
+        </div>
+        <div class="um-cell d3">
+          <div class="um-doc">Doc 3 — The Economy</div>
+          <div class="um-title">Economy rewards verified capability and trust; skills decay in 2.5 years; the gap between credentials and competence is widening</div>
+          <div class="um-body">The beneficiaries most in need are in emerging markets. The market structure misaligns investment from impact.</div>
+        </div>
+        <div class="um-synthesis">
+          <div class="um-doc">Doc 4 + Doc 5 — The Synthesis</div>
+          <div class="um-title">The solution is a complete system that serves all three layers simultaneously — aligned with biology, able to replace institutional functions, and economically credible</div>
+          <div class="um-body">This has never been built at scale. Building it is the work. It requires patience, institutional relationship-building, outcome accountability, and mission discipline that most EdTech companies don't survive long enough to develop.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 5. THE GAP ═══════════════════ -->
+<div class="sec" id="the-gap">
+  <div class="sec-tag">Chapter 4</div>
+  <h2>The <em>Gap</em> — What Is Missing and Why</h2>
+
+  <p>The gap between what exists and what is needed has three dimensions. Each is load-bearing. Closing one without the others produces no outcome.</p>
+
+  <h3>Gap 1 — The Biological Gap</h3>
+  <p>Almost all educational content — whether in classrooms, textbooks, videos, or AI tutors — is designed for passive consumption rather than active generation. This violates the fundamental mechanism of human memory formation. Students exposed to content in passive formats retain a small fraction of what they encounter; students who actively retrieve, explain, apply, and generate retain dramatically more. The biological gap is the failure to design for encoding rather than exposure. <a class="crossref" href="#">Doc 1 — Human</a></p>
+
+  <p>The biological gap is, technically, the easiest to close. The instructional science is established. The LLM technology to implement it is available. What prevents closure is the product design pressure to optimize for the feeling of learning rather than the fact of learning — which points back to the wrong metrics problem identified in Doc 4.</p>
+
+  <h3>Gap 2 — The Institutional Gap</h3>
+  <p>Even a biologically optimal learning experience produces no economic outcome if it lacks institutional recognition. The institutional gap is the absence of the trust infrastructure that makes credentials economically real — employer recognition, track records, selectivity signals, accreditation, network effects. This gap takes years to close, requires non-engineering work, and cannot be purchased with investment capital. It can only be earned through demonstrated outcomes. <a class="crossref" href="#">Doc 2 — System</a></p>
+
+  <p>The institutional gap explains why the best-taught courses produce unemployed graduates if the credential is not trusted by the employers who matter. It also explains why degree programs with mediocre pedagogy continue to dominate the labor market — the institutional trust gap between the degree and any alternative credential is enormous, and the gap narrows by less than most EdTech optimists believe each year.</p>
+
+  <h3>Gap 3 — The Consequence Gap</h3>
+  <p>Motivation is not attitude — it is a function of consequence design. Learners in zero-consequence environments complete at 5%. Learners in high-consequence environments complete at 60–80%. The consequence gap is the absence of meaningful stakes that convert interest into sustained effort. Closing this gap requires architectural choices — cohort structure, financial commitment devices, employer visibility, social accountability — that most free or low-cost learning platforms are structurally unable to implement without fundamentally changing their business model. <a class="crossref" href="#">Doc 1 — Human</a><a class="crossref" href="#">Doc 4 — Strategy</a></p>
+
+  <div class="insight">
+    <div class="insight-label">The Gap Interaction Effect</div>
+    <p>These three gaps interact and amplify each other. A biologically optimal learning experience without institutional recognition is economically inert — the learner gains real competence that no one will pay for. Institutional recognition without biological optimization produces hollow credentials — employers eventually discover they predict nothing. Consequence architecture without both produces sustained effort toward learning experiences that don't work and credentials that don't matter.</p>
+    <p>All three gaps must be addressed in parallel. This is why building the full stack is the minimum viable approach — not because it is technically sophisticated, but because partial solutions produce partial outcomes that are indistinguishable from failure to the learner who needed them to work.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 6. WHY EDTECH FAILS ═══════════════════ -->
+<div class="sec" id="edtech-failures">
+  <div class="sec-tag">Chapter 5</div>
+  <h2>Why EdTech <em>Fails</em> — The Complete Anatomy</h2>
+
+  <p>The history of EdTech failure, viewed through the lens of the unified theory, reveals a consistent anatomy. It is not bad technology, bad content, or bad intentions. It is a systematic failure to understand which problem was actually being solved.</p>
+
+  <div class="failure-anatomy">
+    <div class="fa-row">
+      <div class="fa-head"></div>
+      <div class="fa-head">What Failed</div>
+      <div class="fa-head">Why It Failed</div>
+      <div class="fa-head">The Missed Layer</div>
+    </div>
+
+    <div class="fa-row">
+      <div class="fa-num">1</div>
+      <div class="fa-cell why"><h5>Radio & Film (1920s–40s)</h5><p>Declared the "perfect teacher in every classroom." Neither delivered transformative outcomes.</p></div>
+      <div class="fa-cell lesson"><h5>One-way broadcast</h5><p>No retrieval, no feedback, no adaptation, no accountability. Biological gap untouched.</p></div>
+      <div class="fa-cell fix"><h5>Biological + Consequence</h5><p>Missing active generation, missing stakes. Students watched passively and retained little.</p></div>
+    </div>
+
+    <div class="fa-row">
+      <div class="fa-num">2</div>
+      <div class="fa-cell why"><h5>Skinner's Teaching Machines (1950s–60s)</h5><p>Addressed retrieval and feedback. Still faded.</p></div>
+      <div class="fa-cell lesson"><h5>Correct biology, wrong scope</h5><p>Built for procedural skills only. No intrinsic motivation design. No credential value.</p></div>
+      <div class="fa-cell fix"><h5>Institutional + Motivation</h5><p>Missing credential recognition. Missing identity development. Missing higher-order thinking.</p></div>
+    </div>
+
+    <div class="fa-row">
+      <div class="fa-num">3</div>
+      <div class="fa-cell why"><h5>Educational Software (1980s–90s)</h5><p>Drill-and-practice, educational games. Schools bought hardware; outcomes were modest.</p></div>
+      <div class="fa-cell lesson"><h5>Technology without pedagogy</h5><p>The computer was a tool looking for a theory. Most software was electronic worksheets.</p></div>
+      <div class="fa-cell fix"><h5>All three gaps</h5><p>No biology alignment, no institutional integration, no consequence design. Technology precedes pedagogy every time.</p></div>
+    </div>
+
+    <div class="fa-row">
+      <div class="fa-num">4</div>
+      <div class="fa-cell why"><h5>MOOCs (2012–present)</h5><p>160,000 enrolled. ~5% completed. Concentrated benefits in already-educated populations.</p></div>
+      <div class="fa-cell lesson"><h5>Content without consequence</h5><p>Zero-cost, zero-stake. When stopping is free, most people stop. Credential recognition minimal.</p></div>
+      <div class="fa-cell fix"><h5>Consequence + Institutional</h5><p>The content was excellent. Everything else — accountability, credentialing, motivation design — was missing.</p></div>
+    </div>
+
+    <div class="fa-row">
+      <div class="fa-num">5</div>
+      <div class="fa-cell why"><h5>Most Current AI Tutors</h5><p>Better explanations. Still wrapper products. Outcomes not systematically tracked.</p></div>
+      <div class="fa-cell lesson"><h5>Same failure, better content layer</h5><p>LLMs improved the content and pedagogy layer dramatically. The other layers remain unbuilt.</p></div>
+      <div class="fa-cell fix"><h5>All three gaps — again</h5><p>Without learner state models, consequence architecture, and credential infrastructure, better explanations produce better-explained ignorance.</p></div>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"The remarkable consistency of EdTech failure across a century of different technologies is not a technology story. It is a systems story. The technology improved dramatically in each generation. The system remained unbuilt in each generation. Same missing layers, different products."</p>
+    <cite>Synthesis — Doc 2 × Doc 4</cite>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 7. HUMAN-ECONOMY BRIDGE ═══════════════════ -->
+<div class="sec" id="human-economy">
+  <div class="sec-tag">Chapter 6</div>
+  <h2>The <em>Human–Economy Bridge</em></h2>
+
+  <p>One of the most powerful cross-document insights emerges from placing the findings of Doc 1 (neuroscience) and Doc 3 (economics) in direct dialogue. They are describing the same phenomenon from different vantage points.</p>
+
+  <div class="bridge">
+    <div class="bridge-side">
+      <div class="bs-tag" style="color:var(--accent);">Doc 1 — The Human says:</div>
+      <h4>Skills decay without use. Memory requires periodic retrieval to maintain. The half-life of a memory without reinforcement is days to weeks.</h4>
+      <p>Ebbinghaus forgetting curve. Spaced repetition necessity. Without deliberate maintenance, even well-encoded knowledge decays exponentially.</p>
+    </div>
+    <div class="bridge-arrow">⟷</div>
+    <div class="bridge-side">
+      <div class="bs-tag" style="color:var(--green);">Doc 3 — The Economy says:</div>
+      <h4>Technical skills decay without use. The half-life of a specific skill is approximately 2.5 years. Continuous reskilling is an economic survival requirement.</h4>
+      <p>IBM Institute for Business Value. Skills depreciation. Without deliberate maintenance, even well-developed technical capability becomes economically obsolete.</p>
+    </div>
+  </div>
+
+  <p>These are not analogous phenomena — they are the same phenomenon at two different scales. The forgetting curve describes how individual memories decay biologically. The skills half-life describes how entire capability sets decay economically. Both are manifestations of the same underlying principle: <strong>capabilities, whether neural or professional, require active maintenance to persist.</strong></p>
+
+  <p>This convergence has a profound implication for platform design: the learning platform is not a one-time educational product. It is a <em>maintenance infrastructure</em> for human capability. Just as physical infrastructure requires ongoing maintenance to remain functional, human capability requires ongoing learning investment to remain economically viable. The platform that positions itself as this maintenance infrastructure — the place you return to every 2–3 years as the skills landscape shifts — has a business model with indefinite duration and compounding trust. <a class="crossref" href="#">Doc 1 — Human</a><a class="crossref" href="#">Doc 3 — Economy</a><a class="crossref" href="#">Doc 4 — Strategy</a></p>
+
+  <h3>The Metalearning Convergence</h3>
+  <p>A second cross-document convergence: Doc 1 identifies metacognition — the ability to accurately assess one's own knowledge and regulate one's own learning — as the strongest predictor of learning outcomes beyond IQ. Doc 3 identifies metalearning — the ability to rapidly acquire new skills — as the master skill of the AI economy, with effectively infinite economic half-life.</p>
+
+  <p>These are the same thing from two perspectives. <strong>Metacognition is the cognitive science name for what economists call metalearning.</strong> The skill of accurately knowing what you know, efficiently identifying what you need to learn, and applying effective strategies to close that gap is simultaneously the strongest predictor of educational success (Doc 1) and the most economically durable human capability (Doc 3). A platform that explicitly develops this skill — teaching learners how to learn, not just teaching them specific content — is investing in the asset with the longest economic half-life available.</p>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 8. THE EQUATION ═══════════════════ -->
+<div class="sec" id="the-equation">
+  <div class="sec-tag">Chapter 7</div>
+  <h2>The <em>Equation</em> — What Produces Economic Outcomes</h2>
+
+  <p>The research across four documents allows the construction of a working model for what actually produces economic outcomes from learning. It is not a mathematical equation in the strict sense — but it is close to one.</p>
+
+  <div class="theorem">
+    <h4>The Learning-to-Outcome Equation</h4>
+    <p><strong>Economic Outcome = </strong></p>
+    <p>( Biology-Aligned Encoding Depth × Spaced Retrieval Consistency ) <strong>+</strong></p>
+    <p>( Motivational Architecture × Consequence Design × Cohort Accountability ) <strong>+</strong></p>
+    <p>( Assessment Validity × Credential Trust Level ) <strong>+</strong></p>
+    <p>( Employer Network Access × Economic Placement Infrastructure )</p>
+    <p style="margin-top:16px;">Where any term approaching zero causes the product to approach zero — regardless of the strength of other terms.</p>
+    <p>This is a <strong>multiplicative</strong>, not additive, system. Extraordinary content delivery + zero credential recognition = zero economic outcome. Perfect credential trust + zero learning = credential fraud. Strong motivation + poor pedagogy = sustained effort toward ineffective learning. The system is only as strong as its weakest essential component.</p>
+  </div>
+
+  <p>Most current platforms maximize one term in this equation — typically the first (biology-aligned encoding, through LLM tutoring) — while ignoring the others. The equation explains why this produces impressive technology demonstrations with disappointing graduate outcomes.</p>
+
+  <p>It also explains why traditional universities, with their often mediocre pedagogy, produce graduates who get hired: the credential trust term is so high (decades of institutional reputation, employer recognition, legal standing) that it compensates for weakness in the other terms. The university equation is strong on trust and weak on biology; the EdTech equation is strong on biology and weak on trust. Neither is complete. <a class="crossref" href="#">Doc 2 — System</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 9. WHO WINS ═══════════════════ -->
+<div class="sec" id="who-wins">
+  <div class="sec-tag">Chapter 8</div>
+  <h2>Who <em>Wins</em> in the Next Twenty Years</h2>
+
+  <p>The learning platform landscape of 2044 will be shaped by which organizations successfully close all three gaps simultaneously. Based on the analysis across all four documents, here is what the winners will look like — and what they won't.</p>
+
+  <h3>What the Winners Will Have Done</h3>
+
+  <p><strong>Started the institutional work immediately.</strong> The winners will have begun building employer relationships, tracking outcomes, and publishing data from their very first cohort — not waiting until the technology was mature. Institutional trust is the longest-lead-time component; every day it isn't being built is a day of compounding that isn't happening. <a class="crossref" href="#">Doc 2 — System</a></p>
+
+  <p><strong>Chosen depth over breadth relentlessly.</strong> The winners will have resisted the pressure to expand to new domains before proving the loop in their first domain. One domain with documented, credible, employer-recognized outcomes is worth more than ten domains with engagement metrics and no employment data. The proof of loop is the moat. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+
+  <p><strong>Made completion rate their primary product metric.</strong> The winners will have defined success as learner outcomes, not engagement or enrollment. This means designing for desirable difficulties that feel hard, implementing behavioral consequence architecture that feels restrictive, and accepting lower short-term satisfaction scores in exchange for higher long-term competence outcomes. <a class="crossref" href="#">Doc 1 — Human</a></p>
+
+  <p><strong>Served learners who needed them most, not easiest.</strong> The winners will have explicitly designed for learners in high-need contexts — limited prior education, low-bandwidth connectivity, local labor markets with specific demands, no credit cards. These design constraints produce more robust and more globally valuable platforms than designing for the most advantaged learners. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+
+  <p><strong>Built the metalearning layer explicitly.</strong> The winners will have taught learners how to learn — not as a meta-feature, but as primary curriculum. The learner who graduates knowing how to identify their own gaps, apply effective learning strategies, and maintain their capabilities over time is more economically valuable and more likely to return for reskilling than one who only gained a specific skill set. <a class="crossref" href="#">Doc 1 — Human</a><a class="crossref" href="#">Doc 3 — Economy</a></p>
+
+  <h3>What the Winners Will Not Have Done</h3>
+
+  <p>They will not have optimized for virality before outcomes. They will not have launched credentials without employer recognition. They will not have confused engagement with learning. They will not have built for the already-educated and called it impact. They will not have neglected the boring, unsexy infrastructure — the knowledge tracers, the outcome databases, the employer relationship management — in favor of beautiful interfaces. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 10. GLOBAL IMPERATIVE ═══════════════════ -->
+<div class="sec" id="global-imperative">
+  <div class="sec-tag">Chapter 9</div>
+  <h2>The <em>Global Imperative</em> — Why This Matters Beyond Business</h2>
+
+  <p>The analysis in this series has been framed largely in strategic and economic terms. But the stakes are more than strategic. They are human.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sn">1.3B</div><div class="sl">New African workers entering the global economy by 2050</div></div>
+    <div class="stat-box"><div class="sn">89%</div><div class="sl">Children in Sub-Saharan Africa unable to read proficiently by age 10</div></div>
+    <div class="stat-box"><div class="sn">40yr</div><div class="sl">Track record of institutional failure to build functional school systems in many developing contexts</div></div>
+    <div class="stat-box"><div class="sn">5.4B</div><div class="sl">Smartphone users today — infrastructure for delivery exists</div></div>
+  </div>
+
+  <p>The infrastructure for reaching every learner on earth now exists. The knowledge to teach them adaptively now exists. The technology to personalize that instruction now exists. What does not yet exist — and what is the work — is the complete system that converts that access into economically real, institutionally recognized, durable human capability.</p>
+
+  <p>The development path that lifted hundreds of millions out of poverty in the 20th century — manufacturing export industries that provided ladder rungs into the formal economy — is being automated before the next cohort of developing-world workers can use it. The 1.3 billion young Africans entering the workforce by 2050 cannot rely on the development model that worked for earlier Asian economies. They need something different: a pathway to globally recognized, remotely executable skills that connects them to the global knowledge economy without requiring local institutional infrastructure that will not be built in time. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+
+  <p>This is not a niche. It is the largest educational challenge in human history. And for the first time, the technology to address it is available. The work is the system — not the content, not the AI, but the complete infrastructure of biology-aligned learning, verified credentialing, and economic placement that turns potential into outcome. <a class="crossref" href="#">Doc 2 — System</a></p>
+
+  <div class="pullquote">
+    <p>"For a billion students in systems that are currently failing them, the question is not whether transformative learning technology is optional. It is not. The question is who will build the complete system — and whether they will do it before another generation is written off."</p>
+    <cite>Synthesis — Doc 2 × Doc 3 × Doc 5</cite>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 11. HARDEST PARTS ═══════════════════ -->
+<div class="sec" id="the-hardest-parts">
+  <div class="sec-tag">Chapter 10</div>
+  <h2>The <em>Hardest Parts</em> — An Honest Assessment</h2>
+
+  <p>Intellectual honesty requires naming the places where the unified theory faces genuine resistance — not from bad actors, but from structural realities that are very difficult to overcome.</p>
+
+  <h4>The Credential Trust Problem Has No Technical Solution</h4>
+  <p>The single hardest constraint in the entire system is that institutional trust cannot be engineered, funded, or acquired. It can only be earned, over years, through demonstrated outcomes. The first cohort always graduates into a credential recognition vacuum. The first 100 graduates face skeptical employers. The first outcome report is based on small sample sizes. There is no shortcut to the 10,000th graduate whose employer says "these candidates reliably outperform degree holders." The patience required is genuine and the timeline is long. Most venture-backed EdTech companies will not survive long enough to complete this work. <a class="crossref" href="#">Doc 2 — System</a></p>
+
+  <h4>The Incentive Structure Problem Is Structural, Not Behavioral</h4>
+  <p>Consumer learning platforms face a fundamental structural tension: the practices that produce the best learning outcomes (desirable difficulties, spaced retrieval, interleaving) produce the worst user satisfaction and retention metrics. Optimizing for retention — which investors demand — systematically degrades learning outcomes. The only solution is a business model in which revenue is directly contingent on learning outcomes, not engagement. This means ISAs, employer fees, or performance guarantees — models that are more complex and more capital-intensive than subscriptions. The easy path — subscription, grow users, raise Series B — systematically produces engagement-optimized, outcome-unoptimized products. <a class="crossref" href="#">Doc 4 — Strategy</a></p>
+
+  <h4>The Design-for-Need Problem Is Cultural</h4>
+  <p>Designing for learners in Lagos or Dhaka requires that the team building the platform deeply understand those learners' contexts, constraints, and goals. This is almost never the case for teams in San Francisco or London. The cultural distance between platform builders and the learners who would benefit most is a genuine obstacle that cannot be overcome by good intentions — it requires hiring from those communities, field research in those contexts, and product iteration with those learners. This is slow, expensive, and culturally demanding work that most teams are not equipped or motivated to do. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+
+  <h4>The Metacognition Problem Is Self-Referential</h4>
+  <p>The learners who most need the platform are those who have had the least practice at self-directed learning. But a platform that develops metacognition requires a learner who can recognize gaps in their own metacognition — a recursive challenge. Beginning metacognitive development requires external scaffolding, explicit instruction, and structured reflection processes that are expensive to design and difficult to make engaging. The learners who arrive at the platform self-directed and metacognitively skilled need this layer least; the learners who need it most are least likely to engage with it. This tension is real and requires deliberate design that is rarely well executed. <a class="crossref" href="#">Doc 1 — Human</a></p>
+
+  <div class="insight">
+    <div class="insight-label">The Honest Bottom Line</div>
+    <p>Building this system correctly is a 5–10 year project that requires patient capital, mission discipline, and willingness to prioritize unglamorous infrastructure over visible product features. It requires working in markets that are hard to reach, with learners who are hard to serve, toward outcomes that take years to validate. It is the most important educational work of the next generation. It is also genuinely difficult, and most organizations attempting it will not finish. The ones that do will have changed the economic trajectory of millions of human beings.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 12. FUTURE SCENARIOS ═══════════════════ -->
+<div class="sec" id="future-scenarios">
+  <div class="sec-tag">Chapter 11</div>
+  <h2><em>Future Scenarios</em> — Three Possible Worlds</h2>
+
+  <p>Based on the trajectories established across all four documents, three plausible futures can be sketched for the intersection of AI, education, and economic opportunity over the next 20 years.</p>
+
+  <div class="scenario-grid">
+    <div class="scenario" style="border-top-color:var(--accent);">
+      <div class="sc-name">Scenario A</div>
+      <h4>The Wrapper World</h4>
+      <p>AI tutoring proliferates at scale. Content quality and delivery personalization reach extraordinary levels. But no one builds the institutional trust, consequence architecture, or credentialing infrastructure. Learners gain knowledge that the economy can't verify. Traditional credentials remain dominant because no alternative has built sufficient trust. Inequality widens as those with institutional access capture the AI productivity gains while those without access receive better content with no economic pathway.</p>
+      <p class="sc-prob" style="color:var(--accent);">Highest probability — this is the default trajectory.</p>
+    </div>
+    <div class="scenario" style="border-top-color:var(--gold);">
+      <div class="sc-name">Scenario B</div>
+      <h4>The Platform Transition</h4>
+      <p>2–3 organizations successfully build complete systems in specific high-demand domains with documented outcomes. Employer trust is built incrementally. Skills-based hiring gains genuine (not just announced) traction in tech sectors first, then spreads. Alternative credentials reach parity with degrees in specific fields within 15 years. The transition is uneven — benefits concentrated in technical domains and geographies with existing digital infrastructure. The majority of global learners in underserved markets see partial but real improvements.</p>
+      <p class="sc-prob" style="color:var(--gold);">Moderate probability — requires sustained mission discipline by 2–3 builders.</p>
+    </div>
+    <div class="scenario" style="border-top-color:var(--green);">
+      <div class="sc-name">Scenario C</div>
+      <h4>The Learning Revolution</h4>
+      <p>Multiple organizations build complete systems across domains and geographies. Government partnerships (Singapore model generalized) create funded reskilling infrastructure for mass populations. Credential recognition reaches genuine parity with traditional degrees in most white-collar domains within 20 years. The 1.3 billion young Africans entering the workforce access a functioning pathway to global knowledge economy participation. The credential monopoly of universities is broken not by disruption but by demonstrated superior outcomes. Skill acquisition time compresses dramatically for motivated learners.</p>
+      <p class="sc-prob" style="color:var(--green);">Requires coordinated effort across sectors, patient capital, and policy alignment. Possible but not probable without deliberate work.</p>
+    </div>
+  </div>
+
+  <p>The distance between Scenario A and Scenario C is not primarily a technology gap. The technology for Scenario C exists today. The distance is a systems design gap, a mission discipline gap, a patient capital gap, and a willingness to do unglamorous institutional work gap. The scenario that emerges is determined by whether the organizations working in this space build complete systems or settle for impressive partial solutions.</p>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 13. MASTER PRINCIPLES ═══════════════════ -->
+<div class="sec" id="the-principles">
+  <div class="sec-tag">Chapter 12</div>
+  <h2>The <em>Master Principles</em> — Distilled from All Four Documents</h2>
+
+  <p>Every argument across 154 topics in four documents ultimately reduces to a set of principles that are simple to state and hard to honor. These are them.</p>
+
+  <table class="p-table">
+    <tr>
+      <th>Principle</th>
+      <th>Source</th>
+      <th>The Failure Mode It Prevents</th>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">1. Design for encoding, not for the feeling of learning.</span> The subjective experience of learning and the biological fact of learning are inversely correlated in most platforms.</td>
+      <td><span class="src">Doc 1</span></td>
+      <td>Content entertainment that produces engagement without retention.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">2. Retrieval is the learning, not the test of the learning.</span> Every interaction must require the learner to generate, not consume.</td>
+      <td><span class="src">Doc 1</span></td>
+      <td>Passive consumption pipelines that feel like education and produce none of it.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">3. Difficulty is signal, not obstacle.</span> The struggle, the error, the effortful retrieval — these are the mechanism of neuroplasticity, not bugs in the experience.</td>
+      <td><span class="src">Doc 1</span></td>
+      <td>Over-scaffolded, friction-free learning that removes the very signal that drives neural change.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">4. Credential trust cannot be purchased; it must be earned through outcomes.</span> No amount of design quality creates institutional trust. Only track record does.</td>
+      <td><span class="src">Doc 2</span></td>
+      <td>Beautiful credentials with zero employer recognition that leave learners economically stranded.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">5. Content delivery is the least important function of education.</span> Sorting, credentialing, accountability, socialization, and community are the load-bearing functions.</td>
+      <td><span class="src">Doc 2</span></td>
+      <td>Technology that disrupts content delivery and leaves all other educational functions intact.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">6. Start the institutional work immediately — it has the longest lead time.</span> Employer relationships and outcome data must begin accumulating before the technology is mature.</td>
+      <td><span class="src">Doc 2 + Doc 4</span></td>
+      <td>Technology-first platforms that launch credentials into an employer recognition vacuum years into their existence.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">7. The half-life of skills and the forgetting curve are the same phenomenon.</span> Both require active maintenance. Design for lifelong re-engagement, not one-time completion.</td>
+      <td><span class="src">Doc 1 + Doc 3</span></td>
+      <td>One-time credential products in a world requiring continuous reskilling every 2–3 years.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">8. Metalearning is the only skill with zero economic half-life.</span> Teaching how to learn is more durable than any specific skill taught.</td>
+      <td><span class="src">Doc 1 + Doc 3</span></td>
+      <td>Platforms that produce skilled graduates who cannot navigate the next career transition independently.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">9. Consequence is not cruelty — it is the mechanism of completion.</span> Zero-consequence environments produce 5% completion. Design for meaningful stakes.</td>
+      <td><span class="src">Doc 1 + Doc 4</span></td>
+      <td>Free, zero-stakes platforms with MOOC-level completion rates and no economic impact.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">10. The beneficiary and the market are not aligned.</span> Designing for the already-educated is not impact. The highest-need learners must be deliberately designed for, not served as an afterthought.</td>
+      <td><span class="src">Doc 3 + Synthesis</span></td>
+      <td>Global platforms that concentrate benefits in already-advantaged demographics and call it scale.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">11. The full stack is the minimum viable product.</span> Partial systems produce partial outcomes that are indistinguishable from failure to the learner who needed them to work.</td>
+      <td><span class="src">Doc 4</span></td>
+      <td>Wrapper products that deliver excellent content delivery and nothing else, and declare victory at launch.</td>
+    </tr>
+    <tr>
+      <td><span class="strong-cell">12. Revenue must be contingent on outcomes, not engagement.</span> The business model is the incentive structure. Misaligned incentives produce misaligned products.</td>
+      <td><span class="src">Doc 4</span></td>
+      <td>Subscription platforms that profit equally whether graduates get jobs or not, and therefore optimize for retention over outcomes.</td>
+    </tr>
+  </table>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 14. READING ORDER ═══════════════════ -->
+<div class="sec" id="reading-order">
+  <div class="sec-tag">Chapter 13</div>
+  <h2>The <em>Reading Order</em> — How to Use This Series</h2>
+
+  <p>These five documents are not a collection of references — they are a sequential argument. Each document assumes the preceding ones. Each one is enriched by reading the others. Here is the intended path through the full series, and what each document adds to the understanding that precedes it.</p>
+
+  <p><strong>Start with Doc 1 — The Human.</strong> Before any strategy, any policy, any technology — understand how the human brain actually learns. Everything else follows from this. The biology is the constraint that cannot be negotiated around. Understanding it changes how you read everything else.</p>
+
+  <p><strong>Read Doc 2 — The System next.</strong> Armed with the biology, the institutional failures of education become legible in a new way. You can see exactly where the system violates what Doc 1 established — and why it persists despite those violations. The credential value proposition becomes clear. The institutional trust problem becomes concrete.</p>
+
+  <p><strong>Doc 3 — The Economy then.** </strong>With biology and institutions understood, the economic context shows why the urgency is real and the stakes are high. The skills half-life mirrors the forgetting curve. The geographic opportunity mirrors the equity problem in Doc 2. The credential disruption trajectory becomes legible against the institutional trust framework from Doc 2.</p>
+
+  <p><strong>Doc 4 — The Strategy is where it becomes actionable.</strong> All three preceding documents are now design constraints and design opportunities. The full stack makes sense because each layer addresses a gap identified in Docs 1–3. The business model logic flows from the incentive alignment problem. The domain selection framework flows from the institutional trust-building timeline.</p>
+
+  <p><strong>Doc 5 — The Master is where it becomes a worldview.</strong> The synthesis is not a summary — it is the view from altitude that reveals connections between the ground-level findings that were invisible when you were close to each one individually. Read it last, then reread whichever earlier document now seems most relevant to what you're working on.</p>
+
+  <div class="insight">
+    <div class="insight-label">For Practitioners: The Most Actionable Documents</div>
+    <p>If you are building a learning product: Doc 1 (redesign your pedagogy), Doc 4 (build the full stack, start the institutional work now). If you are advising on education policy: Doc 2 (understand what you're actually trying to change), Doc 3 (understand the economic forces you're working with or against). If you are a learner trying to navigate your own development: Doc 1 (understand how your memory actually works and study accordingly) and Doc 3 (understand which skills to invest in and why metalearning is the master investment).</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════ 15. FINAL WORD ═══════════════════ -->
+<div class="sec" id="final-word">
+  <div class="sec-tag">Final Chapter</div>
+  <h2>The <em>Final Word</em></h2>
+
+  <div class="cta-block">
+    <div class="cta-label">The Work</div>
+    <h2>The technology exists. The knowledge exists. The need is <em>enormous</em>. The system does not yet exist.</h2>
+    <p>Building it requires understanding the biology of human learning deeply enough to design against it rather than with it. It requires respecting the institutional sociology of credentials deeply enough to build trust infrastructure, not just content infrastructure. It requires understanding the economics of the labor market well enough to make credentials that the economy acts on. And it requires the strategic discipline to build the full stack, in order, over years, measuring real outcomes at every step.</p>
+    <p><strong>None of this is glamorous. All of it is necessary.</strong> The measurement infrastructure, the employer relationships, the knowledge tracing algorithms, the psychometric assessments — these are the unglamorous work of which transformative platforms are made.</p>
+  </div>
+
+  <div class="final-statement">
+    <h3>The question is not whether <em>AI can teach</em>. It can. The question is whether anyone will build the complete system around the AI that converts its teaching into verified, trusted, economically real human capability.</h3>
+
+    <p>That system — a complete learning-to-outcome infrastructure, aligned with human biology, credible to human institutions, and accessible to the humans who need it most — is the most important educational project of the next twenty years.</p>
+
+    <p>It is harder than it looks. It is slower than most investors want. It is less glamorous than the products it must compete with. And it is more consequential than perhaps any other technology application available to people working in education today.</p>
+
+    <p>For the learner in Lagos with a $50 smartphone and no path to a credential that an employer will act on. For the 22-year-old in Dhaka whose manufacturing job is being automated before the next development ladder has been built. For the 40-year-old in Ohio whose career is being restructured by AI and who has no institution willing to reskill her in a form that the next employer will trust. For all of them — the content already exists. The AI already exists. What doesn't yet exist is the complete system that connects them.</p>
+
+    <p>That is the work. This series has defined it. The rest is building.</p>
+
+    <span class="final-line">"Information is abundant. Verified capability is scarce. Institutional trust is rarer still. Build for the scarcest thing."</span>
+  </div>
+</div>
+
+</div><!-- end .wrap -->
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-series">
+      <h4>The Master Research Series — Complete</h4>
+      <p>Five documents. One unified theory. The human, the system, the economy, the strategy, and the synthesis — a complete framework for understanding and building transformative learning at scale.</p>
+    </div>
+
+    <div class="footer-docs">
+      <div class="footer-doc-item">
+        <div class="fdi-n">Doc 1</div>
+        <h5>The Human</h5>
+        <p>Brain, memory, motivation, identity</p>
+      </div>
+      <div class="footer-doc-item">
+        <div class="fdi-n">Doc 2</div>
+        <h5>The System</h5>
+        <p>History, credentials, EdTech, institutions</p>
+      </div>
+      <div class="footer-doc-item">
+        <div class="fdi-n">Doc 3</div>
+        <h5>The Economy</h5>
+        <p>Automation, skills, careers, geography</p>
+      </div>
+      <div class="footer-doc-item">
+        <div class="fdi-n">Doc 4</div>
+        <h5>The Strategy</h5>
+        <p>Architecture, phases, metrics, build</p>
+      </div>
+      <div class="footer-doc-item current">
+        <div class="fdi-n">Doc 5</div>
+        <h5>The Master</h5>
+        <p>Synthesis, unified theory, final word</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Master Research Series — Five Documents, One Framework</span>
+      <span>Built with Anthropic Claude · 2024</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pgbar').style.width=(s/h*100)+'%';
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      const kids=e.target.querySelectorAll('.stat-box,.rm-card,.um-cell,.thread,.scenario,.fa-row');
+      kids.forEach((k,i)=>{
+        k.style.opacity='0';k.style.transform='translateY(14px)';
+        k.style.transition=`opacity .4s ease ${i*.055}s,transform .4s ease ${i*.055}s`;
+        setTimeout(()=>{k.style.opacity='1';k.style.transform='translateY(0)';},60+i*55);
+      });
+    }
+  });
+},{threshold:.06});
+document.querySelectorAll('.sec').forEach(s=>obs.observe(s));
+const navLinks=document.querySelectorAll('nav a');
+const navObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.getAttribute('id');
+      navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});
+    }
+  });
+},{threshold:.25});
+document.querySelectorAll('.sec').forEach(s=>navObs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc 4 — The Strategy | Master Research Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0a1a;
+  --paper: #f0edf8;
+  --cream: #f7f5fc;
+  --accent: #5b1a8b;
+  --accent2: #1a6b8b;
+  --gold: #c9880a;
+  --red: #8b1a1a;
+  --green: #1a6b3a;
+  --mid: #3a3a52;
+  --line: rgba(15,10,26,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'Libre Baskerville',Georgia,serif;font-size:16.5px;line-height:1.8;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5;}
+#pgbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2));z-index:9998;width:0%;}
+
+/* HEADER */
+header{background:var(--ink);color:var(--paper);padding:100px 40px 70px;position:relative;overflow:hidden;}
+header::before{content:'04';position:absolute;right:-20px;top:-40px;font-family:'Playfair Display',serif;font-size:280px;font-weight:900;color:rgba(255,255,255,0.025);line-height:1;pointer-events:none;}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent2));}
+.series-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.series-tag::before{content:'';display:block;width:32px;height:1px;background:var(--gold);}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:900;line-height:1.0;max-width:760px;margin-bottom:8px;}
+header h1 em{color:var(--accent);font-style:italic;}
+.header-desc{font-family:'Libre Baskerville',serif;font-size:1.05rem;color:rgba(240,237,248,0.65);max-width:620px;margin:24px 0 40px;line-height:1.7;font-style:italic;}
+.doc-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:40px;}
+.doc-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.45);text-decoration:none;border-radius:2px;transition:all .2s;}
+.doc-link.active{border-color:var(--accent);color:#b57fe8;}
+.doc-link:not(.active):hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.7);}
+.header-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1);}
+.hstat .n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;}
+.hstat .l{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
+
+/* NAV */
+nav{background:var(--cream);border-bottom:1px solid var(--line);padding:0 40px;position:sticky;top:0;z-index:100;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+nav a{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:15px 18px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+nav a:hover,nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* WRAP */
+.wrap{max-width:860px;margin:0 auto;padding:80px 40px;}
+
+/* SECTIONS */
+.sec{margin-bottom:80px;opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.sec.vis{opacity:1;transform:translateY(0);}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.sec-tag::after{content:'';flex:1;height:1px;background:var(--line);}
+.sec h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:700;line-height:1.15;margin-bottom:28px;}
+.sec h2 em{color:var(--accent);font-style:italic;}
+.sec h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin:44px 0 14px;padding-left:16px;border-left:3px solid var(--accent);}
+.sec h4{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin:28px 0 10px;}
+.sec p{margin-bottom:18px;color:#1a0f2e;}
+.sec p:last-child{margin-bottom:0;}
+
+/* PULLQUOTE */
+.pullquote{margin:40px 0;padding:32px 40px;border-left:4px solid var(--gold);background:var(--cream);border-radius:0 4px 4px 0;}
+.pullquote p{font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;line-height:1.65;margin:0 0 12px !important;color:var(--ink) !important;}
+.pullquote cite{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--mid);text-transform:uppercase;}
+
+/* RESEARCHER */
+.researcher{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:11px;padding:4px 12px 4px 8px;border-radius:20px;margin:0 4px 4px 0;letter-spacing:.06em;vertical-align:middle;}
+.researcher::before{content:'◆';color:var(--gold);font-size:8px;}
+
+/* CONCEPT */
+.concept{background:var(--ink);color:var(--paper);padding:36px 40px;margin:36px 0;border-radius:3px;position:relative;overflow:hidden;}
+.concept::before{content:'KEY CONCEPT';position:absolute;top:16px;right:20px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,0.2);}
+.concept h4{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:12px !important;}
+.concept p{color:rgba(240,237,248,0.82) !important;margin-bottom:10px !important;}
+.concept p:last-child{margin-bottom:0 !important;}
+
+/* STUDY */
+.study{border:1px solid var(--line);border-top:3px solid var(--accent);padding:24px 28px;margin:28px 0;border-radius:0 0 3px 3px;background:var(--cream);}
+.study-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.study h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px !important;}
+.study p{font-size:.88rem;color:var(--mid) !important;line-height:1.55;margin:0 !important;}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:28px 0;}
+.card{background:var(--cream);border:1px solid var(--line);padding:22px;border-radius:3px;border-top:3px solid var(--accent);transition:transform .2s,box-shadow .2s;}
+.card:nth-child(2n){border-top-color:var(--accent2);}
+.card:nth-child(3n){border-top-color:var(--gold);}
+.card:nth-child(4n){border-top-color:var(--green);}
+.card:nth-child(5n){border-top-color:var(--red);}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.08);}
+.card .cn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;margin-bottom:8px;}
+.card h4{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:8px !important;}
+.card p{font-size:.83rem;color:var(--mid);line-height:1.5;margin:0 !important;}
+
+/* STAT ROW */
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin:28px 0;}
+.stat-box{flex:1;min-width:140px;background:var(--cream);border:1px solid var(--line);padding:20px;border-radius:3px;text-align:center;}
+.stat-box .sn{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--accent);}
+.stat-box .sl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* CROSSREF */
+.crossref{display:inline-flex;align-items:center;gap:6px;background:rgba(91,26,139,.1);color:var(--accent);font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:.06em;border:1px solid rgba(91,26,139,.2);vertical-align:middle;text-decoration:none;cursor:default;}
+.crossref::before{content:'→';font-size:9px;}
+
+/* IMPL */
+.impl{border:1px dashed var(--gold);background:rgba(201,136,10,.05);padding:24px 28px;margin:28px 0;border-radius:3px;}
+.impl-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.impl p{font-size:.88rem;color:#2a1f00 !important;line-height:1.55;margin:0 0 8px !important;}
+.impl p:last-child{margin-bottom:0 !important;}
+
+/* WARNING */
+.warning{border:1px solid rgba(139,26,26,.3);background:rgba(139,26,26,.04);padding:24px 28px;margin:28px 0;border-radius:3px;}
+.warning-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.warning p{font-size:.88rem;color:#2a1010 !important;line-height:1.55;margin:0 0 8px !important;}
+.warning p:last-child{margin-bottom:0 !important;}
+
+/* COMPARE TABLE */
+.compare{width:100%;border-collapse:collapse;margin:28px 0;font-size:.88rem;}
+.compare th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:12px 16px;background:var(--ink);color:var(--paper);text-align:left;}
+.compare td{padding:12px 16px;border-bottom:1px solid var(--line);color:var(--mid);vertical-align:top;}
+.compare tr:nth-child(even) td{background:var(--cream);}
+.compare .good{color:var(--green);font-weight:700;}
+.compare .bad{color:var(--red);font-weight:700;}
+.compare .mid-c{color:var(--gold);font-weight:700;}
+
+/* DIAGRAM */
+.diagram{margin:36px 0;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--cream);}
+.diagram-title{background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:12px 20px;}
+.diagram-body{padding:28px;}
+
+/* HFLOW */
+.hflow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;}
+.hflow-node{flex:1;min-width:100px;background:#fff;border:1.5px solid var(--ink);padding:14px 12px;text-align:center;position:relative;}
+.hflow-node:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--accent);background:var(--cream);padding:2px;z-index:1;}
+.hflow-node.hl{background:var(--accent);color:white;}
+.hflow-node.hl2{background:var(--accent2);color:white;}
+.hflow-node.hlg{background:var(--gold);color:white;}
+.hflow-node.hlr{background:var(--red);color:white;}
+.hflow-node.hlgr{background:var(--green);color:white;}
+.hflow-node .nt{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;margin-bottom:4px;}
+.hflow-node .nv{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;line-height:1.2;}
+
+/* VFLOW */
+.vflow{display:flex;flex-direction:column;align-items:center;gap:0;margin:24px auto;max-width:540px;}
+.vflow-node{width:100%;background:#fff;border:1.5px solid var(--ink);padding:16px 20px;display:flex;align-items:center;gap:14px;transition:transform .2s,box-shadow .2s;}
+.vflow-node:hover{transform:translateX(4px);box-shadow:-4px 0 0 var(--accent);}
+.vflow-conn{width:2px;height:24px;background:var(--ink);position:relative;}
+.vflow-conn::after{content:'▼';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--ink);}
+.vflow-icon{font-size:1.3rem;flex-shrink:0;}
+.vflow-text h5{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:3px;}
+.vflow-text p{font-size:.78rem;color:var(--mid);line-height:1.4;margin:0 !important;}
+
+/* STACK LAYERS */
+.stack{display:flex;flex-direction:column;gap:3px;margin:36px 0;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden;}
+.stack-layer{padding:20px 28px;display:flex;align-items:center;gap:20px;transition:transform .15s,box-shadow .15s;cursor:default;}
+.stack-layer:hover{transform:translateX(4px);}
+.stack-layer .sl-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;width:32px;flex-shrink:0;opacity:.7;}
+.stack-layer h4{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;min-width:190px;}
+.stack-layer p{font-size:.82rem;line-height:1.45;margin:0 !important;flex:1;opacity:.88;}
+.stack-layer .sl-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:20px;flex-shrink:0;}
+
+/* PRINCIPLE CARDS */
+.principle-grid{display:flex;flex-direction:column;gap:20px;margin:28px 0;}
+.principle{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:28px;background:var(--cream);border:1px solid var(--line);border-radius:3px;border-left:4px solid var(--accent);transition:border-left-color .2s,transform .2s;}
+.principle:nth-child(2n){border-left-color:var(--accent2);}
+.principle:nth-child(3n){border-left-color:var(--gold);}
+.principle:nth-child(4n){border-left-color:var(--green);}
+.principle:hover{transform:translateX(4px);}
+.principle-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--line);line-height:1;text-align:center;padding-top:2px;}
+.principle-body h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:8px;}
+.principle-body p{font-size:.88rem;color:#2a1f3a;line-height:1.65;margin:0 0 8px !important;}
+.sub-points{margin-top:10px;display:flex;flex-direction:column;gap:5px;}
+.sub-point{display:flex;gap:10px;font-size:.82rem;color:var(--mid);line-height:1.4;}
+.sub-point::before{content:'→';color:var(--accent);flex-shrink:0;font-family:'DM Mono',monospace;}
+
+/* PHASE FLOW */
+.phase-flow{display:flex;flex-direction:column;gap:0;margin:36px 0;}
+.phase{display:flex;gap:0;align-items:stretch;}
+.phase-num-col{width:80px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;}
+.phase-circle{width:48px;height:48px;border-radius:50%;background:var(--accent);color:white;font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.phase-line{width:2px;flex:1;background:var(--line);margin:0 auto;}
+.phase-content{flex:1;padding:0 0 40px 20px;}
+.phase-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.phase-content h4{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:10px;}
+.phase-content p{font-size:.88rem;color:#2a1f3a;line-height:1.6;margin-bottom:10px !important;}
+.phase-content p:last-child{margin-bottom:0 !important;}
+.phase-checklist{margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+.check-item{display:flex;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);align-items:flex-start;}
+.check-item::before{content:'☐';color:var(--accent);flex-shrink:0;}
+
+/* BUSINESS MODEL CARDS */
+.bm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:28px 0;}
+.bm-card{background:var(--cream);border:1px solid var(--line);padding:24px;border-radius:3px;}
+.bm-card .bm-type{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.bm-card h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px !important;}
+.bm-card p{font-size:.82rem;color:var(--mid);line-height:1.5;margin:0 0 8px !important;}
+.bm-card .bm-pros,.bm-card .bm-cons{font-size:.78rem;font-family:'DM Mono',monospace;letter-spacing:.04em;}
+.bm-pros{color:var(--green);}
+.bm-cons{color:var(--red);}
+
+/* MISTAKE CARDS */
+.mistake-grid{display:flex;flex-direction:column;gap:14px;margin:28px 0;}
+.mistake{padding:20px 24px;background:var(--cream);border:1px solid var(--line);border-radius:3px;border-left:4px solid var(--red);display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mistake-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.mistake-fix-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:6px;}
+.mistake h5,.mistake-fix h5{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:700;margin-bottom:4px;}
+.mistake p,.mistake-fix p{font-size:.82rem;color:var(--mid);line-height:1.4;margin:0 !important;}
+
+/* NORTH STAR */
+.north-star{background:var(--ink);color:var(--paper);padding:60px 40px;margin:48px 0;border-radius:4px;text-align:center;position:relative;overflow:hidden;}
+.north-star::before{content:'★';position:absolute;font-size:300px;opacity:.03;top:50%;left:50%;transform:translate(-50%,-50%);font-family:serif;pointer-events:none;}
+.north-star .ns-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.north-star h3{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;line-height:1.2;max-width:700px;margin:0 auto 20px;}
+.north-star h3 em{color:var(--accent);font-style:italic;}
+.north-star p{font-size:.92rem;color:rgba(240,237,248,.65);line-height:1.75;max-width:600px;margin:0 auto;}
+
+hr.div{border:none;height:1px;background:var(--line);margin:0;}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--paper);padding:48px 40px;}
+.footer-inner{max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;}
+.footer-doc h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:16px;}
+.footer-doc p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.5;max-width:300px;}
+.doc-nav{display:flex;flex-direction:column;gap:8px;}
+.doc-nav a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.doc-nav a:hover{color:var(--gold);}
+.doc-nav a.current{color:#b57fe8;}
+
+@media(max-width:640px){
+  .wrap{padding:60px 24px;}header{padding:70px 24px 56px;}nav{padding:0 16px;}
+  .hflow{flex-direction:column;}
+  .hflow-node:not(:last-child)::after{content:'↓';right:50%;bottom:-14px;top:auto;transform:translateX(50%);}
+  .footer-inner{flex-direction:column;}
+  .stack-layer{flex-direction:column;gap:8px;}.stack-layer h4{min-width:unset;}
+  .mistake{grid-template-columns:1fr;}
+  .principle{grid-template-columns:1fr;}
+  .phase{flex-direction:column;}
+  .phase-num-col{width:100%;flex-direction:row;gap:12px;align-items:center;margin-bottom:12px;}
+  .phase-line{display:none;}
+  .phase-content{padding:0 0 32px 0;}
+}
+</style>
+</head>
+<body>
+<div id="pgbar"></div>
+
+<!-- ═══════════════════════════════════════ HEADER -->
+<header>
+  <div class="series-tag">Master Research Series · Document 4 of 5</div>
+  <h1>The <em>Strategy</em></h1>
+  <p class="header-desc">How everything from Docs 1, 2, and 3 becomes a concrete blueprint — the principles, architecture, phases, business models, mistakes to avoid, and north star metrics for building a learning platform that actually matters.</p>
+  <div class="doc-links">
+    <a class="doc-link" href="#">Doc 1 — The Human</a>
+    <a class="doc-link" href="#">Doc 2 — The System</a>
+    <a class="doc-link" href="#">Doc 3 — The Economy</a>
+    <a class="doc-link active" href="#">Doc 4 — The Strategy</a>
+    <a class="doc-link" href="#">Doc 5 — The Master</a>
+  </div>
+  <div class="header-stats">
+    <div class="hstat"><div class="n">20</div><div class="l">Strategic Principles</div></div>
+    <div class="hstat"><div class="n">7</div><div class="l">Platform Layers</div></div>
+    <div class="hstat"><div class="n">5</div><div class="l">Build Phases</div></div>
+    <div class="hstat"><div class="n">12</div><div class="l">Critical Mistakes to Avoid</div></div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════ NAV -->
+<nav id="sitenav">
+  <a href="#synthesis-point">The Synthesis Point</a>
+  <a href="#what-non-wrapper">Non-Wrapper Defined</a>
+  <a href="#six-functions">Six Functions</a>
+  <a href="#learner-state">Learner State Model</a>
+  <a href="#full-stack">The Full Stack</a>
+  <a href="#pedagogy">Pedagogy Layer</a>
+  <a href="#behavioral">Behavioral Design</a>
+  <a href="#assessment-credentialing">Assessment & Credentials</a>
+  <a href="#institutional">Institutional Integration</a>
+  <a href="#domain-selection">Domain Selection</a>
+  <a href="#build-phases">Build Phases</a>
+  <a href="#business-models">Business Models</a>
+  <a href="#metrics">Metrics That Matter</a>
+  <a href="#global-design">Designing for the World</a>
+  <a href="#mistakes">12 Critical Mistakes</a>
+  <a href="#north-star">North Star</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════ 1. SYNTHESIS POINT -->
+<div class="sec" id="synthesis-point">
+  <div class="sec-tag">Chapter 1</div>
+  <h2>The <em>Synthesis Point</em> — Where Three Docs Converge</h2>
+  <p>Three documents of research lead to a single inescapable convergence point. Before any strategic choice is made, this convergence must be fully internalized — because every consequential decision that follows flows from it.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">The Three-Document Convergence</div>
+    <div class="diagram-body">
+      <div class="hflow">
+        <div class="hflow-node hl">
+          <div class="nt">Doc 1 — The Human</div>
+          <div class="nv">Learning requires active retrieval, spaced practice, motivation, identity, and consequence. Passive content delivery produces minimal durable encoding.</div>
+        </div>
+        <div class="hflow-node hl2">
+          <div class="nt">Doc 2 — The System</div>
+          <div class="nv">Education's value comes from credentialing, sorting, and accountability — not content. Technology has disrupted content delivery repeatedly without disrupting these functions.</div>
+        </div>
+        <div class="hflow-node hlg">
+          <div class="nt">Doc 3 — The Economy</div>
+          <div class="nv">The economy rewards verified capability and institutional trust. Skills decay in 2.5 years. The trust gap between platforms and employers is the critical bottleneck.</div>
+        </div>
+        <div class="hflow-node" style="background:var(--ink);color:var(--paper);">
+          <div class="nt">The Convergence</div>
+          <div class="nv">A platform that only delivers content addresses 15% of the problem. The other 85% is behavioral design, assessment integrity, institutional trust, and economic consequence.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>The Foundational Diagnosis</h4>
+    <p>Every EdTech wave has optimized for the wrong variable. Radio, film, computers, the internet, and MOOCs all optimized for content access and delivery quality. All failed to produce transformative outcomes. Not because the content was bad — it was often excellent — but because content access was never the bottleneck.</p>
+    <p>The actual bottleneck is a system problem: <strong>how does a learner move from zero knowledge to verified, economically recognized, durable competence?</strong> This system requires biology-aligned pedagogy, accurate knowledge modeling, behavioral motivation architecture, credible assessment, institutional trust, and economic placement. Building only the first piece — even a brilliant first piece — leaves 85% of the system unbuilt. That is the wrapper problem. <a class="crossref" href="#">Doc 1 — The Human</a><a class="crossref" href="#">Doc 2 — The System</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 2. NON-WRAPPER DEFINED -->
+<div class="sec" id="what-non-wrapper">
+  <div class="sec-tag">Chapter 2</div>
+  <h2>What <em>Non-Wrapper</em> Actually Means</h2>
+  <p>The term "wrapper" has been used loosely. Here is a precise definition: a wrapper is any product that addresses only content delivery and expects the surrounding institutional system — schools, employers, credentials — to supply everything else. The wrapper assumes the system will do the credential, accountability, motivation, and consequence work. The system largely won't — and in many contexts, can't.</p>
+
+  <h3>The Wrapper Test</h3>
+  <p>Ask these six questions about any learning product. If most answers are "no" or "someone else does that," you have a wrapper:</p>
+
+  <table class="compare">
+    <tr><th>Question</th><th>Wrapper Answer</th><th>Non-Wrapper Answer</th></tr>
+    <tr><td>Does it model what the learner actually knows right now?</td><td class="bad">No — assumes completion = knowledge</td><td class="good">Yes — continuous probabilistic model</td></tr>
+    <tr><td>Does it create real consequences for non-completion?</td><td class="bad">No — free to stop</td><td class="good">Yes — financial, social, or professional stakes</td></tr>
+    <tr><td>Does it produce a credential employers actually act on?</td><td class="bad">No — or weakly</td><td class="good">Yes — with documented employer outcomes</td></tr>
+    <tr><td>Does it explicitly train metacognition and learning skills?</td><td class="bad">No — assumes learner knows how to learn</td><td class="good">Yes — metalearning is first-class content</td></tr>
+    <tr><td>Is its revenue tied to learner outcomes, not engagement?</td><td class="bad">No — paid per subscription or completion</td><td class="good">Yes — ISA, employer fees, or outcomes-based pricing</td></tr>
+    <tr><td>Does it build on what the learner knew before joining?</td><td class="bad">No — fixed starting point</td><td class="good">Yes — diagnostic entry assessment</td></tr>
+  </table>
+
+  <div class="warning">
+    <div class="warning-label">The Dangerous Middle Ground</div>
+    <p>The most dangerous position is not pure wrapper — that is at least honest. The dangerous position is a platform that does 30% of what a non-wrapper should do, acquires users, raises money, and then optimizes for retention and growth metrics rather than the remaining 70% of the problem it hasn't solved. The metrics look good; the outcomes don't. The platform raises Series B; the learners don't get jobs. This is the modal trajectory of EdTech startups today.</p>
+    <p>Building a real non-wrapper requires deliberately prioritizing outcome measurement over growth metrics, which is uncomfortable, slow, and expensive. It is also the only path to building something durable. <a class="crossref" href="#">→ Section: Metrics That Matter</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 3. SIX FUNCTIONS -->
+<div class="sec" id="six-functions">
+  <div class="sec-tag">Chapter 3</div>
+  <h2>Replicating All <em>Six Functions</em></h2>
+  <p>Doc 2 established that education serves six functions simultaneously. A durable platform must address all six — not just content delivery. Here is what addressing each function actually requires in practice.</p>
+
+  <div class="principle-grid">
+
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <div class="principle-body">
+        <h4>Content Transmission → Biology-Aligned Pedagogy</h4>
+        <p>The function platforms do best — but even here, most do it wrong. Content must be structured around retrieval, not consumption. Spaced repetition must be built in architecturally, not bolted on. Interleaving must override learner preference for blocked practice. Explanations must target the learner's actual knowledge state, not a generic beginner.</p>
+        <div class="sub-points">
+          <div class="sub-point">LLM-generated explanations calibrated to current knowledge graph position</div>
+          <div class="sub-point">Mandatory active generation — no passive reading without retrieval follow-up</div>
+          <div class="sub-point">Spaced repetition scheduling engine as core infrastructure, not add-on</div>
+          <div class="sub-point">Interleaving enforced algorithmically, explained to learner transparently</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <div class="principle-body">
+        <h4>Assessment & Diagnosis → Continuous Knowledge Modeling</h4>
+        <p>Not quiz scores at the end of modules. A real-time, probabilistic learner state model updated from every interaction — response accuracy, response latency, revision behavior, error type classification. The model drives all content decisions. Learner self-reports of confidence are used as one weak signal among many, not as ground truth.</p>
+        <div class="sub-points">
+          <div class="sub-point">Bayesian or deep knowledge tracing on a validated skill dependency graph</div>
+          <div class="sub-point">Behavioral signal collection beyond answer correctness (latency, revision, abandonment)</div>
+          <div class="sub-point">Diagnostic entry assessment calibrated to learner's specific background</div>
+          <div class="sub-point">Model validated against downstream performance outcomes, not just prediction accuracy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <div class="principle-body">
+        <h4>Motivation & Behavioral Regulation → Consequence Architecture</h4>
+        <p>The most neglected function and the one most responsible for MOOC failure. Motivation cannot be assumed — it must be engineered. Self-determination theory demands autonomy support, competence experiences, and relatedness. Behavioral design demands consequences, habits, and social accountability. These must be built deliberately, not hoped for.</p>
+        <div class="sub-points">
+          <div class="sub-point">Implementation intentions at onboarding ("when X, then I will study") — doubles follow-through</div>
+          <div class="sub-point">Cohort structure for social accountability — peers notice absence and non-completion</div>
+          <div class="sub-point">Financial commitment devices for learners who opt in — small stakes change behavior</div>
+          <div class="sub-point">Progress visibility that shows genuine competence growth, not just lesson completion</div>
+          <div class="sub-point">Rationale transparency — explain why each topic matters before teaching it</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">04</div>
+      <div class="principle-body">
+        <h4>Credentialing & Signaling → Employer-Recognized Certification</h4>
+        <p>The function that makes everything else economically real. A credential is worth exactly as much as the trust that backs it. Building that trust requires documented outcomes, employer relationships, and years of track record. Start this immediately — before the technology is perfect — because it is the longest lead-time component of the system.</p>
+        <div class="sub-points">
+          <div class="sub-point">Hire 2–3 employer partners before launch; their testimonials are the first trust signal</div>
+          <div class="sub-point">Track every graduate's employment outcome; publish the data</div>
+          <div class="sub-point">Performance tracking in employer roles for 12–24 months post-placement</div>
+          <div class="sub-point">Cheating-resistant assessment — proctoring, biometric verification, or performance-based work products</div>
+          <div class="sub-point">Psychometrically validated assessments — not homemade quizzes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">05</div>
+      <div class="principle-body">
+        <h4>Accountability Structures → Skin in the Game</h4>
+        <p>Consequence is the mechanism that converts interest into effort. The steeper the consequence of not completing, the higher the completion rate. The zero-consequence design of free platforms produces ~5% completion. Non-zero-consequence designs produce 60–80%. The design question is how to create meaningful stakes without requiring expensive institutional authority.</p>
+        <div class="sub-points">
+          <div class="sub-point">Cohort-based time structure — the group moves together; leaving means leaving the cohort</div>
+          <div class="sub-point">Employer visibility during learning — companies can track enrolled candidates</div>
+          <div class="sub-point">Income share agreements — financial consequence tied directly to outcome</div>
+          <div class="sub-point">Public portfolio — work product is visible; quality (or lack of it) is visible to peers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">06</div>
+      <div class="principle-body">
+        <h4>Community & Identity → Peer Network and Professional Identity</h4>
+        <p>Learners don't only want skills — they want to become someone. The identity transformation from "person who knows nothing about X" to "practitioner of X" is as important as the skill acquisition. Communities that support this transformation, celebrate milestones publicly, and connect learners to professional networks create alumni assets that compound over time.</p>
+        <div class="sub-points">
+          <div class="sub-point">Alumni community with active industry participation and job referral culture</div>
+          <div class="sub-point">Public graduation and project showcase — social proof of achievement</div>
+          <div class="sub-point">Professional identity support — portfolio building, LinkedIn optimization, narrative coaching</div>
+          <div class="sub-point">Mentorship matching with industry practitioners who reinforce identity as professionals</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 4. LEARNER STATE MODEL -->
+<div class="sec" id="learner-state">
+  <div class="sec-tag">Chapter 4</div>
+  <h2>The <em>Learner State Model</em> — The Core Technical Challenge</h2>
+  <p>The learner state model is the brain of the platform. Everything else — content selection, difficulty calibration, review scheduling, intervention triggers — depends on it. Getting this right is the hardest technical problem in adaptive learning and the most consequential engineering investment.</p>
+
+  <h3>What the Model Must Know at Any Moment</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Dimension 01 — Knowledge</div>
+      <h4>What Can They Do?</h4>
+      <p>A probabilistic estimate of competence for each node in the skill graph — not binary (knows / doesn't know) but a probability distribution that narrows with more evidence. Maintained by a knowledge tracing algorithm updated after every interaction. <a class="crossref" href="#">Doc 2 — System</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Dimension 02 — Misconceptions</div>
+      <h4>What Do They Believe That Is Wrong?</h4>
+      <p>Active misconceptions are more dangerous than gaps — they generate confident wrong answers that feel right to the learner. Error pattern classification must identify specific systematic errors, not just "got it wrong." Different misconceptions require different corrective interventions. <a class="crossref" href="#">Doc 1 — The Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Dimension 03 — Cognitive Load</div>
+      <h4>How Much Mental Capacity Right Now?</h4>
+      <p>Working memory load, fatigue, and cognitive resource state affect what can be productively presented in the current session. Time-of-day, session length, error rate trajectory, and response latency are proxies. Content density must be calibrated to current cognitive capacity.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Dimension 04 — Motivation State</div>
+      <h4>How Engaged Are They Right Now?</h4>
+      <p>Session abandonment rate, time between responses, revision behavior, and help-seeking frequency are behavioral signals of engagement and frustration. These trigger different interventions — a frustrated learner needs a competence win before a new challenge; a bored learner needs elevated difficulty. <a class="crossref" href="#">Doc 1 — The Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Dimension 05 — Goals & Context</div>
+      <h4>What Are They Learning For?</h4>
+      <p>A learner studying for a certification exam needs different content sequencing than one preparing for a job interview or building a portfolio project. Goal context should modulate content selection, depth, and urgency across the entire learning path.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Dimension 06 — Learning History</div>
+      <h4>What Has and Hasn't Worked?</h4>
+      <p>Which explanation types, analogy categories, problem formats, and session structures have produced the strongest learning gains for this specific learner? The model should learn individual instructional preferences from outcomes data, not from self-report.</p>
+    </div>
+  </div>
+
+  <h3>Building the Skill Dependency Graph</h3>
+  <p>The knowledge model operates on a structured skill graph — a directed acyclic graph where nodes represent skills or knowledge components and edges represent prerequisite relationships. Before building the learner model, you must build the domain model: what skills exist, in what order must they be learned, and what are the dependencies between them.</p>
+
+  <p>This graph is the most important intellectual asset of the platform and the hardest to build well. It requires: domain expert elicitation, empirical validation (do learners who know A actually learn B faster?), and continuous refinement based on learning outcome data. A poor domain model produces a perfect knowledge tracer operating on the wrong map. <a class="crossref" href="#">Doc 2 — The System</a></p>
+
+  <div class="impl">
+    <div class="impl-label">Engineering Priority</div>
+    <p>Invest disproportionately in the learner state model before building any other platform feature. A mediocre UI with an excellent learner model will outperform a beautiful UI with a poor or absent learner model. The model is the product. Everything visible — the explanations, the questions, the difficulty, the review schedule — is an output of the model. The model is the intelligence. Do not skip to the interface.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 5. FULL STACK -->
+<div class="sec" id="full-stack">
+  <div class="sec-tag">Chapter 5</div>
+  <h2>The <em>Full Stack</em> — Seven Layers</h2>
+  <p>The full platform architecture has seven layers. They must be built in roughly bottom-up order — each layer depends on the one below it. Most EdTech products build layer 3 first (content and pedagogy), sometimes reach layer 4 (behavioral), and rarely progress further. The layers that produce economic value — layers 5, 6, and 7 — are the hardest to build and the last to be funded.</p>
+
+  <div class="stack">
+    <div class="stack-layer" style="background:#0f0a1a;color:var(--paper);">
+      <div class="sl-num">L1</div>
+      <h4>Data Perception Layer</h4>
+      <p>Continuous collection of behavioral signals — response accuracy, latency, revision patterns, session behavior, error classification. The raw material of the learner state model. Must be instrumented before everything else.</p>
+      <span class="sl-tag" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);">Foundation</span>
+    </div>
+    <div class="stack-layer" style="background:#1a0f3a;color:var(--paper);">
+      <div class="sl-num">L2</div>
+      <h4>Knowledge Modeling Layer</h4>
+      <p>The probabilistic learner state model. Skill dependency graph plus knowledge tracing algorithm. Updated in real time from L1 signals. The intelligence of the system — drives all content decisions above it.</p>
+      <span class="sl-tag" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);">Core Intelligence</span>
+    </div>
+    <div class="stack-layer" style="background:var(--accent);color:white;">
+      <div class="sl-num">L3</div>
+      <h4>Content & Pedagogy Layer ← Most products stop here</h4>
+      <p>LLM-generated adaptive explanations, Socratic questioning, calibrated scaffolding, spaced retrieval practice, interleaved problem sets. Driven entirely by L2 model state — not a fixed curriculum.</p>
+      <span class="sl-tag" style="background:rgba(255,255,255,.2);color:white;">AI-Powered</span>
+    </div>
+    <div class="stack-layer" style="background:#1a3f6b;color:white;">
+      <div class="sl-num">L4</div>
+      <h4>Behavioral Architecture Layer</h4>
+      <p>Consequence design, habit formation support, social accountability, motivation state detection and response, identity reinforcement. Requires behavioral scientists, not just ML engineers. The layer most responsible for completion rates.</p>
+      <span class="sl-tag" style="background:rgba(255,255,255,.2);color:white;">Behavioral Science</span>
+    </div>
+    <div class="stack-layer" style="background:#1a6b3a;color:white;">
+      <div class="sl-num">L5</div>
+      <h4>Assessment & Credentialing Layer</h4>
+      <p>Psychometrically rigorous, cheating-resistant summative assessment. CAT-based adaptive testing. External validation of assessment predictive validity. The credential-production mechanism. Requires assessment science expertise.</p>
+      <span class="sl-tag" style="background:rgba(255,255,255,.2);color:white;">Psychometrics</span>
+    </div>
+    <div class="stack-layer" style="background:#6b5a1a;color:white;">
+      <div class="sl-num">L6</div>
+      <h4>Outcomes Measurement Layer</h4>
+      <p>Graduate employment tracking, employer performance feedback, salary trajectory monitoring, 12–24 month follow-up. The evidence base for credential trust-building. Without this layer, every claim about outcomes is unverifiable.</p>
+      <span class="sl-tag" style="background:rgba(255,255,255,.2);color:white;">Evidence Infrastructure</span>
+    </div>
+    <div class="stack-layer" style="background:var(--accent2);color:white;">
+      <div class="sl-num">L7</div>
+      <h4>Institutional Interface Layer</h4>
+      <p>Employer relationships, government recognition, university partnerships, accreditation pathways. The connection to real-world economic consequences. Relationship work — slow, non-scalable, irreplaceable. Starts on day one.</p>
+      <span class="sl-tag" style="background:rgba(255,255,255,.2);color:white;">Relationship Work</span>
+    </div>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">The Build Order Paradox</div>
+    <p>The layers that produce the most learner value (L5–L7) are the ones that take the longest to build and require the most non-engineering work. You cannot wait to start building them until the technical layers are complete — by then you've lost 3–5 years of relationship-building time. The correct approach is parallel development: build the technical stack while simultaneously beginning institutional relationship work, even before the product is ready. Sign employer LOIs before the platform launches. Start tracking outcomes from the first cohort. The evidence compound interest starts on day one or never.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 6. PEDAGOGY LAYER -->
+<div class="sec" id="pedagogy">
+  <div class="sec-tag">Chapter 6</div>
+  <h2>The <em>Pedagogy Layer</em> — Designing for Biology</h2>
+  <p>The content and pedagogy layer is where LLMs provide genuine, unprecedented value. But LLM capability does not automatically produce good pedagogy. The LLM must be explicitly directed to use the pedagogical techniques the research supports — it will not do this by default.</p>
+
+  <h3>The Five Pedagogical Mandates</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Mandate 01</div>
+      <h4>Generation Before Transmission</h4>
+      <p>Always attempt retrieval before presentation. Ask the learner to generate an answer — even to material not yet studied — before explaining it. The prediction error created by being wrong is a more powerful encoding signal than passive reception of correct information. Problem-first, explanation-second is the correct sequence. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Mandate 02</div>
+      <h4>Minimal Scaffolding, Maximally Calibrated</h4>
+      <p>The LLM's natural inclination is to explain fully and helpfully. This is pedagogically wrong for learners who could work it out with less help. Scaffold intensity must be calibrated to the learner's ZPD: a question, then a hint, then a partial example, then a full example — stopping at the earliest point of productive struggle. Never skip to the full answer when a hint would do. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Mandate 03</div>
+      <h4>Interleave Relentlessly</h4>
+      <p>Never allow blocked practice. Systematically mix current content with review of previously learned material. The learner will resist this — it feels disorganized. Explain why. The curriculum sequence is not a linear path from A to Z but a continuously expanding mesh of revisited and connected concepts.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Mandate 04</div>
+      <h4>Misconception-First Correction</h4>
+      <p>When a learner makes an error, diagnose the misconception first before correcting it. "You added the exponents instead of multiplying them, which suggests you may be confusing this with addition of powers" is more effective than "That's wrong, the answer is X." Misconception labeling creates better encoding of the correction. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Mandate 05</div>
+      <h4>Transfer by Design</h4>
+      <p>For every concept taught, explicitly design for transfer: present it in a second novel context, ask the learner to generate a new application themselves, and connect it to previously learned concepts. Transfer does not happen automatically from single-context learning. It requires deliberate multi-context exposure. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Mandate 06</div>
+      <h4>Metacognitive Training as Content</h4>
+      <p>Learning how to learn is not a meta-layer above the curriculum — it is first-class curriculum content. Teach spaced repetition, retrieval practice, the difference between familiarity and knowledge, implementation intentions, and how to identify genuine gaps. Learners who understand how their memory works study more effectively independently. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+  </div>
+
+  <h3>Prompting for Pedagogy</h3>
+  <p>The system prompt architecture for an LLM tutor must explicitly encode these mandates. The LLM will not default to pedagogically optimal behavior — it defaults to helpfulness, which is often pedagogically suboptimal (explaining too fully, scaffolding too heavily, not requiring generation). The system prompt is the pedagogical intelligence layer that constrains LLM behavior toward what the research supports.</p>
+
+  <div class="study">
+    <div class="study-label">Prompt Architecture Principle</div>
+    <h4>Never Ask "Do You Understand?" — Require Demonstration</h4>
+    <p>The LLM tutor must be prompted to always verify understanding through demonstration, not self-report. "Can you explain this back in your own words?" and "Give me an example of this principle that we haven't discussed" are pedagogically effective verification prompts. "Does that make sense?" is not — learners almost always say yes regardless of comprehension. This single change in interaction design significantly improves encoding. <a class="crossref" href="#">Doc 1 — Human</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 7. BEHAVIORAL DESIGN -->
+<div class="sec" id="behavioral">
+  <div class="sec-tag">Chapter 7</div>
+  <h2>Behavioral <em>Design</em> — Engineering Motivation</h2>
+  <p>Behavioral design is the most underinvested layer in EdTech. It requires a different skill set — behavioral scientists, game designers, UX researchers focused on motivation — than the rest of the platform. But it is the layer most directly responsible for whether learners complete.</p>
+
+  <h3>The Behavioral Design Stack</h3>
+
+  <div class="vflow">
+    <div class="vflow-node">
+      <div class="vflow-icon">🔑</div>
+      <div class="vflow-text">
+        <h5>Implementation Intentions at Onboarding</h5>
+        <p>Before first lesson: "When will you study? Where? What will trigger it?" Specific when-then commitments double follow-through. This takes 5 minutes and is one of the highest-leverage behavioral interventions known. <a class="crossref" href="#">Doc 1 — Human</a></p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">👥</div>
+      <div class="vflow-text">
+        <h5>Cohort Structure and Social Accountability</h5>
+        <p>Learning alongside a fixed group of peers who notice your presence and absence creates social consequence for non-attendance. Cohorts also create relatedness — a core SDT need. Cohort-based learning dramatically outperforms self-paced on completion. <a class="crossref" href="#">Doc 1 — Human</a></p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">📈</div>
+      <div class="vflow-text">
+        <h5>Competence-Visible Progress</h5>
+        <p>Show learners what they can now do that they couldn't before — not just what modules they've completed. A competence-based progress visualization (knowledge graph with filled vs unfilled nodes) is more motivating and more accurate than a percentage completion bar.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">⚠️</div>
+      <div class="vflow-text">
+        <h5>Strategic Friction and Commitment Devices</h5>
+        <p>Opt-in financial commitments (even $50 forfeited to charity on failure) significantly increase completion. The key: voluntary opt-in with full transparency. This is a commitment device, not a penalty. Behavioral economics research is consistent: small stakes produce large behavioral effects. <a class="crossref" href="#">Doc 1 — Human</a></p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🏆</div>
+      <div class="vflow-text">
+        <h5>Milestone Ceremonies and Identity Reinforcement</h5>
+        <p>Public acknowledgment of genuine competence milestones — not participation badges, but "you can now do X" certifications shared to professional networks. Each milestone reinforces the identity shift from learner to practitioner. Identity is a powerful behavioral anchor: people act consistently with who they believe they are.</p>
+      </div>
+    </div>
+    <div class="vflow-conn"></div>
+    <div class="vflow-node">
+      <div class="vflow-icon">🎯</div>
+      <div class="vflow-text">
+        <h5>Employer Visibility Layer</h5>
+        <p>With learner consent, allow enrolled employers or employer partners to see learner progress dashboards. The awareness that a potential employer is watching creates accountability of a qualitatively different character than any gamification mechanic. Real stakes produce real effort.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>The Gamification Warning</h3>
+  <p>Gamification — points, badges, leaderboards, streaks — can support engagement but catastrophically damages learning if it displaces intrinsic motivation. The Duolingo evidence is instructive: streak mechanics drove daily engagement while actual language retention remained poor. The lesson is not "don't gamify" but "only gamify the right things." Gamify showing up. Never gamify the learning itself — never give rewards for correct answers that the learner didn't earn through genuine effort. <a class="crossref" href="#">Doc 1 — Human</a></p>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 8. ASSESSMENT & CREDENTIALING -->
+<div class="sec" id="assessment-credentialing">
+  <div class="sec-tag">Chapter 8</div>
+  <h2>Assessment and <em>Credentialing</em> — The Trust Machine</h2>
+  <p>This layer converts learning into economic value. It is the component that most EdTech companies delay, underfund, or treat as a feature rather than a product. It is also the component with the longest lead time — trust is built in years, not sprints.</p>
+
+  <h3>The Three-Part Assessment Architecture</h3>
+
+  <h4>Part 1 — Continuous Formative Assessment (Invisible)</h4>
+  <p>Every interaction in the platform is an assessment event. Response accuracy, latency, help-seeking, revision behavior — all feed the learner state model continuously. This assessment is invisible to the learner and has zero stakes. Its purpose is knowledge modeling, not certification. <a class="crossref" href="#">Doc 2 — The System</a></p>
+
+  <h4>Part 2 — Milestone Assessments (Visible, Low Stakes)</h4>
+  <p>Periodic confirmatory assessments that verify the knowledge model's estimates against direct evidence. Psychometrically designed, adaptive (CAT-based), covering the skill dependency graph systematically. Results are visible to the learner and feed credential progress. Stakes are motivating but not high — failure triggers remediation, not program failure.</p>
+
+  <h4>Part 3 — Summative Credential Assessment (Visible, High Stakes)</h4>
+  <p>The assessment that produces the credential. Must meet a higher bar: cheating resistance (biometric verification, proctoring, or preferably work-product-based), psychometric validity (independently validated), and external recognition (employer or institutional acceptance). This is the hardest and most expensive assessment to build well. Do not launch credentials before this is solid.</p>
+
+  <h3>Making Assessment Cheat-Resistant</h3>
+  <p>With AI tools now available, any assessment that can be answered by an LLM is effectively an honor system. For high-stakes credential assessment, this is unacceptable. Three viable approaches:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Approach 01</div>
+      <h4>Performance-Based Assessment</h4>
+      <p>Assess through real work products — build a functioning system, debug a specific codebase, solve a client problem, conduct a supervised consultation. Work products that require genuine competence cannot be faked by AI proxy. Most credible and least scalable.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Approach 02</div>
+      <h4>Live Verification</h4>
+      <p>Video-proctored oral examination or live demonstration with an expert examiner. Impossible to fake. Highly scalable cost-wise with AI-assisted examiners. Models: bar exam oral components, medical practical exams, coding interviews.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Approach 03</div>
+      <h4>Behavioral Biometrics + Remote Proctoring</h4>
+      <p>Keystroke dynamics, face verification, eye tracking during assessment. Statistically probabilistic, not certain. Lowest friction but least certain. Appropriate for milestone assessments; insufficient alone for high-stakes credentials.</p>
+    </div>
+  </div>
+
+  <div class="impl">
+    <div class="impl-label">The Credential Trust-Building Program</div>
+    <p>Start with 3–5 employer partners before launch. Get their explicit agreement to: hire graduates on the basis of your credential, provide performance feedback at 3, 6, and 12 months, and publicly acknowledge their partnership. This is your initial trust infrastructure. Track every outcome. Publish every outcome (within privacy constraints). Expand employer base based on the outcome data. This is not a marketing program — it is the core product development work. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 9. INSTITUTIONAL INTEGRATION -->
+<div class="sec" id="institutional">
+  <div class="sec-tag">Chapter 9</div>
+  <h2>Institutional <em>Integration</em> — The Relationship Layer</h2>
+  <p>Institutional integration is the layer that makes everything else economically real. It is also the layer that most technology teams find most uncomfortable — it is not buildable with code. It requires human relationships, patience, and a long time horizon.</p>
+
+  <h3>The Four Integration Pathways</h3>
+
+  <h4>Pathway 1 — Employer-Side Integration</h4>
+  <p>The fastest and most tractable pathway. Identify employers who are experiencing genuine skill gaps in the target domain, who are willing to trial alternative credentials, and who have sufficient hiring volume to generate meaningful outcomes data. The deal structure: they provide job opportunities and performance data; you provide pre-screened, pre-trained candidates who reduce their hiring and onboarding costs. The value exchange is real and immediate — do not make this a charity ask.</p>
+
+  <h4>Pathway 2 — University Partnership</h4>
+  <p>Partner with accredited universities to co-credential your assessments. The university's brand provides trust; your assessment provides rigor; learners get a jointly-branded credential that carries institutional recognition. The deal structure varies — revenue share on tuition, licensing of curriculum, or joint-degree arrangements. Slower to negotiate but produces more durable credentials than pure employer pathways.</p>
+
+  <h4>Pathway 3 — Government and Regulatory Recognition</h4>
+  <p>In many domains and geographies, government recognition is the ultimate credential legitimizer. This pathway is the slowest — measured in years — but the most durable. Engage with workforce development agencies, ministries of education, and professional regulatory bodies early. Become a visible stakeholder in policy conversations. This is political as much as educational work.</p>
+
+  <h4>Pathway 4 — Professional Community Integration</h4>
+  <p>Build presence within the professional community of the target domain — conferences, open-source contributions, professional association membership, practitioners who advocate publicly for your credential. The community's endorsement is a trust signal that precedes and enables institutional recognition. This is the fastest pathway to informal recognition and the foundation for formal recognition.</p>
+
+  <div class="concept">
+    <h4>The Trust Flywheel</h4>
+    <p>Trust compounds. The first employer who hires your graduates and finds they perform well tells other employers. The third employer who does so enables you to publish a credible outcome report. That report gets you a university partnership conversation. The university partnership gets you government recognition consideration. Each trust increment unlocks the next. The flywheel is slow to start — the first 3 employers are the hardest — and self-reinforcing once moving. There is no shortcut to starting the flywheel. Start it on day one. <a class="crossref" href="#">Doc 2 — The System</a><a class="crossref" href="#">Doc 3 — Economy</a></p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 10. DOMAIN SELECTION -->
+<div class="sec" id="domain-selection">
+  <div class="sec-tag">Chapter 10</div>
+  <h2>Domain <em>Selection</em> — The Most Important Strategic Decision</h2>
+  <p>The choice of initial domain is more important than almost any other strategic decision. It determines whether the full stack is achievable at all, how long it will take, what it will cost, and how replicable the success will be across other domains.</p>
+
+  <h3>The Domain Selection Framework</h3>
+
+  <table class="compare">
+    <tr><th>Criterion</th><th>Why It Matters</th><th>Good Example</th><th>Bad Example</th></tr>
+    <tr><td>Skills are measurable</td><td>Cannot build a valid credential without measurable skills</td><td class="good">Cloud engineering, data analysis</td><td class="bad">Leadership, creativity, strategy</td></tr>
+    <tr><td>Outcomes are verifiable</td><td>Cannot build employer trust without traceable employment outcomes</td><td class="good">Software development, data science</td><td class="bad">Personal enrichment, general education</td></tr>
+    <tr><td>Employer demand is documented</td><td>Cannot build employer partnerships without evidence of demand</td><td class="good">Cybersecurity, ML engineering</td><td class="bad">General humanities, life skills</td></tr>
+    <tr><td>Learning path is structured</td><td>Cannot build a skill graph without prerequisite structure</td><td class="good">Mathematics, programming, medicine</td><td class="bad">Entrepreneurship, wisdom, judgment</td></tr>
+    <tr><td>Credentials are already disrupting</td><td>Easier to gain recognition where alternatives already exist</td><td class="good">Cloud certs, bootcamp-adjacent tech</td><td class="bad">Law, medicine (highly regulated)</td></tr>
+    <tr><td>Learner population has urgency</td><td>Motivation is easier to engineer when stakes are real</td><td class="good">Career-changers, unemployed adults</td><td class="bad">Curious hobbyists, comfortable professionals</td></tr>
+  </table>
+
+  <h3>The Go-Deep-First Strategy</h3>
+  <p>The correct strategy is not to build an education platform. It is to build the most effective learning-to-employment pipeline in one specific domain, prove the full loop with verifiable outcomes data, and then use that proof as the template for expansion. The proof is the asset — not the technology, not the content, not the brand.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">The Proven Loop — What Must Be Demonstrated Before Expansion</div>
+    <div class="diagram-body">
+      <div class="hflow">
+        <div class="hflow-node hlgr">
+          <div class="nt">Entry</div>
+          <div class="nv">Learner joins with zero domain skill</div>
+        </div>
+        <div class="hflow-node hl">
+          <div class="nt">Learning</div>
+          <div class="nv">Platform models state, adapts content, builds competence</div>
+        </div>
+        <div class="hflow-node hlg">
+          <div class="nt">Assessment</div>
+          <div class="nv">Cheating-resistant credential assessment</div>
+        </div>
+        <div class="hflow-node hl2">
+          <div class="nt">Placement</div>
+          <div class="nv">Employer hires based on credential</div>
+        </div>
+        <div class="hflow-node hlr">
+          <div class="nt">Validation</div>
+          <div class="nv">Graduate performs measurably well; employer provides feedback</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>This loop, demonstrated with 100 learners, is worth more than a platform with 100,000 learners and no outcome data. It answers the question every employer, every institution, and every potential learner actually needs answered: <em>does this work?</em></p>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 11. BUILD PHASES -->
+<div class="sec" id="build-phases">
+  <div class="sec-tag">Chapter 11</div>
+  <h2>The Five <em>Build Phases</em></h2>
+  <p>Building a full-stack learning platform is a 5–10 year project. Attempting to build all seven layers simultaneously is a path to spreading resources too thin and finishing nothing. The phased approach concentrates resources on proving each layer before investing in the next.</p>
+
+  <div class="phase-flow">
+
+    <div class="phase">
+      <div class="phase-num-col">
+        <div class="phase-circle">1</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-tag">Months 1–6</div>
+        <h4>Domain Mastery Engine</h4>
+        <p>Build the core: skill dependency graph, knowledge tracing, LLM pedagogy layer, spaced repetition scheduler, behavioral onboarding. No credential yet — just the best learning experience in the domain. Test with 20–50 learners. Measure knowledge gain, not engagement. Iterate hard.</p>
+        <div class="phase-checklist">
+          <div class="check-item">Skill graph built and validated by 3+ domain experts</div>
+          <div class="check-item">Knowledge tracing algorithm implemented and calibrated</div>
+          <div class="check-item">LLM system prompts encoding all six pedagogical mandates</div>
+          <div class="check-item">Spaced repetition scheduling engine operational</div>
+          <div class="check-item">Behavioral onboarding with implementation intentions</div>
+          <div class="check-item">Learning outcome measurement instrumented from day one</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num-col">
+        <div class="phase-circle">2</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-tag">Months 6–18</div>
+        <h4>Accountability & Community Infrastructure</h4>
+        <p>Add cohort structure, social accountability mechanics, consequence design, and community platform. Run first cohort of 20–30 learners. Measure completion rate as primary metric — must exceed 60% to proceed. Begin employer relationship conversations in parallel.</p>
+        <div class="phase-checklist">
+          <div class="check-item">Cohort structure with fixed start dates and peer accountability</div>
+          <div class="check-item">Social progress visibility within cohort</div>
+          <div class="check-item">Commitment device opt-in (financial or social stakes)</div>
+          <div class="check-item">First 3 employer conversations initiated</div>
+          <div class="check-item">Graduate employment outcome tracking system built</div>
+          <div class="check-item">60%+ cohort completion rate achieved before proceeding</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num-col">
+        <div class="phase-circle">3</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-tag">Months 12–30</div>
+        <h4>Credential and Assessment Infrastructure</h4>
+        <p>Build the summative assessment system. Commission psychometric validation. Establish first employer partnership with performance tracking commitment. Graduate first cohort with credential. Track employment and 6-month performance outcomes. Do not scale until this data exists.</p>
+        <div class="phase-checklist">
+          <div class="check-item">Summative assessment designed with psychometrician</div>
+          <div class="check-item">Cheating resistance mechanism implemented</div>
+          <div class="check-item">3+ employers signed as credential recognition partners</div>
+          <div class="check-item">First cohort graduated and tracked at 3 and 6 months</div>
+          <div class="check-item">Employment rate and performance data documented</div>
+          <div class="check-item">First public outcome report published</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num-col">
+        <div class="phase-circle">4</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-tag">Months 24–48</div>
+        <h4>Institutional Recognition and Scaling</h4>
+        <p>With outcome data in hand, pursue institutional recognition: employer base expansion, university partnership, government workforce program integration. Scale cohort sizes. Begin abstraction of the core architecture for domain expansion planning.</p>
+        <div class="phase-checklist">
+          <div class="check-item">10+ employer partners across 3+ company sizes</div>
+          <div class="check-item">University co-credentialing partnership signed</div>
+          <div class="check-item">2+ outcome reports published with independent verification</div>
+          <div class="check-item">Government workforce program integration explored</div>
+          <div class="check-item">Cohort size scaled while maintaining 60%+ completion</div>
+          <div class="check-item">Domain 2 selection made based on transferability of stack</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num-col">
+        <div class="phase-circle">5</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-tag">Year 4+</div>
+        <h4>Platform Abstraction and Expansion</h4>
+        <p>Abstract the core architecture — learner state model, behavioral design patterns, assessment infrastructure, institutional relationship playbook — into a repeatable template. Apply to domain 2 with dramatically reduced build time. The trust flywheel is now spinning; each new domain benefits from existing institutional relationships and employer recognition.</p>
+        <div class="phase-checklist">
+          <div class="check-item">Domain 1 outcome data 24+ months deep</div>
+          <div class="check-item">Core architecture documented and abstracted</div>
+          <div class="check-item">Domain 2 skill graph and employer relationships begun</div>
+          <div class="check-item">Platform brand recognized as quality signal by employers</div>
+          <div class="check-item">Learner acquisition cost declining as reputation compounds</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 12. BUSINESS MODELS -->
+<div class="sec" id="business-models">
+  <div class="sec-tag">Chapter 12</div>
+  <h2>Business <em>Models</em> — Aligning Revenue With Outcomes</h2>
+  <p>The business model is not a financial detail — it is a strategic choice that determines whose interests are aligned with whose. The right business model makes the platform's revenue contingent on learner outcomes. The wrong model makes it contingent on learner engagement or enrollment — which creates structural pressure to optimize for the wrong thing.</p>
+
+  <div class="bm-grid">
+    <div class="bm-card">
+      <div class="bm-type">Model 01</div>
+      <h4>Income Share Agreement (ISA)</h4>
+      <p>Learners pay nothing upfront; repay a percentage of income above a threshold after employment. Platform revenue is directly contingent on learner employment outcomes.</p>
+      <div class="bm-pros">+ Perfect outcome alignment + No financial barrier to entry + Powerful motivation signal to learner</div>
+      <div class="bm-cons">— Complex regulatory landscape — Cash flow challenges in early stages — Requires sophisticated risk modeling</div>
+    </div>
+    <div class="bm-card">
+      <div class="bm-type">Model 02</div>
+      <h4>Employer-Funded Training</h4>
+      <p>Employers pay per learner placed or per cohort trained. Platform serves as a talent pipeline for specific employers at reduced cost vs traditional recruitment and onboarding.</p>
+      <div class="bm-pros">+ Immediate revenue + Direct outcome accountability + Built-in placement pipeline</div>
+      <div class="bm-cons">— Learner interests may diverge from employer interests — Concentrates dependency on employer relationships — May limit learner flexibility</div>
+    </div>
+    <div class="bm-card">
+      <div class="bm-type">Model 03</div>
+      <h4>Outcomes-Based Subscription</h4>
+      <p>Learners pay monthly subscription with money-back guarantee if no employment outcome within defined timeframe. Aligns platform incentive with learner success.</p>
+      <div class="bm-pros">+ Simple to understand + Learner bears some cost (increases motivation) + Scalable</div>
+      <div class="bm-cons">— Guarantee creates liability requiring outcome confidence — Subscription stops at completion, not long-term aligned — Churn pressure may conflict with pedagogical patience</div>
+    </div>
+    <div class="bm-card">
+      <div class="bm-type">Model 04</div>
+      <h4>Government Workforce Funding</h4>
+      <p>Governments contract platforms to provide reskilling for specific worker populations. Revenue secured; volume predictable; policy alignment creates validation pathway.</p>
+      <div class="bm-pros">+ Large contracts + Policy recognition + Validation as government-endorsed program</div>
+      <div class="bm-cons">— Long procurement cycles — Political risk — May constrain curriculum flexibility — Requires compliance overhead</div>
+    </div>
+    <div class="bm-card">
+      <div class="bm-type">Model 05</div>
+      <h4>B2B Enterprise Reskilling</h4>
+      <p>Companies pay to reskill their own employees. Platform provides the learning infrastructure; company HR provides the accountability structure and motivation.</p>
+      <div class="bm-pros">+ High contract value + Built-in accountability + Data on existing employees</div>
+      <div class="bm-cons">— Outcome alignment weaker (company pays regardless) — Limited to existing employees — Different design constraints than consumer learning</div>
+    </div>
+    <div class="bm-card">
+      <div class="bm-type">Model 06</div>
+      <h4>Hybrid (Recommended)</h4>
+      <p>ISA for self-funded learners + employer contracts for company-sponsored learners + government program integration where available. Diversified revenue with maximum outcome alignment.</p>
+      <div class="bm-pros">+ Risk diversification + Multiple enrollment pathways + Outcome alignment maintained across revenue streams</div>
+      <div class="bm-cons">— Complex to manage multiple contract types — Requires sophisticated operations — Different learner populations need different design</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 13. METRICS -->
+<div class="sec" id="metrics">
+  <div class="sec-tag">Chapter 13</div>
+  <h2>Metrics That <em>Matter</em></h2>
+  <p>The metrics you track are the metrics you optimize for. Optimizing for the wrong metrics — the ones that are easy to measure but not aligned with outcomes — is how platforms end up with impressive dashboards and disappointing graduates.</p>
+
+  <h3>The Wrong Metrics (But Widely Used)</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Wrong Metric 01</div>
+      <h4>Engagement / Time on Platform</h4>
+      <p>Measures how much time learners spend — not whether they're learning. A platform that's genuinely hard and requires concentration may have lower engagement time than one that's easy and pleasurable. Optimizing for time-on-platform produces easy, pleasant, low-retention experiences.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Wrong Metric 02</div>
+      <h4>Module Completion Rate</h4>
+      <p>Measures progress through content — not knowledge gain. Clicking through lessons produces module completion. It does not produce learning. This metric is structurally misaligned: it rewards content exposure, which is the shallowest possible proxy for learning.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Wrong Metric 03</div>
+      <h4>Learner Satisfaction Score</h4>
+      <p>Learners feel most satisfied when learning feels easy (fluent processing). They learn most when learning feels hard (disfluent processing). These are inversely correlated. A platform optimized for satisfaction produces the illusion of learning without the substance. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Wrong Metric 04</div>
+      <h4>Total Enrollments</h4>
+      <p>Vanity metric. Enrollment is a marketing measurement. A platform with 1 million enrollments and a 5% completion rate is 950,000 failed learners. Total enrollments, without completion and outcome data, is meaningless for evaluating platform quality.</p>
+    </div>
+  </div>
+
+  <h3>The Right Metrics</h3>
+  <table class="compare">
+    <tr><th>Metric</th><th>What It Measures</th><th>Target</th><th>Why It Matters</th></tr>
+    <tr><td>Credentialed Completion Rate</td><td>% of enrolled who achieve full credential</td><td class="good">>60%</td><td>Primary accountability metric. 5% = MOOC. 60% = consequential design working.</td></tr>
+    <tr><td>Knowledge Gain (Pre/Post)</td><td>Skill graph delta from entry to graduation</td><td class="good">Validated assessment</td><td>Measures actual learning, not completion. Requires psychometric assessment.</td></tr>
+    <tr><td>6-Month Employment Rate</td><td>% employed in target domain 6 months post-graduation</td><td class="good">>70%</td><td>Primary economic outcome metric. The number employers ask for.</td></tr>
+    <tr><td>Employer Performance Rating</td><td>Employer assessment of graduate quality at 6 and 12 months</td><td class="good">>4.0/5.0</td><td>Validates that credential predicts actual job performance.</td></tr>
+    <tr><td>Salary Delta</td><td>Graduate salary vs pre-enrollment salary or market comparison</td><td class="good">>40% increase</td><td>Measures economic value delivered to learner. The ISA metric.</td></tr>
+    <tr><td>Credential Trust Score</td><td>% of partner employers who would hire another graduate unseen</td><td class="good">>80%</td><td>Measures the ultimate goal: institutional trust in the credential.</td></tr>
+    <tr><td>Learner State Model Accuracy</td><td>Correlation between model predictions and summative assessment</td><td class="good">>0.75</td><td>Validates the core technical component. A poor model produces poor adaptivity.</td></tr>
+  </table>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 14. GLOBAL DESIGN -->
+<div class="sec" id="global-design">
+  <div class="sec-tag">Chapter 14</div>
+  <h2>Designing for the <em>World</em> — Not Just for Rich Markets</h2>
+  <p>The global opportunity is not an extension of the domestic strategy — it is a different design problem. Building for a learner in Lagos, Dhaka, or Nairobi requires fundamentally different choices that must be made architecturally, not as afterthoughts.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Design Requirement 01</div>
+      <h4>Offline-First Architecture</h4>
+      <p>Connectivity in most emerging markets is intermittent. Content must be downloadable; progress must be syncable when connection is available; the platform must function fully offline. This is an architectural decision that cannot be retrofitted. Build it in from the beginning or accept that your "global" platform serves only the connected elite.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Design Requirement 02</div>
+      <h4>Multilingual by Default</h4>
+      <p>English-only platforms exclude the majority of the world's learners. LLMs now enable genuine multilingual instruction at near-zero marginal cost — this is one of the most powerful democratizing capabilities of the technology. Not just translation — instruction, assessment, and feedback in the learner's first language.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Design Requirement 03</div>
+      <h4>Low-Bandwidth, Low-Cost Device Compatibility</h4>
+      <p>Target the $50 Android smartphone on a 3G connection, not the MacBook Pro on fiber. This means: minimal video, progressive loading, aggressive content compression, no dependency on platform-specific app features. Text and simple graphics deliver 90% of the pedagogical value at 10% of the bandwidth.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Design Requirement 04</div>
+      <h4>Economic Model Without Credit Cards</h4>
+      <p>Most of the world's adults do not have credit cards. Payment via mobile money (M-Pesa, bKash), airtime credits, or employer/government vouchers is not a localization detail — it is the difference between accessible and inaccessible. ISA models that delay payment until employment are naturally suited to markets where upfront payment is a barrier.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Design Requirement 05</div>
+      <h4>Local Economic Relevance</h4>
+      <p>Skills must connect to local employment opportunities, not only global remote work markets. For most learners, the realistic outcome is a local job, not a remote US contract. Domain selection for global markets must reflect local employer demand, not only what's fashionable in Silicon Valley.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Design Requirement 06</div>
+      <h4>Cultural Context in Content</h4>
+      <p>Examples, analogies, and scenarios must reflect learner cultural context. A data analysis course using US sports statistics is not neutral for a learner in Kenya — it adds cognitive load and cultural distance. Local relevance in examples is not political correctness; it is cognitive load management. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"The next billion learners are not a secondary market. They are the primary opportunity. The marginal impact of improving education for a learner in Lagos exceeds the marginal impact for a learner in London by an order of magnitude — economically, developmentally, and humanly."</p>
+    <cite>Synthesis from Doc 3 — The Economy</cite>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 15. MISTAKES -->
+<div class="sec" id="mistakes">
+  <div class="sec-tag">Chapter 15</div>
+  <h2>12 <em>Critical Mistakes</em> to Avoid</h2>
+  <p>These are the failure modes that recur across EdTech history. Most are invisible until the damage is done. Each has a structural fix.</p>
+
+  <div class="mistake-grid">
+    <div class="mistake">
+      <div>
+        <div class="mistake-label">Mistake 01</div>
+        <h5>Optimizing for engagement before outcomes</h5>
+        <p>Building what learners enjoy rather than what makes them learn. Produces impressive retention metrics, poor competence outcomes, and eventually trust collapse when employers discover the credential is hollow.</p>
+      </div>
+      <div>
+        <div class="mistake-fix-label">Fix</div>
+        <h5>Outcome-first metric architecture</h5>
+        <p>Track knowledge gain and employment outcomes from week one. Make engagement metrics secondary. Accept lower early satisfaction scores as evidence that desirable difficulties are working.</p>
+      </div>
+    </div>
+    <div class="mistake">
+      <div>
+        <div class="mistake-label">Mistake 02</div>
+        <h5>Building credentials before building outcomes data</h5>
+        <p>Launching a credential without employment outcome evidence. Employers won't trust it; learners won't complete for it; the credential has no value. The most common EdTech sequencing error.</p>
+      </div>
+      <div>
+        <div class="mistake-fix-label">Fix</div>
+        <h5>Employer partnership first</h5>
+        <p>Secure 3 employer partners before credential launch. Track outcomes from cohort one. Publish data. The credential's value is the outcome data — build that first.</p>
+      </div>
+    </div>
+    <div class="mistake">
+      <div>
+        <div class="mistake-label">Mistake 03</div>
+        <h5>Allowing learner self-report to drive content decisions</h5>
+        <p>"Rate your confidence 1–5" as the primary signal for the knowledge model. Learners are systematically miscalibrated — overconfident in what they don't know, underconfident in what they do. <a class="crossref" href="#">Doc 1 — Human</a></p>
+      </div>
+      <div>
+        <div class="mistake-fix-label">Fix</div>
+        <h5>Behavioral signal prioritization</h5>
+        <p>Use retrieval accuracy, latency, revision behavior, and error patterns as primary signals. Treat self-report as one weak signal among many. Build the learner state model on behavioral evidence.</p>
+      </div>
+    </div>
+    <div class="mistake">
+      <div>
+        <div class="mistake-label">Mistake 04</div>
+        <h5>Gamifying learning outcomes rather than showing up</h5>
+        <p>Giving badges and points for correct answers creates extrinsic motivation that undermines intrinsic motivation when removed. Learners optimize for points rather than understanding. <a class="crossref" href="#">Doc 1 — Human</a></p>
+      </div>
+      <div>
+        <div class="mistake-fix-label">Fix</div>
+        <h5>Gamify attendance, not performance</h5>
+        <p>Reward consistent showing up. Never reward correct answers with extrinsic rewards — let competence be its own reward. Use social recognition of genuine milestones, not performance scores.</p>
+      </div>
+    </div>
+    <div class="mistake">
+      <div>
+        <div class="mistake-label">Mistake 05</div>
+        <h5>Scaling before the loop is proven</h5>
+        <p>Investing in acquisition, marketing, and scale before demonstrating the full learning-to-employment loop. Produces large numbers of learners failing in a system that wasn't ready for them — and destroying brand trust.</p>
+      </div>
+      <div>
+        <div class="mistake-fix-label">Fix</div>
+        <h5>100 graduates with documented outcomes before 10,000 enrollments</h5>
+        <p>Prove the loop at small scale. The outcome data is the asset that makes scaling valuable. Without it, scaling is replicating failure at greater cost.</p>
+      </div>
+    </div>
+    <div class="mistake">
+      <div>
+        <div class="mistake-label">Mistake 06</div>
+        <h5>Building for the already-educated</h5>
+        <p>Designing for self-directed, metacognitively skilled, already-credentialed learners. Produces a product that enriches those who already have and ignores those who need most. Also produces demographic concentration that limits total addressable market. <a class="crossref" href="#">Doc 2 — System</a></p>
+      </div>
+      <div>
+        <div class="mistake-fix-label">Fix</div>
+        <h5>Design for the median learner, not the ideal learner</h5>
+        <p>Explicitly test with learners who lack strong academic backgrounds, self-direction skills, and institutional support. Build the platform to serve them. The most impactful and most scalable market is the one with the greatest unmet need.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════ 16. NORTH STAR -->
+<div class="sec" id="north-star">
+  <div class="sec-tag">Chapter 16</div>
+  <h2>The <em>North Star</em></h2>
+
+  <div class="north-star">
+    <div class="ns-label">The Mission</div>
+    <h3>Build a system that takes a human being from <em>zero</em> to verified, economically consequential competence — faster, more durably, and more accessibly than any institution that has ever existed.</h3>
+    <p>Not a better content library. Not a smarter tutor. Not a prettier interface. A complete system — aligned with how humans actually learn, credible to the institutions that recognize capability, consequential enough to generate real effort, and accessible to the learner who needs it most, wherever they are in the world.</p>
+  </div>
+
+  <h3>The Non-Negotiable Tests</h3>
+  <p>Before claiming the mission is being achieved, these questions must all have affirmative, evidence-based answers:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="cn">Test 01</div>
+      <h4>The Biology Test</h4>
+      <p>Does every interaction require active generation rather than passive consumption? Is spaced repetition built architecturally into the learning schedule? Is difficulty calibrated in real time to learner knowledge state? If not, the platform is fighting neuroscience. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Test 02</div>
+      <h4>The Completion Test</h4>
+      <p>What percentage of enrolled learners achieve the credential? If it's below 50%, the accountability and motivation architecture has failed. MOOC-level completion rates disqualify any claim to transformative educational impact.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Test 03</div>
+      <h4>The Employer Test</h4>
+      <p>Would a hiring manager, having seen the platform's outcome data, hire a graduate they'd never met? Would they hire a second graduate based on the first's performance? If not, the credential does not yet have institutional trust. <a class="crossref" href="#">Doc 2 — System</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Test 04</div>
+      <h4>The Access Test</h4>
+      <p>Can a motivated 22-year-old in Lagos with a $50 Android phone and intermittent 3G access use the platform effectively? If not, the platform has not addressed the global opportunity — it has built a premium product for those who need it least. <a class="crossref" href="#">Doc 3 — Economy</a></p>
+    </div>
+    <div class="card">
+      <div class="cn">Test 05</div>
+      <h4>The Economic Test</h4>
+      <p>Is the platform's revenue directly contingent on learner employment outcomes? If the platform profits equally whether graduates get jobs or not, the incentive structure is broken. The business model must make the platform's success identical to the learner's success.</p>
+    </div>
+    <div class="card">
+      <div class="cn">Test 06</div>
+      <h4>The Identity Test</h4>
+      <p>Do graduates describe themselves differently after completing the program? Do they use professional identity language — "I am a data engineer" — rather than "I completed a data course"? Identity transformation is the deepest indicator of genuine learning. <a class="crossref" href="#">Doc 1 — Human</a></p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>The Final Synthesis</h4>
+    <p>Three documents of research — the biology of human learning, the sociology of educational institutions, and the economics of the labor market — converge on a single conclusion. The problem is not a technology problem. The technology to teach anyone anything is now available at near-zero marginal cost. The problem is a systems design problem: how do you assemble pedagogy, behavioral architecture, assessment integrity, institutional trust, and economic consequence into a complete system that works for the human beings who most need it?</p>
+    <p>That system does not yet exist at scale. Building it is among the most important and most tractable challenges of the next two decades. It requires the patience to measure real outcomes over years, the humility to serve learners who don't look like the people building the platform, the discipline to build the unglamorous infrastructure — the skill graphs, the knowledge tracers, the employer relationships, the outcome databases — before building the beautiful interfaces. And it requires the honesty to define success as learner outcomes, not platform metrics.</p>
+    <p>That is the work. Continue to <a class="crossref" href="#">Doc 5 — The Master</a> for the final synthesis of all four documents into a unified theory and action framework.</p>
+  </div>
+</div>
+
+</div><!-- end .wrap -->
+
+<!-- ═══════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-doc">
+      <h4>Doc 4 — The Strategy</h4>
+      <p>The concrete blueprint: principles, architecture, build phases, business models, metrics, global design, and mistakes to avoid. Where the research becomes action.</p>
+    </div>
+    <div class="doc-nav">
+      <a href="#">Doc 1 — The Human</a>
+      <a href="#">Doc 2 — The System</a>
+      <a href="#">Doc 3 — The Economy</a>
+      <a class="current" href="#">← Doc 4 — The Strategy (current)</a>
+      <a href="#">Doc 5 — The Master (coming)</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pgbar').style.width=(s/h*100)+'%';
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      const kids=e.target.querySelectorAll('.card,.study,.vflow-node,.hflow-node,.stat-box,.principle,.phase,.stack-layer,.bm-card,.mistake');
+      kids.forEach((k,i)=>{
+        k.style.opacity='0';k.style.transform='translateY(16px)';
+        k.style.transition=`opacity .45s ease ${i*.06}s,transform .45s ease ${i*.06}s`;
+        setTimeout(()=>{k.style.opacity='1';k.style.transform='translateY(0)';},80+i*60);
+      });
+    }
+  });
+},{threshold:.06});
+document.querySelectorAll('.sec').forEach(s=>obs.observe(s));
+const navLinks=document.querySelectorAll('nav a');
+const secEls=document.querySelectorAll('.sec');
+const navObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.getAttribute('id');
+      navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});
+    }
+  });
+},{threshold:.25});
+secEls.forEach(s=>navObs.observe(s));
+</script>
+</body>
+</html>
