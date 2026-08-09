@@ -15,16 +15,16 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 - Stack: Next.js 14.2.5, React 18, TypeScript 5 (strict), Supabase, Node v22.17.0.
 - Engine code: `src/lib/bkt/index.ts`, `src/lib/sm2/{index,urgency}.ts`, `src/lib/motivation/index.ts`, `src/lib/session/engine.ts`.
 - Content: `content/graph/{nodes,edges}.json`, `content/questions/by-skill/`, validated by `scripts/validate-content.js` (`npm run validate`).
-- **No test framework is installed** (`package.json` has no `jest`/`vitest`/`testing-library`, no `test` script). This blocks every task below that requires a "failing test first" — see Task P0-0.
+- ~~**No test framework is installed.**~~ **Resolved by P0-0 (`95bcb45`):** Vitest is installed with a `test` script and `@/*` alias support.
 - No CI config (`.github/` does not exist). The loop is the only verification gate until/unless a human adds CI.
-- `v2/` (this planning tree) is currently **untracked** in git. Until it's committed, `git log`/`git status` won't reflect it for a fresh clone. Recommended: commit `v2/`, `MASTER_PLAN.md`, `DEVELOPMENT_LOOP.md`, `PROGRESS.md` together as the first commit the loop makes (see `DEVELOPMENT_LOOP.md` step "UPDATE PLAN" — this counts as a plan-doc commit, not a project-implementation commit).
+- ~~`v2/` (this planning tree) is currently **untracked** in git.~~ **Resolved by `985b68b`:** the planning tree and loop documents are committed and pushed.
 
 ---
 
 ## Phase 0 — Foundation (strictly sequential; nothing else starts until this phase is `done`, except the parallel-eligible tracks below)
 
 ### P0-0 — Bootstrap a test framework
-**Status:** not_started
+**Status:** done
 **Why:** No test runner exists anywhere in the repo; every later task in this phase requires writing a failing test first. This is a prerequisite the source plan (`basic-guide.md`) assumed was already true and isn't.
 **Do:** Add Jest (or Vitest — either is acceptable, pick one and stay consistent) with TypeScript support, wired to run against `src/lib/`. Add a `test` script to `package.json`.
 **Acceptance criteria:**

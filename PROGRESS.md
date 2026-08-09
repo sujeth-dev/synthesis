@@ -6,20 +6,20 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None — the development loop has not started executing tasks yet.** This run (2026-08-09) was INSPECT → PLAN → DOCUMENT only, per explicit instruction not to begin implementation.
+**None — P0-0 completed successfully.**
 
 ---
 
 ## Next action
 
-Start at `MASTER_PLAN.md` task **P0-0 — Bootstrap a test framework**. This is a new prerequisite task (not present in the original `v2/doc/basic-guide.md` plan) discovered during repo inspection: no test runner exists in this repo at all, and Phase 0's very first real task (P0-1) requires writing a failing test — which needs a framework to run it.
+Start `MASTER_PLAN.md` task **P0-1 — Failing test: `p_know` doesn't decay when overdue**.
 
 ---
 
 ## Known blockers / risks (not yet acted on)
 
-1. **`v2/` planning tree is untracked in git.** `git status` shows the entire `v2/` directory (containing `basic-guide.md`, `findings/`, `vision/`) as untracked. Until it's committed, a fresh `git clone` of this repo would not include it. Recommendation: the loop's first commit should include `v2/`, `MASTER_PLAN.md`, `DEVELOPMENT_LOOP.md`, and `PROGRESS.md` together as a "docs: add planning system" commit, before P0-0's actual code work begins. Not committed automatically in this run — plan-doc commits weren't explicitly requested yet.
-2. **No test framework installed** — see Next action above. P0-0 exists specifically to resolve this.
+1. ~~**`v2/` planning tree is untracked in git.**~~ **Resolved:** committed and pushed in `985b68b` before implementation began.
+2. ~~**No test framework installed.**~~ **Resolved:** P0-0 installed and configured Vitest in `95bcb45`.
 3. **No CI configuration** (`.github/` doesn't exist) — the loop itself is the only verification gate right now. Not currently a blocker, just a noted gap; consider flagging to a human whether CI should be added before or after Phase 0.
 4. **`.env.local` exists locally but is gitignored** (confirmed present, contents not inspected — respecting that it may hold secrets). Any task needing an external API key (notably the NLP-\* track's LLM API key) must confirm the relevant variable exists in `.env.local` before starting, per `DEVELOPMENT_LOOP.md`'s blocker rules — do not assume it's there.
 
@@ -37,7 +37,7 @@ Start at `MASTER_PLAN.md` task **P0-0 — Bootstrap a test framework**. This is 
 - Animated demo page added for portfolio embedding (`655020b`).
 - Four `Research/lab/` platform-vision docs added and committed (`1e158bc` through `8a9e8c0`): why/blueprint/engines/constructs/tracks/phases/users/audit, interfaces + Engine 6, library doc, build plan + demo masterplan + design spec + content structure.
 
-### This planning pass (2026-08-09, not yet committed)
+### Planning pass (2026-08-09, committed as `985b68b`)
 - Read and cross-checked `v2/doc/basic-guide.md` against `v2/doc/findings/00-index.md` through `07-resolved-and-corrected.md` and `v2/doc/vision/discovery-model.md`.
 - Corrected two stale claims in `basic-guide.md` (Orbit-mapping "still open" claim was false, already resolved in code; `bloom_level` "already correct" claim was false, doesn't exist in schema) — corrections recorded inline per the project's audit-trail convention (strikethrough + note, not silent deletion).
 - Resolved three open scope/sequencing decisions and propagated them into `basic-guide.md` and `discovery-model.md`: Bloom's tagging runs as a parallel-eligible track (not Phase-0-gating); Phase 1 scope is "combination" (build Feynman Loop against existing content now, discovery-first authoring applies to new content going forward); composite puzzles are documented as a Phase 3 future item, not built now.
@@ -52,7 +52,7 @@ Start at `MASTER_PLAN.md` task **P0-0 — Bootstrap a test framework**. This is 
 
 ## Loop iteration log
 
-*(Append one entry per completed or blocked task, most recent first. Empty until the loop actually starts executing.)*
+- 2026-08-10 — **P0-0 done:** bootstrapped Vitest, added `npm test`, verified the `@/*` alias with a real BKT-module smoke test, and passed `npm test` plus `npm run build` (`95bcb45`).
 
 ---
 
