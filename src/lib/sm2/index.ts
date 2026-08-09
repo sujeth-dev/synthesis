@@ -1,5 +1,31 @@
-import type { ReviewSchedule } from '@/types'
+import { deriveMasteryState } from '@/lib/bkt'
+import { deriveUrgency } from '@/lib/sm2/urgency'
+import type { LearnerSkillState, ReviewSchedule } from '@/types'
 function addDays(date: Date, days: number): Date { const d = new Date(date); d.setDate(d.getDate() + days); return d }
+
+export const OVERDUE_DAILY_RETENTION = 0.98
+
+export function reconcileBktSm2OnLoad(
+  state: LearnerSkillState,
+  schedule: ReviewSchedule,
+  now = new Date(),
+): { state: LearnerSkillState; schedule: ReviewSchedule } {
+  const { urgency, days_until_due } = deriveUrgency(schedule.due_at, now)
+  if (urgency !== 'overdue' || schedule.repetitions === 0) return { state, schedule }
+
+  const daysOverdue = Math.max(0, -days_until_due)
+  if (daysOverdue === 0) return { state, schedule }
+
+  const p_know = Math.max(0.01, state.p_know * OVERDUE_DAILY_RETENTION ** daysOverdue)
+  return {
+    state: {
+      ...state,
+      p_know,
+      mastery_state: deriveMasteryState(p_know, state, schedule.repetitions),
+    },
+    schedule: { ...schedule, due_at: now.toISOString() },
+  }
+}
 
 export function updateSM2(schedule: ReviewSchedule, quality: number): ReviewSchedule {
   const s = { ...schedule }

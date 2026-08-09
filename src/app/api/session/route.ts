@@ -3,11 +3,11 @@ import { getCurrentUser } from '@/lib/db/session'
 import { selectNextTask } from '@/lib/session/engine'
 import { getAllNodes, getHardPrereqs } from '@/lib/graph'
 import { initSkillState } from '@/lib/bkt'
-import { initSM2 } from '@/lib/sm2'
+import { initSM2, reconcileBktSm2OnLoad } from '@/lib/sm2'
 import { getMotivationState, getAllSkillStates, getReviewSchedules,
          createSession, getSession, endSession,
          bulkUpsertSkillStates, bulkUpsertReviewSchedules } from '@/lib/db/queries'
-import type { Question, SessionMode } from '@/types'
+import type { LearnerSkillState, Question, ReviewSchedule, SessionMode } from '@/types'
 import fs from 'fs'
 import path from 'path'
 
@@ -40,12 +40,13 @@ export async function POST(req: NextRequest) {
       const session = await getSession(session_id)
       if (!session || session.learner_id !== user.id) return NextResponse.json({ error: 'Invalid session' }, { status: 403 })
 
-      const [allStatesRaw, allSchedules, motivation] = await Promise.all([
+      const [allStatesRaw, allSchedulesRaw, motivation] = await Promise.all([
         getAllSkillStates(user.id),
         getReviewSchedules(user.id),
         getMotivationState(user.id),
       ])
       let allStates = allStatesRaw
+      let allSchedules = allSchedulesRaw
 
       // Auto-sync: initialize states for any new nodes added after onboarding
       const allNodeIds  = new Set(getAllNodes().filter(n => !n.deprecated).map(n => n.id))
@@ -64,12 +65,36 @@ export async function POST(req: NextRequest) {
           bulkUpsertReviewSchedules(newSchedules),
         ])
         allStates = [...allStates, ...newStates]
+        allSchedules = [...allSchedules, ...newSchedules]
+      }
+
+      const statesBySkill = new Map(allStates.map(state => [state.skill_id, state]))
+      const refreshedStates: LearnerSkillState[] = []
+      const refreshedSchedules: ReviewSchedule[] = []
+      const reconciledStates = new Map(statesBySkill)
+      const reconciledSchedules = new Map(allSchedules.map(schedule => [schedule.skill_id, schedule]))
+
+      for (const schedule of allSchedules) {
+        const state = statesBySkill.get(schedule.skill_id)
+        if (!state) continue
+        const refreshed = reconcileBktSm2OnLoad(state, schedule)
+        reconciledStates.set(state.skill_id, refreshed.state)
+        reconciledSchedules.set(schedule.skill_id, refreshed.schedule)
+        if (refreshed.state !== state) refreshedStates.push(refreshed.state)
+        if (refreshed.schedule !== schedule) refreshedSchedules.push(refreshed.schedule)
+      }
+
+      if (refreshedStates.length > 0 || refreshedSchedules.length > 0) {
+        await Promise.all([
+          bulkUpsertSkillStates(refreshedStates),
+          bulkUpsertReviewSchedules(refreshedSchedules),
+        ])
       }
 
       if (!motivation) return NextResponse.json({ error: 'Motivation state missing — run /api/onboard first' }, { status: 400 })
 
-      const skillStates     = new Map(allStates.map(s => [s.skill_id, s]))
-      const reviewSchedules = new Map(allSchedules.map(s => [s.skill_id, s]))
+      const skillStates     = reconciledStates
+      const reviewSchedules = reconciledSchedules
 
       const questionsCache = new Map<string, Question[]>()
       for (const sid of Array.from(skillStates.keys())) {

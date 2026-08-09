@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import * as sm2 from '@/lib/sm2'
+import { shouldAutoScheduleReview } from '@/lib/session/engine'
 import type { LearnerSkillState, ReviewSchedule } from '@/types'
 
 const state: LearnerSkillState = {
@@ -47,5 +48,19 @@ describe('on-load BKT/SM-2 reconciliation', () => {
 
     expect(result.state.p_know).toBeCloseTo(0.9 * 0.98 ** 30, 8)
     expect(result.state.mastery_state).toBe('learning')
+    expect(result.schedule.due_at).toBe('2026-07-31T00:00:00.000Z')
+  })
+
+  it('preserves the attempt-time mastery-loss reset behavior', () => {
+    const result = sm2.reconcileBktSm2(0.49, true, schedule, 1)
+
+    expect(result.interval_days).toBe(1)
+    expect(result.repetitions).toBe(schedule.repetitions)
+  })
+
+  it('keeps past-phase reviews optional outside explicit review mode', () => {
+    expect(shouldAutoScheduleReview('active_phase')).toBe(true)
+    expect(shouldAutoScheduleReview('past_phase')).toBe(false)
+    expect(shouldAutoScheduleReview('past_phase', 'review')).toBe(true)
   })
 })

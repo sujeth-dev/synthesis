@@ -28,6 +28,10 @@ interface SelectTaskParams {
   mode?:                      SessionMode
 }
 
+export function shouldAutoScheduleReview(phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
+  return mode === 'review' || phaseContext === 'active_phase'
+}
+
 // ─── Main selector ─────────────────────────────────────────────────────────────
 
 export function selectNextTask(p: SelectTaskParams): SessionTask | null {
@@ -109,8 +113,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
   // ── Build 5-tier candidate pools ──────────────────────────────────────────
   // Tier 0: urgent overdue reviews in active phase
   // Tier 1: weak/new learnable skills in active phase
-  // Tier 2: severe overdue (≥2d) reviews from past phases
-  // Tier 3: recently-overdue (<2d) reviews from past phases
+  // Past-phase reviews are offered only when the learner chooses review mode.
   // Tier 4: fallback — any learnable skill when active phase is exhausted
   const tiers: Candidate[][] = [[], [], [], [], []]
 
@@ -123,6 +126,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
 
     const { days_until_due, urgency } = deriveUrgency(schedule.due_at, now)
     const inActive = activePhaseIds.has(skillId)
+    if (!shouldAutoScheduleReview(inActive ? 'active_phase' : 'past_phase', mode)) continue
 
     if (inActive) {
       // Tier 0: active phase overdue review
@@ -131,22 +135,6 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
         reason: 'active_phase_review',
         days_until_due, review_repetition: schedule.repetitions,
         phase_context: 'active_phase', review_urgency: urgency,
-      })
-    } else if (days_until_due <= -2) {
-      // Tier 2: severe overdue from past phase
-      tiers[2].push({
-        skill_id: skillId, tier: 2,
-        reason: 'past_phase_review_urgent',
-        days_until_due, review_repetition: schedule.repetitions,
-        phase_context: 'past_phase', review_urgency: urgency,
-      })
-    } else {
-      // Tier 3: recent overdue from past phase (<2d)
-      tiers[3].push({
-        skill_id: skillId, tier: 3,
-        reason: 'past_phase_review',
-        days_until_due, review_repetition: schedule.repetitions,
-        phase_context: 'past_phase', review_urgency: urgency,
       })
     }
   }
@@ -178,6 +166,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
   if (tiers[0].length === 0 && tiers[1].length === 0) {
     const learnableAll = Array.from(skillStates.values())
       .filter(s =>
+        activePhaseIds.has(s.skill_id) &&
         ['ready', 'learning', 'fragile'].includes(s.mastery_state) &&
         questionsCache.has(s.skill_id) &&
         getNodeById(s.skill_id)
