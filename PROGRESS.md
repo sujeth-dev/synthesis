@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None — P0-1 and P0-2 completed successfully.**
+**None — P0-3 completed successfully.**
 
 ---
 
 ## Next action
 
-Start `MASTER_PLAN.md` task **P0-3 — Combined-evidence BKT update**.
+Start `MASTER_PLAN.md` task **P0-4 — Session length + review-debt policy**.
 
 ---
 
@@ -53,6 +53,7 @@ Start `MASTER_PLAN.md` task **P0-3 — Combined-evidence BKT update**.
 
 ## Loop iteration log
 
+- 2026-08-10 — **P0-3 done:** added weighted reasoning-quality and behavior evidence to BKT, wired existing motivation signals with a neutral reasoning stub, preserved the baseline posterior, and passed 8 tests plus production build (`4d42f0d`).
 - 2026-08-10 — **P0-2 done:** added idempotent on-load overdue decay and persistence, preserved attempt-time reconciliation, kept active-phase reviews automatic and past-phase reviews learner-selected; 4 tests and production build green (`44d3613`).
 - 2026-08-10 — **P0-1 done locally, not pushed:** committed the intentional red overdue-decay regression test (`b5616f4`); proceeding immediately to P0-2 under the approved red/green procedure.
 - 2026-08-10 — **P0-1 blocked before implementation:** the decay API/persistence path is unspecified, and its required failing commit conflicts with the loop's green-suite commit/push gate; awaiting human direction.

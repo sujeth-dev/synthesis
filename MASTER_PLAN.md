@@ -54,7 +54,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** P0-1's test + a regression test for the pre-existing edge case.
 
 ### P0-3 — Combined-evidence BKT update
-**Status:** not_started
+**Status:** done
 **Depends on:** P0-2
 **Doc ref:** `basic-guide.md` Phase 0 item 2, Promise #3 (fully original — no lab equivalent)
 **Do:** Extend `bktUpdate()` to accept correctness (existing) + a reasoning-quality modifier + a behavior modifier (from `motivation/index.ts`'s existing signals) as weighted adjustments to the evidence used in the update — not just downstream UX routing. Note: the reasoning-quality modifier's real input (Phase 1's gap-detection classifier) doesn't exist yet — build this task's plumbing to accept a modifier value, and use a stub/neutral value until Phase 1 lands; do not block this task on Phase 1.
