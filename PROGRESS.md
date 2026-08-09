@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P0-1 — blocked before implementation.**
+**None — P0-1 and P0-2 completed successfully.**
 
 ---
 
 ## Next action
 
-Awaiting human input on **P0-1**: resolve the decay API/persistence boundary and the intentional-red-test commit/push exception described below.
+Start `MASTER_PLAN.md` task **P0-3 — Combined-evidence BKT update**.
 
 ---
 
@@ -22,7 +22,7 @@ Awaiting human input on **P0-1**: resolve the decay API/persistence boundary and
 2. ~~**No test framework installed.**~~ **Resolved:** P0-0 installed and configured Vitest in `95bcb45`.
 3. **No CI configuration** (`.github/` doesn't exist) — the loop itself is the only verification gate right now. Not currently a blocker, just a noted gap; consider flagging to a human whether CI should be added before or after Phase 0.
 4. **`.env.local` exists locally but is gitignored** (confirmed present, contents not inspected — respecting that it may hold secrets). Any task needing an external API key (notably the NLP-\* track's LLM API key) must confirm the relevant variable exists in `.env.local` before starting, per `DEVELOPMENT_LOOP.md`'s blocker rules — do not assume it's there.
-5. **P0-1/P0-2 contract is underspecified and conflicts with the loop gates.** Current `reconcileBktSm2()` accepts a numeric `p_know_new` but returns only `ReviewSchedule`, and its only caller is the attempt route; the plan requires decay of persisted `p_know` on every session load without specifying the new return shape or where the decayed learner state is persisted. Human decision needed: define that API/persistence boundary. Separately, P0-1 requires a failing test committed to `main`, while Steps 4-8 prohibit committing or pushing a failing full suite. Human decision needed: either authorize P0-1 as an explicit red-commit exception (preferably hold the push until P0-2 is green) or combine the red/green work into one pushed unit while retaining separate commits.
+5. ~~**P0-1/P0-2 contract was underspecified and conflicted with the loop gates.**~~ **Resolved by human direction on 2026-08-10:** add on-load reconciliation while preserving attempt-time `reconcileBktSm2()`; persist refreshed state/schedule; auto-apply current/active-phase reviews but expose past-phase reviews only through learner-selected review mode. Commit P0-1 red and P0-2 green separately locally, then push both together after P0-2 passes.
 
 ---
 
@@ -53,6 +53,8 @@ Awaiting human input on **P0-1**: resolve the decay API/persistence boundary and
 
 ## Loop iteration log
 
+- 2026-08-10 — **P0-2 done:** added idempotent on-load overdue decay and persistence, preserved attempt-time reconciliation, kept active-phase reviews automatic and past-phase reviews learner-selected; 4 tests and production build green (`44d3613`).
+- 2026-08-10 — **P0-1 done locally, not pushed:** committed the intentional red overdue-decay regression test (`b5616f4`); proceeding immediately to P0-2 under the approved red/green procedure.
 - 2026-08-10 — **P0-1 blocked before implementation:** the decay API/persistence path is unspecified, and its required failing commit conflicts with the loop's green-suite commit/push gate; awaiting human direction.
 - 2026-08-10 — **P0-0 done:** bootstrapped Vitest, added `npm test`, verified the `@/*` alias with a real BKT-module smoke test, and passed `npm test` plus `npm run build` (`95bcb45`).
 

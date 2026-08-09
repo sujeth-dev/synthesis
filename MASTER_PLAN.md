@@ -34,7 +34,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** the smoke test itself.
 
 ### P0-1 — Failing test: `p_know` doesn't decay when overdue
-**Status:** blocked
+**Status:** done
 **Depends on:** P0-0
 **Doc ref:** `v2/doc/findings/01-bkt-time-decay.md`, `basic-guide.md` Phase 0 item 1
 **Do:** Write a test that simulates an overdue SM-2 review and asserts `p_know`/mastery state should have decayed — and confirm it currently fails against the unmodified code.
@@ -42,14 +42,15 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** this test IS the deliverable.
 
 ### P0-2 — Fix: generalize `reconcileBktSm2()` decay
-**Status:** not_started
+**Status:** done
 **Depends on:** P0-1
 **Doc ref:** `basic-guide.md` Phase 0 item 1, Promise #5, corrected Critical Fixes item 3
-**Do:** Extend `reconcileBktSm2()` (`src/lib/sm2/index.ts`) so `p_know` decay applies on every session load keyed off `urgency.ts`'s overdue calculation — not only the existing mastery-loss edge case.
+**Do:** Add on-load BKT/SM-2 reconciliation in `src/lib/sm2/index.ts` so `p_know` decay applies on every session load keyed off `urgency.ts`'s overdue calculation. Keep the existing attempt-time `reconcileBktSm2()` behavior unchanged. Persist refreshed learner state/schedule before task selection. Active-phase/current-flow overdue topics remain automatic candidates; past-phase topics become optional and enter a session only through learner-selected review mode.
 **Acceptance criteria:**
 - P0-1's test now passes.
 - Any existing mastery-loss-edge-case behavior is unchanged (add a regression test for it if one doesn't exist).
 - Manual/scripted check: simulate an overdue review and confirm `p_know` visibly decreases.
+- Normal-mode selection does not force a past-phase topic back into the session solely because decay made it overdue/weak; explicit review mode can still select it.
 **Required tests:** P0-1's test + a regression test for the pre-existing edge case.
 
 ### P0-3 — Combined-evidence BKT update
