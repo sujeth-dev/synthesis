@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
-import { updateMotivationState } from '@/lib/motivation'
+import { deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { computeUnblocked } from '@/lib/graph'
 import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
@@ -67,7 +67,11 @@ export async function POST(req: NextRequest) {
   const schedule    = await getReviewSchedule(user.id, skill_id)
 
   // ── Update BKT
-  const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0)
+  const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
+  const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {
+    reasoningQuality: 1,
+    behavior: behaviorModifier,
+  })
 
   // ── Update SM-2
   if (schedule) {

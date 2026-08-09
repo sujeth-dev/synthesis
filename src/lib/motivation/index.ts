@@ -1,5 +1,12 @@
 import type { MotivationState, MotivationStateValue, LearnerSkillState } from '@/types'
 
+export function deriveBehaviorEvidenceModifier(current: MotivationState, latency_ms: number): number {
+  let modifier = 1
+  if (current.state === 'frustrated' || current.consecutive_errors >= 2) modifier -= 0.2
+  if (latency_ms > 15000 || current.slow_response_streak >= 3) modifier -= 0.15
+  return Math.max(0.5, modifier)
+}
+
 export function updateMotivationState(current: MotivationState, correct: boolean, latency_ms: number, skillState: LearnerSkillState): MotivationState {
   const now = new Date(); const m = { ...current, updated_at: now.toISOString() }
   if (m.intervention_cooldown_until && new Date(m.intervention_cooldown_until) > now) return m
