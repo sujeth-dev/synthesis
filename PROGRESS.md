@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None — P0-0 completed successfully.**
+**P0-1 — blocked before implementation.**
 
 ---
 
 ## Next action
 
-Start `MASTER_PLAN.md` task **P0-1 — Failing test: `p_know` doesn't decay when overdue**.
+Awaiting human input on **P0-1**: resolve the decay API/persistence boundary and the intentional-red-test commit/push exception described below.
 
 ---
 
@@ -22,6 +22,7 @@ Start `MASTER_PLAN.md` task **P0-1 — Failing test: `p_know` doesn't decay when
 2. ~~**No test framework installed.**~~ **Resolved:** P0-0 installed and configured Vitest in `95bcb45`.
 3. **No CI configuration** (`.github/` doesn't exist) — the loop itself is the only verification gate right now. Not currently a blocker, just a noted gap; consider flagging to a human whether CI should be added before or after Phase 0.
 4. **`.env.local` exists locally but is gitignored** (confirmed present, contents not inspected — respecting that it may hold secrets). Any task needing an external API key (notably the NLP-\* track's LLM API key) must confirm the relevant variable exists in `.env.local` before starting, per `DEVELOPMENT_LOOP.md`'s blocker rules — do not assume it's there.
+5. **P0-1/P0-2 contract is underspecified and conflicts with the loop gates.** Current `reconcileBktSm2()` accepts a numeric `p_know_new` but returns only `ReviewSchedule`, and its only caller is the attempt route; the plan requires decay of persisted `p_know` on every session load without specifying the new return shape or where the decayed learner state is persisted. Human decision needed: define that API/persistence boundary. Separately, P0-1 requires a failing test committed to `main`, while Steps 4-8 prohibit committing or pushing a failing full suite. Human decision needed: either authorize P0-1 as an explicit red-commit exception (preferably hold the push until P0-2 is green) or combine the red/green work into one pushed unit while retaining separate commits.
 
 ---
 
@@ -52,6 +53,7 @@ Start `MASTER_PLAN.md` task **P0-1 — Failing test: `p_know` doesn't decay when
 
 ## Loop iteration log
 
+- 2026-08-10 — **P0-1 blocked before implementation:** the decay API/persistence path is unspecified, and its required failing commit conflicts with the loop's green-suite commit/push gate; awaiting human direction.
 - 2026-08-10 — **P0-0 done:** bootstrapped Vitest, added `npm test`, verified the `@/*` alias with a real BKT-module smoke test, and passed `npm test` plus `npm run build` (`95bcb45`).
 
 ---

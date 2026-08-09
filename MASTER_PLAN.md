@@ -34,7 +34,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** the smoke test itself.
 
 ### P0-1 — Failing test: `p_know` doesn't decay when overdue
-**Status:** not_started
+**Status:** blocked
 **Depends on:** P0-0
 **Doc ref:** `v2/doc/findings/01-bkt-time-decay.md`, `basic-guide.md` Phase 0 item 1
 **Do:** Write a test that simulates an overdue SM-2 review and asserts `p_know`/mastery state should have decayed — and confirm it currently fails against the unmodified code.
