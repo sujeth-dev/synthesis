@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None — P0-3 completed successfully.**
+**P0-4 — blocked before implementation.**
 
 ---
 
 ## Next action
 
-Start `MASTER_PLAN.md` task **P0-4 — Session length + review-debt policy**.
+Awaiting human input on **P0-4**: confirm the default session capacity and maximum automatic-review share described below.
 
 ---
 
@@ -23,6 +23,7 @@ Start `MASTER_PLAN.md` task **P0-4 — Session length + review-debt policy**.
 3. **No CI configuration** (`.github/` doesn't exist) — the loop itself is the only verification gate right now. Not currently a blocker, just a noted gap; consider flagging to a human whether CI should be added before or after Phase 0.
 4. **`.env.local` exists locally but is gitignored** (confirmed present, contents not inspected — respecting that it may hold secrets). Any task needing an external API key (notably the NLP-\* track's LLM API key) must confirm the relevant variable exists in `.env.local` before starting, per `DEVELOPMENT_LOOP.md`'s blocker rules — do not assume it's there.
 5. ~~**P0-1/P0-2 contract was underspecified and conflicted with the loop gates.**~~ **Resolved by human direction on 2026-08-10:** add on-load reconciliation while preserving attempt-time `reconcileBktSm2()`; persist refreshed state/schedule; auto-apply current/active-phase reviews but expose past-phase reviews only through learner-selected review mode. Commit P0-1 red and P0-2 green separately locally, then push both together after P0-2 passes.
+6. **P0-4 policy values are unspecified.** The cited docs define a 25–45 minute target and require deterministic review-debt degradation, but do not choose a task cap or automatic-review allocation. Recommended default: 10 tasks per normal session, with at most 6 automatic active-phase reviews and at least 4 current/new-topic slots; excess review debt rolls forward by urgency. Explicit review mode may use all 10 slots for reviews. Human confirmation or alternate values are required because these numbers directly determine pacing and P0-5's arc fallback.
 
 ---
 
@@ -53,6 +54,7 @@ Start `MASTER_PLAN.md` task **P0-4 — Session length + review-debt policy**.
 
 ## Loop iteration log
 
+- 2026-08-10 — **P0-4 blocked before implementation:** the plan gives a 25–45 minute target but no task cap/review allocation; awaiting confirmation of the recommended 10-task, 60%-automatic-review policy.
 - 2026-08-10 — **P0-3 done:** added weighted reasoning-quality and behavior evidence to BKT, wired existing motivation signals with a neutral reasoning stub, preserved the baseline posterior, and passed 8 tests plus production build (`4d42f0d`).
 - 2026-08-10 — **P0-2 done:** added idempotent on-load overdue decay and persistence, preserved attempt-time reconciliation, kept active-phase reviews automatic and past-phase reviews learner-selected; 4 tests and production build green (`44d3613`).
 - 2026-08-10 — **P0-1 done locally, not pushed:** committed the intentional red overdue-decay regression test (`b5616f4`); proceeding immediately to P0-2 under the approved red/green procedure.

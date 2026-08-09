@@ -62,7 +62,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** `bkt` unit tests covering at least: baseline correctness-only, degraded-reasoning-modifier, degraded-behavior-modifier, combined.
 
 ### P0-4 — Session length + review-debt policy
-**Status:** not_started
+**Status:** blocked
 **Depends on:** P0-2 (needs real decay to define debt meaningfully)
 **Doc ref:** `basic-guide.md` Phase 0 item 3, Critical Fixes items 2 & 4, `v2/doc/findings/02-session-length-review-debt.md`
 **Do:** Define session length and review-debt policy explicitly (as named constants/config, not implicit control flow) in `src/lib/session/engine.ts` — what happens when overdue reviews exceed session capacity.
