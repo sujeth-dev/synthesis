@@ -28,6 +28,7 @@ import {
   MAX_REVIEW_ITEMS,
   SESSION_TASK_CAP,
   canChooseTopicSwitch,
+  canSelectReview,
   getSessionGate,
   planReviewDebt,
   selectNextTask,
@@ -126,6 +127,13 @@ describe('session review-debt policy', () => {
   it('stops every mode at the hard session cap', () => {
     expect(getSessionGate(10, 'learn', 10)).toBe('complete')
     expect(getSessionGate(10, 'review', 10)).toBe('complete')
+  })
+
+  it('selects review candidates only in explicit review mode', () => {
+    expect(canSelectReview('active_phase')).toBe(false)
+    expect(canSelectReview('past_phase')).toBe(false)
+    expect(canSelectReview('active_phase', 'review')).toBe(true)
+    expect(canSelectReview('past_phase', 'review')).toBe(true)
   })
 })
 

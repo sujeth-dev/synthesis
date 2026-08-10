@@ -2,7 +2,13 @@ import { describe, expect, it } from 'vitest'
 import fs from 'fs'
 import path from 'path'
 
-import { bktUpdate, diagnosticScoreToKnow, getMasteryTier, initSkillState } from '@/lib/bkt'
+import {
+  bktUpdate,
+  deriveMasteryState,
+  diagnosticScoreToKnow,
+  getMasteryTier,
+  initSkillState,
+} from '@/lib/bkt'
 
 describe('test framework smoke test', () => {
   it('imports a library module through the TypeScript path alias', () => {
@@ -38,6 +44,35 @@ describe('combined-evidence BKT update', () => {
 
     expect(combined.p_know).toBeLessThan(reasoningOnly.p_know)
     expect(combined.p_know).toBeLessThan(behaviorOnly.p_know)
+  })
+})
+
+describe('BKT learner state', () => {
+  it('initializes default, seeded, and blocked skill states', () => {
+    const defaultState = initSkillState('learner-1', 'skill-1')
+    const seededState = initSkillState('learner-1', 'skill-2', 0.4)
+    const blockedState = initSkillState('learner-1', 'skill-3', 0.8, true)
+
+    expect(defaultState).toMatchObject({
+      learner_id: 'learner-1',
+      skill_id: 'skill-1',
+      p_know: 0.1,
+      mastery_state: 'ready',
+      total_attempts: 0,
+    })
+    expect(seededState.mastery_state).toBe('learning')
+    expect(blockedState.mastery_state).toBe('blocked')
+  })
+
+  it('derives every mastery state at its governing boundary', () => {
+    const readyState = initSkillState('learner-1', 'skill-1')
+    const blockedState = { ...readyState, mastery_state: 'blocked' as const }
+
+    expect(deriveMasteryState(0.99, blockedState, 10)).toBe('blocked')
+    expect(deriveMasteryState(0.29, readyState)).toBe('ready')
+    expect(deriveMasteryState(0.30, readyState)).toBe('learning')
+    expect(deriveMasteryState(0.55, readyState)).toBe('fragile')
+    expect(deriveMasteryState(0.65, readyState, 1)).toBe('mastered')
   })
 })
 
