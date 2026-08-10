@@ -45,3 +45,14 @@ export function classifyExplanation(text: string): ExplanationCategory {
 export function explanationWordCount(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length
 }
+
+const REASONING_QUALITY_BY_CATEGORY: Record<ExplanationCategory, number> = {
+  'meaning-included': 1,
+  'method-only': 0.6,
+  'gap': 0.3,
+}
+
+/** Maps a classified explanation to a BKT reasoning-quality evidence modifier (see bktUpdate). */
+export function reasoningQualityFromCategory(category: ExplanationCategory): number {
+  return REASONING_QUALITY_BY_CATEGORY[category]
+}

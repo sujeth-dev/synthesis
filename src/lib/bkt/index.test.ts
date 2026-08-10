@@ -9,6 +9,7 @@ import {
   getMasteryTier,
   initSkillState,
 } from '@/lib/bkt'
+import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
 
 describe('test framework smoke test', () => {
   it('imports a library module through the TypeScript path alias', () => {
@@ -44,6 +45,22 @@ describe('combined-evidence BKT update', () => {
 
     expect(combined.p_know).toBeLessThan(reasoningOnly.p_know)
     expect(combined.p_know).toBeLessThan(behaviorOnly.p_know)
+  })
+
+  it('drives the reasoning-quality modifier from the real Feynman Loop classifier instead of a neutral stub (P1-3)', () => {
+    const gapText = "I'm not sure, maybe it's just the opposite of the other thing?"
+    const meaningText = "Imagine Virat Kohli's run rate changes every over — sometimes 12 runs per over, sometimes 4. Integration adds all of those up to give you the total runs scored, going backwards from rate to total."
+
+    const gapModifier = reasoningQualityFromCategory(classifyExplanation(gapText))
+    const meaningModifier = reasoningQualityFromCategory(classifyExplanation(meaningText))
+    expect(gapModifier).toBeLessThan(meaningModifier)
+
+    const gapResult = bktUpdate(state, true, 0, { reasoningQuality: gapModifier })
+    const meaningResult = bktUpdate(state, true, 0, { reasoningQuality: meaningModifier })
+
+    // A "gap" classification measurably differs from "meaning-included" in the resulting posterior.
+    expect(gapResult.p_know).toBeLessThan(meaningResult.p_know)
+    expect(meaningResult.p_know).toBeCloseTo(bktUpdate(state, true).p_know, 8) // meaning-included matches the neutral baseline (modifier = 1)
   })
 })
 

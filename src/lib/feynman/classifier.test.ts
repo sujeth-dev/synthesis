@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { classifyExplanation } from './classifier'
+import { classifyExplanation, reasoningQualityFromCategory } from './classifier'
 
 describe('classifyExplanation', () => {
   it('classifies a procedure-only explanation as method-only', () => {
@@ -23,5 +23,12 @@ describe('classifyExplanation', () => {
   it('treats a bare procedural description that merely mentions "area under" as meaning-included (ambiguous/edge case)', () => {
     const text = 'Integration is finding the area under the curve of a function using the standard formula.'
     expect(classifyExplanation(text)).toBe('meaning-included')
+  })
+})
+
+describe('reasoningQualityFromCategory', () => {
+  it('orders evidence quality gap < method-only < meaning-included', () => {
+    expect(reasoningQualityFromCategory('gap')).toBeLessThan(reasoningQualityFromCategory('method-only'))
+    expect(reasoningQualityFromCategory('method-only')).toBeLessThan(reasoningQualityFromCategory('meaning-included'))
   })
 })

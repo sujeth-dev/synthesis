@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-None — between tasks. P1-1 is done; loop is selecting the next task per `DEVELOPMENT_LOOP.md` Step 2.
+None — between tasks. P1-3 is done; loop is selecting the next task per `DEVELOPMENT_LOOP.md` Step 2.
 
 ---
 
 ## Next action
 
-Start **P1-3 — Wire gap-detection into BKT reasoning-quality modifier** (depends on P1-1, P0-3 — both done).
+Start **P1-4 — Real BKT-movement comparison (Promise #8)** (depends on P1-1, done).
 
 ---
 
@@ -57,6 +57,7 @@ Start **P1-3 — Wire gap-detection into BKT reasoning-quality modifier** (depen
 
 ## Loop iteration log
 
+- 2026-08-10 — **P1-3 done:** replaced `/api/attempt`'s hardcoded `reasoningQuality: 1` stub with P1-1's real classifier — whenever `question_format === 'explain'`, the submitted text is classified and mapped to an evidence modifier (`reasoningQualityFromCategory`: meaning-included 1, method-only 0.6, gap 0.3) before reaching `bktUpdate()`; non-explain formats keep the neutral modifier since there's no free-text reasoning to evaluate. Added an end-to-end classifier→bktUpdate test in `bkt/index.test.ts` confirming a "gap" classification measurably lowers the posterior versus "meaning-included" (which matches the neutral baseline). 38-test suite and production build green.
 - 2026-08-10 — **P1-1 done:** built the Feynman Loop teaching-canvas construct (`src/components/learning/FeynmanLoop.tsx`) and its rule-based reasoning classifier (`src/lib/feynman/classifier.ts`) plus a pure branching-engine (`src/lib/feynman/loop.ts`) reproducing the `13-content-structure.md` §4.1 transcript's step order (intro → character entry → teaching canvas → follow-up → hard breakdown question → gap callout when needed → rebuild → resolution → summary). Entry point added as an explicit learner-chosen "Try the Feynman Loop" option in `/learn/skill/[skill_id]` (consent-based, consistent with the P0-4 review-consent precedent) rather than an automatic session-engine trigger, to avoid scope-creep into session-selection logic. Classifier and loop unit tests (7 total) include the required 3-category + edge-case coverage and an acceptance script reproducing the transcript's exact branch outcomes (method-only → gap callout → rebuild → meaning-included → resolved; and a meaning-included-first-pass variant that still rebuilds). Full 36-test suite and production build are green. No browser walkthrough was performed (no UI test harness/auth fixture available yet, consistent with the P0-4/P0-5 precedent) — verified via full type-checked production build instead.
 - 2026-08-10 — **P1-1/P1-2 direction received, P1-1 unblocked:** combine the classifier into P1-1 rather than keep the documented split; P1-2 retired, its scope absorbed into P1-1, downstream dependencies (P1-3, P1-5, NLP-1) repointed to P1-1. Docs updated (`MASTER_PLAN.md`, this file); no code changed yet — awaiting explicit go-ahead to implement.
 - 2026-08-10 — **P1-1 blocked before implementation:** its operational criteria duplicate P1-2's classifier implementation/tests, while the cited strategy document explicitly separates teaching-canvas capture (Promise #1) from the pure classifier (Promise #2). Awaiting a human choice between preserving that split (recommended) or combining the tasks.

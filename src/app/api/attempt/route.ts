@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
 import { deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
+import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
 import { computeUnblocked } from '@/lib/graph'
 import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
@@ -68,9 +69,16 @@ export async function POST(req: NextRequest) {
   const schedule    = await getReviewSchedule(user.id, skill_id)
 
   // ── Update BKT
+  // Reasoning-quality evidence comes from the Feynman Loop classifier whenever the
+  // learner submitted free-text reasoning (question_format 'explain'); question types
+  // with no reasoning to evaluate (mcq/fill/code/order) keep the neutral modifier.
+  const explanationText = typeof client_answer === 'string' ? client_answer.trim() : ''
+  const reasoningQuality = question_format === 'explain' && explanationText
+    ? reasoningQualityFromCategory(classifyExplanation(explanationText))
+    : 1
   const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
   const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {
-    reasoningQuality: 1,
+    reasoningQuality,
     behavior: behaviorModifier,
   })
 

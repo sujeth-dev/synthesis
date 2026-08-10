@@ -190,7 +190,7 @@ Scope decision (2026-08-09, see `basic-guide.md` Phase 1 header and `v2/doc/visi
 Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strategy split (Promise #1 UI vs. Promise #2 classifier). Human direction: combine the classifier into P1-1 rather than keep them separate. All P1-2 work now happens under P1-1; downstream tasks that depended on P1-2 now depend on P1-1 directly.
 
 ### P1-3 — Wire gap-detection into BKT reasoning-quality modifier
-**Status:** not_started · **Depends on:** P1-1, P0-3
+**Status:** done · **Depends on:** P1-1, P0-3
 **Do:** Replace P0-3's stub/neutral reasoning-quality modifier with P1-1's real classifier output.
 **Acceptance criteria:** P0-3's combined-evidence test suite now exercises a real (non-stub) reasoning-quality signal end to end; add a test confirming a "gap" classification measurably differs from "meaning-included" in the resulting posterior.
 **Required tests:** integration test, classifier → `bktUpdate()`.
