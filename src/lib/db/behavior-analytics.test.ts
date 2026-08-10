@@ -1,12 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const persistedRows = vi.hoisted(() => [] as Array<Record<string, unknown>>)
+const insertFailures = vi.hoisted(() => [] as Array<{ code: string; message: string }>)
 
 vi.mock('@/lib/db', () => ({
   generateId: () => `attempt-${persistedRows.length + 1}`,
   getDb: () => ({
     from: () => ({
       insert: async (row: Record<string, unknown>) => {
+        const error = insertFailures.shift()
+        if (error) return { data: null, error }
         persistedRows.push(row)
         return { data: null, error: null }
       },
@@ -47,11 +50,50 @@ const sessionId = 'session-analytics'
 
 beforeEach(() => {
   persistedRows.length = 0
+  insertFailures.length = 0
   vi.useFakeTimers()
   vi.setSystemTime(new Date('2026-08-10T08:00:00.000Z'))
 })
 
 describe('attempt behavior analytics persistence', () => {
+  it('falls back to the core attempt columns when analytics migrations are absent', async () => {
+    insertFailures.push({
+      code: 'PGRST204',
+      message: "Could not find the 'p_know_before' column of 'attempt_events' in the schema cache",
+    })
+
+    const id = await insertAttempt({
+      learner_id: learnerId,
+      skill_id: 'binary-numbers',
+      question_id: 'binary-q1',
+      session_id: sessionId,
+      correct: true,
+      latency_ms: 1200,
+      revision_count: 0,
+      error_type: null,
+      difficulty_tier: 'review',
+      question_format: 'mcq',
+      p_know_before: 0.1,
+      p_know_after: 0.2,
+      motivation_state: 'neutral',
+      consecutive_errors: 0,
+      slow_response_streak: 0,
+      behavior_modifier: 1,
+      hesitation_ms: 0,
+    })
+
+    expect(id).toBe('attempt-1')
+    expect(persistedRows).toHaveLength(1)
+    expect(persistedRows[0]).toMatchObject({
+      question_id: 'binary-q1',
+      session_id: sessionId,
+      correct: true,
+      question_format: 'mcq',
+    })
+    expect(persistedRows[0]).not.toHaveProperty('p_know_before')
+    expect(persistedRows[0]).not.toHaveProperty('motivation_state')
+  })
+
   it('round-trips the same signal values computed by the live motivation FSM', async () => {
     const currentMotivation: MotivationState = {
       learner_id: learnerId,

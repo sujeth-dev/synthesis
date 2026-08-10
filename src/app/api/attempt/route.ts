@@ -56,7 +56,6 @@ export async function POST(req: NextRequest) {
     const session = await getSession(session_id)
     if (!session || session.learner_id !== user.id)
       return NextResponse.json({ error: 'Invalid session' }, { status: 403 })
-    await incrementSessionCounts(session_id, correct)
   }
 
   const safe_latency = Math.min(MAX_LATENCY, Math.max(MIN_LATENCY, latency_ms || 3000))
@@ -142,6 +141,7 @@ export async function POST(req: NextRequest) {
     p_know_after: updatedState.p_know,
     ...behaviorSnapshot,
   })
+  if (session_id) await incrementSessionCounts(session_id, correct)
 
   const bktMovement = session_id && isFeynmanAttempt(question_id)
     ? computeBktMovementComparison(

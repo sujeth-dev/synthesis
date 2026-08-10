@@ -196,11 +196,37 @@ export async function getRecentSessions(learnerId: string, limit = 10): Promise<
 
 export async function insertAttempt(attempt: Omit<AttemptEvent, 'id' | 'attempted_at'>): Promise<string> {
   const id = generateId()
-  await getDb().from('attempt_events').insert({
+  const attempted_at = new Date().toISOString()
+  const { error } = await getDb().from('attempt_events').insert({
     ...attempt,
     id,
-    attempted_at: new Date().toISOString(),
+    attempted_at,
   })
+  if (error) {
+    const missingOptionalColumns = error.code === 'PGRST204' ||
+      String(error.message ?? '').includes('attempt_events') && String(error.message ?? '').includes('column')
+    if (!missingOptionalColumns) throw new Error(`Attempt persistence failed: ${error.message}`)
+
+    // Migration-safe fallback for deployments that have not yet applied 002/003.
+    // Core attempt continuity must keep working, while analytics fields remain
+    // unavailable until the operator explicitly applies those migrations.
+    const legacyRow = {
+      id,
+      learner_id: attempt.learner_id,
+      skill_id: attempt.skill_id,
+      question_id: attempt.question_id,
+      session_id: attempt.session_id,
+      correct: attempt.correct,
+      latency_ms: attempt.latency_ms,
+      revision_count: attempt.revision_count,
+      error_type: attempt.error_type,
+      difficulty_tier: attempt.difficulty_tier,
+      question_format: attempt.question_format,
+      attempted_at,
+    }
+    const { error: legacyError } = await getDb().from('attempt_events').insert(legacyRow)
+    if (legacyError) throw new Error(`Attempt persistence failed: ${legacyError.message}`)
+  }
   return id
 }
 

@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-2A — Guided same-skill learning journey** — MCQ/no-repeat correction pushed; remaining Intermediate/Mastery pool completion and human walkthrough remain.
+**P2-2A — Guided same-skill learning journey** — real-browser persistence/adaptive-flow regression is green; remaining Intermediate/Mastery pool completion remains.
 
 ---
 
 ## Next action
 
-Complete distinct two-question pools for the remaining Intermediate/Mastery gaps, then run the revised MCQ-only lesson-first journey walkthrough.
+Complete distinct two-question pools for the remaining Intermediate/Mastery gaps, then rerun unit, Playwright E2E, content validation, and production-build gates.
 
 ---
 
@@ -31,10 +31,13 @@ Complete distinct two-question pools for the remaining Intermediate/Mastery gaps
 11. **BLOOM-1 paused by human reprioritization:** its documentation draft is preserved in `stash@{0}` (`wip BLOOM-1 before guided learning arc`). Resume it after P2-2A by applying that stash; the unrelated `.gitignore`, `.mcp.json`, and `CLAUDE.md` files are not part of the stash.
 12. ~~**P2-2A rendered walkthrough unavailable:** implementation was pushed (`d87ce74`) but could not be inspected automatically because the local computer-use runtime failed.~~ **Resolved by repeated human walkthrough feedback on 2026-08-10:** learning slides belong before practice, not after each answer; the old mode dots and generic “Next question” implied a reset. The four-question revision was also rejected as too shallow. Current contract is `Lesson → Beginner (2+ questions) → Intermediate (2+) → Mastery (2+) → optional Reflect`; two consecutive correct answers advance, while one wrong answer immediately moves down and serves a different easier MCQ.
 13. **P2-2A question-bank coverage gap:** all 45 current skill files now have at least two explicitly easier MCQs and no fill-in questions. Distinct two-question `same` and `harder` pools are still incomplete in part of the bank; runtime fallback preserves the no-repeat flow, but those remaining stage pools must be completed before P2-2A is content-complete.
+14. **Live database migrations 002/003 are absent:** real-browser verification found the configured Supabase `attempt_events` table lacks the BKT-movement and behavior-signal columns. `insertAttempt()` now retries with the legacy core columns so learner progress is durable, and session counters advance only after persistence succeeds. Analytics fields remain unavailable in that deployment until a human authorizes applying `supabase/migrations/002_attempt_bkt_movement.sql` and `003_attempt_behavior_signals.sql`.
 
 ---
 
 ## Completed work (chronological)
+
+- 2026-08-10 — **P2-2A real-browser persistence regression added:** Playwright now creates an isolated learner against the running app/configured database, completes the lesson slide by slide, proves every answer is persisted, verifies a wrong Intermediate answer drops to a different Beginner question, recovers through Beginner → Intermediate → Mastery without switching skills or replaying the lesson, and confirms the optional Feynman action after the core journey. This exposed live schema drift that mocked DB tests could not detect; core-column fallback and persistence-before-session-count ordering fix the resulting repeat/progress bug. Expanded E2E, all 51 unit tests, and the production build are green.
 
 ### Prior to this planning pass (from git history, `git log --oneline`)
 - Initial engine/content build: BKT, SM-2, motivation FSM, session engine, interactive graph, dashboard (multiple commits, `9e9deed` through `dba14cd`).

@@ -21,7 +21,7 @@ export function QuestionCard({ question: q, selected, fillAnswer, revealed, onSe
   const code  = codeStart > 0 ? lines.slice(codeStart).join('\n') : null
 
   return (
-    <div>
+    <div data-testid={`question-${q.id}`}>
       {/* Question stem — bigger: 17px */}
       <p className="font-reading text-[18px] text-c-text leading-[1.7] mb-5">{prose}</p>
 
@@ -47,7 +47,13 @@ export function QuestionCard({ question: q, selected, fillAnswer, revealed, onSe
             else            cls += 'border-[var(--border)] bg-c-bg2 text-c-muted hover:border-[var(--border-hi)] hover:text-c-text cursor-pointer'
 
             return (
-              <button key={opt.id} className={cls} onClick={() => !revealed && onSelect(opt.id)} disabled={revealed}>
+              <button
+                key={opt.id}
+                data-testid={`option-${opt.id}`}
+                className={cls}
+                onClick={() => !revealed && onSelect(opt.id)}
+                disabled={revealed}
+              >
                 {/* Letter badge — larger, bolder */}
                 <span className="font-mono text-[13px] font-semibold mt-0.5 opacity-70 flex-shrink-0 w-5 text-center">
                   {opt.id.toUpperCase()}

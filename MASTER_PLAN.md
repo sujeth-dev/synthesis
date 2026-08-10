@@ -243,7 +243,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 - Post-answer feedback is compact and the primary action says which question comes next; it does not reopen the lesson or reset the progress model.
 - Topic switching remains learner-chosen and is unavailable before both the existing `p_know >= 0.60` gate and staged-journey completion are met.
 - The Feynman Loop remains accessible as an optional learning step.
-**Required tests:** unit tests for two-question stage advancement/regression and the combined switch gate; source/component contract covering direct-route unification, lesson-first slide ordering, persistent staged progress, voluntary exit, and retained Feynman access.
+**Required tests:** unit tests for two-question stage advancement/regression and the combined switch gate; source/component contract covering direct-route unification, lesson-first slide ordering, persistent staged progress, voluntary exit, and retained Feynman access; mandatory Playwright E2E against the running app and configured database covering slide-by-slide lesson completion, persisted question count, no immediate repeat, same-topic continuity, wrong-answer stage regression, recovery through all three practice stages, and optional Feynman availability after core completion.
 
 ### P2-3 — Complete Phases 4-8 content, discovery-first
 **Status:** not_started · **Depends on:** BLOOM-6, Phase 1 done
