@@ -229,7 +229,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Required tests:** component test (or manual, documented in PROGRESS.md if no component-test harness exists yet) confirming `key_insight` renders first and full body is gated behind an explicit action.
 
 ### P2-2A — Guided same-skill learning arc
-**Status:** in_progress · **Depends on:** P2-2
+**Status:** done · **Depends on:** P2-2
 **Doc ref:** human direction 2026-08-10; discovery-first standard in `v2/doc/vision/discovery-model.md` §1; P0-5 continuity policy
 **Do:** Replace the one-question direct-skill mini-session with one shared guided journey. Pin the chosen skill and present its learning content as an intentional slide-by-slide lesson **before** practice. Then run three visible practice stages — **Beginner → Intermediate → Mastery** — with at least two questions in each stage (six core questions minimum). Two consecutive correct answers advance a stage; one wrong answer immediately steps down one stage for support and serves a different question rather than retrying the same item. All guided questions are MCQ so spelling variation cannot create false negatives. Post-answer UI gives compact feedback and advances within the same visible journey; it must not restart or replay the lesson. The learner may explicitly end the session at any point; the engine never switches topics automatically. After the staged journey and mastery gate, retain learner-chosen topic switching and the optional Feynman reflection. Keep the practice-stage label separate from the BKT knowledge label (`Beginner / Intermediate / Mastered`).
 **Acceptance criteria:**
