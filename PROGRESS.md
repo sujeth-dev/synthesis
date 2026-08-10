@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None in progress.** `P0-7` and Phase 0 are complete and pushed.
+**P1-1 — Feynman Loop teaching-canvas interaction** is blocked before implementation.
 
 ---
 
 ## Next action
 
-Start **P1-1 — Feynman Loop teaching-canvas interaction** (next `not_started` task in document order; Phase 0 dependency met).
+Await human direction on the P1-1/P1-2 classifier boundary described in blocker 9 below.
 
 ---
 
@@ -26,6 +26,7 @@ Start **P1-1 — Feynman Loop teaching-canvas interaction** (next `not_started` 
 6. ~~**P0-4 policy values are unspecified.** ... Recommended default: 10 tasks per normal session, with at most 6 automatic active-phase reviews and at least 4 current/new-topic slots; excess review debt rolls forward by urgency. Explicit review mode may use all 10 slots for reviews.~~ **Resolved by human direction on 2026-08-10 (P0-4):** reviews are consent-based, not force-queued — even current/active-phase reviews are no longer auto-inserted into the task list. At session start, offer a default batch of **5–6 review items** and ask before running them; do not silently run them as mandatory tasks. Once that initial batch is done, continuing further — more reviews, or the rest of the session — requires the learner's voluntary choice each time; nothing auto-continues past the point they were last asked. This supersedes the "automatic active-phase reviews" framing above: reviews are offered, never forced, from the first prompt onward. The 10-task session cap and 4-slot new/current-topic minimum are not overridden by this direction and still stand as the working default; excess review debt still rolls forward by urgency, now simply as more items available to be offered/asked about in future sessions rather than auto-queued.
 7. ~~**P0-5 arc completion is qualitative but needs numeric engine thresholds.** The cited docs require genuine mastery/`p_know` movement with a task-count fallback, but specify neither amount. Recommended policy: hold the current skill until it becomes `mastered` or gains at least **0.15 `p_know`** from the arc start; if neither occurs, switch after **4 tasks** on that skill. A switch bridge can state "You've made progress on {old}; now connecting it to {new}."~~ **Superseded by human direction on 2026-08-10 (P0-5):** the task-count fallback is dropped entirely — the automatic in-session flow (`selectNextTask()`'s normal next-question path) never force-switches topics under any circumstance, full stop, no matter how many tasks pass. Instead, once the current topic's `p_know` reaches **0.60**, the learner is offered an explicit choice — continue this topic (framed as the better option, toward full mastery) or switch. If they choose to switch, they pick **any unlocked topic themselves**, not the engine's next algorithmic pick. Manual navigation to any topic via the graph/dashboard remains available at any mastery level regardless of this gate — this policy only governs the automatic in-session next-question flow, not free navigation (assumption stated back to the human and not corrected). The switch prompt/bridge must use tier language (Beginner/Intermediate/Mastered — see new item 8 below and `P0-8`), never a raw percentage.
 8. **New direction (2026-08-10): stop showing raw `p_know`/`p_start` percentages to learners anywhere.** Replace with a 3-tier label — Beginner / Intermediate / Mastered — on every learner-facing surface (`SkillDetailPanel.tsx`'s "62% known" text + percentage-labeled mastery bar caption, dashboard mastery percentages, any other raw-percentage display). Proposed mapping, reusing existing engine constants rather than inventing new ones (`src/lib/bkt/index.ts`): Beginner = `p_know < LEARNING_THRESHOLD (0.30)`, Intermediate = `0.30 ≤ p_know < MASTERY_THRESHOLD (0.65)`, Mastered = `p_know ≥ 0.65`. `fragile` state (decayed-from-mastered, `< FRAGILE_THRESHOLD` 0.55) folds into the Intermediate tier for display purposes only — flagged as an assumption, not explicitly confirmed. Filed as new task **P0-8** in `MASTER_PLAN.md`.
+9. **P1-1 and P1-2 currently duplicate classifier responsibility.** `MASTER_PLAN.md` says P1-1's interaction classifies free text and requires classifier unit tests, then P1-2 separately says to implement the pure classifier with the same tests. The cited `v2/doc/basic-guide.md` Mixture Strategy and checklist instead separate them: P1-1/Promise #1 is the Feynman teaching-canvas UI and structured capture; P1-2/Promise #2 is the original classifier that consumes that captured text. Human direction is required: keep that documented split (recommended), or combine classifier implementation into P1-1 and retire/repurpose P1-2.
 
 ---
 
@@ -56,6 +57,7 @@ Start **P1-1 — Feynman Loop teaching-canvas interaction** (next `not_started` 
 
 ## Loop iteration log
 
+- 2026-08-10 — **P1-1 blocked before implementation:** its operational criteria duplicate P1-2's classifier implementation/tests, while the cited strategy document explicitly separates teaching-canvas capture (Promise #1) from the pure classifier (Promise #2). Awaiting a human choice between preserving that split (recommended) or combining the tasks.
 - 2026-08-10 — **Phase 0 complete:** all P0-0 through P0-8 tasks are done; the final 29-test suite and production build are green. End-of-phase scripted checks against the real modules reconfirmed overdue decay (`p_know` 0.90 → 0.4909359 after 30 overdue days) and a measurable combined-evidence posterior change (baseline 0.4333333 vs. degraded 0.3045455).
 - 2026-08-10 — **P0-7 done:** removed the retired SQLite init/reset scripts and package commands after confirming the runtime is Supabase-only, corrected migration-era storage documentation, and verified live legacy-script references are grep-clean; 29 tests and the production build remain green (`66941c4`).
 - 2026-08-10 — **P0-6 done:** completed direct test coverage for all 20 exported functions across BKT, SM-2/urgency, motivation, and the session engine; added deterministic mastery-boundary, scheduling, urgency, evidence, state-transition, message, and review-consent checks. The full 29-test suite and production build are green (`bddd7bd`).
