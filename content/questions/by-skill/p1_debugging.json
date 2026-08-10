@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Log levels control visibility. In production, logging is usually set to WARNING or ERROR level, so DEBUG messages are invisible. This lets you leave detailed debug logging in code without it appearing in production."
+  },
+  {
+    "id": "p1_debugging_q7",
+    "skill_id": "p1_debugging",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A neural network's training loss starts at a reasonable value but suddenly becomes NaN (Not a Number) after a few hundred steps. What is the most appropriate first debugging step?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Immediately rewrite the entire model architecture from scratch"
+      },
+      {
+        "id": "b",
+        "text": "Isolate what changed — check recent settings like the learning rate, then inspect intermediate values (loss, gradients) around the step where NaN first appears, since NaN commonly stems from numerical instability like exploding gradients or dividing by zero"
+      },
+      {
+        "id": "c",
+        "text": "Ignore it — NaN losses are a normal, expected part of training"
+      },
+      {
+        "id": "d",
+        "text": "Restart training with a different random seed without investigating further"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The same debugging discipline that applies to any bug — isolate what changed, inspect values at the point of failure rather than guessing — applies directly to ML training bugs. A NaN loss almost always traces back to a specific numerical cause (like an overly large learning rate causing exploding gradients, or a log(0) somewhere in the loss calculation), and finding it requires the same careful, methodical inspection as any other debugging session.",
+    "graph_placement_weight": { "p1_debugging": 1.0, "p4_supervised_learning": 0.3 }
+  },
+  {
+    "id": "p1_debugging_q8",
+    "skill_id": "p1_debugging",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "You're debugging why a model performs great on training data but terribly on new test data. Which general debugging mindset applies directly here?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Debugging techniques from regular software don't apply to machine learning at all"
+      },
+      {
+        "id": "b",
+        "text": "Just like isolating variables to find a software bug, you should isolate what's different between the train and test conditions (e.g., data distribution, preprocessing steps) to find the mismatch — this class of ML bug is known as overfitting or train-test skew"
+      },
+      {
+        "id": "c",
+        "text": "The correct fix is always to add more print statements inside the training loop"
+      },
+      {
+        "id": "d",
+        "text": "This can only be resolved by using a larger model"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "This is the same 'change one thing at a time, isolate the variable' principle used to find any software bug, applied to an ML-specific failure mode. Good vs. bad performance between train and test data means something differs between them — different preprocessing, a data leak, or the model simply memorizing training examples (overfitting). Systematically isolating what's different between the two conditions is how you find it.",
+    "graph_placement_weight": { "p1_debugging": 1.0, "p4_supervised_learning": 0.3 }
   }
 ]

@@ -46,5 +46,53 @@
     "correct_option_id": "b",
     "explanation_after": "elif = else if. It lets you chain multiple conditions. If the first condition is False, Python checks the elif. If that's also False, it falls to else. Without elif you'd need deeply nested if statements, which quickly becomes unreadable.",
     "graph_placement_weight": { "p1_conditionals": 0.9 }
+  },
+  {
+    "id": "p1_cond_q4",
+    "skill_id": "p1_conditionals",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\nx = 7\nif x > 5 and x < 10:\n    print('in range')\nelse:\n    print('out of range')",
+    "options": [
+      { "id": "a", "text": "in range" },
+      { "id": "b", "text": "out of range" },
+      { "id": "c", "text": "True" },
+      { "id": "d", "text": "Error" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "and requires both conditions to be True. x > 5 is True (7 > 5) and x < 10 is True (7 < 10), so the combined condition is True and 'in range' is printed. If either side were False, the whole and expression would be False.",
+    "graph_placement_weight": { "p1_conditionals": 1.0 }
+  },
+  {
+    "id": "p1_cond_q5",
+    "skill_id": "p1_conditionals",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\nage = 15\nif age >= 18:\n    print('adult')\nprint('done')",
+    "options": [
+      { "id": "a", "text": "adult\ndone" },
+      { "id": "b", "text": "done" },
+      { "id": "c", "text": "adult" },
+      { "id": "d", "text": "Nothing prints" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Indentation determines what belongs to the if block. print('adult') is indented, so it only runs when age >= 18 — which is False here (15 < 18), so it's skipped. print('done') is not indented, so it's outside the if block and always runs regardless of the condition.",
+    "graph_placement_weight": { "p1_conditionals": 0.9 }
+  },
+  {
+    "id": "p1_cond_q6",
+    "skill_id": "p1_conditionals",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A binary classifier outputs a probability like 0.82. The final prediction is decided by:\n\nif probability >= 0.5:\n    prediction = 1\nelse:\n    prediction = 0\n\nWhat does this conditional represent in machine learning terms?",
+    "options": [
+      { "id": "a", "text": "A random guess with no real meaning" },
+      { "id": "b", "text": "A decision threshold that converts a continuous probability into a discrete class label" },
+      { "id": "c", "text": "A loss function used during training" },
+      { "id": "d", "text": "A type of neural network layer" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Classifiers usually output a continuous probability, but the final answer needs to be a discrete class (like spam/not spam). A simple if/else conditional is exactly how that conversion happens: everything at or above the threshold (commonly 0.5) becomes one class, everything below becomes the other. Changing the threshold — say, to 0.7 — changes how conservative the classifier is, all through this one conditional.",
+    "graph_placement_weight": { "p1_conditionals": 1.0, "p4_supervised_learning": 0.4 }
   }
 ]

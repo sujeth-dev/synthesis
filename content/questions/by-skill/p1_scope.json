@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "Global state means any function anywhere can change a value, making it hard to reason about what a function does, and hard to test in isolation. Parameters and return values make data flow explicit."
+  },
+  {
+    "id": "p1_scope_q7",
+    "skill_id": "p1_scope",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "In a machine learning training script, why is it considered bad practice to store a model's weights in a global variable that many different functions modify directly, rather than passing the model explicitly as a function argument?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Global variables are always slower to access in Python"
+      },
+      {
+        "id": "b",
+        "text": "It becomes hard to track which function changed the weights and when, making bugs — like weights being updated in an unexpected order — very difficult to trace, the same problem global state causes generally"
+      },
+      {
+        "id": "c",
+        "text": "Python doesn't allow model objects to be stored as global variables"
+      },
+      {
+        "id": "d",
+        "text": "It uses significantly more RAM than passing the model as an argument"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "This is the exact same reasoning behind avoiding global variables in general, applied to a real ML codebase: if any function can reach in and modify the model's weights, tracing an unexpected weight update becomes a hunt through the entire codebase instead of a quick look at one function's arguments. Passing the model explicitly makes the data flow visible and testable, which matters enormously in larger training pipelines.",
+    "graph_placement_weight": { "p1_scope": 1.0 }
+  },
+  {
+    "id": "p1_scope_q8",
+    "skill_id": "p1_scope",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "ML frameworks often use a pattern like:\n\ndef make_train_step(model, optimizer):\n    def train_step(batch):\n        # uses model and optimizer here\n        pass\n    return train_step\n\nWhy is this closure pattern useful for building a custom training step?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It lets the inner train_step function access model and optimizer without needing them passed as arguments on every call, while still keeping them out of the global scope entirely"
+      },
+      {
+        "id": "b",
+        "text": "Closures automatically make the code run on a GPU"
+      },
+      {
+        "id": "c",
+        "text": "Closures are mandatory for defining any function in Python"
+      },
+      {
+        "id": "d",
+        "text": "This pattern has no real benefit — it's purely stylistic"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "train_step is a closure: it captures model and optimizer from the enclosing make_train_step scope, so every time train_step(batch) is called later, it still has access to them — without those variables needing to be global (avoiding the problems in the previous question) and without repeating them as arguments on every single call. This exact pattern shows up throughout real training code in frameworks like TensorFlow.",
+    "graph_placement_weight": { "p1_scope": 1.0 }
   }
 ]

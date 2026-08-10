@@ -46,5 +46,53 @@
     "correct_option_id": "d",
     "explanation_after": "Variable assignment in Python: variable_name = value. The equals sign here means 'store this value in this named box' — not 'these two things are equal'. That's why Python uses == (double equals) to check equality.",
     "graph_placement_weight": { "p1_variables": 0.9 }
+  },
+  {
+    "id": "p1_var_q4",
+    "skill_id": "p1_variables",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\nx = 5\ny = x\nx = 10\nprint(y)",
+    "options": [
+      { "id": "a", "text": "5" },
+      { "id": "b", "text": "10" },
+      { "id": "c", "text": "None" },
+      { "id": "d", "text": "Error" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "y = x copies the current value of x (5) into y at that moment. Later reassigning x = 10 only changes what x points to — it doesn't retroactively change y, since y already holds its own copy of the value 5. print(y) outputs 5.",
+    "graph_placement_weight": { "p1_variables": 1.0 }
+  },
+  {
+    "id": "p1_var_q5",
+    "skill_id": "p1_variables",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\na, b = 3, 7\na, b = b, a\nprint(a, b)",
+    "options": [
+      { "id": "a", "text": "3 7" },
+      { "id": "b", "text": "7 3" },
+      { "id": "c", "text": "7 7" },
+      { "id": "d", "text": "Error — variables can't be swapped like this" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Python evaluates the right-hand side (b, a) completely before assigning, using the original values (7, 3). Then it assigns them to a, b in order: a becomes 7, b becomes 3. This is Python's idiomatic swap — no temporary variable needed.",
+    "graph_placement_weight": { "p1_variables": 0.9 }
+  },
+  {
+    "id": "p1_var_q6",
+    "skill_id": "p1_variables",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "In gradient descent, weight updates follow: weight = weight - learning_rate * gradient. If the learning_rate variable is set far too large, what commonly happens during training?",
+    "options": [
+      { "id": "a", "text": "Nothing — the learning rate has no real effect on outcomes" },
+      { "id": "b", "text": "Training becomes unstable and the loss can diverge instead of decreasing, because each update overshoots the optimal weight value" },
+      { "id": "c", "text": "The model trains infinitely fast with perfect accuracy" },
+      { "id": "d", "text": "Python automatically caps the variable's value" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "learning_rate is just a variable, but its value dramatically changes how weight updates behave. Too large, and each update step overshoots the optimal weight, sometimes bouncing further away each time (diverging loss) rather than converging. Choosing learning_rate is one of the most consequential variable-tuning decisions in ML — a single number controlling millions of weight updates.",
+    "graph_placement_weight": { "p1_variables": 1.0, "p4_supervised_learning": 0.3 }
   }
 ]

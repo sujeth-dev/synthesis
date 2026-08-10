@@ -46,5 +46,53 @@
     "correct_option_id": "b",
     "explanation_after": "An AI model learns WHAT to do from data, but the CODE defines HOW it learns — the architecture, training loop, loss function, data pipeline, and deployment. Even GPT-4 is thousands of lines of code wrapped around a trained model. Learning AI engineering means understanding both the code structure and the learning process.",
     "graph_placement_weight": { "p1_how_code_works": 1.0, "p3_what_is_ai": 0.4 }
+  },
+  {
+    "id": "p1_code_q4",
+    "skill_id": "p1_how_code_works",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What is the key difference between a compiled language and an interpreted language?",
+    "options": [
+      { "id": "a", "text": "Compiled languages are translated entirely into machine code before running; interpreted languages are translated and executed line-by-line as the program runs" },
+      { "id": "b", "text": "Compiled languages don't need to be translated into machine code at all" },
+      { "id": "c", "text": "Interpreted languages always run faster than compiled languages" },
+      { "id": "d", "text": "There is no real difference between the two approaches" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A compiler translates the whole program into machine code up front, producing a standalone executable. An interpreter reads and executes the source code line-by-line each time the program runs, with no separate compilation step. Python is interpreted (technically compiled to bytecode then interpreted), which is part of why it's quick to write and test but generally slower than compiled languages like C++.",
+    "graph_placement_weight": { "p1_how_code_works": 1.0 }
+  },
+  {
+    "id": "p1_code_q5",
+    "skill_id": "p1_how_code_works",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What is the order of output for this code?\n\nprint('A')\nprint('B')\nprint('C')",
+    "options": [
+      { "id": "a", "text": "C, B, A" },
+      { "id": "b", "text": "A, B, C" },
+      { "id": "c", "text": "B, A, C" },
+      { "id": "d", "text": "All three print at exactly the same time" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "With no loops, functions, or conditionals to redirect execution, Python simply runs each line in the order it appears: top to bottom. Line 1 runs, then line 2, then line 3 — producing A, B, C in that order.",
+    "graph_placement_weight": { "p1_how_code_works": 1.0 }
+  },
+  {
+    "id": "p1_code_q6",
+    "skill_id": "p1_how_code_works",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A trained model produces wrong predictions. Where is the underlying bug most likely to be found?",
+    "options": [
+      { "id": "a", "text": "Bugs can only exist in the training data, never in code" },
+      { "id": "b", "text": "In the code itself — such as how data is loaded, preprocessed, or how the training loop is written — since a wrong prediction can stem from any step in that code path, not just the learned parameters" },
+      { "id": "c", "text": "In the electricity supplying the computer" },
+      { "id": "d", "text": "AI models cannot have bugs, only humans can have bugs" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A trained model's behavior is the product of executing code, start to finish: data loading code, preprocessing code, the training loop, and the inference code that generates predictions. Reading code carefully and understanding its execution order — the exact skill this question tests — is essential to finding where a bug entered, because 'the model is wrong' could mean the label column was shuffled, the loss was computed incorrectly, or a dozen other code-level issues.",
+    "graph_placement_weight": { "p1_how_code_works": 1.0, "p4_data_pipeline": 0.3 }
   }
 ]

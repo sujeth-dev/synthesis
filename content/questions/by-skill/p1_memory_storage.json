@@ -46,5 +46,53 @@
     "correct_option_id": "b",
     "explanation_after": "The desk/filing cabinet analogy is the standard mental model for RAM vs storage. You work on things at your desk (RAM), and when done, file them away (storage). AI models are loaded from storage (filing cabinet) into RAM (desk) when running.",
     "graph_placement_weight": { "p1_memory_storage": 0.9 }
+  },
+  {
+    "id": "p1_mem_q4",
+    "skill_id": "p1_memory_storage",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Which statement correctly compares the speed and capacity of RAM versus a hard drive or SSD?",
+    "options": [
+      { "id": "a", "text": "RAM is much faster to read and write than storage, but storage typically holds far more data" },
+      { "id": "b", "text": "Storage is always faster than RAM" },
+      { "id": "c", "text": "RAM and storage have identical speed and identical cost" },
+      { "id": "d", "text": "RAM has effectively infinite capacity" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "RAM trades capacity for speed: it's extremely fast to access but limited in size (and volatile). Storage trades speed for capacity: it holds far more data permanently, but reading and writing to it is much slower than RAM. This tradeoff is why computers use both, rather than just one or the other.",
+    "graph_placement_weight": { "p1_memory_storage": 1.0 }
+  },
+  {
+    "id": "p1_mem_q5",
+    "skill_id": "p1_memory_storage",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Which of the following is an example of non-volatile storage — meaning it keeps its data even without power?",
+    "options": [
+      { "id": "a", "text": "RAM" },
+      { "id": "b", "text": "CPU cache" },
+      { "id": "c", "text": "SSD (solid-state drive)" },
+      { "id": "d", "text": "CPU registers" }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "SSDs (and hard drives) are non-volatile — data survives a power loss. RAM, CPU cache, and CPU registers are all volatile: they lose their contents the instant power is cut. This is why anything you want to keep must eventually be written to storage, not just left in RAM.",
+    "graph_placement_weight": { "p1_memory_storage": 0.9 }
+  },
+  {
+    "id": "p1_mem_q6",
+    "skill_id": "p1_memory_storage",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why do machine learning engineers periodically save 'checkpoints' of a model to disk during a long training run?",
+    "options": [
+      { "id": "a", "text": "To make the GPU run faster" },
+      { "id": "b", "text": "Because the model's weights live in RAM during training, and RAM is volatile — a crash or power loss would lose hours of training progress if it isn't saved to persistent storage" },
+      { "id": "c", "text": "Checkpoints are required by Python's syntax" },
+      { "id": "d", "text": "To reduce the size of the training dataset" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Training a large model can take hours or days, and the weights being updated live in RAM (or GPU memory) the entire time. Because that memory is volatile, engineers periodically write ('checkpoint') the current weights to disk so a crash doesn't erase all progress — the same RAM-vs-storage tradeoff you'd apply to an unsaved document, just at a much larger scale.",
+    "graph_placement_weight": { "p1_memory_storage": 1.0 }
   }
 ]

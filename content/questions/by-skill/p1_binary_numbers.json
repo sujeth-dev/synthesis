@@ -62,5 +62,37 @@
     "correct_option_id": "b",
     "explanation_after": "A transistor (the basic building block of CPUs) is either conducting electricity or not — on or off. These two physical states map perfectly to 1 and 0. Building a circuit with 10 reliable states (for decimal) is far harder.",
     "graph_placement_weight": { "p1_binary_numbers": 1.0, "p1_cpu_processing": 0.4 }
+  },
+  {
+    "id": "p1_bin_q5",
+    "skill_id": "p1_binary_numbers",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "How many distinct values can 3 bits represent?",
+    "options": [
+      { "id": "a", "text": "3" },
+      { "id": "b", "text": "6" },
+      { "id": "c", "text": "8" },
+      { "id": "d", "text": "9" }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "n bits can represent 2^n distinct values, because each bit doubles the number of possible combinations. 3 bits give 2^3 = 8 combinations: 000, 001, 010, 011, 100, 101, 110, 111.",
+    "graph_placement_weight": { "p1_binary_numbers": 1.0 }
+  },
+  {
+    "id": "p1_bin_q6",
+    "skill_id": "p1_binary_numbers",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A grayscale image pixel is commonly stored using 8 bits (values 0-255). Why does using 8 bits set the maximum number of distinct shades of gray to exactly 256?",
+    "options": [
+      { "id": "a", "text": "Because 8 bits allow exactly 2^8 = 256 unique on/off combinations, each mapped to a distinct shade" },
+      { "id": "b", "text": "Because 8 is an arbitrary limit chosen by camera manufacturers with no technical reason" },
+      { "id": "c", "text": "Because color images always need more bits than grayscale images" },
+      { "id": "d", "text": "Because 256 is the largest number any computer can store" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "This is the same 2^n counting rule applied to image data: 8 bits give 2^8 = 256 possible values, so pixel intensity is typically represented on a 0-255 scale. When a neural network processes an image, it's ultimately reading these binary-encoded pixel values — the same binary counting principle you use for small numbers scales directly to how AI systems consume visual data.",
+    "graph_placement_weight": { "p1_binary_numbers": 1.0, "p5_neural_network_basics": 0.3 }
   }
 ]

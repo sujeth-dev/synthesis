@@ -46,5 +46,53 @@
     "correct_option_id": "b",
     "explanation_after": "An epoch = one full pass over the entire training dataset. Training for 100 epochs = the training loop runs 100 times. Understanding loops is essential to understanding how models learn.",
     "graph_placement_weight": { "p1_loops": 0.8, "p4_data_pipeline": 0.4 }
+  },
+  {
+    "id": "p1_loop_q4",
+    "skill_id": "p1_loops",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\ncount = 0\nwhile count < 3:\n    print(count)\n    count += 1",
+    "options": [
+      { "id": "a", "text": "0 1 2" },
+      { "id": "b", "text": "1 2 3" },
+      { "id": "c", "text": "0 1 2 3" },
+      { "id": "d", "text": "Infinite loop" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A while loop keeps running as long as its condition is True. count starts at 0, prints, then increments: prints 0 (count becomes 1), prints 1 (count becomes 2), prints 2 (count becomes 3) — now count < 3 is False, so the loop stops. Output: 0 1 2.",
+    "graph_placement_weight": { "p1_loops": 1.0 }
+  },
+  {
+    "id": "p1_loop_q5",
+    "skill_id": "p1_loops",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)",
+    "options": [
+      { "id": "a", "text": "0 1 2" },
+      { "id": "b", "text": "0 1 2 3" },
+      { "id": "c", "text": "0 1 2 3 4" },
+      { "id": "d", "text": "3" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "break immediately exits the loop entirely, skipping any remaining iterations. i takes values 0, 1, 2 and prints each. When i becomes 3, the if condition triggers break before print(i) runs, so 3 is never printed and the loop ends. Output: 0 1 2.",
+    "graph_placement_weight": { "p1_loops": 1.0 }
+  },
+  {
+    "id": "p1_loop_q6",
+    "skill_id": "p1_loops",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A typical training loop looks like:\n\nfor epoch in range(num_epochs):\n    for batch in dataloader:\n        pass  # train on this batch\n\nWhy are there two nested loops here instead of just one?",
+    "options": [
+      { "id": "a", "text": "It's a mistake — a single loop would be simpler and equivalent" },
+      { "id": "b", "text": "The outer loop repeats over the whole dataset multiple times (epochs); the inner loop iterates over the smaller batches within a single pass through the data" },
+      { "id": "c", "text": "The inner loop exists only to print progress messages" },
+      { "id": "d", "text": "Nested loops are a Python syntax requirement for all training code" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Training data is usually too large to process all at once, so it's split into batches. The inner loop walks through every batch once — that's one epoch. The outer loop repeats that entire process multiple times, since a model typically needs to see the data many times to learn well. Two nested loops directly mirror the two concepts: epochs (full passes) and batches (chunks within a pass).",
+    "graph_placement_weight": { "p1_loops": 1.0, "p4_data_pipeline": 0.4 }
   }
 ]

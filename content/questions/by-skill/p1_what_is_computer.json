@@ -46,5 +46,53 @@
     "correct_option_id": "b",
     "explanation_after": "Computers execute instructions with no understanding. Even AI systems are sophisticated instruction-following — they don't 'understand' the way humans do. This distinction matters deeply when building AI systems.",
     "graph_placement_weight": { "p1_what_is_computer": 1.0, "p3_what_is_ai": 0.3 }
+  },
+  {
+    "id": "p1_comp_q4",
+    "skill_id": "p1_what_is_computer",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "A friend says, \"My computer decided to open a browser window by itself this morning.\" What actually happened?",
+    "options": [
+      { "id": "a", "text": "The computer used free will to decide on its own" },
+      { "id": "b", "text": "Some program — like a scheduled task or startup script — instructed it to open the browser; computers never act without instructions" },
+      { "id": "c", "text": "The browser opened itself using intuition" },
+      { "id": "d", "text": "It's impossible for a program to open another program automatically" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Computers never 'decide' anything in the human sense. Every action — even one that looks spontaneous — traces back to some instruction: a scheduled task, a startup item, a background service. If it happened, code told it to happen.",
+    "graph_placement_weight": { "p1_what_is_computer": 1.0 }
+  },
+  {
+    "id": "p1_comp_q5",
+    "skill_id": "p1_what_is_computer",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What is the key difference between a computer's hardware and its software?",
+    "options": [
+      { "id": "a", "text": "Hardware is the physical machine; software is the instructions that tell the hardware what to do" },
+      { "id": "b", "text": "They are two names for the same thing" },
+      { "id": "c", "text": "Software is physical; hardware is a set of instructions" },
+      { "id": "d", "text": "Hardware only matters for gaming computers, not laptops" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Hardware (CPU, RAM, storage) is the physical machine that can only follow instructions — it does nothing on its own. Software is the set of instructions that gives hardware a purpose. The same hardware can run a word processor, a game, or a training script for a neural network, depending only on which software is loaded.",
+    "graph_placement_weight": { "p1_what_is_computer": 0.9 }
+  },
+  {
+    "id": "p1_comp_q6",
+    "skill_id": "p1_what_is_computer",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why can the exact same laptop run a word processor, a video game, and code that trains a neural network?",
+    "options": [
+      { "id": "a", "text": "It has separate hidden chips built in for each possible use" },
+      { "id": "b", "text": "Hardware just follows whatever instructions are loaded into it — the same general-purpose hardware executes completely different software, including ML training code, without needing to change" },
+      { "id": "c", "text": "It can't — each of those requires different physical hardware" },
+      { "id": "d", "text": "AI training requires special non-electronic hardware" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "This is the general-purpose nature of computers: the hardware doesn't know or care what the instructions are for. The same CPU that renders a game frame can execute a PyTorch training loop, because both are just sequences of instructions. This is exactly why software written once (like an ML framework) can run on ordinary consumer hardware.",
+    "graph_placement_weight": { "p1_what_is_computer": 1.0, "p1_how_code_works": 0.3 }
   }
 ]

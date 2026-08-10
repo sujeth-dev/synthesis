@@ -46,5 +46,53 @@
     "correct_option_id": "d",
     "explanation_after": "str stands for string — a sequence of characters. 'hello', 'AI engineering', and '42' (with quotes) are all strings. Without quotes, 42 is an int and hello would be a variable name. In NLP and LLMs, all text input is processed as strings before being tokenised into numbers.",
     "graph_placement_weight": { "p1_data_types": 0.9 }
+  },
+  {
+    "id": "p1_dt_q4",
+    "skill_id": "p1_data_types",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does `type(5)` return in Python?",
+    "options": [
+      { "id": "a", "text": "<class 'int'>" },
+      { "id": "b", "text": "<class 'str'>" },
+      { "id": "c", "text": "<class 'float'>" },
+      { "id": "d", "text": "5" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "type() returns the data type of a value. Since 5 has no decimal point and isn't in quotes, Python treats it as an int, so type(5) reports <class 'int'>. This function is a handy way to check what type you're actually working with, especially when debugging.",
+    "graph_placement_weight": { "p1_data_types": 1.0 }
+  },
+  {
+    "id": "p1_dt_q5",
+    "skill_id": "p1_data_types",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\nx = '5'\ny = 5\nprint(x == y)",
+    "options": [
+      { "id": "a", "text": "True" },
+      { "id": "b", "text": "False" },
+      { "id": "c", "text": "Error — can't compare a string and an int" },
+      { "id": "d", "text": "5" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "x is a string ('5') and y is an int (5) — different data types. Python's == does not raise an error when comparing different types; it simply returns False, because a string is never equal to an int no matter what characters or digits it contains. This is a common source of silent bugs when data isn't converted to the expected type.",
+    "graph_placement_weight": { "p1_data_types": 1.0 }
+  },
+  {
+    "id": "p1_dt_q6",
+    "skill_id": "p1_data_types",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why might an ML engineer convert a trained model's weights from float32 to float16 — a process called quantization?",
+    "options": [
+      { "id": "a", "text": "To make the stored numbers more accurate" },
+      { "id": "b", "text": "To reduce memory usage and increase computation speed, at the cost of some numeric precision" },
+      { "id": "c", "text": "float16 has no practical use in machine learning" },
+      { "id": "d", "text": "Because float32 cannot store numbers with a decimal point" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "float32 uses 32 bits per number and float16 uses only 16, so switching halves the memory needed to store every weight — critical when a model has billions of parameters. The tradeoff is reduced numeric precision, which is usually an acceptable loss for the memory and speed gains. Understanding the difference between data types isn't just academic — it directly determines whether a model fits in memory.",
+    "graph_placement_weight": { "p1_data_types": 1.0, "p1_memory_storage": 0.3 }
   }
 ]

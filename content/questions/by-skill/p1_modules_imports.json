@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "`pip freeze` outputs installed packages and their exact versions. Redirecting to `requirements.txt` saves them. Others can then run `pip install -r requirements.txt` to get the exact same environment."
+  },
+  {
+    "id": "p1_modules_imports_q7",
+    "skill_id": "p1_modules_imports",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A typical ML script starts with:\n\nimport numpy as np\nimport torch\nimport torch.nn as nn\nfrom sklearn.model_selection import train_test_split\n\nWhy does modern machine learning development rely so heavily on importing external libraries rather than writing everything from scratch?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Because Python is unable to perform math operations without importing numpy"
+      },
+      {
+        "id": "b",
+        "text": "Because libraries like NumPy, PyTorch, and scikit-learn provide highly optimized, thoroughly tested implementations of complex operations (tensor math, automatic differentiation, model utilities) that would take enormous effort and expertise to reimplement correctly and efficiently"
+      },
+      {
+        "id": "c",
+        "text": "Because importing libraries is a strict requirement of Python's syntax rules"
+      },
+      {
+        "id": "d",
+        "text": "Because using imports lets code run without needing a CPU"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Python's plain arithmetic works fine without imports — the real reason ML code imports so much is reuse: NumPy's array operations, PyTorch's automatic differentiation engine, and scikit-learn's train_test_split represent years of optimization and correctness testing by many contributors. Importing them means standing on that work instead of reinventing (and likely getting wrong, or getting slow) the same complex machinery yourself.",
+    "graph_placement_weight": { "p1_modules_imports": 1.0 }
+  },
+  {
+    "id": "p1_modules_imports_q8",
+    "skill_id": "p1_modules_imports",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why is a requirements.txt (or similar dependency lock file) especially important for reproducing a machine learning experiment's results months later?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It has no particular importance specific to machine learning"
+      },
+      {
+        "id": "b",
+        "text": "ML libraries change frequently, and even small version differences (e.g., a new NumPy or PyTorch release) can change numerical behavior or break APIs — pinning exact versions ensures the same code produces the same results later"
+      },
+      {
+        "id": "c",
+        "text": "requirements.txt lets training run on more powerful hardware"
+      },
+      {
+        "id": "d",
+        "text": "requirements.txt automatically improves model accuracy"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Reproducibility is a serious concern in ML research and engineering: a library update can silently change how an operation rounds numbers, or deprecate a function your code relies on. Locking exact versions with requirements.txt means that when you (or someone else) rerun the experiment a year later, they get the identical software environment — and therefore a fair shot at reproducing the original results.",
+    "graph_placement_weight": { "p1_modules_imports": 1.0 }
   }
 ]

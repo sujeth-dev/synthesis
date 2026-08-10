@@ -46,5 +46,53 @@
     "correct_option_id": "c",
     "explanation_after": "def stands for 'define'. The pattern is: def function_name(parameters): followed by an indented body. The def keyword tells Python 'I'm creating a reusable block of code with this name.' Functions don't run when you define them — only when you call them.",
     "graph_placement_weight": { "p1_functions": 0.9 }
+  },
+  {
+    "id": "p1_fn_q4",
+    "skill_id": "p1_functions",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\ndef greet(name='friend'):\n    return f'Hello, {name}!'\n\nprint(greet())",
+    "options": [
+      { "id": "a", "text": "Hello, friend!" },
+      { "id": "b", "text": "Hello, name!" },
+      { "id": "c", "text": "Error — no argument was given" },
+      { "id": "d", "text": "None" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "name='friend' is a default parameter value — it's used automatically when the caller doesn't provide an argument. Since greet() is called with no arguments, name falls back to 'friend', and the function returns 'Hello, friend!'.",
+    "graph_placement_weight": { "p1_functions": 1.0 }
+  },
+  {
+    "id": "p1_fn_q5",
+    "skill_id": "p1_functions",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What is the key difference between a function that uses return and one that uses print inside it?",
+    "options": [
+      { "id": "a", "text": "They behave identically in every situation" },
+      { "id": "b", "text": "return sends a value back to the caller so it can be stored or reused elsewhere in the program; print only displays text and gives the caller nothing usable" },
+      { "id": "c", "text": "print runs faster than return in all cases" },
+      { "id": "d", "text": "return can only be used once across an entire program" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "print() is for display — a human sees the output, but the program itself can't capture it or do anything further with it. return hands a value back to whatever called the function, so it can be assigned to a variable, passed to another function, or used in a calculation. A function that only prints a result, without returning it, effectively throws that result away as far as the rest of the program is concerned.",
+    "graph_placement_weight": { "p1_functions": 0.9 }
+  },
+  {
+    "id": "p1_fn_q6",
+    "skill_id": "p1_functions",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A loss function in machine learning, such as `def mse_loss(predictions, actual): return ((predictions - actual) ** 2).mean()`, takes model predictions and true values as arguments. What does it return, and why does that matter for training?",
+    "options": [
+      { "id": "a", "text": "It returns a single number summarizing how wrong the model's predictions are — the exact value the training process tries to minimize" },
+      { "id": "b", "text": "It returns a new dataset to train on next" },
+      { "id": "c", "text": "It returns True or False depending on whether the model is correct" },
+      { "id": "d", "text": "It returns the model's total memory usage" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Like every function, a loss function takes inputs (predictions and actual values) and returns an output — here, a single scalar number representing error. That returned value is what the entire training process is built around: gradient descent repeatedly adjusts the model's weights specifically to make this function's return value smaller. Understanding functions as input-in, output-out machines is exactly what's needed to understand what a loss function actually is.",
+    "graph_placement_weight": { "p1_functions": 1.0, "p4_supervised_learning": 0.4 }
   }
 ]

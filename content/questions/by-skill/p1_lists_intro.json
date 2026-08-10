@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "`enumerate()` yields `(index, value)` pairs: `(0, 'a'), (1, 'b'), (2, 'c')`. It's the idiomatic way to iterate when you need both position and value."
+  },
+  {
+    "id": "p1_lists_intro_q7",
+    "skill_id": "p1_lists_intro",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A dataset of 1,000 house prices is stored as a plain Python list: `prices = [250000, 310000, ...]`. Before training a model, why might a data scientist convert this list into a NumPy array instead of using the list directly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "NumPy arrays support fast, vectorized numeric operations (like adding a constant to every element at once) that are much slower to do with a Python loop over a list"
+      },
+      {
+        "id": "b",
+        "text": "Python lists are physically incapable of storing numbers"
+      },
+      {
+        "id": "c",
+        "text": "NumPy arrays always use less memory than lists, with no other advantage"
+      },
+      {
+        "id": "d",
+        "text": "There is no practical difference — it's purely a style preference"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Python lists are general-purpose containers, and looping over them in pure Python is relatively slow. NumPy arrays store numbers in a compact, uniform block of memory and perform operations on the entire array at once using optimized, compiled code — this is called vectorization. That speed difference becomes critical once datasets grow to millions of values, which is why nearly every ML pipeline converts lists into NumPy arrays (or tensors) before real computation begins.",
+    "graph_placement_weight": { "p1_lists_intro": 1.0, "p2_lists_arrays": 0.4 }
+  },
+  {
+    "id": "p1_lists_intro_q8",
+    "skill_id": "p1_lists_intro",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "You have `data = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]` and want an 80/20 train/test split that preserves order. Which slicing correctly creates the training set (first 80%) and test set (last 20%)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "train = data[:8], test = data[8:]"
+      },
+      {
+        "id": "b",
+        "text": "train = data[8:], test = data[:8]"
+      },
+      {
+        "id": "c",
+        "text": "train = data[0], test = data[-1]"
+      },
+      {
+        "id": "d",
+        "text": "train = data[::2], test = data[1::2]"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "The list has 10 elements, and 80% of 10 is 8. `data[:8]` takes the first 8 elements (indices 0-7) as the training set, and `data[8:]` takes everything from index 8 onward (the last 2 elements) as the test set. This kind of order-preserving slice split is a common, simple technique — especially for time-series data where shuffling would leak future information into training.",
+    "graph_placement_weight": { "p1_lists_intro": 1.0, "p4_data_pipeline": 0.4 }
   }
 ]

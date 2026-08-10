@@ -62,5 +62,37 @@
     "correct_option_id": "c",
     "explanation_after": "In Python, text (strings) must be wrapped in quotes — either single 'like this' or double \"like this\". Without quotes, Python treats it as a variable name.",
     "graph_placement_weight": { "p1_python_intro": 1.0 }
+  },
+  {
+    "id": "p1_py_q5",
+    "skill_id": "p1_python_intro",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\nprint('Value:', 5 + 3)",
+    "options": [
+      { "id": "a", "text": "Value: 8" },
+      { "id": "b", "text": "Value: 5 + 3" },
+      { "id": "c", "text": "Value:8" },
+      { "id": "d", "text": "A syntax error" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "print() can take multiple comma-separated arguments and automatically inserts a space between them. Python first evaluates 5 + 3 to get 8, then prints the text 'Value:' followed by a space and 8, giving 'Value: 8'.",
+    "graph_placement_weight": { "p1_python_intro": 1.0 }
+  },
+  {
+    "id": "p1_py_q6",
+    "skill_id": "p1_python_intro",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "NumPy and PyTorch are Python libraries, yet they perform millions of numeric computations very quickly. How is this possible if Python itself is a relatively slow, interpreted language?",
+    "options": [
+      { "id": "a", "text": "Python secretly compiles itself into machine code at runtime for every program" },
+      { "id": "b", "text": "These libraries implement their core numeric operations in fast compiled languages like C, C++, or CUDA, and Python code simply calls into that fast compiled code" },
+      { "id": "c", "text": "They avoid using the Python interpreter entirely, even to write the surrounding code" },
+      { "id": "d", "text": "They only work on supercomputers, never on ordinary laptops" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "This is the real reason Python dominates ML despite being 'slow': the heavy numeric lifting happens in optimized, compiled C/C++/CUDA code underneath, while Python provides the easy-to-read layer on top that calls into it. You write readable Python; the actual matrix multiplications run in fast, low-level code.",
+    "graph_placement_weight": { "p1_python_intro": 0.8 }
   }
 ]

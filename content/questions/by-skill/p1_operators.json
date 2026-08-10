@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "`//` is floor division — it divides and rounds DOWN to the nearest integer. 15 ÷ 4 = 3.75, rounded down = 3."
+  },
+  {
+    "id": "p1_operators_q7",
+    "skill_id": "p1_operators",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "In machine learning data loading, you often compute `batch_index = sample_index % num_batches` to cycle through batches repeatedly. If `num_batches = 4` and `sample_index = 10`, which batch does this sample belong to?",
+    "options": [
+      {
+        "id": "a",
+        "text": "0"
+      },
+      {
+        "id": "b",
+        "text": "1"
+      },
+      {
+        "id": "c",
+        "text": "2"
+      },
+      {
+        "id": "d",
+        "text": "10"
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "10 % 4 = 2, since 10 divided by 4 is 2 remainder 2. The modulo operator naturally wraps indices in a cycle, which is exactly why it's used to assign samples to a fixed number of batches, or to loop through batches repeatedly across training epochs.",
+    "graph_placement_weight": { "p1_operators": 1.0, "p4_data_pipeline": 0.3 }
+  },
+  {
+    "id": "p1_operators_q8",
+    "skill_id": "p1_operators",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Mean Squared Error (MSE), a common loss function in machine learning, is computed as `error = (prediction - actual) ** 2`. Why square the difference instead of just using `prediction - actual` directly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Squaring makes all errors positive so they don't cancel out, and it penalizes larger errors more heavily than smaller ones"
+      },
+      {
+        "id": "b",
+        "text": "Squaring makes the calculation run faster on a CPU"
+      },
+      {
+        "id": "c",
+        "text": "`**` is required syntax with no mathematical purpose here"
+      },
+      {
+        "id": "d",
+        "text": "Squaring converts the numeric error into a string for logging"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "If errors could be negative, a model with predictions +10 too high and -10 too low on two examples would average to an error of 0 — masking real mistakes. Squaring removes the sign, so every error contributes positively, and larger errors are penalized disproportionately more (an error of 4 contributes 16, not just 4). The `**` operator is the direct mechanism that makes this loss function work.",
+    "graph_placement_weight": { "p1_operators": 1.0, "p4_supervised_learning": 0.4 }
   }
 ]

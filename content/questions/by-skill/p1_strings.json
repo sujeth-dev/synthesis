@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "`.join(list)` concatenates the list elements with the string as separator. `','` is the separator; elements `['a', 'b', 'c']` are joined to give `'a,b,c'`."
+  },
+  {
+    "id": "p1_strings_q7",
+    "skill_id": "p1_strings",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Before feeding text into a language model, it must be broken into smaller pieces called tokens. Which basic Python string operation is conceptually closest to a simple, naive word-level tokenizer?",
+    "options": [
+      {
+        "id": "a",
+        "text": "text.strip()"
+      },
+      {
+        "id": "b",
+        "text": "text.split()"
+      },
+      {
+        "id": "c",
+        "text": "text.upper()"
+      },
+      {
+        "id": "d",
+        "text": "text[0]"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "`.split()` breaks a string into a list of pieces on whitespace — the same core idea behind tokenization: breaking continuous text into discrete units a model can process. Real tokenizers used by models like GPT are more sophisticated (they split on subwords using algorithms like byte-pair encoding, not just whitespace), but the underlying goal is identical: turn one long string into a sequence of smaller pieces.",
+    "graph_placement_weight": { "p1_strings": 1.0 }
+  },
+  {
+    "id": "p1_strings_q8",
+    "skill_id": "p1_strings",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why is repeatedly concatenating strings in a loop (e.g., `result = result + next_word` thousands of times) considered inefficient in Python, making `''.join(list_of_words)` the preferred approach for building large text datasets?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Because strings are immutable — each concatenation creates an entirely new string in memory, copying all previous characters again, which gets slower as the string grows"
+      },
+      {
+        "id": "b",
+        "text": "Because Python doesn't allow the `+` operator to be used on strings"
+      },
+      {
+        "id": "c",
+        "text": "Because loops are not allowed to contain string operations"
+      },
+      {
+        "id": "d",
+        "text": "Because `+` only works correctly on numbers, not text"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Because strings can't be changed in place, `result + next_word` builds a brand-new string every single time, re-copying everything accumulated so far. Over thousands of iterations this becomes quadratically slow. `''.join()` instead builds the final string once from a list, which is why it's the standard approach when assembling large text datasets for NLP preprocessing.",
+    "graph_placement_weight": { "p1_strings": 1.0, "p4_data_pipeline": 0.3 }
   }
 ]
