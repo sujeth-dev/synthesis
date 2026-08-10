@@ -70,7 +70,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** `session/engine.ts` tests for at-capacity and over-capacity review-debt scenarios.
 
 ### P0-5 — Arc memory for `selectNextTask()`
-**Status:** not_started
+**Status:** blocked
 **Depends on:** P0-4
 **Doc ref:** `basic-guide.md` Phase 0 item 4, `v2/doc/findings/04-session-flow-no-continuity.md` (Critical, refined 2026-08-09)
 **Do:** Give `selectNextTask()` continuity: stay on a topic until its arc has genuinely reached a good degree of completion (mastery/`p_know` movement, or the concept's practice sequence resolving) — a bounded task count is a fallback cap only, never the primary trigger. Add a one-line bridge shown on an actual topic switch, replacing the bare "Selecting next skill…" reload.

@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None — P0-4 completed successfully.**
+**P0-5 — blocked before implementation.**
 
 ---
 
 ## Next action
 
-Start `MASTER_PLAN.md` task **P0-5 — Arc memory for `selectNextTask()`**.
+Awaiting human input on **P0-5**: confirm the measurable arc-completion threshold and fallback cap described below.
 
 ---
 
@@ -24,6 +24,7 @@ Start `MASTER_PLAN.md` task **P0-5 — Arc memory for `selectNextTask()`**.
 4. **`.env.local` exists locally but is gitignored** (confirmed present, contents not inspected — respecting that it may hold secrets). Any task needing an external API key (notably the NLP-\* track's LLM API key) must confirm the relevant variable exists in `.env.local` before starting, per `DEVELOPMENT_LOOP.md`'s blocker rules — do not assume it's there.
 5. ~~**P0-1/P0-2 contract was underspecified and conflicted with the loop gates.**~~ **Resolved by human direction on 2026-08-10:** add on-load reconciliation while preserving attempt-time `reconcileBktSm2()`; persist refreshed state/schedule; auto-apply current/active-phase reviews but expose past-phase reviews only through learner-selected review mode. Commit P0-1 red and P0-2 green separately locally, then push both together after P0-2 passes.
 6. ~~**P0-4 policy values are unspecified.** ... Recommended default: 10 tasks per normal session, with at most 6 automatic active-phase reviews and at least 4 current/new-topic slots; excess review debt rolls forward by urgency. Explicit review mode may use all 10 slots for reviews.~~ **Resolved by human direction on 2026-08-10 (P0-4):** reviews are consent-based, not force-queued — even current/active-phase reviews are no longer auto-inserted into the task list. At session start, offer a default batch of **5–6 review items** and ask before running them; do not silently run them as mandatory tasks. Once that initial batch is done, continuing further — more reviews, or the rest of the session — requires the learner's voluntary choice each time; nothing auto-continues past the point they were last asked. This supersedes the "automatic active-phase reviews" framing above: reviews are offered, never forced, from the first prompt onward. The 10-task session cap and 4-slot new/current-topic minimum are not overridden by this direction and still stand as the working default; excess review debt still rolls forward by urgency, now simply as more items available to be offered/asked about in future sessions rather than auto-queued.
+7. **P0-5 arc completion is qualitative but needs numeric engine thresholds.** The cited docs require genuine mastery/`p_know` movement with a task-count fallback, but specify neither amount. Recommended policy: hold the current skill until it becomes `mastered` or gains at least **0.15 `p_know`** from the arc start; if neither occurs, switch after **4 tasks** on that skill. A switch bridge can state “You’ve made progress on {old}; now connecting it to {new}.” Human confirmation or alternate thresholds are required before implementation.
 
 ---
 
@@ -54,6 +55,7 @@ Start `MASTER_PLAN.md` task **P0-5 — Arc memory for `selectNextTask()`**.
 
 ## Loop iteration log
 
+- 2026-08-10 — **P0-5 blocked before implementation:** arc completion and fallback are not numerically specified; awaiting confirmation of the recommended +0.15 `p_know` / 4-task fallback policy.
 - 2026-08-10 — **P0-4 done:** enforced consent before any review, a five-item default batch plus one optional sixth, four protected current-topic slots, a 10-task hard cap, and urgency-preserving debt rollover; 12 tests and production build green (`686b786`). UI behavior was verified through the server gate/client state paths and strict build; no browser walkthrough was available in this iteration.
 - 2026-08-10 — **P0-4 direction received:** reviews must be consent-based, not force-queued — offer a default batch of 5–6 review items and ask before running them, and ask again before continuing further (more reviews or the rest of the session) rather than auto-continuing. 10-task session cap and 4-slot new-topic minimum stand unchanged. Ready to resume implementation.
 - 2026-08-10 — **P0-4 blocked before implementation:** the plan gives a 25–45 minute target but no task cap/review allocation; awaiting confirmation of the recommended 10-task, 60%-automatic-review policy.
