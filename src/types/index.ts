@@ -75,6 +75,9 @@ export interface AttemptEvent {
   revision_count: number; error_type: ErrorType; difficulty_tier: DifficultyTier
   question_format: QuestionFormat; attempted_at: string
   p_know_before: number | null; p_know_after: number | null
+  motivation_state: MotivationStateValue | null; consecutive_errors: number | null
+  slow_response_streak: number | null; behavior_modifier: number | null
+  hesitation_ms: number | null
 }
 
 export interface Session {

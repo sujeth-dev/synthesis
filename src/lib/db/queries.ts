@@ -237,6 +237,16 @@ export async function getRecentAttemptsForSkill(learnerId: string, skillId: stri
   return data ?? []
 }
 
+export async function getSessionBehaviorAttempts(learnerId: string, sessionId: string): Promise<AttemptEvent[]> {
+  const { data } = await getDb()
+    .from('attempt_events')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .eq('session_id', sessionId)
+    .order('attempted_at', { ascending: true })
+  return data ?? []
+}
+
 // ─────────────────────────────────────────────
 // MOTIVATION STATE
 // ─────────────────────────────────────────────

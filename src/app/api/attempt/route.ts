@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
-import { deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
+import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
 import { computeUnblocked } from '@/lib/graph'
 import {
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json()
   const { question_id, skill_id, session_id, latency_ms, client_answer,
-          difficulty_tier, question_format } = body
+          difficulty_tier, question_format, revision_count } = body
 
   if (!question_id || !skill_id) return NextResponse.json({ error: 'question_id and skill_id required' }, { status: 400 })
 
@@ -57,6 +57,8 @@ export async function POST(req: NextRequest) {
   }
 
   const safe_latency = Math.min(MAX_LATENCY, Math.max(MIN_LATENCY, latency_ms || 3000))
+  const parsedRevisionCount = Number.isFinite(Number(revision_count)) ? Math.trunc(Number(revision_count)) : 0
+  const safe_revision_count = Math.min(100, Math.max(0, parsedRevisionCount))
 
   // ── Load current state (parallel)
   const [skillState, motivation] = await Promise.all([
@@ -93,6 +95,7 @@ export async function POST(req: NextRequest) {
 
   // ── Update motivation
   const updatedMotivation = updateMotivationState(motivation, correct, safe_latency, updatedState)
+  const behaviorSnapshot = buildAttemptBehaviorSnapshot(updatedMotivation, safe_latency, behaviorModifier)
   await upsertMotivationState(updatedMotivation)
 
   // ── Update skill state
@@ -129,11 +132,12 @@ export async function POST(req: NextRequest) {
   // ── Record attempt
   const attempt_id = await insertAttempt({
     learner_id: user.id, skill_id, question_id, session_id: session_id ?? null,
-    correct, latency_ms: safe_latency, revision_count: 0, error_type: null,
+    correct, latency_ms: safe_latency, revision_count: safe_revision_count, error_type: null,
     difficulty_tier: difficulty_tier as DifficultyTier,
     question_format: question_format as QuestionFormat,
     p_know_before: skillState.p_know,
     p_know_after: updatedState.p_know,
+    ...behaviorSnapshot,
   })
 
   const bktMovement = session_id && isFeynmanAttempt(question_id)
