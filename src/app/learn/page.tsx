@@ -211,9 +211,10 @@ function LearnPanel({ task, explanation, depth, onReady }: LearnPanelProps) {
 function LearnPageInner() {
   const router       = useRouter()
   const searchParams = useSearchParams()
-  const sessionMode  = (searchParams.get('mode') ?? 'learn') as SessionMode
+  const requestedSessionMode = (searchParams.get('mode') ?? 'learn') as SessionMode
   const { track } = useAnalytics()
 
+  const [sessionMode,       setSessionMode]       = useState<SessionMode>(requestedSessionMode)
   const [sessionId,         setSessionId]         = useState<string | null>(null)
   const [task,              setTask]              = useState<SessionTask | null>(null)
   const [phase,             setPhase]             = useState<SessionPhase>('loading')
@@ -229,6 +230,10 @@ function LearnPageInner() {
   const [seenQuestions,     setSeenQuestions]     = useState<string[]>([])
   const [sessionStats,      setSessionStats]      = useState({ correct: 0, total: 0 })
   const [showLearnFirst,    setShowLearnFirst]    = useState(false)
+  const [reviewOffer,       setReviewOffer]       = useState(0)
+  const [additionalReviews, setAdditionalReviews] = useState(0)
+  const [taskLimit,         setTaskLimit]         = useState(10)
+  const [consentPrompt,     setConsentPrompt]     = useState<'start' | 'continue' | null>(null)
 
   function currentMode(): LearningMode {
     if (showLearnFirst && phase === 'question') return 'learn'
@@ -255,32 +260,26 @@ function LearnPageInner() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, task, showLearnFirst])
 
-  // Start session
-  useEffect(() => {
-    async function start() {
-      const r = await fetch('/api/session', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'start' }),
-      })
-      const d = await r.json()
-      if (d.session_id) { setSessionId(d.session_id); track({ name: 'session_start' }) }
-    }
-    start()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const loadNext = useCallback(async (sid: string) => {
+  const loadNext = useCallback(async (
+    sid: string,
+    modeOverride = sessionMode,
+    limitOverride = taskLimit,
+  ) => {
     setPhase('loading')
     setShowLearnFirst(false)
     setPreExplanation(null)
     const r = await fetch('/api/session', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        action: 'next', session_id: sid, mode: sessionMode,
+        action: 'next', session_id: sid, mode: modeOverride, task_limit: limitOverride,
         seen_skills: seenSkills, seen_question_ids: seenQuestions,
       }),
     })
     const d = await r.json()
+    if (d.consent_required) {
+      setConsentPrompt('continue')
+      return
+    }
     if (d.done || !d.task) {
       setPhase('summary'); track({ name: 'session_end' }); return
     }
@@ -305,12 +304,30 @@ function LearnPageInner() {
     }
 
     setPhase('question')
-  }, [seenSkills, seenQuestions, track])
+  }, [seenSkills, seenQuestions, sessionMode, taskLimit, track])
 
+  // Start session
   useEffect(() => {
-    if (sessionId) loadNext(sessionId)
+    async function start() {
+      const r = await fetch('/api/session', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'start' }),
+      })
+      const d = await r.json()
+      if (d.session_id) {
+        const offer = d.review_offer_count ?? 0
+        setSessionId(d.session_id)
+        setReviewOffer(offer)
+        setAdditionalReviews(d.additional_review_count ?? 0)
+        track({ name: 'session_start' })
+        if (offer > 0) setConsentPrompt('start')
+        else if (requestedSessionMode === 'review') setPhase('summary')
+        else loadNext(d.session_id, 'learn', 10)
+      }
+    }
+    start()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId])
+  }, [])
 
   async function submit() {
     if (!task || !sessionId) return
@@ -349,7 +366,90 @@ function LearnPageInner() {
     if (sessionId) loadNext(sessionId)
   }
 
+  function beginReviews() {
+    if (!sessionId) return
+    const limit = Math.max(1, reviewOffer)
+    setSessionMode('review')
+    setTaskLimit(limit)
+    setConsentPrompt(null)
+    loadNext(sessionId, 'review', limit)
+  }
+
+  function beginCurrentTopics() {
+    if (!sessionId) return
+    setSessionMode('learn')
+    setTaskLimit(10)
+    setConsentPrompt(null)
+    loadNext(sessionId, 'learn', 10)
+  }
+
+  function continueOneReview() {
+    if (!sessionId) return
+    const limit = Math.min(reviewOffer + additionalReviews, taskLimit + 1)
+    if (limit === taskLimit) { setPhase('summary'); setConsentPrompt(null); return }
+    setTaskLimit(limit)
+    setConsentPrompt(null)
+    loadNext(sessionId, 'review', limit)
+  }
+
+  async function endVoluntarily() {
+    if (sessionId) {
+      await fetch('/api/session', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'end', session_id: sessionId }),
+      })
+    }
+    setConsentPrompt(null)
+    router.push('/dashboard')
+  }
+
   const isRevealed = ['revealing','explanation','build_task','explain_back'].includes(phase)
+
+  if (consentPrompt) {
+    const continuing = consentPrompt === 'continue'
+    return (
+      <div className="min-h-screen bg-c-bg">
+        <Navbar />
+        <div className="max-w-lg mx-auto px-8 py-24 text-center animate-slide-up">
+          <p className="font-mono text-[12px] text-c-faint uppercase tracking-[0.14em] mb-4">
+            Your choice
+          </p>
+          <h1 className="font-serif italic text-[34px] text-c-text mb-4">
+            {continuing ? 'Continue reviewing?' : `${reviewOffer} reviews are ready`}
+          </h1>
+          <p className="text-[15px] text-c-muted leading-[1.7] mb-9">
+            {continuing
+              ? additionalReviews > 0 && taskLimit < reviewOffer + additionalReviews
+                ? 'Your review batch is complete. Choose one final review, switch to current topics, or stop here.'
+                : 'Your review allocation is complete. Continue with current topics or stop here.'
+              : `Review up to ${reviewOffer} ${reviewOffer === 1 ? 'item' : 'items'} first, start with current topics, or end the session. Nothing runs until you choose.`}
+          </p>
+          <div className="flex flex-col gap-3">
+            {(!continuing || (additionalReviews > 0 && taskLimit < reviewOffer + additionalReviews)) && (
+              <button
+                onClick={continuing ? continueOneReview : beginReviews}
+                className="w-full py-4 rounded-xl border border-[#fbbf24]/40 text-[#fbbf24] hover:bg-[#fbbf24]/10 text-[15px] font-medium transition-all"
+              >
+                {continuing ? 'Do one final review →' : `Review ${reviewOffer} ${reviewOffer === 1 ? 'item' : 'items'} →`}
+              </button>
+            )}
+            <button
+              onClick={beginCurrentTopics}
+              className="w-full py-4 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[15px] font-medium transition-all"
+            >
+              Start current topics →
+            </button>
+            <button
+              onClick={endVoluntarily}
+              className="w-full py-3 text-c-faint hover:text-c-muted text-[13px] transition-colors"
+            >
+              End session
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   // ── Summary screen ─────────────────────────────────────────────────────────
   if (phase === 'summary') {
@@ -365,7 +465,15 @@ function LearnPageInner() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'start' }),
       }).then(r => r.json()).then(d => {
-        if (d.session_id) { setSessionId(d.session_id); loadNext(d.session_id) }
+        if (!d.session_id) return
+        const offer = d.review_offer_count ?? 0
+        setSessionId(d.session_id)
+        setReviewOffer(offer)
+        setAdditionalReviews(d.additional_review_count ?? 0)
+        setPhase('loading')
+        if (offer > 0) setConsentPrompt('start')
+        else if (sessionMode === 'review') setPhase('summary')
+        else loadNext(d.session_id, 'learn', 10)
       })
     }
 

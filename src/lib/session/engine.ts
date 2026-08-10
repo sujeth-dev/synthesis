@@ -6,6 +6,42 @@ import { getNodeById, getAllNodes } from '@/lib/graph'
 import { findActivePhase, buildPhaseGroups } from '@/lib/phases'
 import { deriveUrgency } from '@/lib/sm2/urgency'
 
+export const SESSION_TASK_CAP = 10
+export const CURRENT_TOPIC_MINIMUM = 4
+export const MAX_REVIEW_ITEMS = SESSION_TASK_CAP - CURRENT_TOPIC_MINIMUM
+export const DEFAULT_REVIEW_OFFER_SIZE = MAX_REVIEW_ITEMS - 1
+
+export interface ReviewDebtPlan {
+  reviewOfferCount: number
+  additionalReviewCount: number
+  currentTopicSlots: number
+  deferredReviewCount: number
+}
+
+export function planReviewDebt(overdueReviewCount: number): ReviewDebtPlan {
+  const debt = Math.max(0, Math.floor(overdueReviewCount))
+  const reviewOfferCount = Math.min(debt, DEFAULT_REVIEW_OFFER_SIZE)
+  const additionalReviewCount = Math.min(debt - reviewOfferCount, MAX_REVIEW_ITEMS - reviewOfferCount)
+  return {
+    reviewOfferCount,
+    additionalReviewCount,
+    currentTopicSlots: CURRENT_TOPIC_MINIMUM,
+    deferredReviewCount: debt - reviewOfferCount - additionalReviewCount,
+  }
+}
+
+export type SessionGate = 'continue' | 'consent_required' | 'complete'
+
+export function getSessionGate(
+  tasksCompleted: number,
+  mode: SessionMode,
+  grantedTaskLimit = 0,
+): SessionGate {
+  if (tasksCompleted >= SESSION_TASK_CAP) return 'complete'
+  if (mode === 'review' && tasksCompleted >= Math.max(0, grantedTaskLimit)) return 'consent_required'
+  return 'continue'
+}
+
 // ─── Internal types ────────────────────────────────────────────────────────────
 
 interface Candidate {
@@ -28,8 +64,8 @@ interface SelectTaskParams {
   mode?:                      SessionMode
 }
 
-export function shouldAutoScheduleReview(phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
-  return mode === 'review' || phaseContext === 'active_phase'
+export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
+  return mode === 'review'
 }
 
 // ─── Main selector ─────────────────────────────────────────────────────────────
@@ -126,7 +162,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
 
     const { days_until_due, urgency } = deriveUrgency(schedule.due_at, now)
     const inActive = activePhaseIds.has(skillId)
-    if (!shouldAutoScheduleReview(inActive ? 'active_phase' : 'past_phase', mode)) continue
+    if (!canSelectReview(inActive ? 'active_phase' : 'past_phase', mode)) continue
 
     if (inActive) {
       // Tier 0: active phase overdue review

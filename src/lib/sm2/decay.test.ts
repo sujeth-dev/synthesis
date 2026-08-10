@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import * as sm2 from '@/lib/sm2'
-import { shouldAutoScheduleReview } from '@/lib/session/engine'
+import { canSelectReview } from '@/lib/session/engine'
 import type { LearnerSkillState, ReviewSchedule } from '@/types'
 
 const state: LearnerSkillState = {
@@ -58,9 +58,10 @@ describe('on-load BKT/SM-2 reconciliation', () => {
     expect(result.repetitions).toBe(schedule.repetitions)
   })
 
-  it('keeps past-phase reviews optional outside explicit review mode', () => {
-    expect(shouldAutoScheduleReview('active_phase')).toBe(true)
-    expect(shouldAutoScheduleReview('past_phase')).toBe(false)
-    expect(shouldAutoScheduleReview('past_phase', 'review')).toBe(true)
+  it('requires explicit review mode for active- and past-phase reviews', () => {
+    expect(canSelectReview('active_phase')).toBe(false)
+    expect(canSelectReview('past_phase')).toBe(false)
+    expect(canSelectReview('active_phase', 'review')).toBe(true)
+    expect(canSelectReview('past_phase', 'review')).toBe(true)
   })
 })
