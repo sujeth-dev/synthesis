@@ -6,7 +6,7 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-2A — Guided same-skill learning journey** — in progress after human direction replaced the four-question arc with `Lesson → Beginner 2+ → Intermediate 2+ → Mastery 2+ → optional Reflect`.
+**P2-2A — Guided same-skill learning journey** — engine/UI checkpoint pushed; distinct per-stage question pools and the revised human walkthrough remain.
 
 ---
 
@@ -61,6 +61,7 @@ Complete distinct two-question pools for every Beginner/Intermediate/Mastery sta
 
 ## Loop iteration log
 
+- 2026-08-10 — **P2-2A staged journey checkpoint pushed:** moved the learning content before practice as a true one-slide-at-a-time lesson; replaced ambiguous per-question dots with persistent `Lesson → Beginner → Intermediate → Mastery → Reflect` checkpoints; separated stage question count from 0/2–2/2 readiness evidence; and made continuation name the exact next stage/question. The same skill remains pinned, two consecutive correct answers advance, mixed evidence holds, and two misses step down. Moving from reviews into learning now starts a fresh session so the approved 5+1 review allocation is preserved. All 47 tests and the production build are green (`afa93ab`). P2-2A remains open because the 45 current question files do not yet each contain two explicitly classified questions per stage, and the revised rendered walkthrough is still required.
 - 2026-08-10 — **P2-2A implementation pushed; visual verification blocked:** unified direct and automatic learning into one pinned skill arc, added four-question-plus-mastery switching, adaptive review/same/harder movement, question-first discovery, ordered explanation blocks, voluntary exit, and retained Feynman submission support. All 46 tests and the production build are green (`d87ce74`); rendered interaction verification is blocked by the local computer-use runtime error recorded above.
 - 2026-08-10 — **P2-2 done:** human confirmed the required dashboard, graph, and direct-skill walkthrough after implementation; the repeated 41-test suite and production build remain green (`e01c93c`).
 - 2026-08-10 — **P2-2 implementation pushed; verification blocked:** applied the locked craft/forest/orange/gold palette, typography roles, blueprint grid, Orbit colors, editorial section rules, reading typography, and shared key-insight-first disclosure across all three explanation paths. The source contract, 41-test suite, and production build are green (`e01c93c`), but the required authenticated manual walkthrough remains blocked by the local computer-use plugin bootstrap error recorded above.
