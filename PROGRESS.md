@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**BLOOM-1 — Define checkable skill-granularity rules** — in progress because P2-3 is gated on BLOOM-6.
+**P2-2A — Guided same-skill learning arc** — in progress by human direction; supersedes the one-question direct-skill flow.
 
 ---
 
 ## Next action
 
-Define deterministic rules for when related sub-concepts share one `skill_id` versus split into separate skills, grounded in the existing graph and BKT assumptions.
+Build a shared four-question, discovery-first skill arc with adaptive easier/medium/harder progression, incremental explanation steps, voluntary exit, and no automatic topic switching.
 
 ---
 
@@ -28,6 +28,7 @@ Define deterministic rules for when related sub-concepts share one `skill_id` ve
 8. **New direction (2026-08-10): stop showing raw `p_know`/`p_start` percentages to learners anywhere.** Replace with a 3-tier label — Beginner / Intermediate / Mastered — on every learner-facing surface (`SkillDetailPanel.tsx`'s "62% known" text + percentage-labeled mastery bar caption, dashboard mastery percentages, any other raw-percentage display). Proposed mapping, reusing existing engine constants rather than inventing new ones (`src/lib/bkt/index.ts`): Beginner = `p_know < LEARNING_THRESHOLD (0.30)`, Intermediate = `0.30 ≤ p_know < MASTERY_THRESHOLD (0.65)`, Mastered = `p_know ≥ 0.65`. `fragile` state (decayed-from-mastered, `< FRAGILE_THRESHOLD` 0.55) folds into the Intermediate tier for display purposes only — flagged as an assumption, not explicitly confirmed. Filed as new task **P0-8** in `MASTER_PLAN.md`.
 9. ~~**P1-1 and P1-2 currently duplicate classifier responsibility.**~~ **Resolved by human direction on 2026-08-10:** combine classifier implementation into P1-1 (rather than keeping the documented split). P1-2 is retired; its scope (pure classifier function + unit tests) now lives inside P1-1. `MASTER_PLAN.md` updated: P1-1 merged, P1-2 marked retired, P1-3/P1-5/NLP-1 dependency edges repointed from P1-2 to P1-1.
 10. ~~**P2-2 manual walkthrough unavailable:** the implementation is committed and pushed (`e01c93c`), the progressive-disclosure source contract passes, all 41 tests pass, and the production build succeeds. The required browser walkthrough could not start because the installed `computer-use` plugin failed during bootstrap.~~ **Resolved by human confirmation on 2026-08-10:** the dashboard, graph, and direct-skill walkthrough is complete; P2-2 is accepted.
+11. **BLOOM-1 paused by human reprioritization:** its documentation draft is preserved in `stash@{0}` (`wip BLOOM-1 before guided learning arc`). Resume it after P2-2A by applying that stash; the unrelated `.gitignore`, `.mcp.json`, and `CLAUDE.md` files are not part of the stash.
 
 ---
 

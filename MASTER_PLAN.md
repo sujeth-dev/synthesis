@@ -123,7 +123,7 @@ Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s
 
 | ID | Status | Task | Depends on |
 |---|---|---|---|
-| BLOOM-1 | in_progress | Define checkable skill-granularity rules (when two sub-concepts = one `skill_id` vs. two) | none |
+| BLOOM-1 | not_started | Define checkable skill-granularity rules (when two sub-concepts = one `skill_id` vs. two) | none |
 | BLOOM-2 | not_started | Add `bloom_level` to `Question`/`SkillNode` schema (`src/types/index.ts`) as closed, versioned vocabulary | BLOOM-1 |
 | BLOOM-3 | not_started | Extend `scripts/validate-content.js`: bank-size minimums, tier coverage, tag-vocabulary closure | BLOOM-2 |
 | BLOOM-4 | not_started | Retrofit `bloom_level` onto the 45 currently-populated skills | BLOOM-2, BLOOM-3 |
@@ -227,6 +227,19 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Do:** Re-skin `dashboard`, `graph`, `learn/skill/[skill_id]` to the locked Seven Worlds design spec. Fold in Finding 05's progressive-disclosure fix in the same pass: `LearnPanel`/`ExplanationPanel` show a short `key_insight`-led opening with full body on demand, instead of rendering the full body immediately.
 **Acceptance criteria:** manual walkthrough confirms all three re-skinned pages match the design spec's Priority-1 screens and don't regress the April UI/UX audit's contrast/size baseline; progressive disclosure verified by confirming full `body` is not rendered until explicitly expanded.
 **Required tests:** component test (or manual, documented in PROGRESS.md if no component-test harness exists yet) confirming `key_insight` renders first and full body is gated behind an explicit action.
+
+### P2-2A — Guided same-skill learning arc
+**Status:** in_progress · **Depends on:** P2-2
+**Doc ref:** human direction 2026-08-10; discovery-first standard in `v2/doc/vision/discovery-model.md` §1; P0-5 continuity policy
+**Do:** Replace the one-question direct-skill mini-session and one-page explanation reveal with one shared, discovery-first learning arc. Pin the chosen skill, begin with an easier question, move through medium and harder evidence as answers succeed, step difficulty down after errors, and require a natural four-question arc before offering topic completion/switching. The learner may explicitly end the session at any point; the engine never switches topics automatically. Reveal the concept explanation in small ordered blocks after the initial attempt instead of presenting a full page at once, and retain the learner-chosen Feynman Loop.
+**Acceptance criteria:**
+- Both `/learn` and `/learn/skill/[skill_id]` enter the same pinned-skill flow; answering one question cannot navigate to another skill.
+- The default arc contains at least four attempts on the chosen skill unless the learner explicitly exits.
+- Difficulty begins at `review` (easier), moves one level toward `same`/`harder` after success, and moves one level down after an error, using unseen questions when available.
+- A discovery question appears before the explanation; explanation content is revealed as ordered, learner-advanced blocks rather than one full body reveal.
+- Topic switching remains learner-chosen and is unavailable before both the existing `p_know >= 0.60` gate and the four-question minimum are met.
+- The Feynman Loop remains accessible as an optional learning step.
+**Required tests:** unit tests for adaptive tier movement and the combined switch gate; source/component contract covering direct-route unification, question-first ordering, incremental explanation blocks, voluntary exit, and retained Feynman access.
 
 ### P2-3 — Complete Phases 4-8 content, discovery-first
 **Status:** not_started · **Depends on:** BLOOM-6, Phase 1 done
