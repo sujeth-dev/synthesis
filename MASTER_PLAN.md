@@ -45,7 +45,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Status:** done
 **Depends on:** P0-1
 **Doc ref:** `basic-guide.md` Phase 0 item 1, Promise #5, corrected Critical Fixes item 3
-**Do:** Add on-load BKT/SM-2 reconciliation in `src/lib/sm2/index.ts` so `p_know` decay applies on every session load keyed off `urgency.ts`'s overdue calculation. Keep the existing attempt-time `reconcileBktSm2()` behavior unchanged. Persist refreshed learner state/schedule before task selection. Active-phase/current-flow overdue topics remain automatic candidates; past-phase topics become optional and enter a session only through learner-selected review mode.
+**Do:** Add on-load BKT/SM-2 reconciliation in `src/lib/sm2/index.ts` so `p_know` decay applies on every session load keyed off `urgency.ts`'s overdue calculation. Keep the existing attempt-time `reconcileBktSm2()` behavior unchanged. Persist refreshed learner state/schedule before task selection. ~~Active-phase/current-flow overdue topics remain automatic candidates; past-phase topics become optional.~~ **Superseded by the P0-4 consent decision:** every review is optional, including active-phase reviews.
 **Acceptance criteria:**
 - P0-1's test now passes.
 - Any existing mastery-loss-edge-case behavior is unchanged (add a regression test for it if one doesn't exist).
@@ -62,11 +62,11 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** `bkt` unit tests covering at least: baseline correctness-only, degraded-reasoning-modifier, degraded-behavior-modifier, combined.
 
 ### P0-4 — Session length + review-debt policy
-**Status:** blocked
+**Status:** done
 **Depends on:** P0-2 (needs real decay to define debt meaningfully)
 **Doc ref:** `basic-guide.md` Phase 0 item 3, Critical Fixes items 2 & 4, `v2/doc/findings/02-session-length-review-debt.md`
-**Do:** Define session length and review-debt policy explicitly (as named constants/config, not implicit control flow) in `src/lib/session/engine.ts` — what happens when overdue reviews exceed session capacity.
-**Acceptance criteria:** policy is named/documented in code; test covering behavior when overdue-review count exceeds session capacity (some defined, deterministic degradation — not silent drop or crash).
+**Do:** Define the policy as named constants/config in `src/lib/session/engine.ts`: 10-task cap, at least 4 current/new-topic slots, a consent-gated initial offer of up to 5 reviews, and one optional sixth review after renewed consent. No review—active or past phase—is selected in normal mode. Excess debt rolls forward by urgency.
+**Acceptance criteria:** policy is named/documented in code; tests cover at-capacity and over-capacity debt; session start reports the bounded review offer; no review runs before consent; normal sessions cap at 10; review mode pauses after its initial batch and requires renewed consent for each additional item.
 **Required tests:** `session/engine.ts` tests for at-capacity and over-capacity review-debt scenarios.
 
 ### P0-5 — Arc memory for `selectNextTask()`
