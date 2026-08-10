@@ -37,6 +37,16 @@ describe('guided explanation contract', () => {
         question.format === 'mcq' && question.difficulty_tier === 'review'
       )
       expect(easierMcqs.length, file).toBeGreaterThanOrEqual(2)
+
+      const sameMcqs = skillQuestions.filter(question =>
+        question.format === 'mcq' && question.difficulty_tier === 'same'
+      )
+      expect(sameMcqs.length, file).toBeGreaterThanOrEqual(2)
+
+      const harderMcqs = skillQuestions.filter(question =>
+        question.format === 'mcq' && question.difficulty_tier === 'harder'
+      )
+      expect(harderMcqs.length, file).toBeGreaterThanOrEqual(2)
     }
   })
 
