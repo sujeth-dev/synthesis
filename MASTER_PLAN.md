@@ -95,7 +95,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** unit tests for the tier-mapping function at boundary values; component check confirming no raw percentage text renders.
 
 ### P0-6 — Core test suite
-**Status:** not_started
+**Status:** done
 **Depends on:** P0-0 (P0-1 through P0-5 will have already seeded partial coverage)
 **Doc ref:** `basic-guide.md` Phase 0 item 5
 **Do:** Fill in remaining test coverage for `bkt/`, `sm2/`, `motivation/`, `session/engine.ts` beyond what P0-1..P0-5 already added, so all four modules have direct test coverage of their exported functions.

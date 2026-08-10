@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None in progress.** `P0-8` is complete and pushed.
+**None in progress.** `P0-6` is complete and pushed.
 
 ---
 
 ## Next action
 
-Start **P0-6 — Core test suite** (next `not_started` task in document order; dependency met).
+Start **P0-7 — Remove dead Supabase-migration debris** (next `not_started` task in document order; dependency met).
 
 ---
 
@@ -56,6 +56,7 @@ Start **P0-6 — Core test suite** (next `not_started` task in document order; d
 
 ## Loop iteration log
 
+- 2026-08-10 — **P0-6 done:** completed direct test coverage for all 20 exported functions across BKT, SM-2/urgency, motivation, and the session engine; added deterministic mastery-boundary, scheduling, urgency, evidence, state-transition, message, and review-consent checks. The full 29-test suite and production build are green (`bddd7bd`).
 - 2026-08-10 — **P0-8 done:** replaced learner-facing raw mastery percentages and Ready/Learning/Fragile labels with Beginner/Intermediate/Mastered across session, dashboard, graph, detail-panel, and direct-skill displays; retained non-numeric progress-bar fills; added exact 0.29/0.30 and 0.64/0.65 boundary coverage plus a recursive source-contract check. The full 17-test suite and production build are green, and the required mastery-percentage grep is clean (`f38a79b`).
 - 2026-08-10 — **P0-5 done:** pinned normal-session selection to the learner's current topic indefinitely, added the exact 0.60 stay-or-switch gate, exposed every unlocked topic as a free switch destination, and rendered tier-only choice/bridge copy; 15 tests and production build green (`c101479`). The UI criteria were verified through source-path inspection plus the strict production build because no UI test harness exists yet; no browser walkthrough was performed.
 - 2026-08-10 — **P0-5 direction received, unblocked; new task P0-8 filed:** no automatic topic-switch under any circumstance (task-count fallback dropped); learner offered an explicit stay/switch choice once `p_know` reaches 0.60; switching lets the learner pick any unlocked topic, not the engine's next pick; free manual navigation via graph/dashboard unaffected. Separately, all raw `p_know`/`p_start` percentages must be replaced with Beginner/Intermediate/Mastered tier labels across learner-facing surfaces — filed as `P0-8`. Docs updated; no code changed yet — awaiting explicit go-ahead to implement.
