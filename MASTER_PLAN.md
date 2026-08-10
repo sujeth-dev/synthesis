@@ -216,7 +216,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 ## Phase 2 — Analytics & Content Completion (Promise #6)
 
 ### P2-1 — Persist motivation-FSM signals
-**Status:** not_started · **Depends on:** Phase 1 done
+**Status:** done · **Depends on:** Phase 1 done
 **Do:** Persist latency/streak/retry/hesitation signals (already computed live in `motivation/index.ts`) into a queryable analytics layer, per attempt — not just live FSM state.
 **Acceptance criteria:** querying the persisted store for a known simulated session returns the same signal values the live FSM computed during that session.
 **Required tests:** integration test comparing live-computed vs. persisted-and-reread signal values.

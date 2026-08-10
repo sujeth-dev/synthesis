@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-None — Phase 1 is complete and pushed; the loop is between clean task iterations.
+None — P2-1 is committed and pushed; the loop is between clean task iterations.
 
 ---
 
 ## Next action
 
-Start **P2-1 — Persist motivation-FSM signals** (depends on Phase 1, done).
+Start **P2-2 — Re-skin to Seven Worlds design spec + Finding 05 fix** (depends on Phase 1, done).
 
 ---
 
@@ -57,6 +57,7 @@ Start **P2-1 — Persist motivation-FSM signals** (depends on Phase 1, done).
 
 ## Loop iteration log
 
+- 2026-08-10 — **P2-1 done:** persisted each attempt's bounded retry count plus the live motivation state, consecutive-error streak, slow-response streak, BKT behavior modifier, and threshold-derived hesitation time; added a session-scoped analytics query and an insert-to-reread integration fixture proving exact signal parity. Full 40-test suite and production build green (`898c094`).
 - 2026-08-10 — **P1-5 and Phase 1 done:** documented the NLP/LLM live-upgrade trigger beside `classifyExplanation()` and in both roadmap sources: promote an API grader only after reliable improvement against the same 50-200 human-labeled examples, retain rules as the hard fallback, and require human sign-off for live BKT cutover. The transcript/classifier acceptance run (8 tests), full 39-test suite, and production build are green (`698e7e4`).
 - 2026-08-10 — **P1-4 done:** persisted BKT before/after snapshots on each attempt, added a migration-safe same-skill query, and compute each Feynman session's movement against up to five earlier plain sessions from real attempt records; the hand-calculated fixture confirms a 0.09 plain average versus 0.21 Feynman movement. Full 39-test suite and production build green (`ece0f17`).
 - 2026-08-10 — **P1-3 done:** replaced `/api/attempt`'s hardcoded `reasoningQuality: 1` stub with P1-1's real classifier — whenever `question_format === 'explain'`, the submitted text is classified and mapped to an evidence modifier (`reasoningQualityFromCategory`: meaning-included 1, method-only 0.6, gap 0.3) before reaching `bktUpdate()`; non-explain formats keep the neutral modifier since there's no free-text reasoning to evaluate. Added an end-to-end classifier→bktUpdate test in `bkt/index.test.ts` confirming a "gap" classification measurably lowers the posterior versus "meaning-included" (which matches the neutral baseline). 38-test suite and production build green.
