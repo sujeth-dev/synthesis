@@ -161,12 +161,12 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section B.
 | FSRS-5 | Switch live scheduling to FSRS (only after FSRS-4 looks right — human sign-off recommended before this one, see `DEVELOPMENT_LOOP.md` blocker rules) | FSRS-4 |
 | FSRS-6 | *(Optional, needs 5k+ real review events)* Refit FSRS's 17 parameters to Synaptic's own users | FSRS-5 |
 
-### NLP/LLM reasoning grader (start once P1-2's rule-based classifier exists)
+### NLP/LLM reasoning grader (start once P1-1's rule-based classifier exists)
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C.
 
 | ID | Task | Depends on |
 |---|---|---|
-| NLP-1 | Collect 50-200 labeled real/hand-authored explanation examples | P1-2 |
+| NLP-1 | Collect 50-200 labeled real/hand-authored explanation examples | P1-1 |
 | NLP-2 | Design the rubric-based grading prompt for the LLM API, versioned | NLP-1 |
 | NLP-3 | Run the API grader against the validation set; measure agreement (e.g. Cohen's kappa) vs. human labels | NLP-2 |
 | NLP-4 | Wire in the rule-based classifier as a hard fallback on API failure/timeout | NLP-3 |
@@ -179,21 +179,19 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C.
 
 Scope decision (2026-08-09, see `basic-guide.md` Phase 1 header and `v2/doc/vision/discovery-model.md` §7): build against **existing** explanation-first content. Discovery-first authoring applies to new content starting at P2-3.
 
-### P1-1 — Feynman Loop teaching-canvas interaction
+### P1-1 — Feynman Loop teaching-canvas interaction + rule-based reasoning classifier
 **Status:** blocked · **Depends on:** Phase 0 done
-**Do:** Build the rule-based branching interaction per `13-content-structure.md`'s Feynman Loop transcript (the concrete spec) — classifies free-text explanation into method-only / meaning-included / gap.
+**Do:** Build the rule-based branching interaction per `13-content-structure.md`'s Feynman Loop transcript (the concrete spec), including the classifier itself (method-only / meaning-included / gap) as a pure function consuming the canvas's captured free text — not bundled invisibly into UI code.
 **Acceptance criteria:** running the transcript from `13-content-structure.md` through the built interaction produces the same branch outcomes it specifies (acceptance script, see Verification below).
 **Required tests:** classifier unit tests for each of the 3 categories + at least one ambiguous/edge input.
 
-### P1-2 — Rule-based reasoning classifier
-**Status:** not_started · **Depends on:** P1-1
-**Do:** Implement the classifier function (method-only / meaning-included / gap) consuming P1-1's captured free text.
-**Acceptance criteria:** same as P1-1's acceptance script; classifier is a pure function with direct unit tests (not bundled invisibly into UI code).
-**Required tests:** unit tests, one per category minimum.
+### P1-2 — retired
+**Status:** retired (2026-08-10, human direction) · superseded by P1-1
+Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strategy split (Promise #1 UI vs. Promise #2 classifier). Human direction: combine the classifier into P1-1 rather than keep them separate. All P1-2 work now happens under P1-1; downstream tasks that depended on P1-2 now depend on P1-1 directly.
 
 ### P1-3 — Wire gap-detection into BKT reasoning-quality modifier
-**Status:** not_started · **Depends on:** P1-2, P0-3
-**Do:** Replace P0-3's stub/neutral reasoning-quality modifier with P1-2's real classifier output.
+**Status:** not_started · **Depends on:** P1-1, P0-3
+**Do:** Replace P0-3's stub/neutral reasoning-quality modifier with P1-1's real classifier output.
 **Acceptance criteria:** P0-3's combined-evidence test suite now exercises a real (non-stub) reasoning-quality signal end to end; add a test confirming a "gap" classification measurably differs from "meaning-included" in the resulting posterior.
 **Required tests:** integration test, classifier → `bktUpdate()`.
 
@@ -204,12 +202,12 @@ Scope decision (2026-08-09, see `basic-guide.md` Phase 1 header and `v2/doc/visi
 **Required tests:** unit test with a fixture session proving the computed comparison matches hand-calculated expected movement.
 
 ### P1-5 — Document NLP/LLM upgrade trigger
-**Status:** not_started · **Depends on:** P1-2
+**Status:** not_started · **Depends on:** P1-1
 **Do:** Document (in code comments near the classifier, and in this repo's docs) the condition under which P2's classifier gets replaced/augmented by the NLP-track grader — not a build task, a documented trigger.
 **Acceptance criteria:** a markdown note or code comment stating the trigger condition exists and is findable from the classifier's source location.
 **Required tests:** none (documentation task).
 
-**Phase 1 is `done` when:** P1-1 through P1-5 are `done`, `npm test` green, acceptance script from `13-content-structure.md` passes.
+**Phase 1 is `done` when:** P1-1, P1-3, P1-4, P1-5 are `done` (P1-2 retired, absorbed into P1-1), `npm test` green, acceptance script from `13-content-structure.md` passes.
 
 ---
 
