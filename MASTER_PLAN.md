@@ -229,14 +229,16 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Required tests:** component test (or manual, documented in PROGRESS.md if no component-test harness exists yet) confirming `key_insight` renders first and full body is gated behind an explicit action.
 
 ### P2-2A — Guided same-skill learning arc
-**Status:** blocked · **Depends on:** P2-2
+**Status:** in_progress · **Depends on:** P2-2
 **Doc ref:** human direction 2026-08-10; discovery-first standard in `v2/doc/vision/discovery-model.md` §1; P0-5 continuity policy
-**Do:** Replace the one-question direct-skill mini-session and one-page explanation reveal with one shared, discovery-first learning arc. Pin the chosen skill, begin with an easier question, move through medium and harder evidence as answers succeed, step difficulty down after errors, and require a natural four-question arc before offering topic completion/switching. The learner may explicitly end the session at any point; the engine never switches topics automatically. Reveal the concept explanation in small ordered blocks after the initial attempt instead of presenting a full page at once, and retain the learner-chosen Feynman Loop.
+**Do:** Replace the one-question direct-skill mini-session with one shared guided arc. Pin the chosen skill and present its learning content as an intentional slide-by-slide lesson **before** practice. Then run a continuous four-question practice sequence: begin easier, move through medium and harder evidence as answers succeed, and step difficulty down after errors. Post-answer UI gives compact feedback and advances within the same visible arc; it must not restart or replay the lesson. The learner may explicitly end the session at any point; the engine never switches topics automatically. After the minimum practice sequence and mastery gate, retain learner-chosen topic switching and the optional Feynman reflection.
 **Acceptance criteria:**
 - Both `/learn` and `/learn/skill/[skill_id]` enter the same pinned-skill flow; answering one question cannot navigate to another skill.
 - The default arc contains at least four attempts on the chosen skill unless the learner explicitly exits.
 - Difficulty begins at `review` (easier), moves one level toward `same`/`harder` after success, and moves one level down after an error, using unseen questions when available.
-- A discovery question appears before the explanation; explanation content is revealed as ordered, learner-advanced blocks rather than one full body reveal.
+- Before question 1, learning content appears as ordered, learner-advanced slides rather than one full page; the practice sequence begins only after the lesson is completed.
+- One persistent arc indicator communicates `Lesson → Question 1/4 → … → Question 4/4 → Reflect`; it never presents one question as if the whole skill were finished.
+- Post-answer feedback is compact and the primary action says which question comes next; it does not reopen the lesson or reset the progress model.
 - Topic switching remains learner-chosen and is unavailable before both the existing `p_know >= 0.60` gate and the four-question minimum are met.
 - The Feynman Loop remains accessible as an optional learning step.
 **Required tests:** unit tests for adaptive tier movement and the combined switch gate; source/component contract covering direct-route unification, question-first ordering, incremental explanation blocks, voluntary exit, and retained Feynman access.

@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-2A — Guided same-skill learning arc** — implementation pushed; blocked only on rendered interaction verification.
+**P2-2A — Guided same-skill learning arc** — in progress after the first walkthrough rejected the lesson timing and ambiguous progress UI.
 
 ---
 
 ## Next action
 
-Await a human walkthrough of one direct-skill arc, or repair of the local computer-use plugin, before marking P2-2A done.
+Move learning slides before practice, replace per-question mode dots with persistent four-question arc progress, and make post-answer continuation unambiguous.
 
 ---
 
@@ -29,7 +29,7 @@ Await a human walkthrough of one direct-skill arc, or repair of the local comput
 9. ~~**P1-1 and P1-2 currently duplicate classifier responsibility.**~~ **Resolved by human direction on 2026-08-10:** combine classifier implementation into P1-1 (rather than keeping the documented split). P1-2 is retired; its scope (pure classifier function + unit tests) now lives inside P1-1. `MASTER_PLAN.md` updated: P1-1 merged, P1-2 marked retired, P1-3/P1-5/NLP-1 dependency edges repointed from P1-2 to P1-1.
 10. ~~**P2-2 manual walkthrough unavailable:** the implementation is committed and pushed (`e01c93c`), the progressive-disclosure source contract passes, all 41 tests pass, and the production build succeeds. The required browser walkthrough could not start because the installed `computer-use` plugin failed during bootstrap.~~ **Resolved by human confirmation on 2026-08-10:** the dashboard, graph, and direct-skill walkthrough is complete; P2-2 is accepted.
 11. **BLOOM-1 paused by human reprioritization:** its documentation draft is preserved in `stash@{0}` (`wip BLOOM-1 before guided learning arc`). Resume it after P2-2A by applying that stash; the unrelated `.gitignore`, `.mcp.json`, and `CLAUDE.md` files are not part of the stash.
-12. **P2-2A rendered walkthrough unavailable:** implementation is committed and pushed (`d87ce74`); all 46 tests pass and the production build succeeds. The required source contracts cover pinned direct-route entry, question-first ordering, four-question switching gate, adaptive tier movement, incremental explanation blocks, voluntary exit, and retained Feynman access. Windows verification could not start because the installed `computer-use` plugin still fails during bootstrap with `Package subpath './dist/project/cua/sky_js/src/targets/windows/internal/computer_use_client_base.js' is not defined by "exports" in ...\@oai\sky\package.json`. **Needed:** manually open a skill from dashboard/graph and confirm: the URL enters the shared guided flow; question 1 appears before explanation; “Explore why” reveals one numbered building block per click; “Next question” retains the skill and changes difficulty from easier toward medium/harder (or down after a wrong answer); no topic switch appears before question 4; “end session” remains available; and the optional Feynman Loop opens after the explanation.
+12. ~~**P2-2A rendered walkthrough unavailable:** implementation was pushed (`d87ce74`) but could not be inspected automatically because the local computer-use runtime failed.~~ **Resolved by human walkthrough feedback on 2026-08-10:** the implementation is not accepted yet. Learning slides belong before question 1, not after each answer; the existing mode dots incorrectly imply completion after one question; clicking “Next question” feels like a restart. P2-2A is reopened with the corrected `Lesson → Question 1/4 → … → Reflect` contract above.
 
 ---
 
