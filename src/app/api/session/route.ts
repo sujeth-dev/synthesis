@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
-import { getSessionGate, MAX_REVIEW_ITEMS, planReviewDebt, selectNextTask, SESSION_TASK_CAP } from '@/lib/session/engine'
+import { getGuidedArcProgress, getSessionGate, MAX_REVIEW_ITEMS, planReviewDebt, selectNextTask, SESSION_TASK_CAP } from '@/lib/session/engine'
 import { getAllNodes, getHardPrereqs } from '@/lib/graph'
 import { initSkillState } from '@/lib/bkt'
 import { initSM2, reconcileBktSm2OnLoad } from '@/lib/sm2'
@@ -158,7 +158,11 @@ export async function POST(req: NextRequest) {
       })
 
       if (!task) return NextResponse.json({ task: null, done: true })
-      return NextResponse.json({ task, done: false })
+      return NextResponse.json({
+        task,
+        done: false,
+        ...(pinnedSkillId && { guided_arc: getGuidedArcProgress(arcHistory) }),
+      })
     }
 
     if (action === 'end') {

@@ -1,14 +1,17 @@
 'use client'
 import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import type { SessionTask, Explanation, ExplanationDepth, SessionPhase, TaskReason, SessionMode, ReviewUrgency } from '@/types'
+import type {
+  SessionTask, Explanation, ExplanationDepth, SessionPhase, TaskReason, SessionMode,
+  ReviewUrgency, GuidedArcProgress, GuidedArcStage,
+} from '@/types'
 import { QuestionCard }     from '@/components/learning/QuestionCard'
 import { FeedbackBanner }   from '@/components/learning/FeedbackBanner'
-import { ExplanationPanel } from '@/components/learning/ExplanationPanel'
 import { MotivationBanner } from '@/components/learning/MotivationBanner'
 import { Spinner }          from '@/components/ui/Spinner'
 import { Navbar }           from '@/components/layout/Navbar'
 import { FeynmanLoop }      from '@/components/learning/FeynmanLoop'
+import { GuidedLesson }     from '@/components/learning/GuidedLesson'
 import { useAnalytics }     from '@/hooks/useAnalytics'
 import { getMasteryTier, type MasteryTier } from '@/lib/bkt'
 
@@ -66,77 +69,95 @@ function ReasonPill({ reason, pKnow }: { reason: TaskReason; pKnow: number }) {
   )
 }
 
-// ─── Learning Mode Step Bar ───────────────────────────────────────────────────
+// ─── Persistent skill-arc progress ───────────────────────────────────────────
 
-type LearningMode = 'learn' | 'practice' | 'apply' | 'review'
-
-interface ModeStep { id: LearningMode; label: string }
-
-const MODE_STEPS: ModeStep[] = [
-  { id: 'learn',    label: 'Learn'    },
-  { id: 'practice', label: 'Practice' },
-  { id: 'apply',    label: 'Apply'    },
-  { id: 'review',   label: 'Review'   },
+const QUESTIONS_PER_STAGE = 2
+const PRACTICE_STAGES: { id: GuidedArcStage; label: string }[] = [
+  { id: 'beginner', label: 'Beginner' },
+  { id: 'intermediate', label: 'Intermediate' },
+  { id: 'mastery', label: 'Mastery' },
 ]
+const EMPTY_GUIDED_ARC: GuidedArcProgress = {
+  stage: 'beginner',
+  stage_attempt_count: 0,
+  stage_correct_streak: 0,
+  completed_stage_count: 0,
+  core_complete: false,
+  total_attempt_count: 0,
+}
 
-function ModeBar({
-  activeMode,
-  hasApply,
-  hasReview,
+function stageLabel(stage: GuidedArcStage): string {
+  return PRACTICE_STAGES.find(item => item.id === stage)?.label ?? 'Beginner'
+}
+
+function ArcProgress({
+  phase,
+  lessonComplete,
+  progress,
 }: {
-  activeMode: LearningMode
-  hasApply:   boolean
-  hasReview:  boolean
+  phase: SessionPhase
+  lessonComplete: boolean
+  progress: GuidedArcProgress
 }) {
-  const visible = MODE_STEPS.filter(s => {
-    if (s.id === 'apply'  && !hasApply)  return false
-    if (s.id === 'review' && !hasReview) return false
-    return true
-  })
-  const activeIdx = visible.findIndex(s => s.id === activeMode)
+  const currentStageIndex = PRACTICE_STAGES.findIndex(item => item.id === progress.stage)
+  const status = phase === 'lesson'
+    ? 'Learn the idea one slide at a time'
+    : phase === 'feynman'
+      ? 'Optional reflection'
+      : progress.core_complete
+        ? `Core journey complete · ${progress.total_attempt_count} questions answered`
+        : `${stageLabel(progress.stage)} · question ${progress.stage_attempt_count + 1} · ${progress.stage_correct_streak}/${QUESTIONS_PER_STAGE} ready`
 
   return (
-    <div className="flex items-center gap-2.5 mb-6">
-      {visible.map((step, idx) => {
-        const isPast   = idx < activeIdx
-        const isActive = idx === activeIdx
-        return (
-          <div key={step.id} className="flex items-center gap-2.5">
-            {idx > 0 && (
-              <div className={`h-px w-8 ${isPast ? 'bg-c-purple' : 'bg-[var(--border-hi)]'}`} />
-            )}
-            <div className="flex items-center gap-2">
-              {/* Larger circle: w-5 h-5 */}
-              <div
-                className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold ${
-                  isPast
-                    ? 'bg-c-purple text-white'
-                    : isActive
-                    ? 'bg-c-purple/20 border-2 border-c-purple text-c-purple'
-                    : 'bg-c-bg3 border border-[var(--border)] text-c-ghost'
-                }`}
-              >
-                {isPast ? (
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                ) : (
-                  idx + 1
-                )}
-              </div>
-              {/* Bigger label: 12px */}
-              <span
-                className={`text-[12px] font-mono font-medium ${
-                  isActive ? 'text-c-purple' : isPast ? 'text-c-muted' : 'text-c-ghost'
-                }`}
-              >
-                {step.label}
-              </span>
+    <div className="mb-7 rounded-2xl border border-[var(--border)] bg-c-bg2 px-5 py-4">
+      <div className="mb-3 flex items-center justify-between gap-4">
+        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-c-purple">{status}</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-c-ghost">One skill · one journey</p>
+      </div>
+      <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-5" aria-label="Skill journey progress">
+        <div className={`rounded-lg border px-2 py-2 text-center font-mono text-[10px] ${
+          lessonComplete
+            ? 'border-c-green/35 bg-c-green/[0.10] text-c-green'
+            : phase === 'lesson'
+              ? 'border-c-purple/50 bg-c-purple/[0.10] text-c-purple'
+              : 'border-[var(--border)] bg-c-bg3 text-c-ghost'
+        }`}>
+          {lessonComplete ? '✓ ' : ''}Lesson
+        </div>
+        {PRACTICE_STAGES.map((item, index) => {
+          const complete = progress.core_complete || index < progress.completed_stage_count
+          const active = !progress.core_complete && index === currentStageIndex && phase !== 'lesson'
+          const count = complete ? QUESTIONS_PER_STAGE : active ? progress.stage_correct_streak : 0
+          return (
+            <div
+              key={item.id}
+              className={`rounded-lg border px-2 py-2 text-center font-mono text-[10px] transition-colors ${
+                complete
+                  ? 'border-c-green/35 bg-c-green/[0.10] text-c-green'
+                  : active
+                    ? 'border-c-purple/50 bg-c-purple/[0.10] text-c-purple'
+                    : 'border-[var(--border)] bg-c-bg3 text-c-ghost'
+              }`}
+            >
+              <span className="block">{complete ? '✓ ' : ''}{item.label}</span>
+              <span className="mt-0.5 block text-[9px] opacity-70">{count}/{QUESTIONS_PER_STAGE} ready</span>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+        <div className={`rounded-lg border px-2 py-2 text-center font-mono text-[10px] ${
+          phase === 'feynman'
+            ? 'border-c-blue/40 bg-c-blue/[0.08] text-c-blue'
+            : 'border-[var(--border)] bg-c-bg3 text-c-ghost'
+        }`}>
+          Reflect
+          <span className="mt-0.5 block text-[9px] opacity-70">optional</span>
+        </div>
+      </div>
+      {phase !== 'lesson' && !progress.core_complete && (
+        <p className="mt-3 text-[11px] leading-relaxed text-c-faint">
+          Each stage has at least two questions. Two correct in a row move forward; two misses step down for support.
+        </p>
+      )}
     </div>
   )
 }
@@ -159,8 +180,7 @@ function LearnPageInner() {
   const [feedback,          setFeedback]          = useState<{ correct: boolean; explanation_after?: string } | null>(null)
   const [explanation,       setExplanation]       = useState<Explanation | null>(null)
   const [explanationDepth,  setExplanationDepth]  = useState<ExplanationDepth>('beginner')
-  const [explanationComplete, setExplanationComplete] = useState(false)
-  const [explanationPending, setExplanationPending] = useState(false)
+  const [lessonComplete,    setLessonComplete]    = useState(false)
   const [motivation,        setMotivation]        = useState<string>('neutral')
   const [seenSkills,        setSeenSkills]        = useState<string[]>([])
   const [seenQuestions,     setSeenQuestions]     = useState<string[]>([])
@@ -171,20 +191,10 @@ function LearnPageInner() {
   const [consentPrompt,     setConsentPrompt]     = useState<'start' | 'continue' | null>(null)
   const [arcSkillId,        setArcSkillId]        = useState<string | null>(requestedSkillId)
   const [arcAttemptCount,   setArcAttemptCount]   = useState(0)
+  const [guidedArc,         setGuidedArc]         = useState<GuidedArcProgress>(EMPTY_GUIDED_ARC)
   const [topicChoiceTier,   setTopicChoiceTier]   = useState<MasteryTier | null>(null)
   const [topicPicker,       setTopicPicker]       = useState<UnlockedTopic[] | null>(null)
   const [switchBridge,      setSwitchBridge]      = useState<string | null>(null)
-
-  function currentMode(): LearningMode {
-    if (phase === 'question' || phase === 'revealing') return 'practice'
-    if (phase === 'explanation' || phase === 'feynman') return 'learn'
-    if (phase === 'build_task') return 'apply'
-    if (phase === 'explain_back') return 'review'
-    return 'practice'
-  }
-
-  const hasApply   = !!explanation?.build_task
-  const hasReview  = !!explanation?.explain_back_prompt
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -193,12 +203,12 @@ function LearnPageInner() {
         const idx = ['1','2','3','4'].indexOf(e.key)
         if (idx >= 0) { const opt = task.question.options?.[idx]; if (opt) setSelected(opt.id) }
       }
-      if (['revealing','explanation'].includes(phase) && e.key === 'Enter' && (!explanation || explanationComplete)) nextQuestion()
+      if (phase === 'revealing' && e.key === 'Enter') nextQuestion()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, task, explanation, explanationComplete])
+  }, [phase, task])
 
   const loadNext = useCallback(async (
     sid: string,
@@ -206,6 +216,8 @@ function LearnPageInner() {
     limitOverride = taskLimit,
     skillOverride = arcSkillId,
     bridgeOverride: string | null = null,
+    lessonOverride?: boolean,
+    historyOverride?: { skills: string[]; questions: string[] },
   ) => {
     setPhase('loading')
     setSwitchBridge(bridgeOverride)
@@ -213,7 +225,8 @@ function LearnPageInner() {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         action: 'next', session_id: sid, mode: modeOverride, task_limit: limitOverride,
-        seen_skills: seenSkills, seen_question_ids: seenQuestions,
+        seen_skills: historyOverride?.skills ?? seenSkills,
+        seen_question_ids: historyOverride?.questions ?? seenQuestions,
         current_skill_id: modeOverride === 'learn' ? skillOverride : undefined,
       }),
     })
@@ -228,12 +241,32 @@ function LearnPageInner() {
 
     const newTask: SessionTask = d.task
     if (modeOverride === 'learn') setArcSkillId(skillOverride ?? newTask.skill_id)
+    if (d.guided_arc) {
+      setGuidedArc(d.guided_arc)
+      setArcAttemptCount(d.guided_arc.total_attempt_count)
+    }
     setTask(newTask)
-    setSelected(null); setFillAnswer(''); setFeedback(null); setExplanation(null)
-    setExplanationComplete(false)
-    setExplanationPending(false)
+    setSelected(null); setFillAnswer(''); setFeedback(null)
+
+    const shouldShowLesson = modeOverride === 'learn' && (
+      lessonOverride ?? (!lessonComplete && arcAttemptCount === 0)
+    )
+    if (shouldShowLesson) {
+      setExplanation(null)
+      try {
+        const response = await fetch(`/api/explanation?skill_id=${newTask.skill_id}`)
+        const data = await response.json()
+        if (data.explanation) {
+          setExplanation(data.explanation)
+          setExplanationDepth(data.depth ?? 'beginner')
+          setPhase('lesson')
+          return
+        }
+      } catch { /* continue to practice when lesson content is unavailable */ }
+      setLessonComplete(true)
+    }
     setPhase('question')
-  }, [arcSkillId, seenSkills, seenQuestions, sessionMode, taskLimit, track])
+  }, [arcAttemptCount, arcSkillId, lessonComplete, seenSkills, seenQuestions, sessionMode, taskLimit, track])
 
   // Start session
   useEffect(() => {
@@ -280,25 +313,17 @@ function LearnPageInner() {
       sessionMode === 'learn' && d.topic_choice_available ? d.mastery_tier as MasteryTier : null
     )
     setArcAttemptCount(d.arc_attempt_count ?? 0)
+    if (d.guided_arc) setGuidedArc(d.guided_arc)
     setSessionStats(s => ({ correct: s.correct + (d.correct ? 1 : 0), total: s.total + 1 }))
     setSeenSkills(s => [...s, task.skill_id])
     setSeenQuestions(s => [...s, task.question.id])
     track({ name: 'attempt_submit', props: { correct: d.correct, skill_id: task.skill_id } })
 
     setPhase('revealing')
-    setExplanationPending(true)
-
-    try {
-      const er = await fetch(`/api/explanation?skill_id=${task.skill_id}&attempt_id=${d.attempt_id}`)
-      const ed = await er.json()
-      if (ed.explanation) { setExplanation(ed.explanation); setExplanationDepth(ed.depth ?? 'beginner') }
-    } catch { /* continue without an explanation */ }
-    finally { setExplanationPending(false) }
   }
 
   async function nextQuestion() {
     if (topicChoiceTier) return
-    if (explanation && !explanationComplete) return
     if (sessionId) loadNext(sessionId)
   }
 
@@ -314,7 +339,7 @@ function LearnPageInner() {
       }),
     })
     track({ name: 'feynman_loop_complete', props: { skill_id: task.skill_id, resolved: result.resolved } })
-    setPhase('explanation')
+    setPhase('revealing')
   }
 
   function continueCurrentTopic() {
@@ -345,7 +370,10 @@ function LearnPageInner() {
     setTopicPicker(null)
     setArcSkillId(topic.id)
     setArcAttemptCount(0)
-    loadNext(sessionId, 'learn', taskLimit, topic.id, bridge)
+    setGuidedArc(EMPTY_GUIDED_ARC)
+    setLessonComplete(false)
+    setExplanation(null)
+    loadNext(sessionId, 'learn', taskLimit, topic.id, bridge, true)
   }
 
   function beginReviews() {
@@ -357,13 +385,46 @@ function LearnPageInner() {
     loadNext(sessionId, 'review', limit)
   }
 
-  function beginCurrentTopics() {
+  async function beginCurrentTopics() {
     if (!sessionId) return
+    let learningSessionId = sessionId
+    if (sessionStats.total > 0) {
+      await fetch('/api/session', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'end', session_id: sessionId }),
+      })
+      const response = await fetch('/api/session', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'start' }),
+      })
+      const data = await response.json()
+      if (!data.session_id) return
+      learningSessionId = data.session_id
+      setSessionId(data.session_id)
+      setReviewOffer(data.review_offer_count ?? 0)
+      setAdditionalReviews(data.additional_review_count ?? 0)
+      setSessionStats({ correct: 0, total: 0 })
+      setSeenSkills([])
+      setSeenQuestions([])
+      track({ name: 'session_start' })
+    }
     setSessionMode('learn')
     setTaskLimit(10)
+    setArcSkillId(null)
     setArcAttemptCount(0)
+    setGuidedArc(EMPTY_GUIDED_ARC)
+    setLessonComplete(false)
+    setExplanation(null)
     setConsentPrompt(null)
-    loadNext(sessionId, 'learn', 10)
+    loadNext(
+      learningSessionId,
+      'learn',
+      10,
+      null,
+      null,
+      true,
+      sessionStats.total > 0 ? { skills: [], questions: [] } : undefined,
+    )
   }
 
   function continueOneReview() {
@@ -386,7 +447,7 @@ function LearnPageInner() {
     router.push('/dashboard')
   }
 
-  const isRevealed = ['revealing','explanation','build_task','explain_back'].includes(phase)
+  const isRevealed = phase === 'revealing'
 
   if (consentPrompt) {
     const continuing = consentPrompt === 'continue'
@@ -481,6 +542,9 @@ function LearnPageInner() {
       setSeenSkills([]); setSeenQuestions([])
       setArcSkillId(null); setTopicChoiceTier(null); setSwitchBridge(null)
       setArcAttemptCount(0)
+      setGuidedArc(EMPTY_GUIDED_ARC)
+      setLessonComplete(false)
+      setExplanation(null)
       fetch('/api/session', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'start' }),
@@ -493,7 +557,7 @@ function LearnPageInner() {
         setPhase('loading')
         if (offer > 0) setConsentPrompt('start')
         else if (sessionMode === 'review') setPhase('summary')
-        else loadNext(d.session_id, 'learn', 10, null)
+        else loadNext(d.session_id, 'learn', 10, null, null, true)
       })
     }
 
@@ -562,14 +626,40 @@ function LearnPageInner() {
     <div className="min-h-screen bg-c-bg"><Navbar /><Spinner label="Preparing your next question…" /></div>
   )
 
+  if (phase === 'lesson' && explanation) return (
+    <div className="min-h-screen bg-c-bg">
+      <Navbar />
+      <div className="max-w-3xl mx-auto px-8 py-10">
+        <ArcProgress phase={phase} lessonComplete={lessonComplete} progress={guidedArc} />
+        <GuidedLesson
+          task={task}
+          explanation={explanation}
+          depth={explanationDepth}
+          onComplete={() => {
+            setLessonComplete(true)
+            track({ name: 'explanation_viewed', props: { skill_id: task.skill_id, depth: explanationDepth } })
+            setPhase('question')
+          }}
+        />
+        <button
+          onClick={endVoluntarily}
+          className="w-full mt-4 py-2 text-c-ghost hover:text-c-faint text-[11px] font-mono transition-colors"
+        >
+          End session
+        </button>
+      </div>
+    </div>
+  )
+
   if (phase === 'feynman') return (
     <div className="min-h-screen bg-c-bg">
       <Navbar />
       <div className="max-w-2xl mx-auto px-8 py-10">
+        <ArcProgress phase={phase} lessonComplete={lessonComplete} progress={guidedArc} />
         <FeynmanLoop
           skillLabel={task.skill_label}
           onComplete={completeFeynmanLoop}
-          onSkip={() => setPhase('explanation')}
+          onSkip={() => setPhase('revealing')}
         />
         <button
           onClick={endVoluntarily}
@@ -587,6 +677,10 @@ function LearnPageInner() {
       <Navbar />
       {/* Widened to max-w-3xl for more breathing room */}
       <div className="max-w-3xl mx-auto px-8 py-10">
+
+        {sessionMode === 'learn' && (
+          <ArcProgress phase={phase} lessonComplete={lessonComplete} progress={guidedArc} />
+        )}
 
         {switchBridge && (
           <div className="mb-6 px-5 py-4 rounded-xl border border-c-purple/25 bg-c-purple/[0.07] animate-slide-up">
@@ -609,7 +703,7 @@ function LearnPageInner() {
             </span>
             <span className="text-c-ghost text-[12px]">·</span>
             <span className="font-mono text-[12px] text-c-faint uppercase tracking-[0.08em]">
-              {task.difficulty_tier}
+              {sessionMode === 'learn' ? `${stageLabel(guidedArc.stage)} practice` : task.difficulty_tier}
             </span>
             {task.reason && (
               <ReasonPill reason={task.reason} pKnow={task.p_know} />
@@ -634,17 +728,11 @@ function LearnPageInner() {
           {/* Learning context */}
           {(task.reason === 'active_phase_new' || task.reason === 'varied_practice') && (
             <p className="text-[12px] font-mono text-c-faint mb-1.5">
-              {getMasteryTier(task.p_know)} · guided question {arcAttemptCount + 1} · {task.difficulty_tier}
+              Knowledge: {getMasteryTier(task.p_know)} · {guidedArc.total_attempt_count} questions answered in this topic journey
             </p>
           )}
 
           {motivation !== 'neutral' && <MotivationBanner state={motivation} />}
-
-          <ModeBar
-            activeMode={currentMode()}
-            hasApply={hasApply}
-            hasReview={hasReview}
-          />
 
           {/* Skill intuition line — bigger */}
           <p className="text-[13px] text-c-faint italic leading-relaxed">{task.skill_intuition}</p>
@@ -670,33 +758,6 @@ function LearnPageInner() {
               </div>
             )}
 
-            {/* Explanation panel */}
-            {(phase === 'explanation' || phase === 'build_task' || phase === 'explain_back') && explanation && (
-              <div className="mb-5 animate-slide-up">
-                <ExplanationPanel
-                  explanation={explanation}
-                  depth={explanationDepth}
-                  onExplainBack={(text) => {
-                    fetch('/api/attempt', {
-                      method: 'POST', headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({
-                        question_id: `${task.question.id}_explain_back`, skill_id: task.skill_id,
-                        session_id: sessionId, latency_ms: 5000, client_answer: text,
-                        correct: true, difficulty_tier: 'same', question_format: 'explain',
-                      }),
-                    })
-                    track({ name: 'explanation_viewed', props: { skill_id: task.skill_id, depth: 'explain_back' } })
-                    setPhase('explain_back')
-                  }}
-                  onBuildTaskDone={() => {
-                    track({ name: 'explanation_viewed', props: { skill_id: task.skill_id, depth: 'build_task' } })
-                    setPhase('build_task')
-                  }}
-                  onExplanationComplete={() => setExplanationComplete(true)}
-                />
-              </div>
-            )}
-
             {/* Action buttons */}
             <div className="animate-slide-up">
               {phase === 'question' && (
@@ -710,20 +771,7 @@ function LearnPageInner() {
               )}
               {isRevealed && (
                 <div className="space-y-2.5">
-                  {phase === 'revealing' && explanation && (
-                    <button
-                      onClick={() => setPhase('explanation')}
-                      className="w-full py-3.5 rounded-xl border border-c-purple/30 bg-c-purple/[0.06] text-c-purple text-[14px] hover:bg-c-purple/10 transition-all"
-                    >
-                      Explore why, one idea at a time →
-                    </button>
-                  )}
-                  {phase === 'revealing' && explanationPending && (
-                    <p className="py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-c-faint">
-                      Preparing the next building block…
-                    </p>
-                  )}
-                  {explanationComplete && hasReview && (
+                  {sessionMode === 'learn' && guidedArc.core_complete && (
                     <button
                       onClick={() => setPhase('feynman')}
                       className="w-full py-3 rounded-xl border border-c-blue/30 bg-c-blue/[0.06] text-c-blue text-[13px] hover:bg-c-blue/10 transition-all"
@@ -732,7 +780,7 @@ function LearnPageInner() {
                       Teach it with the Feynman Loop →
                     </button>
                   )}
-                  {((phase === 'revealing' && !explanation && !explanationPending) || explanationComplete) && (topicChoiceTier && sessionMode === 'learn' ? (
+                  {topicChoiceTier && sessionMode === 'learn' ? (
                     <div className="rounded-xl border border-c-purple/25 bg-c-purple/[0.06] p-4">
                       <p className="text-[15px] text-c-text mb-1">
                         You’re now {topicChoiceTier} in {task.skill_label}.
@@ -758,11 +806,15 @@ function LearnPageInner() {
                   ) : (
                     <button
                       onClick={nextQuestion}
-                      className="w-full py-4 rounded-xl bg-c-bg3 border border-[var(--border)] text-c-muted hover:text-c-text text-[15px] transition-all"
+                      className="w-full py-4 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[15px] font-medium transition-all"
                     >
-                      Next question →
+                      {sessionMode === 'review'
+                        ? 'Next review →'
+                        : guidedArc.core_complete
+                          ? `Keep strengthening ${task.skill_label} →`
+                          : `Continue ${stageLabel(guidedArc.stage)} · question ${guidedArc.stage_attempt_count + 1} →`}
                     </button>
-                  ))}
+                  )}
                 </div>
               )}
             </div>

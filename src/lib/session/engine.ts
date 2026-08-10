@@ -1,37 +1,92 @@
 import type {
   LearnerSkillState, ReviewSchedule, MotivationState,
   Question, SessionTask, DifficultyTier, TaskReason, SessionMode, ReviewUrgency,
+  GuidedArcProgress, GuidedArcStage,
 } from '@/types'
 import { getNodeById, getAllNodes } from '@/lib/graph'
 import { findActivePhase, buildPhaseGroups } from '@/lib/phases'
 import { deriveUrgency } from '@/lib/sm2/urgency'
 
 export const SESSION_TASK_CAP = 10
+export const MIN_QUESTIONS_PER_GUIDED_STAGE = 2
+export const GUIDED_ARC_STAGE_COUNT = 3
+export const MIN_GUIDED_ARC_QUESTIONS = MIN_QUESTIONS_PER_GUIDED_STAGE * GUIDED_ARC_STAGE_COUNT
 export const CURRENT_TOPIC_MINIMUM = 4
 export const MAX_REVIEW_ITEMS = SESSION_TASK_CAP - CURRENT_TOPIC_MINIMUM
 export const DEFAULT_REVIEW_OFFER_SIZE = MAX_REVIEW_ITEMS - 1
 export const ARC_SWITCH_THRESHOLD = 0.60
-export const MIN_GUIDED_ARC_QUESTIONS = 4
 
 export interface ArcAttemptEvidence {
   correct: boolean
   difficulty_tier: DifficultyTier
 }
 
-const ARC_DIFFICULTY_ORDER: DifficultyTier[] = ['review', 'same', 'harder']
-
-export function selectArcDifficulty(history: ArcAttemptEvidence[]): DifficultyTier {
-  if (history.length === 0) return 'review'
-  const last = history[history.length - 1]
-  const currentIndex = Math.max(0, ARC_DIFFICULTY_ORDER.indexOf(last.difficulty_tier))
-  const nextIndex = last.correct
-    ? Math.min(ARC_DIFFICULTY_ORDER.length - 1, currentIndex + 1)
-    : Math.max(0, currentIndex - 1)
-  return ARC_DIFFICULTY_ORDER[nextIndex]
+const GUIDED_STAGE_ORDER: GuidedArcStage[] = ['beginner', 'intermediate', 'mastery']
+const GUIDED_STAGE_DIFFICULTY: Record<GuidedArcStage, DifficultyTier> = {
+  beginner: 'review',
+  intermediate: 'same',
+  mastery: 'harder',
 }
 
-export function canChooseTopicSwitch(pKnow: number, arcAttemptCount: number): boolean {
-  return pKnow >= ARC_SWITCH_THRESHOLD && arcAttemptCount >= MIN_GUIDED_ARC_QUESTIONS
+export function getGuidedArcProgress(history: ArcAttemptEvidence[]): GuidedArcProgress {
+  let stageIndex = 0
+  let recentEvidence: boolean[] = []
+  let stageAttemptCount = 0
+  let coreComplete = false
+
+  for (const attempt of history) {
+    if (coreComplete) continue
+    stageAttemptCount += 1
+    recentEvidence.push(attempt.correct)
+    if (recentEvidence.length < MIN_QUESTIONS_PER_GUIDED_STAGE) continue
+
+    const latest = recentEvidence.slice(-MIN_QUESTIONS_PER_GUIDED_STAGE)
+    const allCorrect = latest.every(Boolean)
+    const allWrong = latest.every(correct => !correct)
+
+    if (allCorrect) {
+      if (stageIndex === GUIDED_STAGE_ORDER.length - 1) {
+        coreComplete = true
+        recentEvidence = latest
+      } else {
+        stageIndex += 1
+        recentEvidence = []
+        stageAttemptCount = 0
+      }
+    } else if (allWrong) {
+      if (stageIndex > 0) {
+        stageIndex -= 1
+        stageAttemptCount = 0
+      }
+      recentEvidence = []
+    } else {
+      // Keep the newest result so the next answer can establish a two-answer trend.
+      recentEvidence = latest.slice(-1)
+    }
+  }
+
+  let stageCorrectStreak = 0
+  for (let index = recentEvidence.length - 1; index >= 0; index -= 1) {
+    if (!recentEvidence[index]) break
+    stageCorrectStreak += 1
+  }
+
+  return {
+    stage: GUIDED_STAGE_ORDER[stageIndex],
+    stage_attempt_count: stageAttemptCount,
+    stage_correct_streak: coreComplete ? MIN_QUESTIONS_PER_GUIDED_STAGE : stageCorrectStreak,
+    completed_stage_count: coreComplete ? GUIDED_STAGE_ORDER.length : stageIndex,
+    core_complete: coreComplete,
+    total_attempt_count: history.length,
+  }
+}
+
+export function selectArcDifficulty(history: ArcAttemptEvidence[]): DifficultyTier {
+  return GUIDED_STAGE_DIFFICULTY[getGuidedArcProgress(history).stage]
+}
+
+export function canChooseTopicSwitch(pKnow: number, progress: GuidedArcProgress): boolean {
+  return pKnow >= ARC_SWITCH_THRESHOLD && progress.core_complete
 }
 
 export interface ReviewDebtPlan {
@@ -146,7 +201,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
     const node = getNodeById(currentSkillId)
     if (state && state.mastery_state !== 'blocked' && node && questionsCache.has(currentSkillId)) {
       const diffTier = selectArcDifficulty(arcHistory)
-      const q = pickQuestion(currentSkillId, diffTier, seenQuestionIdsThisSession, questionsCache)
+      const q = pickGuidedQuestion(currentSkillId, diffTier, seenQuestionIdsThisSession, questionsCache)
       if (q) {
         return buildTask(currentSkillId, q, diffTier, {
           skill_id: currentSkillId,
@@ -335,6 +390,26 @@ function pickQuestion(
   const unseen = qs.filter(q => !seen.has(q.id))
   if (unseen.length > 0) return unseen[Math.floor(Math.random() * unseen.length)]
   return qs[Math.floor(Math.random() * qs.length)] ?? null
+}
+
+function pickGuidedQuestion(
+  skill_id: string,
+  tier: DifficultyTier,
+  seen: Set<string>,
+  cache: Map<string, Question[]>,
+): Question | null {
+  const allQuestions = cache.get(skill_id) ?? []
+  const tiered = allQuestions.filter(question => question.difficulty_tier === tier)
+  const unseen = tiered.filter(question => !seen.has(question.id))
+  const unseenFallback = allQuestions.filter(question => !seen.has(question.id))
+  const pool = unseen.length > 0
+    ? unseen
+    : tiered.length > 0
+      ? tiered
+      : unseenFallback.length > 0
+        ? unseenFallback
+        : allQuestions
+  return pool[Math.floor(Math.random() * pool.length)] ?? null
 }
 
 function findEasyWin(

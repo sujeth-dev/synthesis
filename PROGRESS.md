@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-2A — Guided same-skill learning arc** — in progress after the first walkthrough rejected the lesson timing and ambiguous progress UI.
+**P2-2A — Guided same-skill learning journey** — in progress after human direction replaced the four-question arc with `Lesson → Beginner 2+ → Intermediate 2+ → Mastery 2+ → optional Reflect`.
 
 ---
 
 ## Next action
 
-Move learning slides before practice, replace per-question mode dots with persistent four-question arc progress, and make post-answer continuation unambiguous.
+Complete distinct two-question pools for every Beginner/Intermediate/Mastery stage, then run the revised lesson-first staged journey walkthrough.
 
 ---
 
@@ -29,7 +29,8 @@ Move learning slides before practice, replace per-question mode dots with persis
 9. ~~**P1-1 and P1-2 currently duplicate classifier responsibility.**~~ **Resolved by human direction on 2026-08-10:** combine classifier implementation into P1-1 (rather than keeping the documented split). P1-2 is retired; its scope (pure classifier function + unit tests) now lives inside P1-1. `MASTER_PLAN.md` updated: P1-1 merged, P1-2 marked retired, P1-3/P1-5/NLP-1 dependency edges repointed from P1-2 to P1-1.
 10. ~~**P2-2 manual walkthrough unavailable:** the implementation is committed and pushed (`e01c93c`), the progressive-disclosure source contract passes, all 41 tests pass, and the production build succeeds. The required browser walkthrough could not start because the installed `computer-use` plugin failed during bootstrap.~~ **Resolved by human confirmation on 2026-08-10:** the dashboard, graph, and direct-skill walkthrough is complete; P2-2 is accepted.
 11. **BLOOM-1 paused by human reprioritization:** its documentation draft is preserved in `stash@{0}` (`wip BLOOM-1 before guided learning arc`). Resume it after P2-2A by applying that stash; the unrelated `.gitignore`, `.mcp.json`, and `CLAUDE.md` files are not part of the stash.
-12. ~~**P2-2A rendered walkthrough unavailable:** implementation was pushed (`d87ce74`) but could not be inspected automatically because the local computer-use runtime failed.~~ **Resolved by human walkthrough feedback on 2026-08-10:** the implementation is not accepted yet. Learning slides belong before question 1, not after each answer; the existing mode dots incorrectly imply completion after one question; clicking “Next question” feels like a restart. P2-2A is reopened with the corrected `Lesson → Question 1/4 → … → Reflect` contract above.
+12. ~~**P2-2A rendered walkthrough unavailable:** implementation was pushed (`d87ce74`) but could not be inspected automatically because the local computer-use runtime failed.~~ **Resolved by human walkthrough feedback on 2026-08-10, then refined again:** learning slides belong before practice, not after each answer; the old mode dots and generic “Next question” implied a reset. The four-question revision was also rejected as too shallow. Current contract is `Lesson → Beginner (2+ questions) → Intermediate (2+) → Mastery (2+) → optional Reflect`; two consecutive correct answers advance, mixed evidence holds, and two consecutive errors step down.
+13. **P2-2A question-bank coverage gap:** the staged engine/UI is implemented locally, but the content audit found that none of the 45 current skill files yet has two explicitly classified `review`, two `same`, and two `harder` questions. Runtime fallback preserves flow, but distinct per-stage pools must be completed before P2-2A can be accepted as content-complete.
 
 ---
 

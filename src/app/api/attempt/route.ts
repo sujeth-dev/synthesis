@@ -13,7 +13,7 @@ import {
 } from '@/lib/db/queries'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat } from '@/types'
-import { canChooseTopicSwitch } from '@/lib/session/engine'
+import { canChooseTopicSwitch, getGuidedArcProgress } from '@/lib/session/engine'
 import { computeBktMovementComparison, isFeynmanAttempt } from '@/lib/analytics/bkt-movement'
 
 const MIN_LATENCY = 100
@@ -150,21 +150,26 @@ export async function POST(req: NextRequest) {
       )
     : null
 
-  const arcAttemptCount = session_id
+  const arcAttempts = session_id
     ? (await getSessionBehaviorAttempts(user.id, session_id)).filter(attempt =>
         attempt.skill_id === skill_id &&
         !attempt.question_id.endsWith('_explain_back') &&
         !attempt.question_id.endsWith('_feynman_loop')
-      ).length
-    : 0
+      ).map(attempt => ({
+        correct: attempt.correct,
+        difficulty_tier: attempt.difficulty_tier as DifficultyTier,
+      }))
+    : []
+  const guidedArc = getGuidedArcProgress(arcAttempts)
 
   return NextResponse.json({
     correct, attempt_id,
     new_p_know: updatedState.p_know,
     mastery_state: updatedState.mastery_state,
     mastery_tier: getMasteryTier(updatedState.p_know),
-    topic_choice_available: canChooseTopicSwitch(updatedState.p_know, arcAttemptCount),
-    arc_attempt_count: arcAttemptCount,
+    topic_choice_available: canChooseTopicSwitch(updatedState.p_know, guidedArc),
+    arc_attempt_count: guidedArc.total_attempt_count,
+    guided_arc: guidedArc,
     explanation_unlocked: true,
     motivation: updatedMotivation.state,
     bkt_movement: bktMovement,

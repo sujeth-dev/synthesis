@@ -25,11 +25,14 @@ import {
   ARC_SWITCH_THRESHOLD,
   CURRENT_TOPIC_MINIMUM,
   DEFAULT_REVIEW_OFFER_SIZE,
+  GUIDED_ARC_STAGE_COUNT,
   MAX_REVIEW_ITEMS,
   MIN_GUIDED_ARC_QUESTIONS,
+  MIN_QUESTIONS_PER_GUIDED_STAGE,
   SESSION_TASK_CAP,
   canChooseTopicSwitch,
   canSelectReview,
+  getGuidedArcProgress,
   getSessionGate,
   planReviewDebt,
   selectArcDifficulty,
@@ -151,22 +154,77 @@ describe('session topic arc memory', () => {
   })
 
   it('unlocks the stay-or-switch choice exactly at the threshold', () => {
-    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD - 0.01, MIN_GUIDED_ARC_QUESTIONS)).toBe(false)
-    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD, MIN_GUIDED_ARC_QUESTIONS - 1)).toBe(false)
-    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD, MIN_GUIDED_ARC_QUESTIONS)).toBe(true)
-    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD + 0.01, MIN_GUIDED_ARC_QUESTIONS + 1)).toBe(true)
+    const incomplete = getGuidedArcProgress([
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'review', correct: true },
+    ])
+    const complete = getGuidedArcProgress([
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'same', correct: true },
+      { difficulty_tier: 'same', correct: true },
+      { difficulty_tier: 'harder', correct: true },
+      { difficulty_tier: 'harder', correct: true },
+    ])
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD - 0.01, complete)).toBe(false)
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD, incomplete)).toBe(false)
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD, complete)).toBe(true)
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD + 0.01, complete)).toBe(true)
   })
 
-  it('moves through easier, medium, and harder questions one successful step at a time', () => {
+  it('requires two successful questions in each stage before moving forward', () => {
+    expect(MIN_QUESTIONS_PER_GUIDED_STAGE).toBe(2)
+    expect(GUIDED_ARC_STAGE_COUNT).toBe(3)
+    expect(MIN_GUIDED_ARC_QUESTIONS).toBe(6)
     expect(selectArcDifficulty([])).toBe('review')
-    expect(selectArcDifficulty([{ difficulty_tier: 'review', correct: true }])).toBe('same')
-    expect(selectArcDifficulty([{ difficulty_tier: 'same', correct: true }])).toBe('harder')
-    expect(selectArcDifficulty([{ difficulty_tier: 'harder', correct: true }])).toBe('harder')
+    const oneCorrect = getGuidedArcProgress([{ difficulty_tier: 'review', correct: true }])
+    expect(selectArcDifficulty([{ difficulty_tier: 'review', correct: true }])).toBe('review')
+    expect(oneCorrect.stage_attempt_count).toBe(1)
+    expect(oneCorrect.stage_correct_streak).toBe(1)
+    expect(selectArcDifficulty([
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'review', correct: true },
+    ])).toBe('same')
+    expect(selectArcDifficulty([
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'same', correct: true },
+    ])).toBe('same')
+    const complete = getGuidedArcProgress([
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'review', correct: true },
+      { difficulty_tier: 'same', correct: true },
+      { difficulty_tier: 'same', correct: true },
+      { difficulty_tier: 'harder', correct: true },
+      { difficulty_tier: 'harder', correct: true },
+    ])
+    expect(complete.core_complete).toBe(true)
+    expect(complete.completed_stage_count).toBe(3)
+    expect(complete.stage_attempt_count).toBe(2)
+    expect(complete.stage_correct_streak).toBe(2)
   })
 
-  it('steps difficulty down after an error without leaving the current skill', () => {
-    expect(selectArcDifficulty([{ difficulty_tier: 'harder', correct: false }])).toBe('same')
-    expect(selectArcDifficulty([{ difficulty_tier: 'same', correct: false }])).toBe('review')
-    expect(selectArcDifficulty([{ difficulty_tier: 'review', correct: false }])).toBe('review')
+  it('holds on mixed evidence and steps down after two errors without leaving the skill', () => {
+    const reachedIntermediate = [
+      { difficulty_tier: 'review' as const, correct: true },
+      { difficulty_tier: 'review' as const, correct: true },
+    ]
+    expect(selectArcDifficulty([
+      ...reachedIntermediate,
+      { difficulty_tier: 'same', correct: false },
+    ])).toBe('same')
+    const regressed = getGuidedArcProgress([
+      ...reachedIntermediate,
+      { difficulty_tier: 'same', correct: false },
+      { difficulty_tier: 'same', correct: false },
+    ])
+    expect(selectArcDifficulty([
+      ...reachedIntermediate,
+      { difficulty_tier: 'same', correct: false },
+      { difficulty_tier: 'same', correct: false },
+    ])).toBe('review')
+    expect(regressed.stage).toBe('beginner')
+    expect(regressed.stage_attempt_count).toBe(0)
+    expect(regressed.stage_correct_streak).toBe(0)
   })
 })

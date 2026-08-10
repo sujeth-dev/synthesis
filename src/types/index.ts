@@ -103,6 +103,17 @@ export type TaskReason =
 
 export type SessionMode = 'learn' | 'review'
 
+export type GuidedArcStage = 'beginner' | 'intermediate' | 'mastery'
+
+export interface GuidedArcProgress {
+  stage: GuidedArcStage
+  stage_attempt_count: number
+  stage_correct_streak: number
+  completed_stage_count: number
+  core_complete: boolean
+  total_attempt_count: number
+}
+
 export interface SessionTask {
   skill_id: string; skill_label: string; skill_intuition: string; skill_analogy: string
   question: Question; difficulty_tier: DifficultyTier; source: 'review' | 'learning' | 'diagnostic'
@@ -119,4 +130,4 @@ export interface SessionSummary {
   accuracy: number; skills_practiced: string[]; streak_days: number
 }
 
-export type SessionPhase = 'loading' | 'question' | 'revealing' | 'explanation' | 'build_task' | 'explain_back' | 'feynman' | 'summary'
+export type SessionPhase = 'loading' | 'lesson' | 'question' | 'revealing' | 'explanation' | 'build_task' | 'explain_back' | 'feynman' | 'summary'
