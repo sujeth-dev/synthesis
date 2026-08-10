@@ -180,7 +180,7 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C.
 Scope decision (2026-08-09, see `basic-guide.md` Phase 1 header and `v2/doc/vision/discovery-model.md` §7): build against **existing** explanation-first content. Discovery-first authoring applies to new content starting at P2-3.
 
 ### P1-1 — Feynman Loop teaching-canvas interaction + rule-based reasoning classifier
-**Status:** blocked · **Depends on:** Phase 0 done
+**Status:** done · **Depends on:** Phase 0 done
 **Do:** Build the rule-based branching interaction per `13-content-structure.md`'s Feynman Loop transcript (the concrete spec), including the classifier itself (method-only / meaning-included / gap) as a pure function consuming the canvas's captured free text — not bundled invisibly into UI code.
 **Acceptance criteria:** running the transcript from `13-content-structure.md` through the built interaction produces the same branch outcomes it specifies (acceptance script, see Verification below).
 **Required tests:** classifier unit tests for each of the 3 categories + at least one ambiguous/edge input.

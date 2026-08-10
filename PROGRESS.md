@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P1-1 — Feynman Loop teaching-canvas interaction + rule-based reasoning classifier** is unblocked. Awaiting explicit go-ahead to begin implementation (per this project's standing "discuss before implement" direction).
+None — between tasks. P1-1 is done; loop is selecting the next task per `DEVELOPMENT_LOOP.md` Step 2.
 
 ---
 
 ## Next action
 
-Confirm with the human that implementation of P1-1 (combined scope) should begin now, then follow the normal `DEVELOPMENT_LOOP.md` procedure.
+Start **P1-3 — Wire gap-detection into BKT reasoning-quality modifier** (depends on P1-1, P0-3 — both done).
 
 ---
 
@@ -57,6 +57,7 @@ Confirm with the human that implementation of P1-1 (combined scope) should begin
 
 ## Loop iteration log
 
+- 2026-08-10 — **P1-1 done:** built the Feynman Loop teaching-canvas construct (`src/components/learning/FeynmanLoop.tsx`) and its rule-based reasoning classifier (`src/lib/feynman/classifier.ts`) plus a pure branching-engine (`src/lib/feynman/loop.ts`) reproducing the `13-content-structure.md` §4.1 transcript's step order (intro → character entry → teaching canvas → follow-up → hard breakdown question → gap callout when needed → rebuild → resolution → summary). Entry point added as an explicit learner-chosen "Try the Feynman Loop" option in `/learn/skill/[skill_id]` (consent-based, consistent with the P0-4 review-consent precedent) rather than an automatic session-engine trigger, to avoid scope-creep into session-selection logic. Classifier and loop unit tests (7 total) include the required 3-category + edge-case coverage and an acceptance script reproducing the transcript's exact branch outcomes (method-only → gap callout → rebuild → meaning-included → resolved; and a meaning-included-first-pass variant that still rebuilds). Full 36-test suite and production build are green. No browser walkthrough was performed (no UI test harness/auth fixture available yet, consistent with the P0-4/P0-5 precedent) — verified via full type-checked production build instead.
 - 2026-08-10 — **P1-1/P1-2 direction received, P1-1 unblocked:** combine the classifier into P1-1 rather than keep the documented split; P1-2 retired, its scope absorbed into P1-1, downstream dependencies (P1-3, P1-5, NLP-1) repointed to P1-1. Docs updated (`MASTER_PLAN.md`, this file); no code changed yet — awaiting explicit go-ahead to implement.
 - 2026-08-10 — **P1-1 blocked before implementation:** its operational criteria duplicate P1-2's classifier implementation/tests, while the cited strategy document explicitly separates teaching-canvas capture (Promise #1) from the pure classifier (Promise #2). Awaiting a human choice between preserving that split (recommended) or combining the tasks.
 - 2026-08-10 — **Phase 0 complete:** all P0-0 through P0-8 tasks are done; the final 29-test suite and production build are green. End-of-phase scripted checks against the real modules reconfirmed overdue decay (`p_know` 0.90 → 0.4909359 after 30 overdue days) and a measurable combined-evidence posterior change (baseline 0.4333333 vs. degraded 0.3045455).

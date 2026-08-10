@@ -31,6 +31,7 @@ import { useParams, useRouter } from 'next/navigation'
 import type { Explanation, Question } from '@/types'
 import { QuestionCard }     from '@/components/learning/QuestionCard'
 import { FeedbackBanner }   from '@/components/learning/FeedbackBanner'
+import { FeynmanLoop }      from '@/components/learning/FeynmanLoop'
 import { Spinner }          from '@/components/ui/Spinner'
 import { Navbar }           from '@/components/layout/Navbar'
 import { mdToHtml }         from '@/components/ui/mdToHtml'
@@ -39,7 +40,7 @@ import { getMasteryTier }   from '@/lib/bkt'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type FlowMode = 'init' | 'learn' | 'practice' | 'result' | 'apply' | 'review' | 'done'
+type FlowMode = 'init' | 'learn' | 'practice' | 'result' | 'apply' | 'review' | 'feynman' | 'done'
 
 interface SkillData {
   blocked:     boolean
@@ -132,6 +133,7 @@ export default function SkillLearnPage() {
   const [explainText, setExplainText] = useState('')
   const [buildDone,   setBuildDone]   = useState(false)
   const [explainDone, setExplainDone] = useState(false)
+  const [feynmanDone, setFeynmanDone] = useState<boolean | null>(null)
   const [submitting,  setSubmitting]  = useState(false)
   const [error,       setError]       = useState<string | null>(null)
 
@@ -222,6 +224,26 @@ export default function SkillLearnPage() {
     } catch { /* silently continue */ }
   }
 
+  // ── Submit Feynman Loop result ────────────────────────────────────────────
+  async function submitFeynmanLoop(result: { resolved: boolean; firstExplanation: string; secondExplanation: string }) {
+    if (!sessionId) return
+    try {
+      await fetch('/api/attempt', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question_id: `${skill_id}_feynman_loop`, skill_id, session_id: sessionId,
+          latency_ms: 5000, client_answer: `${result.firstExplanation}\n---\n${result.secondExplanation}`,
+          correct: result.resolved, difficulty_tier: 'same', question_format: 'explain',
+        }),
+      })
+      track({ name: 'feynman_loop_complete', props: { skill_id, resolved: result.resolved } })
+    } catch { /* silently continue */ }
+    finally {
+      setFeynmanDone(result.resolved)
+      setMode('done')
+    }
+  }
+
   // ── Navigate between modes ────────────────────────────────────────────────
   function advanceFromResult() {
     if (hasApply)   { setMode('apply');   return }
@@ -246,7 +268,7 @@ export default function SkillLearnPage() {
     else if (dest === 'next')   router.push('/learn')
     else { // repeat — reload the page
       setMode('init'); setSelected(null); setFillAnswer(''); setFeedback(null)
-      setExplainText(''); setBuildDone(false); setExplainDone(false)
+      setExplainText(''); setBuildDone(false); setExplainDone(false); setFeynmanDone(null)
       setData(null)
       router.refresh()
       // Re-trigger load
@@ -566,6 +588,16 @@ export default function SkillLearnPage() {
                 {hasApply ? 'Try the build task →' : 'Explain it back →'}
               </button>
             )}
+            {/* Optional: Feynman Loop — teach it to Rohan when this concept isn't clicking */}
+            {hasReview && (
+              <button
+                onClick={() => setMode('feynman')}
+                className="w-full py-3 rounded-xl border border-c-blue/30 bg-c-blue/[0.06] text-c-blue text-[13px] hover:bg-c-blue/10 transition-all"
+              >
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-c-blue/60 mr-2">optional</span>
+                Try the Feynman Loop →
+              </button>
+            )}
             <button
               onClick={() => finish('next')}
               className="w-full py-2.5 rounded-xl border border-[var(--border)] text-c-muted hover:text-c-text text-[13px] transition-all"
@@ -716,6 +748,25 @@ export default function SkillLearnPage() {
   }
 
   // ══════════════════════════════════════════════════════════════════════════
+  // FEYNMAN MODE — teach it to Rohan
+  // ══════════════════════════════════════════════════════════════════════════
+  if (mode === 'feynman') {
+    return (
+      <div className="min-h-screen bg-c-bg">
+        <Navbar />
+        <div className="max-w-2xl mx-auto px-8 py-10">
+          {Header}
+          <FeynmanLoop
+            skillLabel={node.label}
+            onComplete={submitFeynmanLoop}
+            onSkip={() => setMode('done')}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
   // DONE MODE — completion summary
   // ══════════════════════════════════════════════════════════════════════════
   return (
@@ -739,6 +790,7 @@ export default function SkillLearnPage() {
             { label: 'Question answered', done: !!feedback, color: '#5a8a9f' },
             { label: 'Build task',        done: buildDone,  color: '#fbbf24', skip: !hasApply },
             { label: 'Explained back',    done: explainDone, color: '#38bdf8', skip: !hasReview },
+            { label: 'Feynman Loop',      done: !!feynmanDone, color: '#38bdf8', skip: feynmanDone === null },
           ].filter(b => !b.skip).map((b, i) => (
             <span
               key={i}
