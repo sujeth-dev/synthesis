@@ -196,7 +196,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Required tests:** integration test, classifier → `bktUpdate()`.
 
 ### P1-4 — Real BKT-movement comparison (Promise #8)
-**Status:** not_started · **Depends on:** P1-1
+**Status:** done · **Depends on:** P1-1
 **Do:** Compute plain-session vs. Feynman-session BKT movement from actual engine/session data, not hardcoded illustrative numbers.
 **Acceptance criteria:** the computed comparison is traceable to real attempt records in a test fixture, not a literal constant in the code.
 **Required tests:** unit test with a fixture session proving the computed comparison matches hand-calculated expected movement.

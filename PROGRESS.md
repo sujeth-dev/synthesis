@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-None — loop paused by human request after P1-3 (a deliberate, clean stopping point: P1-3's commit is pushed, tests/build green, no partial work in progress).
+None — P1-4 is committed and pushed; the loop is between clean task iterations.
 
 ---
 
 ## Next action
 
-Start **P1-4 — Real BKT-movement comparison (Promise #8)** (depends on P1-1, done) when the loop resumes.
+Start **P1-5 — Document NLP/LLM upgrade trigger** (depends on P1-1, done).
 
 ---
 
@@ -57,6 +57,7 @@ Start **P1-4 — Real BKT-movement comparison (Promise #8)** (depends on P1-1, d
 
 ## Loop iteration log
 
+- 2026-08-10 — **P1-4 done:** persisted BKT before/after snapshots on each attempt, added a migration-safe same-skill query, and compute each Feynman session's movement against up to five earlier plain sessions from real attempt records; the hand-calculated fixture confirms a 0.09 plain average versus 0.21 Feynman movement. Full 39-test suite and production build green (`ece0f17`).
 - 2026-08-10 — **P1-3 done:** replaced `/api/attempt`'s hardcoded `reasoningQuality: 1` stub with P1-1's real classifier — whenever `question_format === 'explain'`, the submitted text is classified and mapped to an evidence modifier (`reasoningQualityFromCategory`: meaning-included 1, method-only 0.6, gap 0.3) before reaching `bktUpdate()`; non-explain formats keep the neutral modifier since there's no free-text reasoning to evaluate. Added an end-to-end classifier→bktUpdate test in `bkt/index.test.ts` confirming a "gap" classification measurably lowers the posterior versus "meaning-included" (which matches the neutral baseline). 38-test suite and production build green.
 - 2026-08-10 — **P1-1 done:** built the Feynman Loop teaching-canvas construct (`src/components/learning/FeynmanLoop.tsx`) and its rule-based reasoning classifier (`src/lib/feynman/classifier.ts`) plus a pure branching-engine (`src/lib/feynman/loop.ts`) reproducing the `13-content-structure.md` §4.1 transcript's step order (intro → character entry → teaching canvas → follow-up → hard breakdown question → gap callout when needed → rebuild → resolution → summary). Entry point added as an explicit learner-chosen "Try the Feynman Loop" option in `/learn/skill/[skill_id]` (consent-based, consistent with the P0-4 review-consent precedent) rather than an automatic session-engine trigger, to avoid scope-creep into session-selection logic. Classifier and loop unit tests (7 total) include the required 3-category + edge-case coverage and an acceptance script reproducing the transcript's exact branch outcomes (method-only → gap callout → rebuild → meaning-included → resolved; and a meaning-included-first-pass variant that still rebuilds). Full 36-test suite and production build are green. No browser walkthrough was performed (no UI test harness/auth fixture available yet, consistent with the P0-4/P0-5 precedent) — verified via full type-checked production build instead.
 - 2026-08-10 — **P1-1/P1-2 direction received, P1-1 unblocked:** combine the classifier into P1-1 rather than keep the documented split; P1-2 retired, its scope absorbed into P1-1, downstream dependencies (P1-3, P1-5, NLP-1) repointed to P1-1. Docs updated (`MASTER_PLAN.md`, this file); no code changed yet — awaiting explicit go-ahead to implement.
