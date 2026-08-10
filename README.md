@@ -1,7 +1,7 @@
 # Synaptic — Adaptive AI Engineering Learning Platform
 
 Adaptive learning platform built with **Next.js 14 + TypeScript + Tailwind CSS**.
-Primary storage: **SQLite** (zero-config, local-first). Optional: Supabase.
+Primary storage: **Supabase**.
 
 ---
 
@@ -25,7 +25,7 @@ npm install
 
 # 2. Configure environment
 cp .env.local.example .env.local
-# Edit JWT_SECRET to any random string
+# Add JWT_SECRET and your Supabase project credentials
 
 # 3. Start development server
 npm run dev
@@ -39,15 +39,9 @@ npm run validate
 
 ## Storage Architecture
 
-### Default: SQLite (Local)
-- Zero configuration required
-- Database file: `data/synaptic.db` (auto-created on first run)
-- Auth: bcryptjs + JWT cookies (no external service needed)
-- All data stays on your machine
-
-### Optional: Supabase
-Set `DB_BACKEND=supabase` in `.env.local` and add Supabase env vars.
-See `supabase/migrations/` for the schema to run in Supabase SQL Editor.
+Synaptic uses Supabase for application data and bcryptjs + JWT cookies for authentication.
+Copy `.env.local.example`, provide the three Supabase credentials it lists, and run the schema in
+`supabase/migrations/001_initial_schema.sql` through the Supabase SQL Editor before starting the app.
 
 ---
 
@@ -96,10 +90,8 @@ synaptic/
 │
 ├── scripts/
 │   ├── validate-content.js      ← CI content validator (run before every commit)
-│   ├── init-db.js
-│   └── reset-db.js
+│   └── seed.js                  ← Seed curriculum data into Supabase
 │
-├── data/synaptic.db             ← SQLite database (git-ignored)
 ├── AUDIT_REPORT.md              ← Full system audit + gap analysis
 └── README.md
 ```

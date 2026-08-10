@@ -1,24 +1,24 @@
 # Synaptic — Architecture
 
-## Storage Backend Switch
+## Storage Backend
 
-Synaptic is designed to run locally with SQLite and optionally with Supabase.
+Synaptic uses Supabase as its application database.
 
-### Local Mode (Default)
 ```
-User → Next.js → src/lib/db/index.ts (better-sqlite3) → data/synaptic.db
-                 src/lib/db/auth.ts  (bcryptjs + JWT)
-                 src/lib/db/queries.ts (all SQL)
+User → Next.js → src/lib/db/index.ts (Supabase client) → Supabase Postgres
+                 src/lib/db/auth.ts (bcryptjs + JWT)
+                 src/lib/db/queries.ts (data access)
 ```
 
-### Supabase Mode (Optional)
+Required local environment variables are documented in `.env.local.example`:
+
 ```
-# .env.local
-DB_BACKEND=supabase
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
 ```
-Supabase migration files are in `supabase/migrations/`.
+
+The database schema is versioned in `supabase/migrations/`.
 
 ## Adaptive Engine
 
