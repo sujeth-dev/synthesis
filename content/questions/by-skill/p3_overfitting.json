@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Early stopping monitors validation loss and stops training when it plateaus or starts increasing. The model is restored to the checkpoint with the best validation loss — the optimal point before overfitting."
+  },
+  {
+    "id": "p3_overfitting_q7",
+    "skill_id": "p3_overfitting",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A model overfits with L2 regularisation strength set very low (train 96%, test 78%). The team increases the regularisation strength dramatically to 'fix' it, and now the model scores only 61% on both train and test. What happened?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The stronger regularisation successfully fixed overfitting, and this is the ideal outcome"
+      },
+      {
+        "id": "b",
+        "text": "The regularisation strength was pushed too far, and the model now underfits — regularisation strength needs to be tuned, not maximised"
+      },
+      {
+        "id": "c",
+        "text": "The test set must have changed between the two training runs"
+      },
+      {
+        "id": "d",
+        "text": "L2 regularisation stops having any effect once its strength exceeds a small threshold"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Regularisation strength is a dial to balance, not a lever to maximise. Too little allowed the model to memorise training data (overfitting); too much constrains the model so heavily it can no longer fit even the training data (underfitting). The goal is finding a middle value where validation performance is best."
+  },
+  {
+    "id": "p3_overfitting_q8",
+    "skill_id": "p3_overfitting",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "For a model overfitting a small dataset, which fix most directly addresses the root cause rather than just constraining the symptom?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding L2 regularisation"
+      },
+      {
+        "id": "b",
+        "text": "Adding dropout"
+      },
+      {
+        "id": "c",
+        "text": "Collecting more diverse training data, so the model can no longer simply memorise a small, limited sample"
+      },
+      {
+        "id": "d",
+        "text": "Increasing the learning rate"
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Regularisation techniques like dropout and L2 make memorisation harder, but they don't change the underlying problem: too little data to characterise the true pattern. More diverse training data directly reduces how much the model can memorise, since there's more genuine signal and less of a small fixed sample to overfit to — it's often the single most effective fix, though it isn't always feasible, which is why regularisation is used as a practical alternative."
   }
 ]

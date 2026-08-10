@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Transfer learning uses a model's learned representations (weights) from one task as an initialisation for another. Features learned on ImageNet (edges, textures, shapes) transfer to many vision tasks, reducing required data and training time."
+  },
+  {
+    "id": "p3_training_vs_inference_q7",
+    "skill_id": "p3_training_vs_inference",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A team wants to reduce inference cost by training an entirely smaller model to mimic a large, expensive model's behaviour, rather than changing numerical precision. Which technique does this?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Quantization"
+      },
+      {
+        "id": "b",
+        "text": "Knowledge distillation"
+      },
+      {
+        "id": "c",
+        "text": "Dropout"
+      },
+      {
+        "id": "d",
+        "text": "Data augmentation"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Knowledge distillation trains a smaller 'student' network to match a larger 'teacher' network's output distribution, often reaching similar accuracy at a fraction of the size and inference cost. Unlike quantization, which reduces numeric precision on the same architecture, distillation reduces cost by producing a genuinely smaller model."
+  },
+  {
+    "id": "p3_training_vs_inference_q8",
+    "skill_id": "p3_training_vs_inference",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Autoregressive language models like GPT generate text one token at a time. Why do production inference systems use 'KV caching' during generation?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It stores the attention key/value projections for previous tokens so they don't need to be recomputed from scratch at every new generation step, dramatically speeding up inference"
+      },
+      {
+        "id": "b",
+        "text": "It caches the entire training dataset in memory so the model can look up answers directly"
+      },
+      {
+        "id": "c",
+        "text": "It permanently stores model weights on the GPU to avoid ever reloading them"
+      },
+      {
+        "id": "d",
+        "text": "It converts the model's floating-point weights into lower-precision integers"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Without caching, generating each new token would require recomputing the key/value attention projections for every previous token from scratch — wasteful, since those values don't change once computed. KV caching stores them once and reuses them on later steps, which is why generation speed and memory usage scale with cache size, not just raw model compute."
   }
 ]

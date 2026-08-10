@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "Go's search space is ~10^170 — larger than atoms in the universe — making brute-force search impossible. AlphaGo used deep RL and Monte Carlo tree search, showing AI could master domains previously thought beyond reach."
+  },
+  {
+    "id": "p3_history_of_ai_q7",
+    "skill_id": "p3_history_of_ai",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AlphaGo (2016) was trained partly on a dataset of human expert games before self-play refinement. Its successor, AlphaZero (2017), reached even stronger play. What was the key difference in AlphaZero's approach?",
+    "options": [
+      {
+        "id": "a",
+        "text": "AlphaZero used a much larger dataset of human expert games than AlphaGo did"
+      },
+      {
+        "id": "b",
+        "text": "AlphaZero learned purely through self-play reinforcement learning, with no human game data used at any stage"
+      },
+      {
+        "id": "c",
+        "text": "AlphaZero replaced neural networks with symbolic search rules"
+      },
+      {
+        "id": "d",
+        "text": "AlphaZero only played against weaker opponents to boost its win rate"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "AlphaGo bootstrapped from a dataset of human expert games before refining itself through self-play. AlphaZero removed human data entirely, learning Go — and later chess and shogi — from scratch purely by playing against itself, reaching superhuman performance within days. This showed human game data wasn't a strict prerequisite for mastering these domains."
+  },
+  {
+    "id": "p3_history_of_ai_q8",
+    "skill_id": "p3_history_of_ai",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Minsky and Papert's 1969 book 'Perceptrons' contributed to the first AI winter primarily by:",
+    "options": [
+      {
+        "id": "a",
+        "text": "Proving mathematically that computers could never become intelligent"
+      },
+      {
+        "id": "b",
+        "text": "Demonstrating that single-layer perceptrons could not learn certain simple functions (like XOR), which cooled confidence and funding in neural network research"
+      },
+      {
+        "id": "c",
+        "text": "Showing that neural networks were computationally too slow to ever run on real hardware"
+      },
+      {
+        "id": "d",
+        "text": "Introducing the concept of deep learning for the first time"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Minsky and Papert proved that single-layer perceptrons are limited to linearly separable problems and can't represent functions like XOR. Multi-layer networks don't have this limitation, but that wasn't practically demonstrated until backpropagation matured decades later — in the meantime, the book's critique substantially cooled funding and interest in neural network research."
   }
 ]

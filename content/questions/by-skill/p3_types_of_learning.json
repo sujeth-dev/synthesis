@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "Semi-supervised learning uses a few labelled examples (expensive to obtain) combined with many unlabelled examples (cheap) to train better than supervised learning with labels alone."
+  },
+  {
+    "id": "p3_types_of_learning_q7",
+    "skill_id": "p3_types_of_learning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Self-supervised learning (like GPT's next-token prediction) is sometimes mistakenly called 'unsupervised learning.' What's the key technical distinction between them?",
+    "options": [
+      {
+        "id": "a",
+        "text": "There is no real distinction — the two terms describe exactly the same technique"
+      },
+      {
+        "id": "b",
+        "text": "Self-supervised learning still trains with a supervised-style loss against a target derived from the input itself, whereas true unsupervised learning (like clustering) has no target to predict at all"
+      },
+      {
+        "id": "c",
+        "text": "Unsupervised learning always requires more compute than self-supervised learning"
+      },
+      {
+        "id": "d",
+        "text": "Self-supervised learning cannot be implemented with neural networks"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Self-supervised learning auto-generates a target from the input (e.g. 'predict the next word') and trains with an ordinary supervised loss comparing the prediction to that target. Unsupervised learning, like k-means clustering, has no target to predict at all — it only uncovers structure. The 'self-supervised' name reflects that labels are auto-generated rather than human-annotated, but mechanically the training is supervised."
+  },
+  {
+    "id": "p3_types_of_learning_q8",
+    "skill_id": "p3_types_of_learning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A team wants to train a model to predict tomorrow's stock closing price using years of historical data, where the actual price that occurred on every past day is already known. Which learning paradigm fits best, and why not reinforcement learning?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Reinforcement learning, because the model should be rewarded whenever its prediction is close to correct"
+      },
+      {
+        "id": "b",
+        "text": "Supervised learning — since the correct answer (the actual historical price) already exists for every example, there's no need for the costly trial-and-error exploration reinforcement learning requires"
+      },
+      {
+        "id": "c",
+        "text": "Unsupervised learning, since financial data doesn't really have true labels"
+      },
+      {
+        "id": "d",
+        "text": "Semi-supervised learning, because only some historical prices are considered reliable"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "When ground-truth outcomes already exist for every input, as with historical prices, supervised learning can use them directly as training targets — far more sample-efficient than reinforcement learning. RL earns its keep when correct answers must be discovered through interaction and delayed reward (like the robot grasping example), not when labelled historical outcomes are already sitting in a dataset."
   }
 ]

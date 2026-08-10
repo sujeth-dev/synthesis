@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "F1 is the harmonic mean of precision and recall. It's preferred when classes are imbalanced or when both false positives and false negatives matter — where accuracy can be misleading."
+  },
+  {
+    "id": "p3_model_evaluation_q7",
+    "skill_id": "p3_model_evaluation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Unlike a medical diagnosis model, a spam filter that occasionally misses a spam email (a false negative) is far less costly than one that sends a legitimate email to the spam folder (a false positive). This means a spam filter should typically be tuned to prioritise:",
+    "options": [
+      {
+        "id": "a",
+        "text": "Recall over precision, exactly like the medical diagnosis case"
+      },
+      {
+        "id": "b",
+        "text": "Precision over recall — minimising false positives even if it lets more spam through"
+      },
+      {
+        "id": "c",
+        "text": "ROC AUC over F1 score"
+      },
+      {
+        "id": "d",
+        "text": "Training accuracy over validation accuracy"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The right precision/recall balance depends on which error type costs more. In medical diagnosis, missing a real case (false negative) is worse, so recall is prioritised. For spam filtering, hiding a real email (false positive) is usually more disruptive than letting an occasional spam email through, so precision is prioritised instead — the opposite tradeoff from the medical example."
+  },
+  {
+    "id": "p3_model_evaluation_q8",
+    "skill_id": "p3_model_evaluation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "On a highly imbalanced fraud-detection dataset (0.1% fraud), a model reports an impressive ROC AUC of 0.95. Why might this metric still be misleading?",
+    "options": [
+      {
+        "id": "a",
+        "text": "ROC AUC can never legitimately exceed 0.9, so 0.95 must indicate a bug"
+      },
+      {
+        "id": "b",
+        "text": "ROC AUC's false-positive rate is calculated over the huge negative class, which stays low almost by default, so AUC can look strong even if the model misses most actual fraud; Precision-Recall AUC is often more informative here"
+      },
+      {
+        "id": "c",
+        "text": "ROC AUC is only mathematically defined for perfectly balanced datasets"
+      },
+      {
+        "id": "d",
+        "text": "A high ROC AUC guarantees high recall for the minority class"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "ROC AUC depends on the false-positive rate, which is computed over the (enormous) negative class, so it naturally stays low and keeps AUC looking strong even when many actual frauds are missed. On heavily imbalanced problems, Precision-Recall AUC — which focuses on how well the model finds the rare positive class — gives a more honest picture of performance."
   }
 ]

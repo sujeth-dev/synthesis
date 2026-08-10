@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "The three-way split separates concerns: train for learning, validation for iterative decisions (hyperparameters, architecture), test for honest final evaluation. Using only two splits risks contaminating the test signal."
+  },
+  {
+    "id": "p3_data_and_labels_q7",
+    "skill_id": "p3_data_and_labels",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A team building a stock-price prediction model randomly shuffles all historical data before splitting it into train/test sets. Why is this a serious mistake?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Random shuffling always reduces the overall size of the dataset"
+      },
+      {
+        "id": "b",
+        "text": "For time-series data, random splitting can put future observations in the training set and past observations in the test set, leaking future information and inflating evaluation scores"
+      },
+      {
+        "id": "c",
+        "text": "Shuffling makes the classes more imbalanced"
+      },
+      {
+        "id": "d",
+        "text": "Shuffling strips the labels from the dataset"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "With time-dependent data, random shuffling can place observations from after the test period into the training set. The model effectively 'sees the future' during training, so its evaluation scores look great but collapse in real deployment. Time-series data should be split chronologically — train on the past, test on a later period — not randomly."
+  },
+  {
+    "id": "p3_data_and_labels_q8",
+    "skill_id": "p3_data_and_labels",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "To fix class imbalance, a team applies oversampling (duplicating minority-class examples) to the entire dataset, then splits the resulting data into train and test sets. What went wrong?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Oversampling should always be applied after training completes, not before"
+      },
+      {
+        "id": "b",
+        "text": "Duplicate copies of the same minority-class example can end up in both the train and test sets, leaking information and inflating test performance"
+      },
+      {
+        "id": "c",
+        "text": "Oversampling always shrinks the majority class down to match the minority class"
+      },
+      {
+        "id": "d",
+        "text": "Nothing is wrong — oversampling the full dataset before splitting is the correct standard procedure"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Oversampling before splitting means duplicated examples can land in both the train and test sets — the model is then partly tested on near-identical copies of data it trained on, artificially boosting scores. The correct order is to split first, then oversample only the training portion, leaving the test set as an untouched, realistic sample."
   }
 ]

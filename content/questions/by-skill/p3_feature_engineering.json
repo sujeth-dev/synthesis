@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Training-serving skew occurs when features are computed with different logic in training versus production. For example, a '7-day average' computed with different window boundaries in training vs serving will make the model behave unexpectedly in production."
+  },
+  {
+    "id": "p3_feature_engineering_q7",
+    "skill_id": "p3_feature_engineering",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A team replaces a high-cardinality 'city' feature with its target-encoded value (the average target outcome for each city), computed using the full training set before cross-validation. What subtle problem does this introduce?",
+    "options": [
+      {
+        "id": "a",
+        "text": "There's no problem — computing target encodings on the full training set before CV is standard practice"
+      },
+      {
+        "id": "b",
+        "text": "Each row's own label contributes to its city's average target value, so the feature leaks that row's own outcome into itself and inflates validation performance within each CV fold"
+      },
+      {
+        "id": "c",
+        "text": "Target encoding requires one-hot encoding the feature first"
+      },
+      {
+        "id": "d",
+        "text": "Target encoding only works when the target itself is categorical, not numeric"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Naively computing each category's average target using the whole training set means every row's own label contributes to its own feature value — a subtle form of leakage. The fix is to compute target encodings using only out-of-fold data (or with smoothing/added noise), the same discipline used when fitting a StandardScaler only on the training fold."
+  },
+  {
+    "id": "p3_feature_engineering_q8",
+    "skill_id": "p3_feature_engineering",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A Random Forest assigns low individual importance to two highly correlated features (e.g. 'age' and 'years of experience'), even though the underlying concept they represent is highly predictive. Why can this happen?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Highly correlated features are automatically dropped by Random Forest before training"
+      },
+      {
+        "id": "b",
+        "text": "The model splits the same predictive signal across both correlated features, diluting each one's individual importance score even though together they carry a lot of signal"
+      },
+      {
+        "id": "c",
+        "text": "Correlated features can never be used by tree-based models"
+      },
+      {
+        "id": "d",
+        "text": "Low importance proves the underlying signal itself is not actually predictive"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "When two features carry overlapping information, splits can be made on either one fairly interchangeably, so the importance signal gets divided between them instead of concentrated on one. Judging predictive value from individual feature importance alone can therefore underestimate a correlated group — dropping 'unimportant' correlated features without checking their combined effect can hurt performance."
   }
 ]

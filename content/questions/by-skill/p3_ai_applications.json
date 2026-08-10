@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "Standard RLHF requires large-scale human preference labelling. Constitutional AI uses a written constitution of principles — the model critiques its own responses against these principles, reducing reliance on human labelling at scale."
+  },
+  {
+    "id": "p3_ai_applications_q7",
+    "skill_id": "p3_ai_applications",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A team implements RAG for their support chatbot and assumes hallucination is now a 'solved problem.' What is the flaw in this assumption?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RAG has no effect on hallucination whatsoever"
+      },
+      {
+        "id": "b",
+        "text": "RAG reduces hallucination by grounding answers in retrieved documents, but the model can still misinterpret, ignore, or contradict that retrieved context — hallucination is reduced, not eliminated"
+      },
+      {
+        "id": "c",
+        "text": "RAG only works for coding-related questions"
+      },
+      {
+        "id": "d",
+        "text": "RAG makes hallucination worse in every case"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "RAG substantially reduces hallucination by giving the model relevant source material to draw on, but it doesn't guarantee faithfulness — the model can still generate claims unsupported by, or contradicting, the retrieved documents, especially with ambiguous or conflicting sources. Grounding is a strong mitigation, not a complete fix."
+  },
+  {
+    "id": "p3_ai_applications_q8",
+    "skill_id": "p3_ai_applications",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Collaborative filtering struggles with the cold-start problem for brand-new items that have no interaction history yet. Which approach specifically helps by using an item's inherent properties instead of user interactions?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Collecting more collaborative filtering data before the item launches"
+      },
+      {
+        "id": "b",
+        "text": "Content-based filtering, which recommends items based on their own attributes (genre, description, features) rather than how users have interacted with them"
+      },
+      {
+        "id": "c",
+        "text": "Increasing the size of the ranking model in a two-stage recommendation system"
+      },
+      {
+        "id": "d",
+        "text": "Removing new items from the catalogue until they accumulate interactions"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Content-based filtering recommends based on an item's own attributes (e.g. genre, audio features, text description) rather than interaction history, so a brand-new item with zero interactions can still be recommended based on its content — unlike pure collaborative filtering, which needs interaction data to work at all. Many production systems combine both approaches (hybrid recommenders) to handle cold-start and mature-catalogue cases together."
   }
 ]

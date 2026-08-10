@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "Physical causal reasoning in novel situations remains a significant weakness of current AI. AI systems excel at pattern matching but struggle with physical world reasoning and truly novel scenarios."
+  },
+  {
+    "id": "p3_what_is_ai_q7",
+    "skill_id": "p3_what_is_ai",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A company claims their AI system 'understands' customer emotions because it classifies reviews as positive or negative with 95% accuracy. What is the flaw in this claim?",
+    "options": [
+      {
+        "id": "a",
+        "text": "95% accuracy is too low to support any claim about the system"
+      },
+      {
+        "id": "b",
+        "text": "High accuracy on a narrow classification task doesn't imply genuine understanding — the system may be exploiting statistical word patterns without any comprehension of emotion"
+      },
+      {
+        "id": "c",
+        "text": "The system needs to be tested in more languages before the claim is even discussable"
+      },
+      {
+        "id": "d",
+        "text": "Understanding requires consciousness, and all AI systems are already conscious"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A system can perform very well on a narrow, well-defined task by picking up on surface statistical patterns (certain words, phrasing) without anything resembling comprehension. High accuracy demonstrates competence at the specific task it was trained and measured on — it doesn't demonstrate 'understanding' in the human sense, which is a much stronger and different claim."
+  },
+  {
+    "id": "p3_what_is_ai_q8",
+    "skill_id": "p3_what_is_ai",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A payroll script computes each employee's paycheck using a fixed formula (hours worked times rate, minus fixed deductions) written by a programmer. Why would this NOT typically be classified as AI, even though a rule-based expert system — also built from explicit human-written rules — can be?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The payroll script doesn't use if-then logic, so it can't be compared to an expert system"
+      },
+      {
+        "id": "b",
+        "text": "The payroll script isn't AI simply because it's fully automated"
+      },
+      {
+        "id": "c",
+        "text": "The payroll script performs simple deterministic arithmetic, not a task requiring the kind of pattern recognition or judgment that defines AI, whereas an expert system's rules encode human expertise for exactly that kind of judgment call"
+      },
+      {
+        "id": "d",
+        "text": "Payroll scripts always execute faster than expert systems, and speed is what disqualifies them"
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Automation alone doesn't make software AI. A payroll formula is deterministic arithmetic with no judgment involved — the same inputs always produce the same output via simple math. Rule-based expert systems count as AI because their hand-written rules encode human expertise to make judgment calls (e.g. diagnosing a fault, approving a loan) — the kind of task that normally requires human intelligence, even though the rules themselves are written rather than learned from data."
   }
 ]

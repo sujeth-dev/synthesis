@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "The perceptron was an early artificial neuron that computed a weighted sum of inputs and applied a threshold. It became the building block of neural networks, eventually scaled into today's deep learning architectures."
+  },
+  {
+    "id": "p3_ai_vs_ml_vs_dl_q7",
+    "skill_id": "p3_ai_vs_ml_vs_dl",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A large language model (LLM) like GPT is best described as:",
+    "options": [
+      {
+        "id": "a",
+        "text": "AI but not ML, since it isn't trained on labelled data in the traditional sense"
+      },
+      {
+        "id": "b",
+        "text": "ML but not AI, since it's ultimately just statistics"
+      },
+      {
+        "id": "c",
+        "text": "Deep learning — which automatically makes it ML and AI too, since each is a subset of the one before it"
+      },
+      {
+        "id": "d",
+        "text": "None of AI, ML, or DL — LLMs are a separate category outside this hierarchy"
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Because DL is a subset of ML, which is a subset of AI, the categories are nested rather than mutually exclusive — anything that qualifies as deep learning automatically qualifies as ML and as AI too. An LLM is a deep neural network (a Transformer with many layers), so it's simultaneously deep learning, machine learning, and AI, not a choice between the three."
+  },
+  {
+    "id": "p3_ai_vs_ml_vs_dl_q8",
+    "skill_id": "p3_ai_vs_ml_vs_dl",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Based on the layer-count criterion for deep learning, a neural network with only one hidden layer (input to hidden to output) is most accurately described as:",
+    "options": [
+      {
+        "id": "a",
+        "text": "Deep learning, because any neural network qualifies as 'deep' by definition"
+      },
+      {
+        "id": "b",
+        "text": "A shallow neural network — a form of machine learning, but not usually classified as deep learning"
+      },
+      {
+        "id": "c",
+        "text": "Symbolic AI, since it doesn't have enough layers to learn from data"
+      },
+      {
+        "id": "d",
+        "text": "Not AI at all, since it has too few parameters to be considered intelligent"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The 'deep' in deep learning refers to having multiple hidden layers that let the network build a hierarchy of learned features. A network with a single hidden layer is a legitimate neural network and a form of ML, but with only one layer it can't build that feature hierarchy — practitioners call this a shallow network, reserving 'deep learning' for architectures with several stacked hidden layers."
   }
 ]

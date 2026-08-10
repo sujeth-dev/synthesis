@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Shadow deployment runs the new model alongside the production model. Real traffic goes to production; the new model's predictions are logged and compared. Only after validating performance is the new model promoted to production."
+  },
+  {
+    "id": "p3_ai_dev_cycle_q7",
+    "skill_id": "p3_ai_dev_cycle",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A fraud detection model's input transaction patterns stay statistically the same over time, but its accuracy still degrades because fraudsters change their tactics, altering what fraudulent behaviour actually looks like. This is best described as:",
+    "options": [
+      {
+        "id": "a",
+        "text": "Data drift, since the inputs have technically changed"
+      },
+      {
+        "id": "b",
+        "text": "Concept drift — the relationship between inputs and the true target label has changed, even though the input distribution itself hasn't shifted"
+      },
+      {
+        "id": "c",
+        "text": "Overfitting to the original training set"
+      },
+      {
+        "id": "d",
+        "text": "A model registry failure"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Data drift is a shift in the distribution of input features. Concept drift is a shift in the relationship between inputs and the target — the same input pattern now maps to a different correct answer. Fraud detection is a classic concept-drift scenario: fraudsters adapt, so yesterday's 'normal' pattern may now be fraudulent. Concept drift usually requires retraining with fresh labels, not just monitoring input distributions."
+  },
+  {
+    "id": "p3_ai_dev_cycle_q8",
+    "skill_id": "p3_ai_dev_cycle",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Unlike shadow deployment, where the new model's predictions never affect real users, a canary deployment:",
+    "options": [
+      {
+        "id": "a",
+        "text": "Also never affects real users — it's just another name for shadow deployment"
+      },
+      {
+        "id": "b",
+        "text": "Routes a small percentage of real user traffic to the new model's actual decisions and monitors real-world impact before a full rollout"
+      },
+      {
+        "id": "c",
+        "text": "Only tests the model on synthetic, artificially generated data"
+      },
+      {
+        "id": "d",
+        "text": "Is used exclusively for rolling back an already-failed deployment"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Shadow deployment runs the new model in parallel and compares its predictions to the current model's, without those predictions ever reaching a real user. Canary deployment goes a step further: it exposes a small, real slice of traffic to the new model's actual decisions, so its real-world impact can be measured before a full rollout — a higher-risk, higher-signal step that usually follows a successful shadow test."
   }
 ]

@@ -160,5 +160,59 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "Mini-batch GD is computationally efficient (uses GPU parallelism) and the noise from each mini-batch helps escape shallow local minima. Pure batch GD is slow; pure SGD (1 sample) is too noisy."
+  },
+  {
+    "id": "p3_how_machines_learn_q7",
+    "skill_id": "p3_how_machines_learn",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "In a very deep network using sigmoid activations throughout, training often stalls because the early layers barely update at all. What causes this?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate is always set too low whenever sigmoid activations are used"
+      },
+      {
+        "id": "b",
+        "text": "Repeated multiplication of small sigmoid derivatives (which max out around 0.25) during backpropagation shrinks the gradient exponentially by the time it reaches early layers — the vanishing gradient problem"
+      },
+      {
+        "id": "c",
+        "text": "Sigmoid activations are incompatible with backpropagation and block gradients entirely"
+      },
+      {
+        "id": "d",
+        "text": "The loss function becomes undefined once a network has many layers"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Backpropagation multiplies gradients layer by layer via the chain rule. Sigmoid's derivative never exceeds 0.25, so multiplying many such small values across many layers shrinks the gradient toward zero before it reaches the early layers — those layers barely learn. ReLU activations, batch normalisation, and residual connections were all developed partly to combat this problem."
+  },
+  {
+    "id": "p3_how_machines_learn_q8",
+    "skill_id": "p3_how_machines_learn",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "While training with stochastic gradient descent (batch size 1), the loss fluctuates noticeably from step to step but trends downward over many steps. Does this noisy pattern mean the learning rate is too high?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Yes — any fluctuation at all means the learning rate must be lowered"
+      },
+      {
+        "id": "b",
+        "text": "No — some step-to-step noise is expected with small batch sizes; what matters is whether the loss trends downward over time, not whether each individual step is smooth"
+      },
+      {
+        "id": "c",
+        "text": "Yes — loss must decrease on every single step for training to be considered correct"
+      },
+      {
+        "id": "d",
+        "text": "No — the fluctuation means the model has already converged and training can stop"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "With small batch sizes, especially true SGD with batch size 1, each step's gradient is only a noisy estimate of the gradient over the full dataset, so per-step fluctuation is normal and even helpful for escaping shallow minima. The real warning sign of too high a learning rate is the loss oscillating wildly or trending upward over time — not simple step-to-step noise on an overall downward trend."
   }
 ]
