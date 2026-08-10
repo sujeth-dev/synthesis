@@ -3,7 +3,7 @@
     "id": "p3_overfitting_q1",
     "skill_id": "p3_overfitting",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A model achieves 98% training accuracy but 62% test accuracy. This is most likely:",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_overfitting_q2",
     "skill_id": "p3_overfitting",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A model achieves 62% training accuracy and 60% test accuracy. This is most likely:",
     "options": [
       {

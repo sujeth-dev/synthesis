@@ -3,7 +3,7 @@
     "id": "p1_modules_imports_q1",
     "skill_id": "p1_modules_imports",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the difference between `import math` and `from math import sqrt`?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p1_modules_imports_q2",
     "skill_id": "p1_modules_imports",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What command installs a third-party package from PyPI?",
     "options": [
       {

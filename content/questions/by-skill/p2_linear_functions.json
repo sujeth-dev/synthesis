@@ -3,7 +3,7 @@
     "id": "p2_linear_functions_q1",
     "skill_id": "p2_linear_functions",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "In y = 3x + 5, what does the coefficient 3 (the slope) mean?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p2_linear_functions_q2",
     "skill_id": "p2_linear_functions",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "R² = 0.85 for a linear regression model means:",
     "options": [
       {

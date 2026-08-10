@@ -3,7 +3,7 @@
     "id": "p1_debugging_q1",
     "skill_id": "p1_debugging",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "You see `NameError: name 'x' is not defined`. What does this mean?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p1_debugging_q2",
     "skill_id": "p1_debugging",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the first thing you should do when you see an error message?",
     "options": [
       {

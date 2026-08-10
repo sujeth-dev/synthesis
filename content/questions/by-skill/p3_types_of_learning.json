@@ -3,7 +3,7 @@
     "id": "p3_types_of_learning_q1",
     "skill_id": "p3_types_of_learning",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A model trained on emails labelled 'spam' or 'not spam' is an example of:",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_types_of_learning_q2",
     "skill_id": "p3_types_of_learning",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "K-Means clustering is an example of which type of learning?",
     "options": [
       {

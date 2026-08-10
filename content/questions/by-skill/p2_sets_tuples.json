@@ -3,7 +3,7 @@
     "id": "p2_sets_tuples_q1",
     "skill_id": "p2_sets_tuples",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the key difference between a list and a tuple?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p2_sets_tuples_q2",
     "skill_id": "p2_sets_tuples",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What does `{1, 2, 3, 2, 1}` evaluate to?",
     "options": [
       {

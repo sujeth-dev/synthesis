@@ -3,7 +3,7 @@
     "id": "p1_var_q1",
     "skill_id": "p1_variables",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What does this Python code print?\n\nage = 25\nage = age + 1\nprint(age)",
     "options": [
       { "id": "a", "text": "25" },
@@ -34,10 +34,16 @@
   {
     "id": "p1_var_q3",
     "skill_id": "p1_variables",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "In Python, to create a variable called 'score' and give it the value 100, you write:\n\nscore = ____",
-    "correct_answer": "100",
+    "stem": "Which Python line creates a variable called score with the value 100?",
+    "options": [
+      { "id": "a", "text": "score == 100" },
+      { "id": "b", "text": "100 = score" },
+      { "id": "c", "text": "score: 100" },
+      { "id": "d", "text": "score = 100" }
+    ],
+    "correct_option_id": "d",
     "explanation_after": "Variable assignment in Python: variable_name = value. The equals sign here means 'store this value in this named box' — not 'these two things are equal'. That's why Python uses == (double equals) to check equality.",
     "graph_placement_weight": { "p1_variables": 0.9 }
   }

@@ -3,7 +3,7 @@
     "id": "p2_dict_q1",
     "skill_id": "p2_dictionaries",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What does this code output?\n\nmodel_config = {'layers': 12, 'heads': 8, 'dim': 768}\nprint(model_config['heads'])",
     "options": [
       {
@@ -63,10 +63,16 @@
   {
     "id": "p2_dict_q3",
     "skill_id": "p2_dictionaries",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "In Python, a dictionary stores data as ______-______ pairs.",
-    "correct_answer": "key-value",
+    "stem": "How does a Python dictionary organise its entries?",
+    "options": [
+      { "id": "a", "text": "As row-column pairs" },
+      { "id": "b", "text": "As key-value pairs" },
+      { "id": "c", "text": "As input-output pairs" },
+      { "id": "d", "text": "As index-position pairs only" }
+    ],
+    "correct_option_id": "b",
     "explanation_after": "Every dictionary entry has a key (what you look up by) and a value (what you get back). Keys must be unique.",
     "graph_placement_weight": {
       "p2_dictionaries": 0.9

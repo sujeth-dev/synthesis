@@ -3,7 +3,7 @@
     "id": "p1_cpu_q1",
     "skill_id": "p1_cpu_processing",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What does the CPU (Central Processing Unit) do?",
     "options": [
       { "id": "a", "text": "Stores files permanently on your computer" },
@@ -34,10 +34,16 @@
   {
     "id": "p1_cpu_q3",
     "skill_id": "p1_cpu_processing",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "A CPU is optimised for ______ tasks. A GPU is optimised for ______ tasks.",
-    "correct_answer": "sequential, parallel",
+    "stem": "Which pairing correctly describes what CPUs and GPUs are optimised for?",
+    "options": [
+      { "id": "a", "text": "CPU: parallel tasks; GPU: sequential tasks" },
+      { "id": "b", "text": "CPU: storage tasks; GPU: network tasks" },
+      { "id": "c", "text": "CPU: sequential tasks; GPU: parallel tasks" },
+      { "id": "d", "text": "CPU: input tasks; GPU: output tasks" }
+    ],
+    "correct_option_id": "c",
     "explanation_after": "Sequential = one thing at a time, very fast. Parallel = many things at once, each slower but combined much faster for suitable workloads. Neural network training is a parallel workload — millions of independent multiplications.",
     "graph_placement_weight": { "p1_cpu_processing": 0.9 }
   }

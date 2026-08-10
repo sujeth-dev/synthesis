@@ -3,7 +3,7 @@
     "id": "p3_training_vs_inference_q1",
     "skill_id": "p3_training_vs_inference",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "During inference, compared to training, a neural network:",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_training_vs_inference_q2",
     "skill_id": "p3_training_vs_inference",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Why does training typically require much more compute than inference?",
     "options": [
       {

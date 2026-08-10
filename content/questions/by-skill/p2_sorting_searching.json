@@ -3,7 +3,7 @@
     "id": "p2_sorting_searching_q1",
     "skill_id": "p2_sorting_searching",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the time complexity of Python's sorted() function?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p2_sorting_searching_q2",
     "skill_id": "p2_sorting_searching",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Why must binary search only be used on sorted data?",
     "options": [
       {

@@ -3,7 +3,7 @@
     "id": "p2_data_exploration_q1",
     "skill_id": "p2_data_exploration",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Which of the following should you check FIRST when you receive a new dataset before doing any modelling?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p2_data_exploration_q2",
     "skill_id": "p2_data_exploration",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "You plot a boxplot of 'fare' in the Titanic dataset and see several points far above the upper whisker. What is the most responsible next step?",
     "options": [
       {

@@ -3,7 +3,7 @@
     "id": "p3_ai_applications_q1",
     "skill_id": "p3_ai_applications",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Spotify's 'Discover Weekly' playlist is primarily powered by which type of AI?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_ai_applications_q2",
     "skill_id": "p3_ai_applications",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the 'cold start' problem in recommendation systems?",
     "options": [
       {

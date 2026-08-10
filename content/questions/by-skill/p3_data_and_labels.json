@@ -3,7 +3,7 @@
     "id": "p3_data_and_labels_q1",
     "skill_id": "p3_data_and_labels",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A dataset where 95% of examples are class A and 5% are class B is described as:",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_data_and_labels_q2",
     "skill_id": "p3_data_and_labels",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Data leakage in a machine learning pipeline means:",
     "options": [
       {

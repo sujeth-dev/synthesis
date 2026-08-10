@@ -3,7 +3,7 @@
     "id": "p2_mat_q1",
     "skill_id": "p2_math_matrices",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the shape of the result when multiplying a (3\u00d74) matrix by a (4\u00d75) matrix?",
     "options": [
       {
@@ -63,10 +63,16 @@
   {
     "id": "p2_mat_q3",
     "skill_id": "p2_math_matrices",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "In NumPy and PyTorch, the operator for matrix multiplication is ______",
-    "correct_answer": "@",
+    "stem": "Which Python operator performs matrix multiplication in NumPy and PyTorch?",
+    "options": [
+      { "id": "a", "text": "*" },
+      { "id": "b", "text": "@" },
+      { "id": "c", "text": "//" },
+      { "id": "d", "text": "**" }
+    ],
+    "correct_option_id": "b",
     "explanation_after": "The @ symbol is Python's matrix multiplication operator (Python 3.5+). result = A @ B. You'll also see torch.matmul(A, B) or np.dot(A, B) \u2014 they do the same thing.",
     "graph_placement_weight": {
       "p2_math_matrices": 0.9

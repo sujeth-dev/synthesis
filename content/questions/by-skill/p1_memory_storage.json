@@ -3,7 +3,7 @@
     "id": "p1_mem_q1",
     "skill_id": "p1_memory_storage",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What happens to RAM (Random Access Memory) when you turn off your computer?",
     "options": [
       { "id": "a", "text": "It saves everything automatically to the hard drive" },
@@ -34,10 +34,16 @@
   {
     "id": "p1_mem_q3",
     "skill_id": "p1_memory_storage",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "RAM is like your ______ (temporary working space). Storage (SSD/HDD) is like your ______ (permanent filing system).",
-    "correct_answer": "desk, filing cabinet",
+    "stem": "Which analogy best compares RAM with permanent storage?",
+    "options": [
+      { "id": "a", "text": "RAM is a filing cabinet; storage is a desk" },
+      { "id": "b", "text": "RAM is a desk; storage is a filing cabinet" },
+      { "id": "c", "text": "RAM is a keyboard; storage is a monitor" },
+      { "id": "d", "text": "RAM and storage are both temporary desks" }
+    ],
+    "correct_option_id": "b",
     "explanation_after": "The desk/filing cabinet analogy is the standard mental model for RAM vs storage. You work on things at your desk (RAM), and when done, file them away (storage). AI models are loaded from storage (filing cabinet) into RAM (desk) when running.",
     "graph_placement_weight": { "p1_memory_storage": 0.9 }
   }

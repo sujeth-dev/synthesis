@@ -3,7 +3,7 @@
     "id": "p3_ai_vs_ml_vs_dl_q1",
     "skill_id": "p3_ai_vs_ml_vs_dl",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Which of the following correctly describes the relationship between AI, ML, and Deep Learning?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_ai_vs_ml_vs_dl_q2",
     "skill_id": "p3_ai_vs_ml_vs_dl",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A neural network with 50 layers processing medical images to detect cancer would be classified as:",
     "options": [
       {

@@ -134,27 +134,33 @@ export async function POST(req: NextRequest) {
       const pinnedSkillId = sessionMode === 'learn' && typeof current_skill_id === 'string'
         ? current_skill_id
         : undefined
-      const arcHistory = pinnedSkillId
-        ? (await getSessionBehaviorAttempts(user.id, session_id))
-            .filter(attempt =>
-              attempt.skill_id === pinnedSkillId &&
-              !attempt.question_id.endsWith('_explain_back') &&
-              !attempt.question_id.endsWith('_feynman_loop')
-            )
-            .map(attempt => ({
-              correct: attempt.correct,
-              difficulty_tier: attempt.difficulty_tier as DifficultyTier,
-            }))
+      const persistedArcAttempts = pinnedSkillId
+        ? (await getSessionBehaviorAttempts(user.id, session_id)).filter(attempt =>
+            attempt.skill_id === pinnedSkillId &&
+            !attempt.question_id.endsWith('_explain_back') &&
+            !attempt.question_id.endsWith('_feynman_loop')
+          )
         : []
+      const arcHistory = persistedArcAttempts.map(attempt => ({
+        correct: attempt.correct,
+        difficulty_tier: attempt.difficulty_tier as DifficultyTier,
+      }))
+      const persistedQuestionIds = persistedArcAttempts.map(attempt => attempt.question_id)
+      const selectionSeenQuestionIds = new Set([
+        ...seen_question_ids,
+        ...persistedQuestionIds,
+      ])
 
       const task = selectNextTask({
         skillStates, reviewSchedules, motivationState: motivation,
         seenSkillsThisSession:      seen_skills,
-        seenQuestionIdsThisSession: new Set(seen_question_ids),
+        seenQuestionIdsThisSession: selectionSeenQuestionIds,
         questionsCache,
         mode: sessionMode,
         currentSkillId: pinnedSkillId,
         arcHistory,
+        lastQuestionId: persistedQuestionIds[persistedQuestionIds.length - 1]
+          ?? seen_question_ids[seen_question_ids.length - 1],
       })
 
       if (!task) return NextResponse.json({ task: null, done: true })

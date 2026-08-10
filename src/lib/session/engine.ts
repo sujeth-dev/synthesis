@@ -30,51 +30,37 @@ const GUIDED_STAGE_DIFFICULTY: Record<GuidedArcStage, DifficultyTier> = {
 
 export function getGuidedArcProgress(history: ArcAttemptEvidence[]): GuidedArcProgress {
   let stageIndex = 0
-  let recentEvidence: boolean[] = []
   let stageAttemptCount = 0
+  let stageCorrectStreak = 0
   let coreComplete = false
 
   for (const attempt of history) {
     if (coreComplete) continue
     stageAttemptCount += 1
-    recentEvidence.push(attempt.correct)
-    if (recentEvidence.length < MIN_QUESTIONS_PER_GUIDED_STAGE) continue
 
-    const latest = recentEvidence.slice(-MIN_QUESTIONS_PER_GUIDED_STAGE)
-    const allCorrect = latest.every(Boolean)
-    const allWrong = latest.every(correct => !correct)
-
-    if (allCorrect) {
+    if (attempt.correct) {
+      stageCorrectStreak += 1
+      if (stageCorrectStreak < MIN_QUESTIONS_PER_GUIDED_STAGE) continue
       if (stageIndex === GUIDED_STAGE_ORDER.length - 1) {
         coreComplete = true
-        recentEvidence = latest
       } else {
         stageIndex += 1
-        recentEvidence = []
         stageAttemptCount = 0
+        stageCorrectStreak = 0
       }
-    } else if (allWrong) {
+    } else {
       if (stageIndex > 0) {
         stageIndex -= 1
         stageAttemptCount = 0
       }
-      recentEvidence = []
-    } else {
-      // Keep the newest result so the next answer can establish a two-answer trend.
-      recentEvidence = latest.slice(-1)
+      stageCorrectStreak = 0
     }
-  }
-
-  let stageCorrectStreak = 0
-  for (let index = recentEvidence.length - 1; index >= 0; index -= 1) {
-    if (!recentEvidence[index]) break
-    stageCorrectStreak += 1
   }
 
   return {
     stage: GUIDED_STAGE_ORDER[stageIndex],
     stage_attempt_count: stageAttemptCount,
-    stage_correct_streak: coreComplete ? MIN_QUESTIONS_PER_GUIDED_STAGE : stageCorrectStreak,
+    stage_correct_streak: stageCorrectStreak,
     completed_stage_count: coreComplete ? GUIDED_STAGE_ORDER.length : stageIndex,
     core_complete: coreComplete,
     total_attempt_count: history.length,
@@ -142,6 +128,7 @@ interface SelectTaskParams {
   mode?:                      SessionMode
   currentSkillId?:            string
   arcHistory?:                ArcAttemptEvidence[]
+  lastQuestionId?:            string
 }
 
 export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
@@ -154,7 +141,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
   const {
     skillStates, reviewSchedules, motivationState,
     seenSkillsThisSession, seenQuestionIdsThisSession, questionsCache, mode, currentSkillId,
-    arcHistory = [],
+    arcHistory = [], lastQuestionId,
   } = p
 
   const now = new Date()
@@ -201,7 +188,13 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
     const node = getNodeById(currentSkillId)
     if (state && state.mastery_state !== 'blocked' && node && questionsCache.has(currentSkillId)) {
       const diffTier = selectArcDifficulty(arcHistory)
-      const q = pickGuidedQuestion(currentSkillId, diffTier, seenQuestionIdsThisSession, questionsCache)
+      const q = pickGuidedQuestion(
+        currentSkillId,
+        diffTier,
+        seenQuestionIdsThisSession,
+        questionsCache,
+        lastQuestionId,
+      )
       if (q) {
         return buildTask(currentSkillId, q, diffTier, {
           skill_id: currentSkillId,
@@ -397,18 +390,23 @@ function pickGuidedQuestion(
   tier: DifficultyTier,
   seen: Set<string>,
   cache: Map<string, Question[]>,
+  lastQuestionId?: string,
 ): Question | null {
-  const allQuestions = cache.get(skill_id) ?? []
+  const allQuestions = (cache.get(skill_id) ?? []).filter(question => question.format === 'mcq')
   const tiered = allQuestions.filter(question => question.difficulty_tier === tier)
   const unseen = tiered.filter(question => !seen.has(question.id))
   const unseenFallback = allQuestions.filter(question => !seen.has(question.id))
+  const tieredAlternative = tiered.filter(question => question.id !== lastQuestionId)
+  const anyAlternative = allQuestions.filter(question => question.id !== lastQuestionId)
   const pool = unseen.length > 0
     ? unseen
-    : tiered.length > 0
-      ? tiered
+    : tieredAlternative.length > 0
+      ? tieredAlternative
       : unseenFallback.length > 0
         ? unseenFallback
-        : allQuestions
+        : anyAlternative.length > 0
+          ? anyAlternative
+          : allQuestions
   return pool[Math.floor(Math.random() * pool.length)] ?? null
 }
 

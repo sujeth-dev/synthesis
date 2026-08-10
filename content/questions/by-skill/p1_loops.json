@@ -3,7 +3,7 @@
     "id": "p1_loop_q1",
     "skill_id": "p1_loops",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "How many times will 'hello' be printed?\n\nfor i in range(3):\n    print('hello')",
     "options": [
       { "id": "a", "text": "0 times" },
@@ -19,7 +19,7 @@
     "id": "p1_loop_q2",
     "skill_id": "p1_loops",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What will this code output?\n\nfor num in [1, 2, 3]:\n    print(num * 2)",
     "options": [
       { "id": "a", "text": "1 2 3" },

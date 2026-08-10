@@ -3,7 +3,7 @@
     "id": "p2_bigo_q1",
     "skill_id": "p2_big_o_basics",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "If an algorithm is O(n) and takes 1 second for 1,000 items, roughly how long for 10,000 items?",
     "options": [
       {
@@ -63,10 +63,16 @@
   {
     "id": "p2_bigo_q3",
     "skill_id": "p2_big_o_basics",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "An algorithm that always takes the same amount of time regardless of input size is O(______)",
-    "correct_answer": "1",
+    "stem": "Which Big O notation describes constant time, where runtime does not grow with input size?",
+    "options": [
+      { "id": "a", "text": "O(1)" },
+      { "id": "b", "text": "O(log n)" },
+      { "id": "c", "text": "O(n)" },
+      { "id": "d", "text": "O(n²)" }
+    ],
+    "correct_option_id": "a",
     "explanation_after": "O(1) = constant time. Dictionary lookup is O(1). Accessing a list element by index is O(1). These operations don't get slower as data grows.",
     "graph_placement_weight": {
       "p2_big_o_basics": 0.9

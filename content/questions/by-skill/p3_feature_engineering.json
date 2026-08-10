@@ -3,7 +3,7 @@
     "id": "p3_feature_engineering_q1",
     "skill_id": "p3_feature_engineering",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Why should you normalise/scale features before training a k-nearest neighbours model?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_feature_engineering_q2",
     "skill_id": "p3_feature_engineering",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "You fit a StandardScaler on your training data. When preprocessing the test data, you should:",
     "options": [
       {

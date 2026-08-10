@@ -3,7 +3,7 @@
     "id": "p2_recursion_q1",
     "skill_id": "p2_recursion",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What are the two essential parts of every recursive function?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p2_recursion_q2",
     "skill_id": "p2_recursion",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What error does Python raise when recursion goes too deep?",
     "options": [
       {

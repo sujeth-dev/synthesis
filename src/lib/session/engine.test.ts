@@ -153,6 +153,56 @@ describe('session topic arc memory', () => {
       .toBe('p1_what_is_computer')
   })
 
+  it('serves a different easier question after an error instead of retrying the same item', () => {
+    const skillId = 'p1_what_is_computer'
+    const easyOne: Question = {
+      ...question(skillId),
+      id: 'easy-one',
+      difficulty_tier: 'review',
+    }
+    const easyTwo: Question = {
+      ...question(skillId),
+      id: 'easy-two',
+      difficulty_tier: 'review',
+    }
+    const task = selectNextTask({
+      skillStates: new Map([[skillId, skillState(skillId, 0.1)]]),
+      reviewSchedules: new Map(),
+      motivationState,
+      seenSkillsThisSession: [skillId],
+      seenQuestionIdsThisSession: new Set([easyOne.id]),
+      questionsCache: new Map([[skillId, [easyOne, easyTwo]]]),
+      currentSkillId: skillId,
+      arcHistory: [{ difficulty_tier: 'review', correct: false }],
+      lastQuestionId: easyOne.id,
+    })
+
+    expect(task?.question.id).toBe(easyTwo.id)
+    expect(task?.difficulty_tier).toBe('review')
+  })
+
+  it('never immediately repeats the last item after the easier pool has been seen', () => {
+    const skillId = 'p1_what_is_computer'
+    const easyOne: Question = { ...question(skillId), id: 'easy-one', difficulty_tier: 'review' }
+    const easyTwo: Question = { ...question(skillId), id: 'easy-two', difficulty_tier: 'review' }
+    const task = selectNextTask({
+      skillStates: new Map([[skillId, skillState(skillId, 0.1)]]),
+      reviewSchedules: new Map(),
+      motivationState,
+      seenSkillsThisSession: [skillId, skillId],
+      seenQuestionIdsThisSession: new Set([easyOne.id, easyTwo.id]),
+      questionsCache: new Map([[skillId, [easyOne, easyTwo]]]),
+      currentSkillId: skillId,
+      arcHistory: [
+        { difficulty_tier: 'review', correct: false },
+        { difficulty_tier: 'review', correct: false },
+      ],
+      lastQuestionId: easyTwo.id,
+    })
+
+    expect(task?.question.id).toBe(easyOne.id)
+  })
+
   it('unlocks the stay-or-switch choice exactly at the threshold', () => {
     const incomplete = getGuidedArcProgress([
       { difficulty_tier: 'review', correct: true },
@@ -204,7 +254,7 @@ describe('session topic arc memory', () => {
     expect(complete.stage_correct_streak).toBe(2)
   })
 
-  it('holds on mixed evidence and steps down after two errors without leaving the skill', () => {
+  it('steps down immediately after an error without leaving the skill', () => {
     const reachedIntermediate = [
       { difficulty_tier: 'review' as const, correct: true },
       { difficulty_tier: 'review' as const, correct: true },
@@ -212,17 +262,11 @@ describe('session topic arc memory', () => {
     expect(selectArcDifficulty([
       ...reachedIntermediate,
       { difficulty_tier: 'same', correct: false },
-    ])).toBe('same')
+    ])).toBe('review')
     const regressed = getGuidedArcProgress([
       ...reachedIntermediate,
       { difficulty_tier: 'same', correct: false },
-      { difficulty_tier: 'same', correct: false },
     ])
-    expect(selectArcDifficulty([
-      ...reachedIntermediate,
-      { difficulty_tier: 'same', correct: false },
-      { difficulty_tier: 'same', correct: false },
-    ])).toBe('review')
     expect(regressed.stage).toBe('beginner')
     expect(regressed.stage_attempt_count).toBe(0)
     expect(regressed.stage_correct_streak).toBe(0)

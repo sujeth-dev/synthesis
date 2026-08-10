@@ -3,7 +3,7 @@
     "id": "p2_np_q1",
     "skill_id": "p2_numpy_basics",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What does this NumPy code produce?\n\nimport numpy as np\narr = np.array([1, 2, 3, 4])\nprint(arr * 2)",
     "options": [
       { "id": "a", "text": "[1, 2, 3, 4, 1, 2, 3, 4]" },

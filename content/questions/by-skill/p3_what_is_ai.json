@@ -3,7 +3,7 @@
     "id": "p3_what_is_ai_q1",
     "skill_id": "p3_what_is_ai",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Which of the following best describes Artificial Intelligence?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_what_is_ai_q2",
     "skill_id": "p3_what_is_ai",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the key difference between a rule-based system and a machine learning system?",
     "options": [
       {

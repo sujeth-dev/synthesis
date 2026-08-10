@@ -10,6 +10,36 @@ function source(relativePath: string): string {
 }
 
 describe('guided explanation contract', () => {
+  it('keeps every guided question multiple-choice', () => {
+    const questionsDirectory = path.join(root, 'content/questions/by-skill')
+    const files = fs.readdirSync(questionsDirectory).filter(file => file.endsWith('.json'))
+    const questions = files.flatMap(file => JSON.parse(
+      fs.readFileSync(path.join(questionsDirectory, file), 'utf8'),
+    )) as Array<{
+      id: string
+      format: string
+      options?: Array<{ id: string; text: string }>
+      correct_option_id?: string
+    }>
+
+    expect(questions.length).toBeGreaterThan(0)
+    for (const question of questions) {
+      expect(question.format, question.id).toBe('mcq')
+      expect(question.options?.length, question.id).toBeGreaterThanOrEqual(2)
+      expect(question.options?.some(option => option.id === question.correct_option_id), question.id).toBe(true)
+    }
+
+    for (const file of files) {
+      const skillQuestions = JSON.parse(
+        fs.readFileSync(path.join(questionsDirectory, file), 'utf8'),
+      ) as Array<{ format: string; difficulty_tier: string }>
+      const easierMcqs = skillQuestions.filter(question =>
+        question.format === 'mcq' && question.difficulty_tier === 'review'
+      )
+      expect(easierMcqs.length, file).toBeGreaterThanOrEqual(2)
+    }
+  })
+
   it('splits prose, headings, and fenced examples into ordered building blocks', () => {
     const steps = splitExplanationSteps([
       '## First idea',

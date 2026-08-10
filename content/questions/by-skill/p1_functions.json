@@ -3,7 +3,7 @@
     "id": "p1_fn_q1",
     "skill_id": "p1_functions",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What does this function return when called as double(7)?\n\ndef double(x):\n    return x * 2",
     "options": [
       { "id": "a", "text": "Nothing — it just prints" },
@@ -34,10 +34,16 @@
   {
     "id": "p1_fn_q3",
     "skill_id": "p1_functions",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "In Python, you define a function using the keyword ______.",
-    "correct_answer": "def",
+    "stem": "Which keyword begins a function definition in Python?",
+    "options": [
+      { "id": "a", "text": "func" },
+      { "id": "b", "text": "define" },
+      { "id": "c", "text": "def" },
+      { "id": "d", "text": "function" }
+    ],
+    "correct_option_id": "c",
     "explanation_after": "def stands for 'define'. The pattern is: def function_name(parameters): followed by an indented body. The def keyword tells Python 'I'm creating a reusable block of code with this name.' Functions don't run when you define them — only when you call them.",
     "graph_placement_weight": { "p1_functions": 0.9 }
   }

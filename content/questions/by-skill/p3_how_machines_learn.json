@@ -3,7 +3,7 @@
     "id": "p3_how_machines_learn_q1",
     "skill_id": "p3_how_machines_learn",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "In gradient descent, the gradient tells the model:",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_how_machines_learn_q2",
     "skill_id": "p3_how_machines_learn",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the role of the loss function in machine learning?",
     "options": [
       {

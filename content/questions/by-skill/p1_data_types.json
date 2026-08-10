@@ -3,7 +3,7 @@
     "id": "p1_dt_q1",
     "skill_id": "p1_data_types",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the data type of the value 3.14 in Python?",
     "options": [
       { "id": "a", "text": "int (integer)" },
@@ -34,10 +34,16 @@
   {
     "id": "p1_dt_q3",
     "skill_id": "p1_data_types",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "In Python, text values (like names and sentences) are stored as the ______ data type, written with quotes.",
-    "correct_answer": "str",
+    "stem": "Which Python data type stores text values written inside quotes?",
+    "options": [
+      { "id": "a", "text": "int" },
+      { "id": "b", "text": "bool" },
+      { "id": "c", "text": "float" },
+      { "id": "d", "text": "str" }
+    ],
+    "correct_option_id": "d",
     "explanation_after": "str stands for string — a sequence of characters. 'hello', 'AI engineering', and '42' (with quotes) are all strings. Without quotes, 42 is an int and hello would be a variable name. In NLP and LLMs, all text input is processed as strings before being tokenised into numbers.",
     "graph_placement_weight": { "p1_data_types": 0.9 }
   }

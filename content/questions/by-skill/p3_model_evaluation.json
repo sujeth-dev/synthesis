@@ -3,7 +3,7 @@
     "id": "p3_model_evaluation_q1",
     "skill_id": "p3_model_evaluation",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A cancer detection model has 99% accuracy on a dataset where 99% of patients are healthy. This model is likely:",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_model_evaluation_q2",
     "skill_id": "p3_model_evaluation",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Recall (sensitivity) is defined as:",
     "options": [
       {

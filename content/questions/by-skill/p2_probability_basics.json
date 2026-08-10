@@ -3,7 +3,7 @@
     "id": "p2_prob_q1",
     "skill_id": "p2_probability_basics",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A language model outputs these probabilities for the next word:\n'cat': 0.55, 'dog': 0.30, 'fish': 0.15\n\nWhat must these probabilities sum to?",
     "options": [
       {
@@ -63,10 +63,16 @@
   {
     "id": "p2_prob_q3",
     "skill_id": "p2_probability_basics",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "A probability of 0 means the event is ______. A probability of 1 means the event is ______.",
-    "correct_answer": "impossible, certain",
+    "stem": "What do probabilities of 0 and 1 mean?",
+    "options": [
+      { "id": "a", "text": "0 means unlikely; 1 means likely" },
+      { "id": "b", "text": "0 means certain; 1 means impossible" },
+      { "id": "c", "text": "0 means impossible; 1 means certain" },
+      { "id": "d", "text": "Both mean the event is uncertain" }
+    ],
+    "correct_option_id": "c",
     "explanation_after": "Probability always lives between 0 (impossible) and 1 (certain). Real models almost never output exact 0s or 1s \u2014 they output values in between, reflecting genuine uncertainty.",
     "graph_placement_weight": {
       "p2_probability_basics": 0.9

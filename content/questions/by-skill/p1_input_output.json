@@ -3,7 +3,7 @@
     "id": "p1_io_q1",
     "skill_id": "p1_input_output",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Which of these is an example of OUTPUT from a computer?",
     "options": [
       { "id": "a", "text": "Pressing a key on the keyboard" },
@@ -34,10 +34,16 @@
   {
     "id": "p1_io_q3",
     "skill_id": "p1_input_output",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "review",
-    "prompt": "A keyboard is an ______ device. A monitor (screen) is an ______ device.",
-    "correct_answer": "input, output",
+    "stem": "Which pairing correctly classifies a keyboard and a monitor?",
+    "options": [
+      { "id": "a", "text": "Keyboard: output; monitor: input" },
+      { "id": "b", "text": "Keyboard: input; monitor: output" },
+      { "id": "c", "text": "Both are input devices" },
+      { "id": "d", "text": "Both are output devices" }
+    ],
+    "correct_option_id": "b",
     "explanation_after": "Input devices send data to the computer. Output devices receive data from the computer. Some devices are both — a touchscreen is input (you touch it) and output (it displays things).",
     "graph_placement_weight": { "p1_input_output": 0.9 }
   }

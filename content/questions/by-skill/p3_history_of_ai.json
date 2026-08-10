@@ -3,7 +3,7 @@
     "id": "p3_history_of_ai_q1",
     "skill_id": "p3_history_of_ai",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "The 1956 Dartmouth Conference is significant in AI history because:",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_history_of_ai_q2",
     "skill_id": "p3_history_of_ai",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What was the primary reason for the AI Winters (1970s and 1980s)?",
     "options": [
       {

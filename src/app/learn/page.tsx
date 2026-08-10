@@ -155,7 +155,7 @@ function ArcProgress({
       </div>
       {phase !== 'lesson' && !progress.core_complete && (
         <p className="mt-3 text-[11px] leading-relaxed text-c-faint">
-          Each stage has at least two questions. Two correct in a row move forward; two misses step down for support.
+          Each stage has at least two questions. Two correct in a row move forward; one miss moves to an easier stage with a different question.
         </p>
       )}
     </div>

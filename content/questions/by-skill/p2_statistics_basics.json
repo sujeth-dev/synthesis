@@ -3,7 +3,7 @@
     "id": "p2_statistics_basics_q1",
     "skill_id": "p2_statistics_basics",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A dataset of house prices has a mean of £500,000 and a median of £280,000. What does this tell you?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p2_statistics_basics_q2",
     "skill_id": "p2_statistics_basics",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What does standard deviation measure?",
     "options": [
       {

@@ -3,7 +3,7 @@
     "id": "p3_ai_dev_cycle_q1",
     "skill_id": "p3_ai_dev_cycle",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What is the correct order of the ML development cycle?",
     "options": [
       {
@@ -30,7 +30,7 @@
     "id": "p3_ai_dev_cycle_q2",
     "skill_id": "p3_ai_dev_cycle",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "A DummyClassifier in scikit-learn is used to:",
     "options": [
       {

@@ -3,7 +3,7 @@
     "id": "p1_py_q1",
     "skill_id": "p1_python_intro",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "What will this Python code print?\n\nprint('Hello, World!')",
     "options": [
       { "id": "a", "text": "Nothing" },
@@ -19,7 +19,7 @@
     "id": "p1_py_q2",
     "skill_id": "p1_python_intro",
     "format": "mcq",
-    "difficulty_tier": "same",
+    "difficulty_tier": "review",
     "stem": "Which of these is valid Python code?",
     "options": [
       { "id": "a", "text": "PRINT 'hello'" },
@@ -50,11 +50,16 @@
   {
     "id": "p1_py_q4",
     "skill_id": "p1_python_intro",
-    "format": "fill",
+    "format": "mcq",
     "difficulty_tier": "same",
-    "prompt": "Complete this Python code to print your name:\n\nprint(________)",
-    "correct_answer": "'YourName'",
-    "keywords": ["quote", "string", "print"],
+    "stem": "Which Python line correctly prints the text YourName?",
+    "options": [
+      { "id": "a", "text": "print(YourName)" },
+      { "id": "b", "text": "print['YourName']" },
+      { "id": "c", "text": "print('YourName')" },
+      { "id": "d", "text": "print = 'YourName'" }
+    ],
+    "correct_option_id": "c",
     "explanation_after": "In Python, text (strings) must be wrapped in quotes — either single 'like this' or double \"like this\". Without quotes, Python treats it as a variable name.",
     "graph_placement_weight": { "p1_python_intro": 1.0 }
   }
