@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**None in progress.** `P0-6` is complete and pushed.
+**None in progress.** `P0-7` and Phase 0 are complete and pushed.
 
 ---
 
 ## Next action
 
-Start **P0-7 — Remove dead Supabase-migration debris** (next `not_started` task in document order; dependency met).
+Start **P1-1 — Feynman Loop teaching-canvas interaction** (next `not_started` task in document order; Phase 0 dependency met).
 
 ---
 
@@ -56,6 +56,8 @@ Start **P0-7 — Remove dead Supabase-migration debris** (next `not_started` tas
 
 ## Loop iteration log
 
+- 2026-08-10 — **Phase 0 complete:** all P0-0 through P0-8 tasks are done; the final 29-test suite and production build are green. End-of-phase scripted checks against the real modules reconfirmed overdue decay (`p_know` 0.90 → 0.4909359 after 30 overdue days) and a measurable combined-evidence posterior change (baseline 0.4333333 vs. degraded 0.3045455).
+- 2026-08-10 — **P0-7 done:** removed the retired SQLite init/reset scripts and package commands after confirming the runtime is Supabase-only, corrected migration-era storage documentation, and verified live legacy-script references are grep-clean; 29 tests and the production build remain green (`66941c4`).
 - 2026-08-10 — **P0-6 done:** completed direct test coverage for all 20 exported functions across BKT, SM-2/urgency, motivation, and the session engine; added deterministic mastery-boundary, scheduling, urgency, evidence, state-transition, message, and review-consent checks. The full 29-test suite and production build are green (`bddd7bd`).
 - 2026-08-10 — **P0-8 done:** replaced learner-facing raw mastery percentages and Ready/Learning/Fragile labels with Beginner/Intermediate/Mastered across session, dashboard, graph, detail-panel, and direct-skill displays; retained non-numeric progress-bar fills; added exact 0.29/0.30 and 0.64/0.65 boundary coverage plus a recursive source-contract check. The full 17-test suite and production build are green, and the required mastery-percentage grep is clean (`f38a79b`).
 - 2026-08-10 — **P0-5 done:** pinned normal-session selection to the learner's current topic indefinitely, added the exact 0.60 stay-or-switch gate, exposed every unlocked topic as a free switch destination, and rendered tier-only choice/bridge copy; 15 tests and production build green (`c101479`). The UI criteria were verified through source-path inspection plus the strict production build because no UI test harness exists yet; no browser walkthrough was performed.

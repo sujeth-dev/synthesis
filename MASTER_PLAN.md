@@ -103,7 +103,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** this task's deliverable is the tests themselves.
 
 ### P0-7 — Remove dead Supabase-migration debris
-**Status:** not_started
+**Status:** done
 **Depends on:** none (can run anytime in Phase 0, sequenced last only to avoid churn during the engine work above)
 **Doc ref:** `basic-guide.md` Phase 0 item 6
 **Do:** Remove `scripts/init-db.js`, `scripts/reset-db.js` if confirmed dead (Supabase migration is complete per `basic-guide.md`'s stated current state). Verify nothing references them first (`package.json` scripts `db:init`/`db:reset`, any docs).
