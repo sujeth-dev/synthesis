@@ -35,19 +35,19 @@ const PHASE_SHORT: Record<string, string> = {
 }
 
 const MASTERY_COLOUR: Record<string, string> = {
-  mastered: '#34d399',
-  fragile:  '#7c6eff',
-  learning: '#7c6eff',
-  ready:    '#5a8a9f',
-  blocked:  '#3a3a52',
+  mastered: '#2f5d3a',
+  fragile:  '#e8a84a',
+  learning: '#e8a84a',
+  ready:    '#d96e34',
+  blocked:  '#a8a49c',
 }
 
 const MASTERY_RING: Record<string, string> = {
-  mastered: 'ring-2 ring-[#34d399]/50',
-  fragile:  'ring-2 ring-[#7c6eff]/50',
-  learning: 'ring-2 ring-[#7c6eff]/50',
-  ready:    'ring-1 ring-[#5a8a9f]/40',
-  blocked:  'ring-1 ring-[#3a3a52]/30',
+  mastered: 'ring-2 ring-[#2f5d3a]/50',
+  fragile:  'ring-2 ring-[#e8a84a]/50',
+  learning: 'ring-2 ring-[#e8a84a]/50',
+  ready:    'ring-1 ring-[#d96e34]/40',
+  blocked:  'ring-1 ring-[#a8a49c]/30',
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -221,8 +221,8 @@ export default async function Dashboard({
         {/* ── Stats row ───────────────────────────────────────────────────── */}
         <div className="grid grid-cols-3 gap-4 mb-8">
           {[
-            { val: totalMastered, lbl: 'Skills mastered',  col: '#34d399' },
-            { val: totalLearning, lbl: 'Actively learning', col: '#7c6eff' },
+            { val: totalMastered, lbl: 'Skills mastered',  col: '#2f5d3a' },
+            { val: totalLearning, lbl: 'Actively learning', col: '#e8a84a' },
             { val: urgentCount,   lbl: 'Urgent reviews',   col: urgentCount > 0 ? '#fbbf24' : 'var(--text-faint)' },
           ].map((s, i) => (
             <div
@@ -239,7 +239,7 @@ export default async function Dashboard({
         </div>
 
         {/* ── Active Phase Card (Primary Action) ──────────────────────────── */}
-        <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden mb-6 animate-slide-up">
+        <div className="rounded-2xl border border-[var(--border)] border-t-4 border-t-c-purple bg-c-bg2 overflow-hidden mb-6 animate-slide-up shadow-[0_18px_50px_rgba(0,0,0,0.16)]">
 
           <div className="px-6 pt-6 pb-4">
             <div className="flex items-center justify-between mb-1">
@@ -291,7 +291,7 @@ export default async function Dashboard({
                   const mastery  = state?.mastery_state ?? 'blocked'
                   const pKnow    = state?.p_know ?? 0
                   const masteryTier = mastery === 'blocked' ? 'Locked' : getMasteryTier(pKnow)
-                  const colour   = MASTERY_COLOUR[mastery] ?? '#3a3a52'
+                  const colour   = MASTERY_COLOUR[mastery] ?? '#a8a49c'
                   const ring     = MASTERY_RING[mastery] ?? ''
                   const isLast   = idx === activeNodes.length - 1
                   const isStudiable = ['ready','learning','fragile','mastered'].includes(mastery) && node.question_ids.length > 0
@@ -475,7 +475,7 @@ export default async function Dashboard({
                 </svg>
               )
               if (isDone) return (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0" style={{ color: '#34d399' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0" style={{ color: '#2f5d3a' }}>
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               )
@@ -514,7 +514,7 @@ export default async function Dashboard({
                       <div className="w-28 h-1.5 rounded-full bg-c-bg3 overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all"
-                          style={{ width: `${stats.pct}%`, background: isDone ? '#34d399' : isActive ? '#7c6eff' : '#5a8a9f' }}
+                          style={{ width: `${stats.pct}%`, background: isDone ? '#2f5d3a' : isActive ? '#e8a84a' : '#d96e34' }}
                         />
                       </div>
                     )}
@@ -540,7 +540,7 @@ export default async function Dashboard({
                       const mastery  = state?.mastery_state ?? 'blocked'
                       const pKnow    = state?.p_know ?? 0
                       const masteryTier = mastery === 'blocked' ? 'Locked' : getMasteryTier(pKnow)
-                      const colour   = MASTERY_COLOUR[mastery] ?? '#3a3a52'
+                      const colour   = MASTERY_COLOUR[mastery] ?? '#a8a49c'
                       const isStudiable = ['ready','learning','fragile','mastered'].includes(mastery) && node.question_ids.length > 0
 
                       return (

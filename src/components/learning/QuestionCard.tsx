@@ -23,7 +23,7 @@ export function QuestionCard({ question: q, selected, fillAnswer, revealed, onSe
   return (
     <div>
       {/* Question stem — bigger: 17px */}
-      <p className="text-[17px] text-c-text leading-[1.65] mb-5">{prose}</p>
+      <p className="font-reading text-[18px] text-c-text leading-[1.7] mb-5">{prose}</p>
 
       {/* Inline code block — bigger: 13px, more padding */}
       {code && (
@@ -86,7 +86,7 @@ export function QuestionCard({ question: q, selected, fillAnswer, revealed, onSe
           disabled={revealed}
           placeholder="Explain in your own words…"
           rows={5}
-          className="w-full px-5 py-3.5 rounded-xl bg-c-bg2 border border-[var(--border)] text-c-text placeholder:text-c-ghost text-[15px] focus:border-c-purple/50 focus:outline-none focus:ring-2 focus:ring-c-purple/25 resize-none disabled:opacity-60 transition-colors leading-[1.6]"
+          className="w-full px-5 py-3.5 rounded-xl bg-c-bg2 border border-[var(--border)] font-reading text-c-text placeholder:text-c-ghost text-[15px] focus:border-c-purple/50 focus:outline-none focus:ring-2 focus:ring-c-purple/25 resize-none disabled:opacity-60 transition-colors leading-[1.6]"
         />
       )}
     </div>

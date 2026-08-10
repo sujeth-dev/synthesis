@@ -47,7 +47,7 @@ function RohanLine({ state, text }: { state: FeynmanLoopState; text: string }) {
   return (
     <div className="rounded-xl bg-c-bg3 border border-[var(--border)] px-5 py-4 mb-4 animate-slide-up">
       <RohanTag expression={state.rohanExpression} />
-      <p className="text-[14px] text-c-text leading-[1.6] whitespace-pre-line">{text}</p>
+      <p className="font-reading text-[15px] text-c-text leading-[1.7] whitespace-pre-line">{text}</p>
     </div>
   )
 }
@@ -77,7 +77,7 @@ function TeachingCanvas({
         onChange={e => onChange(e.target.value)}
         rows={6}
         placeholder={hint}
-        className="w-full px-4 py-3.5 rounded-xl bg-c-bg3 border border-[var(--border)] text-c-text placeholder:text-c-ghost text-[13px] focus:border-c-blue/50 focus:outline-none resize-none transition-colors mb-2"
+        className="w-full px-4 py-3.5 rounded-xl bg-c-bg3 border border-[var(--border)] font-reading text-c-text placeholder:text-c-ghost text-[15px] focus:border-c-blue/50 focus:outline-none resize-none transition-colors mb-2"
       />
       <p className="font-mono text-[10px] text-c-ghost mb-3">{words} / {MIN_WORDS} minimum</p>
       <button
@@ -97,7 +97,7 @@ export function FeynmanLoop({ skillLabel, onComplete, onSkip }: Props) {
   const [draft2, setDraft2] = useState('')
 
   return (
-    <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] overflow-hidden animate-slide-up">
+    <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple overflow-hidden animate-slide-up">
       <div className="px-6 pt-6 pb-6">
         <p className="font-mono text-[10px] text-c-purple uppercase tracking-[0.16em] mb-3">Feynman Loop</p>
 

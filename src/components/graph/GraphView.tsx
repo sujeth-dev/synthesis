@@ -36,11 +36,11 @@ interface Props {
 // ─── Mastery colours ─────────────────────────────────────────────────────────
 
 export const MASTERY_COLOUR: Record<MasteryState, string> = {
-  mastered: '#34d399',
-  fragile:  '#7c6eff',
-  learning: '#7c6eff',
-  ready:    '#5a8a9f',
-  blocked:  '#5a5a72',
+  mastered: '#2f5d3a',
+  fragile:  '#e8a84a',
+  learning: '#e8a84a',
+  ready:    '#d96e34',
+  blocked:  '#a8a49c',
 }
 
 // ─── Layout constants ─────────────────────────────────────────────────────────
@@ -260,9 +260,9 @@ export function GraphView({ nodes: skillNodes, edges: skillEdges, onSelect, acti
     >
       <Background
         color="var(--border-hi)"
-        variant={BackgroundVariant.Dots}
-        gap={28}
-        size={1.4}
+        variant={BackgroundVariant.Lines}
+        gap={32}
+        size={1}
       />
       <Controls showInteractive={false} />
       <MiniMap

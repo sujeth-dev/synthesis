@@ -8,7 +8,7 @@ import { ExplanationPanel } from '@/components/learning/ExplanationPanel'
 import { MotivationBanner } from '@/components/learning/MotivationBanner'
 import { Spinner }          from '@/components/ui/Spinner'
 import { Navbar }           from '@/components/layout/Navbar'
-import { mdToHtml }         from '@/components/ui/mdToHtml'
+import { ProgressiveExplanation } from '@/components/learning/ProgressiveExplanation'
 import { useAnalytics }     from '@/hooks/useAnalytics'
 import { getMasteryTier, type MasteryTier } from '@/lib/bkt'
 
@@ -161,7 +161,7 @@ function LearnPanel({ task, explanation, depth, onReady }: LearnPanelProps) {
   return (
     <div className="animate-slide-up">
       {explanation ? (
-        <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] overflow-hidden mb-5">
+        <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple overflow-hidden mb-5">
           <div className="px-6 pt-6 pb-5">
             <div className="flex items-center justify-between mb-2">
               <p className="font-mono text-[12px] text-c-purple uppercase tracking-[0.16em]">New concept</p>
@@ -182,10 +182,7 @@ function LearnPanel({ task, explanation, depth, onReady }: LearnPanelProps) {
               </div>
             )}
 
-            <div
-              className="prose-synaptic text-[14px] text-c-muted leading-[1.75]"
-              dangerouslySetInnerHTML={{ __html: mdToHtml(explanation.body) }}
-            />
+            <ProgressiveExplanation body={explanation.body} />
 
             {explanation.mini_exercise && (
               <div className="mt-5 p-4 rounded-xl bg-c-bg3 border border-[var(--border)]">

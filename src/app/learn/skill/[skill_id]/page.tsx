@@ -34,7 +34,7 @@ import { FeedbackBanner }   from '@/components/learning/FeedbackBanner'
 import { FeynmanLoop }      from '@/components/learning/FeynmanLoop'
 import { Spinner }          from '@/components/ui/Spinner'
 import { Navbar }           from '@/components/layout/Navbar'
-import { mdToHtml }         from '@/components/ui/mdToHtml'
+import { ProgressiveExplanation } from '@/components/learning/ProgressiveExplanation'
 import { useAnalytics }     from '@/hooks/useAnalytics'
 import { getMasteryTier }   from '@/lib/bkt'
 
@@ -395,7 +395,7 @@ export default function SkillLearnPage() {
           <StepBar mode="learn" hasApply={hasApply} hasReview={hasReview} />
 
           {explanation ? (
-            <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] overflow-hidden mb-4 animate-slide-up">
+            <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple overflow-hidden mb-4 animate-slide-up">
               <div className="px-6 pt-6 pb-4">
                 <p className="font-mono text-[10px] text-c-purple uppercase tracking-[0.16em] mb-1">Explanation</p>
                 <h2 className="text-[17px] font-semibold text-c-text mb-3">{explanation.title}</h2>
@@ -406,10 +406,7 @@ export default function SkillLearnPage() {
                   </div>
                 )}
 
-                <div
-                  className="prose-synaptic text-[13px] text-c-muted leading-[1.75]"
-                  dangerouslySetInnerHTML={{ __html: mdToHtml(explanation.body) }}
-                />
+                <ProgressiveExplanation body={explanation.body} />
 
                 {explanation.common_mistakes && explanation.common_mistakes.length > 0 && (
                   <div className="mt-5 pt-4 border-t border-[var(--border)]">

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import type { Explanation, ExplanationDepth } from '@/types'
 import { mdToHtml } from '@/components/ui/mdToHtml'
+import { ProgressiveExplanation } from '@/components/learning/ProgressiveExplanation'
 
 type Sub = 'body' | 'real_world' | 'build_task' | 'explain_back'
 
@@ -73,7 +74,7 @@ export function ExplanationPanel({ explanation: e, depth, onExplainBack, onBuild
   ]
 
   return (
-    <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] overflow-hidden">
+    <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple overflow-hidden">
 
       {/* ── Header ───────────────────────────────────────────────── */}
       <div className="px-6 pt-6 pb-0">
@@ -115,10 +116,7 @@ export function ExplanationPanel({ explanation: e, depth, onExplainBack, onBuild
         {/* Main explanation */}
         {sub === 'body' && (
           <div>
-            <div
-              className="prose-synaptic text-[14px] text-c-muted leading-[1.75]"
-              dangerouslySetInnerHTML={{ __html: mdToHtml(e.body) }}
-            />
+            <ProgressiveExplanation body={e.body} />
 
             {e.common_mistakes && e.common_mistakes.length > 0 && (
               <div className="mt-5 pt-4 border-t border-[var(--border)]">

@@ -9,10 +9,10 @@ import type { SkillEdge } from '@/types'
 // ─── Legend config ────────────────────────────────────────────────────────────
 
 const LEGEND = [
-  { color: '#34d399', label: 'Mastered' },
-  { color: '#7c6eff', label: 'Intermediate' },
-  { color: '#5a8a9f', label: 'Beginner' },
-  { color: '#5a5a72', label: 'Locked'   },
+  { color: '#2f5d3a', label: 'Mastered' },
+  { color: '#e8a84a', label: 'Intermediate' },
+  { color: '#d96e34', label: 'Beginner' },
+  { color: '#a8a49c', label: 'Locked'   },
 ]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -104,9 +104,9 @@ export default function GraphPage() {
             {!loading && !error && (
               <div className="flex items-center gap-6">
                 {[
-                  { val: stats.mastered, label: 'Mastered',    color: '#34d399' },
-                  { val: stats.learning, label: 'In progress', color: '#7c6eff' },
-                  { val: stats.ready,    label: 'Beginner',    color: '#5a8a9f' },
+                  { val: stats.mastered, label: 'Mastered',    color: '#2f5d3a' },
+                  { val: stats.learning, label: 'In progress', color: '#e8a84a' },
+                  { val: stats.ready,    label: 'Beginner',    color: '#d96e34' },
                   { val: stats.total,    label: 'Total',       color: 'var(--text-faint)' },
                 ].map(s => (
                   <div key={s.label} className="flex items-baseline gap-1.5">

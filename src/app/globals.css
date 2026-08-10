@@ -5,52 +5,60 @@
 /* ─── Design Tokens ───────────────────────────────────────────────────────── */
 /* Dark mode (default) */
 :root {
-  --bg:           #0a0a0f;
-  --bg2:          #111118;
-  --bg3:          #17171f;
-  --bg4:          #0d0d13;
-  --text:         #e8e8f0;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-reading: "Newsreader", Georgia, serif;
+  --font-ui: "Space Grotesk", Inter, Arial, sans-serif;
+  --font-label: "Spline Sans Mono", "Cascadia Mono", ui-monospace, monospace;
+  --bg:           #101713;
+  --bg2:          #172019;
+  --bg3:          #202b22;
+  --bg4:          #0d140f;
+  --text:         #f2efe6;
   --text-muted:   #b4b4cc;   /* raised from #a8a8c0 — better contrast on dark bg */
   --text-faint:   #9090b0;   /* raised from #747490 — was failing AA */
   --text-ghost:   #707090;   /* raised from #545468 — was critically failing AA */
   --border:       rgba(255,255,255,0.10);   /* raised from 0.07 — cards more distinct */
   --border-hi:    rgba(255,255,255,0.18);   /* raised from 0.13 */
-  --purple:       #7c6eff;
-  --purple-hover: #6a5cdd;
-  --green:        #34d399;
-  --yellow:       #fbbf24;
-  --red:          #f87171;
-  --blue:         #60a5fa;
+  --purple:       #d96e34;
+  --purple-hover: #bd5727;
+  --green:        #72a37c;
+  --yellow:       #e8a84a;
+  --red:          #df7468;
+  --blue:         #78a4a7;
+  --gold:         #9c7b3a;
+  --orange:       #d96e34;
   /* Node backgrounds (for graph) */
-  --node-bg:      #111118;
-  --node-bg-sel:  #16162a;
+  --node-bg:      #172019;
+  --node-bg-sel:  #273429;
   --node-text:    #d0d0e8;   /* raised from #cccce0 */
   --node-blocked: #7070a0;   /* raised from #5a5a70 */
 }
 
 /* Light mode — switched to cool near-neutral to avoid warm/purple clash */
 html.light {
-  --bg:           #f0f0f8;   /* cool near-neutral instead of warm beige */
-  --bg2:          #f8f8ff;
-  --bg3:          #e8e8f4;
-  --bg4:          #f4f4fc;
-  --text:         #1a1820;
+  --bg:           #eee9dc;
+  --bg2:          #faf7ef;
+  --bg3:          #e4ded0;
+  --bg4:          #f4f0e6;
+  --text:         #1f3a2e;
   --text-muted:   #3e3c54;   /* raised from #4c4a60 */
   --text-faint:   #606080;   /* raised from #7c7a90 — was failing AA */
   --text-ghost:   #8888a8;   /* raised from #aaa8b8 — was critically failing */
   --border:       rgba(0,0,0,0.12);   /* raised from 0.08 — cards visible */
   --border-hi:    rgba(0,0,0,0.20);   /* raised from 0.15 */
-  --purple:       #5544dd;   /* slightly deeper for contrast on light bg */
-  --purple-hover: #4433bb;
-  --green:        #158a5e;   /* deepened from #1a9e6e for contrast */
-  --yellow:       #a87000;   /* deepened from #c4880a */
-  --red:          #c43030;   /* deepened from #d94848 */
-  --blue:         #2563eb;   /* deepened from #3b82f6 */
+  --purple:       #c85f2c;
+  --purple-hover: #a94720;
+  --green:        #2f5d3a;
+  --yellow:       #9a650e;
+  --red:          #a33d35;
+  --blue:         #376d72;
+  --gold:         #9c7b3a;
+  --orange:       #d96e34;
   /* Node backgrounds */
-  --node-bg:      #f8f8ff;
-  --node-bg-sel:  #ebebff;
-  --node-text:    #1e1c30;
-  --node-blocked: #9090b0;
+  --node-bg:      #faf7ef;
+  --node-bg-sel:  #fffaf0;
+  --node-text:    #1f3a2e;
+  --node-blocked: #8a887f;
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
@@ -58,6 +66,10 @@ html.light {
 
 body {
   background: var(--bg);
+  background-image:
+    linear-gradient(rgba(217,110,52,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217,110,52,0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
   color: var(--text);
   transition: background 0.2s ease, color 0.2s ease;
 }
@@ -83,6 +95,7 @@ body {
 .animate-pulse-ring { animation: pulse-ring 2s ease-out infinite; }
 
 /* ─── Prose styles (used in ExplanationPanel) ─────────────────────────────── */
+.prose-synaptic { font-family: var(--font-reading), Georgia, serif; }
 .prose-synaptic p  { margin-bottom: 0.75em; }
 .prose-synaptic ul { list-style: disc; padding-left: 1.4em; margin-bottom: 0.75em; }
 .prose-synaptic ol { list-style: decimal; padding-left: 1.4em; margin-bottom: 0.75em; }

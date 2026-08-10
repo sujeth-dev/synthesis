@@ -4,6 +4,12 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-ui)', 'Arial', 'sans-serif'],
+        serif: ['var(--font-display)', 'Georgia', 'serif'],
+        mono: ['var(--font-label)', 'ui-monospace', 'monospace'],
+        reading: ['var(--font-reading)', 'Georgia', 'serif'],
+      },
       colors: {
         /* CSS-variable-backed semantic palette */
         'c-bg':     'var(--bg)',
@@ -19,6 +25,8 @@ module.exports = {
         'c-yellow': 'var(--yellow)',
         'c-red':    'var(--red)',
         'c-blue':   'var(--blue)',
+        'c-gold':   'var(--gold)',
+        'c-orange': 'var(--orange)',
       },
       animation: {
         'fade-in':  'fadeIn 0.3s ease forwards',
