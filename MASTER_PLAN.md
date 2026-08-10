@@ -83,7 +83,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** `session/engine.ts` tests for hold-indefinitely-below-threshold, hold-indefinitely-above-threshold-until-chosen, and threshold-crossing-unlocks-choice paths.
 
 ### P0-8 — Replace raw mastery percentages with tier labels
-**Status:** not_started
+**Status:** done
 **Depends on:** none (can run in parallel with P0-6/P0-7; not gating P0-5, but P0-5's switch-choice UI consumes this task's labels)
 **Doc ref:** human direction 2026-08-10, see `PROGRESS.md` item 8
 **Do:** Remove every learner-facing raw `p_know`/`p_start` percentage display — including `SkillDetailPanel.tsx`'s "62% known" text and the percentage-labeled mastery-bar caption, and dashboard mastery percentages — and replace with a 3-tier label: **Beginner / Intermediate / Mastered**. Reuse existing engine constants (`src/lib/bkt/index.ts`) rather than inventing new thresholds: Beginner = `p_know < LEARNING_THRESHOLD (0.30)`, Intermediate = `0.30 ≤ p_know < MASTERY_THRESHOLD (0.65)`, Mastered = `p_know ≥ 0.65`. The `fragile` state folds into the Intermediate tier for display purposes only (assumption, not explicitly confirmed — flag if wrong).
