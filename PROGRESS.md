@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-2A — Guided same-skill learning arc** — in progress by human direction; supersedes the one-question direct-skill flow.
+**P2-2A — Guided same-skill learning arc** — implementation pushed; blocked only on rendered interaction verification.
 
 ---
 
 ## Next action
 
-Build a shared four-question, discovery-first skill arc with adaptive easier/medium/harder progression, incremental explanation steps, voluntary exit, and no automatic topic switching.
+Await a human walkthrough of one direct-skill arc, or repair of the local computer-use plugin, before marking P2-2A done.
 
 ---
 
@@ -29,6 +29,7 @@ Build a shared four-question, discovery-first skill arc with adaptive easier/med
 9. ~~**P1-1 and P1-2 currently duplicate classifier responsibility.**~~ **Resolved by human direction on 2026-08-10:** combine classifier implementation into P1-1 (rather than keeping the documented split). P1-2 is retired; its scope (pure classifier function + unit tests) now lives inside P1-1. `MASTER_PLAN.md` updated: P1-1 merged, P1-2 marked retired, P1-3/P1-5/NLP-1 dependency edges repointed from P1-2 to P1-1.
 10. ~~**P2-2 manual walkthrough unavailable:** the implementation is committed and pushed (`e01c93c`), the progressive-disclosure source contract passes, all 41 tests pass, and the production build succeeds. The required browser walkthrough could not start because the installed `computer-use` plugin failed during bootstrap.~~ **Resolved by human confirmation on 2026-08-10:** the dashboard, graph, and direct-skill walkthrough is complete; P2-2 is accepted.
 11. **BLOOM-1 paused by human reprioritization:** its documentation draft is preserved in `stash@{0}` (`wip BLOOM-1 before guided learning arc`). Resume it after P2-2A by applying that stash; the unrelated `.gitignore`, `.mcp.json`, and `CLAUDE.md` files are not part of the stash.
+12. **P2-2A rendered walkthrough unavailable:** implementation is committed and pushed (`d87ce74`); all 46 tests pass and the production build succeeds. The required source contracts cover pinned direct-route entry, question-first ordering, four-question switching gate, adaptive tier movement, incremental explanation blocks, voluntary exit, and retained Feynman access. Windows verification could not start because the installed `computer-use` plugin still fails during bootstrap with `Package subpath './dist/project/cua/sky_js/src/targets/windows/internal/computer_use_client_base.js' is not defined by "exports" in ...\@oai\sky\package.json`. **Needed:** manually open a skill from dashboard/graph and confirm: the URL enters the shared guided flow; question 1 appears before explanation; “Explore why” reveals one numbered building block per click; “Next question” retains the skill and changes difficulty from easier toward medium/harder (or down after a wrong answer); no topic switch appears before question 4; “end session” remains available; and the optional Feynman Loop opens after the explanation.
 
 ---
 
@@ -59,6 +60,7 @@ Build a shared four-question, discovery-first skill arc with adaptive easier/med
 
 ## Loop iteration log
 
+- 2026-08-10 — **P2-2A implementation pushed; visual verification blocked:** unified direct and automatic learning into one pinned skill arc, added four-question-plus-mastery switching, adaptive review/same/harder movement, question-first discovery, ordered explanation blocks, voluntary exit, and retained Feynman submission support. All 46 tests and the production build are green (`d87ce74`); rendered interaction verification is blocked by the local computer-use runtime error recorded above.
 - 2026-08-10 — **P2-2 done:** human confirmed the required dashboard, graph, and direct-skill walkthrough after implementation; the repeated 41-test suite and production build remain green (`e01c93c`).
 - 2026-08-10 — **P2-2 implementation pushed; verification blocked:** applied the locked craft/forest/orange/gold palette, typography roles, blueprint grid, Orbit colors, editorial section rules, reading typography, and shared key-insight-first disclosure across all three explanation paths. The source contract, 41-test suite, and production build are green (`e01c93c`), but the required authenticated manual walkthrough remains blocked by the local computer-use plugin bootstrap error recorded above.
 - 2026-08-10 — **P2-1 done:** persisted each attempt's bounded retry count plus the live motivation state, consecutive-error streak, slow-response streak, BKT behavior modifier, and threshold-derived hesitation time; added a session-scoped analytics query and an insert-to-reread integration fixture proving exact signal parity. Full 40-test suite and production build green (`898c094`).
