@@ -71,9 +71,10 @@ export interface ReviewSchedule {
 
 export interface AttemptEvent {
   id: string; learner_id: string; skill_id: string; question_id: string
-  session_id: string; correct: boolean; latency_ms: number
+  session_id: string | null; correct: boolean; latency_ms: number
   revision_count: number; error_type: ErrorType; difficulty_tier: DifficultyTier
   question_format: QuestionFormat; attempted_at: string
+  p_know_before: number | null; p_know_after: number | null
 }
 
 export interface Session {

@@ -40,8 +40,8 @@ npm run validate
 ## Storage Architecture
 
 Synaptic uses Supabase for application data and bcryptjs + JWT cookies for authentication.
-Copy `.env.local.example`, provide the three Supabase credentials it lists, and run the schema in
-`supabase/migrations/001_initial_schema.sql` through the Supabase SQL Editor before starting the app.
+Copy `.env.local.example`, provide the three Supabase credentials it lists, and run every SQL file in
+`supabase/migrations/` in numeric order through the Supabase SQL Editor before starting the app.
 
 ---
 

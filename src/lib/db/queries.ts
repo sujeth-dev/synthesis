@@ -226,6 +226,17 @@ export async function getRecentAttempts(learnerId: string, limit = 200): Promise
   return data ?? []
 }
 
+export async function getRecentAttemptsForSkill(learnerId: string, skillId: string, limit = 200): Promise<AttemptEvent[]> {
+  const { data } = await getDb()
+    .from('attempt_events')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .eq('skill_id', skillId)
+    .order('attempted_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
 // ─────────────────────────────────────────────
 // MOTIVATION STATE
 // ─────────────────────────────────────────────

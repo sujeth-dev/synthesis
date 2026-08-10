@@ -9,10 +9,12 @@ import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
   getMotivationState, upsertMotivationState, insertAttempt,
   incrementSessionCounts, getSession, getAllSkillStates, schedulePhaseReview,
+  getRecentAttemptsForSkill,
 } from '@/lib/db/queries'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat } from '@/types'
 import { canChooseTopicSwitch } from '@/lib/session/engine'
+import { computeBktMovementComparison, isFeynmanAttempt } from '@/lib/analytics/bkt-movement'
 
 const MIN_LATENCY = 100
 const MAX_LATENCY = 5 * 60 * 1000
@@ -130,7 +132,16 @@ export async function POST(req: NextRequest) {
     correct, latency_ms: safe_latency, revision_count: 0, error_type: null,
     difficulty_tier: difficulty_tier as DifficultyTier,
     question_format: question_format as QuestionFormat,
+    p_know_before: skillState.p_know,
+    p_know_after: updatedState.p_know,
   })
+
+  const bktMovement = session_id && isFeynmanAttempt(question_id)
+    ? computeBktMovementComparison(
+        await getRecentAttemptsForSkill(user.id, skill_id),
+        { sessionId: session_id, skillId: skill_id },
+      )
+    : null
 
   return NextResponse.json({
     correct, attempt_id,
@@ -140,5 +151,6 @@ export async function POST(req: NextRequest) {
     topic_choice_available: canChooseTopicSwitch(updatedState.p_know),
     explanation_unlocked: correct,
     motivation: updatedMotivation.state,
+    bkt_movement: bktMovement,
   })
 }
