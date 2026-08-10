@@ -70,15 +70,29 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Required tests:** `session/engine.ts` tests for at-capacity and over-capacity review-debt scenarios.
 
 ### P0-5 — Arc memory for `selectNextTask()`
-**Status:** blocked
+**Status:** done
 **Depends on:** P0-4
-**Doc ref:** `basic-guide.md` Phase 0 item 4, `v2/doc/findings/04-session-flow-no-continuity.md` (Critical, refined 2026-08-09)
-**Do:** Give `selectNextTask()` continuity: stay on a topic until its arc has genuinely reached a good degree of completion (mastery/`p_know` movement, or the concept's practice sequence resolving) — a bounded task count is a fallback cap only, never the primary trigger. Add a one-line bridge shown on an actual topic switch, replacing the bare "Selecting next skill…" reload.
+**Doc ref:** `basic-guide.md` Phase 0 item 4, `v2/doc/findings/04-session-flow-no-continuity.md` (Critical, refined 2026-08-09); thresholds resolved by human direction 2026-08-10, see `PROGRESS.md` item 7
+**Do:** Give `selectNextTask()` continuity: the automatic next-question flow never force-switches topics, under any circumstance — no task-count fallback, no exceptions. Once the current topic's `p_know` reaches **0.60**, surface an explicit choice to the learner: continue this topic (framed as the better path, toward full mastery) or switch. If they choose to switch, let them pick **any unlocked topic themselves** — do not auto-select the destination via the algorithm's next pick. Free manual navigation to any topic (already possible via the graph/dashboard) is unaffected by this gate at any mastery level — this task only governs the automatic in-session next-question flow. Replace the bare "Selecting next skill…" reload with the stay/switch choice UI, using tier language (Beginner/Intermediate/Mastered, per `P0-8`) — never a raw percentage.
 **Acceptance criteria:**
-- Test proving the engine returns tasks from the same skill across consecutive calls until the completion condition (or fallback cap) is met.
-- Test proving the fallback cap still fires if completion never triggers (no infinite hold).
-- UI: the bridge message renders on an actual switch (manual check acceptable if no UI test harness exists yet — note this explicitly in the commit/PROGRESS entry rather than silently skipping it).
-**Required tests:** `session/engine.ts` tests for hold-until-complete and fallback-cap paths.
+- Test proving the automatic flow returns tasks from the same skill across consecutive calls indefinitely — both below and above the 0.60 threshold — unless the learner explicitly chooses to switch.
+- Test proving no automatic switch ever occurs regardless of task count (confirms the fallback cap is genuinely gone, not just raised).
+- Test/manual check proving the stay/switch choice is offered once `p_know` crosses 0.60 and not before.
+- UI: choosing "switch" lets the learner pick any unlocked topic, not a single engine-suggested one (manual check acceptable if no UI test harness exists yet — note this explicitly in the commit/PROGRESS entry rather than silently skipping it).
+- UI: the choice/bridge uses tier labels, never a raw `p_know` number.
+**Required tests:** `session/engine.ts` tests for hold-indefinitely-below-threshold, hold-indefinitely-above-threshold-until-chosen, and threshold-crossing-unlocks-choice paths.
+
+### P0-8 — Replace raw mastery percentages with tier labels
+**Status:** not_started
+**Depends on:** none (can run in parallel with P0-6/P0-7; not gating P0-5, but P0-5's switch-choice UI consumes this task's labels)
+**Doc ref:** human direction 2026-08-10, see `PROGRESS.md` item 8
+**Do:** Remove every learner-facing raw `p_know`/`p_start` percentage display — including `SkillDetailPanel.tsx`'s "62% known" text and the percentage-labeled mastery-bar caption, and dashboard mastery percentages — and replace with a 3-tier label: **Beginner / Intermediate / Mastered**. Reuse existing engine constants (`src/lib/bkt/index.ts`) rather than inventing new thresholds: Beginner = `p_know < LEARNING_THRESHOLD (0.30)`, Intermediate = `0.30 ≤ p_know < MASTERY_THRESHOLD (0.65)`, Mastered = `p_know ≥ 0.65`. The `fragile` state folds into the Intermediate tier for display purposes only (assumption, not explicitly confirmed — flag if wrong).
+**Acceptance criteria:**
+- No component renders a raw `p_know`/`p_start`-derived percentage to the learner (grep-clean check across `src/components/`, `src/app/dashboard`, `src/app/graph`, `src/app/learn`).
+- Every mastery display shows one of the three tier labels instead.
+- Existing visual progress-bar width (proportional fill) may remain, but its numeric caption is removed.
+- Unit test confirming the tier-mapping function returns the correct label at each threshold boundary (0.29/0.30, 0.64/0.65).
+**Required tests:** unit tests for the tier-mapping function at boundary values; component check confirming no raw percentage text renders.
 
 ### P0-6 — Core test suite
 **Status:** not_started
@@ -96,7 +110,7 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 **Acceptance criteria:** files removed, `package.json` scripts referencing them removed or repointed, `npm run build` clean, no remaining references (`grep` clean).
 **Required tests:** none beyond build passing — this is a deletion task.
 
-**Phase 0 is `done` when:** P0-0 through P0-7 are all `done`, `npm test` is fully green, `npm run build` is clean, and the Phase 0 items in the Verification section of `basic-guide.md` (p_know visibly decays; combined-evidence BKT posterior differs measurably) have been manually re-confirmed once at the end of the phase.
+**Phase 0 is `done` when:** P0-0 through P0-8 are all `done`, `npm test` is fully green, `npm run build` is clean, and the Phase 0 items in the Verification section of `basic-guide.md` (p_know visibly decays; combined-evidence BKT posterior differs measurably) have been manually re-confirmed once at the end of the phase.
 
 ---
 
@@ -251,3 +265,4 @@ Each item's acceptance criteria is its own lab-doc's acceptance script, evaluate
 ## Changelog
 
 - 2026-08-09 — Initial creation, derived from `v2/doc/basic-guide.md`'s Master Checklist + `v2/doc/findings/*.md`. Added P0-0 (test framework bootstrap) as a new prerequisite not present in the source plan.
+- 2026-08-10 — P0-5 rewritten per human direction: dropped the task-count fallback switch entirely (no automatic switching, ever), set the stay/switch choice point at `p_know` 0.60, and made switch destination a free learner choice rather than the algorithm's next pick. Added **P0-8** (new task, not in the original source plan) to replace raw `p_know`/`p_start` percentages with Beginner/Intermediate/Mastered tier labels across learner-facing surfaces. Set P0-5 status back to `not_started`.
