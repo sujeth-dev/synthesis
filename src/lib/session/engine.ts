@@ -10,6 +10,11 @@ export const SESSION_TASK_CAP = 10
 export const CURRENT_TOPIC_MINIMUM = 4
 export const MAX_REVIEW_ITEMS = SESSION_TASK_CAP - CURRENT_TOPIC_MINIMUM
 export const DEFAULT_REVIEW_OFFER_SIZE = MAX_REVIEW_ITEMS - 1
+export const ARC_SWITCH_THRESHOLD = 0.60
+
+export function canChooseTopicSwitch(pKnow: number): boolean {
+  return pKnow >= ARC_SWITCH_THRESHOLD
+}
 
 export interface ReviewDebtPlan {
   reviewOfferCount: number
@@ -62,6 +67,7 @@ interface SelectTaskParams {
   seenQuestionIdsThisSession: Set<string>
   questionsCache:             Map<string, Question[]>
   mode?:                      SessionMode
+  currentSkillId?:            string
 }
 
 export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
@@ -73,7 +79,7 @@ export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?
 export function selectNextTask(p: SelectTaskParams): SessionTask | null {
   const {
     skillStates, reviewSchedules, motivationState,
-    seenSkillsThisSession, seenQuestionIdsThisSession, questionsCache, mode,
+    seenSkillsThisSession, seenQuestionIdsThisSession, questionsCache, mode, currentSkillId,
   } = p
 
   const now = new Date()
@@ -112,6 +118,28 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
     const q = pickQuestion(best.skill_id, diffTier, seenQuestionIdsThisSession, questionsCache)
     if (!q) return null
     return buildTask(best.skill_id, q, diffTier, best, state)
+  }
+
+  // A selected arc always outranks interleaving and motivation-based rerouting.
+  if (currentSkillId) {
+    const state = skillStates.get(currentSkillId)
+    const node = getNodeById(currentSkillId)
+    if (state && state.mastery_state !== 'blocked' && node && questionsCache.has(currentSkillId)) {
+      let diffTier: DifficultyTier = 'same'
+      if (motivationState.state === 'bored' || state.consecutive_correct >= 3) diffTier = 'harder'
+      if (state.consecutive_wrong >= 2) diffTier = 'review'
+      const q = pickQuestion(currentSkillId, diffTier, seenQuestionIdsThisSession, questionsCache)
+      if (q) {
+        return buildTask(currentSkillId, q, diffTier, {
+          skill_id: currentSkillId,
+          tier: 1,
+          reason: activePhaseIds.has(currentSkillId) ? 'active_phase_new' : 'varied_practice',
+          days_until_due: 0,
+          phase_context: activePhaseIds.has(currentSkillId) ? 'active_phase' : 'past_phase',
+        }, state)
+      }
+    }
+    return null
   }
 
   // ── Frustrated → confidence boost (intercept before tiering) ─────────────

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
-import { bktUpdate } from '@/lib/bkt'
+import { bktUpdate, getMasteryTier } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
 import { deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { computeUnblocked } from '@/lib/graph'
@@ -11,6 +11,7 @@ import {
 } from '@/lib/db/queries'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat } from '@/types'
+import { canChooseTopicSwitch } from '@/lib/session/engine'
 
 const MIN_LATENCY = 100
 const MAX_LATENCY = 5 * 60 * 1000
@@ -127,6 +128,8 @@ export async function POST(req: NextRequest) {
     correct, attempt_id,
     new_p_know: updatedState.p_know,
     mastery_state: updatedState.mastery_state,
+    mastery_tier: getMasteryTier(updatedState.p_know),
+    topic_choice_available: canChooseTopicSwitch(updatedState.p_know),
     explanation_unlocked: correct,
     motivation: updatedMotivation.state,
   })

@@ -10,6 +10,16 @@ import { Spinner }          from '@/components/ui/Spinner'
 import { Navbar }           from '@/components/layout/Navbar'
 import { mdToHtml }         from '@/components/ui/mdToHtml'
 import { useAnalytics }     from '@/hooks/useAnalytics'
+import { getMasteryTier, type MasteryTier } from '@/lib/bkt'
+
+interface UnlockedTopic {
+  id: string
+  label: string
+  p_know: number
+  mastery_state: string
+  deprecated?: boolean
+  question_ids: string[]
+}
 
 // ─── Reason pill config ───────────────────────────────────────────────────────
 
@@ -234,6 +244,10 @@ function LearnPageInner() {
   const [additionalReviews, setAdditionalReviews] = useState(0)
   const [taskLimit,         setTaskLimit]         = useState(10)
   const [consentPrompt,     setConsentPrompt]     = useState<'start' | 'continue' | null>(null)
+  const [arcSkillId,        setArcSkillId]        = useState<string | null>(null)
+  const [topicChoiceTier,   setTopicChoiceTier]   = useState<MasteryTier | null>(null)
+  const [topicPicker,       setTopicPicker]       = useState<UnlockedTopic[] | null>(null)
+  const [switchBridge,      setSwitchBridge]      = useState<string | null>(null)
 
   function currentMode(): LearningMode {
     if (showLearnFirst && phase === 'question') return 'learn'
@@ -264,8 +278,11 @@ function LearnPageInner() {
     sid: string,
     modeOverride = sessionMode,
     limitOverride = taskLimit,
+    skillOverride = arcSkillId,
+    bridgeOverride: string | null = null,
   ) => {
     setPhase('loading')
+    setSwitchBridge(bridgeOverride)
     setShowLearnFirst(false)
     setPreExplanation(null)
     const r = await fetch('/api/session', {
@@ -273,6 +290,7 @@ function LearnPageInner() {
       body: JSON.stringify({
         action: 'next', session_id: sid, mode: modeOverride, task_limit: limitOverride,
         seen_skills: seenSkills, seen_question_ids: seenQuestions,
+        current_skill_id: modeOverride === 'learn' ? skillOverride : undefined,
       }),
     })
     const d = await r.json()
@@ -285,6 +303,7 @@ function LearnPageInner() {
     }
 
     const newTask: SessionTask = d.task
+    if (modeOverride === 'learn') setArcSkillId(skillOverride ?? newTask.skill_id)
     setTask(newTask)
     setSelected(null); setFillAnswer(''); setFeedback(null); setExplanation(null)
 
@@ -304,7 +323,7 @@ function LearnPageInner() {
     }
 
     setPhase('question')
-  }, [seenSkills, seenQuestions, sessionMode, taskLimit, track])
+  }, [arcSkillId, seenSkills, seenQuestions, sessionMode, taskLimit, track])
 
   // Start session
   useEffect(() => {
@@ -346,6 +365,9 @@ function LearnPageInner() {
     const d = await r.json()
     setFeedback({ correct: d.correct, explanation_after: task.question.explanation_after })
     setMotivation(d.motivation ?? 'neutral')
+    setTopicChoiceTier(
+      sessionMode === 'learn' && d.topic_choice_available ? d.mastery_tier as MasteryTier : null
+    )
     setSessionStats(s => ({ correct: s.correct + (d.correct ? 1 : 0), total: s.total + 1 }))
     setSeenSkills(s => [...s, task.skill_id])
     setSeenQuestions(s => [...s, task.question.id])
@@ -363,7 +385,38 @@ function LearnPageInner() {
   }
 
   async function nextQuestion() {
+    if (topicChoiceTier) return
     if (sessionId) loadNext(sessionId)
+  }
+
+  function continueCurrentTopic() {
+    if (!sessionId) return
+    setTopicChoiceTier(null)
+    setTopicPicker(null)
+    loadNext(sessionId, 'learn', taskLimit, arcSkillId)
+  }
+
+  async function openTopicPicker() {
+    const response = await fetch('/api/graph')
+    const data = await response.json()
+    const unlocked = (data.nodes ?? []).filter((node: UnlockedTopic) =>
+      !node.deprecated && node.mastery_state !== 'blocked' && node.question_ids.length > 0
+    )
+    setTopicPicker(unlocked)
+  }
+
+  function selectTopic(topic: UnlockedTopic) {
+    if (!sessionId || !task) return
+    if (topic.id === task.skill_id) {
+      continueCurrentTopic()
+      return
+    }
+    const currentTier = topicChoiceTier ?? getMasteryTier(task.p_know)
+    const bridge = `${currentTier} foundation in ${task.skill_label}. You chose ${topic.label}, currently ${getMasteryTier(topic.p_know)}.`
+    setTopicChoiceTier(null)
+    setTopicPicker(null)
+    setArcSkillId(topic.id)
+    loadNext(sessionId, 'learn', taskLimit, topic.id, bridge)
   }
 
   function beginReviews() {
@@ -452,6 +505,41 @@ function LearnPageInner() {
   }
 
   // ── Summary screen ─────────────────────────────────────────────────────────
+  if (topicPicker) {
+    return (
+      <div className="min-h-screen bg-c-bg">
+        <Navbar />
+        <div className="max-w-2xl mx-auto px-8 py-16 animate-slide-up">
+          <p className="font-mono text-[12px] text-c-faint uppercase tracking-[0.14em] mb-4">Your choice</p>
+          <h1 className="font-serif italic text-[34px] text-c-text mb-3">Choose any unlocked topic</h1>
+          <p className="text-[15px] text-c-muted leading-[1.7] mb-8">
+            Pick where you want to go next. Your current topic will still be here when you return.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {topicPicker.map(topic => (
+              <button
+                key={topic.id}
+                onClick={() => selectTopic(topic)}
+                className="text-left p-4 rounded-xl bg-c-bg2 border border-[var(--border)] hover:border-c-purple/50 transition-colors"
+              >
+                <span className="block text-[15px] text-c-text mb-1">{topic.label}</span>
+                <span className="font-mono text-[12px] text-c-faint">
+                  {getMasteryTier(topic.p_know)}{topic.id === task?.skill_id ? ' · current topic' : ''}
+                </span>
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => setTopicPicker(null)}
+            className="mt-6 text-[13px] text-c-faint hover:text-c-muted transition-colors"
+          >
+            ← Back to the stay-or-switch choice
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   if (phase === 'summary') {
     const accuracy = sessionStats.total > 0
       ? Math.round(sessionStats.correct / sessionStats.total * 100) : 0
@@ -461,6 +549,7 @@ function LearnPageInner() {
     function restartSession() {
       setSessionStats({ correct: 0, total: 0 })
       setSeenSkills([]); setSeenQuestions([])
+      setArcSkillId(null); setTopicChoiceTier(null); setSwitchBridge(null)
       fetch('/api/session', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'start' }),
@@ -473,7 +562,7 @@ function LearnPageInner() {
         setPhase('loading')
         if (offer > 0) setConsentPrompt('start')
         else if (sessionMode === 'review') setPhase('summary')
-        else loadNext(d.session_id, 'learn', 10)
+        else loadNext(d.session_id, 'learn', 10, null)
       })
     }
 
@@ -539,7 +628,7 @@ function LearnPageInner() {
   }
 
   if (phase === 'loading' || !task) return (
-    <div className="min-h-screen bg-c-bg"><Navbar /><Spinner label="Selecting next skill…" /></div>
+    <div className="min-h-screen bg-c-bg"><Navbar /><Spinner label="Preparing your next question…" /></div>
   )
 
   // ── Active question screen ─────────────────────────────────────────────────
@@ -548,6 +637,13 @@ function LearnPageInner() {
       <Navbar />
       {/* Widened to max-w-3xl for more breathing room */}
       <div className="max-w-3xl mx-auto px-8 py-10">
+
+        {switchBridge && (
+          <div className="mb-6 px-5 py-4 rounded-xl border border-c-purple/25 bg-c-purple/[0.07] animate-slide-up">
+            <p className="font-mono text-[11px] text-c-purple uppercase tracking-[0.12em] mb-1">Topic bridge</p>
+            <p className="text-[14px] text-c-muted leading-relaxed">{switchBridge}</p>
+          </div>
+        )}
 
         {/* ── Skill context bar ──────────────────────────────────────────── */}
         <div className="mb-6 animate-slide-up">
@@ -691,12 +787,37 @@ function LearnPageInner() {
                         : 'See explanation →'}
                     </button>
                   )}
-                  <button
-                    onClick={nextQuestion}
-                    className="w-full py-4 rounded-xl bg-c-bg3 border border-[var(--border)] text-c-muted hover:text-c-text text-[15px] transition-all"
-                  >
-                    Next question →
-                  </button>
+                  {topicChoiceTier && sessionMode === 'learn' ? (
+                    <div className="rounded-xl border border-c-purple/25 bg-c-purple/[0.06] p-4">
+                      <p className="text-[15px] text-c-text mb-1">
+                        You’re now {topicChoiceTier} in {task.skill_label}.
+                      </p>
+                      <p className="text-[13px] text-c-muted leading-relaxed mb-4">
+                        Staying is the better path toward Mastered, or you can choose any unlocked topic.
+                      </p>
+                      <div className="grid gap-2.5 sm:grid-cols-2">
+                        <button
+                          onClick={continueCurrentTopic}
+                          className="w-full py-3.5 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[14px] font-medium transition-all"
+                        >
+                          Continue toward Mastered →
+                        </button>
+                        <button
+                          onClick={openTopicPicker}
+                          className="w-full py-3.5 rounded-xl bg-c-bg3 border border-[var(--border)] text-c-muted hover:text-c-text text-[14px] transition-all"
+                        >
+                          Choose another topic →
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={nextQuestion}
+                      className="w-full py-4 rounded-xl bg-c-bg3 border border-[var(--border)] text-c-muted hover:text-c-text text-[15px] transition-all"
+                    >
+                      Next question →
+                    </button>
+                  )}
                 </div>
               )}
             </div>

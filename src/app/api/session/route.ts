@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const user = await getCurrentUser()
     if (!user) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
 
-    const { action, session_id, seen_skills = [], seen_question_ids = [], mode, task_limit } = await req.json()
+    const { action, session_id, seen_skills = [], seen_question_ids = [], mode, task_limit, current_skill_id } = await req.json()
 
     if (action === 'start') {
       const [session, schedules] = await Promise.all([
@@ -137,6 +137,9 @@ export async function POST(req: NextRequest) {
         seenQuestionIdsThisSession: new Set(seen_question_ids),
         questionsCache,
         mode: sessionMode,
+        currentSkillId: sessionMode === 'learn' && typeof current_skill_id === 'string'
+          ? current_skill_id
+          : undefined,
       })
 
       if (!task) return NextResponse.json({ task: null, done: true })

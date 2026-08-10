@@ -1,6 +1,13 @@
 import type { LearnerSkillState, MasteryState } from '@/types'
 export const BKT_DEFAULTS = { p_know: 0.10, p_transit: 0.15, p_slip: 0.10, p_guess: 0.20 } as const
 export const MASTERY_THRESHOLD = 0.65; export const FRAGILE_THRESHOLD = 0.55; export const LEARNING_THRESHOLD = 0.30
+export type MasteryTier = 'Beginner' | 'Intermediate' | 'Mastered'
+
+export function getMasteryTier(pKnow: number): MasteryTier {
+  if (pKnow >= MASTERY_THRESHOLD) return 'Mastered'
+  if (pKnow >= LEARNING_THRESHOLD) return 'Intermediate'
+  return 'Beginner'
+}
 
 export interface BktEvidenceModifiers {
   reasoningQuality?: number
