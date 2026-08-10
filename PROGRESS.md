@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-None — between tasks. P1-3 is done; loop is selecting the next task per `DEVELOPMENT_LOOP.md` Step 2.
+None — loop paused by human request after P1-3 (a deliberate, clean stopping point: P1-3's commit is pushed, tests/build green, no partial work in progress).
 
 ---
 
 ## Next action
 
-Start **P1-4 — Real BKT-movement comparison (Promise #8)** (depends on P1-1, done).
+Start **P1-4 — Real BKT-movement comparison (Promise #8)** (depends on P1-1, done) when the loop resumes.
 
 ---
 
