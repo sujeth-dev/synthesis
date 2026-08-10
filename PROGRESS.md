@@ -6,7 +6,7 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-2A — Guided same-skill learning journey** — engine/UI checkpoint pushed; distinct per-stage question pools and the revised human walkthrough remain.
+**P2-2A — Guided same-skill learning journey** — MCQ/no-repeat correction pushed; remaining Intermediate/Mastery pool completion and human walkthrough remain.
 
 ---
 
@@ -61,6 +61,7 @@ Complete distinct two-question pools for the remaining Intermediate/Mastery gaps
 
 ## Loop iteration log
 
+- 2026-08-10 — **P2-2A wrong-answer/MCQ correction pushed:** converted all 210 populated guided questions to validated MCQs, including rewriting the 16 former fill-in questions with explicit distractors; guaranteed at least two easier MCQs in every one of the 45 current skill files; made one wrong answer immediately step down a practice stage; and merged persisted session attempts into selection so the failed question cannot be served again immediately even if client state is stale. Regression tests cover first-error alternate selection, exhausted-pool no-immediate-repeat behavior, recursive MCQ validity, and two-easier-question coverage. All 50 tests and the production build are green (`d83660d`).
 - 2026-08-10 — **P2-2A staged journey checkpoint pushed:** moved the learning content before practice as a true one-slide-at-a-time lesson; replaced ambiguous per-question dots with persistent `Lesson → Beginner → Intermediate → Mastery → Reflect` checkpoints; separated stage question count from 0/2–2/2 readiness evidence; and made continuation name the exact next stage/question. The same skill remains pinned, and two consecutive correct answers advance. This behavior was subsequently refined by later walkthrough feedback: one miss now steps down immediately and all questions are MCQ. Moving from reviews into learning starts a fresh session so the approved 5+1 review allocation is preserved. All 47 tests and the production build were green at this checkpoint (`afa93ab`).
 - 2026-08-10 — **P2-2A implementation pushed; visual verification blocked:** unified direct and automatic learning into one pinned skill arc, added four-question-plus-mastery switching, adaptive review/same/harder movement, question-first discovery, ordered explanation blocks, voluntary exit, and retained Feynman submission support. All 46 tests and the production build are green (`d87ce74`); rendered interaction verification is blocked by the local computer-use runtime error recorded above.
 - 2026-08-10 — **P2-2 done:** human confirmed the required dashboard, graph, and direct-skill walkthrough after implementation; the repeated 41-test suite and production build remain green (`e01c93c`).
