@@ -103,7 +103,7 @@ export interface SessionTask {
   skill_id: string; skill_label: string; skill_intuition: string; skill_analogy: string
   question: Question; difficulty_tier: DifficultyTier; source: 'review' | 'learning' | 'diagnostic'
   reason: TaskReason
-  p_know: number                // current mastery % for context display
+  p_know: number                // current mastery probability used for selection and tier display
   phase_context?: 'active_phase' | 'past_phase'
   review_urgency?: ReviewUrgency
   days_until_due?: number       // negative = overdue, positive = future

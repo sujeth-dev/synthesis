@@ -35,6 +35,7 @@ import { Spinner }          from '@/components/ui/Spinner'
 import { Navbar }           from '@/components/layout/Navbar'
 import { mdToHtml }         from '@/components/ui/mdToHtml'
 import { useAnalytics }     from '@/hooks/useAnalytics'
+import { getMasteryTier }   from '@/lib/bkt'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -311,7 +312,7 @@ export default function SkillLearnPage() {
   const { node, state, schedule } = data
   const pKnow     = state?.p_know ?? 0
   const mastery   = state?.mastery_state ?? 'ready'
-  const pct       = Math.round(pKnow * 100)
+  const masteryTier = getMasteryTier(pKnow)
 
   // SM-2 display data
   const scheduleNow       = new Date()
@@ -343,10 +344,9 @@ export default function SkillLearnPage() {
           <p className="text-[12px] text-c-faint italic mt-1 leading-relaxed">{node.intuition}</p>
         </div>
         <div className="flex-shrink-0 text-right">
-          <p className="font-mono text-[11px] capitalize" style={{ color: mastery === 'mastered' ? '#34d399' : mastery === 'fragile' ? '#fbbf24' : mastery === 'learning' ? '#7c6eff' : 'var(--text-faint)' }}>
-            {mastery}
+          <p className="font-mono text-[11px]" style={{ color: mastery === 'mastered' ? '#34d399' : ['fragile', 'learning'].includes(mastery) ? '#7c6eff' : 'var(--text-faint)' }}>
+            {masteryTier}
           </p>
-          <p className="font-mono text-[10px] text-c-ghost">{pct}%</p>
           {schedule && schedule.repetitions > 0 && (
             <p className="font-mono text-[10px] mt-0.5" style={{ color: scheduleIsOverdue ? '#fbbf24' : 'var(--text-ghost)' }}>
               {scheduleIsOverdue

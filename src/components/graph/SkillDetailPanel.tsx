@@ -1,7 +1,8 @@
 'use client'
 import type { SkillEdge } from '@/types'
 import type { GraphNodeWithState } from './GraphView'
-import { MASTERY_COLOUR, MASTERY_LABEL } from './GraphView'
+import { MASTERY_COLOUR } from './GraphView'
+import { getMasteryTier } from '@/lib/bkt'
 
 interface Props {
   node:     GraphNodeWithState
@@ -38,9 +39,10 @@ function NodeTag({ node, strength }: { node: GraphNodeWithState; strength?: 'har
 
 export function SkillDetailPanel({ node, edges, nodesMap, onClose }: Props) {
   const color      = MASTERY_COLOUR[node.mastery_state]
-  const pKnowPct   = Math.round(node.p_know * 100)
+  const progressWidth = Math.max(0, node.p_know * 100)
   const isBlocked  = node.mastery_state === 'blocked'
   const isMastered = node.mastery_state === 'mastered'
+  const masteryTier = isBlocked ? 'Locked' : getMasteryTier(node.p_know)
 
   const prerequisites = edges
     .filter(e => e.to === node.id)
@@ -77,10 +79,7 @@ export function SkillDetailPanel({ node, edges, nodesMap, onClose }: Props) {
               className="px-2.5 py-0.5 rounded-md text-[12px] font-mono font-semibold"
               style={{ color, background: color + '18' }}
             >
-              {MASTERY_LABEL[node.mastery_state]}
-            </span>
-            <span className="text-[12px] font-mono text-c-muted">
-              {pKnowPct}% known
+              {masteryTier}
             </span>
             <span className="text-[12px] font-mono text-c-faint">
               {PHASE_LABEL[node.phase] ?? node.phase}
@@ -111,12 +110,12 @@ export function SkillDetailPanel({ node, edges, nodesMap, onClose }: Props) {
           <div>
             <div className="flex justify-between items-center mb-2">
               <span className="text-[12px] font-mono text-c-faint uppercase tracking-[0.07em]">Mastery</span>
-              <span className="text-[12px] font-mono font-semibold" style={{ color }}>{pKnowPct}%</span>
+              <span className="text-[12px] font-mono font-semibold" style={{ color }}>{masteryTier}</span>
             </div>
             <div className="h-2 bg-c-bg3 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-700"
-                style={{ width: `${pKnowPct}%`, background: color }}
+                style={{ width: `${progressWidth}%`, background: color }}
               />
             </div>
           </div>

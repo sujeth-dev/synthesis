@@ -7,6 +7,7 @@ import { getAllNodes, getAllEdges } from '@/lib/graph'
 import { Navbar } from '@/components/layout/Navbar'
 import { PHASE_ORDER, findActivePhase, buildPhaseGroups } from '@/lib/phases'
 import { deriveUrgency } from '@/lib/sm2/urgency'
+import { getMasteryTier } from '@/lib/bkt'
 import type { LearnerSkillState, SkillNode } from '@/types'
 
 // ─── Display constants ────────────────────────────────────────────────────────
@@ -35,7 +36,7 @@ const PHASE_SHORT: Record<string, string> = {
 
 const MASTERY_COLOUR: Record<string, string> = {
   mastered: '#34d399',
-  fragile:  '#fbbf24',
+  fragile:  '#7c6eff',
   learning: '#7c6eff',
   ready:    '#5a8a9f',
   blocked:  '#3a3a52',
@@ -43,7 +44,7 @@ const MASTERY_COLOUR: Record<string, string> = {
 
 const MASTERY_RING: Record<string, string> = {
   mastered: 'ring-2 ring-[#34d399]/50',
-  fragile:  'ring-2 ring-[#fbbf24]/50',
+  fragile:  'ring-2 ring-[#7c6eff]/50',
   learning: 'ring-2 ring-[#7c6eff]/50',
   ready:    'ring-1 ring-[#5a8a9f]/40',
   blocked:  'ring-1 ring-[#3a3a52]/30',
@@ -289,7 +290,7 @@ export default async function Dashboard({
                   const state    = stateMap.get(node.id)
                   const mastery  = state?.mastery_state ?? 'blocked'
                   const pKnow    = state?.p_know ?? 0
-                  const pct      = Math.round(pKnow * 100)
+                  const masteryTier = mastery === 'blocked' ? 'Locked' : getMasteryTier(pKnow)
                   const colour   = MASTERY_COLOUR[mastery] ?? '#3a3a52'
                   const ring     = MASTERY_RING[mastery] ?? ''
                   const isLast   = idx === activeNodes.length - 1
@@ -311,9 +312,7 @@ export default async function Dashboard({
                               <polyline points="20 6 9 17 4 12"/>
                             </svg>
                           ) : (
-                            <span className="font-mono text-[13px] font-bold" style={{ color: colour }}>
-                              {pct}%
-                            </span>
+                            <span className="w-2.5 h-2.5 rounded-full" style={{ background: colour }} />
                           )}
                         </Link>
                         <p
@@ -321,6 +320,9 @@ export default async function Dashboard({
                           style={{ color: mastery === 'blocked' ? 'var(--text-ghost)' : 'var(--text-muted)' }}
                         >
                           {node.label}
+                        </p>
+                        <p className="text-[10px] font-mono mt-1" style={{ color: colour }}>
+                          {masteryTier}
                         </p>
                       </div>
                       {!isLast && (
@@ -537,6 +539,7 @@ export default async function Dashboard({
                       const state    = stateMap.get(node.id)
                       const mastery  = state?.mastery_state ?? 'blocked'
                       const pKnow    = state?.p_know ?? 0
+                      const masteryTier = mastery === 'blocked' ? 'Locked' : getMasteryTier(pKnow)
                       const colour   = MASTERY_COLOUR[mastery] ?? '#3a3a52'
                       const isStudiable = ['ready','learning','fragile','mastered'].includes(mastery) && node.question_ids.length > 0
 
@@ -550,11 +553,8 @@ export default async function Dashboard({
                             <span className="text-[14px] text-c-text truncate">{node.label}</span>
                           </div>
                           <div className="flex items-center gap-3 flex-shrink-0 ml-4">
-                            <span className="font-mono text-[12px] capitalize" style={{ color: colour }}>
-                              {mastery}
-                            </span>
-                            <span className="font-mono text-[12px] text-c-ghost">
-                              {Math.round(pKnow * 100)}%
+                            <span className="font-mono text-[12px]" style={{ color: colour }}>
+                              {masteryTier}
                             </span>
                             {isStudiable && (
                               <Link

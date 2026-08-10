@@ -16,6 +16,7 @@ import {
 import '@xyflow/react/dist/style.css'
 import { graphlib, layout as dagreLayout } from '@dagrejs/dagre'
 import type { SkillEdge, SkillNode, MasteryState } from '@/types'
+import { getMasteryTier } from '@/lib/bkt'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -36,18 +37,10 @@ interface Props {
 
 export const MASTERY_COLOUR: Record<MasteryState, string> = {
   mastered: '#34d399',
-  fragile:  '#fbbf24',
+  fragile:  '#7c6eff',
   learning: '#7c6eff',
   ready:    '#5a8a9f',
   blocked:  '#5a5a72',
-}
-
-export const MASTERY_LABEL: Record<MasteryState, string> = {
-  mastered: 'Mastered',
-  fragile:  'Fragile',
-  learning: 'Learning',
-  ready:    'Ready',
-  blocked:  'Locked',
 }
 
 // ─── Layout constants ─────────────────────────────────────────────────────────
@@ -187,7 +180,7 @@ function SkillNodeComponent({ data, selected }: SkillNodeProps) {
           {label}
         </span>
 
-        {/* p_know % badge — larger and readable */}
+        {/* Learner-facing mastery tier */}
         {!blocked && sn.p_know > 0 && (
           <span
             style={{
@@ -200,7 +193,7 @@ function SkillNodeComponent({ data, selected }: SkillNodeProps) {
               fontWeight:    500,
             }}
           >
-            {Math.round(sn.p_know * 100)}%
+            {getMasteryTier(sn.p_know)}
           </span>
         )}
       </div>

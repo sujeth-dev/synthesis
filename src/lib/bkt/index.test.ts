@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
+import fs from 'fs'
+import path from 'path'
 
-import { bktUpdate, diagnosticScoreToKnow, initSkillState } from '@/lib/bkt'
+import { bktUpdate, diagnosticScoreToKnow, getMasteryTier, initSkillState } from '@/lib/bkt'
 
 describe('test framework smoke test', () => {
   it('imports a library module through the TypeScript path alias', () => {
@@ -36,5 +38,36 @@ describe('combined-evidence BKT update', () => {
 
     expect(combined.p_know).toBeLessThan(reasoningOnly.p_know)
     expect(combined.p_know).toBeLessThan(behaviorOnly.p_know)
+  })
+})
+
+describe('learner-facing mastery tiers', () => {
+  it('maps the exact learning and mastery threshold boundaries', () => {
+    expect(getMasteryTier(0.29)).toBe('Beginner')
+    expect(getMasteryTier(0.30)).toBe('Intermediate')
+    expect(getMasteryTier(0.64)).toBe('Intermediate')
+    expect(getMasteryTier(0.65)).toBe('Mastered')
+  })
+
+  it('does not render raw mastery percentages in learner-facing components', () => {
+    const roots = [
+      'src/components',
+      'src/app/dashboard',
+      'src/app/graph',
+      'src/app/learn',
+    ].map(root => path.join(process.cwd(), root))
+
+    function tsxFiles(directory: string): string[] {
+      return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+        const entryPath = path.join(directory, entry.name)
+        if (entry.isDirectory()) return tsxFiles(entryPath)
+        return entry.isFile() && entry.name.endsWith('.tsx') ? [entryPath] : []
+      })
+    }
+
+    const source = roots.flatMap(tsxFiles).map(file => fs.readFileSync(file, 'utf8')).join('\n')
+    expect(source).not.toMatch(/Math\.round\([^\n]*(?:p_know|pKnow|p_start|pStart)[^\n]*100/)
+    expect(source).not.toMatch(/%\s*(?:known|mastered)/i)
+    expect(source).not.toMatch(/\{(?:pKnowPct|pStartPct)\}%/)
   })
 })

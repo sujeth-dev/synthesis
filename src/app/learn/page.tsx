@@ -52,16 +52,16 @@ function formatDueLabel(days_until_due: number, urgency?: ReviewUrgency): string
 function ReasonPill({ reason, pKnow }: { reason: TaskReason; pKnow: number }) {
   const cfg = REASON_CONFIG[reason]
   if (!cfg) return null
-  const pct = Math.round(pKnow * 100)
+  const masteryTier = getMasteryTier(pKnow)
   const showMastery = reason === 'active_phase_new' || reason === 'varied_practice'
   return (
     <span
       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-mono border"
       style={{ color: cfg.color, borderColor: cfg.color + '35', background: cfg.color + '12' }}
-      title={`Why this? ${cfg.label}${showMastery ? ` (${pct}% mastered)` : ''}`}
+      title={`Why this? ${cfg.label}${showMastery ? ` (${masteryTier})` : ''}`}
     >
       <span>{cfg.icon}</span>
-      <span>{cfg.label}{showMastery ? ` · ${pct}%` : ''}</span>
+      <span>{cfg.label}{showMastery ? ` · ${masteryTier}` : ''}</span>
     </span>
   )
 }
@@ -684,7 +684,7 @@ function LearnPageInner() {
           {/* Learning context */}
           {(task.reason === 'active_phase_new' || task.reason === 'varied_practice') && (
             <p className="text-[12px] font-mono text-c-faint mb-1.5">
-              {Math.round(task.p_know * 100)}% mastered · weakest in queue
+              {getMasteryTier(task.p_know)} · weakest in queue
             </p>
           )}
 
