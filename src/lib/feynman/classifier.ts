@@ -25,6 +25,15 @@ const METHOD_MARKERS = [
 ]
 
 /**
+ * NLP/LLM upgrade trigger (P1-5): keep this rule-based classifier primary until
+ * NLP-1 through NLP-3 compare it with a versioned API grader on the same 50-200
+ * human-labeled explanations and the API grader shows a reliable improvement in
+ * agreement with those labels. If promoted, the API augments rather than removes
+ * this function: these rules remain the hard fallback for failure, timeout, or
+ * cost-based disablement. See v2/doc/basic-guide.md section C.
+ */
+
+/**
  * Rule-based classifier for a learner's free-text explanation of a concept
  * (the Feynman Loop teaching canvas — see Research/lab/13-content-structure.md §4.1).
  *

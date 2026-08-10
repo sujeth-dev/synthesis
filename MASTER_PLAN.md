@@ -164,6 +164,8 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section B.
 ### NLP/LLM reasoning grader (start once P1-1's rule-based classifier exists)
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C.
 
+**Live upgrade trigger:** keep the rule-based classifier primary until NLP-1 through NLP-3 show that the versioned API grader has reliably higher agreement with the same 50-200 human-labeled examples. A promoted API grader must retain the rules as its hard fallback; live cutover requires human sign-off.
+
 | ID | Task | Depends on |
 |---|---|---|
 | NLP-1 | Collect 50-200 labeled real/hand-authored explanation examples | P1-1 |
@@ -202,7 +204,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Required tests:** unit test with a fixture session proving the computed comparison matches hand-calculated expected movement.
 
 ### P1-5 — Document NLP/LLM upgrade trigger
-**Status:** not_started · **Depends on:** P1-1
+**Status:** in_progress · **Depends on:** P1-1
 **Do:** Document (in code comments near the classifier, and in this repo's docs) the condition under which P2's classifier gets replaced/augmented by the NLP-track grader — not a build task, a documented trigger.
 **Acceptance criteria:** a markdown note or code comment stating the trigger condition exists and is findable from the classifier's source location.
 **Required tests:** none (documentation task).
