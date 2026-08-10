@@ -204,7 +204,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Required tests:** unit test with a fixture session proving the computed comparison matches hand-calculated expected movement.
 
 ### P1-5 — Document NLP/LLM upgrade trigger
-**Status:** in_progress · **Depends on:** P1-1
+**Status:** done · **Depends on:** P1-1
 **Do:** Document (in code comments near the classifier, and in this repo's docs) the condition under which P2's classifier gets replaced/augmented by the NLP-track grader — not a build task, a documented trigger.
 **Acceptance criteria:** a markdown note or code comment stating the trigger condition exists and is findable from the classifier's source location.
 **Required tests:** none (documentation task).
