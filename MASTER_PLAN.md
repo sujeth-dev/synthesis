@@ -121,14 +121,14 @@ These do not block Phase 0 completion and may be worked whenever the loop has ba
 ### Content classification & Bloom's tagging (Promise #7)
 Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s Bloom's checklist.
 
-| ID | Task | Depends on |
-|---|---|---|
-| BLOOM-1 | Define checkable skill-granularity rules (when two sub-concepts = one `skill_id` vs. two) | none |
-| BLOOM-2 | Add `bloom_level` to `Question`/`SkillNode` schema (`src/types/index.ts`) as closed, versioned vocabulary | BLOOM-1 |
-| BLOOM-3 | Extend `scripts/validate-content.js`: bank-size minimums, tier coverage, tag-vocabulary closure | BLOOM-2 |
-| BLOOM-4 | Retrofit `bloom_level` onto the 45 currently-populated skills | BLOOM-2, BLOOM-3 |
-| BLOOM-5 | Wire `bloom_level` into `engine.ts`'s tier/difficulty selection | BLOOM-4 |
-| BLOOM-6 | Gate — confirm Phase 2 content authoring (P2-3) uses this vocabulary from creation | BLOOM-5, must be done before P2-3 starts |
+| ID | Status | Task | Depends on |
+|---|---|---|---|
+| BLOOM-1 | in_progress | Define checkable skill-granularity rules (when two sub-concepts = one `skill_id` vs. two) | none |
+| BLOOM-2 | not_started | Add `bloom_level` to `Question`/`SkillNode` schema (`src/types/index.ts`) as closed, versioned vocabulary | BLOOM-1 |
+| BLOOM-3 | not_started | Extend `scripts/validate-content.js`: bank-size minimums, tier coverage, tag-vocabulary closure | BLOOM-2 |
+| BLOOM-4 | not_started | Retrofit `bloom_level` onto the 45 currently-populated skills | BLOOM-2, BLOOM-3 |
+| BLOOM-5 | not_started | Wire `bloom_level` into `engine.ts`'s tier/difficulty selection | BLOOM-4 |
+| BLOOM-6 | not_started | Gate — confirm Phase 2 content authoring (P2-3) uses this vocabulary from creation | BLOOM-5, must be done before P2-3 starts |
 
 **Acceptance per item:** matches its one-line "Do" above; BLOOM-3's acceptance additionally requires `npm run validate` to actually enforce the new checks (fail on violation, not just warn).
 
@@ -222,7 +222,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Required tests:** integration test comparing live-computed vs. persisted-and-reread signal values.
 
 ### P2-2 — Re-skin to Seven Worlds design spec + Finding 05 fix
-**Status:** blocked · **Depends on:** Phase 1 done
+**Status:** done · **Depends on:** Phase 1 done
 **Doc ref:** `v2/doc/12-design-spec.md`, `v2/doc/findings/05-explanation-content-static.md`
 **Do:** Re-skin `dashboard`, `graph`, `learn/skill/[skill_id]` to the locked Seven Worlds design spec. Fold in Finding 05's progressive-disclosure fix in the same pass: `LearnPanel`/`ExplanationPanel` show a short `key_insight`-led opening with full body on demand, instead of rendering the full body immediately.
 **Acceptance criteria:** manual walkthrough confirms all three re-skinned pages match the design spec's Priority-1 screens and don't regress the April UI/UX audit's contrast/size baseline; progressive disclosure verified by confirming full `body` is not rendered until explicitly expanded.

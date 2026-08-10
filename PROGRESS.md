@@ -6,13 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-2 — Re-skin to Seven Worlds design spec + Finding 05 fix** — implementation pushed; blocked at the required manual UI walkthrough.
+**BLOOM-1 — Define checkable skill-granularity rules** — in progress because P2-3 is gated on BLOOM-6.
 
 ---
 
 ## Next action
 
-Await human verification of P2-2's dashboard, graph, and direct-skill screens, or repair of the local computer-use plugin so the walkthrough can be completed automatically.
+Define deterministic rules for when related sub-concepts share one `skill_id` versus split into separate skills, grounded in the existing graph and BKT assumptions.
 
 ---
 
@@ -27,7 +27,7 @@ Await human verification of P2-2's dashboard, graph, and direct-skill screens, o
 7. ~~**P0-5 arc completion is qualitative but needs numeric engine thresholds.** The cited docs require genuine mastery/`p_know` movement with a task-count fallback, but specify neither amount. Recommended policy: hold the current skill until it becomes `mastered` or gains at least **0.15 `p_know`** from the arc start; if neither occurs, switch after **4 tasks** on that skill. A switch bridge can state "You've made progress on {old}; now connecting it to {new}."~~ **Superseded by human direction on 2026-08-10 (P0-5):** the task-count fallback is dropped entirely — the automatic in-session flow (`selectNextTask()`'s normal next-question path) never force-switches topics under any circumstance, full stop, no matter how many tasks pass. Instead, once the current topic's `p_know` reaches **0.60**, the learner is offered an explicit choice — continue this topic (framed as the better option, toward full mastery) or switch. If they choose to switch, they pick **any unlocked topic themselves**, not the engine's next algorithmic pick. Manual navigation to any topic via the graph/dashboard remains available at any mastery level regardless of this gate — this policy only governs the automatic in-session next-question flow, not free navigation (assumption stated back to the human and not corrected). The switch prompt/bridge must use tier language (Beginner/Intermediate/Mastered — see new item 8 below and `P0-8`), never a raw percentage.
 8. **New direction (2026-08-10): stop showing raw `p_know`/`p_start` percentages to learners anywhere.** Replace with a 3-tier label — Beginner / Intermediate / Mastered — on every learner-facing surface (`SkillDetailPanel.tsx`'s "62% known" text + percentage-labeled mastery bar caption, dashboard mastery percentages, any other raw-percentage display). Proposed mapping, reusing existing engine constants rather than inventing new ones (`src/lib/bkt/index.ts`): Beginner = `p_know < LEARNING_THRESHOLD (0.30)`, Intermediate = `0.30 ≤ p_know < MASTERY_THRESHOLD (0.65)`, Mastered = `p_know ≥ 0.65`. `fragile` state (decayed-from-mastered, `< FRAGILE_THRESHOLD` 0.55) folds into the Intermediate tier for display purposes only — flagged as an assumption, not explicitly confirmed. Filed as new task **P0-8** in `MASTER_PLAN.md`.
 9. ~~**P1-1 and P1-2 currently duplicate classifier responsibility.**~~ **Resolved by human direction on 2026-08-10:** combine classifier implementation into P1-1 (rather than keeping the documented split). P1-2 is retired; its scope (pure classifier function + unit tests) now lives inside P1-1. `MASTER_PLAN.md` updated: P1-1 merged, P1-2 marked retired, P1-3/P1-5/NLP-1 dependency edges repointed from P1-2 to P1-1.
-10. **P2-2 manual walkthrough unavailable:** the implementation is committed and pushed (`e01c93c`), the progressive-disclosure source contract passes, all 41 tests pass, and the production build succeeds. The required browser walkthrough could not start because the installed `computer-use` plugin failed during bootstrap with `Package subpath './dist/project/cua/sky_js/src/targets/windows/internal/computer_use_client_base.js' is not defined by "exports" in ...\@oai\sky\package.json` from `C:\Users\user\.codex\plugins\cache\openai-bundled\computer-use\26.609.30741`. No authenticated browser fixture is otherwise available. **Needed:** either repair/update that plugin, or manually verify `/dashboard`, `/graph`, and `/learn/skill/[skill_id]` (including expanding “Read full explanation”) and confirm the World 04/07/01 visual treatment and progressive disclosure. Do not mark P2-2 done until this is confirmed.
+10. ~~**P2-2 manual walkthrough unavailable:** the implementation is committed and pushed (`e01c93c`), the progressive-disclosure source contract passes, all 41 tests pass, and the production build succeeds. The required browser walkthrough could not start because the installed `computer-use` plugin failed during bootstrap.~~ **Resolved by human confirmation on 2026-08-10:** the dashboard, graph, and direct-skill walkthrough is complete; P2-2 is accepted.
 
 ---
 
@@ -58,6 +58,7 @@ Await human verification of P2-2's dashboard, graph, and direct-skill screens, o
 
 ## Loop iteration log
 
+- 2026-08-10 — **P2-2 done:** human confirmed the required dashboard, graph, and direct-skill walkthrough after implementation; the repeated 41-test suite and production build remain green (`e01c93c`).
 - 2026-08-10 — **P2-2 implementation pushed; verification blocked:** applied the locked craft/forest/orange/gold palette, typography roles, blueprint grid, Orbit colors, editorial section rules, reading typography, and shared key-insight-first disclosure across all three explanation paths. The source contract, 41-test suite, and production build are green (`e01c93c`), but the required authenticated manual walkthrough remains blocked by the local computer-use plugin bootstrap error recorded above.
 - 2026-08-10 — **P2-1 done:** persisted each attempt's bounded retry count plus the live motivation state, consecutive-error streak, slow-response streak, BKT behavior modifier, and threshold-derived hesitation time; added a session-scoped analytics query and an insert-to-reread integration fixture proving exact signal parity. Full 40-test suite and production build green (`898c094`).
 - 2026-08-10 — **P1-5 and Phase 1 done:** documented the NLP/LLM live-upgrade trigger beside `classifyExplanation()` and in both roadmap sources: promote an API grader only after reliable improvement against the same 50-200 human-labeled examples, retain rules as the hard fallback, and require human sign-off for live BKT cutover. The transcript/classifier acceptance run (8 tests), full 39-test suite, and production build are green (`698e7e4`).
