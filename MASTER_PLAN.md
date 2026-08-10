@@ -222,7 +222,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 **Required tests:** integration test comparing live-computed vs. persisted-and-reread signal values.
 
 ### P2-2 — Re-skin to Seven Worlds design spec + Finding 05 fix
-**Status:** not_started · **Depends on:** Phase 1 done
+**Status:** blocked · **Depends on:** Phase 1 done
 **Doc ref:** `v2/doc/12-design-spec.md`, `v2/doc/findings/05-explanation-content-static.md`
 **Do:** Re-skin `dashboard`, `graph`, `learn/skill/[skill_id]` to the locked Seven Worlds design spec. Fold in Finding 05's progressive-disclosure fix in the same pass: `LearnPanel`/`ExplanationPanel` show a short `key_insight`-led opening with full body on demand, instead of rendering the full body immediately.
 **Acceptance criteria:** manual walkthrough confirms all three re-skinned pages match the design spec's Priority-1 screens and don't regress the April UI/UX audit's contrast/size baseline; progressive disclosure verified by confirming full `body` is not rendered until explicitly expanded.
