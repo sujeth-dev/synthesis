@@ -11,9 +11,27 @@ export const CURRENT_TOPIC_MINIMUM = 4
 export const MAX_REVIEW_ITEMS = SESSION_TASK_CAP - CURRENT_TOPIC_MINIMUM
 export const DEFAULT_REVIEW_OFFER_SIZE = MAX_REVIEW_ITEMS - 1
 export const ARC_SWITCH_THRESHOLD = 0.60
+export const MIN_GUIDED_ARC_QUESTIONS = 4
 
-export function canChooseTopicSwitch(pKnow: number): boolean {
-  return pKnow >= ARC_SWITCH_THRESHOLD
+export interface ArcAttemptEvidence {
+  correct: boolean
+  difficulty_tier: DifficultyTier
+}
+
+const ARC_DIFFICULTY_ORDER: DifficultyTier[] = ['review', 'same', 'harder']
+
+export function selectArcDifficulty(history: ArcAttemptEvidence[]): DifficultyTier {
+  if (history.length === 0) return 'review'
+  const last = history[history.length - 1]
+  const currentIndex = Math.max(0, ARC_DIFFICULTY_ORDER.indexOf(last.difficulty_tier))
+  const nextIndex = last.correct
+    ? Math.min(ARC_DIFFICULTY_ORDER.length - 1, currentIndex + 1)
+    : Math.max(0, currentIndex - 1)
+  return ARC_DIFFICULTY_ORDER[nextIndex]
+}
+
+export function canChooseTopicSwitch(pKnow: number, arcAttemptCount: number): boolean {
+  return pKnow >= ARC_SWITCH_THRESHOLD && arcAttemptCount >= MIN_GUIDED_ARC_QUESTIONS
 }
 
 export interface ReviewDebtPlan {
@@ -68,6 +86,7 @@ interface SelectTaskParams {
   questionsCache:             Map<string, Question[]>
   mode?:                      SessionMode
   currentSkillId?:            string
+  arcHistory?:                ArcAttemptEvidence[]
 }
 
 export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
@@ -80,6 +99,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
   const {
     skillStates, reviewSchedules, motivationState,
     seenSkillsThisSession, seenQuestionIdsThisSession, questionsCache, mode, currentSkillId,
+    arcHistory = [],
   } = p
 
   const now = new Date()
@@ -125,9 +145,7 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
     const state = skillStates.get(currentSkillId)
     const node = getNodeById(currentSkillId)
     if (state && state.mastery_state !== 'blocked' && node && questionsCache.has(currentSkillId)) {
-      let diffTier: DifficultyTier = 'same'
-      if (motivationState.state === 'bored' || state.consecutive_correct >= 3) diffTier = 'harder'
-      if (state.consecutive_wrong >= 2) diffTier = 'review'
+      const diffTier = selectArcDifficulty(arcHistory)
       const q = pickQuestion(currentSkillId, diffTier, seenQuestionIdsThisSession, questionsCache)
       if (q) {
         return buildTask(currentSkillId, q, diffTier, {

@@ -8,7 +8,7 @@ import { ExplanationPanel } from '@/components/learning/ExplanationPanel'
 import { MotivationBanner } from '@/components/learning/MotivationBanner'
 import { Spinner }          from '@/components/ui/Spinner'
 import { Navbar }           from '@/components/layout/Navbar'
-import { ProgressiveExplanation } from '@/components/learning/ProgressiveExplanation'
+import { FeynmanLoop }      from '@/components/learning/FeynmanLoop'
 import { useAnalytics }     from '@/hooks/useAnalytics'
 import { getMasteryTier, type MasteryTier } from '@/lib/bkt'
 
@@ -141,84 +141,13 @@ function ModeBar({
   )
 }
 
-// ─── Pre-question Learn Panel ─────────────────────────────────────────────────
-
-interface LearnPanelProps {
-  task:        SessionTask
-  explanation: Explanation | null
-  depth?:      ExplanationDepth
-  onReady:     () => void
-}
-
-const DEPTH_COLORS: Record<ExplanationDepth, string> = {
-  beginner: 'var(--green)',
-  mid:      'var(--yellow)',
-  advanced: 'var(--orange, #f97316)',
-  expert:   'var(--purple)',
-}
-
-function LearnPanel({ task, explanation, depth, onReady }: LearnPanelProps) {
-  return (
-    <div className="animate-slide-up">
-      {explanation ? (
-        <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple overflow-hidden mb-5">
-          <div className="px-6 pt-6 pb-5">
-            <div className="flex items-center justify-between mb-2">
-              <p className="font-mono text-[12px] text-c-purple uppercase tracking-[0.16em]">New concept</p>
-              {depth && (
-                <span
-                  className="text-[11px] font-mono font-semibold uppercase tracking-[0.1em] px-2 py-0.5 rounded"
-                  style={{ color: DEPTH_COLORS[depth], background: DEPTH_COLORS[depth] + '18' }}
-                >
-                  {depth}
-                </span>
-              )}
-            </div>
-            <h3 className="text-[18px] font-semibold text-c-text mb-3">{explanation.title}</h3>
-
-            {explanation.key_insight && (
-              <div className="mb-5 px-4 py-3.5 rounded-xl bg-c-purple/[0.10] border border-c-purple/25">
-                <p className="text-[13px] text-c-purple italic leading-[1.6]">"{explanation.key_insight}"</p>
-              </div>
-            )}
-
-            <ProgressiveExplanation body={explanation.body} />
-
-            {explanation.mini_exercise && (
-              <div className="mt-5 p-4 rounded-xl bg-c-bg3 border border-[var(--border)]">
-                <p className="text-[11px] font-mono text-c-faint uppercase tracking-[0.14em] mb-2">Quick check</p>
-                <p className="text-[13px] text-c-muted leading-[1.6]">{explanation.mini_exercise}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      ) : (
-        <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] px-6 py-6 mb-5">
-          <p className="font-mono text-[12px] text-c-purple uppercase tracking-[0.14em] mb-2">New concept</p>
-          <h3 className="text-[18px] font-semibold text-c-text mb-2">{task.skill_label}</h3>
-          <p className="text-[14px] text-c-muted italic leading-[1.6]">{task.skill_intuition}</p>
-          {task.skill_analogy && (
-            <p className="text-[13px] text-c-faint mt-3 leading-[1.55]">Analogy: {task.skill_analogy}</p>
-          )}
-        </div>
-      )}
-
-      <button
-        onClick={onReady}
-        className="w-full py-4 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[15px] font-medium transition-all hover:scale-[1.01]"
-      >
-        I understand — Practice now →
-      </button>
-    </div>
-  )
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function LearnPageInner() {
   const router       = useRouter()
   const searchParams = useSearchParams()
   const requestedSessionMode = (searchParams.get('mode') ?? 'learn') as SessionMode
+  const requestedSkillId = searchParams.get('skill_id')
   const { track } = useAnalytics()
 
   const [sessionMode,       setSessionMode]       = useState<SessionMode>(requestedSessionMode)
@@ -230,25 +159,25 @@ function LearnPageInner() {
   const [feedback,          setFeedback]          = useState<{ correct: boolean; explanation_after?: string } | null>(null)
   const [explanation,       setExplanation]       = useState<Explanation | null>(null)
   const [explanationDepth,  setExplanationDepth]  = useState<ExplanationDepth>('beginner')
-  const [preExplanation,    setPreExplanation]    = useState<Explanation | null>(null)
-  const [preDepth,          setPreDepth]          = useState<ExplanationDepth>('beginner')
+  const [explanationComplete, setExplanationComplete] = useState(false)
+  const [explanationPending, setExplanationPending] = useState(false)
   const [motivation,        setMotivation]        = useState<string>('neutral')
   const [seenSkills,        setSeenSkills]        = useState<string[]>([])
   const [seenQuestions,     setSeenQuestions]     = useState<string[]>([])
   const [sessionStats,      setSessionStats]      = useState({ correct: 0, total: 0 })
-  const [showLearnFirst,    setShowLearnFirst]    = useState(false)
   const [reviewOffer,       setReviewOffer]       = useState(0)
   const [additionalReviews, setAdditionalReviews] = useState(0)
   const [taskLimit,         setTaskLimit]         = useState(10)
   const [consentPrompt,     setConsentPrompt]     = useState<'start' | 'continue' | null>(null)
-  const [arcSkillId,        setArcSkillId]        = useState<string | null>(null)
+  const [arcSkillId,        setArcSkillId]        = useState<string | null>(requestedSkillId)
+  const [arcAttemptCount,   setArcAttemptCount]   = useState(0)
   const [topicChoiceTier,   setTopicChoiceTier]   = useState<MasteryTier | null>(null)
   const [topicPicker,       setTopicPicker]       = useState<UnlockedTopic[] | null>(null)
   const [switchBridge,      setSwitchBridge]      = useState<string | null>(null)
 
   function currentMode(): LearningMode {
-    if (showLearnFirst && phase === 'question') return 'learn'
     if (phase === 'question' || phase === 'revealing') return 'practice'
+    if (phase === 'explanation' || phase === 'feynman') return 'learn'
     if (phase === 'build_task') return 'apply'
     if (phase === 'explain_back') return 'review'
     return 'practice'
@@ -260,16 +189,16 @@ function LearnPageInner() {
   // Keyboard shortcuts
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (phase === 'question' && !showLearnFirst && task?.question.format === 'mcq') {
+      if (phase === 'question' && task?.question.format === 'mcq') {
         const idx = ['1','2','3','4'].indexOf(e.key)
         if (idx >= 0) { const opt = task.question.options?.[idx]; if (opt) setSelected(opt.id) }
       }
-      if (['revealing','explanation'].includes(phase) && e.key === 'Enter') nextQuestion()
+      if (['revealing','explanation'].includes(phase) && e.key === 'Enter' && (!explanation || explanationComplete)) nextQuestion()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, task, showLearnFirst])
+  }, [phase, task, explanation, explanationComplete])
 
   const loadNext = useCallback(async (
     sid: string,
@@ -280,8 +209,6 @@ function LearnPageInner() {
   ) => {
     setPhase('loading')
     setSwitchBridge(bridgeOverride)
-    setShowLearnFirst(false)
-    setPreExplanation(null)
     const r = await fetch('/api/session', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -303,22 +230,8 @@ function LearnPageInner() {
     if (modeOverride === 'learn') setArcSkillId(skillOverride ?? newTask.skill_id)
     setTask(newTask)
     setSelected(null); setFillAnswer(''); setFeedback(null); setExplanation(null)
-
-    const isNewOrWeak = newTask.p_know < 0.35
-    if (isNewOrWeak) {
-      try {
-        const er = await fetch(`/api/explanation?skill_id=${newTask.skill_id}`)
-        const ed = await er.json()
-        if (ed.explanation) {
-          setPreExplanation(ed.explanation)
-          setPreDepth(ed.depth ?? 'beginner')
-          setShowLearnFirst(true)
-          setPhase('question')
-          return
-        }
-      } catch { /* proceed to question */ }
-    }
-
+    setExplanationComplete(false)
+    setExplanationPending(false)
     setPhase('question')
   }, [arcSkillId, seenSkills, seenQuestions, sessionMode, taskLimit, track])
 
@@ -336,7 +249,8 @@ function LearnPageInner() {
         setReviewOffer(offer)
         setAdditionalReviews(d.additional_review_count ?? 0)
         track({ name: 'session_start' })
-        if (offer > 0) setConsentPrompt('start')
+        if (requestedSkillId) loadNext(d.session_id, 'learn', 10, requestedSkillId)
+        else if (offer > 0) setConsentPrompt('start')
         else if (requestedSessionMode === 'review') setPhase('summary')
         else loadNext(d.session_id, 'learn', 10)
       }
@@ -365,25 +279,42 @@ function LearnPageInner() {
     setTopicChoiceTier(
       sessionMode === 'learn' && d.topic_choice_available ? d.mastery_tier as MasteryTier : null
     )
+    setArcAttemptCount(d.arc_attempt_count ?? 0)
     setSessionStats(s => ({ correct: s.correct + (d.correct ? 1 : 0), total: s.total + 1 }))
     setSeenSkills(s => [...s, task.skill_id])
     setSeenQuestions(s => [...s, task.question.id])
     track({ name: 'attempt_submit', props: { correct: d.correct, skill_id: task.skill_id } })
 
     setPhase('revealing')
+    setExplanationPending(true)
 
-    if (d.correct) {
-      try {
-        const er = await fetch(`/api/explanation?skill_id=${task.skill_id}&attempt_id=${d.attempt_id}`)
-        const ed = await er.json()
-        if (ed.explanation) { setExplanation(ed.explanation); setExplanationDepth(ed.depth ?? 'beginner') }
-      } catch { /* explanation not required */ }
-    }
+    try {
+      const er = await fetch(`/api/explanation?skill_id=${task.skill_id}&attempt_id=${d.attempt_id}`)
+      const ed = await er.json()
+      if (ed.explanation) { setExplanation(ed.explanation); setExplanationDepth(ed.depth ?? 'beginner') }
+    } catch { /* continue without an explanation */ }
+    finally { setExplanationPending(false) }
   }
 
   async function nextQuestion() {
     if (topicChoiceTier) return
+    if (explanation && !explanationComplete) return
     if (sessionId) loadNext(sessionId)
+  }
+
+  async function completeFeynmanLoop(result: { resolved: boolean; firstExplanation: string; secondExplanation: string }) {
+    if (!sessionId || !task) return
+    await fetch('/api/attempt', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question_id: `${task.skill_id}_feynman_loop`, skill_id: task.skill_id,
+        session_id: sessionId, latency_ms: 5000,
+        client_answer: `${result.firstExplanation}\n---\n${result.secondExplanation}`,
+        correct: result.resolved, difficulty_tier: task.difficulty_tier, question_format: 'explain',
+      }),
+    })
+    track({ name: 'feynman_loop_complete', props: { skill_id: task.skill_id, resolved: result.resolved } })
+    setPhase('explanation')
   }
 
   function continueCurrentTopic() {
@@ -413,6 +344,7 @@ function LearnPageInner() {
     setTopicChoiceTier(null)
     setTopicPicker(null)
     setArcSkillId(topic.id)
+    setArcAttemptCount(0)
     loadNext(sessionId, 'learn', taskLimit, topic.id, bridge)
   }
 
@@ -429,6 +361,7 @@ function LearnPageInner() {
     if (!sessionId) return
     setSessionMode('learn')
     setTaskLimit(10)
+    setArcAttemptCount(0)
     setConsentPrompt(null)
     loadNext(sessionId, 'learn', 10)
   }
@@ -547,6 +480,7 @@ function LearnPageInner() {
       setSessionStats({ correct: 0, total: 0 })
       setSeenSkills([]); setSeenQuestions([])
       setArcSkillId(null); setTopicChoiceTier(null); setSwitchBridge(null)
+      setArcAttemptCount(0)
       fetch('/api/session', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'start' }),
@@ -628,6 +562,25 @@ function LearnPageInner() {
     <div className="min-h-screen bg-c-bg"><Navbar /><Spinner label="Preparing your next question…" /></div>
   )
 
+  if (phase === 'feynman') return (
+    <div className="min-h-screen bg-c-bg">
+      <Navbar />
+      <div className="max-w-2xl mx-auto px-8 py-10">
+        <FeynmanLoop
+          skillLabel={task.skill_label}
+          onComplete={completeFeynmanLoop}
+          onSkip={() => setPhase('explanation')}
+        />
+        <button
+          onClick={endVoluntarily}
+          className="w-full mt-4 py-2 text-c-ghost hover:text-c-faint text-[11px] font-mono transition-colors"
+        >
+          End session
+        </button>
+      </div>
+    </div>
+  )
+
   // ── Active question screen ─────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-c-bg">
@@ -681,40 +634,24 @@ function LearnPageInner() {
           {/* Learning context */}
           {(task.reason === 'active_phase_new' || task.reason === 'varied_practice') && (
             <p className="text-[12px] font-mono text-c-faint mb-1.5">
-              {getMasteryTier(task.p_know)} · weakest in queue
+              {getMasteryTier(task.p_know)} · guided question {arcAttemptCount + 1} · {task.difficulty_tier}
             </p>
           )}
 
           {motivation !== 'neutral' && <MotivationBanner state={motivation} />}
 
-          {!showLearnFirst && (
-            <ModeBar
-              activeMode={currentMode()}
-              hasApply={hasApply}
-              hasReview={hasReview}
-            />
-          )}
+          <ModeBar
+            activeMode={currentMode()}
+            hasApply={hasApply}
+            hasReview={hasReview}
+          />
 
           {/* Skill intuition line — bigger */}
           <p className="text-[13px] text-c-faint italic leading-relaxed">{task.skill_intuition}</p>
         </div>
 
-        {/* ── LEARN PANEL (pre-question) ──────────────────────────────── */}
-        {showLearnFirst && phase === 'question' && (
-          <>
-            <ModeBar activeMode="learn" hasApply={false} hasReview={false} />
-            <LearnPanel
-              task={task}
-              explanation={preExplanation}
-              depth={preDepth}
-              onReady={() => setShowLearnFirst(false)}
-            />
-          </>
-        )}
-
         {/* ── PRACTICE: Question card ─────────────────────────────────── */}
-        {!showLearnFirst && (
-          <>
+        <>
             <div className="p-7 rounded-2xl bg-c-bg2 border border-[var(--border)] mb-5 animate-slide-up">
               <QuestionCard
                 question={task.question}
@@ -755,6 +692,7 @@ function LearnPageInner() {
                     track({ name: 'explanation_viewed', props: { skill_id: task.skill_id, depth: 'build_task' } })
                     setPhase('build_task')
                   }}
+                  onExplanationComplete={() => setExplanationComplete(true)}
                 />
               </div>
             )}
@@ -772,19 +710,29 @@ function LearnPageInner() {
               )}
               {isRevealed && (
                 <div className="space-y-2.5">
-                  {feedback?.correct && phase === 'revealing' && explanation && (
+                  {phase === 'revealing' && explanation && (
                     <button
                       onClick={() => setPhase('explanation')}
                       className="w-full py-3.5 rounded-xl border border-c-purple/30 bg-c-purple/[0.06] text-c-purple text-[14px] hover:bg-c-purple/10 transition-all"
                     >
-                      {hasApply
-                        ? 'See explanation + build task →'
-                        : hasReview
-                        ? 'See explanation + explain back →'
-                        : 'See explanation →'}
+                      Explore why, one idea at a time →
                     </button>
                   )}
-                  {topicChoiceTier && sessionMode === 'learn' ? (
+                  {phase === 'revealing' && explanationPending && (
+                    <p className="py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-c-faint">
+                      Preparing the next building block…
+                    </p>
+                  )}
+                  {explanationComplete && hasReview && (
+                    <button
+                      onClick={() => setPhase('feynman')}
+                      className="w-full py-3 rounded-xl border border-c-blue/30 bg-c-blue/[0.06] text-c-blue text-[13px] hover:bg-c-blue/10 transition-all"
+                    >
+                      <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-c-blue/60 mr-2">optional</span>
+                      Teach it with the Feynman Loop →
+                    </button>
+                  )}
+                  {((phase === 'revealing' && !explanation && !explanationPending) || explanationComplete) && (topicChoiceTier && sessionMode === 'learn' ? (
                     <div className="rounded-xl border border-c-purple/25 bg-c-purple/[0.06] p-4">
                       <p className="text-[15px] text-c-text mb-1">
                         You’re now {topicChoiceTier} in {task.skill_label}.
@@ -814,26 +762,23 @@ function LearnPageInner() {
                     >
                       Next question →
                     </button>
-                  )}
+                  ))}
                 </div>
               )}
             </div>
-          </>
-        )}
+        </>
 
         {/* Session counter */}
-        {!showLearnFirst && (
-          <p className="text-center text-[12px] text-c-ghost mt-5 font-mono">
-            {sessionStats.correct}/{sessionStats.total} correct this session
-            {' · '}
-            <button
-              className="underline underline-offset-2 hover:text-c-faint transition-colors"
-              onClick={() => router.push('/dashboard')}
-            >
-              end session
-            </button>
-          </p>
-        )}
+        <p className="text-center text-[12px] text-c-ghost mt-5 font-mono">
+          {sessionStats.correct}/{sessionStats.total} correct this session
+          {' · '}
+          <button
+            className="underline underline-offset-2 hover:text-c-faint transition-colors"
+            onClick={endVoluntarily}
+          >
+            end session
+          </button>
+        </p>
       </div>
     </div>
   )

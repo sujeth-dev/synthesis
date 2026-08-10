@@ -26,11 +26,13 @@ import {
   CURRENT_TOPIC_MINIMUM,
   DEFAULT_REVIEW_OFFER_SIZE,
   MAX_REVIEW_ITEMS,
+  MIN_GUIDED_ARC_QUESTIONS,
   SESSION_TASK_CAP,
   canChooseTopicSwitch,
   canSelectReview,
   getSessionGate,
   planReviewDebt,
+  selectArcDifficulty,
   selectNextTask,
 } from '@/lib/session/engine'
 import type { LearnerSkillState, MotivationState, Question } from '@/types'
@@ -149,8 +151,22 @@ describe('session topic arc memory', () => {
   })
 
   it('unlocks the stay-or-switch choice exactly at the threshold', () => {
-    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD - 0.01)).toBe(false)
-    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD)).toBe(true)
-    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD + 0.01)).toBe(true)
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD - 0.01, MIN_GUIDED_ARC_QUESTIONS)).toBe(false)
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD, MIN_GUIDED_ARC_QUESTIONS - 1)).toBe(false)
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD, MIN_GUIDED_ARC_QUESTIONS)).toBe(true)
+    expect(canChooseTopicSwitch(ARC_SWITCH_THRESHOLD + 0.01, MIN_GUIDED_ARC_QUESTIONS + 1)).toBe(true)
+  })
+
+  it('moves through easier, medium, and harder questions one successful step at a time', () => {
+    expect(selectArcDifficulty([])).toBe('review')
+    expect(selectArcDifficulty([{ difficulty_tier: 'review', correct: true }])).toBe('same')
+    expect(selectArcDifficulty([{ difficulty_tier: 'same', correct: true }])).toBe('harder')
+    expect(selectArcDifficulty([{ difficulty_tier: 'harder', correct: true }])).toBe('harder')
+  })
+
+  it('steps difficulty down after an error without leaving the current skill', () => {
+    expect(selectArcDifficulty([{ difficulty_tier: 'harder', correct: false }])).toBe('same')
+    expect(selectArcDifficulty([{ difficulty_tier: 'same', correct: false }])).toBe('review')
+    expect(selectArcDifficulty([{ difficulty_tier: 'review', correct: false }])).toBe('review')
   })
 })

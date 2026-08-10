@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Explanation, ExplanationDepth } from '@/types'
 import { mdToHtml } from '@/components/ui/mdToHtml'
 import { ProgressiveExplanation } from '@/components/learning/ProgressiveExplanation'
@@ -59,18 +59,25 @@ interface Props {
   depth?:          ExplanationDepth
   onExplainBack?:  (text: string) => void
   onBuildTaskDone?: () => void
+  onExplanationComplete?: () => void
 }
 
-export function ExplanationPanel({ explanation: e, depth, onExplainBack, onBuildTaskDone }: Props) {
+export function ExplanationPanel({ explanation: e, depth, onExplainBack, onBuildTaskDone, onExplanationComplete }: Props) {
   const [sub,         setSub]        = useState<Sub>('body')
   const [explainText, setExplainText] = useState('')
   const [buildDone,   setBuildDone]  = useState(false)
+  const [bodyComplete, setBodyComplete] = useState(false)
+
+  useEffect(() => {
+    setSub('body')
+    setBodyComplete(false)
+  }, [e.skill_id, e.depth])
 
   const tabs: [Sub, string][] = [
     ['body', 'Explanation'],
-    ...(e.real_world_usage    ? [['real_world',   'Used in practice'] as [Sub, string]] : []),
-    ...(e.build_task          ? [['build_task',   'Build it']         as [Sub, string]] : []),
-    ...(e.explain_back_prompt ? [['explain_back', 'Explain it back']  as [Sub, string]] : []),
+    ...(bodyComplete && e.real_world_usage    ? [['real_world',   'Used in practice'] as [Sub, string]] : []),
+    ...(bodyComplete && e.build_task          ? [['build_task',   'Build it']         as [Sub, string]] : []),
+    ...(bodyComplete && e.explain_back_prompt ? [['explain_back', 'Explain it back']  as [Sub, string]] : []),
   ]
 
   return (
@@ -116,9 +123,15 @@ export function ExplanationPanel({ explanation: e, depth, onExplainBack, onBuild
         {/* Main explanation */}
         {sub === 'body' && (
           <div>
-            <ProgressiveExplanation body={e.body} />
+            <ProgressiveExplanation
+              body={e.body}
+              onComplete={() => {
+                setBodyComplete(true)
+                onExplanationComplete?.()
+              }}
+            />
 
-            {e.common_mistakes && e.common_mistakes.length > 0 && (
+            {bodyComplete && e.common_mistakes && e.common_mistakes.length > 0 && (
               <div className="mt-5 pt-4 border-t border-[var(--border)]">
                 <p className="text-[11px] font-mono text-c-faint uppercase tracking-[0.14em] mb-3">
                   Common mistakes
@@ -134,7 +147,7 @@ export function ExplanationPanel({ explanation: e, depth, onExplainBack, onBuild
               </div>
             )}
 
-            {e.mini_exercise && (
+            {bodyComplete && e.mini_exercise && (
               <div className="mt-5 p-4 rounded-xl bg-c-bg3 border border-[var(--border)]">
                 <p className="text-[11px] font-mono text-c-faint uppercase tracking-[0.14em] mb-2">Try it</p>
                 <p className="text-[13px] text-c-muted leading-[1.6]">{e.mini_exercise}</p>

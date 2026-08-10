@@ -6,8 +6,8 @@ import { initSkillState } from '@/lib/bkt'
 import { initSM2, reconcileBktSm2OnLoad } from '@/lib/sm2'
 import { getMotivationState, getAllSkillStates, getReviewSchedules,
          createSession, getSession, endSession,
-         bulkUpsertSkillStates, bulkUpsertReviewSchedules } from '@/lib/db/queries'
-import type { LearnerSkillState, Question, ReviewSchedule, SessionMode } from '@/types'
+         bulkUpsertSkillStates, bulkUpsertReviewSchedules, getSessionBehaviorAttempts } from '@/lib/db/queries'
+import type { DifficultyTier, LearnerSkillState, Question, ReviewSchedule, SessionMode } from '@/types'
 import fs from 'fs'
 import path from 'path'
 
@@ -131,15 +131,30 @@ export async function POST(req: NextRequest) {
         if (qs.length > 0) questionsCache.set(sid, qs)
       }
 
+      const pinnedSkillId = sessionMode === 'learn' && typeof current_skill_id === 'string'
+        ? current_skill_id
+        : undefined
+      const arcHistory = pinnedSkillId
+        ? (await getSessionBehaviorAttempts(user.id, session_id))
+            .filter(attempt =>
+              attempt.skill_id === pinnedSkillId &&
+              !attempt.question_id.endsWith('_explain_back') &&
+              !attempt.question_id.endsWith('_feynman_loop')
+            )
+            .map(attempt => ({
+              correct: attempt.correct,
+              difficulty_tier: attempt.difficulty_tier as DifficultyTier,
+            }))
+        : []
+
       const task = selectNextTask({
         skillStates, reviewSchedules, motivationState: motivation,
         seenSkillsThisSession:      seen_skills,
         seenQuestionIdsThisSession: new Set(seen_question_ids),
         questionsCache,
         mode: sessionMode,
-        currentSkillId: sessionMode === 'learn' && typeof current_skill_id === 'string'
-          ? current_skill_id
-          : undefined,
+        currentSkillId: pinnedSkillId,
+        arcHistory,
       })
 
       if (!task) return NextResponse.json({ task: null, done: true })

@@ -119,4 +119,4 @@ export interface SessionSummary {
   accuracy: number; skills_practiced: string[]; streak_days: number
 }
 
-export type SessionPhase = 'loading' | 'question' | 'revealing' | 'explanation' | 'build_task' | 'explain_back' | 'summary'
+export type SessionPhase = 'loading' | 'question' | 'revealing' | 'explanation' | 'build_task' | 'explain_back' | 'feynman' | 'summary'

@@ -9,7 +9,7 @@ import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
   getMotivationState, upsertMotivationState, insertAttempt,
   incrementSessionCounts, getSession, getAllSkillStates, schedulePhaseReview,
-  getRecentAttemptsForSkill,
+  getRecentAttemptsForSkill, getSessionBehaviorAttempts,
 } from '@/lib/db/queries'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat } from '@/types'
@@ -31,13 +31,16 @@ export async function POST(req: NextRequest) {
 
   // ── Server-side answer verification
   let correct = false
+  const isGuidedReflection = question_format === 'explain' && (
+    question_id.endsWith('_explain_back') || question_id.endsWith('_feynman_loop')
+  )
   try {
     const questions: Question[] = require(`@/../content/questions/by-skill/${skill_id}.json`)
     const q = questions.find(q => q.id === question_id)
-    if (!q) return NextResponse.json({ error: 'Unknown question_id' }, { status: 400 })
+    if (!q && !isGuidedReflection) return NextResponse.json({ error: 'Unknown question_id' }, { status: 400 })
 
-    if (q.format === 'mcq') correct = client_answer === q.correct_option_id
-    else if (q.format === 'fill') {
+    if (q?.format === 'mcq') correct = client_answer === q.correct_option_id
+    else if (q?.format === 'fill') {
       const ans = (client_answer || '').toString().trim().toLowerCase()
       correct = ans === (q.correct_answer || '').trim().toLowerCase() ||
                 (q.keywords || []).some((kw: string) => ans.includes(kw.toLowerCase()))
@@ -147,13 +150,22 @@ export async function POST(req: NextRequest) {
       )
     : null
 
+  const arcAttemptCount = session_id
+    ? (await getSessionBehaviorAttempts(user.id, session_id)).filter(attempt =>
+        attempt.skill_id === skill_id &&
+        !attempt.question_id.endsWith('_explain_back') &&
+        !attempt.question_id.endsWith('_feynman_loop')
+      ).length
+    : 0
+
   return NextResponse.json({
     correct, attempt_id,
     new_p_know: updatedState.p_know,
     mastery_state: updatedState.mastery_state,
     mastery_tier: getMasteryTier(updatedState.p_know),
-    topic_choice_available: canChooseTopicSwitch(updatedState.p_know),
-    explanation_unlocked: correct,
+    topic_choice_available: canChooseTopicSwitch(updatedState.p_know, arcAttemptCount),
+    arc_attempt_count: arcAttemptCount,
+    explanation_unlocked: true,
     motivation: updatedMotivation.state,
     bkt_movement: bktMovement,
   })
