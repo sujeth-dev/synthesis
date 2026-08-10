@@ -77,5 +77,53 @@
     "graph_placement_weight": {
       "p2_math_vectors": 0.9
     }
+  },
+  {
+    "id": "p2_vec_q4",
+    "skill_id": "p2_math_vectors",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What is the magnitude (L2 norm) of the vector [3, 4]?",
+    "options": [
+      { "id": "a", "text": "7" },
+      { "id": "b", "text": "5" },
+      { "id": "c", "text": "12" },
+      { "id": "d", "text": "25" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The L2 norm (Euclidean length) is the square root of the sum of squares: √(3²+4²) = √(9+16) = √25 = 5. Vector norms are used to measure embedding magnitude and to normalise vectors before comparing them.",
+    "graph_placement_weight": { "p2_math_vectors": 1.0 }
+  },
+  {
+    "id": "p2_vec_q5",
+    "skill_id": "p2_math_vectors",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What is [2, -1, 4] + [1, 3, -2]?",
+    "options": [
+      { "id": "a", "text": "[3, 2, 2]" },
+      { "id": "b", "text": "[1, -4, 6]" },
+      { "id": "c", "text": "[2, -3, -8]" },
+      { "id": "d", "text": "[3, 3, 3]" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Vector addition is element-wise: add corresponding components. [2+1, -1+3, 4+(-2)] = [3, 2, 2]. This is exactly how gradient updates work: new_weights = weights + (-learning_rate × gradient), an element-wise vector addition.",
+    "graph_placement_weight": { "p2_math_vectors": 1.0 }
+  },
+  {
+    "id": "p2_vec_q6",
+    "skill_id": "p2_math_vectors",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "In gradient descent, the gradient of the loss function is a vector. Why does the algorithm update weights by moving in the OPPOSITE direction of the gradient vector?",
+    "options": [
+      { "id": "a", "text": "Because the gradient vector points in the direction of steepest increase of the loss, so moving opposite decreases the loss fastest" },
+      { "id": "b", "text": "Because vectors can only be subtracted, never added" },
+      { "id": "c", "text": "Because the gradient vector is always negative" },
+      { "id": "d", "text": "Because moving in the gradient's own direction would leave the loss unchanged" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "The gradient of a function at a point is a vector pointing in the direction of steepest increase. Since training wants to minimise loss, weights are updated as w_new = w_old − learning_rate × gradient — stepping opposite to the gradient vector, the direction of steepest decrease. This single vector fact is the mechanical core of how every neural network learns.",
+    "graph_placement_weight": { "p2_math_vectors": 1.0, "p5_neural_network_basics": 0.4 }
   }
 ]

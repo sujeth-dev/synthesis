@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "In `fact_tail(n, acc=1)`, instead of `n * fact(n-1)` (which needs to wait for the return), we pass the accumulated result as `acc`, making the recursive call the last operation (tail call)."
+  },
+  {
+    "id": "p2_recursion_q7",
+    "skill_id": "p2_recursion",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A decision tree is built with this idea: to build a tree for a dataset, pick the best feature to split on, then build a tree for each resulting subset. Why is this naturally a recursive algorithm?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Because trees are always slower than lists"
+      },
+      {
+        "id": "b",
+        "text": "Because building a tree for a subset is the same problem — build a tree for a dataset — applied to smaller data, with a base case of a subset that's pure enough (or empty) to stop splitting"
+      },
+      {
+        "id": "c",
+        "text": "Because decision trees require a fixed number of loops"
+      },
+      {
+        "id": "d",
+        "text": "Because Python requires recursion for any tree-shaped structure"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Decision tree construction (e.g. CART, ID3) is a textbook example of recursion: build_tree(data) calls build_tree(subset) on each split, with a base case where a node becomes a leaf (data is pure, too small, or a max depth is reached). This recursive structure directly mirrors the tree-shaped data it produces.",
+    "graph_placement_weight": { "p2_recursion": 1.0, "p4_supervised_learning": 0.3 }
+  },
+  {
+    "id": "p2_recursion_q8",
+    "skill_id": "p2_recursion",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Backpropagation computes the gradient of the loss with respect to each layer's weights by starting at the output layer and working backward, where each layer's gradient calculation reuses the gradient already computed for the layer after it. Which recursion concept does this resemble?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A base case with no recursive case at all"
+      },
+      {
+        "id": "b",
+        "text": "Memoisation — each layer's gradient is like a cached subproblem result, reused rather than recomputed from scratch"
+      },
+      {
+        "id": "c",
+        "text": "Infinite recursion with no termination"
+      },
+      {
+        "id": "d",
+        "text": "A recursive call with no base case, since neural networks have no natural stopping point"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Just like memoised recursive Fibonacci reuses fib(n-1)'s cached result instead of recomputing it, backpropagation reuses the gradient already computed at layer L+1 when computing the gradient at layer L, via the chain rule. This reuse is why backprop is efficient rather than recomputing the chain rule from scratch for every single weight.",
+    "graph_placement_weight": { "p2_recursion": 1.0, "p5_neural_network_basics": 0.4 }
   }
 ]

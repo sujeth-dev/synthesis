@@ -77,5 +77,53 @@
     "graph_placement_weight": {
       "p2_dictionaries": 0.9
     }
+  },
+  {
+    "id": "p2_dict_q4",
+    "skill_id": "p2_dictionaries",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code output?\n\nconfig = {'lr': 0.01, 'epochs': 10}\nprint(config.get('batch_size', 32))",
+    "options": [
+      { "id": "a", "text": "32" },
+      { "id": "b", "text": "KeyError" },
+      { "id": "c", "text": "None" },
+      { "id": "d", "text": "10" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": ".get(key, default) returns the default value when the key is missing instead of raising KeyError. Since 'batch_size' isn't in config, it returns 32. This is safer than config['batch_size'] whenever a key might be optional, like reading hyperparameters that have sensible defaults.",
+    "graph_placement_weight": { "p2_dictionaries": 1.0 }
+  },
+  {
+    "id": "p2_dict_q5",
+    "skill_id": "p2_dictionaries",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code print?\n\nscores = {'Alice': 90, 'Bob': 85}\nfor name, score in scores.items():\n    print(name, score)",
+    "options": [
+      { "id": "a", "text": "Alice 90\nBob 85" },
+      { "id": "b", "text": "('Alice', 90)\n('Bob', 85)" },
+      { "id": "c", "text": "90 Alice\n85 Bob" },
+      { "id": "d", "text": "AliceBob 90 85" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": ".items() yields (key, value) tuples, and unpacking them into name, score gives each pair directly, so print(name, score) prints them space-separated. Dictionaries preserve insertion order since Python 3.7, so 'Alice' prints before 'Bob'.",
+    "graph_placement_weight": { "p2_dictionaries": 1.0 }
+  },
+  {
+    "id": "p2_dict_q6",
+    "skill_id": "p2_dictionaries",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A bag-of-words model counts word frequency in a document using a dictionary called counts. Which line correctly increments the count for a word that may or may not already be a key?",
+    "options": [
+      { "id": "a", "text": "counts[word] += 1" },
+      { "id": "b", "text": "counts[word] = counts.get(word, 0) + 1" },
+      { "id": "c", "text": "counts.add(word)" },
+      { "id": "d", "text": "counts[word] == counts[word] + 1" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "If word isn't already a key, counts[word] += 1 raises a KeyError because it tries to read counts[word] before it exists. counts.get(word, 0) safely returns 0 for a first-time word, so adding 1 correctly starts the count at 1. This counting dictionary is the first step in building a bag-of-words feature vector — once the vocabulary is fixed in order, the dictionary's values become the numbers in an ML input vector.",
+    "graph_placement_weight": { "p2_dictionaries": 1.0, "p2_math_vectors": 0.3 }
   }
 ]

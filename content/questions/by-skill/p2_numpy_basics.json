@@ -62,5 +62,37 @@
     "correct_option_id": "b",
     "explanation_after": "A scalar is 0D (single number). A vector is 1D. A matrix is 2D. A tensor is the general term for N-dimensional arrays. PyTorch's core object is a Tensor — essentially NumPy with GPU support and automatic differentiation.",
     "graph_placement_weight": { "p2_numpy_basics": 0.8, "p5_neural_network_basics": 0.3 }
+  },
+  {
+    "id": "p2_np_q5",
+    "skill_id": "p2_numpy_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code output?\n\nimport numpy as np\na = np.array([[1, 2, 3], [4, 5, 6]])\nb = np.array([10, 20, 30])\nprint(a + b)",
+    "options": [
+      { "id": "a", "text": "[[11, 22, 33], [14, 25, 36]]" },
+      { "id": "b", "text": "Error — shapes don't match" },
+      { "id": "c", "text": "[[11, 12, 13], [14, 15, 16]]" },
+      { "id": "d", "text": "[[10, 20, 30], [10, 20, 30]]" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "NumPy broadcasting stretches the smaller array (shape (3,)) across each row of the larger array (shape (2,3)) without actually copying data, adding it element-wise to every row. Broadcasting is what lets you add a bias vector to every row of a batch of activations in a neural network without writing an explicit loop.",
+    "graph_placement_weight": { "p2_numpy_basics": 1.0 }
+  },
+  {
+    "id": "p2_np_q6",
+    "skill_id": "p2_numpy_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why does training a neural network on a batch of 256 images at once (as a single (256, 784) array) run dramatically faster than looping through the 256 images one at a time in Python?",
+    "options": [
+      { "id": "a", "text": "Because batching skips some of the images to save time" },
+      { "id": "b", "text": "Because a vectorised array operation runs as optimised, parallelised low-level code, avoiding the overhead of 256 separate Python-level loop iterations" },
+      { "id": "c", "text": "Because a batch of 256 images takes up less memory than 256 individual images" },
+      { "id": "d", "text": "Because Python automatically converts loops into batches with no other benefit" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Each iteration of a Python for-loop carries interpreter overhead. A vectorised operation on a (256, 784) array dispatches a single call into optimised C/CUDA code that processes all 256 rows in parallel, especially on a GPU. This is exactly why deep learning trains on batches — it's not just a stability trick, it's what makes the underlying matrix math fast enough to train at all.",
+    "graph_placement_weight": { "p2_numpy_basics": 1.0, "p5_neural_network_basics": 0.3 }
   }
 ]

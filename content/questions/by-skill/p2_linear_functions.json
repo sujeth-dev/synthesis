@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "When features are correlated (e.g. 'size_sqft' and 'size_m2'), the model can't determine which one explains the outcome. Coefficients become unstable — small data changes cause wild swings. Variance Inflation Factor (VIF) detects this."
+  },
+  {
+    "id": "p2_linear_functions_q7",
+    "skill_id": "p2_linear_functions",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A neural network stacks 3 linear layers with no activation function in between: y = W3(W2(W1 x)). What is true about this network's overall function from x to y?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It can represent complex non-linear relationships, same as if activation functions were used"
+      },
+      {
+        "id": "b",
+        "text": "It's mathematically equivalent to a single linear function of x — multiplying by W3, W2, W1 in sequence is the same as multiplying by one combined matrix W = W3 W2 W1"
+      },
+      {
+        "id": "c",
+        "text": "It runs three times as fast as a single linear layer"
+      },
+      {
+        "id": "d",
+        "text": "Each layer must have the same number of neurons for this to work"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Composing linear functions is still linear: y = W3(W2(W1 x)) = (W3 W2 W1) x = Wx for some single combined matrix W. No matter how many linear layers you stack, the result collapses to one linear function. This is exactly why neural networks insert non-linear activation functions (ReLU, sigmoid, etc.) between layers — without them, a 100-layer network is no more expressive than a single linear layer.",
+    "graph_placement_weight": { "p2_linear_functions": 1.0, "p5_neural_network_basics": 0.4 }
+  },
+  {
+    "id": "p2_linear_functions_q8",
+    "skill_id": "p2_linear_functions",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A single artificial neuron computes z = w·x + b before applying an activation function. How does this relate to the linear function y = mx + b you already know from algebra?",
+    "options": [
+      {
+        "id": "a",
+        "text": "They're unrelated — neurons use a completely different kind of math"
+      },
+      {
+        "id": "b",
+        "text": "It's the exact same structure: w (weight) plays the role of the slope m, and b (bias) plays the role of the intercept — just extended to multiple input features via a dot product instead of a single x"
+      },
+      {
+        "id": "c",
+        "text": "w must always equal m exactly for this to work"
+      },
+      {
+        "id": "d",
+        "text": "Neurons never use addition, only multiplication"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "With one input feature, z = wx + b IS y = mx + b. With multiple features, the weight becomes a vector w and wx becomes a dot product w·x, but the role is identical: each weight scales its input like a slope, and the bias shifts the output like an intercept. A neural network's first layer is literally a bundle of linear functions, one per neuron, before non-linear activations are applied.",
+    "graph_placement_weight": { "p2_linear_functions": 1.0, "p5_neural_network_basics": 0.4 }
   }
 ]

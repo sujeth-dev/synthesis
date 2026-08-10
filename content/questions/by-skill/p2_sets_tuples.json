@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Tuple unpacking: `x, y = (3, 4)` assigns 3 to x and 4 to y. Python also supports extended unpacking: `first, *rest = (1, 2, 3, 4)` gives first=1 and rest=[2,3,4]."
+  },
+  {
+    "id": "p2_sets_tuples_q7",
+    "skill_id": "p2_sets_tuples",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "After splitting a dataset into train and test sets, you want to verify there's no data leakage — that no example ID appears in both. Which check correctly verifies this using sets of example IDs?",
+    "options": [
+      {
+        "id": "a",
+        "text": "len(train_ids) == len(test_ids)"
+      },
+      {
+        "id": "b",
+        "text": "len(set(train_ids) & set(test_ids)) == 0 — the intersection of the two ID sets must be empty"
+      },
+      {
+        "id": "c",
+        "text": "set(train_ids) | set(test_ids) == set(train_ids)"
+      },
+      {
+        "id": "d",
+        "text": "train_ids == test_ids"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The intersection (&) of the train and test ID sets gives exactly the IDs that appear in both. If that intersection is empty, there's no overlap — no data leakage. This set-based check, fast thanks to O(1) hash lookups, is standard practice before trusting any model evaluation.",
+    "graph_placement_weight": { "p2_sets_tuples": 1.0, "p4_supervised_learning": 0.3 }
+  },
+  {
+    "id": "p2_sets_tuples_q8",
+    "skill_id": "p2_sets_tuples",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "You want to use a coordinate pair like (3, 5) as a key in a dictionary that maps grid positions to values — a common pattern for representing states in reinforcement learning. Why must you use a tuple (3, 5) rather than a list [3, 5] for this?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tuples take less memory than lists"
+      },
+      {
+        "id": "b",
+        "text": "Dictionary keys must be hashable, and tuples are hashable (immutable) while lists are not"
+      },
+      {
+        "id": "c",
+        "text": "Lists cannot contain two numbers"
+      },
+      {
+        "id": "d",
+        "text": "Python does not allow lists inside dictionaries at all"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Dictionary keys (and set elements) must be hashable — their hash value must never change. Tuples are immutable, so they're hashable and valid as keys. Lists are mutable, so Python disallows them as keys, raising 'unhashable type: list'. This tuple-as-key pattern is exactly how reinforcement learning Q-tables map (state, action) pairs to values.",
+    "graph_placement_weight": { "p2_sets_tuples": 1.0, "p2_dictionaries": 0.3 }
   }
 ]

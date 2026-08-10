@@ -77,5 +77,53 @@
     "graph_placement_weight": {
       "p2_lists_arrays": 0.9
     }
+  },
+  {
+    "id": "p2_list_q4",
+    "skill_id": "p2_lists_arrays",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code output?\n\nscores = [10, 20, 30, 40, 50]\nprint(scores[-2])",
+    "options": [
+      { "id": "a", "text": "50" },
+      { "id": "b", "text": "40" },
+      { "id": "c", "text": "30" },
+      { "id": "d", "text": "-2" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Negative indices count from the end: -1 is the last element (50), -2 is the second-to-last (40). Negative indexing is a quick way to grab recent items without knowing the list's length.",
+    "graph_placement_weight": { "p2_lists_arrays": 1.0 }
+  },
+  {
+    "id": "p2_list_q5",
+    "skill_id": "p2_lists_arrays",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What does this code output?\n\nnums = [1, 2, 3, 4, 5, 6]\nprint(nums[1:4])",
+    "options": [
+      { "id": "a", "text": "[2, 3, 4]" },
+      { "id": "b", "text": "[2, 3, 4, 5]" },
+      { "id": "c", "text": "[1, 2, 3, 4]" },
+      { "id": "d", "text": "[2, 3]" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Slicing with [start:stop] includes the start index and excludes the stop index. nums[1:4] grabs indices 1, 2, 3 — values 2, 3, 4. Slicing like this is exactly how you'd pull out a mini-batch from a larger dataset by index range.",
+    "graph_placement_weight": { "p2_lists_arrays": 1.0 }
+  },
+  {
+    "id": "p2_list_q6",
+    "skill_id": "p2_lists_arrays",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A machine learning model expects each input to be a feature vector of exactly 10 numbers (a Python list of length 10). Why does passing a list of length 8 cause the model to fail?",
+    "options": [
+      { "id": "a", "text": "Because lists longer than 8 items are not allowed" },
+      { "id": "b", "text": "Because the model's weights are sized for exactly 10 inputs — a mismatched length breaks the dot product between the feature vector and the weight vector" },
+      { "id": "c", "text": "Because Python lists cannot hold fewer than 10 items" },
+      { "id": "d", "text": "Because the model automatically pads short lists, so it should work fine" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A model's weights are fixed at training time to match a specific number of input features. Each weight multiplies one corresponding feature in the dot product w·x, so a length mismatch leaves some weights with nothing to multiply — the shapes must match exactly. 'Shape mismatch' errors like this are one of the most common bugs in real ML code, and they trace directly back to a feature list not having the length the model expects.",
+    "graph_placement_weight": { "p2_lists_arrays": 1.0, "p2_math_vectors": 0.4 }
   }
 ]

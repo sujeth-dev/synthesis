@@ -77,5 +77,53 @@
     "graph_placement_weight": {
       "p2_big_o_basics": 0.9
     }
+  },
+  {
+    "id": "p2_bigo_q4",
+    "skill_id": "p2_big_o_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "This function has a nested loop:\n\ndef pairs(items):\n    count = 0\n    for i in items:\n        for j in items:\n            count += 1\n    return count\n\nWhat is its time complexity in terms of n = len(items)?",
+    "options": [
+      { "id": "a", "text": "O(n)" },
+      { "id": "b", "text": "O(n log n)" },
+      { "id": "c", "text": "O(n²)" },
+      { "id": "d", "text": "O(2n)" }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "The inner loop runs n times for every one of the n iterations of the outer loop, giving n × n = n² total operations — O(n²). Nested loops over the same data are the classic pattern that produces quadratic time.",
+    "graph_placement_weight": { "p2_big_o_basics": 1.0 }
+  },
+  {
+    "id": "p2_bigo_q5",
+    "skill_id": "p2_big_o_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Which of these operations is O(log n)?",
+    "options": [
+      { "id": "a", "text": "Looking up a value by key in a dictionary" },
+      { "id": "b", "text": "Finding an element in a sorted array using binary search" },
+      { "id": "c", "text": "Checking every element of an unsorted list one by one" },
+      { "id": "d", "text": "Multiplying two n×n matrices the naive way" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Binary search halves the search space at every step, giving O(log n). Dictionary lookup is O(1), a linear scan is O(n), and naive matrix multiplication is O(n³). Recognising log n growth matters because it barely increases even as the data doubles.",
+    "graph_placement_weight": { "p2_big_o_basics": 1.0 }
+  },
+  {
+    "id": "p2_bigo_q6",
+    "skill_id": "p2_big_o_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A k-nearest-neighbours (k-NN) classifier makes a prediction by computing the distance from the query point to all n points in the training set, then picking the closest k. What is the time complexity of a single prediction, and why does this matter for deploying k-NN on a dataset of 10 million examples?",
+    "options": [
+      { "id": "a", "text": "O(1) — k-NN just looks up the answer instantly" },
+      { "id": "b", "text": "O(log n) — like binary search, distances can be found by halving the data" },
+      { "id": "c", "text": "O(n) — every prediction scans all training data, so predictions get slower as the dataset grows, unlike models that learn a fixed set of parameters" },
+      { "id": "d", "text": "O(n²) — because every point is compared to every other point" }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Unlike a trained model with a fixed number of parameters (e.g. logistic regression: O(d) per prediction regardless of training set size), k-NN keeps the entire training set and computes a distance to every point at prediction time — O(n) per query. With 10 million examples, every single prediction becomes slow. This is why Big-O reasoning directly drives the choice between 'lazy' algorithms like k-NN and 'eager' trained models in production systems.",
+    "graph_placement_weight": { "p2_big_o_basics": 1.0, "p4_supervised_learning": 0.3 }
   }
 ]

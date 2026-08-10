@@ -77,5 +77,53 @@
     "graph_placement_weight": {
       "p2_problem_solving": 0.9
     }
+  },
+  {
+    "id": "p2_ps_q4",
+    "skill_id": "p2_problem_solving",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Before building a system to recommend products to users, which question is MOST important to answer first?",
+    "options": [
+      { "id": "a", "text": "Which recommendation algorithm has the most GitHub stars?" },
+      { "id": "b", "text": "What does 'a good recommendation' mean here — clicks? purchases? time on page — since that decides how you'll measure success" },
+      { "id": "c", "text": "How many lines of code will the final system have?" },
+      { "id": "d", "text": "Which programming language is fastest?" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Before any technical choice, you must define the goal in measurable terms. Without a clear definition of success, you can't tell if any solution — simple or sophisticated — is actually working.",
+    "graph_placement_weight": { "p2_problem_solving": 1.0 }
+  },
+  {
+    "id": "p2_ps_q5",
+    "skill_id": "p2_problem_solving",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Your data pipeline crashes on a dataset of 1 million rows, but you don't know which row is causing it. What is the most effective problem-solving strategy?",
+    "options": [
+      { "id": "a", "text": "Rewrite the entire pipeline from scratch" },
+      { "id": "b", "text": "Narrow it down by testing on progressively smaller subsets of the data to isolate which rows trigger the failure" },
+      { "id": "c", "text": "Ignore the error and skip that step" },
+      { "id": "d", "text": "Add more RAM to the machine" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Isolating a problem by repeatedly narrowing the search space is far faster than blind rewriting or guessing. This 'bisection' debugging strategy is a divide-and-conquer approach, the same halving logic that makes binary search efficient.",
+    "graph_placement_weight": { "p2_problem_solving": 1.0 }
+  },
+  {
+    "id": "p2_ps_q6",
+    "skill_id": "p2_problem_solving",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "You're asked to 'build an AI that predicts customer churn.' Applying decomposition, which is the correct order of sub-problems to tackle?",
+    "options": [
+      { "id": "a", "text": "Deploy a model, then collect data, then check if it works" },
+      { "id": "b", "text": "Define what 'churn' means and gather labelled data, explore and clean the data, choose and train a model, evaluate against a clear metric, then deploy and monitor" },
+      { "id": "c", "text": "Pick the fanciest neural network architecture, then figure out the problem later" },
+      { "id": "d", "text": "Write the user interface first, then decide what the model should predict" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "This is the standard ML project pipeline, and it's decomposition applied at the project level: a vague goal ('predict churn') is broken into ordered sub-problems, each with a clear deliverable. Jumping straight to model architecture or deployment before defining the problem and data is one of the most common mistakes in real-world ML projects.",
+    "graph_placement_weight": { "p2_problem_solving": 1.0, "p4_supervised_learning": 0.3 }
   }
 ]

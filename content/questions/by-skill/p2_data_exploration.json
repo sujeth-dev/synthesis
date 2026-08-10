@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Correlation gives a global average relationship. SHAP gives a per-instance, directional decomposition: for THIS specific passenger, 'female' pushed survival probability up by 0.3, 'pclass=3' pushed it down by 0.2. Dependence plots then reveal non-linear interactions — how one feature's effect changes with another feature's value."
+  },
+  {
+    "id": "p2_data_exploration_q7",
+    "skill_id": "p2_data_exploration",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "During EDA, you discover your binary classification target is imbalanced: 98% class 0, 2% class 1. Which downstream modelling decision does this discovery directly justify?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ignoring accuracy as the primary metric in favour of precision, recall, or F1, and considering techniques like class weighting or resampling"
+      },
+      {
+        "id": "b",
+        "text": "Doubling the size of the dataset to fix the imbalance automatically"
+      },
+      {
+        "id": "c",
+        "text": "Switching to unsupervised learning since the labels are unreliable"
+      },
+      {
+        "id": "d",
+        "text": "Removing the minority class entirely to simplify the problem"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "With 98/2 imbalance, a model predicting 'class 0' for everything scores 98% accuracy while being useless. EDA surfacing this imbalance is what should trigger choosing metrics sensitive to the minority class (precision/recall/F1/AUC) and considering class weights, oversampling (e.g. SMOTE), or undersampling during training — decisions made before modelling because EDA revealed them.",
+    "graph_placement_weight": { "p2_data_exploration": 1.0, "p4_supervised_learning": 0.4 }
+  },
+  {
+    "id": "p2_data_exploration_q8",
+    "skill_id": "p2_data_exploration",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "During EDA you compute the mean and standard deviation of a feature using the ENTIRE dataset (train + test combined), then use those statistics to standardise all the data before splitting into train/test. What is wrong with this workflow?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nothing — mean and std are properties of the data, not the model, so this is safe"
+      },
+      {
+        "id": "b",
+        "text": "It causes data leakage: information from the test set, via the combined mean/std, influences preprocessing applied to the training set, making evaluation results overly optimistic"
+      },
+      {
+        "id": "c",
+        "text": "It makes training slower"
+      },
+      {
+        "id": "d",
+        "text": "Standardisation should never be used before splitting, only after"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Any statistic computed for preprocessing (mean, std, min/max, PCA components, imputation values) must be fit only on the training set, then applied — transform, not fit — to the test set. Fitting on combined data lets test-set information subtly leak into the numbers used to prepare training data, inflating test performance in a way that won't hold up on truly new, unseen data. This is one of the most common and dangerous mistakes in real ML pipelines.",
+    "graph_placement_weight": { "p2_data_exploration": 1.0, "p4_supervised_learning": 0.4 }
   }
 ]

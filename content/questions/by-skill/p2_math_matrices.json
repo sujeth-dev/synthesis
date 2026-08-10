@@ -77,5 +77,53 @@
     "graph_placement_weight": {
       "p2_math_matrices": 0.9
     }
+  },
+  {
+    "id": "p2_mat_q4",
+    "skill_id": "p2_math_matrices",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "What is the shape of the transpose of a matrix with shape (5, 3)?",
+    "options": [
+      { "id": "a", "text": "(5, 3)" },
+      { "id": "b", "text": "(3, 5)" },
+      { "id": "c", "text": "(8,)" },
+      { "id": "d", "text": "(15,)" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Transposing swaps rows and columns: a (5, 3) matrix becomes (3, 5). Transposes are used constantly in ML \u2014 for example to align dimensions for multiplication, as in X @ W.T inside a linear layer.",
+    "graph_placement_weight": { "p2_math_matrices": 1.0 }
+  },
+  {
+    "id": "p2_mat_q5",
+    "skill_id": "p2_math_matrices",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "For two (2\u00d72) matrices A and B, which correctly distinguishes element-wise multiplication from matrix multiplication?",
+    "options": [
+      { "id": "a", "text": "A * B multiplies corresponding elements; A @ B computes the matrix product (row\u00b7column dot products)" },
+      { "id": "b", "text": "A * B and A @ B always give the same result for square matrices" },
+      { "id": "c", "text": "A * B is matrix multiplication; A @ B is element-wise" },
+      { "id": "d", "text": "Neither operation is defined for matrices" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "* (or np.multiply) performs Hadamard (element-wise) multiplication \u2014 same-shape arrays, each entry multiplied independently. @ (or np.matmul) performs true matrix multiplication \u2014 row-by-column dot products. Confusing the two is one of the most common bugs when implementing neural network layers by hand.",
+    "graph_placement_weight": { "p2_math_matrices": 1.0 }
+  },
+  {
+    "id": "p2_mat_q6",
+    "skill_id": "p2_math_matrices",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A dataset has 1000 examples, each with 20 features, stored as matrix X with shape (1000, 20). A linear regression model has weights w with shape (20, 1). What does X @ w compute, and what is its shape?",
+    "options": [
+      { "id": "a", "text": "One single prediction for the whole dataset; shape (1,)" },
+      { "id": "b", "text": "A prediction for every example in one matrix multiplication; shape (1000, 1)" },
+      { "id": "c", "text": "It is invalid because X has more rows than w" },
+      { "id": "d", "text": "The sum of all features; shape (20, 1)" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "(1000\u00d720) @ (20\u00d71) = (1000\u00d71) \u2014 the inner 20s cancel, leaving one predicted value per example. This is the entire point of representing a dataset as a matrix: one matrix multiplication computes all 1000 predictions (1000 dot products) simultaneously, instead of looping over each row in Python.",
+    "graph_placement_weight": { "p2_math_matrices": 1.0, "p2_big_o_basics": 0.3 }
   }
 ]

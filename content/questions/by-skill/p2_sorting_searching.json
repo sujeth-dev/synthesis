@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "The `key=` parameter accepts any callable. `sorted(students, key=lambda s: s.grade)` sorts by the `.grade` attribute. Python calls `key(item)` once per item and sorts by those results."
+  },
+  {
+    "id": "p2_sorting_searching_q7",
+    "skill_id": "p2_sorting_searching",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A recommendation system computes a similarity score between a user and 5 million products, then needs to return the top 10 highest-scoring products. Why would a production system use a heap-based top-k selection instead of sorting all 5 million scores?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sorting all 5 million scores is O(n log n), while a heap-based top-k approach is O(n log k) — with k=10 this is dramatically fewer comparisons at scale"
+      },
+      {
+        "id": "b",
+        "text": "Heaps always produce more accurate rankings than sorting"
+      },
+      {
+        "id": "c",
+        "text": "Sorting cannot handle more than 1 million items"
+      },
+      {
+        "id": "d",
+        "text": "Heaps skip computing scores for most products"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A full sort costs O(n log n) over all 5 million scores just to read off the top 10. A size-k heap costs O(n log k); with k=10, log₂10 ≈ 3.3 versus log₂(5,000,000) ≈ 22.3, so the heap does roughly 6-7x fewer comparisons — and the gap widens as n grows. This exact top-k-out-of-millions pattern is why heaps (or approximate nearest-neighbour structures) power real-world recommendation and search systems.",
+    "graph_placement_weight": { "p2_sorting_searching": 1.0, "p2_big_o_basics": 0.3 }
+  },
+  {
+    "id": "p2_sorting_searching_q8",
+    "skill_id": "p2_sorting_searching",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "To build a precision-recall curve for a binary classifier, you evaluate metrics at every possible decision threshold. Why do implementations typically sort the model's predicted probabilities first, rather than testing thresholds in random order?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sorting is required because labels must be alphabetised before evaluation"
+      },
+      {
+        "id": "b",
+        "text": "Once probabilities are sorted, sweeping the threshold through them lets precision and recall be updated incrementally — O(1) per step — instead of recomputing from scratch — O(n) per threshold, O(n²) overall — for every one of the n candidate thresholds"
+      },
+      {
+        "id": "c",
+        "text": "Sorting increases the model's accuracy"
+      },
+      {
+        "id": "d",
+        "text": "It has no effect on performance, it's purely convention"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "With unsorted predictions, recomputing precision/recall from scratch at each of n thresholds costs O(n) per threshold, O(n²) total. Sorting once (O(n log n)) lets you sweep the threshold through the sorted predictions and update true/false positive counts incrementally in O(1) per step — O(n) total after the sort. This is exactly how scikit-learn's precision_recall_curve and roc_curve are implemented efficiently.",
+    "graph_placement_weight": { "p2_sorting_searching": 1.0, "p4_supervised_learning": 0.3 }
   }
 ]

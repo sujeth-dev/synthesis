@@ -160,5 +160,61 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Bootstrap resampling makes no assumptions about the underlying distribution. It works for any statistic (mean, median, correlation) even when the data is not normally distributed."
+  },
+  {
+    "id": "p2_statistics_basics_q7",
+    "skill_id": "p2_statistics_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Before training many ML models, features are standardised using z = (x − mean) / std. Why is this step important when features have very different scales, e.g. 'age' (0–100) and 'income' (0–200,000)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It makes the data look nicer in plots but doesn't affect training"
+      },
+      {
+        "id": "b",
+        "text": "Without it, features with larger raw ranges (like income) can dominate distance-based or gradient-based calculations, even if they're not more informative"
+      },
+      {
+        "id": "c",
+        "text": "It removes outliers automatically"
+      },
+      {
+        "id": "d",
+        "text": "It converts categorical features into numbers"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Standardisation rescales each feature to mean 0, std 1. Without it, a feature like income (range in the hundreds of thousands) can dwarf a feature like age (range 0–100) in distance calculations (k-NN, clustering) or gradient magnitudes (gradient descent), causing the model to implicitly overweight large-scale features regardless of their actual importance.",
+    "graph_placement_weight": { "p2_statistics_basics": 1.0, "p4_supervised_learning": 0.3 }
+  },
+  {
+    "id": "p2_statistics_basics_q8",
+    "skill_id": "p2_statistics_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "You test Model A (91.2% accuracy) against Model B (91.6% accuracy) on the same test set, and a statistical significance test gives p = 0.41 for the difference. What is the correct conclusion?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Model B is definitely better because 91.6 > 91.2"
+      },
+      {
+        "id": "b",
+        "text": "The observed difference is small enough that it could easily arise from random chance — there isn't strong evidence Model B is actually better"
+      },
+      {
+        "id": "c",
+        "text": "The models are 41% similar"
+      },
+      {
+        "id": "d",
+        "text": "You need to retrain Model A"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A high p-value (0.41, far above typical thresholds like 0.05) means that if the two models were truly equally good, a difference this size would be unsurprising due to random sampling in the test set. A small accuracy bump alone doesn't prove one model is genuinely better — this is why rigorous ML evaluation uses significance testing, not just raw metric comparison.",
+    "graph_placement_weight": { "p2_statistics_basics": 1.0, "p4_supervised_learning": 0.3 }
   }
 ]
