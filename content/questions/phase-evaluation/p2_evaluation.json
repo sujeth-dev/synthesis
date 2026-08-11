@@ -1,0 +1,290 @@
+[
+  {
+    "id": "p2_eval_list_remember",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_lists_arrays",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "stem": "What is the index of the first element in a Python list?",
+    "options": [
+      { "id": "a", "text": "1" },
+      { "id": "b", "text": "0" },
+      { "id": "c", "text": "-1" },
+      { "id": "d", "text": "It depends on the list" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Python lists (like most programming languages) are zero-indexed — the first element is at index 0, the second at index 1, and so on."
+  },
+  {
+    "id": "p2_eval_sets_remember",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_sets_tuples",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "stem": "What is the key property that distinguishes a Python set from a list?",
+    "options": [
+      { "id": "a", "text": "A set can only hold strings" },
+      { "id": "b", "text": "A set holds only unique elements and has no defined order" },
+      { "id": "c", "text": "A set is always sorted automatically" },
+      { "id": "d", "text": "A set cannot be modified after creation" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A set automatically removes duplicates and doesn't preserve insertion order (unlike a list). Adding an element already present in the set has no effect."
+  },
+  {
+    "id": "p2_eval_bigo_remember",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_big_o_basics",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "stem": "What does Big-O notation describe?",
+    "options": [
+      { "id": "a", "text": "The exact number of seconds an algorithm takes to run" },
+      { "id": "b", "text": "How an algorithm's running time or memory use grows as input size grows" },
+      { "id": "c", "text": "The number of bugs in a program" },
+      { "id": "d", "text": "The programming language used" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Big-O describes growth rate, not a literal stopwatch time — O(n) means running time scales roughly linearly with input size n, regardless of the exact hardware or language."
+  },
+  {
+    "id": "p2_eval_dict_understand",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_dictionaries",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "stem": "Why is looking up a value by key in a dictionary so much faster than searching for a value in a list?",
+    "options": [
+      { "id": "a", "text": "Dictionaries use a hash table internally, computing where a key lives directly instead of checking every entry one by one" },
+      { "id": "b", "text": "Dictionaries are always smaller than lists" },
+      { "id": "c", "text": "Dictionaries only store numbers, which are faster to compare" },
+      { "id": "d", "text": "There's no real speed difference between the two" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A dictionary hashes each key to compute roughly where its value is stored, so lookup is close to O(1) regardless of size. A list lookup by value has to check entries one at a time — O(n) in the worst case."
+  },
+  {
+    "id": "p2_eval_de_understand",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_data_exploration",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "stem": "Why do data scientists look at a dataset (distributions, missing values, outliers) before building a model on it?",
+    "options": [
+      { "id": "a", "text": "It's a formality with no real effect on the resulting model" },
+      { "id": "b", "text": "Because a model trained on data with unnoticed issues (missing values, outliers, skew) can silently learn the wrong pattern, so understanding the data first catches problems before they become invisible model errors" },
+      { "id": "c", "text": "Because models can only be trained on perfectly clean data, with no exceptions" },
+      { "id": "d", "text": "Because exploration automatically fixes any data quality issues" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Exploration surfaces issues — missing values, extreme outliers, class imbalance — that would otherwise silently bias what the model learns, since the model has no way to know the data was flawed; it just learns whatever pattern is actually there, good or bad."
+  },
+  {
+    "id": "p2_eval_stat_understand",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_statistics_basics",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "stem": "Why can the mean (average) of a dataset be misleading if the data has extreme outliers?",
+    "options": [
+      { "id": "a", "text": "Because the mean is pulled toward extreme values, so it can end up far from where most of the data actually sits" },
+      { "id": "b", "text": "The mean is never affected by outliers" },
+      { "id": "c", "text": "Outliers make the mean impossible to calculate" },
+      { "id": "d", "text": "The mean only works on integers" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A single very large or very small value shifts the mean because every value contributes to the sum. The median (the middle value) is far less sensitive to outliers, which is why it's often reported alongside or instead of the mean for skewed data."
+  },
+  {
+    "id": "p2_eval_vec_apply",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_math_vectors",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "stem": "What is the dot product of vectors [2, 3] and [4, 1]?",
+    "options": [
+      { "id": "a", "text": "6" },
+      { "id": "b", "text": "11" },
+      { "id": "c", "text": "8" },
+      { "id": "d", "text": "[8, 3]" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Dot product multiplies corresponding elements and sums the results: (2×4) + (3×1) = 8 + 3 = 11. The dot product of two vectors is always a single number, not another vector."
+  },
+  {
+    "id": "p2_eval_mat_apply",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_math_matrices",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "stem": "What is the shape of the result when multiplying a (2×3) matrix by a (3×1) matrix?",
+    "options": [
+      { "id": "a", "text": "(2×1)" },
+      { "id": "b", "text": "(3×3)" },
+      { "id": "c", "text": "(2×3)" },
+      { "id": "d", "text": "Undefined — the shapes don't match" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Matrix multiply rule: (m×n) × (n×p) = (m×p). The inner dimensions (3 and 3) match and cancel, leaving the outer dimensions: (2×1)."
+  },
+  {
+    "id": "p2_eval_lf_apply",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_linear_functions",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "stem": "For the linear function y = 3x + 2, what is y when x = 4?",
+    "options": [
+      { "id": "a", "text": "9" },
+      { "id": "b", "text": "12" },
+      { "id": "c", "text": "14" },
+      { "id": "d", "text": "20" }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "y = 3(4) + 2 = 12 + 2 = 14. In machine learning, this exact form (a slope times an input, plus an offset) is the basic shape of a single-feature linear model's prediction."
+  },
+  {
+    "id": "p2_eval_alg_analyze",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_algorithms_intro",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "stem": "An algorithm to find the maximum value in an unsorted list checks every element exactly once and keeps track of the largest seen so far. Why can't this be done any faster than checking every element?",
+    "options": [
+      { "id": "a", "text": "It could be done faster, but nobody has found a way yet" },
+      { "id": "b", "text": "Because the maximum could be anywhere in an unsorted list — skipping any single element risks skipping the actual maximum, so every element must be examined at least once" },
+      { "id": "c", "text": "Computers process lists in a fixed, unavoidable amount of time regardless of size" },
+      { "id": "d", "text": "This algorithm is actually slower than necessary" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "With no prior structure (unsorted), there's no way to rule out any element as a possible maximum without checking it — this is why finding the max in an unsorted list is fundamentally O(n): you must look at every element at least once, no shortcut exists."
+  },
+  {
+    "id": "p2_eval_rec_analyze",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_recursion",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "stem": "This recursive function to sum a list never terminates and eventually crashes. What's wrong?\n\ndef total(nums):\n    return nums[0] + total(nums[1:])",
+    "options": [
+      { "id": "a", "text": "Python cannot sum lists recursively" },
+      { "id": "b", "text": "There is no base case — it never checks for an empty list, so it keeps recursing on shorter and shorter lists past the point where nums[0] is valid" },
+      { "id": "c", "text": "The + operator doesn't work inside recursive functions" },
+      { "id": "d", "text": "nums[1:] is invalid syntax" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Every recursive function needs a base case to stop. This one always tries nums[0], but eventually nums becomes empty and nums[0] raises an IndexError — the fix is `if not nums: return 0` before the recursive line."
+  },
+  {
+    "id": "p2_eval_ss_analyze",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_sorting_searching",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "stem": "Binary search requires the list to already be sorted. Why does binary search fail (give wrong results) on an unsorted list, even though it runs without crashing?",
+    "options": [
+      { "id": "a", "text": "Binary search actually works fine on unsorted lists too" },
+      { "id": "b", "text": "Binary search decides which half to discard by comparing to the middle element — that logic only correctly eliminates half the possibilities if the list is ordered, so on unsorted data it can discard the half that actually contains the target" },
+      { "id": "c", "text": "Binary search only works on numbers, not other data types" },
+      { "id": "d", "text": "Binary search always returns the first element regardless of input" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Binary search's speed comes from safely discarding half the remaining elements each step, which is only valid because sortedness guarantees everything on one side of the middle is smaller/larger. Without that guarantee, the discarded half might silently contain the answer, producing a wrong 'not found' result."
+  },
+  {
+    "id": "p2_eval_prob_evaluate",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_probability_basics",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "stem": "A spam classifier outputs a probability that an email is spam. For a high-stakes work inbox where missing an important email is costly, is it better to set the 'spam' decision threshold at 0.5 (default) or higher (e.g. 0.9), and why?",
+    "options": [
+      { "id": "a", "text": "0.5, because that's always the mathematically correct threshold" },
+      { "id": "b", "text": "Higher (e.g. 0.9), because it makes the classifier only flag emails it's very confident about as spam, reducing the risk of an important email being wrongly hidden — at the cost of letting more borderline spam through" },
+      { "id": "c", "text": "It makes no difference what threshold is chosen" },
+      { "id": "d", "text": "Lower than 0.5, to catch as much spam as possible regardless of consequences" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The threshold is a real design choice, not a fixed constant — raising it trades some spam-catching ability for fewer false positives (real emails wrongly flagged), which is the right tradeoff when missing a real email is more costly than seeing an extra spam message."
+  },
+  {
+    "id": "p2_eval_ps_evaluate",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_problem_solving",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "stem": "Faced with a large, confusing bug, one developer immediately starts randomly changing code to see what happens; another first writes down exactly what they expect vs. what's actually happening, then narrows down where the two diverge. Which approach is generally more effective, and why?",
+    "options": [
+      { "id": "a", "text": "Randomly changing code, because it's faster to just try things" },
+      { "id": "b", "text": "Narrowing down where expected and actual behavior diverge, because it systematically eliminates possibilities rather than relying on luck, and scales to bugs random changes would never stumble onto" },
+      { "id": "c", "text": "Both approaches are equally effective in every situation" },
+      { "id": "d", "text": "Neither approach works; only rewriting the code from scratch works" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Systematic problem decomposition — defining expected vs. actual, then narrowing the gap — scales to complex problems in a way random trial-and-error doesn't; it's the same divide-and-conquer thinking used in binary search or debugging by bisection."
+  },
+  {
+    "id": "p2_eval_np_evaluate",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_numpy_basics",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "stem": "For adding two lists of one million numbers element-by-element, is a Python for-loop or a NumPy vectorized operation (arr1 + arr2) the better choice, and why?",
+    "options": [
+      { "id": "a", "text": "The for-loop, because it gives more precise control over each element" },
+      { "id": "b", "text": "NumPy, because it pushes the loop down into pre-compiled C code operating on contiguous memory, avoiding Python's per-iteration interpreter overhead — dramatically faster at this scale" },
+      { "id": "c", "text": "Both perform identically at any scale" },
+      { "id": "d", "text": "The for-loop, because NumPy cannot handle a million elements" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A Python for-loop pays interpreter overhead on every single iteration. NumPy's vectorized operations run the loop in optimized, compiled C code instead — for a million elements this can be tens to hundreds of times faster, which is exactly why real ML code is built on NumPy/PyTorch rather than raw Python loops."
+  },
+  {
+    "id": "p2_eval_dict_create",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_dictionaries",
+    "bloom_level": "create",
+    "format": "mcq",
+    "stem": "You need to count how many times each word appears in a list of words. Which code correctly builds that word-count dictionary?",
+    "options": [
+      { "id": "a", "text": "counts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1" },
+      { "id": "b", "text": "counts = []\nfor word in words:\n    counts.append(word, 1)" },
+      { "id": "c", "text": "counts = {}\nfor word in words:\n    counts[word] = 1" },
+      { "id": "d", "text": "counts = words.count()" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "counts.get(word, 0) returns the word's current count (or 0 if it's new), and adding 1 correctly increments it each time the word appears. Option (c) looks similar but always resets the count to 1 instead of incrementing — a classic off-by-logic bug."
+  },
+  {
+    "id": "p2_eval_alg_create",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_algorithms_intro",
+    "bloom_level": "create",
+    "format": "mcq",
+    "stem": "You need an algorithm that checks whether a given list of numbers contains any duplicate values. Which approach correctly and efficiently solves this?",
+    "options": [
+      { "id": "a", "text": "Convert the list to a set and compare its length to the original list's length — if they differ, duplicates exist" },
+      { "id": "b", "text": "Sort the list and check if it's still in the same order" },
+      { "id": "c", "text": "Add 1 to every number and check if any are equal" },
+      { "id": "d", "text": "It's impossible to check for duplicates without comparing every pair manually" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A set automatically drops duplicate values, so if converting to a set shrinks the length, the original list had duplicates. This runs in roughly O(n) time — far better than comparing every pair of elements (O(n²))."
+  },
+  {
+    "id": "p2_eval_np_create",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_numpy_basics",
+    "bloom_level": "create",
+    "format": "mcq",
+    "stem": "You have a NumPy array of exam scores and need a new array containing only the scores of 60 or above. Which code correctly builds that?",
+    "options": [
+      { "id": "a", "text": "passing = scores[scores >= 60]" },
+      { "id": "b", "text": "passing = scores.remove(scores < 60)" },
+      { "id": "c", "text": "passing = scores >= 60" },
+      { "id": "d", "text": "passing = scores[0:60]" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "scores >= 60 produces a boolean array (True/False per element), and using that boolean array to index scores[...] returns only the elements where the condition was True — this is NumPy's boolean-mask filtering pattern. Option (c) alone just gives the True/False mask, not the filtered values."
+  }
+]
