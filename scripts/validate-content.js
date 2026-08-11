@@ -81,6 +81,47 @@ if (fs.existsSync(diagFile)) {
 } else {
   warn('Missing diagnostic/questions.json')
 }
+console.log('\nPhase Evaluations')
+const BLOOM_LEVELS = ['remember', 'understand', 'apply', 'analyze', 'evaluate', 'create']
+const MIN_PER_BLOOM_LEVEL = 2
+const skillsByPhase = new Map()
+for (const node of nodes) {
+  if (!skillsByPhase.has(node.phase)) { skillsByPhase.set(node.phase, new Set()) }
+  skillsByPhase.get(node.phase).add(node.id)
+}
+const authoredPhases = ['phase_1_computer_basics', 'phase_2_cs_data', 'phase_3_intro_ai']
+const phaseFileNames = {
+  phase_1_computer_basics: 'p1_evaluation.json',
+  phase_2_cs_data:         'p2_evaluation.json',
+  phase_3_intro_ai:        'p3_evaluation.json',
+}
+let peChecked = 0
+for (const phase of authoredPhases) {
+  const peFile = path.join(CONTENT, 'questions/phase-evaluation', phaseFileNames[phase])
+  if (!fs.existsSync(peFile)) { warn(`Missing phase evaluation: ${phaseFileNames[phase]}`); continue }
+  const qs = loadJSON(peFile)
+  if (!qs) { continue }
+  const validSkillIds = skillsByPhase.get(phase) || new Set()
+  const seenIds = new Set()
+  const countByLevel = new Map(BLOOM_LEVELS.map(l => [l, 0]))
+  for (const q of qs) {
+    if (seenIds.has(q.id)) { err(`${phaseFileNames[phase]}: duplicate question id "${q.id}"`) }
+    seenIds.add(q.id)
+    if (q.phase !== phase) { err(`${phaseFileNames[phase]}: question "${q.id}" has phase "${q.phase}", expected "${phase}"`) }
+    if (!validSkillIds.has(q.skill_id)) { err(`${phaseFileNames[phase]}: question "${q.id}" references unknown/out-of-phase skill_id "${q.skill_id}"`) }
+    if (!BLOOM_LEVELS.includes(q.bloom_level)) { err(`${phaseFileNames[phase]}: question "${q.id}" has invalid bloom_level "${q.bloom_level}"`) }
+    else { countByLevel.set(q.bloom_level, countByLevel.get(q.bloom_level) + 1) }
+    if (q.format !== 'mcq') { err(`${phaseFileNames[phase]}: question "${q.id}" must be format "mcq"`) }
+    if (!Array.isArray(q.options) || q.options.length < 2) { err(`${phaseFileNames[phase]}: question "${q.id}" needs at least 2 options`) }
+    else if (!q.options.some(o => o.id === q.correct_option_id)) { err(`${phaseFileNames[phase]}: question "${q.id}" correct_option_id doesn't match any option`) }
+  }
+  for (const level of BLOOM_LEVELS) {
+    const count = countByLevel.get(level)
+    if (count < MIN_PER_BLOOM_LEVEL) { err(`${phaseFileNames[phase]}: only ${count} "${level}" question(s), needs at least ${MIN_PER_BLOOM_LEVEL}`) }
+  }
+  peChecked++
+}
+ok(`${peChecked} phase evaluation set(s) validated`)
 console.log('\n' + '─'.repeat(50) + '\n')
 if (errors === 0 && warnings === 0) {
   console.log('✅ All checks passed — 0 errors, 0 warnings\n')
