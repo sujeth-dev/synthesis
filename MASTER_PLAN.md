@@ -126,11 +126,11 @@ Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s
 | ID | Status | Task | Depends on |
 |---|---|---|---|
 | BLOOM-1 | done | Define checkable skill-granularity rules (when two sub-concepts = one `skill_id` vs. two) | none |
-| BLOOM-2 | not_started | Add `BloomLevel` type + `PhaseEvaluationQuestion` schema (`src/types/index.ts`) | BLOOM-1 |
-| BLOOM-3 | not_started | Extend `scripts/validate-content.js`: per-phase minimum coverage (2-3 questions per Bloom level) | BLOOM-2 |
-| BLOOM-4 | not_started | Author phase evaluation sets for p1, p2, p3 (~12-18 questions each) + API/UI entry point + results screen, built once against p1 then reused for p2/p3 | BLOOM-2, BLOOM-3 |
-| BLOOM-5 | not_started | ~~Wire `bloom_level` into `engine.ts`'s tier/difficulty selection~~ **Dropped** — with per-phase (not per-question) granularity there's no per-question signal left to bias selection with; superseded by BLOOM-4's results screen instead. | — |
-| BLOOM-6 | not_started | Gate — confirm Phase 2 content authoring (P2-3) authors its own phase evaluation set alongside new content, not as a later retrofit | BLOOM-4, must be done before P2-3 starts |
+| BLOOM-2 | done | Add `BloomLevel` type + `PhaseEvaluationQuestion` schema (`src/types/index.ts`) | BLOOM-1 |
+| BLOOM-3 | done | Extend `scripts/validate-content.js`: per-phase minimum coverage (2-3 questions per Bloom level) | BLOOM-2 |
+| BLOOM-4 | done | Author phase evaluation sets for p1, p2, p3 (18 questions each) + API/UI entry point + results screen, built once against p1 then reused for p2/p3 | BLOOM-2, BLOOM-3 |
+| BLOOM-5 | dropped | ~~Wire `bloom_level` into `engine.ts`'s tier/difficulty selection~~ **Dropped** — with per-phase (not per-question) granularity there's no per-question signal left to bias selection with; superseded by BLOOM-4's results screen instead. | — |
+| BLOOM-6 | done | Gate — confirm Phase 2 content authoring (P2-3) authors its own phase evaluation set alongside new content, not as a later retrofit | BLOOM-4, must be done before P2-3 starts |
 
 **Acceptance per item:** matches its one-line "Do" above; BLOOM-3's acceptance additionally requires `npm run validate` to actually enforce the new checks (fail on violation, not just warn).
 
@@ -249,8 +249,8 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 
 ### P2-3 — Complete Phases 4-8 content, discovery-first
 **Status:** not_started · **Depends on:** BLOOM-6, Phase 1 done
-**Do:** Author remaining JEE Math content (Phases 4-8) via the existing validated pipeline (`content/graph/nodes.json`, `content/questions/by-skill/`), authored discovery-first per `v2/doc/vision/discovery-model.md` §1 (problem/scenario opening, not explanation-first), tagged with `bloom_level`.
-**Acceptance criteria:** `npm run validate` passes with Phases 4-8 populated; spot-check confirms discovery-first framing (problem before explanation) on new content.
+**Do:** ~~Author remaining JEE Math content (Phases 4-8)~~ **Corrected 2026-08-10:** the doc's "JEE Math" framing was stale — the 45 currently-populated skills are a Python → CS fundamentals → intro-ML curriculum, and Phases 4-8's already-stubbed nodes (`p4_data_pipeline`, `p4_supervised_learning`, `p5_neural_network_basics`, `p6_transformers`, `p6_embeddings`, `p6_rag_systems`, `p7_ai_apis`, `p8_system_design_ai` in `content/graph/nodes.json`) confirm this same curriculum continues, not a subject-matter switch. Author these via the existing validated pipeline (`content/graph/nodes.json`, `content/questions/by-skill/`), discovery-first per `v2/doc/vision/discovery-model.md` §1 (problem/scenario opening, not explanation-first). **BLOOM-6 gate:** each newly-completed phase (4, 5, 6, 7, 8) must ship its own `content/questions/phase-evaluation/<phase>_evaluation.json` (~2-3 questions per Bloom level, see BLOOM-4's p1/p2/p3 sets for the pattern) alongside its by-skill content — authored at creation time, not retrofitted later — and be added to `scripts/validate-content.js`'s `authoredPhases` list so the coverage check actually enforces it.
+**Acceptance criteria:** `npm run validate` passes with Phases 4-8 populated, including their phase evaluation sets; spot-check confirms discovery-first framing (problem before explanation) on new content.
 **Required tests:** `npm run validate` is the gate; no unit tests needed for content itself.
 
 **Phase 2 is `done` when:** P2-1 through P2-3 are `done`, `next build` is clean (0 TypeScript errors), `npm run validate` passes.

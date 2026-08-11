@@ -89,6 +89,9 @@ for (const node of nodes) {
   if (!skillsByPhase.has(node.phase)) { skillsByPhase.set(node.phase, new Set()) }
   skillsByPhase.get(node.phase).add(node.id)
 }
+// BLOOM-6 gate: when a Phases 4-8 content pass (P2-3) completes, add that phase here
+// and to phaseFileNames below — its phase evaluation set must ship alongside the
+// by-skill content, not be retrofitted later. See MASTER_PLAN.md's P2-3/BLOOM-6.
 const authoredPhases = ['phase_1_computer_basics', 'phase_2_cs_data', 'phase_3_intro_ai']
 const phaseFileNames = {
   phase_1_computer_basics: 'p1_evaluation.json',
