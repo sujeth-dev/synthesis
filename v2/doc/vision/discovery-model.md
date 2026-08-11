@@ -35,6 +35,8 @@ This is a design pillar, not a bug list — it belongs next to `basic-guide.md` 
 
 This closes Finding 06's gap productively rather than just adding a field: `bloom_level` stops being metadata nobody reads and becomes the thing that literally decides what shows up on screen.
 
+**Note (2026-08-10):** Finding 06's near-term schema prerequisite this section refers to was redirected by human direction — instead of a per-question `bloom_level` tag, it shipped as a per-phase **Phase Evaluation** feature (see `MASTER_PLAN.md`'s BLOOM-2..6): skill/BKT tracking is the micro layer, Bloom's is a macro layer one level up, not a label on individual questions. This section's puzzle-format-by-Bloom-level idea remains a legitimate later-stage vision — it isn't contradicted by the redirection, just not what got built for the near-term ask. It still depends on Composite Puzzles (§5, gated to Phase 3) for the multi-concept puzzle formats described here, and on a possible future per-question tagging pass if this vision is picked up.
+
 ---
 
 ## 3. Masked levels — the metrics still exist, they're just never shown raw

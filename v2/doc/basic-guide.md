@@ -230,12 +230,9 @@ One linear view of everything above, in the order it actually happens. The DKT, 
 - [ ] Remove dead Supabase-migration debris (`scripts/init-db.js`, `scripts/reset-db.js`)
 
 ### Parallel-eligible — Content classification & Bloom's tagging (Finding 06; start anytime, doesn't block or gate Phase 0 per 2026-08-09 decision) **[Promise #7]**
-- [ ] Define explicit, checkable skill-granularity rules (when two sub-concepts are one `skill_id` vs. two)
-- [ ] Add `bloom_level` to the `Question`/`SkillNode` schema (`src/types/index.ts`) as a closed, versioned vocabulary — same pattern as the existing `difficulty_tier`/`error_type` enums
-- [ ] Extend `scripts/validate-content.js` to check bank-size minimums, tier coverage, and tag-vocabulary closure
-- [ ] Retrofit `bloom_level` tags onto the 45 currently-populated skills
-- [ ] Wire `bloom_level` into `engine.ts`'s tier/difficulty selection once it's real content, not a stub
-- [ ] Gate Phase 2's Phases 4-8 content authoring on this vocabulary existing, so new content is tagged correctly from creation rather than retrofitted later
+- [x] Define explicit, checkable skill-granularity rules (when two sub-concepts are one `skill_id` vs. two)
+- [ ] ~~Add `bloom_level` to the `Question`/`SkillNode` schema (`src/types/index.ts`) as a closed, versioned vocabulary — same pattern as the existing `difficulty_tier`/`error_type` enums~~ ~~Extend `scripts/validate-content.js` to check bank-size minimums, tier coverage, and tag-vocabulary closure~~ ~~Retrofit `bloom_level` tags onto the 45 currently-populated skills~~ ~~Wire `bloom_level` into `engine.ts`'s tier/difficulty selection once it's real content, not a stub~~ **Redefined by human direction 2026-08-10** (see `MASTER_PLAN.md`'s BLOOM-2..6 for the operational task list): per-question `bloom_level` tagging is replaced with a **Phase Evaluation** feature — skill/BKT tracking is the *micro* layer, Bloom's is meant to be a *macro* layer one level up. One optional evaluation set per phase (p1/p2/p3), ~2-3 questions per Bloom level, sampled across that phase's skills, results shown as a per-level breakdown. Each question still records through the existing `insertAttempt()`/BKT pipeline unchanged.
+- [ ] Gate Phase 2's Phases 4-8 content authoring on this vocabulary existing, so new content authors its own phase evaluation set from creation rather than retrofitting one later
 
 ### Phase 1 — Explanation & Reasoning Evaluation
 *(Scope decision 2026-08-09: build against existing explanation-first content now; discovery-first authoring applies to new content going forward — see Phase 2's content item and `vision/discovery-model.md` §7.)*

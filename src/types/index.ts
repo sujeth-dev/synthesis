@@ -4,6 +4,9 @@ export type QuestionFormat = 'mcq' | 'fill' | 'explain' | 'code' | 'order'
 export type MotivationStateValue = 'bored' | 'neutral' | 'frustrated' | 'winning'
 export type ErrorType = 'careless' | 'conceptual' | 'partial' | null
 export type ExplanationDepth = 'beginner' | 'mid' | 'advanced' | 'expert'
+// Bloom's Taxonomy cognitive level — independent of DifficultyTier (which is
+// how hard, not what kind of thinking). See v2/doc/findings/06-content-classification-gaps.md.
+export type BloomLevel = 'remember' | 'understand' | 'apply' | 'analyze' | 'evaluate' | 'create'
 
 export type Phase =
   | 'phase_1_computer_basics'
@@ -30,6 +33,17 @@ export interface Question {
   stem?: string; options?: { id: string; text: string }[]; correct_option_id?: string
   prompt?: string; correct_answer?: string; task?: string; keywords?: string[]
   graph_placement_weight?: Record<string, number>; explanation_after?: string
+}
+
+// One question in a per-phase Phase Evaluation set (macro/Bloom's-level
+// tracking, distinct from per-skill BKT tracking). Always MCQ, always tied
+// to one skill_id so it flows through the existing insertAttempt()/BKT path
+// unchanged. See MASTER_PLAN.md's BLOOM-2..6.
+export interface PhaseEvaluationQuestion {
+  id: string; phase: Phase; skill_id: string; bloom_level: BloomLevel
+  format: 'mcq'; stem: string
+  options: { id: string; text: string }[]; correct_option_id: string
+  explanation_after: string
 }
 
 export interface BuildTask {

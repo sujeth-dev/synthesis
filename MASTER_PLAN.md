@@ -119,16 +119,18 @@ This is the task-by-task execution list for the autonomous development loop (`DE
 These do not block Phase 0 completion and may be worked whenever the loop has bandwidth, but **the default loop always prefers the next sequential Phase 0/1/2/3 task over a parallel track** unless a human explicitly redirects it — treat these as lower priority, not equal priority. Their *live cutover* points (a track actually changing production behavior) remain gated to the phase noted in each track.
 
 ### Content classification & Bloom's tagging (Promise #7)
-Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s Bloom's checklist.
+Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s Bloom's checklist, `v2/doc/vision/discovery-model.md` §2.
+
+**Redefined by human direction 2026-08-10, superseding BLOOM-2 through BLOOM-6 below as originally written** (BLOOM-1 is unaffected and already resolved): the original design — a `bloom_level` field added to every individual practice `Question`, retrofitted across all 45 skills, then wired into per-question selection — is replaced with a **Phase Evaluation** feature. Rationale given: skill-level tracking (BKT/`p_know` per `skill_id`) is the *micro* evaluation layer; Bloom's Taxonomy is meant to be a *macro* evaluation/tracking layer, one level up — a phase-wide check of whether the learner can operate at every level of thinking (Remember → Create) across a phase's main concepts, not a per-question label on existing practice content. Concretely: one optional, self-check evaluation set per phase (p1/p2/p3), each containing ~2-3 questions per Bloom level (~12-18 questions/phase) sampled across that phase's skills. Each question still targets one `skill_id` and is recorded through the existing `insertAttempt()`/BKT pipeline unchanged — this deliberately avoids the "redesigned `insertAttempt()`" that true multi-skill Composite Puzzles (`P3-4`) would need, keeping this buildable now. Results are shown as a per-Bloom-level breakdown, not a single score. `discovery-model.md` §2's original idea (Bloom level determines *which puzzle/construct format* gets used) remains a legitimate later-stage vision tied to Composite Puzzles — this redefinition doesn't replace or contradict it, it just delivers the schema-prerequisite work (Finding 06's actual ask) as a shippable macro-evaluation feature now rather than as inert per-question metadata.
 
 | ID | Status | Task | Depends on |
 |---|---|---|---|
-| BLOOM-1 | not_started | Define checkable skill-granularity rules (when two sub-concepts = one `skill_id` vs. two) | none |
-| BLOOM-2 | not_started | Add `bloom_level` to `Question`/`SkillNode` schema (`src/types/index.ts`) as closed, versioned vocabulary | BLOOM-1 |
-| BLOOM-3 | not_started | Extend `scripts/validate-content.js`: bank-size minimums, tier coverage, tag-vocabulary closure | BLOOM-2 |
-| BLOOM-4 | not_started | Retrofit `bloom_level` onto the 45 currently-populated skills | BLOOM-2, BLOOM-3 |
-| BLOOM-5 | not_started | Wire `bloom_level` into `engine.ts`'s tier/difficulty selection | BLOOM-4 |
-| BLOOM-6 | not_started | Gate — confirm Phase 2 content authoring (P2-3) uses this vocabulary from creation | BLOOM-5, must be done before P2-3 starts |
+| BLOOM-1 | done | Define checkable skill-granularity rules (when two sub-concepts = one `skill_id` vs. two) | none |
+| BLOOM-2 | not_started | Add `BloomLevel` type + `PhaseEvaluationQuestion` schema (`src/types/index.ts`) | BLOOM-1 |
+| BLOOM-3 | not_started | Extend `scripts/validate-content.js`: per-phase minimum coverage (2-3 questions per Bloom level) | BLOOM-2 |
+| BLOOM-4 | not_started | Author phase evaluation sets for p1, p2, p3 (~12-18 questions each) + API/UI entry point + results screen, built once against p1 then reused for p2/p3 | BLOOM-2, BLOOM-3 |
+| BLOOM-5 | not_started | ~~Wire `bloom_level` into `engine.ts`'s tier/difficulty selection~~ **Dropped** — with per-phase (not per-question) granularity there's no per-question signal left to bias selection with; superseded by BLOOM-4's results screen instead. | — |
+| BLOOM-6 | not_started | Gate — confirm Phase 2 content authoring (P2-3) authors its own phase evaluation set alongside new content, not as a later retrofit | BLOOM-4, must be done before P2-3 starts |
 
 **Acceptance per item:** matches its one-line "Do" above; BLOOM-3's acceptance additionally requires `npm run validate` to actually enforce the new checks (fail on violation, not just warn).
 
