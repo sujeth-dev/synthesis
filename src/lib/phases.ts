@@ -13,6 +13,14 @@ export const PHASE_ORDER = [
 
 export type PhaseKey = typeof PHASE_ORDER[number]
 
+// Phases with an authored Phase Evaluation set (content/questions/phase-evaluation/).
+// Mirrored in scripts/validate-content.js's phaseFileNames (plain JS, can't share this import).
+export const PHASE_EVALUATION_FILES: Partial<Record<PhaseKey, string>> = {
+  phase_1_computer_basics: 'p1_evaluation.json',
+  phase_2_cs_data:         'p2_evaluation.json',
+  phase_3_intro_ai:        'p3_evaluation.json',
+}
+
 export function buildPhaseGroups(allNodes: SkillNode[]): Record<string, SkillNode[]> {
   const groups: Record<string, SkillNode[]> = {}
   for (const node of allNodes.filter(n => !n.deprecated)) {

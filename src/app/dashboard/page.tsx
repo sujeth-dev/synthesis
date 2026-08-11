@@ -5,7 +5,7 @@ import { verifyToken } from '@/lib/db/auth'
 import { getLearnerProfile, getAllSkillStates, getReviewSchedules } from '@/lib/db/queries'
 import { getAllNodes, getAllEdges } from '@/lib/graph'
 import { Navbar } from '@/components/layout/Navbar'
-import { PHASE_ORDER, findActivePhase, buildPhaseGroups } from '@/lib/phases'
+import { PHASE_ORDER, findActivePhase, buildPhaseGroups, PHASE_EVALUATION_FILES } from '@/lib/phases'
 import { deriveUrgency } from '@/lib/sm2/urgency'
 import { getMasteryTier } from '@/lib/bkt'
 import type { LearnerSkillState, SkillNode } from '@/types'
@@ -527,6 +527,15 @@ export default async function Dashboard({
                         className="px-3 py-1.5 rounded-lg text-[12px] font-mono bg-c-purple/10 text-c-purple hover:bg-c-purple/20 transition-all border border-c-purple/20"
                       >
                         Study
+                      </Link>
+                    )}
+                    {/* Optional self-check across every Bloom level, once some progress exists in this phase */}
+                    {PHASE_EVALUATION_FILES[phaseKey] && stats.mastered > 0 && (
+                      <Link
+                        href={`/learn/evaluate/${phaseKey}`}
+                        className="px-3 py-1.5 rounded-lg text-[12px] font-mono bg-c-bg3 text-c-muted hover:text-c-text hover:bg-c-bg2 transition-all border border-[var(--border)]"
+                      >
+                        Evaluate
                       </Link>
                     )}
                   </div>
