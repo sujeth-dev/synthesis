@@ -97,6 +97,8 @@ describe('phase evaluation feature contract', () => {
     expect(page).toContain('BLOOM_LEVELS')
     expect(page).toContain('byLevel')
     expect(page).toContain('BLOOM_LABELS[level]')
+    expect(page).toContain('data-testid={`bloom-row-${level}`}')
+    expect(page).toContain('data-testid={`bloom-score-${level}`}')
   })
 
   it('is framed as optional and non-gating on the results/intro copy', () => {

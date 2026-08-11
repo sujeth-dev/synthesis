@@ -125,9 +125,9 @@ export default function PhaseEvaluationPage() {
           </p>
           <div className="space-y-2.5 mb-8">
             {byLevel.map(({ level, correct: c, total }) => (
-              <div key={level} className="flex items-center justify-between px-5 py-3.5 rounded-xl bg-c-bg2 border border-[var(--border)]">
+              <div key={level} data-testid={`bloom-row-${level}`} className="flex items-center justify-between px-5 py-3.5 rounded-xl bg-c-bg2 border border-[var(--border)]">
                 <span className="text-[13px] text-c-text">{BLOOM_LABELS[level]}</span>
-                <span className={`font-mono text-[13px] ${c === total ? 'text-c-green' : 'text-c-muted'}`}>
+                <span data-testid={`bloom-score-${level}`} className={`font-mono text-[13px] ${c === total ? 'text-c-green' : 'text-c-muted'}`}>
                   {c}/{total}
                 </span>
               </div>
