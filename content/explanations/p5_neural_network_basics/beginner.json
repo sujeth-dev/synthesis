@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_neural_network_basics",
+  "depth": "beginner",
+  "title": "Neural Networks — A Stack of Helpful Filters",
+  "key_insight": "A neural network uses layers. Early layers notice small patterns, later layers combine them, and a final layer turns the combined evidence into an answer.",
+  "body": "## A Stack of Helpful Filters\n\nA photo arrives as millions of color numbers, but the answer needed is simply “cat or dog?” One rule cannot bridge that gap cleanly.\n\nA neural network uses layers. Early layers notice small patterns, later layers combine them, and a final layer turns the combined evidence into an answer.\n\nConnections carry adjustable numbers called weights. Training changes the weights so useful signals grow stronger and misleading signals grow weaker.",
+  "common_mistakes": [
+    "Every layer stores only words and never numbers.",
+    "Training keeps all weights fixed forever.",
+    "Adding layers guarantees a correct answer without data."
+  ],
+  "mini_exercise": "Sketch the situation in “A Stack of Helpful Filters” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Neural networks are the shared foundation of modern image, language, speech, and recommendation systems.",
+  "explain_back_prompt": "Using the “A Stack of Helpful Filters” situation, explain Neural Networks without assuming the listener knows deep learning."
+}

@@ -583,5 +583,115 @@
     "from": "p4_sklearn_workflow",
     "to": "p5_neural_network_basics",
     "strength": "soft"
+  },
+  {
+    "from": "p5_neural_network_basics",
+    "to": "p5_activation_functions",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_neural_network_basics",
+    "to": "p5_forward_propagation",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_activation_functions",
+    "to": "p5_forward_propagation",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_forward_propagation",
+    "to": "p5_loss_functions",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_loss_functions",
+    "to": "p5_backpropagation",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_backpropagation",
+    "to": "p5_gradient_descent_and_optimizers",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_gradient_descent_and_optimizers",
+    "to": "p5_training_loops_epochs_batches",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_training_loops_epochs_batches",
+    "to": "p5_learning_rate_and_hyperparameters",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_learning_rate_and_hyperparameters",
+    "to": "p5_overfitting_in_deep_nets",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_forward_propagation",
+    "to": "p5_batch_normalization",
+    "strength": "soft"
+  },
+  {
+    "from": "p5_backpropagation",
+    "to": "p5_vanishing_exploding_gradients",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_batch_normalization",
+    "to": "p5_vanishing_exploding_gradients",
+    "strength": "soft"
+  },
+  {
+    "from": "p5_overfitting_in_deep_nets",
+    "to": "p5_cnn_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p5_vanishing_exploding_gradients",
+    "to": "p5_rnn_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_cnn_basics",
+    "to": "p5_pytorch_intro",
+    "strength": "soft"
+  },
+  {
+    "from": "p5_rnn_basics",
+    "to": "p5_why_transformers_replaced_rnns",
+    "strength": "hard"
+  },
+  {
+    "from": "p1b_oop_classes",
+    "to": "p5_pytorch_intro",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_training_loops_epochs_batches",
+    "to": "p5_pytorch_intro",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_pytorch_intro",
+    "to": "p5_build_your_first_network",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_overfitting_in_deep_nets",
+    "to": "p5_build_your_first_network",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_why_transformers_replaced_rnns",
+    "to": "p6_transformers",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_build_your_first_network",
+    "to": "p6_transformers",
+    "strength": "soft"
   }
 ]

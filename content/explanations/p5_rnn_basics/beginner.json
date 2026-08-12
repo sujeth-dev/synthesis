@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_rnn_basics",
+  "depth": "beginner",
+  "title": "RNN Basics — Carry a Notebook Through the Sentence",
+  "key_insight": "A recurrent neural network reads one item at a time and carries a hidden state, a set of numbers summarizing what it has seen.",
+  "body": "## Carry a Notebook Through the Sentence\n\nThe meaning of “bank” changes after reading “river” or “loan.” A word cannot always be understood alone.\n\nA recurrent neural network reads one item at a time and carries a hidden state, a set of numbers summarizing what it has seen.\n\nAt each step, the current item and earlier state produce a new state. The same update rule is reused across the whole sequence.",
+  "common_mistakes": [
+    "An RNN treats every sequence position as unrelated.",
+    "Hidden state is always a human-readable sentence.",
+    "Padding should contribute to the training loss as real data."
+  ],
+  "mini_exercise": "Sketch the situation in “Carry a Notebook Through the Sentence” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RNNs introduce sequence state and make the limitations that motivated transformers concrete.",
+  "explain_back_prompt": "Using the “Carry a Notebook Through the Sentence” situation, explain RNN Basics without assuming the listener knows deep learning."
+}

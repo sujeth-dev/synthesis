@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_overfitting_in_deep_nets",
+  "depth": "beginner",
+  "title": "Overfitting in Deep Networks — Perfect Practice, Poor Test",
+  "key_insight": "A deep network overfits when training performance keeps improving while validation performance stops improving or gets worse.",
+  "body": "## Perfect Practice, Poor Test\n\nA student repeats the practice sheet perfectly but fails when the numbers change. The answers were memorized rather than understood.\n\nA deep network overfits when training performance keeps improving while validation performance stops improving or gets worse.\n\nKeep a validation set separate and watch both curves. More training is helpful only while new-data behavior also improves.",
+  "common_mistakes": [
+    "Overfitting means both training and validation are always perfect.",
+    "Dropout permanently deletes the same units at deployment.",
+    "The test set should guide every training decision."
+  ],
+  "mini_exercise": "Sketch the situation in “Perfect Practice, Poor Test” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Deep networks have enough capacity to memorize easily, so validation and regularization are essential.",
+  "explain_back_prompt": "Using the “Perfect Practice, Poor Test” situation, explain Overfitting in Deep Networks without assuming the listener knows deep learning."
+}

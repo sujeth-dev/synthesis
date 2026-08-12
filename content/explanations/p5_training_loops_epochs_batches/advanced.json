@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_training_loops_epochs_batches",
+  "depth": "advanced",
+  "title": "Training Loops, Epochs & Batches — Keep the Accelerator Fed",
+  "key_insight": "Data loaders can prepare batches in worker processes, pin transfer-friendly memory, and prefetch the next batch while the current one runs.",
+  "body": "## Keep the Accelerator Fed\n\nA fast GPU waits idle because the CPU loads and prepares each batch too slowly. The model is not the bottleneck.\n\nData loaders can prepare batches in worker processes, pin transfer-friendly memory, and prefetch the next batch while the current one runs.\n\nMeasure examples per second and data-wait time. Larger batches improve hardware use until memory fills, but they also change optimization behavior.",
+  "common_mistakes": [
+    "An epoch is one single number inside a feature.",
+    "Validation should secretly train the model.",
+    "Larger batches always fit in memory and always improve accuracy."
+  ],
+  "mini_exercise": "Sketch the situation in “Keep the Accelerator Fed” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Correct loop structure keeps data, gradients, evaluation, and progress measurements in the right order.",
+  "explain_back_prompt": "Using the “Keep the Accelerator Fed” situation, explain Training Loops, Epochs & Batches without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Write a visible training loop",
+    "context": "Turn the Training Loops, Epochs & Batches idea into one small, inspectable workflow.",
+    "steps": [
+      "Load a tiny dataset in batches.",
+      "Train for three epochs.",
+      "Print average training loss per epoch.",
+      "Run a separate validation pass without updates."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

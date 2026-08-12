@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_batch_normalization",
+  "depth": "expert",
+  "title": "Batch Normalization — Reparameterize the Learning Problem",
+  "key_insight": "Normalization changes the coordinates used during learning. It smooths some update directions and makes the effect of weight scale less direct.",
+  "body": "## Reparameterize the Learning Problem\n\nThe network could represent similar functions without normalization, yet optimization behaves very differently once normalization is inserted.\n\nNormalization changes the coordinates used during learning. It smooths some update directions and makes the effect of weight scale less direct.\n\nDistributed training may synchronize batch statistics across devices for a larger effective batch. That improves estimates but adds communication, so measure whether the stability gain is worth the cost.",
+  "common_mistakes": [
+    "Batch normalization removes every learned parameter.",
+    "Evaluation should always use random batch measurements.",
+    "Normalization guarantees that overfitting cannot occur."
+  ],
+  "mini_exercise": "Sketch the situation in “Reparameterize the Learning Problem” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Stable activation scales can allow faster, less fragile deep-network training.",
+  "explain_back_prompt": "Using the “Reparameterize the Learning Problem” situation, explain Batch Normalization without assuming the listener knows deep learning."
+}

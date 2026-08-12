@@ -1,0 +1,506 @@
+[
+  {
+    "id": "p5_eval_remember_1",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A neural network passes numbers through connected layers."
+      },
+      {
+        "id": "b",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "c",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "d",
+        "text": "Adding layers guarantees a correct answer without data."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A neural network passes numbers through connected layers.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p5_eval_remember_2",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Activation functions let networks learn non-linear rules."
+      },
+      {
+        "id": "b",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "c",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "d",
+        "text": "The same output gate is correct for every possible task."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Activation functions let networks learn non-linear rules.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p5_eval_remember_3",
+    "skill_id": "p5_forward_propagation",
+    "format": "mcq",
+    "stem": "Forward Propagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Forward propagation carries inputs through layers to a prediction."
+      },
+      {
+        "id": "b",
+        "text": "A forward pass updates every weight before producing output."
+      },
+      {
+        "id": "c",
+        "text": "Batches must contain exactly one example."
+      },
+      {
+        "id": "d",
+        "text": "Evaluation mode randomly removes more units than training mode."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Forward propagation carries inputs through layers to a prediction.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p5_eval_understand_1",
+    "skill_id": "p5_loss_functions",
+    "format": "mcq",
+    "stem": "Loss Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Loss is only a chart and never affects training."
+      },
+      {
+        "id": "b",
+        "text": "Mean squared error fits numeric targets."
+      },
+      {
+        "id": "c",
+        "text": "The largest possible loss always means the best model."
+      },
+      {
+        "id": "d",
+        "text": "One loss has the correct meaning for every output type."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Mean squared error fits numeric targets.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p5_eval_understand_2",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "mcq",
+    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An optimizer creates training labels from nothing."
+      },
+      {
+        "id": "b",
+        "text": "Training repeats prediction, loss, gradient, and update steps."
+      },
+      {
+        "id": "c",
+        "text": "Weights should move in the direction that raises loss."
+      },
+      {
+        "id": "d",
+        "text": "Momentum deletes all information from earlier steps."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Training repeats prediction, loss, gradient, and update steps.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p5_eval_understand_3",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "mcq",
+    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An epoch is one single number inside a feature."
+      },
+      {
+        "id": "b",
+        "text": "An epoch is one full pass through the training set."
+      },
+      {
+        "id": "c",
+        "text": "Validation should secretly train the model."
+      },
+      {
+        "id": "d",
+        "text": "Larger batches always fit in memory and always improve accuracy."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An epoch is one full pass through the training set.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p5_eval_apply_1",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "mcq",
+    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate is the model’s final accuracy."
+      },
+      {
+        "id": "b",
+        "text": "Hyperparameters are always discovered perfectly without experiments."
+      },
+      {
+        "id": "c",
+        "text": "Schedules can use warmup and later decay."
+      },
+      {
+        "id": "d",
+        "text": "Warmup begins with the largest possible update."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Schedules can use warmup and later decay.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p5_eval_apply_2",
+    "skill_id": "p5_overfitting_in_deep_nets",
+    "format": "mcq",
+    "stem": "Overfitting in Deep Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Overfitting means both training and validation are always perfect."
+      },
+      {
+        "id": "b",
+        "text": "Dropout permanently deletes the same units at deployment."
+      },
+      {
+        "id": "c",
+        "text": "Weight decay discourages large weights."
+      },
+      {
+        "id": "d",
+        "text": "The test set should guide every training decision."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Weight decay discourages large weights.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p5_eval_apply_3",
+    "skill_id": "p5_batch_normalization",
+    "format": "mcq",
+    "stem": "Batch Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Batch normalization removes every learned parameter."
+      },
+      {
+        "id": "b",
+        "text": "Evaluation should always use random batch measurements."
+      },
+      {
+        "id": "c",
+        "text": "Training uses batch statistics."
+      },
+      {
+        "id": "d",
+        "text": "Normalization guarantees that overfitting cannot occur."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Training uses batch statistics.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p5_eval_analyze_1",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "mcq",
+    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vanishing gradients make every update infinitely large."
+      },
+      {
+        "id": "b",
+        "text": "Gradient clipping creates new labels for the dataset."
+      },
+      {
+        "id": "c",
+        "text": "Depth can never affect backward signal scale."
+      },
+      {
+        "id": "d",
+        "text": "Initialization helps keep signals in a workable range."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Initialization helps keep signals in a workable range.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p5_eval_analyze_2",
+    "skill_id": "p5_cnn_basics",
+    "format": "mcq",
+    "stem": "CNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A CNN requires a separate full model for every pixel."
+      },
+      {
+        "id": "b",
+        "text": "Stride means the number of class labels."
+      },
+      {
+        "id": "c",
+        "text": "Padding always deletes the image border."
+      },
+      {
+        "id": "d",
+        "text": "Padding controls border handling and output size."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Padding controls border handling and output size.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p5_eval_analyze_3",
+    "skill_id": "p5_rnn_basics",
+    "format": "mcq",
+    "stem": "RNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An RNN treats every sequence position as unrelated."
+      },
+      {
+        "id": "b",
+        "text": "Hidden state is always a human-readable sentence."
+      },
+      {
+        "id": "c",
+        "text": "Padding should contribute to the training loss as real data."
+      },
+      {
+        "id": "d",
+        "text": "Masks prevent padded positions from acting like real data."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Masks prevent padded positions from acting like real data.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p5_eval_evaluate_1",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "mcq",
+    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RNNs can remain useful for streaming or constrained devices."
+      },
+      {
+        "id": "b",
+        "text": "Transformers read only the immediately previous token."
+      },
+      {
+        "id": "c",
+        "text": "Parallel training means token order no longer matters."
+      },
+      {
+        "id": "d",
+        "text": "Attention has zero memory cost at every sequence length."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "RNNs can remain useful for streaming or constrained devices.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p5_eval_evaluate_2",
+    "skill_id": "p5_pytorch_intro",
+    "format": "mcq",
+    "stem": "PyTorch Introduction: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Gradients accumulate unless they are cleared."
+      },
+      {
+        "id": "b",
+        "text": "A tensor can contain only one number."
+      },
+      {
+        "id": "c",
+        "text": "An nn.Module prevents parameters from being trained."
+      },
+      {
+        "id": "d",
+        "text": "Autograd requires every derivative to be entered by hand."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Gradients accumulate unless they are cleared.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p5_eval_evaluate_3",
+    "skill_id": "p5_build_your_first_network",
+    "format": "mcq",
+    "stem": "Build Your First Network: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A fresh-process load test verifies the saved artifact."
+      },
+      {
+        "id": "b",
+        "text": "A model learns merely because its script exits successfully."
+      },
+      {
+        "id": "c",
+        "text": "Only the final accuracy number is needed to reproduce a run."
+      },
+      {
+        "id": "d",
+        "text": "Validation rows should be used for every weight update."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A fresh-process load test verifies the saved artifact.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p5_eval_create_1",
+    "skill_id": "p5_backpropagation",
+    "format": "mcq",
+    "stem": "Backpropagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Backpropagation changes labels before training."
+      },
+      {
+        "id": "b",
+        "text": "Reverse-mode differentiation is efficient when many parameters lead to one loss."
+      },
+      {
+        "id": "c",
+        "text": "The backward pass never uses the forward computation."
+      },
+      {
+        "id": "d",
+        "text": "Every weight receives the same correction."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Reverse-mode differentiation is efficient when many parameters lead to one loss.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p5_eval_create_2",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "b",
+        "text": "Initialization scale affects whether signals remain usable through deep networks."
+      },
+      {
+        "id": "c",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "d",
+        "text": "Adding layers guarantees a correct answer without data."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Initialization scale affects whether signals remain usable through deep networks.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p5_eval_create_3",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "b",
+        "text": "An activation’s slope affects how gradients travel backward."
+      },
+      {
+        "id": "c",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "d",
+        "text": "The same output gate is correct for every possible task."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An activation’s slope affects how gradients travel backward.",
+    "phase": "phase_5_deep_learning",
+    "bloom_level": "create"
+  }
+]

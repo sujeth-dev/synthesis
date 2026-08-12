@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_activation_functions",
+  "depth": "beginner",
+  "title": "Activation Functions — A Gate Between Layers",
+  "key_insight": "An activation function bends each layer’s numbers before passing them on. That bend lets later layers combine signals into curved and detailed rules.",
+  "body": "## A Gate Between Layers\n\nTwo layers keep making only straight boundaries, no matter how many times they are stacked. The model cannot wrap around a curved pattern.\n\nAn activation function bends each layer’s numbers before passing them on. That bend lets later layers combine signals into curved and detailed rules.\n\nReLU keeps positive values and turns negative values into zero. It is a common hidden-layer gate because it is simple and usually trains well.",
+  "common_mistakes": [
+    "Activations permanently remove the need for weights.",
+    "Every activation produces text labels directly.",
+    "The same output gate is correct for every possible task."
+  ],
+  "mini_exercise": "Sketch the situation in “A Gate Between Layers” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The activation choice changes signal flow, output meaning, and how easily a network trains.",
+  "explain_back_prompt": "Using the “A Gate Between Layers” situation, explain Activation Functions without assuming the listener knows deep learning."
+}

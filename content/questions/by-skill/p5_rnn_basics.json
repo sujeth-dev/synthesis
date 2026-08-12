@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_rnn_basics_q1",
+    "skill_id": "p5_rnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "RNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An RNN carries hidden state across sequence steps."
+      },
+      {
+        "id": "b",
+        "text": "An RNN treats every sequence position as unrelated."
+      },
+      {
+        "id": "c",
+        "text": "Hidden state is always a human-readable sentence."
+      },
+      {
+        "id": "d",
+        "text": "Padding should contribute to the training loss as real data."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An RNN carries hidden state across sequence steps.",
+    "graph_placement_weight": {
+      "p5_rnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_rnn_basics_q2",
+    "skill_id": "p5_rnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "RNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An RNN treats every sequence position as unrelated."
+      },
+      {
+        "id": "b",
+        "text": "The same cell rule is reused at each step."
+      },
+      {
+        "id": "c",
+        "text": "Hidden state is always a human-readable sentence."
+      },
+      {
+        "id": "d",
+        "text": "Padding should contribute to the training loss as real data."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The same cell rule is reused at each step.",
+    "graph_placement_weight": {
+      "p5_rnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_rnn_basics_q3",
+    "skill_id": "p5_rnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "RNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An RNN treats every sequence position as unrelated."
+      },
+      {
+        "id": "b",
+        "text": "Hidden state is always a human-readable sentence."
+      },
+      {
+        "id": "c",
+        "text": "Backpropagation through time follows the unrolled sequence."
+      },
+      {
+        "id": "d",
+        "text": "Padding should contribute to the training loss as real data."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Backpropagation through time follows the unrolled sequence.",
+    "graph_placement_weight": {
+      "p5_rnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_rnn_basics_q4",
+    "skill_id": "p5_rnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "RNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An RNN treats every sequence position as unrelated."
+      },
+      {
+        "id": "b",
+        "text": "Hidden state is always a human-readable sentence."
+      },
+      {
+        "id": "c",
+        "text": "Padding should contribute to the training loss as real data."
+      },
+      {
+        "id": "d",
+        "text": "Masks prevent padded positions from acting like real data."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Masks prevent padded positions from acting like real data.",
+    "graph_placement_weight": {
+      "p5_rnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_rnn_basics_q5",
+    "skill_id": "p5_rnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "RNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LSTM and GRU gates help preserve useful information."
+      },
+      {
+        "id": "b",
+        "text": "An RNN treats every sequence position as unrelated."
+      },
+      {
+        "id": "c",
+        "text": "Hidden state is always a human-readable sentence."
+      },
+      {
+        "id": "d",
+        "text": "Padding should contribute to the training loss as real data."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "LSTM and GRU gates help preserve useful information.",
+    "graph_placement_weight": {
+      "p5_rnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_rnn_basics_q6",
+    "skill_id": "p5_rnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "RNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An RNN treats every sequence position as unrelated."
+      },
+      {
+        "id": "b",
+        "text": "Sequential dependence limits full parallel processing."
+      },
+      {
+        "id": "c",
+        "text": "Hidden state is always a human-readable sentence."
+      },
+      {
+        "id": "d",
+        "text": "Padding should contribute to the training loss as real data."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Sequential dependence limits full parallel processing.",
+    "graph_placement_weight": {
+      "p5_rnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_rnn_basics_order1",
+    "skill_id": "p5_rnn_basics",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this RNN Basics workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "encode sequence items"
+      },
+      {
+        "id": "b",
+        "text": "start the hidden state"
+      },
+      {
+        "id": "c",
+        "text": "update the state at each step"
+      },
+      {
+        "id": "d",
+        "text": "read the final or per-step outputs"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: encode sequence items → start the hidden state → update the state at each step → read the final or per-step outputs."
+  },
+  {
+    "id": "p5_rnn_basics_fill1",
+    "skill_id": "p5_rnn_basics",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the RNN Basics step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "hidden_state"
+      },
+      {
+        "id": "b",
+        "text": "class_weight"
+      },
+      {
+        "id": "c",
+        "text": "image_width"
+      },
+      {
+        "id": "d",
+        "text": "test_score"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "hidden_state",
+    "explanation_after": "The correct choice is hidden_state."
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_why_transformers_replaced_rnns",
+  "depth": "beginner",
+  "title": "Why Transformers Replaced RNNs — Stop Passing One Notebook Down the Line",
+  "key_insight": "A transformer lets each position look directly at other positions through attention. A distant clue no longer has to survive one handoff at a time.",
+  "body": "## Stop Passing One Notebook Down the Line\n\nThe first word holds a clue for the last word, but an RNN must carry that clue through every middle step.\n\nA transformer lets each position look directly at other positions through attention. A distant clue no longer has to survive one handoff at a time.\n\nThis does not make RNNs useless. It explains why transformers became the main choice for large language models and many other sequence tasks.",
+  "common_mistakes": [
+    "Transformers read only the immediately previous token.",
+    "Parallel training means token order no longer matters.",
+    "Attention has zero memory cost at every sequence length."
+  ],
+  "mini_exercise": "Sketch the situation in “Stop Passing One Notebook Down the Line” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This bridge explains the practical problems attention solves before Phase 6 teaches transformer mechanics.",
+  "explain_back_prompt": "Using the “Stop Passing One Notebook Down the Line” situation, explain Why Transformers Replaced RNNs without assuming the listener knows deep learning."
+}

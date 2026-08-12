@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_gradient_descent_and_optimizers",
+  "depth": "advanced",
+  "title": "Gradient Descent & Optimizers — The Update Is More Than the Gradient",
+  "key_insight": "Treat the optimizer as a stateful algorithm. Save its moving averages in checkpoints or a resumed run will not truly continue from the same training state.",
+  "body": "## The Update Is More Than the Gradient\n\nTwo runs use identical gradients but finish differently because weight decay, momentum, clipping, and schedules alter the actual step.\n\nTreat the optimizer as a stateful algorithm. Save its moving averages in checkpoints or a resumed run will not truly continue from the same training state.\n\nMonitor update size relative to weight size. Tiny updates stall learning; huge updates can erase useful structure even when loss has not yet exploded.",
+  "common_mistakes": [
+    "An optimizer creates training labels from nothing.",
+    "Weights should move in the direction that raises loss.",
+    "Momentum deletes all information from earlier steps."
+  ],
+  "mini_exercise": "Sketch the situation in “The Update Is More Than the Gradient” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Backpropagation finds directions; the optimizer decides the actual size and pattern of every update.",
+  "explain_back_prompt": "Using the “The Update Is More Than the Gradient” situation, explain Gradient Descent & Optimizers without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Compare two optimizers",
+    "context": "Turn the Gradient Descent & Optimizers idea into one small, inspectable workflow.",
+    "steps": [
+      "Create one small model and dataset.",
+      "Train one copy with SGD.",
+      "Train another copy with Adam.",
+      "Plot or print both loss histories."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_loss_functions",
+  "depth": "advanced",
+  "title": "Loss Functions — The Average Can Hide the Important Case",
+  "key_insight": "Class weights or focal loss can give rare or difficult examples more influence. The choice should reflect error cost, not merely force equal counts.",
+  "body": "## The Average Can Hide the Important Case\n\nA medical dataset contains many healthy examples and few dangerous cases. An ordinary average lets the common cases dominate training.\n\nClass weights or focal loss can give rare or difficult examples more influence. The choice should reflect error cost, not merely force equal counts.\n\nOutliers can also dominate squared error. Absolute or Huber losses reduce that pull when extreme targets may be noisy.",
+  "common_mistakes": [
+    "Loss is only a chart and never affects training.",
+    "The largest possible loss always means the best model.",
+    "One loss has the correct meaning for every output type."
+  ],
+  "mini_exercise": "Sketch the situation in “The Average Can Hide the Important Case” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Training needs a meaningful numeric objective before it can decide how weights should change.",
+  "explain_back_prompt": "Using the “The Average Can Hide the Important Case” situation, explain Loss Functions without assuming the listener knows deep learning."
+}

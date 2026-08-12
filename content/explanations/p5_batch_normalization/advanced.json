@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_batch_normalization",
+  "depth": "advanced",
+  "title": "Batch Normalization — Small Batches Make Noisy Rulers",
+  "key_insight": "Group normalization measures within channel groups of each example and does not require a large batch. Layer normalization measures across features and is common in sequence models.",
+  "body": "## Small Batches Make Noisy Rulers\n\nMemory limits force batches of two images. Their mean and spread change wildly, so normalization becomes unreliable.\n\nGroup normalization measures within channel groups of each example and does not require a large batch. Layer normalization measures across features and is common in sequence models.\n\nChoose normalization for the data shape and batch regime. Batch normalization remains effective when batches provide stable statistics.",
+  "common_mistakes": [
+    "Batch normalization removes every learned parameter.",
+    "Evaluation should always use random batch measurements.",
+    "Normalization guarantees that overfitting cannot occur."
+  ],
+  "mini_exercise": "Sketch the situation in “Small Batches Make Noisy Rulers” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Stable activation scales can allow faster, less fragile deep-network training.",
+  "explain_back_prompt": "Using the “Small Batches Make Noisy Rulers” situation, explain Batch Normalization without assuming the listener knows deep learning."
+}

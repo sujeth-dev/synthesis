@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_why_transformers_replaced_rnns",
+  "depth": "mid",
+  "title": "Why Transformers Replaced RNNs — Train Many Positions Together",
+  "key_insight": "During training, a transformer can compute representations for many positions in parallel. Attention then mixes information between those positions.",
+  "body": "## Train Many Positions Together\n\nAn RNN waits for the previous hidden state before processing the next token. The accelerator cannot do all time steps together.\n\nDuring training, a transformer can compute representations for many positions in parallel. Attention then mixes information between those positions.\n\nBecause parallel processing loses the built-in notion of order, transformers add position information so “dog bites person” differs from “person bites dog.”",
+  "common_mistakes": [
+    "Transformers read only the immediately previous token.",
+    "Parallel training means token order no longer matters.",
+    "Attention has zero memory cost at every sequence length."
+  ],
+  "mini_exercise": "Sketch the situation in “Train Many Positions Together” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This bridge explains the practical problems attention solves before Phase 6 teaches transformer mechanics.",
+  "explain_back_prompt": "Using the “Train Many Positions Together” situation, explain Why Transformers Replaced RNNs without assuming the listener knows deep learning."
+}

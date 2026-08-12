@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_gradient_descent_and_optimizers",
+  "depth": "expert",
+  "title": "Gradient Descent & Optimizers — Curvature Changes What One Step Means",
+  "key_insight": "Second-order methods use information about that bend to rescale movement, but storing the full curvature table is usually too expensive for deep networks.",
+  "body": "## Curvature Changes What One Step Means\n\nThe same numeric step is gentle along a flat direction and disastrous along a steep one. The loss surface has different curvature in different directions.\n\nSecond-order methods use information about that bend to rescale movement, but storing the full curvature table is usually too expensive for deep networks.\n\nPractical optimizers approximate this idea with per-parameter scales or small structured blocks. Their benefit must be weighed against extra memory and communication across accelerators.",
+  "common_mistakes": [
+    "An optimizer creates training labels from nothing.",
+    "Weights should move in the direction that raises loss.",
+    "Momentum deletes all information from earlier steps."
+  ],
+  "mini_exercise": "Sketch the situation in “Curvature Changes What One Step Means” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Backpropagation finds directions; the optimizer decides the actual size and pattern of every update.",
+  "explain_back_prompt": "Using the “Curvature Changes What One Step Means” situation, explain Gradient Descent & Optimizers without assuming the listener knows deep learning."
+}

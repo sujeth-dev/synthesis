@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p5_batch_normalization_q1",
+    "skill_id": "p5_batch_normalization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Batch Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Batch normalization stabilizes intermediate value scales."
+      },
+      {
+        "id": "b",
+        "text": "Batch normalization removes every learned parameter."
+      },
+      {
+        "id": "c",
+        "text": "Evaluation should always use random batch measurements."
+      },
+      {
+        "id": "d",
+        "text": "Normalization guarantees that overfitting cannot occur."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Batch normalization stabilizes intermediate value scales.",
+    "graph_placement_weight": {
+      "p5_batch_normalization": 1
+    }
+  },
+  {
+    "id": "p5_batch_normalization_q2",
+    "skill_id": "p5_batch_normalization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Batch Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Batch normalization removes every learned parameter."
+      },
+      {
+        "id": "b",
+        "text": "It learns a shift and scale after normalization."
+      },
+      {
+        "id": "c",
+        "text": "Evaluation should always use random batch measurements."
+      },
+      {
+        "id": "d",
+        "text": "Normalization guarantees that overfitting cannot occur."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "It learns a shift and scale after normalization.",
+    "graph_placement_weight": {
+      "p5_batch_normalization": 1
+    }
+  },
+  {
+    "id": "p5_batch_normalization_q3",
+    "skill_id": "p5_batch_normalization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Batch Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Batch normalization removes every learned parameter."
+      },
+      {
+        "id": "b",
+        "text": "Evaluation should always use random batch measurements."
+      },
+      {
+        "id": "c",
+        "text": "Training uses batch statistics."
+      },
+      {
+        "id": "d",
+        "text": "Normalization guarantees that overfitting cannot occur."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Training uses batch statistics.",
+    "graph_placement_weight": {
+      "p5_batch_normalization": 1
+    }
+  },
+  {
+    "id": "p5_batch_normalization_q4",
+    "skill_id": "p5_batch_normalization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Batch Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Batch normalization removes every learned parameter."
+      },
+      {
+        "id": "b",
+        "text": "Evaluation should always use random batch measurements."
+      },
+      {
+        "id": "c",
+        "text": "Normalization guarantees that overfitting cannot occur."
+      },
+      {
+        "id": "d",
+        "text": "Evaluation uses saved running statistics."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Evaluation uses saved running statistics.",
+    "graph_placement_weight": {
+      "p5_batch_normalization": 1
+    }
+  },
+  {
+    "id": "p5_batch_normalization_q5",
+    "skill_id": "p5_batch_normalization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Batch Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Group normalization can work better with very small image batches."
+      },
+      {
+        "id": "b",
+        "text": "Batch normalization removes every learned parameter."
+      },
+      {
+        "id": "c",
+        "text": "Evaluation should always use random batch measurements."
+      },
+      {
+        "id": "d",
+        "text": "Normalization guarantees that overfitting cannot occur."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Group normalization can work better with very small image batches.",
+    "graph_placement_weight": {
+      "p5_batch_normalization": 1
+    }
+  },
+  {
+    "id": "p5_batch_normalization_q6",
+    "skill_id": "p5_batch_normalization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Batch Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Batch normalization removes every learned parameter."
+      },
+      {
+        "id": "b",
+        "text": "Synchronized statistics trade communication cost for a larger effective normalization batch."
+      },
+      {
+        "id": "c",
+        "text": "Evaluation should always use random batch measurements."
+      },
+      {
+        "id": "d",
+        "text": "Normalization guarantees that overfitting cannot occur."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Synchronized statistics trade communication cost for a larger effective normalization batch.",
+    "graph_placement_weight": {
+      "p5_batch_normalization": 1
+    }
+  }
+]

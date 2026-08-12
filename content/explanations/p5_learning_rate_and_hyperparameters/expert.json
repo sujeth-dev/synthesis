@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_learning_rate_and_hyperparameters",
+  "depth": "expert",
+  "title": "Learning Rate & Hyperparameters — Search the Useful Scale",
+  "key_insight": "Search learning rates and penalties on a logarithmic range, which compares multiplicative changes. Stop weak trials early so compute moves toward promising regions.",
+  "body": "## Search the Useful Scale\n\nTesting 0.00011, 0.00012, and 0.00013 wastes trials while ignoring values ten times larger or smaller. Many settings matter by scale.\n\nSearch learning rates and penalties on a logarithmic range, which compares multiplicative changes. Stop weak trials early so compute moves toward promising regions.\n\nPopulation-based methods can change settings during training and copy strong runs. They cost more machinery, so use them only when simpler schedules and careful searches are insufficient.",
+  "common_mistakes": [
+    "The learning rate is the model’s final accuracy.",
+    "Hyperparameters are always discovered perfectly without experiments.",
+    "Warmup begins with the largest possible update."
+  ],
+  "mini_exercise": "Sketch the situation in “Search the Useful Scale” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Good architecture can fail when its training settings make steps unstable, slow, or poorly timed.",
+  "explain_back_prompt": "Using the “Search the Useful Scale” situation, explain Learning Rate & Hyperparameters without assuming the listener knows deep learning."
+}

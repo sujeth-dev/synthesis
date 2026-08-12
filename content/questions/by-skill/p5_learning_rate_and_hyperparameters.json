@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p5_learning_rate_and_hyperparameters_q1",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate controls weight-update size."
+      },
+      {
+        "id": "b",
+        "text": "The learning rate is the model’s final accuracy."
+      },
+      {
+        "id": "c",
+        "text": "Hyperparameters are always discovered perfectly without experiments."
+      },
+      {
+        "id": "d",
+        "text": "Warmup begins with the largest possible update."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "The learning rate controls weight-update size.",
+    "graph_placement_weight": {
+      "p5_learning_rate_and_hyperparameters": 1
+    }
+  },
+  {
+    "id": "p5_learning_rate_and_hyperparameters_q2",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate is the model’s final accuracy."
+      },
+      {
+        "id": "b",
+        "text": "A rate that is too high can make training unstable."
+      },
+      {
+        "id": "c",
+        "text": "Hyperparameters are always discovered perfectly without experiments."
+      },
+      {
+        "id": "d",
+        "text": "Warmup begins with the largest possible update."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A rate that is too high can make training unstable.",
+    "graph_placement_weight": {
+      "p5_learning_rate_and_hyperparameters": 1
+    }
+  },
+  {
+    "id": "p5_learning_rate_and_hyperparameters_q3",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate is the model’s final accuracy."
+      },
+      {
+        "id": "b",
+        "text": "Hyperparameters are always discovered perfectly without experiments."
+      },
+      {
+        "id": "c",
+        "text": "Schedules can use warmup and later decay."
+      },
+      {
+        "id": "d",
+        "text": "Warmup begins with the largest possible update."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Schedules can use warmup and later decay.",
+    "graph_placement_weight": {
+      "p5_learning_rate_and_hyperparameters": 1
+    }
+  },
+  {
+    "id": "p5_learning_rate_and_hyperparameters_q4",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate is the model’s final accuracy."
+      },
+      {
+        "id": "b",
+        "text": "Hyperparameters are always discovered perfectly without experiments."
+      },
+      {
+        "id": "c",
+        "text": "Warmup begins with the largest possible update."
+      },
+      {
+        "id": "d",
+        "text": "Hyperparameters are settings rather than ordinary learned weights."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Hyperparameters are settings rather than ordinary learned weights.",
+    "graph_placement_weight": {
+      "p5_learning_rate_and_hyperparameters": 1
+    }
+  },
+  {
+    "id": "p5_learning_rate_and_hyperparameters_q5",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Batch size can change which learning rate behaves well."
+      },
+      {
+        "id": "b",
+        "text": "The learning rate is the model’s final accuracy."
+      },
+      {
+        "id": "c",
+        "text": "Hyperparameters are always discovered perfectly without experiments."
+      },
+      {
+        "id": "d",
+        "text": "Warmup begins with the largest possible update."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Batch size can change which learning rate behaves well.",
+    "graph_placement_weight": {
+      "p5_learning_rate_and_hyperparameters": 1
+    }
+  },
+  {
+    "id": "p5_learning_rate_and_hyperparameters_q6",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate is the model’s final accuracy."
+      },
+      {
+        "id": "b",
+        "text": "Logarithmic search compares learning rates across meaningful scales."
+      },
+      {
+        "id": "c",
+        "text": "Hyperparameters are always discovered perfectly without experiments."
+      },
+      {
+        "id": "d",
+        "text": "Warmup begins with the largest possible update."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Logarithmic search compares learning rates across meaningful scales.",
+    "graph_placement_weight": {
+      "p5_learning_rate_and_hyperparameters": 1
+    }
+  }
+]

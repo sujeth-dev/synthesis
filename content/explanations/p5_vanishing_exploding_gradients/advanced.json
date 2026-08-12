@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_vanishing_exploding_gradients",
+  "depth": "advanced",
+  "title": "Vanishing & Exploding Gradients — Give the Signal a Shorter Road",
+  "key_insight": "Residual connections add an earlier value to a later one, providing a simple path through the network. Gradient clipping caps an update when its norm becomes too large.",
+  "body": "## Give the Signal a Shorter Road\n\nA 100-layer chain asks information and gradients to survive every transformation. A direct side road makes the journey easier.\n\nResidual connections add an earlier value to a later one, providing a simple path through the network. Gradient clipping caps an update when its norm becomes too large.\n\nClipping treats the dangerous symptom, not every cause. Combine it with good initialization, normalization, architecture, and learning rate.",
+  "common_mistakes": [
+    "Vanishing gradients make every update infinitely large.",
+    "Gradient clipping creates new labels for the dataset.",
+    "Depth can never affect backward signal scale."
+  ],
+  "mini_exercise": "Sketch the situation in “Give the Signal a Shorter Road” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Unhealthy gradient scale prevents early layers from learning and can make training numerically unstable.",
+  "explain_back_prompt": "Using the “Give the Signal a Shorter Road” situation, explain Vanishing & Exploding Gradients without assuming the listener knows deep learning."
+}

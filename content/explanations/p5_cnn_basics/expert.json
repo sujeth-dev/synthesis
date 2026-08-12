@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_cnn_basics",
+  "depth": "expert",
+  "title": "CNN Basics — Convolution Builds in Translation Structure",
+  "key_insight": "Shared filters give convolution translation equivariance: shifting the input tends to shift the detected pattern. Pooling can make the final decision less sensitive to small shifts.",
+  "body": "## Convolution Builds in Translation Structure\n\nMoving an object slightly should move its feature map rather than force the model to relearn the object from scratch.\n\nShared filters give convolution translation equivariance: shifting the input tends to shift the detected pattern. Pooling can make the final decision less sensitive to small shifts.\n\nDepthwise separable convolution splits spatial filtering from channel mixing, cutting computation. Accelerator speed still depends on memory layout and optimized kernels, not FLOP count alone.",
+  "common_mistakes": [
+    "A CNN requires a separate full model for every pixel.",
+    "Stride means the number of class labels.",
+    "Padding always deletes the image border."
+  ],
+  "mini_exercise": "Sketch the situation in “Convolution Builds in Translation Structure” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "CNNs exploit image structure, using fewer parameters than connecting every pixel to every output.",
+  "explain_back_prompt": "Using the “Convolution Builds in Translation Structure” situation, explain CNN Basics without assuming the listener knows deep learning."
+}

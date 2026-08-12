@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_training_loops_epochs_batches_q1",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A batch is a manageable group of training examples."
+      },
+      {
+        "id": "b",
+        "text": "An epoch is one single number inside a feature."
+      },
+      {
+        "id": "c",
+        "text": "Validation should secretly train the model."
+      },
+      {
+        "id": "d",
+        "text": "Larger batches always fit in memory and always improve accuracy."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A batch is a manageable group of training examples.",
+    "graph_placement_weight": {
+      "p5_training_loops_epochs_batches": 1
+    }
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_q2",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An epoch is one single number inside a feature."
+      },
+      {
+        "id": "b",
+        "text": "An epoch is one full pass through the training set."
+      },
+      {
+        "id": "c",
+        "text": "Validation should secretly train the model."
+      },
+      {
+        "id": "d",
+        "text": "Larger batches always fit in memory and always improve accuracy."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An epoch is one full pass through the training set.",
+    "graph_placement_weight": {
+      "p5_training_loops_epochs_batches": 1
+    }
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_q3",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An epoch is one single number inside a feature."
+      },
+      {
+        "id": "b",
+        "text": "Validation should secretly train the model."
+      },
+      {
+        "id": "c",
+        "text": "Old gradients are cleared before computing the next ordinary batch update."
+      },
+      {
+        "id": "d",
+        "text": "Larger batches always fit in memory and always improve accuracy."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Old gradients are cleared before computing the next ordinary batch update.",
+    "graph_placement_weight": {
+      "p5_training_loops_epochs_batches": 1
+    }
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_q4",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An epoch is one single number inside a feature."
+      },
+      {
+        "id": "b",
+        "text": "Validation should secretly train the model."
+      },
+      {
+        "id": "c",
+        "text": "Larger batches always fit in memory and always improve accuracy."
+      },
+      {
+        "id": "d",
+        "text": "Validation measures progress without updating weights."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Validation measures progress without updating weights.",
+    "graph_placement_weight": {
+      "p5_training_loops_epochs_batches": 1
+    }
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_q5",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Prefetching can reduce accelerator waiting time."
+      },
+      {
+        "id": "b",
+        "text": "An epoch is one single number inside a feature."
+      },
+      {
+        "id": "c",
+        "text": "Validation should secretly train the model."
+      },
+      {
+        "id": "d",
+        "text": "Larger batches always fit in memory and always improve accuracy."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Prefetching can reduce accelerator waiting time.",
+    "graph_placement_weight": {
+      "p5_training_loops_epochs_batches": 1
+    }
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_q6",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An epoch is one single number inside a feature."
+      },
+      {
+        "id": "b",
+        "text": "Data-parallel training combines gradients from different devices before a shared update."
+      },
+      {
+        "id": "c",
+        "text": "Validation should secretly train the model."
+      },
+      {
+        "id": "d",
+        "text": "Larger batches always fit in memory and always improve accuracy."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Data-parallel training combines gradients from different devices before a shared update.",
+    "graph_placement_weight": {
+      "p5_training_loops_epochs_batches": 1
+    }
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_order1",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Training Loops, Epochs & Batches workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "start an epoch"
+      },
+      {
+        "id": "b",
+        "text": "load one batch"
+      },
+      {
+        "id": "c",
+        "text": "compute loss and gradients"
+      },
+      {
+        "id": "d",
+        "text": "update weights and continue"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: start an epoch → load one batch → compute loss and gradients → update weights and continue."
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_fill1",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Training Loops, Epochs & Batches step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "zero_grad"
+      },
+      {
+        "id": "b",
+        "text": "predict_proba"
+      },
+      {
+        "id": "c",
+        "text": "drop_duplicates"
+      },
+      {
+        "id": "d",
+        "text": "compile"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "zero_grad",
+    "explanation_after": "The correct choice is zero_grad."
+  }
+]

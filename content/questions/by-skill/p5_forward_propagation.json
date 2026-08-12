@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_forward_propagation_q1",
+    "skill_id": "p5_forward_propagation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Forward Propagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Forward propagation carries inputs through layers to a prediction."
+      },
+      {
+        "id": "b",
+        "text": "A forward pass updates every weight before producing output."
+      },
+      {
+        "id": "c",
+        "text": "Batches must contain exactly one example."
+      },
+      {
+        "id": "d",
+        "text": "Evaluation mode randomly removes more units than training mode."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Forward propagation carries inputs through layers to a prediction.",
+    "graph_placement_weight": {
+      "p5_forward_propagation": 1
+    }
+  },
+  {
+    "id": "p5_forward_propagation_q2",
+    "skill_id": "p5_forward_propagation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Forward Propagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A forward pass updates every weight before producing output."
+      },
+      {
+        "id": "b",
+        "text": "A batch processes several examples together."
+      },
+      {
+        "id": "c",
+        "text": "Batches must contain exactly one example."
+      },
+      {
+        "id": "d",
+        "text": "Evaluation mode randomly removes more units than training mode."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A batch processes several examples together.",
+    "graph_placement_weight": {
+      "p5_forward_propagation": 1
+    }
+  },
+  {
+    "id": "p5_forward_propagation_q3",
+    "skill_id": "p5_forward_propagation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Forward Propagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A forward pass updates every weight before producing output."
+      },
+      {
+        "id": "b",
+        "text": "Batches must contain exactly one example."
+      },
+      {
+        "id": "c",
+        "text": "A dense layer applies weights, bias, and usually an activation."
+      },
+      {
+        "id": "d",
+        "text": "Evaluation mode randomly removes more units than training mode."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "A dense layer applies weights, bias, and usually an activation.",
+    "graph_placement_weight": {
+      "p5_forward_propagation": 1
+    }
+  },
+  {
+    "id": "p5_forward_propagation_q4",
+    "skill_id": "p5_forward_propagation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Forward Propagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A forward pass updates every weight before producing output."
+      },
+      {
+        "id": "b",
+        "text": "Batches must contain exactly one example."
+      },
+      {
+        "id": "c",
+        "text": "Evaluation mode randomly removes more units than training mode."
+      },
+      {
+        "id": "d",
+        "text": "Training may save intermediate values needed for later gradients."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Training may save intermediate values needed for later gradients.",
+    "graph_placement_weight": {
+      "p5_forward_propagation": 1
+    }
+  },
+  {
+    "id": "p5_forward_propagation_q5",
+    "skill_id": "p5_forward_propagation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Forward Propagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Training and evaluation modes change dropout and batch-normalization behavior."
+      },
+      {
+        "id": "b",
+        "text": "A forward pass updates every weight before producing output."
+      },
+      {
+        "id": "c",
+        "text": "Batches must contain exactly one example."
+      },
+      {
+        "id": "d",
+        "text": "Evaluation mode randomly removes more units than training mode."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Training and evaluation modes change dropout and batch-normalization behavior.",
+    "graph_placement_weight": {
+      "p5_forward_propagation": 1
+    }
+  },
+  {
+    "id": "p5_forward_propagation_q6",
+    "skill_id": "p5_forward_propagation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Forward Propagation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A forward pass updates every weight before producing output."
+      },
+      {
+        "id": "b",
+        "text": "Checkpointing trades repeated forward computation for lower saved-activation memory."
+      },
+      {
+        "id": "c",
+        "text": "Batches must contain exactly one example."
+      },
+      {
+        "id": "d",
+        "text": "Evaluation mode randomly removes more units than training mode."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Checkpointing trades repeated forward computation for lower saved-activation memory.",
+    "graph_placement_weight": {
+      "p5_forward_propagation": 1
+    }
+  },
+  {
+    "id": "p5_forward_propagation_order1",
+    "skill_id": "p5_forward_propagation",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Forward Propagation workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "form an input batch"
+      },
+      {
+        "id": "b",
+        "text": "apply the first layer"
+      },
+      {
+        "id": "c",
+        "text": "apply the activation"
+      },
+      {
+        "id": "d",
+        "text": "apply the output layer"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: form an input batch → apply the first layer → apply the activation → apply the output layer."
+  },
+  {
+    "id": "p5_forward_propagation_fill1",
+    "skill_id": "p5_forward_propagation",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Forward Propagation step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "model(x)"
+      },
+      {
+        "id": "b",
+        "text": "loss.backward()"
+      },
+      {
+        "id": "c",
+        "text": "optimizer.step()"
+      },
+      {
+        "id": "d",
+        "text": "model.zero_grad()"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "model(x)",
+    "explanation_after": "The correct choice is model(x)."
+  }
+]

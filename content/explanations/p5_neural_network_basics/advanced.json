@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_neural_network_basics",
+  "depth": "advanced",
+  "title": "Neural Networks — Shape Is Part of the Design",
+  "key_insight": "Tensor shape records how values are arranged: often batch size first, then features or channels. Every layer has an input shape and an output shape that must connect.",
+  "body": "## Shape Is Part of the Design\n\nA model crashes even though every number is valid. One layer produced 64 values, while the next expected 128.\n\nTensor shape records how values are arranged: often batch size first, then features or channels. Every layer has an input shape and an output shape that must connect.\n\nCount parameters and activation memory before training. Wider layers can learn more patterns, but they also require more data, memory, and computation.",
+  "common_mistakes": [
+    "Every layer stores only words and never numbers.",
+    "Training keeps all weights fixed forever.",
+    "Adding layers guarantees a correct answer without data."
+  ],
+  "mini_exercise": "Sketch the situation in “Shape Is Part of the Design” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Neural networks are the shared foundation of modern image, language, speech, and recommendation systems.",
+  "explain_back_prompt": "Using the “Shape Is Part of the Design” situation, explain Neural Networks without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Trace a tiny network",
+    "context": "Turn the Neural Networks idea into one small, inspectable workflow.",
+    "steps": [
+      "Create two input numbers.",
+      "Pass them through a small linear layer.",
+      "Apply an activation.",
+      "Print every shape and final output."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

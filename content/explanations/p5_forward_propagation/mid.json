@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_forward_propagation",
+  "depth": "mid",
+  "title": "Forward Propagation — One Batch, One Ordered Computation",
+  "key_insight": "For a dense layer, the batch matrix multiplies the weight matrix, receives a bias, and passes through an activation. The output becomes the next layer’s input.",
+  "body": "## One Batch, One Ordered Computation\n\nProcessing one example at a time wastes the hardware’s ability to work on many rows together. A batch groups examples into one tensor.\n\nFor a dense layer, the batch matrix multiplies the weight matrix, receives a bias, and passes through an activation. The output becomes the next layer’s input.\n\nDuring training, the framework also remembers needed intermediate values. During inference, that saved trail is unnecessary and can be disabled.",
+  "common_mistakes": [
+    "A forward pass updates every weight before producing output.",
+    "Batches must contain exactly one example.",
+    "Evaluation mode randomly removes more units than training mode."
+  ],
+  "mini_exercise": "Sketch the situation in “One Batch, One Ordered Computation” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every training step and every real prediction begins with a correct forward pass.",
+  "explain_back_prompt": "Using the “One Batch, One Ordered Computation” situation, explain Forward Propagation without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Inspect a forward pass",
+    "context": "Turn the Forward Propagation idea into one small, inspectable workflow.",
+    "steps": [
+      "Create a two-layer model.",
+      "Make a small input batch.",
+      "Print the shape after each layer.",
+      "Run evaluation mode and print the final output."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

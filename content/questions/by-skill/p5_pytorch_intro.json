@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_pytorch_intro_q1",
+    "skill_id": "p5_pytorch_intro",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "PyTorch Introduction: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tensor has shape, data type, and device."
+      },
+      {
+        "id": "b",
+        "text": "A tensor can contain only one number."
+      },
+      {
+        "id": "c",
+        "text": "An nn.Module prevents parameters from being trained."
+      },
+      {
+        "id": "d",
+        "text": "Autograd requires every derivative to be entered by hand."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A tensor has shape, data type, and device.",
+    "graph_placement_weight": {
+      "p5_pytorch_intro": 1
+    }
+  },
+  {
+    "id": "p5_pytorch_intro_q2",
+    "skill_id": "p5_pytorch_intro",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "PyTorch Introduction: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tensor can contain only one number."
+      },
+      {
+        "id": "b",
+        "text": "An nn.Module groups layers and registered parameters."
+      },
+      {
+        "id": "c",
+        "text": "An nn.Module prevents parameters from being trained."
+      },
+      {
+        "id": "d",
+        "text": "Autograd requires every derivative to be entered by hand."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An nn.Module groups layers and registered parameters.",
+    "graph_placement_weight": {
+      "p5_pytorch_intro": 1
+    }
+  },
+  {
+    "id": "p5_pytorch_intro_q3",
+    "skill_id": "p5_pytorch_intro",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "PyTorch Introduction: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tensor can contain only one number."
+      },
+      {
+        "id": "b",
+        "text": "An nn.Module prevents parameters from being trained."
+      },
+      {
+        "id": "c",
+        "text": "The forward method describes the input route."
+      },
+      {
+        "id": "d",
+        "text": "Autograd requires every derivative to be entered by hand."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "The forward method describes the input route.",
+    "graph_placement_weight": {
+      "p5_pytorch_intro": 1
+    }
+  },
+  {
+    "id": "p5_pytorch_intro_q4",
+    "skill_id": "p5_pytorch_intro",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "PyTorch Introduction: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tensor can contain only one number."
+      },
+      {
+        "id": "b",
+        "text": "An nn.Module prevents parameters from being trained."
+      },
+      {
+        "id": "c",
+        "text": "Autograd requires every derivative to be entered by hand."
+      },
+      {
+        "id": "d",
+        "text": "Autograd records operations needed for gradients."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Autograd records operations needed for gradients.",
+    "graph_placement_weight": {
+      "p5_pytorch_intro": 1
+    }
+  },
+  {
+    "id": "p5_pytorch_intro_q5",
+    "skill_id": "p5_pytorch_intro",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "PyTorch Introduction: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Gradients accumulate unless they are cleared."
+      },
+      {
+        "id": "b",
+        "text": "A tensor can contain only one number."
+      },
+      {
+        "id": "c",
+        "text": "An nn.Module prevents parameters from being trained."
+      },
+      {
+        "id": "d",
+        "text": "Autograd requires every derivative to be entered by hand."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Gradients accumulate unless they are cleared.",
+    "graph_placement_weight": {
+      "p5_pytorch_intro": 1
+    }
+  },
+  {
+    "id": "p5_pytorch_intro_q6",
+    "skill_id": "p5_pytorch_intro",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "PyTorch Introduction: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tensor can contain only one number."
+      },
+      {
+        "id": "b",
+        "text": "CPU-GPU transfers can dominate time if work is moved in tiny pieces."
+      },
+      {
+        "id": "c",
+        "text": "An nn.Module prevents parameters from being trained."
+      },
+      {
+        "id": "d",
+        "text": "Autograd requires every derivative to be entered by hand."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "CPU-GPU transfers can dominate time if work is moved in tiny pieces.",
+    "graph_placement_weight": {
+      "p5_pytorch_intro": 1
+    }
+  },
+  {
+    "id": "p5_pytorch_intro_order1",
+    "skill_id": "p5_pytorch_intro",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this PyTorch Introduction workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "import torch and define a module"
+      },
+      {
+        "id": "b",
+        "text": "create the model and input tensor"
+      },
+      {
+        "id": "c",
+        "text": "run the forward pass"
+      },
+      {
+        "id": "d",
+        "text": "inspect output shape and parameters"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: import torch and define a module → create the model and input tensor → run the forward pass → inspect output shape and parameters."
+  },
+  {
+    "id": "p5_pytorch_intro_fill1",
+    "skill_id": "p5_pytorch_intro",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the PyTorch Introduction step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "nn.Module"
+      },
+      {
+        "id": "b",
+        "text": "pd.DataFrame"
+      },
+      {
+        "id": "c",
+        "text": "KMeans"
+      },
+      {
+        "id": "d",
+        "text": "json.loads"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "nn.Module",
+    "explanation_after": "The correct choice is nn.Module."
+  }
+]

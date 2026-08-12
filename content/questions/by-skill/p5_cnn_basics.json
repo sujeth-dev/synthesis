@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_cnn_basics_q1",
+    "skill_id": "p5_cnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "CNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A convolution reuses one filter across image locations."
+      },
+      {
+        "id": "b",
+        "text": "A CNN requires a separate full model for every pixel."
+      },
+      {
+        "id": "c",
+        "text": "Stride means the number of class labels."
+      },
+      {
+        "id": "d",
+        "text": "Padding always deletes the image border."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A convolution reuses one filter across image locations.",
+    "graph_placement_weight": {
+      "p5_cnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_cnn_basics_q2",
+    "skill_id": "p5_cnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "CNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A CNN requires a separate full model for every pixel."
+      },
+      {
+        "id": "b",
+        "text": "Different filters learn different visual patterns."
+      },
+      {
+        "id": "c",
+        "text": "Stride means the number of class labels."
+      },
+      {
+        "id": "d",
+        "text": "Padding always deletes the image border."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Different filters learn different visual patterns.",
+    "graph_placement_weight": {
+      "p5_cnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_cnn_basics_q3",
+    "skill_id": "p5_cnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "CNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A CNN requires a separate full model for every pixel."
+      },
+      {
+        "id": "b",
+        "text": "Stride means the number of class labels."
+      },
+      {
+        "id": "c",
+        "text": "Stride controls how far a filter moves."
+      },
+      {
+        "id": "d",
+        "text": "Padding always deletes the image border."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Stride controls how far a filter moves.",
+    "graph_placement_weight": {
+      "p5_cnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_cnn_basics_q4",
+    "skill_id": "p5_cnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "CNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A CNN requires a separate full model for every pixel."
+      },
+      {
+        "id": "b",
+        "text": "Stride means the number of class labels."
+      },
+      {
+        "id": "c",
+        "text": "Padding always deletes the image border."
+      },
+      {
+        "id": "d",
+        "text": "Padding controls border handling and output size."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Padding controls border handling and output size.",
+    "graph_placement_weight": {
+      "p5_cnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_cnn_basics_q5",
+    "skill_id": "p5_cnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "CNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A receptive field is the input region affecting one later value."
+      },
+      {
+        "id": "b",
+        "text": "A CNN requires a separate full model for every pixel."
+      },
+      {
+        "id": "c",
+        "text": "Stride means the number of class labels."
+      },
+      {
+        "id": "d",
+        "text": "Padding always deletes the image border."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A receptive field is the input region affecting one later value.",
+    "graph_placement_weight": {
+      "p5_cnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_cnn_basics_q6",
+    "skill_id": "p5_cnn_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "CNN Basics: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A CNN requires a separate full model for every pixel."
+      },
+      {
+        "id": "b",
+        "text": "Depthwise separable convolution can reduce computation by splitting spatial and channel work."
+      },
+      {
+        "id": "c",
+        "text": "Stride means the number of class labels."
+      },
+      {
+        "id": "d",
+        "text": "Padding always deletes the image border."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Depthwise separable convolution can reduce computation by splitting spatial and channel work.",
+    "graph_placement_weight": {
+      "p5_cnn_basics": 1
+    }
+  },
+  {
+    "id": "p5_cnn_basics_order1",
+    "skill_id": "p5_cnn_basics",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this CNN Basics workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "load an image batch"
+      },
+      {
+        "id": "b",
+        "text": "apply a convolution"
+      },
+      {
+        "id": "c",
+        "text": "apply an activation and downsampling"
+      },
+      {
+        "id": "d",
+        "text": "flatten or pool before classification"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: load an image batch → apply a convolution → apply an activation and downsampling → flatten or pool before classification."
+  },
+  {
+    "id": "p5_cnn_basics_fill1",
+    "skill_id": "p5_cnn_basics",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the CNN Basics step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "Conv2d"
+      },
+      {
+        "id": "b",
+        "text": "LinearRegression"
+      },
+      {
+        "id": "c",
+        "text": "Tokenizer"
+      },
+      {
+        "id": "d",
+        "text": "KMeans"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "Conv2d",
+    "explanation_after": "The correct choice is Conv2d."
+  }
+]

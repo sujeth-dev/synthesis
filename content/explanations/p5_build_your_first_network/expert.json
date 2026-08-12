@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_build_your_first_network",
+  "depth": "expert",
+  "title": "Build Your First Network — Turn the Experiment into a Reproducible Artifact",
+  "key_insight": "Give each run a versioned configuration and record dataset fingerprint, source revision, dependency versions, metrics, and artifacts. Reproducibility is a property of the whole route, not one random seed.",
+  "body": "## Turn the Experiment into a Reproducible Artifact\n\nA good result cannot be trusted if nobody can identify the data, code, settings, or environment that produced it.\n\nGive each run a versioned configuration and record dataset fingerprint, source revision, dependency versions, metrics, and artifacts. Reproducibility is a property of the whole route, not one random seed.\n\nBefore promotion, compare against a simple baseline and inspect errors by group. A deeper model earns its cost only when the gain is stable, useful, and deployable.",
+  "common_mistakes": [
+    "A model learns merely because its script exits successfully.",
+    "Only the final accuracy number is needed to reproduce a run.",
+    "Validation rows should be used for every weight update."
+  ],
+  "mini_exercise": "Sketch the situation in “Turn the Experiment into a Reproducible Artifact” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This capstone proves the learner can connect Phase 5’s parts into a working training system.",
+  "explain_back_prompt": "Using the “Turn the Experiment into a Reproducible Artifact” situation, explain Build Your First Network without assuming the listener knows deep learning."
+}

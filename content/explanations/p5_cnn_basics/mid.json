@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_cnn_basics",
+  "depth": "mid",
+  "title": "CNN Basics — Control the Output Map",
+  "key_insight": "Kernel size is the filter’s window. Stride is how far it moves each time. Padding adds a border so edge information can be kept and size can be controlled.",
+  "body": "## Control the Output Map\n\nA filter moves across an image, but the output unexpectedly shrinks. The movement rules determine the new shape.\n\nKernel size is the filter’s window. Stride is how far it moves each time. Padding adds a border so edge information can be kept and size can be controlled.\n\nChannels carry several feature maps. Each output channel combines information from all input channels with its own learned filters.",
+  "common_mistakes": [
+    "A CNN requires a separate full model for every pixel.",
+    "Stride means the number of class labels.",
+    "Padding always deletes the image border."
+  ],
+  "mini_exercise": "Sketch the situation in “Control the Output Map” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "CNNs exploit image structure, using fewer parameters than connecting every pixel to every output.",
+  "explain_back_prompt": "Using the “Control the Output Map” situation, explain CNN Basics without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Inspect an image feature map",
+    "context": "Turn the CNN Basics idea into one small, inspectable workflow.",
+    "steps": [
+      "Create one tiny grayscale image tensor.",
+      "Apply one convolution filter.",
+      "Print input and output shapes.",
+      "Display or print the resulting feature values."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

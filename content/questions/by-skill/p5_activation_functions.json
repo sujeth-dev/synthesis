@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p5_activation_functions_q1",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Activation functions let networks learn non-linear rules."
+      },
+      {
+        "id": "b",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "c",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "d",
+        "text": "The same output gate is correct for every possible task."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Activation functions let networks learn non-linear rules.",
+    "graph_placement_weight": {
+      "p5_activation_functions": 1
+    }
+  },
+  {
+    "id": "p5_activation_functions_q2",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "b",
+        "text": "ReLU keeps positive inputs and clips negative inputs to zero."
+      },
+      {
+        "id": "c",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "d",
+        "text": "The same output gate is correct for every possible task."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "ReLU keeps positive inputs and clips negative inputs to zero.",
+    "graph_placement_weight": {
+      "p5_activation_functions": 1
+    }
+  },
+  {
+    "id": "p5_activation_functions_q3",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "b",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "c",
+        "text": "Sigmoid is useful for one binary probability."
+      },
+      {
+        "id": "d",
+        "text": "The same output gate is correct for every possible task."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Sigmoid is useful for one binary probability.",
+    "graph_placement_weight": {
+      "p5_activation_functions": 1
+    }
+  },
+  {
+    "id": "p5_activation_functions_q4",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "b",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "c",
+        "text": "The same output gate is correct for every possible task."
+      },
+      {
+        "id": "d",
+        "text": "Softmax turns several scores into shares that sum to one."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Softmax turns several scores into shares that sum to one.",
+    "graph_placement_weight": {
+      "p5_activation_functions": 1
+    }
+  },
+  {
+    "id": "p5_activation_functions_q5",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A dying ReLU stays inactive and receives little useful correction."
+      },
+      {
+        "id": "b",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "c",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "d",
+        "text": "The same output gate is correct for every possible task."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A dying ReLU stays inactive and receives little useful correction.",
+    "graph_placement_weight": {
+      "p5_activation_functions": 1
+    }
+  },
+  {
+    "id": "p5_activation_functions_q6",
+    "skill_id": "p5_activation_functions",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Activation Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Activations permanently remove the need for weights."
+      },
+      {
+        "id": "b",
+        "text": "An activation’s slope affects how gradients travel backward."
+      },
+      {
+        "id": "c",
+        "text": "Every activation produces text labels directly."
+      },
+      {
+        "id": "d",
+        "text": "The same output gate is correct for every possible task."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An activation’s slope affects how gradients travel backward.",
+    "graph_placement_weight": {
+      "p5_activation_functions": 1
+    }
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_rnn_basics",
+  "depth": "expert",
+  "title": "RNN Basics — One Step Depends on the Previous Step",
+  "key_insight": "This recurrence creates a sequential bottleneck even on powerful hardware. It also compresses earlier context into a fixed-size state unless extra attention is added.",
+  "body": "## One Step Depends on the Previous Step\n\nA long sequence cannot be processed fully in parallel because step 50 waits for the state from step 49.\n\nThis recurrence creates a sequential bottleneck even on powerful hardware. It also compresses earlier context into a fixed-size state unless extra attention is added.\n\nTruncated backpropagation limits how far gradients travel to control memory cost. Stateful serving must also define when hidden state is kept, reset, or separated between users.",
+  "common_mistakes": [
+    "An RNN treats every sequence position as unrelated.",
+    "Hidden state is always a human-readable sentence.",
+    "Padding should contribute to the training loss as real data."
+  ],
+  "mini_exercise": "Sketch the situation in “One Step Depends on the Previous Step” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RNNs introduce sequence state and make the limitations that motivated transformers concrete.",
+  "explain_back_prompt": "Using the “One Step Depends on the Previous Step” situation, explain RNN Basics without assuming the listener knows deep learning."
+}

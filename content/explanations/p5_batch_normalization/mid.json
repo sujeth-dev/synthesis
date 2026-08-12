@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_batch_normalization",
+  "depth": "mid",
+  "title": "Batch Normalization — Training and Deployment Use Different Measurements",
+  "key_insight": "During training, batch normalization uses batch mean and variance while updating running estimates. During evaluation, it uses those saved running estimates.",
+  "body": "## Training and Deployment Use Different Measurements\n\nA deployed model receives one example, so it cannot depend on a fresh, trustworthy batch average every time.\n\nDuring training, batch normalization uses batch mean and variance while updating running estimates. During evaluation, it uses those saved running estimates.\n\nSwitch model modes correctly. Leaving a model in training mode makes predictions depend on the other examples that happen to share the batch.",
+  "common_mistakes": [
+    "Batch normalization removes every learned parameter.",
+    "Evaluation should always use random batch measurements.",
+    "Normalization guarantees that overfitting cannot occur."
+  ],
+  "mini_exercise": "Sketch the situation in “Training and Deployment Use Different Measurements” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Stable activation scales can allow faster, less fragile deep-network training.",
+  "explain_back_prompt": "Using the “Training and Deployment Use Different Measurements” situation, explain Batch Normalization without assuming the listener knows deep learning."
+}

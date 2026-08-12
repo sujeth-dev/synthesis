@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_overfitting_in_deep_nets",
+  "depth": "advanced",
+  "title": "Overfitting in Deep Networks — Stop at the Best Generalizing Point",
+  "key_insight": "Early stopping saves the best validation checkpoint rather than the final checkpoint. Patience allows small temporary setbacks before stopping.",
+  "body": "## Stop at the Best Generalizing Point\n\nValidation loss reaches its lowest point at epoch 18, then climbs while training loss falls. The useful model existed before the run ended.\n\nEarly stopping saves the best validation checkpoint rather than the final checkpoint. Patience allows small temporary setbacks before stopping.\n\nTune regularization on validation data, then report once on untouched test data. Repeated test checks turn the test set into another training signal.",
+  "common_mistakes": [
+    "Overfitting means both training and validation are always perfect.",
+    "Dropout permanently deletes the same units at deployment.",
+    "The test set should guide every training decision."
+  ],
+  "mini_exercise": "Sketch the situation in “Stop at the Best Generalizing Point” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Deep networks have enough capacity to memorize easily, so validation and regularization are essential.",
+  "explain_back_prompt": "Using the “Stop at the Best Generalizing Point” situation, explain Overfitting in Deep Networks without assuming the listener knows deep learning."
+}

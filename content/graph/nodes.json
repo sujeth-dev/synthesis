@@ -2030,21 +2030,31 @@
     "label": "Neural Networks",
     "phase": "phase_5_deep_learning",
     "difficulty_base": 4,
-    "question_ids": [],
+    "question_ids": [
+      "p5_neural_network_basics_q1",
+      "p5_neural_network_basics_q2",
+      "p5_neural_network_basics_q3",
+      "p5_neural_network_basics_q4",
+      "p5_neural_network_basics_q5",
+      "p5_neural_network_basics_q6",
+      "p5_neural_network_basics_order1",
+      "p5_neural_network_basics_fill1"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p5_neural_network_basics_beginner",
+      "mid": "p5_neural_network_basics_mid",
+      "advanced": "p5_neural_network_basics_advanced",
+      "expert": "p5_neural_network_basics_expert"
     },
     "tags": [
       "neural-network",
-      "perceptron",
-      "layers"
+      "layers",
+      "weights"
     ],
     "deprecated": false,
-    "intuition": "A neural network is a chain of matrix multiplications with non-linear functions in between.",
-    "analogy": "Like a series of filters — each layer extracts progressively more abstract features from the input.",
-    "why_it_matters": "Every modern AI system — LLMs, image models, voice assistants — is a neural network.",
+    "intuition": "A neural network passes numbers through connected layers that learn which signals matter.",
+    "analogy": "Like a team of filters that turns raw details into a useful decision one step at a time.",
+    "why_it_matters": "Neural networks are the shared foundation of modern image, language, speech, and recommendation systems.",
     "topic": "Network Fundamentals",
     "topic_order": 1
   },
@@ -2195,5 +2205,462 @@
     "why_it_matters": "This is what senior AI engineers do. It's the skill that separates practitioners from architects.",
     "topic": "Systems at Scale",
     "topic_order": 1
+  },
+  {
+    "id": "p5_activation_functions",
+    "label": "Activation Functions",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p5_activation_functions_q1",
+      "p5_activation_functions_q2",
+      "p5_activation_functions_q3",
+      "p5_activation_functions_q4",
+      "p5_activation_functions_q5",
+      "p5_activation_functions_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_activation_functions_beginner",
+      "mid": "p5_activation_functions_mid",
+      "advanced": "p5_activation_functions_advanced",
+      "expert": "p5_activation_functions_expert"
+    },
+    "tags": [
+      "activation",
+      "relu",
+      "sigmoid",
+      "nonlinearity"
+    ],
+    "deprecated": false,
+    "intuition": "An activation function bends a layer’s output so a network can learn more than straight-line rules.",
+    "analogy": "Like a gate that decides how much of each incoming signal continues.",
+    "why_it_matters": "The activation choice changes signal flow, output meaning, and how easily a network trains.",
+    "topic": "Network Fundamentals",
+    "topic_order": 2
+  },
+  {
+    "id": "p5_forward_propagation",
+    "label": "Forward Propagation",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p5_forward_propagation_q1",
+      "p5_forward_propagation_q2",
+      "p5_forward_propagation_q3",
+      "p5_forward_propagation_q4",
+      "p5_forward_propagation_q5",
+      "p5_forward_propagation_q6",
+      "p5_forward_propagation_order1",
+      "p5_forward_propagation_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_forward_propagation_beginner",
+      "mid": "p5_forward_propagation_mid",
+      "advanced": "p5_forward_propagation_advanced",
+      "expert": "p5_forward_propagation_expert"
+    },
+    "tags": [
+      "forward-pass",
+      "tensor-shapes",
+      "inference"
+    ],
+    "deprecated": false,
+    "intuition": "Forward propagation carries an input through each layer to produce a prediction.",
+    "analogy": "Like sending ingredients through an ordered recipe until a finished dish appears.",
+    "why_it_matters": "Every training step and every real prediction begins with a correct forward pass.",
+    "topic": "Network Fundamentals",
+    "topic_order": 3
+  },
+  {
+    "id": "p5_loss_functions",
+    "label": "Loss Functions",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p5_loss_functions_q1",
+      "p5_loss_functions_q2",
+      "p5_loss_functions_q3",
+      "p5_loss_functions_q4",
+      "p5_loss_functions_q5",
+      "p5_loss_functions_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_loss_functions_beginner",
+      "mid": "p5_loss_functions_mid",
+      "advanced": "p5_loss_functions_advanced",
+      "expert": "p5_loss_functions_expert"
+    },
+    "tags": [
+      "loss",
+      "cross-entropy",
+      "mse",
+      "objective"
+    ],
+    "deprecated": false,
+    "intuition": "A loss function turns the gap between a prediction and its answer into one number to reduce.",
+    "analogy": "Like a scorecard that tells a coach how far the attempt missed the target.",
+    "why_it_matters": "Training needs a meaningful numeric objective before it can decide how weights should change.",
+    "topic": "Network Fundamentals",
+    "topic_order": 4
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers",
+    "label": "Gradient Descent & Optimizers",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_gradient_descent_and_optimizers_q1",
+      "p5_gradient_descent_and_optimizers_q2",
+      "p5_gradient_descent_and_optimizers_q3",
+      "p5_gradient_descent_and_optimizers_q4",
+      "p5_gradient_descent_and_optimizers_q5",
+      "p5_gradient_descent_and_optimizers_q6",
+      "p5_gradient_descent_and_optimizers_order1",
+      "p5_gradient_descent_and_optimizers_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_gradient_descent_and_optimizers_beginner",
+      "mid": "p5_gradient_descent_and_optimizers_mid",
+      "advanced": "p5_gradient_descent_and_optimizers_advanced",
+      "expert": "p5_gradient_descent_and_optimizers_expert"
+    },
+    "tags": [
+      "gradient-descent",
+      "sgd",
+      "adam",
+      "optimizer"
+    ],
+    "deprecated": false,
+    "intuition": "An optimizer uses gradients to make weight changes that tend to lower loss.",
+    "analogy": "Like walking downhill in fog by feeling the slope under your feet.",
+    "why_it_matters": "Backpropagation finds directions; the optimizer decides the actual size and pattern of every update.",
+    "topic": "Training Mechanics",
+    "topic_order": 2
+  },
+  {
+    "id": "p5_training_loops_epochs_batches",
+    "label": "Training Loops, Epochs & Batches",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p5_training_loops_epochs_batches_q1",
+      "p5_training_loops_epochs_batches_q2",
+      "p5_training_loops_epochs_batches_q3",
+      "p5_training_loops_epochs_batches_q4",
+      "p5_training_loops_epochs_batches_q5",
+      "p5_training_loops_epochs_batches_q6",
+      "p5_training_loops_epochs_batches_order1",
+      "p5_training_loops_epochs_batches_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_training_loops_epochs_batches_beginner",
+      "mid": "p5_training_loops_epochs_batches_mid",
+      "advanced": "p5_training_loops_epochs_batches_advanced",
+      "expert": "p5_training_loops_epochs_batches_expert"
+    },
+    "tags": [
+      "training-loop",
+      "epoch",
+      "batch",
+      "dataloader"
+    ],
+    "deprecated": false,
+    "intuition": "A training loop repeatedly learns from manageable batches until the dataset has been visited enough times.",
+    "analogy": "Like practicing a deck in small hands, then reshuffling and starting another round.",
+    "why_it_matters": "Correct loop structure keeps data, gradients, evaluation, and progress measurements in the right order.",
+    "topic": "Training Mechanics",
+    "topic_order": 3
+  },
+  {
+    "id": "p5_learning_rate_and_hyperparameters",
+    "label": "Learning Rate & Hyperparameters",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_learning_rate_and_hyperparameters_q1",
+      "p5_learning_rate_and_hyperparameters_q2",
+      "p5_learning_rate_and_hyperparameters_q3",
+      "p5_learning_rate_and_hyperparameters_q4",
+      "p5_learning_rate_and_hyperparameters_q5",
+      "p5_learning_rate_and_hyperparameters_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_learning_rate_and_hyperparameters_beginner",
+      "mid": "p5_learning_rate_and_hyperparameters_mid",
+      "advanced": "p5_learning_rate_and_hyperparameters_advanced",
+      "expert": "p5_learning_rate_and_hyperparameters_expert"
+    },
+    "tags": [
+      "learning-rate",
+      "schedule",
+      "hyperparameters"
+    ],
+    "deprecated": false,
+    "intuition": "The learning rate controls update size, while other hyperparameters shape capacity, noise, and training cost.",
+    "analogy": "Like choosing stride length, backpack weight, and route before walking downhill.",
+    "why_it_matters": "Good architecture can fail when its training settings make steps unstable, slow, or poorly timed.",
+    "topic": "Training Mechanics",
+    "topic_order": 4
+  },
+  {
+    "id": "p5_overfitting_in_deep_nets",
+    "label": "Overfitting in Deep Networks",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_overfitting_in_deep_nets_q1",
+      "p5_overfitting_in_deep_nets_q2",
+      "p5_overfitting_in_deep_nets_q3",
+      "p5_overfitting_in_deep_nets_q4",
+      "p5_overfitting_in_deep_nets_q5",
+      "p5_overfitting_in_deep_nets_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_overfitting_in_deep_nets_beginner",
+      "mid": "p5_overfitting_in_deep_nets_mid",
+      "advanced": "p5_overfitting_in_deep_nets_advanced",
+      "expert": "p5_overfitting_in_deep_nets_expert"
+    },
+    "tags": [
+      "overfitting",
+      "dropout",
+      "weight-decay"
+    ],
+    "deprecated": false,
+    "intuition": "A deep network overfits when it learns training details that do not hold for new examples.",
+    "analogy": "Like memorizing every practice answer instead of learning the rule behind them.",
+    "why_it_matters": "Deep networks have enough capacity to memorize easily, so validation and regularization are essential.",
+    "topic": "Regularization & Stability",
+    "topic_order": 1
+  },
+  {
+    "id": "p5_batch_normalization",
+    "label": "Batch Normalization",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_batch_normalization_q1",
+      "p5_batch_normalization_q2",
+      "p5_batch_normalization_q3",
+      "p5_batch_normalization_q4",
+      "p5_batch_normalization_q5",
+      "p5_batch_normalization_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_batch_normalization_beginner",
+      "mid": "p5_batch_normalization_mid",
+      "advanced": "p5_batch_normalization_advanced",
+      "expert": "p5_batch_normalization_expert"
+    },
+    "tags": [
+      "batch-normalization",
+      "normalization",
+      "training-stability"
+    ],
+    "deprecated": false,
+    "intuition": "Batch normalization keeps intermediate signals on a steadier scale and then learns a useful rescaling.",
+    "analogy": "Like resetting a measuring gauge between stations while keeping adjustable calibration controls.",
+    "why_it_matters": "Stable activation scales can allow faster, less fragile deep-network training.",
+    "topic": "Regularization & Stability",
+    "topic_order": 2
+  },
+  {
+    "id": "p5_vanishing_exploding_gradients",
+    "label": "Vanishing & Exploding Gradients",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_vanishing_exploding_gradients_q1",
+      "p5_vanishing_exploding_gradients_q2",
+      "p5_vanishing_exploding_gradients_q3",
+      "p5_vanishing_exploding_gradients_q4",
+      "p5_vanishing_exploding_gradients_q5",
+      "p5_vanishing_exploding_gradients_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_vanishing_exploding_gradients_beginner",
+      "mid": "p5_vanishing_exploding_gradients_mid",
+      "advanced": "p5_vanishing_exploding_gradients_advanced",
+      "expert": "p5_vanishing_exploding_gradients_expert"
+    },
+    "tags": [
+      "gradients",
+      "vanishing-gradient",
+      "exploding-gradient",
+      "clipping"
+    ],
+    "deprecated": false,
+    "intuition": "Gradients can shrink toward zero or grow without bound as they pass through many layers.",
+    "analogy": "Like a message whispered through a long line becoming inaudible, or amplified until it becomes a shout.",
+    "why_it_matters": "Unhealthy gradient scale prevents early layers from learning and can make training numerically unstable.",
+    "topic": "Regularization & Stability",
+    "topic_order": 3
+  },
+  {
+    "id": "p5_cnn_basics",
+    "label": "CNN Basics",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_cnn_basics_q1",
+      "p5_cnn_basics_q2",
+      "p5_cnn_basics_q3",
+      "p5_cnn_basics_q4",
+      "p5_cnn_basics_q5",
+      "p5_cnn_basics_q6",
+      "p5_cnn_basics_order1",
+      "p5_cnn_basics_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_cnn_basics_beginner",
+      "mid": "p5_cnn_basics_mid",
+      "advanced": "p5_cnn_basics_advanced",
+      "expert": "p5_cnn_basics_expert"
+    },
+    "tags": [
+      "cnn",
+      "convolution",
+      "images",
+      "pooling"
+    ],
+    "deprecated": false,
+    "intuition": "A convolutional network reuses small pattern detectors across an image.",
+    "analogy": "Like sliding the same tiny magnifying window over every part of a picture.",
+    "why_it_matters": "CNNs exploit image structure, using fewer parameters than connecting every pixel to every output.",
+    "topic": "Architectures",
+    "topic_order": 1
+  },
+  {
+    "id": "p5_rnn_basics",
+    "label": "RNN Basics",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_rnn_basics_q1",
+      "p5_rnn_basics_q2",
+      "p5_rnn_basics_q3",
+      "p5_rnn_basics_q4",
+      "p5_rnn_basics_q5",
+      "p5_rnn_basics_q6",
+      "p5_rnn_basics_order1",
+      "p5_rnn_basics_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_rnn_basics_beginner",
+      "mid": "p5_rnn_basics_mid",
+      "advanced": "p5_rnn_basics_advanced",
+      "expert": "p5_rnn_basics_expert"
+    },
+    "tags": [
+      "rnn",
+      "sequence",
+      "hidden-state"
+    ],
+    "deprecated": false,
+    "intuition": "A recurrent network reads a sequence step by step while carrying a changing memory state.",
+    "analogy": "Like reading a sentence while keeping a small notebook of what earlier words suggested.",
+    "why_it_matters": "RNNs introduce sequence state and make the limitations that motivated transformers concrete.",
+    "topic": "Architectures",
+    "topic_order": 2
+  },
+  {
+    "id": "p5_why_transformers_replaced_rnns",
+    "label": "Why Transformers Replaced RNNs",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_why_transformers_replaced_rnns_q1",
+      "p5_why_transformers_replaced_rnns_q2",
+      "p5_why_transformers_replaced_rnns_q3",
+      "p5_why_transformers_replaced_rnns_q4",
+      "p5_why_transformers_replaced_rnns_q5",
+      "p5_why_transformers_replaced_rnns_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_why_transformers_replaced_rnns_beginner",
+      "mid": "p5_why_transformers_replaced_rnns_mid",
+      "advanced": "p5_why_transformers_replaced_rnns_advanced",
+      "expert": "p5_why_transformers_replaced_rnns_expert"
+    },
+    "tags": [
+      "transformers",
+      "rnn",
+      "attention",
+      "parallelism"
+    ],
+    "deprecated": false,
+    "intuition": "Transformers connect sequence positions directly with attention and process training tokens in parallel.",
+    "analogy": "Like letting every word consult every other relevant word instead of passing one small notebook down a line.",
+    "why_it_matters": "This bridge explains the practical problems attention solves before Phase 6 teaches transformer mechanics.",
+    "topic": "Architectures",
+    "topic_order": 3
+  },
+  {
+    "id": "p5_pytorch_intro",
+    "label": "PyTorch Introduction",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p5_pytorch_intro_q1",
+      "p5_pytorch_intro_q2",
+      "p5_pytorch_intro_q3",
+      "p5_pytorch_intro_q4",
+      "p5_pytorch_intro_q5",
+      "p5_pytorch_intro_q6",
+      "p5_pytorch_intro_order1",
+      "p5_pytorch_intro_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_pytorch_intro_beginner",
+      "mid": "p5_pytorch_intro_mid",
+      "advanced": "p5_pytorch_intro_advanced",
+      "expert": "p5_pytorch_intro_expert"
+    },
+    "tags": [
+      "pytorch",
+      "tensor",
+      "module",
+      "autograd"
+    ],
+    "deprecated": false,
+    "intuition": "PyTorch represents data as tensors, models as modules, and gradients through recorded operations.",
+    "analogy": "Like a workshop where materials, machines, and an automatic measurement trail share one system.",
+    "why_it_matters": "PyTorch turns the phase’s equations into inspectable, trainable programs.",
+    "topic": "Practice",
+    "topic_order": 1
+  },
+  {
+    "id": "p5_build_your_first_network",
+    "label": "Build Your First Network",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p5_build_your_first_network_q1",
+      "p5_build_your_first_network_q2",
+      "p5_build_your_first_network_q3",
+      "p5_build_your_first_network_q4",
+      "p5_build_your_first_network_q5",
+      "p5_build_your_first_network_q6",
+      "p5_build_your_first_network_order1",
+      "p5_build_your_first_network_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p5_build_your_first_network_beginner",
+      "mid": "p5_build_your_first_network_mid",
+      "advanced": "p5_build_your_first_network_advanced",
+      "expert": "p5_build_your_first_network_expert"
+    },
+    "tags": [
+      "pytorch",
+      "training",
+      "capstone",
+      "neural-network"
+    ],
+    "deprecated": false,
+    "intuition": "A complete network project connects prepared data, a model, a loss, an optimizer, and honest evaluation.",
+    "analogy": "Like assembling the separate stations of a workshop into one repeatable production line.",
+    "why_it_matters": "This capstone proves the learner can connect Phase 5’s parts into a working training system.",
+    "topic": "Practice",
+    "topic_order": 2
   }
 ]

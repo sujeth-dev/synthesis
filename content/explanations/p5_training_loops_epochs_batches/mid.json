@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_training_loops_epochs_batches",
+  "depth": "mid",
+  "title": "Training Loops, Epochs & Batches — The Five Moves Inside Every Batch",
+  "key_insight": "For each batch: clear old gradients, run the forward pass, compute loss, run backward, and let the optimizer update the weights.",
+  "body": "## The Five Moves Inside Every Batch\n\nA model appears to train, but its gradients silently pile up from earlier batches. The loop skipped one small but essential move.\n\nFor each batch: clear old gradients, run the forward pass, compute loss, run backward, and let the optimizer update the weights.\n\nShuffle training rows between epochs so batches do not repeat one fixed order. Keep validation deterministic and do not update weights there.",
+  "common_mistakes": [
+    "An epoch is one single number inside a feature.",
+    "Validation should secretly train the model.",
+    "Larger batches always fit in memory and always improve accuracy."
+  ],
+  "mini_exercise": "Sketch the situation in “The Five Moves Inside Every Batch” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Correct loop structure keeps data, gradients, evaluation, and progress measurements in the right order.",
+  "explain_back_prompt": "Using the “The Five Moves Inside Every Batch” situation, explain Training Loops, Epochs & Batches without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Write a visible training loop",
+    "context": "Turn the Training Loops, Epochs & Batches idea into one small, inspectable workflow.",
+    "steps": [
+      "Load a tiny dataset in batches.",
+      "Train for three epochs.",
+      "Print average training loss per epoch.",
+      "Run a separate validation pass without updates."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

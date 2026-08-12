@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_forward_propagation",
+  "depth": "expert",
+  "title": "Forward Propagation — A Graph Appears as Operations Run",
+  "key_insight": "Automatic-differentiation systems can record a computation graph while the forward operations run. Nodes are operations; arrows show which values produced later values.",
+  "body": "## A Graph Appears as Operations Run\n\nA flexible model may choose different branches for different inputs. A fixed handwritten formula cannot describe every possible route in advance.\n\nAutomatic-differentiation systems can record a computation graph while the forward operations run. Nodes are operations; arrows show which values produced later values.\n\nSaved tensors make backward calculation possible but consume memory. Checkpointing saves fewer tensors and recomputes some forward work later, trading extra computation for lower memory use.",
+  "common_mistakes": [
+    "A forward pass updates every weight before producing output.",
+    "Batches must contain exactly one example.",
+    "Evaluation mode randomly removes more units than training mode."
+  ],
+  "mini_exercise": "Sketch the situation in “A Graph Appears as Operations Run” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every training step and every real prediction begins with a correct forward pass.",
+  "explain_back_prompt": "Using the “A Graph Appears as Operations Run” situation, explain Forward Propagation without assuming the listener knows deep learning."
+}
