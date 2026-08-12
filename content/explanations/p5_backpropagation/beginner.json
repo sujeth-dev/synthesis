@@ -1,0 +1,16 @@
+{
+  "skill_id": "p5_backpropagation",
+  "depth": "beginner",
+  "title": "Tracing a Bad Prediction Back to Its Knobs",
+  "key_insight": "Backpropagation follows a bad result backward through the steps that made it and gives every adjustable weight its share of the correction.",
+  "body": "## Follow the Fault Backward\n\nA toy leaves a factory with a crooked wheel. Do not blame only the last worker; trace the toy backward and ask how much each station caused the final fault.\n\nA neural network does this after a bad prediction. Backpropagation follows the calculation backward and gives every adjustable weight a number showing its share of the error.\n\nBackpropagation finds the correction clues; an optimizer uses them to move the weights. Repeating predict, trace, and adjust is how the network learns.",
+  "common_mistakes": [
+    "Saying backpropagation directly updates the weights — it computes gradients; the optimizer applies updates.",
+    "Blaming only the final layer — earlier layers also influenced the prediction and receive their own gradients.",
+    "Thinking a large gradient means a weight is bad — it means the loss is locally sensitive to that weight.",
+    "Expecting one backward pass to finish learning — training repeats forward, backward, and update steps."
+  ],
+  "mini_exercise": "For prediction `input × weight`, use input `3`, weight `2`, and target `9`. Decide whether the weight should move up or down, and explain your answer before doing any formula.",
+  "real_world_usage": "When PyTorch runs `loss.backward()`, it traces through recorded tensor operations and fills each trainable parameter's `.grad` field. An optimizer such as SGD or Adam then uses those values.",
+  "explain_back_prompt": "Use the factory story to distinguish the forward pass, backpropagation, and the optimizer's update."
+}

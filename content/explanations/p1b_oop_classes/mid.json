@@ -1,0 +1,28 @@
+{
+  "skill_id": "p1b_oop_classes",
+  "depth": "mid",
+  "title": "Keeping a Model's State Beside Its Behavior",
+  "key_insight": "A useful class is a guarded toolbox: it keeps one model’s data and actions together and refuses actions that would leave the model in a broken state.",
+  "body": "## A Toolbox That Guards Its Tools\n\nA model's weights, settings, and prediction code are scattered across a notebook. Put them in one class, and each model object becomes a toolbox that owns the right data and actions.\n\nThe buttons on the toolbox—such as fit and predict—form its interface. The class can also guard rules, like refusing to predict before it has learned from examples.\n\nInheritance means starting with a ready-made toolbox, as PyTorch models do. Composition means placing smaller tools inside it, such as a layer; use that when one object uses another rather than being another kind of it.",
+  "common_mistakes": [
+    "Forgetting `super().__init__()` in a PyTorch module — the parent cannot register layers and parameters correctly without its setup.",
+    "Using inheritance only to borrow a convenient method — composition is clearer when the child is not genuinely a kind of the parent.",
+    "Letting callers edit every attribute freely — methods can protect rules such as 'fit before predict'."
+  ],
+  "mini_exercise": "Add a `reset()` method to `LinearModel` that sets `fitted` back to `False`, then confirm prediction raises the intended error until `fit()` is called again.",
+  "real_world_usage": "scikit-learn estimators use a shared class interface: `fit`, `predict`, and `score`. Because many model objects honor the same interface, tools such as cross-validation can operate on them without knowing the model's internal algorithm.",
+  "explain_back_prompt": "Why does a PyTorch model inherit from `nn.Module`, and why is its linear layer an example of composition rather than inheritance?",
+  "build_task": {
+    "title": "Build a tiny model-shaped class",
+    "context": "Practice keeping configuration, fitted state, and prediction behavior inside one object.",
+    "steps": [
+      "Create a `ThresholdClassifier` class whose setup stores a numeric threshold and sets `fitted` to `False`.",
+      "Add `fit(values)` so it replaces the threshold with the average of the values, marks the object fitted, and returns `self`.",
+      "Add `predict(value)` so it raises a clear error before fitting and otherwise returns 1 when the value is at least the threshold, or 0 when it is below.",
+      "Create two classifier objects with different training values and confirm that they keep different thresholds."
+    ],
+    "expected_output": "Two fitted objects print different thresholds and can give different predictions for the same input value.",
+    "hint": "Every value that belongs to one classifier should be stored on `self`.",
+    "starter_code": "class ThresholdClassifier:\n    def __init__(self, threshold=0.0):\n        # TODO: store threshold and fitted state\n        pass\n\n    def fit(self, values):\n        # TODO: learn the average threshold\n        pass\n\n    def predict(self, value):\n        # TODO: guard against prediction before fitting\n        pass"
+  }
+}

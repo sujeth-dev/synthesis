@@ -1,0 +1,16 @@
+{
+  "skill_id": "p2_calculus_basics",
+  "depth": "advanced",
+  "title": "When a Correct-Looking Gradient Is Wrong",
+  "key_insight": "A gradient can point badly on a computer when the test nudge is unclear, the path has a sharp corner, or the inputs live on wildly different scales.",
+  "body": "## A Compass That Lies on a Computer\n\nA model has gradient numbers, yet training still jumps or freezes. Check the compass by nudging a weight slightly both ways and seeing whether the measured error change agrees.\n\nThe test can fail if the nudge is too large or too tiny for the computer to store clearly. Sharp corners and hard choices can also leave no single smooth direction to follow.\n\nWildly different feature sizes make the landscape feel steep one way and flat another. Scaling the inputs and watching gradient sizes helps turn those misleading directions into useful steps.",
+  "common_mistakes": [
+    "Checking with only one nudge size — compare several, because a huge nudge is not local and a microscopic one can disappear in rounding.",
+    "Expecting one smooth direction at a sharp corner — the framework must choose a useful direction there.",
+    "Assuming every hard choice carries a gradient — rounding or choosing one item can break the smooth trail.",
+    "Limiting a giant gradient without investigating what made it giant."
+  ],
+  "mini_exercise": "For a simple bowl-shaped error curve, estimate the downhill direction using a large nudge, a medium nudge, and an extremely tiny nudge. Compare which answers stay stable.",
+  "real_world_usage": "When developers add a new differentiable operation, they often compare the framework’s gradient with careful tiny nudges on a small example before trusting it in a large model.",
+  "explain_back_prompt": "Explain how rounding, a sharp corner, and badly matched input scales can each make a gradient less useful."
+}

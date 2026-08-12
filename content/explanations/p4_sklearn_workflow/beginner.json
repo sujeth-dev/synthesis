@@ -1,0 +1,16 @@
+{
+  "skill_id": "p4_sklearn_workflow",
+  "depth": "beginner",
+  "title": "From House Records to a Price Guess",
+  "key_insight": "When tomorrow's house has features but no known price, scikit-learn offers one dependable route: create a model, fit past examples, then predict the unseen case.",
+  "body": "## A Price for Tomorrow's House\n\nPast houses have sizes, ages, and known prices; tomorrow's house has no price yet. First choose a model and create one copy of it.\n\nFit means show that model the past inputs and their known answers so it can learn a pattern. Predict means give it new inputs and ask it to use that pattern.\n\nKeep some answered houses out of fitting. Testing on those untouched rows shows whether the model learned a useful rule instead of merely remembering its homework.",
+  "common_mistakes": [
+    "Calling `predict` before `fit` — the model has not learned any relationship yet.",
+    "Fitting on the test data — that turns the supposed check into more training data.",
+    "Mixing up `X` and `y` — `X` holds input features; `y` holds the answers or targets.",
+    "Changing the split on every run and then comparing scores as if the data stayed identical."
+  ],
+  "mini_exercise": "Write the four core lines—import, create, fit, predict—on separate cards and arrange them. Then explain what information is available at each step.",
+  "real_world_usage": "Analysts use this same fit/predict pattern for price forecasting, churn prediction, fraud screening, and many other classical machine-learning tasks.",
+  "explain_back_prompt": "Tell the house-price story from raw rows to unseen predictions. Why must the test rows stay out of `fit`?"
+}

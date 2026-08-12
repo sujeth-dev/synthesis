@@ -1,0 +1,99 @@
+[
+  {
+    "id": "p5_bp_q1",
+    "skill_id": "p5_backpropagation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "What is backpropagation's main job during a training step?",
+    "options": [
+      { "id": "a", "text": "Compute how the loss changes with each contributing weight" },
+      { "id": "b", "text": "Choose the training dataset" },
+      { "id": "c", "text": "Replace every weight with zero" },
+      { "id": "d", "text": "Make predictions without a forward pass" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Backpropagation traces sensitivity from the loss toward earlier operations and produces gradients. The optimizer uses those gradients in a separate update step.",
+    "graph_placement_weight": { "p5_backpropagation": 1.0 }
+  },
+  {
+    "id": "p5_bp_q2",
+    "skill_id": "p5_backpropagation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Why does a training loop usually clear gradients before the next backward pass?",
+    "options": [
+      { "id": "a", "text": "Because parameter gradients accumulate unless they are cleared" },
+      { "id": "b", "text": "Because clearing gradients deletes the model" },
+      { "id": "c", "text": "Because a forward pass cannot use weights" },
+      { "id": "d", "text": "Because the loss must always be zero" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Frameworks add new gradient contributions to the existing `.grad` values. Clearing them avoids mixing the previous batch with the current one unless accumulation is deliberate.",
+    "graph_placement_weight": { "p5_backpropagation": 1.0 }
+  },
+  {
+    "id": "p5_bp_q3",
+    "skill_id": "p5_backpropagation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "An operation receives an upstream gradient during backpropagation. What does it normally send to an input?",
+    "options": [
+      { "id": "a", "text": "The upstream gradient multiplied by the operation's local derivative for that input" },
+      { "id": "b", "text": "The original input with no change" },
+      { "id": "c", "text": "A new random weight" },
+      { "id": "d", "text": "Only the final prediction" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "This is the chain rule in local form. The incoming sensitivity tells how the loss depends on the output; multiplying by the local derivative carries that sensitivity to the input.",
+    "graph_placement_weight": { "p5_backpropagation": 1.0, "p2_calculus_basics": 0.4 }
+  },
+  {
+    "id": "p5_bp_q4",
+    "skill_id": "p5_backpropagation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Why can activation checkpointing reduce training memory?",
+    "options": [
+      { "id": "a", "text": "It saves selected activations and recomputes missing forward pieces during backward" },
+      { "id": "b", "text": "It removes all model parameters" },
+      { "id": "c", "text": "It skips gradient computation" },
+      { "id": "d", "text": "It stores the full Hessian on the CPU" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Checkpointing keeps fewer intermediate activations alive. It spends extra compute later to recreate them, exchanging runtime for lower peak memory.",
+    "graph_placement_weight": { "p5_backpropagation": 1.0 }
+  },
+  {
+    "id": "p5_bp_q5",
+    "skill_id": "p5_backpropagation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A method needs local curvature only along one chosen direction in a million-parameter model. What is the practical derivative object to compute?",
+    "options": [
+      { "id": "a", "text": "A Hessian-vector product" },
+      { "id": "b", "text": "The full million-by-million Hessian" },
+      { "id": "c", "text": "No gradient at all" },
+      { "id": "d", "text": "A random prediction label" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A Hessian-vector product answers how curvature acts on the selected direction without storing the enormous full second-derivative table.",
+    "graph_placement_weight": { "p5_backpropagation": 1.0 }
+  },
+  {
+    "id": "p5_bp_order1",
+    "skill_id": "p5_backpropagation",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange one PyTorch training step in the correct order.",
+    "options": [
+      { "id": "a", "text": "prediction = model(inputs)" },
+      { "id": "b", "text": "loss.backward()" },
+      { "id": "c", "text": "loss = loss_fn(prediction, targets)" },
+      { "id": "d", "text": "optimizer.zero_grad()" },
+      { "id": "e", "text": "optimizer.step()" }
+    ],
+    "correct_answer": "d,a,c,b,e",
+    "explanation_after": "Clear old gradients, make a forward prediction, compute the loss, backpropagate to fill current gradients, and finally let the optimizer update the weights.",
+    "graph_placement_weight": { "p5_backpropagation": 1.0 }
+  }
+]

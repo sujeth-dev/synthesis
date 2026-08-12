@@ -1,0 +1,30 @@
+{
+  "skill_id": "p5_backpropagation",
+  "depth": "advanced",
+  "title": "The Backward Pass That Runs Out of Memory",
+  "key_insight": "Training needs a larger backpack than prediction because the return trip keeps clues, protects tiny numbers, and shares corrections between devices.",
+  "body": "## The Backpack Needed for the Return Trip\n\nA model fits in memory while predicting but runs out during training. The backward trip needs saved clues from the forward trip, called activations, so its backpack is much larger.\n\nCheckpointing packs fewer clues and recalculates the missing ones later. Smaller number formats save more room, while loss scaling makes tiny correction signals large enough to survive that smaller format.\n\nAcross many devices, each worker finds local gradients and then shares them so everyone updates alike. Good training balances saved memory, repeated work, number safety, and communication time.",
+  "common_mistakes": [
+    "Estimating training memory from weights alone — saved forward clues and optimizer records may take more room.",
+    "Keeping old calculation trails repeatedly instead of finding why the program still holds them.",
+    "Breaking the trail before the error and then expecting earlier weights to receive corrections.",
+    "Limiting large gradients without finding what made their size unstable.",
+    "Adding more devices while ignoring the time they spend exchanging corrections."
+  ],
+  "mini_exercise": "Run a small network normally, then use activation checkpointing on its middle part. Compare memory if possible and note the extra time spent rebuilding discarded clues.",
+  "real_world_usage": "Large-model training combines checkpointing, smaller number formats, protection for tiny gradients, and overlapping device communication to fit the work in memory and keep hardware busy.",
+  "explain_back_prompt": "Use the backpack story to explain why checkpointing, protecting tiny numbers, and sharing gradients solve three different training problems.",
+  "build_task": {
+    "title": "Inspect a real backward pass",
+    "context": "Make the backward trail visible before hiding it inside a full training loop.",
+    "steps": [
+      "Create a two-layer PyTorch network. Between the layers, use ReLU, a gate that replaces negative values with zero.",
+      "Send one small batch forward and measure the average squared gap between predictions and target answers.",
+      "Clear old gradients, run `loss.backward()`, and print each parameter beside one number that summarizes the size of its gradient.",
+      "Use `detach()` on the middle result to break the recorded trail, run again, and observe which earlier gradients disappear; then remove it to restore the trail."
+    ],
+    "expected_output": "The connected run shows a gradient-size number for every trainable parameter. After the deliberate break, parameters before that break receive no new correction from the loss.",
+    "hint": "Set gradients to `None` before each comparison so an old value cannot be mistaken for a new one.",
+    "starter_code": "import torch\nimport torch.nn as nn\n\nlayer1 = nn.Linear(4, 8)\nlayer2 = nn.Linear(8, 1)\nX = torch.randn(6, 4)\ny = torch.randn(6, 1)\n\n# TODO: forward through layer1, ReLU, and layer2\n# TODO: compute MSE, clear gradients, and call backward\n# TODO: print gradient norms and repeat with the hidden value detached"
+  }
+}

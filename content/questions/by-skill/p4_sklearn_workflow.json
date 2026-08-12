@@ -1,0 +1,115 @@
+[
+  {
+    "id": "p4_skl_q1",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Which method teaches a scikit-learn model from `X_train` and `y_train`?",
+    "options": [
+      { "id": "a", "text": "fit" },
+      { "id": "b", "text": "predict" },
+      { "id": "c", "text": "score" },
+      { "id": "d", "text": "transform" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "`fit` learns and stores information from the training examples. `predict` uses that learned state to produce answers for new inputs.",
+    "graph_placement_weight": { "p4_sklearn_workflow": 1.0 }
+  },
+  {
+    "id": "p4_skl_q2",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Why is part of the dataset kept as test data?",
+    "options": [
+      { "id": "a", "text": "To make the training table larger" },
+      { "id": "b", "text": "To check the fitted model on examples it did not learn from" },
+      { "id": "c", "text": "To replace the target values" },
+      { "id": "d", "text": "To avoid choosing a model" }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Held-out examples provide a fairer check of generalization. If the model fits those rows, they are no longer unseen evidence.",
+    "graph_placement_weight": { "p4_sklearn_workflow": 1.0 }
+  },
+  {
+    "id": "p4_skl_q3",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Why place `StandardScaler` and a model in one scikit-learn `Pipeline`?",
+    "options": [
+      { "id": "a", "text": "So scaling can be fitted on training data and reused consistently before prediction" },
+      { "id": "b", "text": "So the scaler can read the test targets" },
+      { "id": "c", "text": "So `predict` retrains both steps on every request" },
+      { "id": "d", "text": "So train/test splitting is no longer needed" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A pipeline keeps learned preprocessing inside the same fit boundary as the model. Test data receives the saved training transformation instead of influencing it.",
+    "graph_placement_weight": { "p4_sklearn_workflow": 1.0 }
+  },
+  {
+    "id": "p4_skl_q4",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "A dataset contains repeated visits from the same patients. Which evaluation choice best prevents one patient's records from appearing in both training and validation?",
+    "options": [
+      { "id": "a", "text": "A group-aware split using patient ID" },
+      { "id": "b", "text": "A larger random seed" },
+      { "id": "c", "text": "Fitting the test data first" },
+      { "id": "d", "text": "Removing the target column" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Grouping by patient keeps all visits from one person on one side of a fold. A random row split could leak that person's patterns into both training and validation.",
+    "graph_placement_weight": { "p4_sklearn_workflow": 1.0 }
+  },
+  {
+    "id": "p4_skl_q5",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why should a custom estimator create learned attributes such as `target_mean_` during `fit` rather than `__init__`?",
+    "options": [
+      { "id": "a", "text": "`__init__` should record configuration, while `fit` should create state learned from the supplied training data" },
+      { "id": "b", "text": "Python does not allow numbers in `__init__`" },
+      { "id": "c", "text": "Learned state must be shared by every estimator object" },
+      { "id": "d", "text": "Cross-validation never calls `fit`" }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Keeping configuration separate from learned state lets scikit-learn clone a clean estimator for each fold, then fit that clone only on the fold's training rows.",
+    "graph_placement_weight": { "p4_sklearn_workflow": 1.0 }
+  },
+  {
+    "id": "p4_skl_order1",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange these lines into a working scikit-learn training flow.",
+    "options": [
+      { "id": "a", "text": "model = LinearRegression()" },
+      { "id": "b", "text": "model.fit(X_train, y_train)" },
+      { "id": "c", "text": "predictions = model.predict(X_test)" },
+      { "id": "d", "text": "from sklearn.linear_model import LinearRegression" }
+    ],
+    "correct_answer": "d,a,b,c",
+    "explanation_after": "Import the class, create a model object, fit that object on training examples, and only then ask it to predict unseen examples.",
+    "graph_placement_weight": { "p4_sklearn_workflow": 1.0 }
+  },
+  {
+    "id": "p4_skl_fill1",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that fills the blank: `model.____(X_train, y_train)`",
+    "options": [
+      { "id": "a", "text": "fit" },
+      { "id": "b", "text": "predict" },
+      { "id": "c", "text": "score" },
+      { "id": "d", "text": "transform" }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "fit",
+    "explanation_after": "`fit` is the training call because it receives both input examples and their known answers. `predict` receives only inputs and uses state that was already learned.",
+    "graph_placement_weight": { "p4_sklearn_workflow": 1.0 }
+  }
+]

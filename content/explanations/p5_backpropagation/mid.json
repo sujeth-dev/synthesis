@@ -1,0 +1,16 @@
+{
+  "skill_id": "p5_backpropagation",
+  "depth": "mid",
+  "title": "Multiplying Local Effects Along the Route",
+  "key_insight": "Backpropagation passes blame backward, scaling it by each step’s own effect and adding blame where several routes meet.",
+  "body": "## Pass the Blame Along the Chain\n\nAn early weight changes one number, which changes the next, which finally changes the error. Backpropagation starts at the error and walks that same chain in reverse.\n\nAt each step, it combines the blame arriving from later work with that step's own effect. This multiply-as-you-trace rule is the chain rule.\n\nIf one value feeds two routes, both routes add their blame before the walk continues. The result is one collected gradient, or correction clue, for every weight.",
+  "common_mistakes": [
+    "Passing blame backward without scaling it by what the current step actually did.",
+    "Ignoring a second route from the same value to the error — both routes contribute and must be added.",
+    "Changing the weights before the backward walk has produced current correction clues.",
+    "Leaving the previous batch’s correction clues in place when you did not mean to combine batches."
+  ],
+  "mini_exercise": "Draw a three-station chain. Give each station a simple multiplier, start with one unit of blame at the end, and carry it backward one station at a time.",
+  "real_world_usage": "Automatic-differentiation systems remember the tensor steps from prediction, then ask each step how to pass the final error backward until every parameter has a gradient.",
+  "explain_back_prompt": "What blame arrives from later work, what does the current step do to it, and why do two returning routes add together?"
+}

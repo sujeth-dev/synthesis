@@ -1,0 +1,17 @@
+{
+  "skill_id": "p5_backpropagation",
+  "depth": "expert",
+  "title": "Differentiating the Backward Pass Itself",
+  "key_insight": "You can trace one error backward, trace that backward work again, or test curvature in one direction without ever storing every possible connection.",
+  "body": "## Retracing the Return Trip\n\nMillions of weights lead to one error score. Reverse-mode automatic differentiation carries concern for that one score backward through each recorded step, without building a giant table of every possible connection.\n\nSometimes we ask how the correction clues themselves would change. Recording the first backward trip so it can be traced again is called double backpropagation, and it costs extra memory.\n\nAll second-change clues together form a huge table called a Hessian. Usually we test only one chosen direction through it—a Hessian-vector product—so the useful answer fits without storing the whole table.",
+  "common_mistakes": [
+    "Saying the backward method stores the full table of every local connection — it carries only the needed concern through each step.",
+    "Forgetting to add correction contributions when one value feeds several later paths.",
+    "Discarding the first backward trail and then asking to trace how its corrections change.",
+    "Building the entire second-change table when the task asks about one chosen direction.",
+    "Recording every backward trail just in case, then mistaking its expected memory cost for a leak."
+  ],
+  "mini_exercise": "Choose a simple curve, find its slope at one point, then compare the slope just to the left and right. Explain how that slope change describes the curve’s bend.",
+  "real_world_usage": "Some training methods punish overly sensitive predictions or study how one update affects another. They record the first backward calculation so a second backward question can pass through it.",
+  "explain_back_prompt": "Explain the first backward trip, tracing that trip again, the full table of bends, and why testing one bend direction is much cheaper."
+}

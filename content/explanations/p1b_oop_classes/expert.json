@@ -1,0 +1,16 @@
+{
+  "skill_id": "p1b_oop_classes",
+  "depth": "expert",
+  "title": "When Python Must Decide What a Class Means",
+  "key_insight": "Python has separate rulebooks for choosing between inherited methods, building class blueprints, and letting threads take turns with pure Python work.",
+  "body": "## Who Gets the Next Turn?\n\nA child class has two parents, and both offer the same method. Python writes one fair lookup route called the method resolution order; its C3 rule keeps earlier family promises from being silently reversed.\n\nBefore any object exists, something must build the class blueprint itself. That class-builder is called a metaclass; frameworks can use it to check or register a class as soon as the blueprint is made.\n\nNow picture one key for the pure-Python workroom. CPython's Global Interpreter Lock lets one thread hold that key at a time, though waiting jobs and fast outside libraries can release it.",
+  "common_mistakes": [
+    "Thinking the parent-call helper always names one fixed parent — it continues along Python’s chosen lookup route.",
+    "Using a class-building rulebook for a check that could happen more simply when an ordinary object is created.",
+    "Saying the interpreter lock stops every kind of parallel work — waiting tasks and many fast numerical libraries can release it.",
+    "Combining several parent classes when their methods expect different inputs or refuse to pass control onward."
+  ],
+  "mini_exercise": "Create three small parent classes that each print its name and pass control onward. Swap the first two parents, print Python’s lookup route, and predict the new print order.",
+  "real_world_usage": "Frameworks can inspect a class when its blueprint is created, while numerical libraries send heavy calculations to fast compiled code that can work outside Python’s one-at-a-time lock.",
+  "explain_back_prompt": "Using the family-route, blueprint-builder, and workroom-key stories, explain the job of the method lookup order, its consistency rule, a metaclass, and the interpreter lock."
+}

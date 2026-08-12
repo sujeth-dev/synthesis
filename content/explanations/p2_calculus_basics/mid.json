@@ -1,0 +1,16 @@
+{
+  "skill_id": "p2_calculus_basics",
+  "depth": "mid",
+  "title": "Tracing a Small Change Through a Model",
+  "key_insight": "The chain rule follows one nudge through a line of steps and combines how strongly every step passes that nudge onward.",
+  "body": "## Passing a Nudge Down the Line\n\nPush the first domino and several later pieces move. To learn how strongly the last piece reacts, follow the nudge through every link and combine each link's effect.\n\nThat combining rule is called the chain rule. If one step triples a change and the next doubles it, the final change is six times as large.\n\nA model uses this rule to connect an early weight to the final error. Doing it for every weight gives a gradient: one downhill clue for each adjustable knob.",
+  "common_mistakes": [
+    "Adding the links’ effects when they happen one after another — each link scales the change passed to the next.",
+    "Changing every knob at once when checking one knob’s effect — hold the others still for that one check.",
+    "Walking toward larger error when the goal is to reduce it — training moves the other way.",
+    "Confusing the downhill clue with the step size — the learning rate separately decides how far to move."
+  ],
+  "mini_exercise": "Imagine the first machine triples a nudge and the second doubles it. Explain why the final change is six times the starting nudge, then invent a third machine and continue the chain.",
+  "real_world_usage": "During neural-network training, every layer reports how it changed an incoming number. Automatic differentiation joins those small reports into one correction clue for every adjustable weight.",
+  "explain_back_prompt": "Use a row of dominoes or machines to explain why effects along one chain are multiplied rather than added."
+}

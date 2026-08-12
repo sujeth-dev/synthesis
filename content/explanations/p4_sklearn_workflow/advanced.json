@@ -1,0 +1,17 @@
+{
+  "skill_id": "p4_sklearn_workflow",
+  "depth": "advanced",
+  "title": "Choosing a Workflow That Holds Up Beyond One Split",
+  "key_insight": "A dependable model wins across several fair rehearsals and travels with the exact cleaning recipe, data rules, and software needed to repeat its performance.",
+  "body": "## Five Rehearsals, Not One Lucky Show\n\nOne train-and-test split may flatter a model by chance. Cross-validation repeats the rehearsal with several different held-out groups, revealing both its usual score and how much that score wobbles.\n\nEvery learned cleaning step must repeat inside each rehearsal. Time data must keep the future out of the past, while repeated records from one person must stay together.\n\nThe winning pipeline should travel to production as one labeled package, with its data recipe and software versions. A good score is not enough if the package is too slow, too large, or impossible to repeat.",
+  "common_mistakes": [
+    "Mixing future records into past training, or splitting repeated records from one person across both sides.",
+    "Teaching the data cleaner before each fair rehearsal begins, which lets held-out rows influence training.",
+    "Saving only the final predictor and rebuilding its cleaning steps by hand in the service.",
+    "Running too many trials at once without checking how many copies of the data and model fill memory.",
+    "Opening a saved model package from an untrusted source, which can run unwanted code."
+  ],
+  "mini_exercise": "For repeated customer visits over time, describe one split that keeps each customer together and another that always trains on the past before checking the future.",
+  "real_world_usage": "Teams package feature cleaning and prediction together, test that full package with a split shaped like future data, and store its versions and expected columns for serving.",
+  "explain_back_prompt": "Why are several fair rehearsals stronger than one split, and what must travel with the fitted model so production can repeat the same work?"
+}

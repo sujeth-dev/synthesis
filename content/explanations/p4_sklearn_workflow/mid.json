@@ -1,0 +1,29 @@
+{
+  "skill_id": "p4_sklearn_workflow",
+  "depth": "mid",
+  "title": "A Training Flow That Does Not Leak Tomorrow into Yesterday",
+  "key_insight": "When a test score looks suspiciously perfect, the workflow must prove that every learned preprocessing step saw training data only before touching held-out rows.",
+  "body": "## Keep the Answer Sheet Sealed\n\nA classifier gets a perfect test score because the data cleaner peeked at every row before the split. The model has indirectly seen the answer sheet; this mistake is called data leakage.\n\nA scikit-learn pipeline is a sealed assembly line. During fit, each cleaning step learns only from training rows, then the model learns from the cleaned result.\n\nDuring predict, the saved cleaning rules prepare new rows without relearning. This keeps training and prediction in the same order while the held-out data stays a fair check.",
+  "common_mistakes": [
+    "Fitting a scaler or imputer on the full dataset before splitting — its learned values then contain test information.",
+    "Calling `fit` again on test data when you mean `predict` — that changes the model before evaluation.",
+    "Relying on an estimator's default `score` without checking what metric it returns.",
+    "Applying different preprocessing code paths during training and prediction — a pipeline keeps the sequence together."
+  ],
+  "mini_exercise": "Wrap `StandardScaler` and `LinearRegression` in a pipeline, fit on the diabetes training split, and print five predictions beside their five actual values.",
+  "real_world_usage": "scikit-learn pipelines are used to package preprocessing and estimation as one object for cross-validation and deployment. The same fitted sequence can be saved and applied consistently to later requests.",
+  "explain_back_prompt": "Explain how preprocessing can leak test information and how a pipeline keeps `fit`, `transform`, and `predict` in the right places.",
+  "build_task": {
+    "title": "Train your first real model",
+    "context": "You have arranged the flow and named the training method; now run the whole path on a real built-in dataset.",
+    "steps": [
+      "Load the diabetes dataset with `load_diabetes(return_X_y=True)`.",
+      "Split it with `train_test_split`, keeping 20% for testing and setting `random_state=42`.",
+      "Create a `LinearRegression` object and fit it on `X_train` and `y_train`.",
+      "Predict on `X_test`, then print the first five predictions beside the first five actual values."
+    ],
+    "expected_output": "Two printed lists or arrays of five numbers each. Each prediction should sit near its actual value, but the two lists should not be identical.",
+    "hint": "Fit on train and predict on test—never fit on the test data.",
+    "starter_code": "from sklearn.datasets import load_diabetes\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\nX, y = load_diabetes(return_X_y=True)\n# TODO: split the data\n# TODO: create and fit the model\n# TODO: predict and print five predictions beside five actual values"
+  }
+}
