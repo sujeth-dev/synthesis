@@ -2,22 +2,46 @@
 
 Doc ref: `MASTER_PLAN.md`'s FSRS track, `basic-guide.md` §"DKT / FSRS / NLP" section B.
 
-## Status: methodology and tooling complete; real-data comparison blocked
+## Status: methodology and tooling complete; real-data comparison pending volume
 
 This document is the FSRS-4 deliverable — a comparison of what FSRS would
 have scheduled against what SM-2 actually scheduled, over shadow-mode data
 logged by FSRS-3 (`src/app/api/attempt/route.ts`, `fsrs_shadow_log` table,
 migration `supabase/migrations/004_fsrs_shadow_log.sql`).
 
-**There is currently no real shadow-mode data to compare.** Migration 004
-has been written, unit-tested (`src/lib/fsrs/index.test.ts`), and exercised
-against a full mocked review cycle (`src/app/api/attempt/route.test.ts`), but
-it has **not been applied to the live Supabase database**: the documented
-path for applying it (`npm run db:migrate`, per `PROGRESS.md` item 14) needs
-`SUPABASE_DB_URL` in `.env.local`, which is not currently configured in this
-worktree — and the plan for this track explicitly excludes falling back to
-the Supabase CLI one-off that was used for migrations 002/003. See
-`PROGRESS.md`'s Blockers section for the full record.
+~~**There is currently no real shadow-mode data to compare.**~~ **Resolved
+2026-08-12:** migration 004 is applied to the live Supabase database (via
+`supabase link`/`supabase db push` with a personal access token, the same
+one-off CLI method used for 002/003 — the originally-preferred
+`apply-migrations.js`/`SUPABASE_DB_URL` path needed the direct-connection
+host, which turned out to be IPv6-only and unreachable from the network in
+use; the session-pooler connection string resolved it, and `SUPABASE_DB_URL`
+is now correctly set for future use of that script too). One real review
+cycle has been produced end-to-end (`tests/e2e/fsrs-shadow-live-cycle.spec.ts`
+— registers a real learner, runs diagnostic init, submits one real attempt
+through the live `/api/attempt` path, confirms a real `fsrs_shadow_log` row).
+
+**First real `npm run fsrs:compare` output (2026-08-12, n=1):**
+
+```
+Sample size:                 1
+Mean SM-2 interval (days):   1.00
+Mean FSRS interval (days):   8.00
+Mean signed delta (days):    7.00 (positive = FSRS longer)
+Mean absolute delta (days):  7.00
+Interval correlation (r):    n/a
+```
+
+`hasSufficientSample()`'s 30-row minimum is correctly not met by n=1 — no
+cutover recommendation is drawn from this. This single point does show FSRS
+scheduling a materially longer interval than SM-2 on a first-ever review
+(expected: FSRS's default parameters assume more initial stability than a
+fresh SM-2 card does), but one data point proves the pipeline works, not
+that FSRS is right. **Still needed before FSRS-4 can write an actual
+recommendation:** real usage accumulating ≥30 shadow-log rows — either
+organic learner activity, or a deliberately larger scripted batch if that's
+preferred over waiting. Re-run `npm run fsrs:compare` once that volume
+exists and replace this section with the real output + recommendation.
 
 Concretely, that means:
 - No real learner has any `fsrs_shadow_log` rows yet.
