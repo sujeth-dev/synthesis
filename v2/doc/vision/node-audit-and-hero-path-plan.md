@@ -179,3 +179,48 @@ The phase→topic→node structure above is designed so future addition, deletio
    - `scripts/validate-content.js` already plays the correctness-backstop role a generation pipeline needs (JSON validity, question-ID cross-references, cycle detection, phase-evaluation Bloom coverage). Recommend it gain a few more checks *when Phase 4-8 authoring actually starts*, not in this session: topic-field validity, a minimum question count per node (closing A5), and a dead-end-leaf warning (closing A2/A3). All are deterministic and cheap, the same role the existing checks already play — and specifically useful for catching bad LLM-generated output before it merges.
 
 Net effect: authoring Phase 4-8 (or Phase 2's two new A6 nodes, or any future Phase 9+) becomes "fill in N short content briefs against two fixed templates, let the validator catch structural mistakes" rather than N bespoke one-off authoring passes — and the same pipeline works unchanged for corrections to Phase 1-3 too.
+
+---
+
+## C. Hands-on "build it yourself" mechanic — design, not implementation
+
+This is a design for a future construct, matching the scope the human direction for this session set: "just the basic draft of it is more than enough now." No engine code or content is built here.
+
+### What already exists in the schema (important — not starting from zero)
+
+- `QuestionFormat` already includes `'code'` and `'order'` alongside `'mcq'`/`'fill'`/`'explain'` (`src/types/index.ts:3`) — **declared but never used** by any of the 45 real skills (every one of the 210 guided questions is `'mcq'`, per `PROGRESS.md`'s P2-2A entries).
+- `Explanation.build_task?: BuildTask` already exists (`title`, `context`, `steps[]`, `expected_output`, `hint?`, `starter_code?`) and `ExplanationPanel.tsx` already renders a "Build it" tab with a "Mark done" button when `build_task` is populated (`src/components/learning/ExplanationPanel.tsx:173-207`) — **but this is currently self-report only**: it never calls `insertAttempt()`, never touches BKT, is pure UI state. No content file populates `build_task` except the template.
+- The fuller vision (`Research/lab/09-library.md`) already specs a real in-browser **Code Editor environment** + **Debug the Machine** construct with live test-pass/fail — documented in `MASTER_PLAN.md` as `P3-2` ("Promise #9"), explicitly a later Phase 3/Track 2 item, not something to build now.
+
+### Design: a 3-tier ladder using only what the schema already declares
+
+The requested UX is "complete hand-holding," "choosing the right option," "building brick by brick, very slowly" — that maps directly onto a ladder of increasingly-free-form interaction, not a jump straight to typing code:
+
+**Tier 1 — "Arrange it" (`format: 'order'`).** Learner drags given code lines/blocks into correct order. No new schema needed: reuse `Question.options[]` as the list of draggable blocks, and `correct_answer` as a delimited canonical sequence (e.g. `"b,d,a,c"`). Deterministic check, same `insertAttempt()`/BKT path as MCQ today, no free-text grading risk. This is the most "brick by brick" tier and matches the requested UX (choose/arrange, not type).
+
+**Tier 2 — "Fill it" (`format: 'fill'`, but chip-based, not free-text).** `'fill'` already exists in the schema but was **actively abandoned for free-text answers** in P2-2A specifically because of false negatives from spelling/typo variation (`PROGRESS.md` item 13 — "converted all 210 populated guided questions to validated MCQs, including rewriting the 16 former fill-in questions"). Repeating that mistake for code-fill would hit the same wall. Fix: present the blank with a small set of option chips (reuse `options[]` + `correct_option_id`, exactly like MCQ) rather than a free-text input — "choose the right token for this blank," not "type the right token." Same deterministic grading, same evidence pipeline, no new false-negative risk.
+
+**Tier 3 — "Build it" (self-report `build_task`, ungraded).** Keep the existing `ExplanationPanel` build_task walkthrough as **pure guided practice, deliberately not fed into BKT**. Self-reported "I did this" is not evidence of competence — feeding it into `insertAttempt()` would inflate `p_know` without real signal, which contradicts the rigor already established in `P0-3`'s combined-evidence design and the reasoning behind dropping `BLOOM-5`. This tier is where the full step-by-step "clean table, brick by brick" experience lives; it stays a scaffolded walkthrough with hints and starter code, offered as an optional deep-practice add-on after Tier 1/2 questions are answered correctly — not a scored checkpoint.
+
+**Explicitly out of scope for this ladder:** real free-form code execution/grading (`format: 'code'` actually running learner code against a test suite). That's `P3-2`'s Code Editor/Debug the Machine construct, already scoped and gated elsewhere. Tiers 1-3 above are designed to work *now*, without waiting for it, and Tier 3 can later graduate into the real Code Editor once `P3-2` ships.
+
+**No new `question_format` or schema field is needed.** Everything above fits `Question`, `BuildTask`, and `Explanation` exactly as already defined in `src/types/index.ts`.
+
+### Concrete example — `p4_sklearn_workflow` (Phase 4, new node from Section B)
+
+- **Tier 1 (`order`, `difficulty_tier: 'same'`)**: stem "Arrange these lines into a working scikit-learn training flow." Options = 4 shuffled lines: `model = LinearRegression()`, `model.fit(X_train, y_train)`, `predictions = model.predict(X_test)`, `from sklearn.linear_model import LinearRegression`. `correct_answer: "d,a,b,c"` (import → instantiate → fit → predict).
+- **Tier 2 (`fill`-as-chips, `difficulty_tier: 'harder'`)**: stem "Fill in the blank: `model.____(X_train, y_train)`." Options = `["fit", "predict", "score", "transform"]`, `correct_option_id` = fit's id, `explanation_after` explains why `fit` (not `predict`) is the training call.
+- **Tier 3 (`build_task` on the `mid` or `advanced` explanation)**: title "Train your first real model." Context: "You've arranged the flow and named the method — now run it end to end." Steps: load a small built-in dataset (e.g. `sklearn.datasets.load_diabetes`), split it with `train_test_split`, instantiate and fit a `LinearRegression`, predict on the test set and print the first 5 predictions vs. actual values. `expected_output`: "Two printed lists of 5 numbers each, close but not identical." `hint`: "Remember: fit on train, predict on test — never fit on test data." `starter_code`: a scaffold with the import already done and a `# TODO` for the rest.
+
+This example is illustrative for this plan — real content authoring (actual question text for all 72 new nodes, actual explanations) happens in the queued follow-up session, not here.
+
+---
+
+## E. Open questions to flag for human decision
+
+1. **Phase 1 relabeling** (A1) — split "Computer Basics" into two phases, or leave the label as-is since it already shipped? Leaning toward "leave as-is, note it," given re-labeling a shipped phase has UI/URL/analytics ripple effects beyond this audit's scope — but it's the human's call.
+2. **Candidate Phase 1-2 additions** (A4: OOP, exceptions, file I/O, list comprehensions; A6: calculus basics, data cleaning/preprocessing) — add these before Phase 4-8 authoring starts, or accept the gap and patch it later? Recommendation: add OOP and calculus at minimum before Phase 5 content is authored (both are now hard prerequisites for Phase 5's `neural_network_basics`/`backpropagation`), plus data cleaning before Phase 4's `sklearn_workflow`. Exceptions, file I/O, and list comprehensions are lower urgency and can follow later.
+3. **The originally-referenced "~41-node" figure** — no matching draft was found anywhere in this repo; Section B's breakdown (now 72 nodes after the depth-scaling revision) is freshly derived and may diverge from whatever was actually discussed before this planning pass started. Worth a side-by-side check against that original source before treating Section B as final.
+4. **Dead-end edges** (A2/A3) — safe/cosmetic to leave as-is; only worth fixing if a human wants the concept-map visualization to look cleaner, not because anything is functionally broken.
+5. **`topic` as a first-class schema field** (A1.5/Section D) — recommendation is yes, add `topic`/`topic_order` to `SkillNode` in `src/types/index.ts`, since it's the difference between "an LLM generation pipeline gets a deterministic slot" and "grouping stays an inferred convention." This is a `src/` change, outside this session's edit scope by the task's own guardrails — needs explicit human sign-off, and would need to happen before or alongside the follow-up authoring session, not after.
+6. **Total scope check** — the curriculum has grown from 53 nodes (45+8) to a proposed 119 across this full plan (Phase 2: +2, Phase 4-8: +64). This is a substantially bigger authoring lift than the original task framing implied. Worth an explicit go/no-go on the full 119-node scope (vs., e.g., shipping Phase 4-5 first at this depth and revisiting 6-8 later) before the follow-up session commits to authoring all of it in one pass.
