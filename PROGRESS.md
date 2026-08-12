@@ -12,7 +12,7 @@ None — the BLOOM track (BLOOM-1 through BLOOM-6, BLOOM-5 dropped) is fully don
 
 ## Next action
 
-Per `DEVELOPMENT_LOOP.md` Step 2, the sequential path is still **P2-3** (complete Phases 4-8 content, discovery-first) — unblocked since BLOOM-6 is done, but now has a concrete plan instead of an 8-stub-node placeholder scope. A full audit + planning pass (2026-08-12, see below and `v2/doc/vision/node-audit-and-hero-path-plan.md`) revised the target to 72 new Phase 4-8 nodes (weighted by subject depth) plus 2 new Phase 2 nodes and 1 flagged Phase 1 addition. **Await explicit human direction before starting authoring** — consistent with this project's "settle direction before implementing" convention, and doubly so here since the plan doc's 6 open questions (topic-field schema change, phase-relabeling, total 119-node scope go/no-go, etc.) need a decision before content authoring begins, not during it.
+Per `DEVELOPMENT_LOOP.md` Step 2, the sequential path is still **P2-3** (complete Phases 4-8 content, discovery-first) — unblocked since BLOOM-6 is done, and as of 2026-08-12 all 6 open questions from the node-audit plan are resolved (see `v2/doc/vision/node-audit-and-hero-path-plan.md` Section E and the two 2026-08-12 changelog entries in `MASTER_PLAN.md`). P2-3 itself remains `not_started` — the plan is settled, but the authoring session (Set 1 through Set 6, per the finalized plan) has not begun. Next step is starting that authoring session.
 
 ---
 
