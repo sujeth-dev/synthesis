@@ -234,6 +234,19 @@
     "why_it_matters": "Every AI project starts with imports: numpy, pandas, torch, sklearn. Knowing how modules work lets you use any library confidently."
   },
   {
+    "id": "p1b_oop_classes",
+    "label": "Classes & Objects",
+    "phase": "phase_1_computer_basics",
+    "difficulty_base": 3,
+    "question_ids": ["p1b_oop_q1","p1b_oop_q2","p1b_oop_q3","p1b_oop_q4","p1b_oop_q5","p1b_oop_order1","p1b_oop_fill1"],
+    "explanation_ids": { "beginner": "p1b_oop_beg", "mid": "p1b_oop_mid", "advanced": "p1b_oop_adv", "expert": "p1b_oop_exp" },
+    "tags": ["oop","class","object","self","python"],
+    "deprecated": false,
+    "intuition": "A class is a blueprint for building many similar things that each carry their own data and their own behavior.",
+    "analogy": "Like a cookie cutter: the cutter (class) is one shape, but every cookie (object) it stamps out is its own separate cookie, even though they're all the same shape.",
+    "why_it_matters": "Every neural network in PyTorch is written as a class — 'class Model(nn.Module):' — because a model needs to carry its own weights and its own forward-pass logic together, exactly what a class is for."
+  },
+  {
     "id": "p2_lists_arrays",
     "label": "Lists & Arrays",
     "phase": "phase_2_cs_data",
@@ -414,6 +427,19 @@
     "intuition": "A linear function is the simplest possible transformation: scale an input by a weight, add a bias, get an output. y = Wx + b.",
     "analogy": "Like a dimmer switch on a light. The brightness (output) is always a scaled version of how much you turn it (input) — predictable, proportional.",
     "why_it_matters": "Every neuron in a neural network is a linear transformation. y = Wx + b is the equation at the heart of every layer."
+  },
+  {
+    "id": "p2_calculus_basics",
+    "label": "Derivatives & Gradients",
+    "phase": "phase_2_cs_data",
+    "difficulty_base": 4,
+    "question_ids": ["p2_calc_q1","p2_calc_q2","p2_calc_q3","p2_calc_q4","p2_calc_q5"],
+    "explanation_ids": { "beginner": "p2_calc_beg", "mid": "p2_calc_mid", "advanced": "p2_calc_adv", "expert": "p2_calc_exp" },
+    "tags": ["calculus","derivative","gradient","slope","math"],
+    "deprecated": false,
+    "intuition": "A derivative measures how fast something is changing right now — the slope of a curve at a single point.",
+    "analogy": "Like a speedometer. Your car's total distance travelled is one number; your speedometer tells you how fast that number is currently changing. A derivative is a speedometer for any changing quantity, not just distance.",
+    "why_it_matters": "Every neural network learns by asking 'if I nudge this weight slightly, does the error go up or down?' — that question IS a derivative. Backpropagation is nothing but derivatives, computed automatically, for millions of weights at once."
   },
   {
     "id": "p2_data_exploration",
@@ -611,6 +637,19 @@
     "why_it_matters": "Most practical ML — spam detection, image recognition, translation — is supervised learning."
   },
   {
+    "id": "p4_sklearn_workflow",
+    "label": "The scikit-learn Workflow",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 3,
+    "question_ids": ["p4_skl_q1","p4_skl_q2","p4_skl_q3","p4_skl_q4","p4_skl_q5","p4_skl_order1","p4_skl_fill1"],
+    "explanation_ids": { "beginner": "p4_skl_beg", "mid": "p4_skl_mid", "advanced": "p4_skl_adv", "expert": "p4_skl_exp" },
+    "tags": ["sklearn","workflow","fit-predict","train-test-split"],
+    "deprecated": false,
+    "intuition": "Nearly every classical ML model in scikit-learn follows the exact same four-step pattern: import, instantiate, fit, predict.",
+    "analogy": "Like learning to drive one car — once you know the pattern (key, start, accelerate, brake), you can drive almost any car, because they all share the same basic interface.",
+    "why_it_matters": "This fit/predict pattern is the single most-used piece of code in applied machine learning — from a two-line logistic regression to a production pipeline, the pattern never changes, only the model does."
+  },
+  {
     "id": "p5_neural_network_basics",
     "label": "Neural Networks",
     "phase": "phase_5_deep_learning",
@@ -622,6 +661,19 @@
     "intuition": "A neural network is a chain of matrix multiplications with non-linear functions in between.",
     "analogy": "Like a series of filters — each layer extracts progressively more abstract features from the input.",
     "why_it_matters": "Every modern AI system — LLMs, image models, voice assistants — is a neural network."
+  },
+  {
+    "id": "p5_backpropagation",
+    "label": "Backpropagation",
+    "phase": "phase_5_deep_learning",
+    "difficulty_base": 5,
+    "question_ids": ["p5_bp_q1","p5_bp_q2","p5_bp_q3","p5_bp_q4","p5_bp_q5","p5_bp_order1"],
+    "explanation_ids": { "beginner": "p5_bp_beg", "mid": "p5_bp_mid", "advanced": "p5_bp_adv", "expert": "p5_bp_exp" },
+    "tags": ["backpropagation","chain-rule","gradients","training"],
+    "deprecated": false,
+    "intuition": "Backpropagation is the chain rule, applied layer by layer, to figure out how much each individual weight contributed to the final error.",
+    "analogy": "Like tracing blame backward through an assembly line: if the final product is defective, you don't just blame the last worker — you trace back through every station to see how much each one's mistake contributed, then correct each one proportionally.",
+    "why_it_matters": "Backpropagation is THE algorithm that makes training a neural network possible at all — without an efficient way to compute how every one of millions of weights should change, deep learning simply wouldn't work."
   },
   {
     "id": "p6_transformers",

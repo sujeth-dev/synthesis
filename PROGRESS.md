@@ -6,13 +6,20 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-None — the BLOOM track (BLOOM-1 through BLOOM-6, BLOOM-5 dropped) is fully done and pushed (see item 16). A node-audit + hero-path planning pass for P2-3 is now also done, docs-only, committed locally but not pushed (see the 2026-08-12 loop iteration log entry below).
+**P2-3 authoring session started 2026-08-12, currently paused mid-checkpoint — not committed.** Per the plan doc's mandatory checkpoint, a session picked 5 representative nodes (1 existing-content revision + 4 new) and drafted their full content in-conversation for tone/depth/style approval, exactly as instructed, before writing anything to disk. Two things happened before approval was reached:
+1. The session started writing files, was stopped, and asked to preview content in-chat first instead — correct per the checkpoint's intent, but should have been the approach from the start.
+2. Once previewed, human feedback corrected the draft's approach: **all four explanation depths (beginner/mid/advanced/expert) must stay plainly, human-readably written — not just beginner** — then sharpened further: **"not just plain mention from baby level."** The drafted `advanced`/`expert` sections for the harder sample nodes (OOP internals, calculus, backpropagation) leaned too heavily on unexplained jargon (GIL internals, MRO/C3 linearization, Jacobian-vector products, metaclasses) for depth instead of staying plain while covering harder material. The point isn't a plain-language preamble followed by dense jargon — every depth must genuinely keep teaching plainly and cumulatively, sustained the whole way through, "expert" meaning harder material taught with the same care rather than material that assumes the reader already has that background. Saved as a standing rule in this session's memory (`feedback_content_plain_language_all_depths`) so it applies to all future authoring here, not just this batch.
+
+**Actual repo state right now (uncommitted, in the `synaptic-nodes` worktree / `nodes-track` branch):**
+- `content/graph/nodes.json` and `content/graph/edges.json` already have 4 new node entries + their edges added: `p1b_oop_classes` (Phase 1, placeholder phase — see note below), `p2_calculus_basics` (Phase 2), `p4_sklearn_workflow` (Phase 4), `p5_backpropagation` (Phase 5). This graph-shape work does not depend on prose style and does not need to be redone.
+- **No explanation or question content files exist yet** for any of the 4 new nodes, and `p2_math_matrices`'s existing beginner/mid/advanced files (identified as needing revision — currently byte-for-byte duplicate bodies across those three depths) have not been touched.
+- The `topic`/`topic_order` schema field (E5) and the Phase 1 split into a new `phase_1b_programming_basics` key (E1) were deliberately **not** done as part of this sample — flagged as real Set 1 structural work with its own risk (splitting Phase 1 forces re-splitting the already-shipped `p1_evaluation.json` Bloom-coverage content), not something to bundle silently into a style checkpoint. `p1b_oop_classes` currently sits under the existing `phase_1_computer_basics` as an interim placement.
 
 ---
 
 ## Next action
 
-Per `DEVELOPMENT_LOOP.md` Step 2, the sequential path is still **P2-3** (complete Phases 4-8 content, discovery-first) — unblocked since BLOOM-6 is done, and as of 2026-08-12 all 6 open questions from the node-audit plan are resolved (see `v2/doc/vision/node-audit-and-hero-path-plan.md` Section E and the two 2026-08-12 changelog entries in `MASTER_PLAN.md`). P2-3 itself remains `not_started` — the plan is settled, but the authoring session (Set 1 through Set 6, per the finalized plan) has not begun. Next step is starting that authoring session.
+Resume the P2-3 checkpoint: re-derive the same 5-node sample (revise `p2_math_matrices`'s beginner/mid/advanced explanations; write full beginner/mid/advanced/expert explanations + questions for `p1b_oop_classes`, `p2_calculus_basics`, `p4_sklearn_workflow`, `p5_backpropagation`) applying the plain-language-at-every-depth rule throughout, then present the result for approval again before writing to disk or proceeding to Sets 1-6. See the exact handoff brief a human requested for this, dated 2026-08-12, for the full self-contained prompt to resume with.
 
 ---
 
