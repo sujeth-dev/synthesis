@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
+import { computeFsrsSchedule, fsrsRatingFromCorrectness } from '@/lib/fsrs'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
 import { computeUnblocked } from '@/lib/graph'
@@ -10,6 +11,7 @@ import {
   getMotivationState, upsertMotivationState, insertAttempt,
   incrementSessionCounts, getSession, getAllSkillStates, schedulePhaseReview,
   getRecentAttemptsForSkill, getSessionBehaviorAttempts,
+  getLastFsrsShadowEntry, insertFsrsShadowLog,
 } from '@/lib/db/queries'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat } from '@/types'
@@ -89,10 +91,35 @@ export async function POST(req: NextRequest) {
   })
 
   // ── Update SM-2
+  // ── FSRS shadow mode (FSRS-3): computed alongside SM-2 from the same
+  // correctness/latency evidence, but never read from or served to the
+  // learner — SM-2's write above is the only thing that stays live. Any
+  // failure here (e.g. migration 004 not yet applied on some deployment)
+  // must not affect the real SM-2 write, so it's isolated and fail-open.
+  let fsrsShadow: { sm2_interval_days: number; fsrs_interval_days: number; fsrs_stability: number; fsrs_difficulty: number; fsrs_due_at: string } | null = null
   if (schedule) {
     const quality         = bktToQuality(correct, safe_latency)
     const updatedSchedule = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, quality)
     await upsertReviewSchedule(updatedSchedule)
+
+    try {
+      const previousShadow = await getLastFsrsShadowEntry(user.id, skill_id)
+      const fsrsResult = computeFsrsSchedule(
+        previousShadow
+          ? { stability: previousShadow.fsrs_stability, difficulty: previousShadow.fsrs_difficulty, last_review: previousShadow.created_at }
+          : null,
+        fsrsRatingFromCorrectness(correct, safe_latency),
+      )
+      fsrsShadow = {
+        sm2_interval_days: updatedSchedule.interval_days,
+        fsrs_interval_days: fsrsResult.interval_days,
+        fsrs_stability: fsrsResult.stability,
+        fsrs_difficulty: fsrsResult.difficulty,
+        fsrs_due_at: fsrsResult.due_at,
+      }
+    } catch {
+      fsrsShadow = null
+    }
   }
 
   // ── Update motivation
@@ -142,6 +169,14 @@ export async function POST(req: NextRequest) {
     ...behaviorSnapshot,
   })
   if (session_id) await incrementSessionCounts(session_id, correct)
+
+  if (fsrsShadow) {
+    try {
+      await insertFsrsShadowLog({ learner_id: user.id, skill_id, attempt_id, ...fsrsShadow })
+    } catch {
+      // Observational only — see the SM-2 block above.
+    }
+  }
 
   const bktMovement = session_id && isFeynmanAttempt(question_id)
     ? computeBktMovementComparison(
