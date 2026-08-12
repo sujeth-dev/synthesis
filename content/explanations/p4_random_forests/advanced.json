@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_random_forests",
+  "depth": "advanced",
+  "title": "Random Forests — Importance Can Mislead",
+  "key_insight": "Split-based importance can therefore favor certain features. Permutation importance asks how performance changes after shuffling one feature, but linked features can hide each other.",
+  "body": "## Importance Can Mislead\n\nA forest says one feature is important because it was used in many helpful splits. A feature with many possible cut points gets more chances to look helpful.\n\nSplit-based importance can therefore favor certain features. Permutation importance asks how performance changes after shuffling one feature, but linked features can hide each other.\n\nTune tree count for stability and leaf controls for generalization. More trees usually steady the vote, but increase memory and prediction time.",
+  "common_mistakes": [
+    "Assuming more trees repair biased or bad data.",
+    "Trusting split importance as unbiased evidence.",
+    "Ignoring prediction cost when serving a very large forest."
+  ],
+  "mini_exercise": "Draw the situation from “Importance Can Mislead” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Random forests are dependable tabular-data models with little tuning.",
+  "explain_back_prompt": "Using the “Importance Can Mislead” story, explain Random Forests without assuming the listener knows machine learning."
+}

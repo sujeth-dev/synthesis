@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_decision_trees",
+  "depth": "beginner",
+  "title": "Decision Trees — Twenty Questions for a Prediction",
+  "key_insight": "A decision tree predicts the same way. Each split asks whether one feature falls on one side of a boundary.",
+  "body": "## Twenty Questions for a Prediction\n\nA doctor asks one yes-or-no question, then chooses the next question from the answer. After a short path, the patient reaches a recommendation.\n\nA decision tree predicts the same way. Each split asks whether one feature falls on one side of a boundary.\n\nThe final leaf stores an answer or a mix of answers from training examples that reached it.",
+  "common_mistakes": [
+    "Growing until every training row has its own leaf.",
+    "Reading one greedy split as the only valid explanation.",
+    "Ignoring the advantage given to features with many possible cut points."
+  ],
+  "mini_exercise": "Draw the situation from “Twenty Questions for a Prediction” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Trees handle curved rules and mixed features while remaining inspectable.",
+  "explain_back_prompt": "Using the “Twenty Questions for a Prediction” story, explain Decision Trees without assuming the listener knows machine learning."
+}

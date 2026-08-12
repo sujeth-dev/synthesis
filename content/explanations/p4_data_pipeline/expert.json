@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_data_pipeline",
+  "depth": "expert",
+  "title": "Data → Model → Prediction — A Pipeline Becomes a Directed Map",
+  "key_insight": "Represent the work as a directed acyclic graph: arrows show dependency, and no path loops back forever. A scheduler can run independent branches together.",
+  "body": "## A Pipeline Becomes a Directed Map\n\nA large system branches: one cleaned table feeds several models, and one feature is reused in many places. A simple straight line no longer describes it.\n\nRepresent the work as a directed acyclic graph: arrows show dependency, and no path loops back forever. A scheduler can run independent branches together.\n\nCache a step only when its inputs and code version match. This makes partial reruns safe and gives every prediction a record of the exact artifacts that produced it.",
+  "common_mistakes": [
+    "Changing serving-time cleaning without retraining the model.",
+    "Saving the model but not its learned preprocessing.",
+    "Running a pipeline without recording versions or data-quality counts."
+  ],
+  "mini_exercise": "Draw the situation from “A Pipeline Becomes a Directed Map” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every ML project needs a traceable path from source data to a monitored prediction.",
+  "explain_back_prompt": "Using the “A Pipeline Becomes a Directed Map” story, explain Data → Model → Prediction without assuming the listener knows machine learning."
+}

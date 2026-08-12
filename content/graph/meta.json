@@ -5,10 +5,10 @@
     "phase_1_computer_basics",
     "phase_1b_programming_basics",
     "phase_2_cs_data",
-    "phase_3_intro_ai"
+    "phase_3_intro_ai",
+    "phase_4_machine_learning"
   ],
   "phases_planned": [
-    "phase_4_machine_learning",
     "phase_5_deep_learning",
     "phase_6_modern_ai",
     "phase_7_real_world",

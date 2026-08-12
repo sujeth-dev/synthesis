@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_linear_regression_q1",
+    "skill_id": "p4_linear_regression",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Linear Regression: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Linear regression predicts a number with a weighted straight trend."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Linear regression predicts a number with a weighted straight trend.",
+    "graph_placement_weight": {
+      "p4_linear_regression": 1
+    }
+  },
+  {
+    "id": "p4_linear_regression_q2",
+    "skill_id": "p4_linear_regression",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Linear Regression: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Least squares gives larger misses extra influence by squaring them."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Least squares gives larger misses extra influence by squaring them.",
+    "graph_placement_weight": {
+      "p4_linear_regression": 1
+    }
+  },
+  {
+    "id": "p4_linear_regression_q3",
+    "skill_id": "p4_linear_regression",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Linear Regression: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A coefficient describes association while other features stay fixed."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A coefficient describes association while other features stay fixed.",
+    "graph_placement_weight": {
+      "p4_linear_regression": 1
+    }
+  },
+  {
+    "id": "p4_linear_regression_q4",
+    "skill_id": "p4_linear_regression",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Linear Regression: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Overlapping features can make individual weights unstable."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Overlapping features can make individual weights unstable.",
+    "graph_placement_weight": {
+      "p4_linear_regression": 1
+    }
+  },
+  {
+    "id": "p4_linear_regression_q5",
+    "skill_id": "p4_linear_regression",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Linear Regression: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual patterns reveal structure the straight-line model missed."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Residual patterns reveal structure the straight-line model missed.",
+    "graph_placement_weight": {
+      "p4_linear_regression": 1
+    }
+  },
+  {
+    "id": "p4_linear_regression_q6",
+    "skill_id": "p4_linear_regression",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Linear Regression: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Stable solvers are safer than directly inverting a nearly ambiguous matrix."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Stable solvers are safer than directly inverting a nearly ambiguous matrix.",
+    "graph_placement_weight": {
+      "p4_linear_regression": 1
+    }
+  },
+  {
+    "id": "p4_linear_regression_order1",
+    "skill_id": "p4_linear_regression",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Linear Regression workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "create the model"
+      },
+      {
+        "id": "b",
+        "text": "fit training rows"
+      },
+      {
+        "id": "c",
+        "text": "predict test rows"
+      },
+      {
+        "id": "d",
+        "text": "measure the errors"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: create the model → fit training rows → predict test rows → measure the errors."
+  },
+  {
+    "id": "p4_linear_regression_fill1",
+    "skill_id": "p4_linear_regression",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Linear Regression step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "predict"
+      },
+      {
+        "id": "b",
+        "text": "fit"
+      },
+      {
+        "id": "c",
+        "text": "transform"
+      },
+      {
+        "id": "d",
+        "text": "cluster"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "predict",
+    "explanation_after": "The correct choice is predict."
+  }
+]

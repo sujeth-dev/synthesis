@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_evaluation_metrics_q1",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Evaluation Metrics: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Accuracy can hide failure when one class is rare."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Accuracy can hide failure when one class is rare.",
+    "graph_placement_weight": {
+      "p4_evaluation_metrics": 1
+    }
+  },
+  {
+    "id": "p4_evaluation_metrics_q2",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Evaluation Metrics: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Precision asks what fraction of alarms were truly positive."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Precision asks what fraction of alarms were truly positive.",
+    "graph_placement_weight": {
+      "p4_evaluation_metrics": 1
+    }
+  },
+  {
+    "id": "p4_evaluation_metrics_q3",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Evaluation Metrics: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Recall asks what fraction of real positives were caught."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Recall asks what fraction of real positives were caught.",
+    "graph_placement_weight": {
+      "p4_evaluation_metrics": 1
+    }
+  },
+  {
+    "id": "p4_evaluation_metrics_q4",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Evaluation Metrics: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "F1 becomes low when either precision or recall is weak."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "F1 becomes low when either precision or recall is weak.",
+    "graph_placement_weight": {
+      "p4_evaluation_metrics": 1
+    }
+  },
+  {
+    "id": "p4_evaluation_metrics_q5",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Evaluation Metrics: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Precision-recall curves can be more revealing for rare positives."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Precision-recall curves can be more revealing for rare positives.",
+    "graph_placement_weight": {
+      "p4_evaluation_metrics": 1
+    }
+  },
+  {
+    "id": "p4_evaluation_metrics_q6",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Evaluation Metrics: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A deployment threshold should reflect the real costs and benefits of mistakes."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A deployment threshold should reflect the real costs and benefits of mistakes.",
+    "graph_placement_weight": {
+      "p4_evaluation_metrics": 1
+    }
+  },
+  {
+    "id": "p4_evaluation_metrics_order1",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Evaluation Metrics workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "count the four outcome types"
+      },
+      {
+        "id": "b",
+        "text": "compute precision and recall"
+      },
+      {
+        "id": "c",
+        "text": "inspect thresholds"
+      },
+      {
+        "id": "d",
+        "text": "choose a threshold from real costs"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: count the four outcome types → compute precision and recall → inspect thresholds → choose a threshold from real costs."
+  },
+  {
+    "id": "p4_evaluation_metrics_fill1",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Evaluation Metrics step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "recall_score"
+      },
+      {
+        "id": "b",
+        "text": "train_test_split"
+      },
+      {
+        "id": "c",
+        "text": "StandardScaler"
+      },
+      {
+        "id": "d",
+        "text": "fit_transform"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "recall_score",
+    "explanation_after": "The correct choice is recall_score."
+  }
+]

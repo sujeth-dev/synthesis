@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_unsupervised_learning",
+  "depth": "expert",
+  "title": "Unsupervised Learning — A Shape Hidden in Many Numbers",
+  "key_insight": "Manifold methods try to preserve nearby relationships on that hidden sheet. Density methods instead find crowded regions and can leave isolated points ungrouped.",
+  "body": "## A Shape Hidden in Many Numbers\n\nPoints that need hundreds of coordinates may still lie near a curved sheet with only a few true directions. Flat compression can tear that shape.\n\nManifold methods try to preserve nearby relationships on that hidden sheet. Density methods instead find crowded regions and can leave isolated points ungrouped.\n\nJudge unsupervised results with stability and usefulness, not a single magic score. If small data changes rewrite every group, the pattern may not be dependable.",
+  "common_mistakes": [
+    "Calling clusters true labels without inspecting them.",
+    "Using distance before putting features on comparable scales.",
+    "Choosing the number of groups only because one chart looks attractive."
+  ],
+  "mini_exercise": "Draw the situation from “A Shape Hidden in Many Numbers” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Many datasets have no labels, yet their groups, unusual cases, and compressed structure are valuable.",
+  "explain_back_prompt": "Using the “A Shape Hidden in Many Numbers” story, explain Unsupervised Learning without assuming the listener knows machine learning."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_evaluation_metrics",
+  "depth": "beginner",
+  "title": "Evaluation Metrics — The Scoreboard Rewards the Wrong Team",
+  "key_insight": "Accuracy counts all correct answers equally. When one class is rare, precision and recall describe the positive predictions more honestly.",
+  "body": "## The Scoreboard Rewards the Wrong Team\n\nOnly one in a hundred transactions is fraud. A model says “not fraud” every time and boasts 99% accuracy while catching nothing.\n\nAccuracy counts all correct answers equally. When one class is rare, precision and recall describe the positive predictions more honestly.\n\nPrecision asks how many alarms were real. Recall asks how many real cases were caught. Choose based on which mistake hurts more.",
+  "common_mistakes": [
+    "Using accuracy for a rare positive class.",
+    "Comparing AUC without choosing a deployment threshold.",
+    "Treating a tiny metric difference as meaningful without uncertainty."
+  ],
+  "mini_exercise": "Draw the situation from “The Scoreboard Rewards the Wrong Team” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The wrong metric rewards the wrong model, especially with rare events.",
+  "explain_back_prompt": "Using the “The Scoreboard Rewards the Wrong Team” story, explain Evaluation Metrics without assuming the listener knows machine learning."
+}

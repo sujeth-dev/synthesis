@@ -1508,11 +1508,21 @@
     "label": "Data → Model → Prediction",
     "phase": "phase_4_machine_learning",
     "difficulty_base": 3,
-    "question_ids": [],
+    "question_ids": [
+      "p4_data_pipeline_q1",
+      "p4_data_pipeline_q2",
+      "p4_data_pipeline_q3",
+      "p4_data_pipeline_q4",
+      "p4_data_pipeline_q5",
+      "p4_data_pipeline_q6",
+      "p4_data_pipeline_order1",
+      "p4_data_pipeline_fill1"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p4_data_pipeline_beg",
+      "mid": "p4_data_pipeline_mid",
+      "advanced": "p4_data_pipeline_adv",
+      "expert": "p4_data_pipeline_exp"
     },
     "tags": [
       "pipeline",
@@ -1520,9 +1530,9 @@
       "inference"
     ],
     "deprecated": false,
-    "intuition": "ML follows a fixed pattern: collect data → train a model → make predictions on new data.",
-    "analogy": "Like teaching a child to recognise dogs by showing 1000 photos — then testing them on a new photo they've never seen.",
-    "why_it_matters": "This three-step pipeline is the mental model behind every ML system you'll ever build.",
+    "intuition": "A machine-learning system carries raw examples through preparation and learning before it can answer new cases.",
+    "analogy": "Like a bakery line: inspect ingredients, follow a recipe, bake, then check each finished loaf.",
+    "why_it_matters": "Every ML project needs a traceable path from source data to a monitored prediction.",
     "topic": "Core ML Paradigms",
     "topic_order": 1
   },
@@ -1531,21 +1541,30 @@
     "label": "Supervised Learning",
     "phase": "phase_4_machine_learning",
     "difficulty_base": 3,
-    "question_ids": [],
+    "question_ids": [
+      "p4_supervised_learning_q1",
+      "p4_supervised_learning_q2",
+      "p4_supervised_learning_q3",
+      "p4_supervised_learning_q4",
+      "p4_supervised_learning_q5",
+      "p4_supervised_learning_q6"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p4_supervised_learning_beg",
+      "mid": "p4_supervised_learning_mid",
+      "advanced": "p4_supervised_learning_adv",
+      "expert": "p4_supervised_learning_exp"
     },
     "tags": [
       "supervised",
       "labels",
-      "training"
+      "classification",
+      "regression"
     ],
     "deprecated": false,
-    "intuition": "Supervised learning trains on labelled examples — input paired with the correct answer.",
-    "analogy": "A student learning with an answer key. For every practice problem, they see the right answer and adjust.",
-    "why_it_matters": "Most practical ML — spam detection, image recognition, translation — is supervised learning.",
+    "intuition": "Supervised learning studies examples paired with known answers, then tries to answer new examples.",
+    "analogy": "Like practicing with an answer key that is covered during the final test.",
+    "why_it_matters": "Most practical prediction systems begin with labeled historical examples.",
     "topic": "Core ML Paradigms",
     "topic_order": 2
   },
@@ -1582,6 +1601,429 @@
     "why_it_matters": "This fit/predict pattern is the single most-used piece of code in applied machine learning — from a two-line logistic regression to a production pipeline, the pattern never changes, only the model does.",
     "topic": "Practical Workflow",
     "topic_order": 2
+  },
+  {
+    "id": "p4_unsupervised_learning",
+    "label": "Unsupervised Learning",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 3,
+    "question_ids": [
+      "p4_unsupervised_learning_q1",
+      "p4_unsupervised_learning_q2",
+      "p4_unsupervised_learning_q3",
+      "p4_unsupervised_learning_q4",
+      "p4_unsupervised_learning_q5",
+      "p4_unsupervised_learning_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_unsupervised_learning_beg",
+      "mid": "p4_unsupervised_learning_mid",
+      "advanced": "p4_unsupervised_learning_adv",
+      "expert": "p4_unsupervised_learning_exp"
+    },
+    "tags": [
+      "unsupervised",
+      "clustering",
+      "k-means",
+      "dimensionality-reduction"
+    ],
+    "deprecated": false,
+    "intuition": "Unsupervised learning searches for useful structure when examples arrive without answer labels.",
+    "analogy": "Like sorting a mixed drawer by patterns you notice instead of following printed categories.",
+    "why_it_matters": "Many datasets have no labels, yet their groups, unusual cases, and compressed structure are valuable.",
+    "topic": "Core ML Paradigms",
+    "topic_order": 3
+  },
+  {
+    "id": "p4_linear_regression",
+    "label": "Linear Regression",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 3,
+    "question_ids": [
+      "p4_linear_regression_q1",
+      "p4_linear_regression_q2",
+      "p4_linear_regression_q3",
+      "p4_linear_regression_q4",
+      "p4_linear_regression_q5",
+      "p4_linear_regression_q6",
+      "p4_linear_regression_order1",
+      "p4_linear_regression_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_linear_regression_beg",
+      "mid": "p4_linear_regression_mid",
+      "advanced": "p4_linear_regression_adv",
+      "expert": "p4_linear_regression_exp"
+    },
+    "tags": [
+      "regression",
+      "linear-model",
+      "least-squares"
+    ],
+    "deprecated": false,
+    "intuition": "Linear regression fits a straight trend that predicts a numeric answer from weighted inputs.",
+    "analogy": "Like laying a ruler through a cloud of points to summarize their direction.",
+    "why_it_matters": "It is a fast, explainable baseline for numeric prediction and a foundation for many later models.",
+    "topic": "Regression Algorithms",
+    "topic_order": 1
+  },
+  {
+    "id": "p4_logistic_regression",
+    "label": "Logistic Regression",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 3,
+    "question_ids": [
+      "p4_logistic_regression_q1",
+      "p4_logistic_regression_q2",
+      "p4_logistic_regression_q3",
+      "p4_logistic_regression_q4",
+      "p4_logistic_regression_q5",
+      "p4_logistic_regression_q6",
+      "p4_logistic_regression_order1",
+      "p4_logistic_regression_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_logistic_regression_beg",
+      "mid": "p4_logistic_regression_mid",
+      "advanced": "p4_logistic_regression_adv",
+      "expert": "p4_logistic_regression_exp"
+    },
+    "tags": [
+      "classification",
+      "logistic-regression",
+      "probability"
+    ],
+    "deprecated": false,
+    "intuition": "Logistic regression turns a weighted score into a probability for a category.",
+    "analogy": "Like a dimmer switch that changes a score into a chance between zero and one.",
+    "why_it_matters": "It is a strong, explainable baseline for binary classification.",
+    "topic": "Regression Algorithms",
+    "topic_order": 2
+  },
+  {
+    "id": "p4_decision_trees",
+    "label": "Decision Trees",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 3,
+    "question_ids": [
+      "p4_decision_trees_q1",
+      "p4_decision_trees_q2",
+      "p4_decision_trees_q3",
+      "p4_decision_trees_q4",
+      "p4_decision_trees_q5",
+      "p4_decision_trees_q6",
+      "p4_decision_trees_order1",
+      "p4_decision_trees_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_decision_trees_beg",
+      "mid": "p4_decision_trees_mid",
+      "advanced": "p4_decision_trees_adv",
+      "expert": "p4_decision_trees_exp"
+    },
+    "tags": [
+      "decision-tree",
+      "splits",
+      "classification"
+    ],
+    "deprecated": false,
+    "intuition": "A decision tree predicts by asking a sequence of simple feature questions.",
+    "analogy": "Like a choose-your-own-adventure path where each answer sends you to the next question.",
+    "why_it_matters": "Trees handle curved rules and mixed features while remaining inspectable.",
+    "topic": "Classification & Ensembles",
+    "topic_order": 1
+  },
+  {
+    "id": "p4_random_forests",
+    "label": "Random Forests",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p4_random_forests_q1",
+      "p4_random_forests_q2",
+      "p4_random_forests_q3",
+      "p4_random_forests_q4",
+      "p4_random_forests_q5",
+      "p4_random_forests_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_random_forests_beg",
+      "mid": "p4_random_forests_mid",
+      "advanced": "p4_random_forests_adv",
+      "expert": "p4_random_forests_exp"
+    },
+    "tags": [
+      "random-forest",
+      "bagging",
+      "ensemble"
+    ],
+    "deprecated": false,
+    "intuition": "A random forest combines many varied decision trees so their individual mistakes can cancel.",
+    "analogy": "Like asking many jurors who saw different evidence samples instead of trusting one witness.",
+    "why_it_matters": "Random forests are dependable tabular-data models with little tuning.",
+    "topic": "Classification & Ensembles",
+    "topic_order": 2
+  },
+  {
+    "id": "p4_boosting_methods",
+    "label": "Boosting Methods",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p4_boosting_methods_q1",
+      "p4_boosting_methods_q2",
+      "p4_boosting_methods_q3",
+      "p4_boosting_methods_q4",
+      "p4_boosting_methods_q5",
+      "p4_boosting_methods_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_boosting_methods_beg",
+      "mid": "p4_boosting_methods_mid",
+      "advanced": "p4_boosting_methods_adv",
+      "expert": "p4_boosting_methods_exp"
+    },
+    "tags": [
+      "boosting",
+      "gradient-boosting",
+      "xgboost"
+    ],
+    "deprecated": false,
+    "intuition": "Boosting builds a sequence of small models, each correcting errors left by the earlier group.",
+    "analogy": "Like an editor making focused passes: first structure, then unclear sentences, then small mistakes.",
+    "why_it_matters": "Boosted trees are among the strongest methods for structured tables.",
+    "topic": "Classification & Ensembles",
+    "topic_order": 3
+  },
+  {
+    "id": "p4_knn_and_svm",
+    "label": "K-Nearest Neighbors & Support Vector Machines",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p4_knn_and_svm_q1",
+      "p4_knn_and_svm_q2",
+      "p4_knn_and_svm_q3",
+      "p4_knn_and_svm_q4",
+      "p4_knn_and_svm_q5",
+      "p4_knn_and_svm_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_knn_and_svm_beg",
+      "mid": "p4_knn_and_svm_mid",
+      "advanced": "p4_knn_and_svm_adv",
+      "expert": "p4_knn_and_svm_exp"
+    },
+    "tags": [
+      "knn",
+      "svm",
+      "classification",
+      "distance"
+    ],
+    "deprecated": false,
+    "intuition": "KNN predicts from nearby examples, while an SVM searches for a wide separating boundary.",
+    "analogy": "One asks nearby neighbors; the other draws the safest fence between groups.",
+    "why_it_matters": "These contrasting methods teach how distance, boundaries, and scaling shape classification.",
+    "topic": "Classification & Ensembles",
+    "topic_order": 4
+  },
+  {
+    "id": "p4_train_test_cross_validation",
+    "label": "Train/Test Splits & Cross-Validation",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 3,
+    "question_ids": [
+      "p4_train_test_cross_validation_q1",
+      "p4_train_test_cross_validation_q2",
+      "p4_train_test_cross_validation_q3",
+      "p4_train_test_cross_validation_q4",
+      "p4_train_test_cross_validation_q5",
+      "p4_train_test_cross_validation_q6",
+      "p4_train_test_cross_validation_order1",
+      "p4_train_test_cross_validation_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_train_test_cross_validation_beg",
+      "mid": "p4_train_test_cross_validation_mid",
+      "advanced": "p4_train_test_cross_validation_adv",
+      "expert": "p4_train_test_cross_validation_exp"
+    },
+    "tags": [
+      "train-test",
+      "cross-validation",
+      "leakage"
+    ],
+    "deprecated": false,
+    "intuition": "Fair evaluation keeps answer-bearing data outside fitting and repeats checks when one split is too uncertain.",
+    "analogy": "Like rehearsing with several practice exams while sealing the final exam.",
+    "why_it_matters": "Without a fair split, every model comparison can be confidently wrong.",
+    "topic": "Model Evaluation & Tuning",
+    "topic_order": 1
+  },
+  {
+    "id": "p4_evaluation_metrics",
+    "label": "Evaluation Metrics",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p4_evaluation_metrics_q1",
+      "p4_evaluation_metrics_q2",
+      "p4_evaluation_metrics_q3",
+      "p4_evaluation_metrics_q4",
+      "p4_evaluation_metrics_q5",
+      "p4_evaluation_metrics_q6",
+      "p4_evaluation_metrics_order1",
+      "p4_evaluation_metrics_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_evaluation_metrics_beg",
+      "mid": "p4_evaluation_metrics_mid",
+      "advanced": "p4_evaluation_metrics_adv",
+      "expert": "p4_evaluation_metrics_exp"
+    },
+    "tags": [
+      "metrics",
+      "precision",
+      "recall",
+      "f1",
+      "roc-auc"
+    ],
+    "deprecated": false,
+    "intuition": "A metric turns the real cost of prediction mistakes into a number used for comparison.",
+    "analogy": "Like choosing a scoreboard whose points match what the game actually values.",
+    "why_it_matters": "The wrong metric rewards the wrong model, especially with rare events.",
+    "topic": "Model Evaluation & Tuning",
+    "topic_order": 2
+  },
+  {
+    "id": "p4_bias_variance_tradeoff",
+    "label": "Bias–Variance Tradeoff",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p4_bias_variance_tradeoff_q1",
+      "p4_bias_variance_tradeoff_q2",
+      "p4_bias_variance_tradeoff_q3",
+      "p4_bias_variance_tradeoff_q4",
+      "p4_bias_variance_tradeoff_q5",
+      "p4_bias_variance_tradeoff_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_bias_variance_tradeoff_beg",
+      "mid": "p4_bias_variance_tradeoff_mid",
+      "advanced": "p4_bias_variance_tradeoff_adv",
+      "expert": "p4_bias_variance_tradeoff_exp"
+    },
+    "tags": [
+      "bias",
+      "variance",
+      "generalization"
+    ],
+    "deprecated": false,
+    "intuition": "Simple models can miss the pattern, while overly flexible models can chase the particular training sample.",
+    "analogy": "Like aiming arrows: a bent sight misses consistently, while a shaky hand scatters shots.",
+    "why_it_matters": "The tradeoff explains underfitting, overfitting, and why model complexity needs validation.",
+    "topic": "Model Evaluation & Tuning",
+    "topic_order": 3
+  },
+  {
+    "id": "p4_regularization",
+    "label": "Regularization",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p4_regularization_q1",
+      "p4_regularization_q2",
+      "p4_regularization_q3",
+      "p4_regularization_q4",
+      "p4_regularization_q5",
+      "p4_regularization_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_regularization_beg",
+      "mid": "p4_regularization_mid",
+      "advanced": "p4_regularization_adv",
+      "expert": "p4_regularization_exp"
+    },
+    "tags": [
+      "regularization",
+      "l1",
+      "l2",
+      "ridge",
+      "lasso"
+    ],
+    "deprecated": false,
+    "intuition": "Regularization asks a model to fit the data while keeping its learned rule restrained.",
+    "analogy": "Like charging rent for every overly large knob setting.",
+    "why_it_matters": "It reduces brittle fits and stabilizes models with many or overlapping features.",
+    "topic": "Model Evaluation & Tuning",
+    "topic_order": 4
+  },
+  {
+    "id": "p4_hyperparameter_tuning",
+    "label": "Hyperparameter Tuning",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p4_hyperparameter_tuning_q1",
+      "p4_hyperparameter_tuning_q2",
+      "p4_hyperparameter_tuning_q3",
+      "p4_hyperparameter_tuning_q4",
+      "p4_hyperparameter_tuning_q5",
+      "p4_hyperparameter_tuning_q6",
+      "p4_hyperparameter_tuning_order1",
+      "p4_hyperparameter_tuning_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_hyperparameter_tuning_beg",
+      "mid": "p4_hyperparameter_tuning_mid",
+      "advanced": "p4_hyperparameter_tuning_adv",
+      "expert": "p4_hyperparameter_tuning_exp"
+    },
+    "tags": [
+      "hyperparameters",
+      "grid-search",
+      "random-search"
+    ],
+    "deprecated": false,
+    "intuition": "Hyperparameters are choices made before fitting; tuning compares those choices with fair validation.",
+    "analogy": "Like testing oven temperature and baking time on practice loaves before serving the final loaf.",
+    "why_it_matters": "Good settings can matter as much as the chosen algorithm, but careless search overfits validation data.",
+    "topic": "Model Evaluation & Tuning",
+    "topic_order": 5
+  },
+  {
+    "id": "p4_feature_scaling",
+    "label": "Feature Scaling",
+    "phase": "phase_4_machine_learning",
+    "difficulty_base": 3,
+    "question_ids": [
+      "p4_feature_scaling_q1",
+      "p4_feature_scaling_q2",
+      "p4_feature_scaling_q3",
+      "p4_feature_scaling_q4",
+      "p4_feature_scaling_q5",
+      "p4_feature_scaling_q6",
+      "p4_feature_scaling_order1",
+      "p4_feature_scaling_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p4_feature_scaling_beg",
+      "mid": "p4_feature_scaling_mid",
+      "advanced": "p4_feature_scaling_adv",
+      "expert": "p4_feature_scaling_exp"
+    },
+    "tags": [
+      "scaling",
+      "standardization",
+      "normalization"
+    ],
+    "deprecated": false,
+    "intuition": "Feature scaling puts differently measured inputs on comparable numeric ranges.",
+    "analogy": "Like converting meters and millimeters before comparing lengths.",
+    "why_it_matters": "Distance methods and gradient-based models can be distorted or slowed by mismatched feature units.",
+    "topic": "Practical Workflow",
+    "topic_order": 1
   },
   {
     "id": "p5_neural_network_basics",

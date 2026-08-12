@@ -108,12 +108,13 @@ for (const node of nodes) {
 // BLOOM-6 gate: when a Phases 4-8 content pass (P2-3) completes, add that phase here
 // and to phaseFileNames below — its phase evaluation set must ship alongside the
 // by-skill content, not be retrofitted later. See MASTER_PLAN.md's P2-3/BLOOM-6.
-const authoredPhases = ['phase_1_computer_basics', 'phase_1b_programming_basics', 'phase_2_cs_data', 'phase_3_intro_ai']
+const authoredPhases = ['phase_1_computer_basics', 'phase_1b_programming_basics', 'phase_2_cs_data', 'phase_3_intro_ai', 'phase_4_machine_learning']
 const phaseFileNames = {
   phase_1_computer_basics: 'p1_evaluation.json',
   phase_1b_programming_basics: 'p1b_evaluation.json',
   phase_2_cs_data:         'p2_evaluation.json',
   phase_3_intro_ai:        'p3_evaluation.json',
+  phase_4_machine_learning: 'p4_evaluation.json',
 }
 let peChecked = 0
 for (const phase of authoredPhases) {

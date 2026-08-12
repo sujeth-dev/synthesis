@@ -1,0 +1,506 @@
+[
+  {
+    "id": "p4_eval_remember_1",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "stem": "Data → Model → Prediction: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A pipeline makes the route from raw data to prediction visible."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A pipeline makes the route from raw data to prediction visible.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p4_eval_remember_2",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "stem": "Supervised Learning: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Supervised examples pair inputs with known answers."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Supervised examples pair inputs with known answers.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p4_eval_remember_3",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "stem": "Unsupervised Learning: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unsupervised learning works without known answer labels."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Unsupervised learning works without known answer labels.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p4_eval_understand_1",
+    "skill_id": "p4_linear_regression",
+    "format": "mcq",
+    "stem": "Linear Regression: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Least squares gives larger misses extra influence by squaring them."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Least squares gives larger misses extra influence by squaring them.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p4_eval_understand_2",
+    "skill_id": "p4_logistic_regression",
+    "format": "mcq",
+    "stem": "Logistic Regression: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An S-shaped gate keeps the output between zero and one."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An S-shaped gate keeps the output between zero and one.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p4_eval_understand_3",
+    "skill_id": "p4_decision_trees",
+    "format": "mcq",
+    "stem": "Decision Trees: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A split is useful when it makes the resulting groups less mixed."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A split is useful when it makes the resulting groups less mixed.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p4_eval_apply_1",
+    "skill_id": "p4_random_forests",
+    "format": "mcq",
+    "stem": "Random Forests: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Random feature choices make tree errors less alike."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Random feature choices make tree errors less alike.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p4_eval_apply_2",
+    "skill_id": "p4_boosting_methods",
+    "format": "mcq",
+    "stem": "Boosting Methods: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate controls how strongly each correction joins."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "The learning rate controls how strongly each correction joins.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p4_eval_apply_3",
+    "skill_id": "p4_knn_and_svm",
+    "format": "mcq",
+    "stem": "K-Nearest Neighbors & Support Vector Machines: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Feature scaling matters because both methods rely on distance."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Feature scaling matters because both methods rely on distance.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p4_eval_analyze_1",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "mcq",
+    "stem": "Train/Test Splits & Cross-Validation: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Group splits keep related records from leaking across sides."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Group splits keep related records from leaking across sides.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p4_eval_analyze_2",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "mcq",
+    "stem": "Evaluation Metrics: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "F1 becomes low when either precision or recall is weak."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "F1 becomes low when either precision or recall is weak.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p4_eval_analyze_3",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "mcq",
+    "stem": "Bias–Variance Tradeoff: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A large train-validation gap suggests high variance."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A large train-validation gap suggests high variance.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p4_eval_evaluate_1",
+    "skill_id": "p4_regularization",
+    "format": "mcq",
+    "stem": "Regularization: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Elastic net combines L1 and L2 behavior."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Elastic net combines L1 and L2 behavior.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p4_eval_evaluate_2",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "mcq",
+    "stem": "Hyperparameter Tuning: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Successive halving gives more resources to promising trials."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Successive halving gives more resources to promising trials.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p4_eval_evaluate_3",
+    "skill_id": "p4_feature_scaling",
+    "format": "mcq",
+    "stem": "Feature Scaling: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tree splits usually care less about scaling than distance-based models."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Tree splits usually care less about scaling than distance-based models.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p4_eval_create_1",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "stem": "Data → Model → Prediction: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A directed acyclic graph can represent branching pipeline dependencies without loops."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A directed acyclic graph can represent branching pipeline dependencies without loops.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p4_eval_create_2",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "stem": "Supervised Learning: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Distribution shift can change who arrives or how inputs relate to answers."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Distribution shift can change who arrives or how inputs relate to answers.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p4_eval_create_3",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "stem": "Unsupervised Learning: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Stable and useful groups matter more than treating one clustering score as truth."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Stable and useful groups matter more than treating one clustering score as truth.",
+    "phase": "phase_4_machine_learning",
+    "bloom_level": "create"
+  }
+]

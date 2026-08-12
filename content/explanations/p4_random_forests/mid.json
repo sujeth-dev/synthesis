@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_random_forests",
+  "depth": "mid",
+  "title": "Random Forests — Reuse Rows with Replacement",
+  "key_insight": "This is bootstrap sampling. Trees train on their own bags, and rows left out of a tree’s bag can provide an extra check called out-of-bag evaluation.",
+  "body": "## Reuse Rows with Replacement\n\nTo build different juries from one dataset, draw rows into separate bags and allow the same row to be drawn more than once.\n\nThis is bootstrap sampling. Trees train on their own bags, and rows left out of a tree’s bag can provide an extra check called out-of-bag evaluation.\n\nRandom feature choices further separate the trees. If every tree followed the same strongest feature, their mistakes would remain too similar.",
+  "common_mistakes": [
+    "Assuming more trees repair biased or bad data.",
+    "Trusting split importance as unbiased evidence.",
+    "Ignoring prediction cost when serving a very large forest."
+  ],
+  "mini_exercise": "Draw the situation from “Reuse Rows with Replacement” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Random forests are dependable tabular-data models with little tuning.",
+  "explain_back_prompt": "Using the “Reuse Rows with Replacement” story, explain Random Forests without assuming the listener knows machine learning."
+}

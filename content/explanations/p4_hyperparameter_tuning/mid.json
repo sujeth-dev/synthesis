@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_hyperparameter_tuning",
+  "depth": "mid",
+  "title": "Hyperparameter Tuning — Grid or Lottery Tickets",
+  "key_insight": "Random search samples combinations and often explores important settings more widely for the same number of trials.",
+  "body": "## Grid or Lottery Tickets\n\nA grid tries every listed combination, but most settings barely matter and the combinations multiply quickly.\n\nRandom search samples combinations and often explores important settings more widely for the same number of trials.\n\nSearch the whole pipeline so preprocessing stays inside each fold. Record every trial, not only the winner, to understand sensitivity.",
+  "common_mistakes": [
+    "Calling learned weights hyperparameters.",
+    "Tuning on the final test set.",
+    "Reporting only the winning trial and hiding instability around it."
+  ],
+  "mini_exercise": "Draw the situation from “Grid or Lottery Tickets” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Good settings can matter as much as the chosen algorithm, but careless search overfits validation data.",
+  "explain_back_prompt": "Using the “Grid or Lottery Tickets” story, explain Hyperparameter Tuning without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "Tune without touching the test set",
+    "context": "Turn the Hyperparameter Tuning idea into one small, inspectable workflow.",
+    "steps": [
+      "Hold out a final test set.",
+      "Create a small pipeline and setting grid.",
+      "Run cross-validated search on training rows.",
+      "Evaluate the chosen pipeline once on test rows."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}

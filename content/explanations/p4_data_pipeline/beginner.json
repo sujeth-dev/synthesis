@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_data_pipeline",
+  "depth": "beginner",
+  "title": "Data → Model → Prediction — The Mystery Package Line",
+  "key_insight": "An ML pipeline is the same kind of route: collect data, clean it, train a model, and use that model on new inputs.",
+  "body": "## The Mystery Package Line\n\nA parcel company keeps losing boxes between arrival and delivery. Drawing every station reveals where each box changes and where mistakes enter.\n\nAn ML pipeline is the same kind of route: collect data, clean it, train a model, and use that model on new inputs.\n\nKeeping the route visible makes a prediction traceable. When an answer looks wrong, you can inspect one station instead of blaming the whole system.",
+  "common_mistakes": [
+    "Changing serving-time cleaning without retraining the model.",
+    "Saving the model but not its learned preprocessing.",
+    "Running a pipeline without recording versions or data-quality counts."
+  ],
+  "mini_exercise": "Draw the situation from “The Mystery Package Line” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every ML project needs a traceable path from source data to a monitored prediction.",
+  "explain_back_prompt": "Using the “The Mystery Package Line” story, explain Data → Model → Prediction without assuming the listener knows machine learning."
+}

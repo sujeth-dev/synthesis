@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_feature_scaling_q1",
+    "skill_id": "p4_feature_scaling",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Feature Scaling: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Scaling puts features measured in different units on comparable numeric ranges."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Scaling puts features measured in different units on comparable numeric ranges.",
+    "graph_placement_weight": {
+      "p4_feature_scaling": 1
+    }
+  },
+  {
+    "id": "p4_feature_scaling_q2",
+    "skill_id": "p4_feature_scaling",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Feature Scaling: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A scaler must learn its ruler from training rows only."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A scaler must learn its ruler from training rows only.",
+    "graph_placement_weight": {
+      "p4_feature_scaling": 1
+    }
+  },
+  {
+    "id": "p4_feature_scaling_q3",
+    "skill_id": "p4_feature_scaling",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Feature Scaling: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Standardization centers values and uses their typical spread."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Standardization centers values and uses their typical spread.",
+    "graph_placement_weight": {
+      "p4_feature_scaling": 1
+    }
+  },
+  {
+    "id": "p4_feature_scaling_q4",
+    "skill_id": "p4_feature_scaling",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Feature Scaling: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Robust scaling is less influenced by extreme outliers."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Robust scaling is less influenced by extreme outliers.",
+    "graph_placement_weight": {
+      "p4_feature_scaling": 1
+    }
+  },
+  {
+    "id": "p4_feature_scaling_q5",
+    "skill_id": "p4_feature_scaling",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Feature Scaling: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tree splits usually care less about scaling than distance-based models."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Tree splits usually care less about scaling than distance-based models.",
+    "graph_placement_weight": {
+      "p4_feature_scaling": 1
+    }
+  },
+  {
+    "id": "p4_feature_scaling_q6",
+    "skill_id": "p4_feature_scaling",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Feature Scaling: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Scaling can make an optimization valley easier for gradient steps to navigate."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Scaling can make an optimization valley easier for gradient steps to navigate.",
+    "graph_placement_weight": {
+      "p4_feature_scaling": 1
+    }
+  },
+  {
+    "id": "p4_feature_scaling_order1",
+    "skill_id": "p4_feature_scaling",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Feature Scaling workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "split the rows"
+      },
+      {
+        "id": "b",
+        "text": "fit the scaler on training rows"
+      },
+      {
+        "id": "c",
+        "text": "transform training and test rows"
+      },
+      {
+        "id": "d",
+        "text": "fit the model"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: split the rows → fit the scaler on training rows → transform training and test rows → fit the model."
+  },
+  {
+    "id": "p4_feature_scaling_fill1",
+    "skill_id": "p4_feature_scaling",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Feature Scaling step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "StandardScaler"
+      },
+      {
+        "id": "b",
+        "text": "DecisionTreeClassifier"
+      },
+      {
+        "id": "c",
+        "text": "accuracy_score"
+      },
+      {
+        "id": "d",
+        "text": "dropna"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "StandardScaler",
+    "explanation_after": "The correct choice is StandardScaler."
+  }
+]

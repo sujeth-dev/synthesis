@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_train_test_cross_validation",
+  "depth": "advanced",
+  "title": "Train/Test Splits & Cross-Validation — Rows Are Not Always Independent",
+  "key_insight": "Group-aware splits keep related rows together. Time-aware splits always train on the past and validate on the future.",
+  "body": "## Rows Are Not Always Independent\n\nThe same patient appears in both training and validation, or tomorrow’s records teach a model judged on yesterday. The split leaks identity or time.\n\nGroup-aware splits keep related rows together. Time-aware splits always train on the past and validate on the future.\n\nMatch the split to real deployment. A random split answers the wrong question when requests arrive in groups or chronological waves.",
+  "common_mistakes": [
+    "Using the test set to choose model settings.",
+    "Randomly splitting time-ordered or grouped records.",
+    "Reporting only the best fold instead of the full variation."
+  ],
+  "mini_exercise": "Draw the situation from “Rows Are Not Always Independent” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Without a fair split, every model comparison can be confidently wrong.",
+  "explain_back_prompt": "Using the “Rows Are Not Always Independent” story, explain Train/Test Splits & Cross-Validation without assuming the listener knows machine learning."
+}

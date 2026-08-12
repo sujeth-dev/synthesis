@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_bias_variance_tradeoff",
+  "depth": "expert",
+  "title": "Bias–Variance Tradeoff — Double Descent Breaks the Simple U-Shape",
+  "key_insight": "This pattern is called double descent. Optimization choices, data shape, and implicit regularization can favor some perfect-fitting solutions over others.",
+  "body": "## Double Descent Breaks the Simple U-Shape\n\nVery large models sometimes improve again after becoming flexible enough to fit every training example. The old single U-shaped story is incomplete.\n\nThis pattern is called double descent. Optimization choices, data shape, and implicit regularization can favor some perfect-fitting solutions over others.\n\nThe practical lesson remains empirical: track held-out performance as capacity grows. Parameter count alone does not tell how complex the learned function behaves.",
+  "common_mistakes": [
+    "Calling every bad model overfit.",
+    "Choosing a remedy without comparing training and validation behavior.",
+    "Assuming model size alone determines effective complexity."
+  ],
+  "mini_exercise": "Draw the situation from “Double Descent Breaks the Simple U-Shape” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The tradeoff explains underfitting, overfitting, and why model complexity needs validation.",
+  "explain_back_prompt": "Using the “Double Descent Breaks the Simple U-Shape” story, explain Bias–Variance Tradeoff without assuming the listener knows machine learning."
+}

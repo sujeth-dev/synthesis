@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_random_forests",
+  "depth": "expert",
+  "title": "Random Forests — Reduce Variance by Weakening Agreement",
+  "key_insight": "Bootstrap rows and random feature subsets reduce correlation between trees. The forest mainly lowers variance—the sensitivity of one deep tree to its training sample.",
+  "body": "## Reduce Variance by Weakening Agreement\n\nAveraging helps most when models are individually useful but do not make the same errors. Perfectly matching trees gain nothing from a vote.\n\nBootstrap rows and random feature subsets reduce correlation between trees. The forest mainly lowers variance—the sensitivity of one deep tree to its training sample.\n\nParallel training is easy because trees are independent, but serving many large trees can stress memory caches. Compress, limit depth, or distill when latency matters.",
+  "common_mistakes": [
+    "Assuming more trees repair biased or bad data.",
+    "Trusting split importance as unbiased evidence.",
+    "Ignoring prediction cost when serving a very large forest."
+  ],
+  "mini_exercise": "Draw the situation from “Reduce Variance by Weakening Agreement” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Random forests are dependable tabular-data models with little tuning.",
+  "explain_back_prompt": "Using the “Reduce Variance by Weakening Agreement” story, explain Random Forests without assuming the listener knows machine learning."
+}

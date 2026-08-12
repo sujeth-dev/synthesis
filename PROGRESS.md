@@ -6,7 +6,7 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-3 is in progress; Set 1 is complete and the next unit is Set 2 (Phase 4).** The approved five-node style checkpoint remains the binding content reference.
+**P2-3 is in progress; Sets 1-2 are complete and the next unit is Set 3 (Phase 5).** The approved five-node style checkpoint remains the binding content reference.
 
 The checkpoint required three passes and settled two hard authoring rules for all remaining P2-3 content:
 1. **Zero background at every depth.** Expert depth covers harder material but teaches it as plainly and cumulatively as beginner depth. It may name advanced ideas only after making them understandable through a concrete situation or analogy; it cannot assume outside topic fluency.
@@ -14,11 +14,13 @@ The checkpoint required three passes and settled two hard authoring rules for al
 
 Set 1 added `topic`/`topic_order` to the schema and every graph node; split Phase 1 into 5-node Computer Basics and 14-node Programming Basics; split the old mixed Phase 1 evaluation into independently valid `p1_evaluation.json` and `p1b_evaluation.json`; authored `p2_data_cleaning_preprocessing`; and added a second harder MCQ to each checkpoint bank so every guided difficulty tier has two distinct MCQs. Its four new explanation bodies each resolve to exactly three slides. `npm test` (58 tests), `npm run build`, and `npm run validate` pass; the validator's 115 stale-question-ID warnings are pre-existing.
 
+Set 2 completed Phase 4 at 16 nodes across Core ML Paradigms, Regression Algorithms, Classification & Ensembles, Model Evaluation & Tuning, and Practical Workflow. The 15 newly authored nodes each have four discovery-first, three-slide explanation depths and six MCQs; practical nodes also carry order/fill/build exercises. `p4_evaluation.json` has 18 MCQs with three at each Bloom level. The graph now has 71 nodes and 117 valid acyclic edges. All 58 tests, the production build, and content validation pass with zero errors and the same 115 pre-existing warnings.
+
 ---
 
 ## Next action
 
-Continue with Set 2: complete all 16 Phase 4 nodes across the five topics in `node-audit-and-hero-path-plan.md` Section B, including four explanation depths, six MCQs per node, hands-on ladder items where they genuinely fit, graph edges, and `p4_evaluation.json`. Add Phase 4 to the validator/runtime evaluation maps, validate, build, test, update these docs, and commit locally before Set 3. Never push.
+Continue with Set 3: complete all 16 Phase 5 nodes across the topics in `node-audit-and-hero-path-plan.md` Section B, retaining the approved `p5_backpropagation` checkpoint content and building on Set 1's OOP/calculus prerequisites. Include four explanation depths, six MCQs per node, hands-on ladder items where they genuinely fit, graph edges, and `p5_evaluation.json`; add Phase 5 to the validator/runtime evaluation maps, validate, build, test, update these docs, and commit locally before Set 4. Never push.
 
 ---
 
@@ -41,9 +43,13 @@ Continue with Set 2: complete all 16 Phase 4 nodes across the five topics in `no
 15. **Pre-existing E2E flakiness discovered (not caused by this pass):** `tests/e2e/guided-learning.spec.ts` failed once, then passed on immediate retry, with no code or content change in between. Root cause: `pickGuidedQuestion()` (`src/lib/session/engine.ts:410`) picks uniformly at random from the eligible pool; the review tier already had exactly 2 questions before this pass, so if the practice-start flow calls it more than once for the same task, there's a real chance of two different (both valid) picks, which this test's assumption of a single stable pick doesn't tolerate. Not fixed here — pinning down whether there's an unnecessary double-fetch, or the test should tolerate any valid tiered question rather than an exact ID match, is a separate scoping decision.
 16. **BLOOM track redefined by human direction 2026-08-10 (BLOOM-2 through BLOOM-6).** Original design (Finding 06, `basic-guide.md`): a `bloom_level` field on every individual `Question`, retrofitted across 45 skills, wired into per-question selection. After discussion, redirected to a **Phase Evaluation** feature: skill/BKT tracking is the *micro* layer, Bloom's is a *macro* layer one level up — a phase-wide check across all 6 Bloom levels (Remember→Create), not a per-question label. One optional self-check evaluation set per phase (p1/p2/p3), ~2-3 questions per level (~12-18/phase), sampled across that phase's skills; each question still records through the existing single-skill `insertAttempt()`/BKT pipeline unchanged, avoiding the "redesigned `insertAttempt()`" that true multi-skill Composite Puzzles (`P3-4`) would need. Results shown as a per-Bloom-level breakdown. BLOOM-5 (wiring into `engine.ts`'s per-question selection) is dropped — with per-phase granularity there's no per-question signal left to select with. `MASTER_PLAN.md`, `basic-guide.md`, `findings/06-content-classification-gaps.md`, and `discovery-model.md` §2 all updated with visible correction notes (not silently overwritten) per this project's documentation convention. Per explicit direction: commit locally after each BLOOM-track step, push only once the whole track is done — do not push after every commit like earlier phases.
 
+17. **P2-3 final-count contradiction (does not block Sets 2-5):** the documented per-phase targets add to 120 nodes after the approved Phase 1 split and prerequisite additions (5 + 14 + 17 + 12 + 16 + 16 + 16 + 14 + 10), while the same plan states a 119-node full-curriculum total. The named Set 2-5 scopes remain unambiguous, so work can continue through them; before Set 6 is finalized, a human must choose which one-node count or total is authoritative rather than having the loop silently remove a planned node.
+
 ---
 
 ## Completed work (chronological)
+
+- 2026-08-12 — **P2-3 Set 2 complete:** completed all 16 Phase 4 nodes across five topics, with four plain-language three-slide depths, six tiered MCQs per node, hands-on ladders where useful, 117 valid acyclic graph edges, and an enforced 18-question Phase 4 Bloom evaluation. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings).
 
 - 2026-08-12 — **P2-3 Set 1 complete:** introduced first-class topic placement, split Computer Basics from Programming Basics with separate Bloom evaluations, authored the data-cleaning prerequisite, and restored two distinct MCQs per guided tier for checkpoint nodes. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings).
 - 2026-08-10 — **P2-2A real-browser persistence regression added:** Playwright now creates an isolated learner against the running app/configured database, completes the lesson slide by slide, proves every answer is persisted, verifies a wrong Intermediate answer drops to a different Beginner question, recovers through Beginner → Intermediate → Mastery without switching skills or replaying the lesson, and confirms the optional Feynman action after the core journey. This exposed live schema drift that mocked DB tests could not detect; core-column fallback and persistence-before-session-count ordering fix the resulting repeat/progress bug. Expanded E2E, all 51 unit tests, and the production build are green.

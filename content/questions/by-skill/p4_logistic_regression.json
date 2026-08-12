@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_logistic_regression_q1",
+    "skill_id": "p4_logistic_regression",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Logistic Regression: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Logistic regression predicts a class probability from a weighted score."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Logistic regression predicts a class probability from a weighted score.",
+    "graph_placement_weight": {
+      "p4_logistic_regression": 1
+    }
+  },
+  {
+    "id": "p4_logistic_regression_q2",
+    "skill_id": "p4_logistic_regression",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Logistic Regression: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An S-shaped gate keeps the output between zero and one."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An S-shaped gate keeps the output between zero and one.",
+    "graph_placement_weight": {
+      "p4_logistic_regression": 1
+    }
+  },
+  {
+    "id": "p4_logistic_regression_q3",
+    "skill_id": "p4_logistic_regression",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Logistic Regression: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A decision threshold controls the balance of false alarms and missed cases."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A decision threshold controls the balance of false alarms and missed cases.",
+    "graph_placement_weight": {
+      "p4_logistic_regression": 1
+    }
+  },
+  {
+    "id": "p4_logistic_regression_q4",
+    "skill_id": "p4_logistic_regression",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Logistic Regression: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Coefficients add on the log-odds scale rather than directly on probability."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Coefficients add on the log-odds scale rather than directly on probability.",
+    "graph_placement_weight": {
+      "p4_logistic_regression": 1
+    }
+  },
+  {
+    "id": "p4_logistic_regression_q5",
+    "skill_id": "p4_logistic_regression",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Logistic Regression: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Regularization can control runaway weights under perfect separation."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Regularization can control runaway weights under perfect separation.",
+    "graph_placement_weight": {
+      "p4_logistic_regression": 1
+    }
+  },
+  {
+    "id": "p4_logistic_regression_q6",
+    "skill_id": "p4_logistic_regression",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Logistic Regression: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Curvature-aware solvers can choose better-scaled steps toward the fitted solution."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Curvature-aware solvers can choose better-scaled steps toward the fitted solution.",
+    "graph_placement_weight": {
+      "p4_logistic_regression": 1
+    }
+  },
+  {
+    "id": "p4_logistic_regression_order1",
+    "skill_id": "p4_logistic_regression",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Logistic Regression workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "split labeled rows"
+      },
+      {
+        "id": "b",
+        "text": "fit logistic regression"
+      },
+      {
+        "id": "c",
+        "text": "predict probabilities"
+      },
+      {
+        "id": "d",
+        "text": "choose and evaluate a threshold"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: split labeled rows → fit logistic regression → predict probabilities → choose and evaluate a threshold."
+  },
+  {
+    "id": "p4_logistic_regression_fill1",
+    "skill_id": "p4_logistic_regression",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Logistic Regression step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "predict_proba"
+      },
+      {
+        "id": "b",
+        "text": "fit_transform"
+      },
+      {
+        "id": "c",
+        "text": "cluster"
+      },
+      {
+        "id": "d",
+        "text": "reshape"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "predict_proba",
+    "explanation_after": "The correct choice is predict_proba."
+  }
+]

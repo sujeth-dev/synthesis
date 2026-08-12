@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_train_test_cross_validation_q1",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Train/Test Splits & Cross-Validation: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Training rows teach while test rows judge unseen performance."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Training rows teach while test rows judge unseen performance.",
+    "graph_placement_weight": {
+      "p4_train_test_cross_validation": 1
+    }
+  },
+  {
+    "id": "p4_train_test_cross_validation_q2",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Train/Test Splits & Cross-Validation: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The test set should not guide model or setting choices."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "The test set should not guide model or setting choices.",
+    "graph_placement_weight": {
+      "p4_train_test_cross_validation": 1
+    }
+  },
+  {
+    "id": "p4_train_test_cross_validation_q3",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Train/Test Splits & Cross-Validation: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cross-validation rotates held-out groups to reduce dependence on one split."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Cross-validation rotates held-out groups to reduce dependence on one split.",
+    "graph_placement_weight": {
+      "p4_train_test_cross_validation": 1
+    }
+  },
+  {
+    "id": "p4_train_test_cross_validation_q4",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Train/Test Splits & Cross-Validation: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Group splits keep related records from leaking across sides."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Group splits keep related records from leaking across sides.",
+    "graph_placement_weight": {
+      "p4_train_test_cross_validation": 1
+    }
+  },
+  {
+    "id": "p4_train_test_cross_validation_q5",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Train/Test Splits & Cross-Validation: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Time splits train on earlier records and validate on later records."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Time splits train on earlier records and validate on later records.",
+    "graph_placement_weight": {
+      "p4_train_test_cross_validation": 1
+    }
+  },
+  {
+    "id": "p4_train_test_cross_validation_q6",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Train/Test Splits & Cross-Validation: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nested cross-validation evaluates the setting-selection process itself."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Nested cross-validation evaluates the setting-selection process itself.",
+    "graph_placement_weight": {
+      "p4_train_test_cross_validation": 1
+    }
+  },
+  {
+    "id": "p4_train_test_cross_validation_order1",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Train/Test Splits & Cross-Validation workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "hold out the final test set"
+      },
+      {
+        "id": "b",
+        "text": "search settings with training folds"
+      },
+      {
+        "id": "c",
+        "text": "choose the workflow"
+      },
+      {
+        "id": "d",
+        "text": "evaluate once on the test set"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: hold out the final test set → search settings with training folds → choose the workflow → evaluate once on the test set."
+  },
+  {
+    "id": "p4_train_test_cross_validation_fill1",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Train/Test Splits & Cross-Validation step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "cross_val_score"
+      },
+      {
+        "id": "b",
+        "text": "predict_proba"
+      },
+      {
+        "id": "c",
+        "text": "dropna"
+      },
+      {
+        "id": "d",
+        "text": "argmax"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "cross_val_score",
+    "explanation_after": "The correct choice is cross_val_score."
+  }
+]

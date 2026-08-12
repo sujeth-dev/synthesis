@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_linear_regression",
+  "depth": "advanced",
+  "title": "Linear Regression — The Ruler Wobbles",
+  "key_insight": "This is multicollinearity: the model cannot clearly divide credit between overlapping features. Scaling and regularization can make the weights steadier.",
+  "body": "## The Ruler Wobbles\n\nTwo input columns carry almost the same information. Tiny data changes make their individual weights swing wildly even though predictions barely change.\n\nThis is multicollinearity: the model cannot clearly divide credit between overlapping features. Scaling and regularization can make the weights steadier.\n\nInspect leftover errors too. Curves, changing spread, or time patterns in those residuals show that a straight, constant-noise story is missing something.",
+  "common_mistakes": [
+    "Reading a learned weight as proof that one feature causes the answer.",
+    "Ignoring curved patterns left in the errors.",
+    "Comparing raw coefficient sizes when input units differ."
+  ],
+  "mini_exercise": "Draw the situation from “The Ruler Wobbles” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It is a fast, explainable baseline for numeric prediction and a foundation for many later models.",
+  "explain_back_prompt": "Using the “The Ruler Wobbles” story, explain Linear Regression without assuming the listener knows machine learning."
+}

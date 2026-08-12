@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_regularization",
+  "depth": "advanced",
+  "title": "Regularization — Correlated Features Share or Compete",
+  "key_insight": "Elastic net combines L1 and L2 so it can create sparsity while remaining steadier among related features.",
+  "body": "## Correlated Features Share or Compete\n\nTwo columns carry nearly the same signal. Ridge tends to share weight between them, while lasso may keep one and drop the other.\n\nElastic net combines L1 and L2 so it can create sparsity while remaining steadier among related features.\n\nChoose strength inside cross-validation. Fitting the penalty with test feedback turns regularization into another route for leakage.",
+  "common_mistakes": [
+    "Applying penalties before putting features on comparable scales.",
+    "Choosing regularization strength on the test set.",
+    "Assuming a zero lasso weight proves a feature is useless in every context."
+  ],
+  "mini_exercise": "Draw the situation from “Correlated Features Share or Compete” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It reduces brittle fits and stabilizes models with many or overlapping features.",
+  "explain_back_prompt": "Using the “Correlated Features Share or Compete” story, explain Regularization without assuming the listener knows machine learning."
+}

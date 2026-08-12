@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_decision_trees",
+  "depth": "mid",
+  "title": "Decision Trees — Choose the Cleanest Split",
+  "key_insight": "Trees measure this mixing with impurity scores such as Gini impurity or entropy. They try many questions and choose a split that reduces impurity most.",
+  "body": "## Choose the Cleanest Split\n\nA box contains mixed red and blue cards. A useful question separates them into two boxes that are less mixed than before.\n\nTrees measure this mixing with impurity scores such as Gini impurity or entropy. They try many questions and choose a split that reduces impurity most.\n\nThe greedy choice is local: it picks the best next question, not a guaranteed best complete tree.",
+  "common_mistakes": [
+    "Growing until every training row has its own leaf.",
+    "Reading one greedy split as the only valid explanation.",
+    "Ignoring the advantage given to features with many possible cut points."
+  ],
+  "mini_exercise": "Draw the situation from “Choose the Cleanest Split” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Trees handle curved rules and mixed features while remaining inspectable.",
+  "explain_back_prompt": "Using the “Choose the Cleanest Split” story, explain Decision Trees without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "Inspect a small tree",
+    "context": "Turn the Decision Trees idea into one small, inspectable workflow.",
+    "steps": [
+      "Load a small classification dataset.",
+      "Fit a shallow decision tree.",
+      "Print or plot its first splits.",
+      "Compare training and test accuracy with a deeper tree."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}

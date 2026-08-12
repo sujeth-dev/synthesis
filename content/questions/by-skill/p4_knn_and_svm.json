@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p4_knn_and_svm_q1",
+    "skill_id": "p4_knn_and_svm",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "K-Nearest Neighbors & Support Vector Machines: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "KNN predicts from labels of nearby stored examples."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "KNN predicts from labels of nearby stored examples.",
+    "graph_placement_weight": {
+      "p4_knn_and_svm": 1
+    }
+  },
+  {
+    "id": "p4_knn_and_svm_q2",
+    "skill_id": "p4_knn_and_svm",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "K-Nearest Neighbors & Support Vector Machines: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An SVM seeks a separating boundary with a wide safety margin."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An SVM seeks a separating boundary with a wide safety margin.",
+    "graph_placement_weight": {
+      "p4_knn_and_svm": 1
+    }
+  },
+  {
+    "id": "p4_knn_and_svm_q3",
+    "skill_id": "p4_knn_and_svm",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "K-Nearest Neighbors & Support Vector Machines: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Feature scaling matters because both methods rely on distance."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Feature scaling matters because both methods rely on distance.",
+    "graph_placement_weight": {
+      "p4_knn_and_svm": 1
+    }
+  },
+  {
+    "id": "p4_knn_and_svm_q4",
+    "skill_id": "p4_knn_and_svm",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "K-Nearest Neighbors & Support Vector Machines: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "K balances sensitivity to noise against overly broad neighborhoods."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "K balances sensitivity to noise against overly broad neighborhoods.",
+    "graph_placement_weight": {
+      "p4_knn_and_svm": 1
+    }
+  },
+  {
+    "id": "p4_knn_and_svm_q5",
+    "skill_id": "p4_knn_and_svm",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "K-Nearest Neighbors & Support Vector Machines: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A kernel lets an SVM form curved boundaries through pairwise similarity."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A kernel lets an SVM form curved boundaries through pairwise similarity.",
+    "graph_placement_weight": {
+      "p4_knn_and_svm": 1
+    }
+  },
+  {
+    "id": "p4_knn_and_svm_q6",
+    "skill_id": "p4_knn_and_svm",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "K-Nearest Neighbors & Support Vector Machines: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "In many dimensions, nearest and farthest distances can become less distinct."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "In many dimensions, nearest and farthest distances can become less distinct.",
+    "graph_placement_weight": {
+      "p4_knn_and_svm": 1
+    }
+  }
+]

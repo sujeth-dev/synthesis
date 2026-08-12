@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_bias_variance_tradeoff",
+  "depth": "beginner",
+  "title": "Bias–Variance Tradeoff — Bent Sight or Shaky Hand",
+  "key_insight": "Bias is a consistent miss because the model is too limited. Variance is instability because the model follows small details of its training sample.",
+  "body": "## Bent Sight or Shaky Hand\n\nOne archer lands every arrow left of the target; another scatters arrows everywhere. Both are inaccurate for different reasons.\n\nBias is a consistent miss because the model is too limited. Variance is instability because the model follows small details of its training sample.\n\nA useful model captures the lasting pattern without chasing every accident. Validation shows which problem is dominating.",
+  "common_mistakes": [
+    "Calling every bad model overfit.",
+    "Choosing a remedy without comparing training and validation behavior.",
+    "Assuming model size alone determines effective complexity."
+  ],
+  "mini_exercise": "Draw the situation from “Bent Sight or Shaky Hand” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The tradeoff explains underfitting, overfitting, and why model complexity needs validation.",
+  "explain_back_prompt": "Using the “Bent Sight or Shaky Hand” story, explain Bias–Variance Tradeoff without assuming the listener knows machine learning."
+}

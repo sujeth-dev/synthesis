@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_supervised_learning",
+  "depth": "beginner",
+  "title": "Supervised Learning — The Covered Answer Key",
+  "key_insight": "Supervised learning follows that pattern. Each training example has inputs and a known answer called a label.",
+  "body": "## The Covered Answer Key\n\nA student sees many animal photos with the correct animal written underneath. Later, the labels are covered and the student names a new photo.\n\nSupervised learning follows that pattern. Each training example has inputs and a known answer called a label.\n\nThe real goal is not remembering the practice cards. It is learning a pattern that still works when a new card arrives.",
+  "common_mistakes": [
+    "Treating training accuracy as proof that new cases will work.",
+    "Using a classification score for a numeric prediction problem.",
+    "Assuming every recorded label is perfectly correct."
+  ],
+  "mini_exercise": "Draw the situation from “The Covered Answer Key” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Most practical prediction systems begin with labeled historical examples.",
+  "explain_back_prompt": "Using the “The Covered Answer Key” story, explain Supervised Learning without assuming the listener knows machine learning."
+}

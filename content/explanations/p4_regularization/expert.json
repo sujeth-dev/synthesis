@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_regularization",
+  "depth": "expert",
+  "title": "Regularization — A Preference Becomes a Prior",
+  "key_insight": "L2 matches a bell-shaped prior around zero; L1 matches a sharp, heavy-tailed prior that favors exact zeros. The fitted result balances prior preference and evidence.",
+  "body": "## A Preference Becomes a Prior\n\nBefore seeing data, you may believe extreme weights are unlikely. Regularization writes that preference into the fitting objective.\n\nL2 matches a bell-shaped prior around zero; L1 matches a sharp, heavy-tailed prior that favors exact zeros. The fitted result balances prior preference and evidence.\n\nIn underdetermined problems, optimization itself can prefer certain solutions even without an explicit penalty. This implicit regularization helps explain why large models can generalize.",
+  "common_mistakes": [
+    "Applying penalties before putting features on comparable scales.",
+    "Choosing regularization strength on the test set.",
+    "Assuming a zero lasso weight proves a feature is useless in every context."
+  ],
+  "mini_exercise": "Draw the situation from “A Preference Becomes a Prior” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It reduces brittle fits and stabilizes models with many or overlapping features.",
+  "explain_back_prompt": "Using the “A Preference Becomes a Prior” story, explain Regularization without assuming the listener knows machine learning."
+}

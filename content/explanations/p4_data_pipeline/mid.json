@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_data_pipeline",
+  "depth": "mid",
+  "title": "Data → Model → Prediction — One Recipe for Training and Serving",
+  "key_insight": "A fitted pipeline stores the learned cleaning rules beside the model. Training learns those rules; prediction reuses them without changing them.",
+  "body": "## One Recipe for Training and Serving\n\nA model works in a notebook but fails in the app because the app cleans inputs differently. The two routes have quietly become different recipes.\n\nA fitted pipeline stores the learned cleaning rules beside the model. Training learns those rules; prediction reuses them without changing them.\n\nVersion the complete route, not only the final model. Then testing, saving, loading, and serving all use the same ordered steps.",
+  "common_mistakes": [
+    "Changing serving-time cleaning without retraining the model.",
+    "Saving the model but not its learned preprocessing.",
+    "Running a pipeline without recording versions or data-quality counts."
+  ],
+  "mini_exercise": "Draw the situation from “One Recipe for Training and Serving” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every ML project needs a traceable path from source data to a monitored prediction.",
+  "explain_back_prompt": "Using the “One Recipe for Training and Serving” story, explain Data → Model → Prediction without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "Build a tiny repeatable pipeline",
+    "context": "Turn the Data → Model → Prediction idea into one small, inspectable workflow.",
+    "steps": [
+      "Load a small table.",
+      "Split it before learning any cleaning rule.",
+      "Fit a cleaner and model on training rows.",
+      "Predict held-out rows and print the score."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}

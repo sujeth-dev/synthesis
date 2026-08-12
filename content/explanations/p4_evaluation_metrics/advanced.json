@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_evaluation_metrics",
+  "depth": "advanced",
+  "title": "Evaluation Metrics — One Curve Hides a Rare Class",
+  "key_insight": "ROC AUC measures ranking across thresholds. Precision-recall area focuses more directly on the rare positive class and can be more revealing.",
+  "body": "## One Curve Hides a Rare Class\n\nA fraud model has impressive ROC area because millions of ordinary cases keep the false-positive rate small, yet its alerts are mostly wrong.\n\nROC AUC measures ranking across thresholds. Precision-recall area focuses more directly on the rare positive class and can be more revealing.\n\nAlso check calibration: among predictions near 70%, roughly seven in ten should happen. Ranking and trustworthy probability are different qualities.",
+  "common_mistakes": [
+    "Using accuracy for a rare positive class.",
+    "Comparing AUC without choosing a deployment threshold.",
+    "Treating a tiny metric difference as meaningful without uncertainty."
+  ],
+  "mini_exercise": "Draw the situation from “One Curve Hides a Rare Class” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The wrong metric rewards the wrong model, especially with rare events.",
+  "explain_back_prompt": "Using the “One Curve Hides a Rare Class” story, explain Evaluation Metrics without assuming the listener knows machine learning."
+}

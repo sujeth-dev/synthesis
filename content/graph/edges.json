@@ -463,5 +463,125 @@
     "from": "p2_data_cleaning_preprocessing",
     "to": "p4_sklearn_workflow",
     "strength": "hard"
+  },
+  {
+    "from": "p4_data_pipeline",
+    "to": "p4_unsupervised_learning",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_supervised_learning",
+    "to": "p4_linear_regression",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_supervised_learning",
+    "to": "p4_logistic_regression",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_supervised_learning",
+    "to": "p4_decision_trees",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_supervised_learning",
+    "to": "p4_knn_and_svm",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_decision_trees",
+    "to": "p4_random_forests",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_random_forests",
+    "to": "p4_boosting_methods",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_linear_regression",
+    "to": "p4_train_test_cross_validation",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_logistic_regression",
+    "to": "p4_train_test_cross_validation",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_decision_trees",
+    "to": "p4_train_test_cross_validation",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_train_test_cross_validation",
+    "to": "p4_evaluation_metrics",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_evaluation_metrics",
+    "to": "p4_bias_variance_tradeoff",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_bias_variance_tradeoff",
+    "to": "p4_regularization",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_regularization",
+    "to": "p4_hyperparameter_tuning",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_data_cleaning_preprocessing",
+    "to": "p4_feature_scaling",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_feature_scaling",
+    "to": "p4_linear_regression",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_feature_scaling",
+    "to": "p4_logistic_regression",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_feature_scaling",
+    "to": "p4_knn_and_svm",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_hyperparameter_tuning",
+    "to": "p4_sklearn_workflow",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_unsupervised_learning",
+    "to": "p5_neural_network_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_boosting_methods",
+    "to": "p5_neural_network_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_knn_and_svm",
+    "to": "p5_neural_network_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_hyperparameter_tuning",
+    "to": "p5_neural_network_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_sklearn_workflow",
+    "to": "p5_neural_network_basics",
+    "strength": "soft"
   }
 ]

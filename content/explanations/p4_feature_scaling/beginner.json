@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_feature_scaling",
+  "depth": "beginner",
+  "title": "Feature Scaling — Meters Beside Millimeters",
+  "key_insight": "Feature scaling changes the numeric rulers without changing which row is which. Standardization centers a feature and measures it in typical-spread units.",
+  "body": "## Meters Beside Millimeters\n\nOne column measures height near 2 meters and another records salary near 100,000. A distance calculation mostly notices salary because its numbers are larger.\n\nFeature scaling changes the numeric rulers without changing which row is which. Standardization centers a feature and measures it in typical-spread units.\n\nFit the ruler on training rows, then reuse it for test and production rows. Letting test values set the ruler leaks information.",
+  "common_mistakes": [
+    "Fitting the scaler before the train/test split.",
+    "Using min-max scaling without checking extreme outliers.",
+    "Centering a huge sparse matrix until it becomes dense."
+  ],
+  "mini_exercise": "Draw the situation from “Meters Beside Millimeters” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Distance methods and gradient-based models can be distorted or slowed by mismatched feature units.",
+  "explain_back_prompt": "Using the “Meters Beside Millimeters” story, explain Feature Scaling without assuming the listener knows machine learning."
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_train_test_cross_validation",
+  "depth": "mid",
+  "title": "Train/Test Splits & Cross-Validation — Rotate the Practice Exam",
+  "key_insight": "Cross-validation rotates several validation groups. Each row gets a turn outside training, and the scores reveal both average performance and wobble.",
+  "body": "## Rotate the Practice Exam\n\nA small dataset gives a very different score depending on which rows are held out. One split is too lucky or unlucky.\n\nCross-validation rotates several validation groups. Each row gets a turn outside training, and the scores reveal both average performance and wobble.\n\nUse validation folds to choose settings, then use the untouched test set once for the final report.",
+  "common_mistakes": [
+    "Using the test set to choose model settings.",
+    "Randomly splitting time-ordered or grouped records.",
+    "Reporting only the best fold instead of the full variation."
+  ],
+  "mini_exercise": "Draw the situation from “Rotate the Practice Exam” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Without a fair split, every model comparison can be confidently wrong.",
+  "explain_back_prompt": "Using the “Rotate the Practice Exam” story, explain Train/Test Splits & Cross-Validation without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "Compare one split with five folds",
+    "context": "Turn the Train/Test Splits & Cross-Validation idea into one small, inspectable workflow.",
+    "steps": [
+      "Load a small labeled dataset.",
+      "Score one fixed train/test split.",
+      "Run five-fold cross-validation on training data.",
+      "Compare the single score with the fold average and spread."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}

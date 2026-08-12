@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_decision_trees",
+  "depth": "advanced",
+  "title": "Decision Trees — The Tree Memorizes Every Leaf",
+  "key_insight": "Limit depth, require enough rows for a split, or prune weak branches. These controls trade a little training fit for steadier new-data behavior.",
+  "body": "## The Tree Memorizes Every Leaf\n\nA tree keeps splitting until nearly every training row owns a private leaf. Training looks perfect, but tiny new changes send examples down brittle paths.\n\nLimit depth, require enough rows for a split, or prune weak branches. These controls trade a little training fit for steadier new-data behavior.\n\nMissing values and categories need a clear policy. Also inspect whether one high-cardinality feature wins simply because it offers many possible splits.",
+  "common_mistakes": [
+    "Growing until every training row has its own leaf.",
+    "Reading one greedy split as the only valid explanation.",
+    "Ignoring the advantage given to features with many possible cut points."
+  ],
+  "mini_exercise": "Draw the situation from “The Tree Memorizes Every Leaf” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Trees handle curved rules and mixed features while remaining inspectable.",
+  "explain_back_prompt": "Using the “The Tree Memorizes Every Leaf” story, explain Decision Trees without assuming the listener knows machine learning."
+}

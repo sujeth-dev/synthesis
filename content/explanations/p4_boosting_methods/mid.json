@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_boosting_methods",
+  "depth": "mid",
+  "title": "Boosting Methods — Fit the Leftover Error",
+  "key_insight": "Gradient boosting generalizes this idea by following the downhill direction of a chosen loss. The new tree estimates a useful correction.",
+  "body": "## Fit the Leftover Error\n\nA house model underprices one group and overprices another. Write down each leftover difference and train the next small tree to predict those differences.\n\nGradient boosting generalizes this idea by following the downhill direction of a chosen loss. The new tree estimates a useful correction.\n\nThe learning rate shrinks each correction. Smaller rates often need more trees but can produce steadier learning.",
+  "common_mistakes": [
+    "Confusing boosting with independent-tree voting.",
+    "Using a large learning rate and many deep trees without validation.",
+    "Treating library defaults as a substitute for leakage-safe evaluation."
+  ],
+  "mini_exercise": "Draw the situation from “Fit the Leftover Error” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Boosted trees are among the strongest methods for structured tables.",
+  "explain_back_prompt": "Using the “Fit the Leftover Error” story, explain Boosting Methods without assuming the listener knows machine learning."
+}

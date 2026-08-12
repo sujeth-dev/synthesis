@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_feature_scaling",
+  "depth": "mid",
+  "title": "Feature Scaling — Choose the Right Ruler",
+  "key_insight": "Min-max scaling uses the observed ends. Standard scaling uses the average and spread. Robust scaling uses middle ranks and resists extreme outliers.",
+  "body": "## Choose the Right Ruler\n\nMost values cluster normally, but one huge outlier stretches the range. A zero-to-one ruler squeezes ordinary values into a tiny space.\n\nMin-max scaling uses the observed ends. Standard scaling uses the average and spread. Robust scaling uses middle ranks and resists extreme outliers.\n\nTrees usually do not need scaling because their split order survives a change of units. KNN, SVM, and gradient-based models often do.",
+  "common_mistakes": [
+    "Fitting the scaler before the train/test split.",
+    "Using min-max scaling without checking extreme outliers.",
+    "Centering a huge sparse matrix until it becomes dense."
+  ],
+  "mini_exercise": "Draw the situation from “Choose the Right Ruler” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Distance methods and gradient-based models can be distorted or slowed by mismatched feature units.",
+  "explain_back_prompt": "Using the “Choose the Right Ruler” story, explain Feature Scaling without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "See scaling change distance",
+    "context": "Turn the Feature Scaling idea into one small, inspectable workflow.",
+    "steps": [
+      "Create two features with very different units.",
+      "Compare nearest neighbors before scaling.",
+      "Fit a scaler on training rows.",
+      "Compare neighbors again and explain the change."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}
