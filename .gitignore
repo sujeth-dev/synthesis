@@ -9,3 +9,10 @@ data/*.bak
 .env.local
 *.DS_Store
 .claude/
+
+# research/dkt (DKT-1): raw ASSISTments data and Python env/artifacts, never committed
+research/dkt/data/
+research/dkt/.venv/
+research/dkt/__pycache__/
+research/dkt/**/__pycache__/
+research/dkt/.pytest_cache/

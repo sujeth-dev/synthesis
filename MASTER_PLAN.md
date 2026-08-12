@@ -138,16 +138,18 @@ Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section A.
 **Constraint:** lives entirely under `research/dkt/` (Python), never touches `package.json` or the Next.js runtime. Do not commit raw datasets — `.gitignore` them, commit only scripts + results.
 
-| ID | Task |
-|---|---|
-| DKT-1 | Download ASSISTments 2009-2010, record license/citation terms in `research/dkt/README.md` |
-| DKT-2 | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
-| DKT-3 | Split by student, not by interaction |
-| DKT-4 | Fit a proper per-skill BKT baseline on the same split |
-| DKT-5 | Train a small LSTM DKT on train/val |
-| DKT-6 | Evaluate DKT AUC vs. BKT AUC on held-out test set |
-| DKT-7 | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
-| DKT-8 | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+| ID | Status | Task |
+|---|---|---|
+| DKT-1 | done | Download ASSISTments 2009-2010, record license/citation terms in `research/dkt/README.md` |
+| DKT-2 | done | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
+| DKT-3 | done | Split by student, not by interaction |
+| DKT-4 | done | Fit a proper per-skill BKT baseline on the same split |
+| DKT-5 | done | Train a small LSTM DKT on train/val |
+| DKT-6 | done | Evaluate DKT AUC vs. BKT AUC on held-out test set |
+| DKT-7 | done | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
+| DKT-8 | done | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+
+**Track status: all of DKT-1 through DKT-8 done (2026-08-12).** DKT AUC 0.8299 vs. BKT AUC 0.7296 on the held-out ASSISTments test split — see `research/dkt/RESULTS.md`. `pytest research/dkt/tests/` (4/4) and the full `download_data.py → preprocess.py → split.py → bkt_baseline.py → train_dkt.py → evaluate.py` pipeline both verified green against the real dataset. Committed locally on `dkt-track`, not pushed (final push happens once alongside `fsrs-track`, outside this session).
 
 **Live cutover** (switching Synaptic's own engine to DKT) is Phase 3 item P3-3, gated at 50k+ real sessions — do not do this as part of this track.
 
