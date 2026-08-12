@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_tokenization",
+  "depth": "mid",
+  "title": "Tokenization — Build a Useful Vocabulary",
+  "key_insight": "Subword methods begin with small pieces and learn common combinations. Frequent text becomes compact while unfamiliar words can still be assembled.",
+  "body": "## Build a Useful Vocabulary\n\nWhole words make rare names impossible, while single characters make every sentence very long. A practical tokenizer balances those extremes.\n\nSubword methods begin with small pieces and learn common combinations. Frequent text becomes compact while unfamiliar words can still be assembled.\n\nSpecial tokens mark boundaries or roles. Their exact meanings belong to the model and tokenizer pair, so mismatching versions corrupts inputs.",
+  "common_mistakes": [
+    "A tokenizer directly verifies every factual answer.",
+    "Every token is always one complete English word.",
+    "Token numbers have the same meaning across all models."
+  ],
+  "mini_exercise": "Draw “Build a Useful Vocabulary” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every language-model input and output passes through a tokenizer, so its choices affect meaning, length, and cost.",
+  "explain_back_prompt": "Using “Build a Useful Vocabulary,” explain Tokenization without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Inspect how text becomes tokens",
+    "context": "Turn Tokenization into one small, inspectable workflow.",
+    "steps": [
+      "Choose two short sentences.",
+      "Encode both with one tokenizer.",
+      "Print token pieces and counts.",
+      "Decode the ids and compare with the originals."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

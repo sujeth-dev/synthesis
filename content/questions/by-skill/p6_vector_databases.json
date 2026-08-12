@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_vector_databases_q1",
+    "skill_id": "p6_vector_databases",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Vector Databases: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A vector database indexes embeddings for similarity search."
+      },
+      {
+        "id": "b",
+        "text": "A vector database removes the need to store source text."
+      },
+      {
+        "id": "c",
+        "text": "Approximate search is guaranteed to return the exact same neighbors."
+      },
+      {
+        "id": "d",
+        "text": "Access control should be applied only after private text reaches the model."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A vector database indexes embeddings for similarity search.",
+    "graph_placement_weight": {
+      "p6_vector_databases": 1
+    }
+  },
+  {
+    "id": "p6_vector_databases_q2",
+    "skill_id": "p6_vector_databases",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Vector Databases: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A vector database removes the need to store source text."
+      },
+      {
+        "id": "b",
+        "text": "Metadata supports filtering and source lookup."
+      },
+      {
+        "id": "c",
+        "text": "Approximate search is guaranteed to return the exact same neighbors."
+      },
+      {
+        "id": "d",
+        "text": "Access control should be applied only after private text reaches the model."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Metadata supports filtering and source lookup.",
+    "graph_placement_weight": {
+      "p6_vector_databases": 1
+    }
+  },
+  {
+    "id": "p6_vector_databases_q3",
+    "skill_id": "p6_vector_databases",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Vector Databases: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A vector database removes the need to store source text."
+      },
+      {
+        "id": "b",
+        "text": "Approximate search is guaranteed to return the exact same neighbors."
+      },
+      {
+        "id": "c",
+        "text": "Approximate search trades some recall for speed."
+      },
+      {
+        "id": "d",
+        "text": "Access control should be applied only after private text reaches the model."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Approximate search trades some recall for speed.",
+    "graph_placement_weight": {
+      "p6_vector_databases": 1
+    }
+  },
+  {
+    "id": "p6_vector_databases_q4",
+    "skill_id": "p6_vector_databases",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Vector Databases: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A vector database removes the need to store source text."
+      },
+      {
+        "id": "b",
+        "text": "Approximate search is guaranteed to return the exact same neighbors."
+      },
+      {
+        "id": "c",
+        "text": "Access control should be applied only after private text reaches the model."
+      },
+      {
+        "id": "d",
+        "text": "Recall can be checked against exact search on a sample."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Recall can be checked against exact search on a sample.",
+    "graph_placement_weight": {
+      "p6_vector_databases": 1
+    }
+  },
+  {
+    "id": "p6_vector_databases_q5",
+    "skill_id": "p6_vector_databases",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Vector Databases: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Embedding versions should not be mixed in one similarity space."
+      },
+      {
+        "id": "b",
+        "text": "A vector database removes the need to store source text."
+      },
+      {
+        "id": "c",
+        "text": "Approximate search is guaranteed to return the exact same neighbors."
+      },
+      {
+        "id": "d",
+        "text": "Access control should be applied only after private text reaches the model."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Embedding versions should not be mixed in one similarity space.",
+    "graph_placement_weight": {
+      "p6_vector_databases": 1
+    }
+  },
+  {
+    "id": "p6_vector_databases_q6",
+    "skill_id": "p6_vector_databases",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Vector Databases: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A vector database removes the need to store source text."
+      },
+      {
+        "id": "b",
+        "text": "Index choice depends on memory, updates, filters, and tail latency."
+      },
+      {
+        "id": "c",
+        "text": "Approximate search is guaranteed to return the exact same neighbors."
+      },
+      {
+        "id": "d",
+        "text": "Access control should be applied only after private text reaches the model."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Index choice depends on memory, updates, filters, and tail latency.",
+    "graph_placement_weight": {
+      "p6_vector_databases": 1
+    }
+  }
+]

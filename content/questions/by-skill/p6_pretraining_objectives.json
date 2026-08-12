@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_pretraining_objectives_q1",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Pretraining Objectives: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pretraining can create labels from raw sequences."
+      },
+      {
+        "id": "b",
+        "text": "Pretraining guarantees every generated claim is true."
+      },
+      {
+        "id": "c",
+        "text": "A causal model trains by reading the answer tokens ahead."
+      },
+      {
+        "id": "d",
+        "text": "Data quality cannot affect a fixed mathematical loss."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Pretraining can create labels from raw sequences.",
+    "graph_placement_weight": {
+      "p6_pretraining_objectives": 1
+    }
+  },
+  {
+    "id": "p6_pretraining_objectives_q2",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Pretraining Objectives: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pretraining guarantees every generated claim is true."
+      },
+      {
+        "id": "b",
+        "text": "Causal training predicts later tokens without seeing the future."
+      },
+      {
+        "id": "c",
+        "text": "A causal model trains by reading the answer tokens ahead."
+      },
+      {
+        "id": "d",
+        "text": "Data quality cannot affect a fixed mathematical loss."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Causal training predicts later tokens without seeing the future.",
+    "graph_placement_weight": {
+      "p6_pretraining_objectives": 1
+    }
+  },
+  {
+    "id": "p6_pretraining_objectives_q3",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Pretraining Objectives: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pretraining guarantees every generated claim is true."
+      },
+      {
+        "id": "b",
+        "text": "A causal model trains by reading the answer tokens ahead."
+      },
+      {
+        "id": "c",
+        "text": "Masked training reconstructs hidden tokens from surrounding context."
+      },
+      {
+        "id": "d",
+        "text": "Data quality cannot affect a fixed mathematical loss."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Masked training reconstructs hidden tokens from surrounding context.",
+    "graph_placement_weight": {
+      "p6_pretraining_objectives": 1
+    }
+  },
+  {
+    "id": "p6_pretraining_objectives_q4",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Pretraining Objectives: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pretraining guarantees every generated claim is true."
+      },
+      {
+        "id": "b",
+        "text": "A causal model trains by reading the answer tokens ahead."
+      },
+      {
+        "id": "c",
+        "text": "Data quality cannot affect a fixed mathematical loss."
+      },
+      {
+        "id": "d",
+        "text": "Padding positions should not affect token loss."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Padding positions should not affect token loss.",
+    "graph_placement_weight": {
+      "p6_pretraining_objectives": 1
+    }
+  },
+  {
+    "id": "p6_pretraining_objectives_q5",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Pretraining Objectives: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Data filtering and mixture weights shape learned behavior."
+      },
+      {
+        "id": "b",
+        "text": "Pretraining guarantees every generated claim is true."
+      },
+      {
+        "id": "c",
+        "text": "A causal model trains by reading the answer tokens ahead."
+      },
+      {
+        "id": "d",
+        "text": "Data quality cannot affect a fixed mathematical loss."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Data filtering and mixture weights shape learned behavior.",
+    "graph_placement_weight": {
+      "p6_pretraining_objectives": 1
+    }
+  },
+  {
+    "id": "p6_pretraining_objectives_q6",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Pretraining Objectives: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pretraining guarantees every generated claim is true."
+      },
+      {
+        "id": "b",
+        "text": "Scaling laws help allocate a fixed compute budget among model size and data."
+      },
+      {
+        "id": "c",
+        "text": "A causal model trains by reading the answer tokens ahead."
+      },
+      {
+        "id": "d",
+        "text": "Data quality cannot affect a fixed mathematical loss."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Scaling laws help allocate a fixed compute budget among model size and data.",
+    "graph_placement_weight": {
+      "p6_pretraining_objectives": 1
+    }
+  }
+]

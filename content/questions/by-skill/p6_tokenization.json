@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p6_tokenization_q1",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tokenizer splits text into numbered pieces."
+      },
+      {
+        "id": "b",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "c",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "d",
+        "text": "Token numbers have the same meaning across all models."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A tokenizer splits text into numbered pieces.",
+    "graph_placement_weight": {
+      "p6_tokenization": 1
+    }
+  },
+  {
+    "id": "p6_tokenization_q2",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "b",
+        "text": "Tokens can be words, subwords, punctuation, or bytes."
+      },
+      {
+        "id": "c",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "d",
+        "text": "Token numbers have the same meaning across all models."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Tokens can be words, subwords, punctuation, or bytes.",
+    "graph_placement_weight": {
+      "p6_tokenization": 1
+    }
+  },
+  {
+    "id": "p6_tokenization_q3",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "b",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "c",
+        "text": "Subword vocabularies balance coverage and sequence length."
+      },
+      {
+        "id": "d",
+        "text": "Token numbers have the same meaning across all models."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Subword vocabularies balance coverage and sequence length.",
+    "graph_placement_weight": {
+      "p6_tokenization": 1
+    }
+  },
+  {
+    "id": "p6_tokenization_q4",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "b",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "c",
+        "text": "Token numbers have the same meaning across all models."
+      },
+      {
+        "id": "d",
+        "text": "Model and tokenizer versions must match."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Model and tokenizer versions must match.",
+    "graph_placement_weight": {
+      "p6_tokenization": 1
+    }
+  },
+  {
+    "id": "p6_tokenization_q5",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Context limits are measured in tokens rather than characters."
+      },
+      {
+        "id": "b",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "c",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "d",
+        "text": "Token numbers have the same meaning across all models."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Context limits are measured in tokens rather than characters.",
+    "graph_placement_weight": {
+      "p6_tokenization": 1
+    }
+  },
+  {
+    "id": "p6_tokenization_q6",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "b",
+        "text": "Vocabulary size trades shorter sequences against larger embedding and output tables."
+      },
+      {
+        "id": "c",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "d",
+        "text": "Token numbers have the same meaning across all models."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Vocabulary size trades shorter sequences against larger embedding and output tables.",
+    "graph_placement_weight": {
+      "p6_tokenization": 1
+    }
+  },
+  {
+    "id": "p6_tokenization_order1",
+    "skill_id": "p6_tokenization",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Tokenization workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "load the matching tokenizer"
+      },
+      {
+        "id": "b",
+        "text": "encode the text"
+      },
+      {
+        "id": "c",
+        "text": "inspect token ids and pieces"
+      },
+      {
+        "id": "d",
+        "text": "decode and compare"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: load the matching tokenizer → encode the text → inspect token ids and pieces → decode and compare."
+  },
+  {
+    "id": "p6_tokenization_fill1",
+    "skill_id": "p6_tokenization",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Tokenization step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "encode"
+      },
+      {
+        "id": "b",
+        "text": "fit"
+      },
+      {
+        "id": "c",
+        "text": "cluster"
+      },
+      {
+        "id": "d",
+        "text": "backward"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "encode",
+    "explanation_after": "The correct choice is encode."
+  }
+]

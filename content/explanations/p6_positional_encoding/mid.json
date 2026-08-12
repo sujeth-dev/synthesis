@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_positional_encoding",
+  "depth": "mid",
+  "title": "Positional Encoding — Fixed Waves Mark Many Positions",
+  "key_insight": "Sinusoidal encodings use waves of different frequencies. Nearby positions have related patterns, while many frequencies help distinguish longer distances.",
+  "body": "## Fixed Waves Mark Many Positions\n\nAssigning one learned label to every possible position limits the model to labels it saw. Fixed repeating waves offer a structured alternative.\n\nSinusoidal encodings use waves of different frequencies. Nearby positions have related patterns, while many frequencies help distinguish longer distances.\n\nLearned position vectors can adapt to the training range. Neither method automatically guarantees strong behavior far beyond that range.",
+  "common_mistakes": [
+    "Position information alphabetically sorts every sentence.",
+    "Word order never changes meaning.",
+    "Rotary encoding deletes token content."
+  ],
+  "mini_exercise": "Draw “Fixed Waves Mark Many Positions” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Language meaning depends on order, and position design affects how models handle lengths beyond training.",
+  "explain_back_prompt": "Using “Fixed Waves Mark Many Positions,” explain Positional Encoding without assuming the listener knows modern AI."
+}

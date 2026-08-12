@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_vector_databases",
+  "depth": "mid",
+  "title": "Vector Databases — Trade a Little Recall for Speed",
+  "key_insight": "Approximate nearest-neighbor methods organize likely neighborhoods. Search controls such as probe count trade more work for a better chance of finding the true top results.",
+  "body": "## Trade a Little Recall for Speed\n\nAn exact scan finds the true nearest items but checks everything. An approximate index skips much of the collection and may miss a rare neighbor.\n\nApproximate nearest-neighbor methods organize likely neighborhoods. Search controls such as probe count trade more work for a better chance of finding the true top results.\n\nMeasure recall against an exact sample, along with latency. A fast index that misses the needed document is not useful.",
+  "common_mistakes": [
+    "A vector database removes the need to store source text.",
+    "Approximate search is guaranteed to return the exact same neighbors.",
+    "Access control should be applied only after private text reaches the model."
+  ],
+  "mini_exercise": "Draw “Trade a Little Recall for Speed” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Large retrieval systems need fast similarity search plus filters, updates, metadata, and operational guarantees.",
+  "explain_back_prompt": "Using “Trade a Little Recall for Speed,” explain Vector Databases without assuming the listener knows modern AI."
+}

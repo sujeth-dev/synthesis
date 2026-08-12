@@ -693,5 +693,105 @@
     "from": "p5_build_your_first_network",
     "to": "p6_transformers",
     "strength": "soft"
+  },
+  {
+    "from": "p5_why_transformers_replaced_rnns",
+    "to": "p6_tokenization",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_tokenization",
+    "to": "p6_embeddings",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_embeddings",
+    "to": "p6_vector_databases",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_embeddings",
+    "to": "p6_attention_mechanism",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_why_transformers_replaced_rnns",
+    "to": "p6_attention_mechanism",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_attention_mechanism",
+    "to": "p6_self_attention_and_multihead",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_self_attention_and_multihead",
+    "to": "p6_positional_encoding",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_positional_encoding",
+    "to": "p6_transformers",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_transformers",
+    "to": "p6_residual_connections_and_layernorm",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_transformers",
+    "to": "p6_pretraining_objectives",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_pretraining_objectives",
+    "to": "p6_finetuning_methods",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_finetuning_methods",
+    "to": "p6_lora_and_peft",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_pretraining_objectives",
+    "to": "p6_llm_landscape",
+    "strength": "soft"
+  },
+  {
+    "from": "p6_llm_landscape",
+    "to": "p6_prompt_engineering",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_vector_databases",
+    "to": "p6_rag_systems",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_prompt_engineering",
+    "to": "p6_rag_systems",
+    "strength": "soft"
+  },
+  {
+    "from": "p6_prompt_engineering",
+    "to": "p6_tool_use_and_function_calling",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_rag_systems",
+    "to": "p6_evaluating_and_choosing_llms",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_tool_use_and_function_calling",
+    "to": "p6_evaluating_and_choosing_llms",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_evaluating_and_choosing_llms",
+    "to": "p7_ai_apis",
+    "strength": "hard"
   }
 ]

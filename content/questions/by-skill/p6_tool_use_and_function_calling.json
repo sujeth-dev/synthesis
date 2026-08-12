@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p6_tool_use_and_function_calling_q1",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Tool Use & Function Calling: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model can propose a tool call but application code executes it."
+      },
+      {
+        "id": "b",
+        "text": "A model response automatically has every system credential."
+      },
+      {
+        "id": "c",
+        "text": "Tool arguments never need validation."
+      },
+      {
+        "id": "d",
+        "text": "Retries are safe even when they repeat payments."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A model can propose a tool call but application code executes it.",
+    "graph_placement_weight": {
+      "p6_tool_use_and_function_calling": 1
+    }
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_q2",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Tool Use & Function Calling: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model response automatically has every system credential."
+      },
+      {
+        "id": "b",
+        "text": "Tool schemas define typed arguments."
+      },
+      {
+        "id": "c",
+        "text": "Tool arguments never need validation."
+      },
+      {
+        "id": "d",
+        "text": "Retries are safe even when they repeat payments."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Tool schemas define typed arguments.",
+    "graph_placement_weight": {
+      "p6_tool_use_and_function_calling": 1
+    }
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_q3",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Tool Use & Function Calling: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model response automatically has every system credential."
+      },
+      {
+        "id": "b",
+        "text": "Tool arguments never need validation."
+      },
+      {
+        "id": "c",
+        "text": "Arguments must be validated before execution."
+      },
+      {
+        "id": "d",
+        "text": "Retries are safe even when they repeat payments."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Arguments must be validated before execution.",
+    "graph_placement_weight": {
+      "p6_tool_use_and_function_calling": 1
+    }
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_q4",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Tool Use & Function Calling: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model response automatically has every system credential."
+      },
+      {
+        "id": "b",
+        "text": "Tool arguments never need validation."
+      },
+      {
+        "id": "c",
+        "text": "Retries are safe even when they repeat payments."
+      },
+      {
+        "id": "d",
+        "text": "Write actions need stronger confirmation than reads."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Write actions need stronger confirmation than reads.",
+    "graph_placement_weight": {
+      "p6_tool_use_and_function_calling": 1
+    }
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_q5",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Tool Use & Function Calling: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tool loops need limits on time, cost, and retries."
+      },
+      {
+        "id": "b",
+        "text": "A model response automatically has every system credential."
+      },
+      {
+        "id": "c",
+        "text": "Tool arguments never need validation."
+      },
+      {
+        "id": "d",
+        "text": "Retries are safe even when they repeat payments."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Tool loops need limits on time, cost, and retries.",
+    "graph_placement_weight": {
+      "p6_tool_use_and_function_calling": 1
+    }
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_q6",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Tool Use & Function Calling: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model response automatically has every system credential."
+      },
+      {
+        "id": "b",
+        "text": "Authorization must come from application policy rather than model confidence."
+      },
+      {
+        "id": "c",
+        "text": "Tool arguments never need validation."
+      },
+      {
+        "id": "d",
+        "text": "Retries are safe even when they repeat payments."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Authorization must come from application policy rather than model confidence.",
+    "graph_placement_weight": {
+      "p6_tool_use_and_function_calling": 1
+    }
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_order1",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Tool Use & Function Calling workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "describe the tool schema"
+      },
+      {
+        "id": "b",
+        "text": "let the model propose arguments"
+      },
+      {
+        "id": "c",
+        "text": "validate and authorize the call"
+      },
+      {
+        "id": "d",
+        "text": "execute and return the result"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: describe the tool schema → let the model propose arguments → validate and authorize the call → execute and return the result."
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_fill1",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Tool Use & Function Calling step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "required"
+      },
+      {
+        "id": "b",
+        "text": "temperature"
+      },
+      {
+        "id": "c",
+        "text": "epoch"
+      },
+      {
+        "id": "d",
+        "text": "dropout"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "required",
+    "explanation_after": "The correct choice is required."
+  }
+]

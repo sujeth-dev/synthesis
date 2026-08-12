@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p6_lora_and_peft_q1",
+    "skill_id": "p6_lora_and_peft",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "LoRA & Parameter-Efficient Fine-Tuning: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LoRA freezes base weights and learns a small adjustment."
+      },
+      {
+        "id": "b",
+        "text": "LoRA retrains every base parameter by definition."
+      },
+      {
+        "id": "c",
+        "text": "An adapter works with any unrelated base model."
+      },
+      {
+        "id": "d",
+        "text": "Lower precision can never affect speed or quality."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "LoRA freezes base weights and learns a small adjustment.",
+    "graph_placement_weight": {
+      "p6_lora_and_peft": 1
+    }
+  },
+  {
+    "id": "p6_lora_and_peft_q2",
+    "skill_id": "p6_lora_and_peft",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "LoRA & Parameter-Efficient Fine-Tuning: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LoRA retrains every base parameter by definition."
+      },
+      {
+        "id": "b",
+        "text": "Adapters are much smaller than full model copies."
+      },
+      {
+        "id": "c",
+        "text": "An adapter works with any unrelated base model."
+      },
+      {
+        "id": "d",
+        "text": "Lower precision can never affect speed or quality."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Adapters are much smaller than full model copies.",
+    "graph_placement_weight": {
+      "p6_lora_and_peft": 1
+    }
+  },
+  {
+    "id": "p6_lora_and_peft_q3",
+    "skill_id": "p6_lora_and_peft",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "LoRA & Parameter-Efficient Fine-Tuning: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LoRA retrains every base parameter by definition."
+      },
+      {
+        "id": "b",
+        "text": "An adapter works with any unrelated base model."
+      },
+      {
+        "id": "c",
+        "text": "LoRA builds a weight change from two thin matrices."
+      },
+      {
+        "id": "d",
+        "text": "Lower precision can never affect speed or quality."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "LoRA builds a weight change from two thin matrices.",
+    "graph_placement_weight": {
+      "p6_lora_and_peft": 1
+    }
+  },
+  {
+    "id": "p6_lora_and_peft_q4",
+    "skill_id": "p6_lora_and_peft",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "LoRA & Parameter-Efficient Fine-Tuning: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LoRA retrains every base parameter by definition."
+      },
+      {
+        "id": "b",
+        "text": "An adapter works with any unrelated base model."
+      },
+      {
+        "id": "c",
+        "text": "Lower precision can never affect speed or quality."
+      },
+      {
+        "id": "d",
+        "text": "Rank controls adjustment capacity and parameter count."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Rank controls adjustment capacity and parameter count.",
+    "graph_placement_weight": {
+      "p6_lora_and_peft": 1
+    }
+  },
+  {
+    "id": "p6_lora_and_peft_q5",
+    "skill_id": "p6_lora_and_peft",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "LoRA & Parameter-Efficient Fine-Tuning: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "QLoRA uses a quantized frozen base with trainable adapters."
+      },
+      {
+        "id": "b",
+        "text": "LoRA retrains every base parameter by definition."
+      },
+      {
+        "id": "c",
+        "text": "An adapter works with any unrelated base model."
+      },
+      {
+        "id": "d",
+        "text": "Lower precision can never affect speed or quality."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "QLoRA uses a quantized frozen base with trainable adapters.",
+    "graph_placement_weight": {
+      "p6_lora_and_peft": 1
+    }
+  },
+  {
+    "id": "p6_lora_and_peft_q6",
+    "skill_id": "p6_lora_and_peft",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "LoRA & Parameter-Efficient Fine-Tuning: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LoRA retrains every base parameter by definition."
+      },
+      {
+        "id": "b",
+        "text": "Combining independently trained adapters can cause interference."
+      },
+      {
+        "id": "c",
+        "text": "An adapter works with any unrelated base model."
+      },
+      {
+        "id": "d",
+        "text": "Lower precision can never affect speed or quality."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Combining independently trained adapters can cause interference.",
+    "graph_placement_weight": {
+      "p6_lora_and_peft": 1
+    }
+  },
+  {
+    "id": "p6_lora_and_peft_order1",
+    "skill_id": "p6_lora_and_peft",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this LoRA & Parameter-Efficient Fine-Tuning workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "load the matching base model"
+      },
+      {
+        "id": "b",
+        "text": "attach LoRA to chosen modules"
+      },
+      {
+        "id": "c",
+        "text": "train adapter parameters"
+      },
+      {
+        "id": "d",
+        "text": "save and evaluate the adapter"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: load the matching base model → attach LoRA to chosen modules → train adapter parameters → save and evaluate the adapter."
+  },
+  {
+    "id": "p6_lora_and_peft_fill1",
+    "skill_id": "p6_lora_and_peft",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the LoRA & Parameter-Efficient Fine-Tuning step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "LoraConfig"
+      },
+      {
+        "id": "b",
+        "text": "StandardScaler"
+      },
+      {
+        "id": "c",
+        "text": "Conv2d"
+      },
+      {
+        "id": "d",
+        "text": "KMeans"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "LoraConfig",
+    "explanation_after": "The correct choice is LoraConfig."
+  }
+]

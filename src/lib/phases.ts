@@ -23,6 +23,7 @@ export const PHASE_EVALUATION_FILES: Partial<Record<PhaseKey, string>> = {
   phase_3_intro_ai:        'p3_evaluation.json',
   phase_4_machine_learning: 'p4_evaluation.json',
   phase_5_deep_learning:   'p5_evaluation.json',
+  phase_6_modern_ai:       'p6_evaluation.json',
 }
 
 export function buildPhaseGroups(allNodes: SkillNode[]): Record<string, SkillNode[]> {

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_lora_and_peft",
+  "depth": "mid",
+  "title": "LoRA & Parameter-Efficient Fine-Tuning — Build the Change from Two Thin Matrices",
+  "key_insight": "The inner width is called rank. Lower rank uses fewer trainable values; higher rank can express a richer change but costs more memory and compute.",
+  "body": "## Build the Change from Two Thin Matrices\n\nA full weight update is a large rectangle. LoRA represents its change as the product of two thinner matrices.\n\nThe inner width is called rank. Lower rank uses fewer trainable values; higher rank can express a richer change but costs more memory and compute.\n\nA scale controls adapter strength. Targeting attention projections is common, but the best modules depend on the task and model.",
+  "common_mistakes": [
+    "LoRA retrains every base parameter by definition.",
+    "An adapter works with any unrelated base model.",
+    "Lower precision can never affect speed or quality."
+  ],
+  "mini_exercise": "Draw “Build the Change from Two Thin Matrices” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Parameter-efficient tuning makes adaptation possible with less training memory and smaller task-specific artifacts.",
+  "explain_back_prompt": "Using “Build the Change from Two Thin Matrices,” explain LoRA & Parameter-Efficient Fine-Tuning without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Plan a small adapter run",
+    "context": "Turn LoRA & Parameter-Efficient Fine-Tuning into one small, inspectable workflow.",
+    "steps": [
+      "Choose one narrow behavior and dataset.",
+      "Select target modules and a modest rank.",
+      "Train while tracking validation behavior.",
+      "Save the adapter and compare with the base model."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

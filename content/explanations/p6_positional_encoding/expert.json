@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_positional_encoding",
+  "depth": "expert",
+  "title": "Positional Encoding — Position Changes the Attention Kernel",
+  "key_insight": "Relative biases can directly favor or penalize distance buckets. Rotary methods encode distance through angles; absolute methods add location vectors to content.",
+  "body": "## Position Changes the Attention Kernel\n\nA position method alters which query-key relationships are easy to express. It is part of the model’s learned similarity rule, not a decorative tag.\n\nRelative biases can directly favor or penalize distance buckets. Rotary methods encode distance through angles; absolute methods add location vectors to content.\n\nExtrapolation fails when the model encounters frequencies or distances outside its learned behavior. Evaluate retrieval and reasoning at controlled positions, not only average long-context scores.",
+  "common_mistakes": [
+    "Position information alphabetically sorts every sentence.",
+    "Word order never changes meaning.",
+    "Rotary encoding deletes token content."
+  ],
+  "mini_exercise": "Draw “Position Changes the Attention Kernel” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Language meaning depends on order, and position design affects how models handle lengths beyond training.",
+  "explain_back_prompt": "Using “Position Changes the Attention Kernel,” explain Positional Encoding without assuming the listener knows modern AI."
+}

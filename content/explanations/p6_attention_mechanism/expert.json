@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_attention_mechanism",
+  "depth": "expert",
+  "title": "Attention Mechanism — Attention Is Content-Dependent Mixing",
+  "key_insight": "The result is a weighted sum of value vectors, so each output lies in the span of available values before later transformations. Learned projections decide what information each role exposes.",
+  "body": "## Attention Is Content-Dependent Mixing\n\nA convolution uses the same local filter everywhere. Attention instead creates a new mixing pattern from the current content on every forward pass.\n\nThe result is a weighted sum of value vectors, so each output lies in the span of available values before later transformations. Learned projections decide what information each role exposes.\n\nFast exact kernels avoid storing some intermediate score data by processing blocks and maintaining stable partial softmax results. They reduce memory traffic without changing the mathematical answer.",
+  "common_mistakes": [
+    "Attention always selects exactly one word.",
+    "Queries, keys, and values are raw English questions and answers.",
+    "A causal mask reveals future tokens during generation."
+  ],
+  "mini_exercise": "Draw “Attention Is Content-Dependent Mixing” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Attention is the core routing idea that lets transformers connect distant information.",
+  "explain_back_prompt": "Using “Attention Is Content-Dependent Mixing,” explain Attention Mechanism without assuming the listener knows modern AI."
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_tool_use_and_function_calling",
+  "depth": "advanced",
+  "title": "Tool Use & Function Calling — Separate Read Actions from Write Actions",
+  "key_insight": "Give each tool the least authority needed. Require confirmation and idempotency keys for important writes, and log who requested and approved them.",
+  "body": "## Separate Read Actions from Write Actions\n\nLooking up inventory is reversible; issuing a refund changes the world. Treating both tools alike creates risk.\n\nGive each tool the least authority needed. Require confirmation and idempotency keys for important writes, and log who requested and approved them.\n\nLimit loops, time, cost, and result size. A tool agent needs a bounded failure policy rather than retrying forever.",
+  "common_mistakes": [
+    "A model response automatically has every system credential.",
+    "Tool arguments never need validation.",
+    "Retries are safe even when they repeat payments."
+  ],
+  "mini_exercise": "Draw “Separate Read Actions from Write Actions” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Models need tools to query live systems, calculate reliably, and take controlled actions beyond text generation.",
+  "explain_back_prompt": "Using “Separate Read Actions from Write Actions,” explain Tool Use & Function Calling without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Mock one safe tool call",
+    "context": "Turn Tool Use & Function Calling into one small, inspectable workflow.",
+    "steps": [
+      "Define a read-only tool with typed inputs.",
+      "Validate one valid and one invalid proposal.",
+      "Execute only the valid proposal.",
+      "Return a structured result and log the decision."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

@@ -1,0 +1,506 @@
+[
+  {
+    "id": "p6_eval_remember_1",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tokenizer splits text into numbered pieces."
+      },
+      {
+        "id": "b",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "c",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "d",
+        "text": "Token numbers have the same meaning across all models."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A tokenizer splits text into numbered pieces.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p6_eval_remember_2",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Embeddings represent items as numeric vectors."
+      },
+      {
+        "id": "b",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "c",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "d",
+        "text": "Every similarity metric ranks all vectors identically."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Embeddings represent items as numeric vectors.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p6_eval_remember_3",
+    "skill_id": "p6_vector_databases",
+    "format": "mcq",
+    "stem": "Vector Databases: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A vector database indexes embeddings for similarity search."
+      },
+      {
+        "id": "b",
+        "text": "A vector database removes the need to store source text."
+      },
+      {
+        "id": "c",
+        "text": "Approximate search is guaranteed to return the exact same neighbors."
+      },
+      {
+        "id": "d",
+        "text": "Access control should be applied only after private text reaches the model."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A vector database indexes embeddings for similarity search.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p6_eval_understand_1",
+    "skill_id": "p6_attention_mechanism",
+    "format": "mcq",
+    "stem": "Attention Mechanism: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Attention always selects exactly one word."
+      },
+      {
+        "id": "b",
+        "text": "Queries ask, keys advertise, and values supply information."
+      },
+      {
+        "id": "c",
+        "text": "Queries, keys, and values are raw English questions and answers."
+      },
+      {
+        "id": "d",
+        "text": "A causal mask reveals future tokens during generation."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Queries ask, keys advertise, and values supply information.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p6_eval_understand_2",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "mcq",
+    "stem": "Self-Attention & Multiple Heads: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every attention head is manually programmed with a grammar rule."
+      },
+      {
+        "id": "b",
+        "text": "Multiple heads use different learned projections."
+      },
+      {
+        "id": "c",
+        "text": "Self-attention compares a sequence only with an unrelated database."
+      },
+      {
+        "id": "d",
+        "text": "Causal language models should train by looking at future answers."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Multiple heads use different learned projections.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p6_eval_understand_3",
+    "skill_id": "p6_positional_encoding",
+    "format": "mcq",
+    "stem": "Positional Encoding: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Position information alphabetically sorts every sentence."
+      },
+      {
+        "id": "b",
+        "text": "Attention without position lacks sequence order by itself."
+      },
+      {
+        "id": "c",
+        "text": "Word order never changes meaning."
+      },
+      {
+        "id": "d",
+        "text": "Rotary encoding deletes token content."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Attention without position lacks sequence order by itself.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p6_eval_apply_1",
+    "skill_id": "p6_transformers",
+    "format": "mcq",
+    "stem": "Transformer Architecture: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A transformer contains attention and nothing else."
+      },
+      {
+        "id": "b",
+        "text": "Decoder generation should read future unseen tokens."
+      },
+      {
+        "id": "c",
+        "text": "Encoders can attend both directions."
+      },
+      {
+        "id": "d",
+        "text": "A key-value cache makes memory use shrink as context grows."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Encoders can attend both directions.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p6_eval_apply_2",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "mcq",
+    "stem": "Residual Connections & Layer Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual connections permanently skip every transformation."
+      },
+      {
+        "id": "b",
+        "text": "Layer normalization averages unrelated users together."
+      },
+      {
+        "id": "c",
+        "text": "Layer normalization rescales features within each token."
+      },
+      {
+        "id": "d",
+        "text": "Normalization removes all learned scale and shift."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Layer normalization rescales features within each token.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p6_eval_apply_3",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "mcq",
+    "stem": "Pretraining Objectives: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pretraining guarantees every generated claim is true."
+      },
+      {
+        "id": "b",
+        "text": "A causal model trains by reading the answer tokens ahead."
+      },
+      {
+        "id": "c",
+        "text": "Masked training reconstructs hidden tokens from surrounding context."
+      },
+      {
+        "id": "d",
+        "text": "Data quality cannot affect a fixed mathematical loss."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Masked training reconstructs hidden tokens from surrounding context.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p6_eval_analyze_1",
+    "skill_id": "p6_finetuning_methods",
+    "format": "mcq",
+    "stem": "Fine-Tuning Methods: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fine-tuning changes behavior without any examples."
+      },
+      {
+        "id": "b",
+        "text": "Every input token should always be treated as the desired assistant output."
+      },
+      {
+        "id": "c",
+        "text": "A preference dataset represents universal values automatically."
+      },
+      {
+        "id": "d",
+        "text": "Loss masks can exclude user or padding tokens."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Loss masks can exclude user or padding tokens.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p6_eval_analyze_2",
+    "skill_id": "p6_lora_and_peft",
+    "format": "mcq",
+    "stem": "LoRA & Parameter-Efficient Fine-Tuning: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LoRA retrains every base parameter by definition."
+      },
+      {
+        "id": "b",
+        "text": "An adapter works with any unrelated base model."
+      },
+      {
+        "id": "c",
+        "text": "Lower precision can never affect speed or quality."
+      },
+      {
+        "id": "d",
+        "text": "Rank controls adjustment capacity and parameter count."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Rank controls adjustment capacity and parameter count.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p6_eval_analyze_3",
+    "skill_id": "p6_llm_landscape",
+    "format": "mcq",
+    "stem": "The LLM Landscape: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One leaderboard winner is best for every application."
+      },
+      {
+        "id": "b",
+        "text": "A large context window guarantees perfect recall."
+      },
+      {
+        "id": "c",
+        "text": "Open weights always mean unrestricted use without a license."
+      },
+      {
+        "id": "d",
+        "text": "A context limit does not guarantee equal use of every position."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "A context limit does not guarantee equal use of every position.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p6_eval_evaluate_1",
+    "skill_id": "p6_prompt_engineering",
+    "format": "mcq",
+    "stem": "Prompt Engineering: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Prompt versions should be tested on a stable evaluation set."
+      },
+      {
+        "id": "b",
+        "text": "Longer prompts are always more reliable."
+      },
+      {
+        "id": "c",
+        "text": "Requested JSON is guaranteed to parse without checks."
+      },
+      {
+        "id": "d",
+        "text": "One successful chat proves a prompt cannot regress."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Prompt versions should be tested on a stable evaluation set.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p6_eval_evaluate_2",
+    "skill_id": "p6_rag_systems",
+    "format": "mcq",
+    "stem": "RAG Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Retrieval quality should be measured separately from generation."
+      },
+      {
+        "id": "b",
+        "text": "RAG permanently writes every document into model weights."
+      },
+      {
+        "id": "c",
+        "text": "Retrieval guarantees the final answer is correct."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should override system instructions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Retrieval quality should be measured separately from generation.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p6_eval_evaluate_3",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "mcq",
+    "stem": "Tool Use & Function Calling: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tool loops need limits on time, cost, and retries."
+      },
+      {
+        "id": "b",
+        "text": "A model response automatically has every system credential."
+      },
+      {
+        "id": "c",
+        "text": "Tool arguments never need validation."
+      },
+      {
+        "id": "d",
+        "text": "Retries are safe even when they repeat payments."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Tool loops need limits on time, cost, and retries.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p6_eval_create_1",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "mcq",
+    "stem": "Evaluating & Choosing LLMs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The biggest model is automatically best for every product."
+      },
+      {
+        "id": "b",
+        "text": "A frontier compares models across several objectives instead of one score."
+      },
+      {
+        "id": "c",
+        "text": "One public benchmark replaces task-specific testing."
+      },
+      {
+        "id": "d",
+        "text": "A model-based grader is perfectly objective and never changes."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A frontier compares models across several objectives instead of one score.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p6_eval_create_2",
+    "skill_id": "p6_tokenization",
+    "format": "mcq",
+    "stem": "Tokenization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tokenizer directly verifies every factual answer."
+      },
+      {
+        "id": "b",
+        "text": "Vocabulary size trades shorter sequences against larger embedding and output tables."
+      },
+      {
+        "id": "c",
+        "text": "Every token is always one complete English word."
+      },
+      {
+        "id": "d",
+        "text": "Token numbers have the same meaning across all models."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Vocabulary size trades shorter sequences against larger embedding and output tables.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p6_eval_create_3",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "b",
+        "text": "Embedding geometry reflects the comparisons used during training."
+      },
+      {
+        "id": "c",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "d",
+        "text": "Every similarity metric ranks all vectors identically."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Embedding geometry reflects the comparisons used during training.",
+    "phase": "phase_6_modern_ai",
+    "bloom_level": "create"
+  }
+]

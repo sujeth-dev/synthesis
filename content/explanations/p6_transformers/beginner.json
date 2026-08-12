@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_transformers",
+  "depth": "beginner",
+  "title": "Transformer Architecture — Alternate Group Discussion and Desk Work",
+  "key_insight": "A transformer block alternates attention, which mixes information across positions, with a feed-forward network, which transforms each position.",
+  "body": "## Alternate Group Discussion and Desk Work\n\nEvery word first needs to hear relevant words, then privately update what it understands. Repeating only one of those activities is limiting.\n\nA transformer block alternates attention, which mixes information across positions, with a feed-forward network, which transforms each position.\n\nMany blocks build progressively richer representations. Residual paths and normalization keep the deep stack trainable.",
+  "common_mistakes": [
+    "A transformer contains attention and nothing else.",
+    "Decoder generation should read future unseen tokens.",
+    "A key-value cache makes memory use shrink as context grows."
+  ],
+  "mini_exercise": "Draw “Alternate Group Discussion and Desk Work” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Transformers are the architecture behind modern language models and many vision and multimodal systems.",
+  "explain_back_prompt": "Using “Alternate Group Discussion and Desk Work,” explain Transformer Architecture without assuming the listener knows modern AI."
+}

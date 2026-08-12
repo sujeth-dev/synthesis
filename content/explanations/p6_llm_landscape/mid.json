@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_llm_landscape",
+  "depth": "mid",
+  "title": "The LLM Landscape — Open Weights and Hosted APIs",
+  "key_insight": "Open-weight models can run on chosen infrastructure subject to their license. Hosted APIs manage serving but create provider, network, and data-handling dependencies.",
+  "body": "## Open Weights and Hosted APIs\n\nOne team needs full local control; another needs the strongest service without operating GPUs. The delivery model changes the engineering work.\n\nOpen-weight models can run on chosen infrastructure subject to their license. Hosted APIs manage serving but create provider, network, and data-handling dependencies.\n\nRead licenses and data policies directly. “Open” can describe weights, code, or access while permitting different uses.",
+  "common_mistakes": [
+    "One leaderboard winner is best for every application.",
+    "A large context window guarantees perfect recall.",
+    "Open weights always mean unrestricted use without a license."
+  ],
+  "mini_exercise": "Draw “Open Weights and Hosted APIs” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Sound model choice begins with the workload and constraints, not a leaderboard winner.",
+  "explain_back_prompt": "Using “Open Weights and Hosted APIs,” explain The LLM Landscape without assuming the listener knows modern AI."
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_self_attention_and_multihead_q1",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Self-Attention & Multiple Heads: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Self-attention relates positions inside one sequence."
+      },
+      {
+        "id": "b",
+        "text": "Every attention head is manually programmed with a grammar rule."
+      },
+      {
+        "id": "c",
+        "text": "Self-attention compares a sequence only with an unrelated database."
+      },
+      {
+        "id": "d",
+        "text": "Causal language models should train by looking at future answers."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Self-attention relates positions inside one sequence.",
+    "graph_placement_weight": {
+      "p6_self_attention_and_multihead": 1
+    }
+  },
+  {
+    "id": "p6_self_attention_and_multihead_q2",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Self-Attention & Multiple Heads: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every attention head is manually programmed with a grammar rule."
+      },
+      {
+        "id": "b",
+        "text": "Multiple heads use different learned projections."
+      },
+      {
+        "id": "c",
+        "text": "Self-attention compares a sequence only with an unrelated database."
+      },
+      {
+        "id": "d",
+        "text": "Causal language models should train by looking at future answers."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Multiple heads use different learned projections.",
+    "graph_placement_weight": {
+      "p6_self_attention_and_multihead": 1
+    }
+  },
+  {
+    "id": "p6_self_attention_and_multihead_q3",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Self-Attention & Multiple Heads: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every attention head is manually programmed with a grammar rule."
+      },
+      {
+        "id": "b",
+        "text": "Self-attention compares a sequence only with an unrelated database."
+      },
+      {
+        "id": "c",
+        "text": "Head outputs are concatenated and projected."
+      },
+      {
+        "id": "d",
+        "text": "Causal language models should train by looking at future answers."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Head outputs are concatenated and projected.",
+    "graph_placement_weight": {
+      "p6_self_attention_and_multihead": 1
+    }
+  },
+  {
+    "id": "p6_self_attention_and_multihead_q4",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Self-Attention & Multiple Heads: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every attention head is manually programmed with a grammar rule."
+      },
+      {
+        "id": "b",
+        "text": "Self-attention compares a sequence only with an unrelated database."
+      },
+      {
+        "id": "c",
+        "text": "Causal language models should train by looking at future answers."
+      },
+      {
+        "id": "d",
+        "text": "A causal mask blocks future tokens."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "A causal mask blocks future tokens.",
+    "graph_placement_weight": {
+      "p6_self_attention_and_multihead": 1
+    }
+  },
+  {
+    "id": "p6_self_attention_and_multihead_q5",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Self-Attention & Multiple Heads: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Padding and causal masks solve different problems."
+      },
+      {
+        "id": "b",
+        "text": "Every attention head is manually programmed with a grammar rule."
+      },
+      {
+        "id": "c",
+        "text": "Self-attention compares a sequence only with an unrelated database."
+      },
+      {
+        "id": "d",
+        "text": "Causal language models should train by looking at future answers."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Padding and causal masks solve different problems.",
+    "graph_placement_weight": {
+      "p6_self_attention_and_multihead": 1
+    }
+  },
+  {
+    "id": "p6_self_attention_and_multihead_q6",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Self-Attention & Multiple Heads: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every attention head is manually programmed with a grammar rule."
+      },
+      {
+        "id": "b",
+        "text": "Grouped-query attention reduces key-value cache by sharing key/value heads."
+      },
+      {
+        "id": "c",
+        "text": "Self-attention compares a sequence only with an unrelated database."
+      },
+      {
+        "id": "d",
+        "text": "Causal language models should train by looking at future answers."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Grouped-query attention reduces key-value cache by sharing key/value heads.",
+    "graph_placement_weight": {
+      "p6_self_attention_and_multihead": 1
+    }
+  }
+]

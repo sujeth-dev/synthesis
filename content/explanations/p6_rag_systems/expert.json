@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_rag_systems",
+  "depth": "expert",
+  "title": "RAG Systems — The System Has Two Coupled Error Paths",
+  "key_insight": "Measure retrieval recall, ranking quality, citation support, answer correctness, and abstention. Create tests where no source contains an answer.",
+  "body": "## The System Has Two Coupled Error Paths\n\nA wrong answer may come from missing evidence, misleading evidence, or generation that ignores good evidence. One final score hides the cause.\n\nMeasure retrieval recall, ranking quality, citation support, answer correctness, and abstention. Create tests where no source contains an answer.\n\nProduction RAG also needs permission filters, document versions, deletion, and injection defenses. Treat retrieved text as untrusted data, not higher-priority instructions.",
+  "common_mistakes": [
+    "RAG permanently writes every document into model weights.",
+    "Retrieval guarantees the final answer is correct.",
+    "Retrieved documents should override system instructions."
+  ],
+  "mini_exercise": "Draw “The System Has Two Coupled Error Paths” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RAG connects models to current or private knowledge without retraining the model for every document change.",
+  "explain_back_prompt": "Using “The System Has Two Coupled Error Paths,” explain RAG Systems without assuming the listener knows modern AI."
+}

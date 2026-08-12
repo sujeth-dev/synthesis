@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_vector_databases",
+  "depth": "beginner",
+  "title": "Vector Databases — Find a Neighbor Without Scanning the World",
+  "key_insight": "A vector database stores vectors in an index built for nearest-neighbor search. It quickly returns items whose vectors are close to the query.",
+  "body": "## Find a Neighbor Without Scanning the World\n\nA million documents each have an embedding. Comparing a query with every document works, but becomes too slow for an interactive answer.\n\nA vector database stores vectors in an index built for nearest-neighbor search. It quickly returns items whose vectors are close to the query.\n\nStore the original text and useful metadata beside each vector. The vector finds candidates; the metadata explains and filters them.",
+  "common_mistakes": [
+    "A vector database removes the need to store source text.",
+    "Approximate search is guaranteed to return the exact same neighbors.",
+    "Access control should be applied only after private text reaches the model."
+  ],
+  "mini_exercise": "Draw “Find a Neighbor Without Scanning the World” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Large retrieval systems need fast similarity search plus filters, updates, metadata, and operational guarantees.",
+  "explain_back_prompt": "Using “Find a Neighbor Without Scanning the World,” explain Vector Databases without assuming the listener knows modern AI."
+}

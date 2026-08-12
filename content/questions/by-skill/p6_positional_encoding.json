@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_positional_encoding_q1",
+    "skill_id": "p6_positional_encoding",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Positional Encoding: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Positional encoding distinguishes token order."
+      },
+      {
+        "id": "b",
+        "text": "Position information alphabetically sorts every sentence."
+      },
+      {
+        "id": "c",
+        "text": "Word order never changes meaning."
+      },
+      {
+        "id": "d",
+        "text": "Rotary encoding deletes token content."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Positional encoding distinguishes token order.",
+    "graph_placement_weight": {
+      "p6_positional_encoding": 1
+    }
+  },
+  {
+    "id": "p6_positional_encoding_q2",
+    "skill_id": "p6_positional_encoding",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Positional Encoding: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Position information alphabetically sorts every sentence."
+      },
+      {
+        "id": "b",
+        "text": "Attention without position lacks sequence order by itself."
+      },
+      {
+        "id": "c",
+        "text": "Word order never changes meaning."
+      },
+      {
+        "id": "d",
+        "text": "Rotary encoding deletes token content."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Attention without position lacks sequence order by itself.",
+    "graph_placement_weight": {
+      "p6_positional_encoding": 1
+    }
+  },
+  {
+    "id": "p6_positional_encoding_q3",
+    "skill_id": "p6_positional_encoding",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Positional Encoding: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Position information alphabetically sorts every sentence."
+      },
+      {
+        "id": "b",
+        "text": "Word order never changes meaning."
+      },
+      {
+        "id": "c",
+        "text": "Sinusoidal encodings use several fixed frequencies."
+      },
+      {
+        "id": "d",
+        "text": "Rotary encoding deletes token content."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Sinusoidal encodings use several fixed frequencies.",
+    "graph_placement_weight": {
+      "p6_positional_encoding": 1
+    }
+  },
+  {
+    "id": "p6_positional_encoding_q4",
+    "skill_id": "p6_positional_encoding",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Positional Encoding: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Position information alphabetically sorts every sentence."
+      },
+      {
+        "id": "b",
+        "text": "Word order never changes meaning."
+      },
+      {
+        "id": "c",
+        "text": "Rotary encoding deletes token content."
+      },
+      {
+        "id": "d",
+        "text": "Learned positions adapt to a training range."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Learned positions adapt to a training range.",
+    "graph_placement_weight": {
+      "p6_positional_encoding": 1
+    }
+  },
+  {
+    "id": "p6_positional_encoding_q5",
+    "skill_id": "p6_positional_encoding",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Positional Encoding: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Rotary encoding puts relative-distance information into query-key matches."
+      },
+      {
+        "id": "b",
+        "text": "Position information alphabetically sorts every sentence."
+      },
+      {
+        "id": "c",
+        "text": "Word order never changes meaning."
+      },
+      {
+        "id": "d",
+        "text": "Rotary encoding deletes token content."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Rotary encoding puts relative-distance information into query-key matches.",
+    "graph_placement_weight": {
+      "p6_positional_encoding": 1
+    }
+  },
+  {
+    "id": "p6_positional_encoding_q6",
+    "skill_id": "p6_positional_encoding",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Positional Encoding: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Position information alphabetically sorts every sentence."
+      },
+      {
+        "id": "b",
+        "text": "Longer accepted input does not guarantee useful reasoning across that full distance."
+      },
+      {
+        "id": "c",
+        "text": "Word order never changes meaning."
+      },
+      {
+        "id": "d",
+        "text": "Rotary encoding deletes token content."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Longer accepted input does not guarantee useful reasoning across that full distance.",
+    "graph_placement_weight": {
+      "p6_positional_encoding": 1
+    }
+  }
+]

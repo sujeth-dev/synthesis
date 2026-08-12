@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_self_attention_and_multihead",
+  "depth": "mid",
+  "title": "Self-Attention & Multiple Heads — Split, Attend, Join",
+  "key_insight": "Each head computes attention independently. Their outputs concatenate back to the model width and pass through an output projection.",
+  "body": "## Split, Attend, Join\n\nA model-width vector is projected into queries, keys, and values, then reshaped into several smaller heads.\n\nEach head computes attention independently. Their outputs concatenate back to the model width and pass through an output projection.\n\nThe head dimension times the number of heads must match the designed inner width. Shape tracing prevents silent transposes and misplaced sequence axes.",
+  "common_mistakes": [
+    "Every attention head is manually programmed with a grammar rule.",
+    "Self-attention compares a sequence only with an unrelated database.",
+    "Causal language models should train by looking at future answers."
+  ],
+  "mini_exercise": "Draw “Split, Attend, Join” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This is the working mechanism that turns attention intuition into transformer representations.",
+  "explain_back_prompt": "Using “Split, Attend, Join,” explain Self-Attention & Multiple Heads without assuming the listener knows modern AI."
+}

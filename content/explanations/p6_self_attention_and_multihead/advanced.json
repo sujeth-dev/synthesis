@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_self_attention_and_multihead",
+  "depth": "advanced",
+  "title": "Self-Attention & Multiple Heads — Do Not Read the Future",
+  "key_insight": "A causal mask removes future positions before softmax. A padding mask separately removes empty batch positions. Combining them requires matching signs, types, and dimensions.",
+  "body": "## Do Not Read the Future\n\nA language model predicting token five must not use token six from the training answer. Parallel computation would otherwise leak it.\n\nA causal mask removes future positions before softmax. A padding mask separately removes empty batch positions. Combining them requires matching signs, types, and dimensions.\n\nInspect a tiny attention matrix by hand. One incorrect mask can produce excellent training loss and useless real generation.",
+  "common_mistakes": [
+    "Every attention head is manually programmed with a grammar rule.",
+    "Self-attention compares a sequence only with an unrelated database.",
+    "Causal language models should train by looking at future answers."
+  ],
+  "mini_exercise": "Draw “Do Not Read the Future” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This is the working mechanism that turns attention intuition into transformer representations.",
+  "explain_back_prompt": "Using “Do Not Read the Future,” explain Self-Attention & Multiple Heads without assuming the listener knows modern AI."
+}

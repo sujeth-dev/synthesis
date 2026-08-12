@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_evaluating_and_choosing_llms_q1",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Evaluating & Choosing LLMs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Model evaluation should use representative application tasks."
+      },
+      {
+        "id": "b",
+        "text": "The biggest model is automatically best for every product."
+      },
+      {
+        "id": "c",
+        "text": "One public benchmark replaces task-specific testing."
+      },
+      {
+        "id": "d",
+        "text": "A model-based grader is perfectly objective and never changes."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Model evaluation should use representative application tasks.",
+    "graph_placement_weight": {
+      "p6_evaluating_and_choosing_llms": 1
+    }
+  },
+  {
+    "id": "p6_evaluating_and_choosing_llms_q2",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Evaluating & Choosing LLMs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The biggest model is automatically best for every product."
+      },
+      {
+        "id": "b",
+        "text": "Quality, latency, cost, privacy, and reliability all matter."
+      },
+      {
+        "id": "c",
+        "text": "One public benchmark replaces task-specific testing."
+      },
+      {
+        "id": "d",
+        "text": "A model-based grader is perfectly objective and never changes."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Quality, latency, cost, privacy, and reliability all matter.",
+    "graph_placement_weight": {
+      "p6_evaluating_and_choosing_llms": 1
+    }
+  },
+  {
+    "id": "p6_evaluating_and_choosing_llms_q3",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Evaluating & Choosing LLMs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The biggest model is automatically best for every product."
+      },
+      {
+        "id": "b",
+        "text": "One public benchmark replaces task-specific testing."
+      },
+      {
+        "id": "c",
+        "text": "Different outputs require different grading methods."
+      },
+      {
+        "id": "d",
+        "text": "A model-based grader is perfectly objective and never changes."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Different outputs require different grading methods.",
+    "graph_placement_weight": {
+      "p6_evaluating_and_choosing_llms": 1
+    }
+  },
+  {
+    "id": "p6_evaluating_and_choosing_llms_q4",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Evaluating & Choosing LLMs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The biggest model is automatically best for every product."
+      },
+      {
+        "id": "b",
+        "text": "One public benchmark replaces task-specific testing."
+      },
+      {
+        "id": "c",
+        "text": "A model-based grader is perfectly objective and never changes."
+      },
+      {
+        "id": "d",
+        "text": "Automated graders should be calibrated against human labels."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Automated graders should be calibrated against human labels.",
+    "graph_placement_weight": {
+      "p6_evaluating_and_choosing_llms": 1
+    }
+  },
+  {
+    "id": "p6_evaluating_and_choosing_llms_q5",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Evaluating & Choosing LLMs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Repeated runs reveal variability and severe failure tails."
+      },
+      {
+        "id": "b",
+        "text": "The biggest model is automatically best for every product."
+      },
+      {
+        "id": "c",
+        "text": "One public benchmark replaces task-specific testing."
+      },
+      {
+        "id": "d",
+        "text": "A model-based grader is perfectly objective and never changes."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Repeated runs reveal variability and severe failure tails.",
+    "graph_placement_weight": {
+      "p6_evaluating_and_choosing_llms": 1
+    }
+  },
+  {
+    "id": "p6_evaluating_and_choosing_llms_q6",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Evaluating & Choosing LLMs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The biggest model is automatically best for every product."
+      },
+      {
+        "id": "b",
+        "text": "A frontier compares models across several objectives instead of one score."
+      },
+      {
+        "id": "c",
+        "text": "One public benchmark replaces task-specific testing."
+      },
+      {
+        "id": "d",
+        "text": "A model-based grader is perfectly objective and never changes."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A frontier compares models across several objectives instead of one score.",
+    "graph_placement_weight": {
+      "p6_evaluating_and_choosing_llms": 1
+    }
+  }
+]

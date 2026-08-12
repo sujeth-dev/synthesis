@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_pretraining_objectives",
+  "depth": "expert",
+  "title": "Pretraining Objectives — Scaling Reveals Predictable Tradeoffs",
+  "key_insight": "Scaling laws fit empirical curves that help allocate parameters and training tokens. They guide planning; they do not guarantee downstream usefulness or safety.",
+  "body": "## Scaling Reveals Predictable Tradeoffs\n\nLarger models, more data, and more compute often reduce pretraining loss in smooth patterns, but a fixed budget cannot maximize all three.\n\nScaling laws fit empirical curves that help allocate parameters and training tokens. They guide planning; they do not guarantee downstream usefulness or safety.\n\nToken loss weights common patterns heavily. Rare capabilities may appear abruptly or remain hidden, so evaluate targeted behaviors throughout training rather than trusting average loss alone.",
+  "common_mistakes": [
+    "Pretraining guarantees every generated claim is true.",
+    "A causal model trains by reading the answer tokens ahead.",
+    "Data quality cannot affect a fixed mathematical loss."
+  ],
+  "mini_exercise": "Draw “Scaling Reveals Predictable Tradeoffs” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The objective determines what patterns a foundation model is rewarded for learning before task-specific adaptation.",
+  "explain_back_prompt": "Using “Scaling Reveals Predictable Tradeoffs,” explain Pretraining Objectives without assuming the listener knows modern AI."
+}

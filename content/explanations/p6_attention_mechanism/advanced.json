@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_attention_mechanism",
+  "depth": "advanced",
+  "title": "Attention Mechanism — Build the Whole Score Table at Once",
+  "key_insight": "The score tensor includes batch, head, query-position, and key-position dimensions. A mask must broadcast to those dimensions without hiding valid positions.",
+  "body": "## Build the Whole Score Table at Once\n\nCalculating every pair in loops is slow. Matrix multiplication forms all query-key scores for a batch and head together.\n\nThe score tensor includes batch, head, query-position, and key-position dimensions. A mask must broadcast to those dimensions without hiding valid positions.\n\nAttention weights consume memory proportional to pairs of positions. Long contexts therefore pressure memory even when model parameter count stays fixed.",
+  "common_mistakes": [
+    "Attention always selects exactly one word.",
+    "Queries, keys, and values are raw English questions and answers.",
+    "A causal mask reveals future tokens during generation."
+  ],
+  "mini_exercise": "Draw “Build the Whole Score Table at Once” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Attention is the core routing idea that lets transformers connect distant information.",
+  "explain_back_prompt": "Using “Build the Whole Score Table at Once,” explain Attention Mechanism without assuming the listener knows modern AI."
+}

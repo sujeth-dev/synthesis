@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_pretraining_objectives",
+  "depth": "beginner",
+  "title": "Pretraining Objectives — Turn Raw Text into Its Own Answer Key",
+  "key_insight": "Next-token prediction uses earlier tokens as the question and the actual next token as the answer. Every position supplies another training example.",
+  "body": "## Turn Raw Text into Its Own Answer Key\n\nA library has trillions of words but no human-written label for each sentence. Manually grading all of it is impossible.\n\nNext-token prediction uses earlier tokens as the question and the actual next token as the answer. Every position supplies another training example.\n\nThe model learns patterns useful for prediction, not a guaranteed database of truth. Frequent text and data quality strongly shape what it learns.",
+  "common_mistakes": [
+    "Pretraining guarantees every generated claim is true.",
+    "A causal model trains by reading the answer tokens ahead.",
+    "Data quality cannot affect a fixed mathematical loss."
+  ],
+  "mini_exercise": "Draw “Turn Raw Text into Its Own Answer Key” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The objective determines what patterns a foundation model is rewarded for learning before task-specific adaptation.",
+  "explain_back_prompt": "Using “Turn Raw Text into Its Own Answer Key,” explain Pretraining Objectives without assuming the listener knows modern AI."
+}

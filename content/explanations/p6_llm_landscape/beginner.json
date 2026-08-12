@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_llm_landscape",
+  "depth": "beginner",
+  "title": "The LLM Landscape — Choose a Model for the Trip",
+  "key_insight": "An LLM family includes models with related architecture or training. Models vary in parameter size, context length, supported inputs, and access method.",
+  "body": "## Choose a Model for the Trip\n\nA tiny local assistant and a frontier cloud model can both answer questions, but they have very different cost, privacy, and quality.\n\nAn LLM family includes models with related architecture or training. Models vary in parameter size, context length, supported inputs, and access method.\n\nStart from the task: required quality, latency, privacy, budget, and languages. There is no best model for every trip.",
+  "common_mistakes": [
+    "One leaderboard winner is best for every application.",
+    "A large context window guarantees perfect recall.",
+    "Open weights always mean unrestricted use without a license."
+  ],
+  "mini_exercise": "Draw “Choose a Model for the Trip” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Sound model choice begins with the workload and constraints, not a leaderboard winner.",
+  "explain_back_prompt": "Using “Choose a Model for the Trip,” explain The LLM Landscape without assuming the listener knows modern AI."
+}

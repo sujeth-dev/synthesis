@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_rag_systems",
+  "depth": "mid",
+  "title": "RAG Systems — Chunk, Embed, Retrieve, Answer",
+  "key_insight": "A RAG pipeline chunks documents, embeds and indexes chunks, embeds the query, retrieves candidates, and builds a grounded prompt.",
+  "body": "## Chunk, Embed, Retrieve, Answer\n\nA 200-page manual is too large and imprecise to send whole. It must be divided into useful retrieval units.\n\nA RAG pipeline chunks documents, embeds and indexes chunks, embeds the query, retrieves candidates, and builds a grounded prompt.\n\nChunk boundaries should preserve meaning and metadata. Overlap can protect boundary information but increases duplicates and index size.",
+  "common_mistakes": [
+    "RAG permanently writes every document into model weights.",
+    "Retrieval guarantees the final answer is correct.",
+    "Retrieved documents should override system instructions."
+  ],
+  "mini_exercise": "Draw “Chunk, Embed, Retrieve, Answer” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RAG connects models to current or private knowledge without retraining the model for every document change.",
+  "explain_back_prompt": "Using “Chunk, Embed, Retrieve, Answer,” explain RAG Systems without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Build a tiny grounded-answer flow",
+    "context": "Turn RAG Systems into one small, inspectable workflow.",
+    "steps": [
+      "Create five short source passages.",
+      "Retrieve passages for three questions.",
+      "Build a prompt containing only selected evidence.",
+      "Print answers with source identifiers and an abstention case."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

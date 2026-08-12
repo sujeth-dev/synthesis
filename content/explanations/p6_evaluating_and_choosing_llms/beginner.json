@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_evaluating_and_choosing_llms",
+  "depth": "beginner",
+  "title": "Evaluating & Choosing LLMs — Run the Real Job as an Audition",
+  "key_insight": "Build a small set of representative requests with expected qualities. Compare models on those cases before choosing one.",
+  "body": "## Run the Real Job as an Audition\n\nA model tops a public leaderboard but fails the company’s support tone and product facts. The benchmark measured a different job.\n\nBuild a small set of representative requests with expected qualities. Compare models on those cases before choosing one.\n\nInclude cost, response time, privacy, and availability beside answer quality. A useful model must fit the whole application.",
+  "common_mistakes": [
+    "The biggest model is automatically best for every product.",
+    "One public benchmark replaces task-specific testing.",
+    "A model-based grader is perfectly objective and never changes."
+  ],
+  "mini_exercise": "Draw “Run the Real Job as an Audition” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Model families and versions change quickly, so a repeatable evaluation process is more durable than one recommendation.",
+  "explain_back_prompt": "Using “Run the Real Job as an Audition,” explain Evaluating & Choosing LLMs without assuming the listener knows modern AI."
+}

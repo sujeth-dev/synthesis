@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_tool_use_and_function_calling",
+  "depth": "beginner",
+  "title": "Tool Use & Function Calling — Ask for an Action, Do Not Pretend It Happened",
+  "key_insight": "A tool gives the model a named capability with described inputs. The model proposes a call, application code runs it, and the result returns to the conversation.",
+  "body": "## Ask for an Action, Do Not Pretend It Happened\n\nA model is asked for today’s account balance. It cannot know the live value by continuing to guess text.\n\nA tool gives the model a named capability with described inputs. The model proposes a call, application code runs it, and the result returns to the conversation.\n\nThe model does not execute authority by itself. The application owns credentials, validation, permissions, and side effects.",
+  "common_mistakes": [
+    "A model response automatically has every system credential.",
+    "Tool arguments never need validation.",
+    "Retries are safe even when they repeat payments."
+  ],
+  "mini_exercise": "Draw “Ask for an Action, Do Not Pretend It Happened” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Models need tools to query live systems, calculate reliably, and take controlled actions beyond text generation.",
+  "explain_back_prompt": "Using “Ask for an Action, Do Not Pretend It Happened,” explain Tool Use & Function Calling without assuming the listener knows modern AI."
+}

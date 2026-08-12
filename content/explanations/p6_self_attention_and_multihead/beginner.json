@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_self_attention_and_multihead",
+  "depth": "beginner",
+  "title": "Self-Attention & Multiple Heads — Several Readers, Different Highlighters",
+  "key_insight": "Self-attention lets positions in a sequence consult that same sequence. Multiple heads repeat the process with different learned projections.",
+  "body": "## Several Readers, Different Highlighters\n\nOne reader follows who “she” refers to; another notices dates; another tracks the main topic. One highlighting pattern cannot capture every relationship.\n\nSelf-attention lets positions in a sequence consult that same sequence. Multiple heads repeat the process with different learned projections.\n\nThe head results are joined and mixed. Heads are not assigned human labels in advance; useful roles emerge from training.",
+  "common_mistakes": [
+    "Every attention head is manually programmed with a grammar rule.",
+    "Self-attention compares a sequence only with an unrelated database.",
+    "Causal language models should train by looking at future answers."
+  ],
+  "mini_exercise": "Draw “Several Readers, Different Highlighters” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This is the working mechanism that turns attention intuition into transformer representations.",
+  "explain_back_prompt": "Using “Several Readers, Different Highlighters,” explain Self-Attention & Multiple Heads without assuming the listener knows modern AI."
+}

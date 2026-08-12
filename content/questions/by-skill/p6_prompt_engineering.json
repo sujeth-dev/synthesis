@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p6_prompt_engineering_q1",
+    "skill_id": "p6_prompt_engineering",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Prompt Engineering: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A useful prompt states task, context, constraints, and output."
+      },
+      {
+        "id": "b",
+        "text": "Longer prompts are always more reliable."
+      },
+      {
+        "id": "c",
+        "text": "Requested JSON is guaranteed to parse without checks."
+      },
+      {
+        "id": "d",
+        "text": "One successful chat proves a prompt cannot regress."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A useful prompt states task, context, constraints, and output.",
+    "graph_placement_weight": {
+      "p6_prompt_engineering": 1
+    }
+  },
+  {
+    "id": "p6_prompt_engineering_q2",
+    "skill_id": "p6_prompt_engineering",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Prompt Engineering: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Longer prompts are always more reliable."
+      },
+      {
+        "id": "b",
+        "text": "Instructions should be separated from data."
+      },
+      {
+        "id": "c",
+        "text": "Requested JSON is guaranteed to parse without checks."
+      },
+      {
+        "id": "d",
+        "text": "One successful chat proves a prompt cannot regress."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Instructions should be separated from data.",
+    "graph_placement_weight": {
+      "p6_prompt_engineering": 1
+    }
+  },
+  {
+    "id": "p6_prompt_engineering_q3",
+    "skill_id": "p6_prompt_engineering",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Prompt Engineering: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Longer prompts are always more reliable."
+      },
+      {
+        "id": "b",
+        "text": "Requested JSON is guaranteed to parse without checks."
+      },
+      {
+        "id": "c",
+        "text": "Few-shot examples demonstrate a desired mapping."
+      },
+      {
+        "id": "d",
+        "text": "One successful chat proves a prompt cannot regress."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Few-shot examples demonstrate a desired mapping.",
+    "graph_placement_weight": {
+      "p6_prompt_engineering": 1
+    }
+  },
+  {
+    "id": "p6_prompt_engineering_q4",
+    "skill_id": "p6_prompt_engineering",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Prompt Engineering: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Longer prompts are always more reliable."
+      },
+      {
+        "id": "b",
+        "text": "Requested JSON is guaranteed to parse without checks."
+      },
+      {
+        "id": "c",
+        "text": "One successful chat proves a prompt cannot regress."
+      },
+      {
+        "id": "d",
+        "text": "Structured output still requires validation."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Structured output still requires validation.",
+    "graph_placement_weight": {
+      "p6_prompt_engineering": 1
+    }
+  },
+  {
+    "id": "p6_prompt_engineering_q5",
+    "skill_id": "p6_prompt_engineering",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Prompt Engineering: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Prompt versions should be tested on a stable evaluation set."
+      },
+      {
+        "id": "b",
+        "text": "Longer prompts are always more reliable."
+      },
+      {
+        "id": "c",
+        "text": "Requested JSON is guaranteed to parse without checks."
+      },
+      {
+        "id": "d",
+        "text": "One successful chat proves a prompt cannot regress."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Prompt versions should be tested on a stable evaluation set.",
+    "graph_placement_weight": {
+      "p6_prompt_engineering": 1
+    }
+  },
+  {
+    "id": "p6_prompt_engineering_q6",
+    "skill_id": "p6_prompt_engineering",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Prompt Engineering: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Longer prompts are always more reliable."
+      },
+      {
+        "id": "b",
+        "text": "Automatic prompt search can overfit its evaluation examples."
+      },
+      {
+        "id": "c",
+        "text": "Requested JSON is guaranteed to parse without checks."
+      },
+      {
+        "id": "d",
+        "text": "One successful chat proves a prompt cannot regress."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Automatic prompt search can overfit its evaluation examples.",
+    "graph_placement_weight": {
+      "p6_prompt_engineering": 1
+    }
+  },
+  {
+    "id": "p6_prompt_engineering_order1",
+    "skill_id": "p6_prompt_engineering",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Prompt Engineering workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "state the task"
+      },
+      {
+        "id": "b",
+        "text": "provide only relevant context"
+      },
+      {
+        "id": "c",
+        "text": "specify constraints and output"
+      },
+      {
+        "id": "d",
+        "text": "test on normal and edge cases"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: state the task → provide only relevant context → specify constraints and output → test on normal and edge cases."
+  },
+  {
+    "id": "p6_prompt_engineering_fill1",
+    "skill_id": "p6_prompt_engineering",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Prompt Engineering step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "examples"
+      },
+      {
+        "id": "b",
+        "text": "gradients"
+      },
+      {
+        "id": "c",
+        "text": "epochs"
+      },
+      {
+        "id": "d",
+        "text": "clusters"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "examples",
+    "explanation_after": "The correct choice is examples."
+  }
+]

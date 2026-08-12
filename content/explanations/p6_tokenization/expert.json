@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_tokenization",
+  "depth": "expert",
+  "title": "Tokenization — Segmentation Creates a Modeling Tradeoff",
+  "key_insight": "A larger vocabulary shortens sequences but expands the embedding and output tables. A smaller vocabulary saves table parameters but lengthens attention work.",
+  "body": "## Segmentation Creates a Modeling Tradeoff\n\nA rare technical term is split into many fragments. The model can represent it, but must rebuild its meaning across more positions.\n\nA larger vocabulary shortens sequences but expands the embedding and output tables. A smaller vocabulary saves table parameters but lengthens attention work.\n\nByte-level fallbacks guarantee coverage of unusual text. Evaluate compression, unknown handling, and fairness across languages rather than choosing vocabulary size from English alone.",
+  "common_mistakes": [
+    "A tokenizer directly verifies every factual answer.",
+    "Every token is always one complete English word.",
+    "Token numbers have the same meaning across all models."
+  ],
+  "mini_exercise": "Draw “Segmentation Creates a Modeling Tradeoff” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every language-model input and output passes through a tokenizer, so its choices affect meaning, length, and cost.",
+  "explain_back_prompt": "Using “Segmentation Creates a Modeling Tradeoff,” explain Tokenization without assuming the listener knows modern AI."
+}

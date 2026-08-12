@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_pretraining_objectives",
+  "depth": "advanced",
+  "title": "Pretraining Objectives — Data Mixture Is Part of the Objective",
+  "key_insight": "Deduplication, quality filters, language balance, and source weights shape the effective objective. Hold out contamination-sensitive benchmarks before training.",
+  "body": "## Data Mixture Is Part of the Objective\n\nA technically correct loss still creates a poor model because duplicate spam dominates the corpus. The examples determine what minimizing loss means.\n\nDeduplication, quality filters, language balance, and source weights shape the effective objective. Hold out contamination-sensitive benchmarks before training.\n\nCurricula can change the mixture or sequence length over time. Record every version so model behavior can be traced to its data route.",
+  "common_mistakes": [
+    "Pretraining guarantees every generated claim is true.",
+    "A causal model trains by reading the answer tokens ahead.",
+    "Data quality cannot affect a fixed mathematical loss."
+  ],
+  "mini_exercise": "Draw “Data Mixture Is Part of the Objective” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The objective determines what patterns a foundation model is rewarded for learning before task-specific adaptation.",
+  "explain_back_prompt": "Using “Data Mixture Is Part of the Objective,” explain Pretraining Objectives without assuming the listener knows modern AI."
+}

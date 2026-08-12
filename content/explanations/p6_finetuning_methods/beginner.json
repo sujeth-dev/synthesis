@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_finetuning_methods",
+  "depth": "beginner",
+  "title": "Fine-Tuning Methods — Teach the Generalist a Specific Job",
+  "key_insight": "Fine-tuning continues training on selected input-output pairs. Small weight changes make the demonstrated responses more likely.",
+  "body": "## Teach the Generalist a Specific Job\n\nA general model can discuss medicine but does not reliably write the clinic’s required note format. Examples can demonstrate the desired behavior.\n\nFine-tuning continues training on selected input-output pairs. Small weight changes make the demonstrated responses more likely.\n\nUse it for learned behavior, not constantly changing facts. Retrieval is usually easier to update when knowledge changes weekly.",
+  "common_mistakes": [
+    "Fine-tuning changes behavior without any examples.",
+    "Every input token should always be treated as the desired assistant output.",
+    "A preference dataset represents universal values automatically."
+  ],
+  "mini_exercise": "Draw “Teach the Generalist a Specific Job” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Fine-tuning can shape format, domain behavior, and task skill when prompting or retrieval is insufficient.",
+  "explain_back_prompt": "Using “Teach the Generalist a Specific Job,” explain Fine-Tuning Methods without assuming the listener knows modern AI."
+}

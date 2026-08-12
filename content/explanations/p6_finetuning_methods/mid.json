@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_finetuning_methods",
+  "depth": "mid",
+  "title": "Fine-Tuning Methods — Train on Instructions and Responses",
+  "key_insight": "Supervised fine-tuning formats each conversation with the model’s chat template and masks tokens that should not count as targets.",
+  "body": "## Train on Instructions and Responses\n\nA dataset mixes user requests, context, and ideal assistant answers. Only the assistant portion should usually teach the response loss.\n\nSupervised fine-tuning formats each conversation with the model’s chat template and masks tokens that should not count as targets.\n\nSplit by source or scenario so near-duplicate examples do not leak into validation. Evaluate both the target behavior and broad capabilities that might regress.",
+  "common_mistakes": [
+    "Fine-tuning changes behavior without any examples.",
+    "Every input token should always be treated as the desired assistant output.",
+    "A preference dataset represents universal values automatically."
+  ],
+  "mini_exercise": "Draw “Train on Instructions and Responses” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Fine-tuning can shape format, domain behavior, and task skill when prompting or retrieval is insufficient.",
+  "explain_back_prompt": "Using “Train on Instructions and Responses,” explain Fine-Tuning Methods without assuming the listener knows modern AI."
+}

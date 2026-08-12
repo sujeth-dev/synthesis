@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_lora_and_peft",
+  "depth": "advanced",
+  "title": "LoRA & Parameter-Efficient Fine-Tuning — Quantize the Frozen Base",
+  "key_insight": "QLoRA combines a quantized base with trainable low-rank adapters, while sensitive calculations use safer precision where needed.",
+  "body": "## Quantize the Frozen Base\n\nEven frozen weights consume device memory. Storing them in fewer bits leaves more room for activations and adapter training.\n\nQLoRA combines a quantized base with trainable low-rank adapters, while sensitive calculations use safer precision where needed.\n\nQuantization saves memory but adds kernels and approximation error. Measure training stability, throughput, and final quality on the deployment hardware.",
+  "common_mistakes": [
+    "LoRA retrains every base parameter by definition.",
+    "An adapter works with any unrelated base model.",
+    "Lower precision can never affect speed or quality."
+  ],
+  "mini_exercise": "Draw “Quantize the Frozen Base” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Parameter-efficient tuning makes adaptation possible with less training memory and smaller task-specific artifacts.",
+  "explain_back_prompt": "Using “Quantize the Frozen Base,” explain LoRA & Parameter-Efficient Fine-Tuning without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Plan a small adapter run",
+    "context": "Turn LoRA & Parameter-Efficient Fine-Tuning into one small, inspectable workflow.",
+    "steps": [
+      "Choose one narrow behavior and dataset.",
+      "Select target modules and a modest rank.",
+      "Train while tracking validation behavior.",
+      "Save the adapter and compare with the base model."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

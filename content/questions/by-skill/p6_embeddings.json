@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p6_embeddings_q1",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Embeddings represent items as numeric vectors."
+      },
+      {
+        "id": "b",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "c",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "d",
+        "text": "Every similarity metric ranks all vectors identically."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Embeddings represent items as numeric vectors.",
+    "graph_placement_weight": {
+      "p6_embeddings": 1
+    }
+  },
+  {
+    "id": "p6_embeddings_q2",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "b",
+        "text": "Related items can be placed near one another."
+      },
+      {
+        "id": "c",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "d",
+        "text": "Every similarity metric ranks all vectors identically."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Related items can be placed near one another.",
+    "graph_placement_weight": {
+      "p6_embeddings": 1
+    }
+  },
+  {
+    "id": "p6_embeddings_q3",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "b",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "c",
+        "text": "Cosine similarity compares vector direction."
+      },
+      {
+        "id": "d",
+        "text": "Every similarity metric ranks all vectors identically."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Cosine similarity compares vector direction.",
+    "graph_placement_weight": {
+      "p6_embeddings": 1
+    }
+  },
+  {
+    "id": "p6_embeddings_q4",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "b",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "c",
+        "text": "Every similarity metric ranks all vectors identically."
+      },
+      {
+        "id": "d",
+        "text": "Contextual embeddings change with surrounding text."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Contextual embeddings change with surrounding text.",
+    "graph_placement_weight": {
+      "p6_embeddings": 1
+    }
+  },
+  {
+    "id": "p6_embeddings_q5",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Hard negatives teach distinctions between plausible and correct matches."
+      },
+      {
+        "id": "b",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "c",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "d",
+        "text": "Every similarity metric ranks all vectors identically."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Hard negatives teach distinctions between plausible and correct matches.",
+    "graph_placement_weight": {
+      "p6_embeddings": 1
+    }
+  },
+  {
+    "id": "p6_embeddings_q6",
+    "skill_id": "p6_embeddings",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Embeddings: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An embedding is always a readable paragraph."
+      },
+      {
+        "id": "b",
+        "text": "Embedding geometry reflects the comparisons used during training."
+      },
+      {
+        "id": "c",
+        "text": "Vector closeness proves two statements are factually true."
+      },
+      {
+        "id": "d",
+        "text": "Every similarity metric ranks all vectors identically."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Embedding geometry reflects the comparisons used during training.",
+    "graph_placement_weight": {
+      "p6_embeddings": 1
+    }
+  },
+  {
+    "id": "p6_embeddings_order1",
+    "skill_id": "p6_embeddings",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Embeddings workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "embed stored items"
+      },
+      {
+        "id": "b",
+        "text": "embed the query"
+      },
+      {
+        "id": "c",
+        "text": "compare query and item vectors"
+      },
+      {
+        "id": "d",
+        "text": "return the closest useful matches"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: embed stored items → embed the query → compare query and item vectors → return the closest useful matches."
+  },
+  {
+    "id": "p6_embeddings_fill1",
+    "skill_id": "p6_embeddings",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Embeddings step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "cosine_similarity"
+      },
+      {
+        "id": "b",
+        "text": "cross_entropy"
+      },
+      {
+        "id": "c",
+        "text": "dropout"
+      },
+      {
+        "id": "d",
+        "text": "token_count"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "cosine_similarity",
+    "explanation_after": "The correct choice is cosine_similarity."
+  }
+]

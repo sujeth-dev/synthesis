@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_transformers",
+  "depth": "mid",
+  "title": "Transformer Architecture — Encoder, Decoder, or Both",
+  "key_insight": "Encoders use bidirectional attention over available input. Decoder-only models use causal attention. Encoder-decoder models let a generating decoder also attend to encoded source text.",
+  "body": "## Encoder, Decoder, or Both\n\nOne task understands a complete sentence; another generates the next token without seeing the future. They need different attention rules.\n\nEncoders use bidirectional attention over available input. Decoder-only models use causal attention. Encoder-decoder models let a generating decoder also attend to encoded source text.\n\nChoose the layout for the task rather than treating every transformer as identical. Modern chat models are commonly decoder-only.",
+  "common_mistakes": [
+    "A transformer contains attention and nothing else.",
+    "Decoder generation should read future unseen tokens.",
+    "A key-value cache makes memory use shrink as context grows."
+  ],
+  "mini_exercise": "Draw “Encoder, Decoder, or Both” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Transformers are the architecture behind modern language models and many vision and multimodal systems.",
+  "explain_back_prompt": "Using “Encoder, Decoder, or Both,” explain Transformer Architecture without assuming the listener knows modern AI."
+}

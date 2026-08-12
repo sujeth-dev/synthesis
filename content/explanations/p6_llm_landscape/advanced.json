@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_llm_landscape",
+  "depth": "advanced",
+  "title": "The LLM Landscape — A Context Window Is Capacity, Not Memory Skill",
+  "key_insight": "Effective context depends on retrieval, position, prompt structure, and model training. Evaluate with your document lengths and answer locations.",
+  "body": "## A Context Window Is Capacity, Not Memory Skill\n\nA model accepts 100,000 tokens, yet misses a fact placed in the middle. Input capacity does not ensure equal attention to every position.\n\nEffective context depends on retrieval, position, prompt structure, and model training. Evaluate with your document lengths and answer locations.\n\nParameter count also poorly predicts latency across architectures and quantization. Benchmark the exact endpoint or hardware with realistic batch and output lengths.",
+  "common_mistakes": [
+    "One leaderboard winner is best for every application.",
+    "A large context window guarantees perfect recall.",
+    "Open weights always mean unrestricted use without a license."
+  ],
+  "mini_exercise": "Draw “A Context Window Is Capacity, Not Memory Skill” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Sound model choice begins with the workload and constraints, not a leaderboard winner.",
+  "explain_back_prompt": "Using “A Context Window Is Capacity, Not Memory Skill,” explain The LLM Landscape without assuming the listener knows modern AI."
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_prompt_engineering",
+  "depth": "mid",
+  "title": "Prompt Engineering — Show the Pattern with Examples",
+  "key_insight": "Few-shot prompting places example inputs and outputs before the new case. Examples should cover important boundaries without contradicting the written instructions.",
+  "body": "## Show the Pattern with Examples\n\nA label scheme is hard to describe but easy to demonstrate. Two careful examples reveal the desired mapping and format.\n\nFew-shot prompting places example inputs and outputs before the new case. Examples should cover important boundaries without contradicting the written instructions.\n\nAsk for structured output only when the consumer needs it, then validate the structure. A requested format is not a guarantee.",
+  "common_mistakes": [
+    "Longer prompts are always more reliable.",
+    "Requested JSON is guaranteed to parse without checks.",
+    "One successful chat proves a prompt cannot regress."
+  ],
+  "mini_exercise": "Draw “Show the Pattern with Examples” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Clear prompts improve reliability before more expensive retrieval, tuning, or model changes are attempted.",
+  "explain_back_prompt": "Using “Show the Pattern with Examples,” explain Prompt Engineering without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Build and test one prompt",
+    "context": "Turn Prompt Engineering into one small, inspectable workflow.",
+    "steps": [
+      "Write a vague baseline prompt.",
+      "Add task, context, constraints, and output shape.",
+      "Test both on five varied inputs.",
+      "Record failures and revise once."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_lora_and_peft",
+  "depth": "expert",
+  "title": "LoRA & Parameter-Efficient Fine-Tuning — Low Rank Is a Hypothesis About Adaptation",
+  "key_insight": "Rank patterns can differ by layer, and adapters can be composed or switched. Combining adapters may cause interference because their learned changes were not coordinated.",
+  "body": "## Low Rank Is a Hypothesis About Adaptation\n\nLoRA assumes the useful task-specific change lies mostly in a small number of directions. That often works, but it is not guaranteed.\n\nRank patterns can differ by layer, and adapters can be composed or switched. Combining adapters may cause interference because their learned changes were not coordinated.\n\nCompare against prompting, retrieval, and full tuning on a fixed evaluation. The smallest method that meets the behavior goal is usually easiest to operate.",
+  "common_mistakes": [
+    "LoRA retrains every base parameter by definition.",
+    "An adapter works with any unrelated base model.",
+    "Lower precision can never affect speed or quality."
+  ],
+  "mini_exercise": "Draw “Low Rank Is a Hypothesis About Adaptation” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Parameter-efficient tuning makes adaptation possible with less training memory and smaller task-specific artifacts.",
+  "explain_back_prompt": "Using “Low Rank Is a Hypothesis About Adaptation,” explain LoRA & Parameter-Efficient Fine-Tuning without assuming the listener knows modern AI."
+}

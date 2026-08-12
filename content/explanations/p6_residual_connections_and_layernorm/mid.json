@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_residual_connections_and_layernorm",
+  "depth": "mid",
+  "title": "Residual Connections & Layer Normalization — Normalize Before or After the Block",
+  "key_insight": "Post-norm applies a block then normalizes the sum. Pre-norm normalizes before the block and adds the result back to the untouched residual stream.",
+  "body": "## Normalize Before or After the Block\n\nThe same attention and feed-forward parts train differently depending on where normalization sits relative to the residual addition.\n\nPost-norm applies a block then normalizes the sum. Pre-norm normalizes before the block and adds the result back to the untouched residual stream.\n\nPre-norm often makes very deep training easier because gradients have a cleaner residual route, though architecture details still matter.",
+  "common_mistakes": [
+    "Residual connections permanently skip every transformation.",
+    "Layer normalization averages unrelated users together.",
+    "Normalization removes all learned scale and shift."
+  ],
+  "mini_exercise": "Draw “Normalize Before or After the Block” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "These support stable information and gradient flow through deep transformer stacks.",
+  "explain_back_prompt": "Using “Normalize Before or After the Block,” explain Residual Connections & Layer Normalization without assuming the listener knows modern AI."
+}

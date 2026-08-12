@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_embeddings",
+  "depth": "mid",
+  "title": "Embeddings — Compare Directions, Not Just Size",
+  "key_insight": "Cosine similarity measures the angle between vectors. Dot product mixes direction and length, while Euclidean distance measures straight-line separation.",
+  "body": "## Compare Directions, Not Just Size\n\nTwo vectors point in nearly the same direction but have different lengths. Their pattern may be more important than their magnitude.\n\nCosine similarity measures the angle between vectors. Dot product mixes direction and length, while Euclidean distance measures straight-line separation.\n\nNormalize vectors when the retrieval method expects it. The index metric and the model’s training objective should agree.",
+  "common_mistakes": [
+    "An embedding is always a readable paragraph.",
+    "Vector closeness proves two statements are factually true.",
+    "Every similarity metric ranks all vectors identically."
+  ],
+  "mini_exercise": "Draw “Compare Directions, Not Just Size” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Embeddings connect text, images, and users to search, recommendation, retrieval, and neural computation.",
+  "explain_back_prompt": "Using “Compare Directions, Not Just Size,” explain Embeddings without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Build a tiny semantic search",
+    "context": "Turn Embeddings into one small, inspectable workflow.",
+    "steps": [
+      "Write five short notes.",
+      "Embed the notes and one query.",
+      "Compute similarity scores.",
+      "Print the two nearest notes and inspect whether they help."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

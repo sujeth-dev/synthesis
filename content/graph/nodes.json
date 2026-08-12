@@ -2093,24 +2093,32 @@
   },
   {
     "id": "p6_transformers",
-    "label": "Transformers Architecture",
+    "label": "Transformer Architecture",
     "phase": "phase_6_modern_ai",
     "difficulty_base": 5,
-    "question_ids": [],
+    "question_ids": [
+      "p6_transformers_q1",
+      "p6_transformers_q2",
+      "p6_transformers_q3",
+      "p6_transformers_q4",
+      "p6_transformers_q5",
+      "p6_transformers_q6"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p6_transformers_beginner",
+      "mid": "p6_transformers_mid",
+      "advanced": "p6_transformers_advanced",
+      "expert": "p6_transformers_expert"
     },
     "tags": [
       "transformer",
       "attention",
-      "LLM"
+      "feed-forward"
     ],
     "deprecated": false,
-    "intuition": "The Transformer is the architecture behind GPT, Claude, and every major LLM. It processes all tokens in parallel using attention.",
-    "analogy": "Like a room where everyone can see and talk to everyone else at once, instead of passing a message down a line.",
-    "why_it_matters": "You cannot build or work with LLMs without understanding the Transformer architecture.",
+    "intuition": "A transformer repeatedly mixes information across positions and transforms each position through a small neural network.",
+    "analogy": "Like a workshop alternating group discussion with private desk work.",
+    "why_it_matters": "Transformers are the architecture behind modern language models and many vision and multimodal systems.",
     "topic": "Transformer Architecture",
     "topic_order": 4
   },
@@ -2119,21 +2127,31 @@
     "label": "Embeddings",
     "phase": "phase_6_modern_ai",
     "difficulty_base": 4,
-    "question_ids": [],
+    "question_ids": [
+      "p6_embeddings_q1",
+      "p6_embeddings_q2",
+      "p6_embeddings_q3",
+      "p6_embeddings_q4",
+      "p6_embeddings_q5",
+      "p6_embeddings_q6",
+      "p6_embeddings_order1",
+      "p6_embeddings_fill1"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p6_embeddings_beginner",
+      "mid": "p6_embeddings_mid",
+      "advanced": "p6_embeddings_advanced",
+      "expert": "p6_embeddings_expert"
     },
     "tags": [
       "embeddings",
       "vectors",
-      "representation"
+      "similarity"
     ],
     "deprecated": false,
-    "intuition": "An embedding turns words, images, or any data into a dense vector where similar things are close together.",
-    "analogy": "Like placing cities on a map — Paris and London are close (both European capitals), Paris and Tokyo are far.",
-    "why_it_matters": "Embeddings are the bridge between raw text/images and the math that AI operates on.",
+    "intuition": "An embedding represents an item as a vector whose location captures learned relationships.",
+    "analogy": "Like placing ideas on a map so related ideas become neighbors.",
+    "why_it_matters": "Embeddings connect text, images, and users to search, recommendation, retrieval, and neural computation.",
     "topic": "Representation",
     "topic_order": 2
   },
@@ -2142,21 +2160,31 @@
     "label": "RAG Systems",
     "phase": "phase_6_modern_ai",
     "difficulty_base": 4,
-    "question_ids": [],
+    "question_ids": [
+      "p6_rag_systems_q1",
+      "p6_rag_systems_q2",
+      "p6_rag_systems_q3",
+      "p6_rag_systems_q4",
+      "p6_rag_systems_q5",
+      "p6_rag_systems_q6",
+      "p6_rag_systems_order1",
+      "p6_rag_systems_fill1"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p6_rag_systems_beginner",
+      "mid": "p6_rag_systems_mid",
+      "advanced": "p6_rag_systems_advanced",
+      "expert": "p6_rag_systems_expert"
     },
     "tags": [
-      "RAG",
+      "rag",
       "retrieval",
-      "vector-db"
+      "grounding"
     ],
     "deprecated": false,
-    "intuition": "RAG gives an LLM the ability to look things up before answering.",
-    "analogy": "Like an open-book exam vs closed-book. RAG lets the model check its notes before answering.",
-    "why_it_matters": "Most production AI applications are RAG systems. It's the most practical AI architecture to learn.",
+    "intuition": "Retrieval-augmented generation finds relevant sources and gives them to a model before it answers.",
+    "analogy": "Like an open-book answer that first finds the right pages and then explains them.",
+    "why_it_matters": "RAG connects models to current or private knowledge without retraining the model for every document change.",
     "topic": "Applying LLMs",
     "topic_order": 2
   },
@@ -2662,5 +2690,416 @@
     "why_it_matters": "This capstone proves the learner can connect Phase 5’s parts into a working training system.",
     "topic": "Practice",
     "topic_order": 2
+  },
+  {
+    "id": "p6_tokenization",
+    "label": "Tokenization",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p6_tokenization_q1",
+      "p6_tokenization_q2",
+      "p6_tokenization_q3",
+      "p6_tokenization_q4",
+      "p6_tokenization_q5",
+      "p6_tokenization_q6",
+      "p6_tokenization_order1",
+      "p6_tokenization_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_tokenization_beginner",
+      "mid": "p6_tokenization_mid",
+      "advanced": "p6_tokenization_advanced",
+      "expert": "p6_tokenization_expert"
+    },
+    "tags": [
+      "tokenization",
+      "tokens",
+      "vocabulary"
+    ],
+    "deprecated": false,
+    "intuition": "Tokenization turns raw text into pieces that a language model can represent as numbers.",
+    "analogy": "Like cutting a sentence into reusable tiles before arranging them on a numbered shelf.",
+    "why_it_matters": "Every language-model input and output passes through a tokenizer, so its choices affect meaning, length, and cost.",
+    "topic": "Representation",
+    "topic_order": 1
+  },
+  {
+    "id": "p6_vector_databases",
+    "label": "Vector Databases",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_vector_databases_q1",
+      "p6_vector_databases_q2",
+      "p6_vector_databases_q3",
+      "p6_vector_databases_q4",
+      "p6_vector_databases_q5",
+      "p6_vector_databases_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_vector_databases_beginner",
+      "mid": "p6_vector_databases_mid",
+      "advanced": "p6_vector_databases_advanced",
+      "expert": "p6_vector_databases_expert"
+    },
+    "tags": [
+      "vector-database",
+      "nearest-neighbor",
+      "index"
+    ],
+    "deprecated": false,
+    "intuition": "A vector database stores embeddings and finds nearby items without comparing every item one by one.",
+    "analogy": "Like a map index that narrows the neighborhood before checking exact addresses.",
+    "why_it_matters": "Large retrieval systems need fast similarity search plus filters, updates, metadata, and operational guarantees.",
+    "topic": "Representation",
+    "topic_order": 3
+  },
+  {
+    "id": "p6_attention_mechanism",
+    "label": "Attention Mechanism",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_attention_mechanism_q1",
+      "p6_attention_mechanism_q2",
+      "p6_attention_mechanism_q3",
+      "p6_attention_mechanism_q4",
+      "p6_attention_mechanism_q5",
+      "p6_attention_mechanism_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_attention_mechanism_beginner",
+      "mid": "p6_attention_mechanism_mid",
+      "advanced": "p6_attention_mechanism_advanced",
+      "expert": "p6_attention_mechanism_expert"
+    },
+    "tags": [
+      "attention",
+      "context",
+      "sequence"
+    ],
+    "deprecated": false,
+    "intuition": "Attention lets one position gather information from other positions according to learned relevance.",
+    "analogy": "Like highlighting different words in a page depending on the question being asked.",
+    "why_it_matters": "Attention is the core routing idea that lets transformers connect distant information.",
+    "topic": "Transformer Architecture",
+    "topic_order": 1
+  },
+  {
+    "id": "p6_self_attention_and_multihead",
+    "label": "Self-Attention & Multiple Heads",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_self_attention_and_multihead_q1",
+      "p6_self_attention_and_multihead_q2",
+      "p6_self_attention_and_multihead_q3",
+      "p6_self_attention_and_multihead_q4",
+      "p6_self_attention_and_multihead_q5",
+      "p6_self_attention_and_multihead_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_self_attention_and_multihead_beginner",
+      "mid": "p6_self_attention_and_multihead_mid",
+      "advanced": "p6_self_attention_and_multihead_advanced",
+      "expert": "p6_self_attention_and_multihead_expert"
+    },
+    "tags": [
+      "self-attention",
+      "multi-head",
+      "qkv"
+    ],
+    "deprecated": false,
+    "intuition": "Self-attention relates positions within one sequence, while multiple heads learn several relationship types in parallel.",
+    "analogy": "Like several readers marking the same page for grammar, references, and topic at once.",
+    "why_it_matters": "This is the working mechanism that turns attention intuition into transformer representations.",
+    "topic": "Transformer Architecture",
+    "topic_order": 2
+  },
+  {
+    "id": "p6_positional_encoding",
+    "label": "Positional Encoding",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_positional_encoding_q1",
+      "p6_positional_encoding_q2",
+      "p6_positional_encoding_q3",
+      "p6_positional_encoding_q4",
+      "p6_positional_encoding_q5",
+      "p6_positional_encoding_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_positional_encoding_beginner",
+      "mid": "p6_positional_encoding_mid",
+      "advanced": "p6_positional_encoding_advanced",
+      "expert": "p6_positional_encoding_expert"
+    },
+    "tags": [
+      "position",
+      "positional-encoding",
+      "rotary"
+    ],
+    "deprecated": false,
+    "intuition": "Position information tells attention where tokens occur because attention alone treats a reordered set similarly.",
+    "analogy": "Like numbering shuffled sentence cards so their original order can be reconstructed.",
+    "why_it_matters": "Language meaning depends on order, and position design affects how models handle lengths beyond training.",
+    "topic": "Transformer Architecture",
+    "topic_order": 3
+  },
+  {
+    "id": "p6_residual_connections_and_layernorm",
+    "label": "Residual Connections & Layer Normalization",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_residual_connections_and_layernorm_q1",
+      "p6_residual_connections_and_layernorm_q2",
+      "p6_residual_connections_and_layernorm_q3",
+      "p6_residual_connections_and_layernorm_q4",
+      "p6_residual_connections_and_layernorm_q5",
+      "p6_residual_connections_and_layernorm_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_residual_connections_and_layernorm_beginner",
+      "mid": "p6_residual_connections_and_layernorm_mid",
+      "advanced": "p6_residual_connections_and_layernorm_advanced",
+      "expert": "p6_residual_connections_and_layernorm_expert"
+    },
+    "tags": [
+      "residual",
+      "layer-normalization",
+      "stability"
+    ],
+    "deprecated": false,
+    "intuition": "Residual paths preserve an easy information route, while layer normalization keeps each token’s feature scale manageable.",
+    "analogy": "Like keeping an express lane around each workshop station and recalibrating the measuring tools.",
+    "why_it_matters": "These support stable information and gradient flow through deep transformer stacks.",
+    "topic": "Transformer Architecture",
+    "topic_order": 5
+  },
+  {
+    "id": "p6_pretraining_objectives",
+    "label": "Pretraining Objectives",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_pretraining_objectives_q1",
+      "p6_pretraining_objectives_q2",
+      "p6_pretraining_objectives_q3",
+      "p6_pretraining_objectives_q4",
+      "p6_pretraining_objectives_q5",
+      "p6_pretraining_objectives_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_pretraining_objectives_beginner",
+      "mid": "p6_pretraining_objectives_mid",
+      "advanced": "p6_pretraining_objectives_advanced",
+      "expert": "p6_pretraining_objectives_expert"
+    },
+    "tags": [
+      "pretraining",
+      "next-token",
+      "masked-language"
+    ],
+    "deprecated": false,
+    "intuition": "A pretraining objective creates learning signals from raw data by hiding or predicting parts of it.",
+    "analogy": "Like making practice questions automatically from a library by covering the next word.",
+    "why_it_matters": "The objective determines what patterns a foundation model is rewarded for learning before task-specific adaptation.",
+    "topic": "Training & Adapting LLMs",
+    "topic_order": 1
+  },
+  {
+    "id": "p6_finetuning_methods",
+    "label": "Fine-Tuning Methods",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_finetuning_methods_q1",
+      "p6_finetuning_methods_q2",
+      "p6_finetuning_methods_q3",
+      "p6_finetuning_methods_q4",
+      "p6_finetuning_methods_q5",
+      "p6_finetuning_methods_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_finetuning_methods_beginner",
+      "mid": "p6_finetuning_methods_mid",
+      "advanced": "p6_finetuning_methods_advanced",
+      "expert": "p6_finetuning_methods_expert"
+    },
+    "tags": [
+      "fine-tuning",
+      "instruction-tuning",
+      "adaptation"
+    ],
+    "deprecated": false,
+    "intuition": "Fine-tuning continues training a pretrained model on examples that teach a narrower behavior or task.",
+    "analogy": "Like taking a broadly educated apprentice and practicing the exact work needed for a new job.",
+    "why_it_matters": "Fine-tuning can shape format, domain behavior, and task skill when prompting or retrieval is insufficient.",
+    "topic": "Training & Adapting LLMs",
+    "topic_order": 2
+  },
+  {
+    "id": "p6_lora_and_peft",
+    "label": "LoRA & Parameter-Efficient Fine-Tuning",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_lora_and_peft_q1",
+      "p6_lora_and_peft_q2",
+      "p6_lora_and_peft_q3",
+      "p6_lora_and_peft_q4",
+      "p6_lora_and_peft_q5",
+      "p6_lora_and_peft_q6",
+      "p6_lora_and_peft_order1",
+      "p6_lora_and_peft_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_lora_and_peft_beginner",
+      "mid": "p6_lora_and_peft_mid",
+      "advanced": "p6_lora_and_peft_advanced",
+      "expert": "p6_lora_and_peft_expert"
+    },
+    "tags": [
+      "lora",
+      "peft",
+      "adapters"
+    ],
+    "deprecated": false,
+    "intuition": "LoRA learns small low-rank weight changes while leaving the large base model frozen.",
+    "analogy": "Like attaching a small adjustable overlay to a fixed machine instead of rebuilding the machine.",
+    "why_it_matters": "Parameter-efficient tuning makes adaptation possible with less training memory and smaller task-specific artifacts.",
+    "topic": "Training & Adapting LLMs",
+    "topic_order": 3
+  },
+  {
+    "id": "p6_llm_landscape",
+    "label": "The LLM Landscape",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p6_llm_landscape_q1",
+      "p6_llm_landscape_q2",
+      "p6_llm_landscape_q3",
+      "p6_llm_landscape_q4",
+      "p6_llm_landscape_q5",
+      "p6_llm_landscape_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_llm_landscape_beginner",
+      "mid": "p6_llm_landscape_mid",
+      "advanced": "p6_llm_landscape_advanced",
+      "expert": "p6_llm_landscape_expert"
+    },
+    "tags": [
+      "llm",
+      "model-families",
+      "context-window"
+    ],
+    "deprecated": false,
+    "intuition": "Language models differ in capability, size, openness, context, modality, cost, and deployment constraints.",
+    "analogy": "Like choosing a vehicle by route, load, fuel, and maintenance rather than horsepower alone.",
+    "why_it_matters": "Sound model choice begins with the workload and constraints, not a leaderboard winner.",
+    "topic": "Training & Adapting LLMs",
+    "topic_order": 4
+  },
+  {
+    "id": "p6_prompt_engineering",
+    "label": "Prompt Engineering",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p6_prompt_engineering_q1",
+      "p6_prompt_engineering_q2",
+      "p6_prompt_engineering_q3",
+      "p6_prompt_engineering_q4",
+      "p6_prompt_engineering_q5",
+      "p6_prompt_engineering_q6",
+      "p6_prompt_engineering_order1",
+      "p6_prompt_engineering_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_prompt_engineering_beginner",
+      "mid": "p6_prompt_engineering_mid",
+      "advanced": "p6_prompt_engineering_advanced",
+      "expert": "p6_prompt_engineering_expert"
+    },
+    "tags": [
+      "prompting",
+      "instructions",
+      "few-shot"
+    ],
+    "deprecated": false,
+    "intuition": "Prompt engineering makes the task, context, constraints, and desired output clear to a language model.",
+    "analogy": "Like writing a precise work order with examples and an acceptance checklist.",
+    "why_it_matters": "Clear prompts improve reliability before more expensive retrieval, tuning, or model changes are attempted.",
+    "topic": "Applying LLMs",
+    "topic_order": 1
+  },
+  {
+    "id": "p6_tool_use_and_function_calling",
+    "label": "Tool Use & Function Calling",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_tool_use_and_function_calling_q1",
+      "p6_tool_use_and_function_calling_q2",
+      "p6_tool_use_and_function_calling_q3",
+      "p6_tool_use_and_function_calling_q4",
+      "p6_tool_use_and_function_calling_q5",
+      "p6_tool_use_and_function_calling_q6",
+      "p6_tool_use_and_function_calling_order1",
+      "p6_tool_use_and_function_calling_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_tool_use_and_function_calling_beginner",
+      "mid": "p6_tool_use_and_function_calling_mid",
+      "advanced": "p6_tool_use_and_function_calling_advanced",
+      "expert": "p6_tool_use_and_function_calling_expert"
+    },
+    "tags": [
+      "tools",
+      "function-calling",
+      "agents"
+    ],
+    "deprecated": false,
+    "intuition": "Tool use lets a model request a typed external action while application code validates and executes it.",
+    "analogy": "Like a planner filling out a work order that a trusted operator checks before acting.",
+    "why_it_matters": "Models need tools to query live systems, calculate reliably, and take controlled actions beyond text generation.",
+    "topic": "Applying LLMs",
+    "topic_order": 3
+  },
+  {
+    "id": "p6_evaluating_and_choosing_llms",
+    "label": "Evaluating & Choosing LLMs",
+    "phase": "phase_6_modern_ai",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p6_evaluating_and_choosing_llms_q1",
+      "p6_evaluating_and_choosing_llms_q2",
+      "p6_evaluating_and_choosing_llms_q3",
+      "p6_evaluating_and_choosing_llms_q4",
+      "p6_evaluating_and_choosing_llms_q5",
+      "p6_evaluating_and_choosing_llms_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p6_evaluating_and_choosing_llms_beginner",
+      "mid": "p6_evaluating_and_choosing_llms_mid",
+      "advanced": "p6_evaluating_and_choosing_llms_advanced",
+      "expert": "p6_evaluating_and_choosing_llms_expert"
+    },
+    "tags": [
+      "llm-evaluation",
+      "model-selection",
+      "benchmark"
+    ],
+    "deprecated": false,
+    "intuition": "Choosing an LLM requires task-specific quality checks alongside latency, cost, privacy, and reliability.",
+    "analogy": "Like auditioning tools on the actual job instead of buying the one with the biggest advertisement.",
+    "why_it_matters": "Model families and versions change quickly, so a repeatable evaluation process is more durable than one recommendation.",
+    "topic": "Applying LLMs",
+    "topic_order": 4
   }
 ]

@@ -6,7 +6,7 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-3 is in progress; Sets 1-3 are complete and the next unit is Set 4 (Phase 6).** The approved five-node style checkpoint remains the binding content reference.
+**P2-3 is in progress; Sets 1-4 are complete and the next unit is Set 5 (Phase 7).** The approved five-node style checkpoint remains the binding content reference.
 
 The checkpoint required three passes and settled two hard authoring rules for all remaining P2-3 content:
 1. **Zero background at every depth.** Expert depth covers harder material but teaches it as plainly and cumulatively as beginner depth. It may name advanced ideas only after making them understandable through a concrete situation or analogy; it cannot assume outside topic fluency.
@@ -18,11 +18,13 @@ Set 2 completed Phase 4 at 16 nodes across Core ML Paradigms, Regression Algorit
 
 Set 3 completed Phase 5 at 16 nodes across Network Fundamentals, Training Mechanics, Regularization & Stability, Architectures, and Practice. The approved `p5_backpropagation` checkpoint remained untouched; the other 15 nodes now have four discovery-first, three-slide explanation depths and six MCQs, with order/fill/build practice on suitable nodes. `p5_evaluation.json` has 18 MCQs with three at each Bloom level. The graph now has 85 nodes and 139 valid acyclic edges. All 58 tests, the production build, and content validation pass with zero errors and the same 115 pre-existing warnings.
 
+Set 4 completed Phase 6 at 16 nodes across Representation, Transformer Architecture, Training & Adapting LLMs, and Applying LLMs. All nodes have four discovery-first, three-slide explanation depths and six MCQs, with order/fill/build practice on suitable nodes. `p6_evaluation.json` has 18 MCQs with three at each Bloom level. The graph now has 98 nodes and 159 valid acyclic edges. All 58 tests, the production build, and content validation pass with zero errors and the same 115 pre-existing warnings.
+
 ---
 
 ## Next action
 
-Continue with Set 4: complete all 16 Phase 6 nodes across the four topics in `node-audit-and-hero-path-plan.md` Section B, including four explanation depths, six MCQs per node, hands-on ladder items where they genuinely fit, graph edges, and `p6_evaluation.json`. Add Phase 6 to the validator/runtime evaluation maps, validate, build, test, update these docs, and commit locally before Set 5. Never push.
+Continue with Set 5: complete all 14 Phase 7 nodes across the four topics in `node-audit-and-hero-path-plan.md` Section B, including four explanation depths, six MCQs per node, hands-on ladder items where they genuinely fit, graph edges, and `p7_evaluation.json`. Add Phase 7 to the validator/runtime evaluation maps, validate, build, test, update these docs, and commit locally before Set 6. Never push.
 
 ---
 
@@ -50,6 +52,8 @@ Continue with Set 4: complete all 16 Phase 6 nodes across the four topics in `no
 ---
 
 ## Completed work (chronological)
+
+- 2026-08-12 — **P2-3 Set 4 complete:** completed all 16 Phase 6 nodes across four topics, with four plain-language three-slide depths, six tiered MCQs per node, hands-on ladders where useful, 159 valid acyclic graph edges, and an enforced 18-question Phase 6 Bloom evaluation. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings).
 
 - 2026-08-12 — **P2-3 Set 3 complete:** completed all 16 Phase 5 nodes across five topics while retaining the approved backpropagation checkpoint, with four plain-language three-slide depths, six tiered MCQs per node, hands-on ladders where useful, 139 valid acyclic graph edges, and an enforced 18-question Phase 5 Bloom evaluation. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings).
 
