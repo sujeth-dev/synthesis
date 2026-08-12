@@ -144,10 +144,12 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section A.
 | DKT-2 | done | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
 | DKT-3 | done | Split by student, not by interaction |
 | DKT-4 | done | Fit a proper per-skill BKT baseline on the same split |
-| DKT-5 | in_progress | Train a small LSTM DKT on train/val |
-| DKT-6 | not_started | Evaluate DKT AUC vs. BKT AUC on held-out test set |
+| DKT-5 | done | Train a small LSTM DKT on train/val |
+| DKT-6 | done | Evaluate DKT AUC vs. BKT AUC on held-out test set |
 | DKT-7 | done | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
-| DKT-8 | not_started | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+| DKT-8 | done | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+
+**Track status: all of DKT-1 through DKT-8 done (2026-08-12).** DKT AUC 0.8299 vs. BKT AUC 0.7296 on the held-out ASSISTments test split — see `research/dkt/RESULTS.md`. `pytest research/dkt/tests/` (4/4) and the full `download_data.py → preprocess.py → split.py → bkt_baseline.py → train_dkt.py → evaluate.py` pipeline both verified green against the real dataset. Committed locally on `dkt-track`, not pushed (final push happens once alongside `fsrs-track`, outside this session).
 
 **Live cutover** (switching Synaptic's own engine to DKT) is Phase 3 item P3-3, gated at 50k+ real sessions — do not do this as part of this track.
 
