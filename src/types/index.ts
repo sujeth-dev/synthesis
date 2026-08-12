@@ -83,6 +83,15 @@ export interface ReviewSchedule {
   ease_factor: number; repetitions: number; due_at: string; last_reviewed_at: string | null
 }
 
+// One row per attempt, logging what FSRS would have scheduled alongside the
+// live SM-2 decision — observational only, see MASTER_PLAN.md's FSRS-3.
+export interface FsrsShadowLogEntry {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  sm2_interval_days: number; fsrs_interval_days: number
+  fsrs_stability: number; fsrs_difficulty: number; fsrs_due_at: string
+  created_at: string
+}
+
 export interface AttemptEvent {
   id: string; learner_id: string; skill_id: string; question_id: string
   session_id: string | null; correct: boolean; latency_ms: number

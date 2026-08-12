@@ -18,3 +18,4 @@ research/dkt/**/__pycache__/
 research/dkt/.pytest_cache/
 
 logs/*.jsonl
+supabase/.temp/

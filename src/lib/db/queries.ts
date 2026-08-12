@@ -1,7 +1,7 @@
 import { getDb, generateId } from '@/lib/db'
 import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
-  AttemptEvent, Session, MotivationState,
+  AttemptEvent, Session, MotivationState, FsrsShadowLogEntry,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -271,6 +271,31 @@ export async function getSessionBehaviorAttempts(learnerId: string, sessionId: s
     .eq('session_id', sessionId)
     .order('attempted_at', { ascending: true })
   return data ?? []
+}
+
+// ─────────────────────────────────────────────
+// FSRS SHADOW LOG (observational only — SM-2 remains the live scheduler)
+// ─────────────────────────────────────────────
+
+export async function getLastFsrsShadowEntry(learnerId: string, skillId: string): Promise<FsrsShadowLogEntry | null> {
+  const { data } = await getDb()
+    .from('fsrs_shadow_log')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .eq('skill_id', skillId)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+  return data
+}
+
+export async function insertFsrsShadowLog(entry: Omit<FsrsShadowLogEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('fsrs_shadow_log').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`FSRS shadow log insert failed: ${error.message}`)
 }
 
 // ─────────────────────────────────────────────

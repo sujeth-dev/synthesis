@@ -11,7 +11,8 @@
     "lint": "next lint",
     "validate": "node scripts/validate-content.js",
     "db:seed": "node scripts/seed.js",
-    "db:migrate": "node scripts/apply-migrations.js"
+    "db:migrate": "node scripts/apply-migrations.js",
+    "fsrs:compare": "node scripts/fsrs-shadow-comparison.js"
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",
@@ -24,7 +25,8 @@
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.4.0"
+    "tailwind-merge": "^2.4.0",
+    "ts-fsrs": "^5.4.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
