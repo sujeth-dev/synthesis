@@ -102,3 +102,80 @@ Adding the two prerequisite-gap nodes brings Phase 2 to **17 nodes**, closer to 
 **Phase 3 (12 nodes) — held up under the same test; not recommending expansion.** Phase 3 is deliberately conceptual/orientation-level (`difficulty_base` never exceeds 3, versus Phase 2's up to 4) — its job is breadth before Phase 4 gets technical, not skill-depth itself. Its 4×3 topic structure covers what a conceptual survey phase needs without an obvious missing prerequisite the way Phase 2 had. Depth should track what the material actually needs, not match a number for its own sake — the same principle that justifies Phase 5/6 growing more than Phase 7/8 in Section B.
 
 **Bottom line for Section A:** Phase 1-3 is not "fine because it shipped." It has real, fixable gaps — OOP, exceptions, file I/O, comprehensions (A4); calculus and data-cleaning (A6); two disconnected-but-important leaf nodes (A2); a phase-label mismatch (A1). None of this blocks Phase 4-8 from starting, but OOP and calculus specifically should be resolved *before* Phase 5 content is authored, since Phase 5 now hard-depends on both.
+
+---
+
+## B. Phase 4-8 proposed breakdown (72 nodes vs. current 8 stubs)
+
+**Revised mid-review:** the first pass of this section proposed ~41 nodes, matching a figure referenced when this planning pass started. On review, that isn't enough depth for phases covering the actual hard, AI-defining material — 9 nodes cannot honestly cover backpropagation, CNNs, RNNs, and PyTorch, and 41 nodes total for Phases 4-8 would leave the "hero" half of the curriculum thinner than the "zero" half (Phase 1-3's 45 nodes cover comparatively low-complexity material). Revised to scale every phase up toward Phase 1-2's rigor, weighted by actual subject complexity rather than spread evenly. **This section supersedes, not silently replaces, the original ~41-node figure**, per this project's correction convention. No prior draft matching "~41 candidate nodes" was found anywhere in this repo (`v2/doc/**`, `Research/lab/**` searched) — if one exists outside it, it should be checked against this deeper version (open question E3).
+
+Existing 8 stubs are kept (same IDs, not renamed) and slotted into the breakdown below. Depth is allocated by actual subject complexity, not evenly: **Phase 5 (Deep Learning) and Phase 6 (Modern AI/Transformers) get the most nodes** — the two phases where real conceptual depth (backprop, attention mechanics, fine-tuning) cannot be compressed without becoming a highlights reel. Phase 4 gets comparable depth to Phase 2 (it's "CS fundamentals" for ML — algorithms and math applied). Phase 7-8 stay proportionally lighter since they're inherently more applied/survey/synthesis in nature (production practice, capstone) rather than new conceptual ground.
+
+Every new node follows Phase 1-3's own field pattern exactly: `id`, `label`, `phase`, `difficulty_base` (continuing the existing 1→5 gradient), `question_ids` (5, for consistency per A5), `explanation_ids` for all **four** depths including `expert` (the current 8 stubs wrongly omit `expert` — fix this for all new authoring), `tags`, `intuition`, `analogy`, `why_it_matters`. Prerequisite edges connect each new node into the existing spine — none are left as new dead-end leaves, learning A2's lesson. Framing is **discovery-first** (per `P2-3`'s existing doc ref, `discovery-model.md` §1) — every new node opens with a problem/scenario, not a definition, distinct from Phase 1-3's explanation-first style. Exact edge lists and full node JSON are authored in the follow-up session, not here — this is the topic/node map, not the content itself.
+
+### Phase 4 — Machine Learning (`phase_4_machine_learning`), 5 topics / 16 nodes
+
+| Topic | Nodes |
+|---|---|
+| Core ML Paradigms (3) | `p4_data_pipeline`\*, `p4_supervised_learning`\*, `p4_unsupervised_learning` (clustering/K-means, dimensionality reduction — ties back to `p3_types_of_learning`) |
+| Regression Algorithms (2) | `p4_linear_regression`, `p4_logistic_regression` |
+| Classification & Ensembles (4) | `p4_decision_trees`, `p4_random_forests`, `p4_boosting_methods` (gradient boosting/XGBoost — split from ensembles-as-one-node so bagging vs. boosting each get real coverage), `p4_knn_and_svm` |
+| Model Evaluation & Tuning (5) | `p4_train_test_cross_validation` (deeper than `p3_model_evaluation`'s intro), `p4_evaluation_metrics` (precision/recall/F1/ROC-AUC — `p3_model_evaluation` only covered accuracy/loss), `p4_bias_variance_tradeoff` (revisits `p3_overfitting` with algorithm-tuning rigor), `p4_regularization` (L1/L2/ridge/lasso), `p4_hyperparameter_tuning` |
+| Practical Workflow (2) | `p4_feature_scaling` (normalization/standardization, builds on `p3_feature_engineering`), `p4_sklearn_workflow` (fit/predict/score end-to-end; first hands-on-ladder candidate, see Section C) |
+
+\* = existing stub node, kept as-is.
+
+### Phase 5 — Deep Learning (`phase_5_deep_learning`), 5 topics / 16 nodes
+
+| Topic | Nodes |
+|---|---|
+| Network Fundamentals (4) | `p5_neural_network_basics`\* (needs the OOP prerequisite from A4), `p5_activation_functions`, `p5_forward_propagation`, `p5_loss_functions` |
+| Training Mechanics (4) | `p5_backpropagation` (chain-rule/blame-assignment intuition — split from gradient descent, genuinely distinct ideas), `p5_gradient_descent_and_optimizers` (SGD vs. Adam, learning-rate behavior), `p5_training_loops_epochs_batches`, `p5_learning_rate_and_hyperparameters` |
+| Regularization & Stability (3) | `p5_overfitting_in_deep_nets` (dropout/weight decay — deep-net-specific, distinct from Phase 4's classical regularization), `p5_batch_normalization`, `p5_vanishing_exploding_gradients` |
+| Architectures (3) | `p5_cnn_basics` (image data), `p5_rnn_basics` (sequence data), `p5_why_transformers_replaced_rnns` (deliberate bridge node — explains RNN limitations, sets up Phase 6 rather than leaving the jump unmotivated) |
+| Practice (2) | `p5_pytorch_intro` (second hands-on-ladder candidate), `p5_build_your_first_network` (capstone-style node for the phase — assemble everything above into one trained model) |
+
+### Phase 6 — Modern AI (`phase_6_modern_ai`), 4 topics / 16 nodes
+
+| Topic | Nodes |
+|---|---|
+| Representation (3) | `p6_tokenization` (belongs *before* embeddings, currently missing entirely), `p6_embeddings`\*, `p6_vector_databases` (mechanics distinct from the RAG concept itself) |
+| Transformer Architecture (5) | `p6_attention_mechanism` (intuition first), `p6_self_attention_and_multihead` (the actual mechanics — split from intuition deliberately, matching how genuinely hard this concept is), `p6_positional_encoding`, `p6_transformers`\* (the assembled architecture), `p6_residual_connections_and_layernorm` |
+| Training & Adapting LLMs (4) | `p6_pretraining_objectives`, `p6_finetuning_methods`, `p6_lora_and_peft` (parameter-efficient fine-tuning — current, real-world practice), `p6_llm_landscape` (model families, context windows, sizes) |
+| Applying LLMs (4) | `p6_prompt_engineering` (conceptual, distinct from Phase 7's applied/API version), `p6_rag_systems`\*, `p6_tool_use_and_function_calling` (agentic groundwork, bridges to Phase 8's multi-agent systems), `p6_evaluating_and_choosing_llms` (picking a model for a use case — distinct from Phase 7's "grading your own app's outputs") |
+
+### Phase 7 — Real World (`phase_7_real_world`), 4 topics / 14 nodes
+
+| Topic | Nodes |
+|---|---|
+| Shipping AI Products (3) | `p7_ai_apis`\*, `p7_building_ai_app` (end-to-end example; third/primary hands-on-ladder candidate), `p7_api_design_for_ai_features` (wrapping AI calls into your own product's API surface) |
+| Quality & Safety (5) | `p7_evaluating_llm_outputs` (testing/grading AI outputs, distinct from Phase 3's classical `model_evaluation` and Phase 6's model-choice evaluation), `p7_explainability_and_interpretability`, `p7_safety_guardrails`, `p7_prompt_injection_and_jailbreaks`, `p7_content_moderation` |
+| Performance & Cost (3) | `p7_cost_latency_optimization`, `p7_caching_and_batching`, `p7_model_selection_tradeoffs` (small/local vs. large/API models) |
+| Operating in Production (3) | `p7_deployment_hosting`, `p7_monitoring_observability`, `p7_ci_cd_for_ai_apps` (versioning prompts/models, testing before deploy) |
+
+### Phase 8 — Mastery (`phase_8_mastery`), 3 topics / 10 nodes
+
+| Topic | Nodes |
+|---|---|
+| Systems at Scale (4) | `p8_system_design_ai`\*, `p8_scaling_ai_systems`, `p8_mlops` (CI/CD, model versioning at the systems level, distinct from Phase 7's app-level version), `p8_multi_agent_systems` |
+| Responsibility & Frontier (4) | `p8_ai_ethics_bias`, `p8_ai_safety_alignment_intro` (distinct from ethics/bias — the existential/alignment side of the field), `p8_staying_current_with_research` (how to read papers, follow the field — a genuine "hero" skill, not busywork), `p8_case_studies_of_real_systems` (grounding system design in how real production AI systems are actually built) |
+| Practice & Capstone (2) | `p8_ai_product_strategy` (product/business judgment for AI features, synthesizing every phase), `p8_capstone_project` (the flagship hands-on deliverable, ties every ladder tier from Section C together) |
+
+**Total: 8 existing + 64 new = 72 nodes across 21 main topics for Phase 4-8.** Combined with Phase 2's 2 new prerequisite-gap nodes from A6, Phase 1-3 becomes 47, and the full curriculum lands at **119 nodes**. Deliberately not a round number — each phase's count reflects what the subject matter needs, not a padding target. Depth allocation: Phase 4/5/6 at 16 each (matching Phase 1's 18 / Phase 2's revised 17 rigor), Phase 7 at 14 (applied/survey), Phase 8 at 10 (synthesis/capstone, naturally the smallest).
+
+---
+
+## D. Scalable, LLM-generatable content architecture
+
+The phase→topic→node structure above is designed so future addition, deletion, and LLM-assisted generation of nodes is a clean, mechanical operation — not a one-time fix scoped only to Phase 4-8. Five concrete pieces:
+
+1. **Stable, additive-only node IDs.** This project already uses this exact convention for `MASTER_PLAN.md` task IDs ("stable once assigned — never renumber, only append"). Apply the same discipline to `skill_id`s: once assigned, never renamed or reused, even when content is revised — matches what's already true of the 45+8 existing nodes.
+2. **Promote `topic` to a first-class field on `SkillNode`.** Resolves A1.5's open question in favor of "yes, add it": `topic: string` (human-readable, e.g. `"Transformer Architecture"`) plus a `topic_order`/`node_order` for stable within-topic ordering. Today, "topic" is only an implied grouping reconstructed by reading node content — with a real field, adding a node to a topic, adding a whole new topic, or moving a node between topics becomes a pure data edit, with zero ID-string archaeology or edge-topology inference required. That matters specifically because an LLM generation pipeline needs a deterministic slot to write into, not an inferred one. This is a `src/types/index.ts` change — see open question E5.
+3. **Deprecate, don't delete.** Every node already has `deprecated: boolean` (confirmed present, always `false` today across all 53 real+stub nodes) — formalize this as the actual removal mechanism. Retiring a node means `deprecated: true` plus edge cleanup, never deleting the file outright. This matters because `LearnerSkillState` rows key on `skill_id` (`src/types/index.ts:73`) — a real learner's mastery history for a deleted skill_id would become an orphaned reference with no schema-level protection. Deprecation preserves both learner history and an audit trail.
+4. **Edges are naturally additive; deletions are not.** `edges.json` references nodes by string ID only, so adding a node is zero-touch for existing files (new node entry + new edge entries). Deprecating a node is **not** zero-touch — its inbound/outbound edges need explicit cleanup (drop, or redirect to a replacement) as a required step, not an afterthought, or `scripts/validate-content.js`'s cycle-detection and (recommended, below) dead-end checks silently degrade.
+5. **A generation contract for LLM-assisted authoring.** Define a minimal per-node "content brief" (`id`, `phase`, `topic`, `prereq_ids`, `difficulty_base`, a 1-2 sentence intuition seed) as the fixed input unit for generating a node's full content set:
+   - `content/templates/explanation_file.json` **already exists** and already encodes this exact generation contract (title/key_insight/body/common_mistakes/mini_exercise/real_world_usage/explain_back_prompt/build_task, plus a `_depth_guide` telling a generator how beginner/mid/advanced should differ). Directly reusable as-is — no changes needed.
+   - No equivalent `content/templates/question_file.json` exists. The follow-up authoring session should create one, mirroring the explanation template's `_comment`-guided-skeleton pattern, covering `mcq` plus Section C's `order` and chip-based `fill` ladder tiers — so question generation becomes just as templated and repeatable as explanation generation already is.
+   - `scripts/validate-content.js` already plays the correctness-backstop role a generation pipeline needs (JSON validity, question-ID cross-references, cycle detection, phase-evaluation Bloom coverage). Recommend it gain a few more checks *when Phase 4-8 authoring actually starts*, not in this session: topic-field validity, a minimum question count per node (closing A5), and a dead-end-leaf warning (closing A2/A3). All are deterministic and cheap, the same role the existing checks already play — and specifically useful for catching bad LLM-generated output before it merges.
+
+Net effect: authoring Phase 4-8 (or Phase 2's two new A6 nodes, or any future Phase 9+) becomes "fill in N short content briefs against two fixed templates, let the validator catch structural mistakes" rather than N bespoke one-off authoring passes — and the same pipeline works unchanged for corrections to Phase 1-3 too.
