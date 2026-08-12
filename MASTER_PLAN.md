@@ -141,12 +141,12 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section A.
 | ID | Status | Task |
 |---|---|---|
 | DKT-1 | done | Download ASSISTments 2009-2010, record license/citation terms in `research/dkt/README.md` |
-| DKT-2 | not_started | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
-| DKT-3 | not_started | Split by student, not by interaction |
-| DKT-4 | not_started | Fit a proper per-skill BKT baseline on the same split |
-| DKT-5 | not_started | Train a small LSTM DKT on train/val |
+| DKT-2 | done | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
+| DKT-3 | done | Split by student, not by interaction |
+| DKT-4 | done | Fit a proper per-skill BKT baseline on the same split |
+| DKT-5 | in_progress | Train a small LSTM DKT on train/val |
 | DKT-6 | not_started | Evaluate DKT AUC vs. BKT AUC on held-out test set |
-| DKT-7 | not_started | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
+| DKT-7 | done | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
 | DKT-8 | not_started | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
 
 **Live cutover** (switching Synaptic's own engine to DKT) is Phase 3 item P3-3, gated at 50k+ real sessions — do not do this as part of this track.
