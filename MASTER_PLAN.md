@@ -154,14 +154,16 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section A.
 ### FSRS (start anytime after P0-2's SM-2 behavior is well-tested)
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section B.
 
-| ID | Task | Depends on |
-|---|---|---|
-| FSRS-1 | Pull FSRS's published default parameters from a reference implementation (e.g. `ts-fsrs`) | none |
-| FSRS-2 | Test FSRS interval output against the reference implementation for known inputs | FSRS-1 |
-| FSRS-3 | Run FSRS in shadow mode alongside SM-2 for ≥1 full review cycle (compute + log both, serve SM-2 live) | FSRS-2, P0-2 done |
-| FSRS-4 | Compare shadow-mode logs; decide on cutover | FSRS-3 |
-| FSRS-5 | Switch live scheduling to FSRS (only after FSRS-4 looks right — human sign-off recommended before this one, see `DEVELOPMENT_LOOP.md` blocker rules) | FSRS-4 |
-| FSRS-6 | *(Optional, needs 5k+ real review events)* Refit FSRS's 17 parameters to Synaptic's own users | FSRS-5 |
+**Blocked on a missing credential, 2026-08-12 (FSRS-3/FSRS-4):** FSRS-1 and FSRS-2 are fully done. FSRS-3's code (migration `supabase/migrations/004_fsrs_shadow_log.sql`, the shadow-mode hook in `src/app/api/attempt/route.ts`, and a route-level integration test) is complete and tested, but the migration has **not been applied to the live Supabase database** — the documented path (`npm run db:migrate`) needs `SUPABASE_DB_URL` in `.env.local`, which isn't configured in this worktree, and this track's plan explicitly excludes falling back to the Supabase CLI one-off used for migrations 002/003. So no real learner has any `fsrs_shadow_log` rows, and FSRS-3's "≥1 full review cycle" requirement hasn't happened against production data — only against the mocked integration test's simulated cycle. FSRS-4's comparison tooling (`src/lib/fsrs/comparison.ts`, `scripts/fsrs-shadow-comparison.js`, `npm run fsrs:compare`) is built and unit-tested, and `Research/fsrs-shadow-comparison.md` documents the methodology, but it deliberately stops short of a cutover recommendation since there is no real data yet to compare — see `PROGRESS.md`'s Blockers section for the full record. **Needs human action:** add `SUPABASE_DB_URL` to `.env.local` (or otherwise get migration 004 applied to the live database), let the app run for ≥1 real review cycle, then run `npm run fsrs:compare` and write the actual recommendation into `Research/fsrs-shadow-comparison.md`.
+
+| ID | Status | Task | Depends on |
+|---|---|---|---|
+| FSRS-1 | done | Pull FSRS's published default parameters from a reference implementation (e.g. `ts-fsrs`) | none |
+| FSRS-2 | done | Test FSRS interval output against the reference implementation for known inputs | FSRS-1 |
+| FSRS-3 | blocked | Run FSRS in shadow mode alongside SM-2 for ≥1 full review cycle (compute + log both, serve SM-2 live) — code/tests done, live migration application blocked (see note above) | FSRS-2, P0-2 done |
+| FSRS-4 | blocked | Compare shadow-mode logs; decide on cutover — tooling/methodology done, real comparison blocked on FSRS-3's live data (see note above) | FSRS-3 |
+| FSRS-5 | not_started | Switch live scheduling to FSRS (only after FSRS-4 looks right — human sign-off recommended before this one, see `DEVELOPMENT_LOOP.md` blocker rules) | FSRS-4 |
+| FSRS-6 | not_started | *(Optional, needs 5k+ real review events)* Refit FSRS's 17 parameters to Synaptic's own users | FSRS-5 |
 
 ### NLP/LLM reasoning grader (start once P1-1's rule-based classifier exists)
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C.
