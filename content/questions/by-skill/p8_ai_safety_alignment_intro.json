@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p8_ai_safety_alignment_intro_q1",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Alignment concerns behavior matching intended goals and constraints."
+      },
+      {
+        "id": "b",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "c",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "d",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Alignment concerns behavior matching intended goals and constraints.",
+    "graph_placement_weight": {
+      "p8_ai_safety_alignment_intro": 1
+    }
+  },
+  {
+    "id": "p8_ai_safety_alignment_intro_q2",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "b",
+        "text": "A reward can permit harmful shortcuts."
+      },
+      {
+        "id": "c",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "d",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A reward can permit harmful shortcuts.",
+    "graph_placement_weight": {
+      "p8_ai_safety_alignment_intro": 1
+    }
+  },
+  {
+    "id": "p8_ai_safety_alignment_intro_q3",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "b",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "c",
+        "text": "Capability to state a rule does not prove reliable compliance."
+      },
+      {
+        "id": "d",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Capability to state a rule does not prove reliable compliance.",
+    "graph_placement_weight": {
+      "p8_ai_safety_alignment_intro": 1
+    }
+  },
+  {
+    "id": "p8_ai_safety_alignment_intro_q4",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "b",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "c",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      },
+      {
+        "id": "d",
+        "text": "Threat models connect harms to actors and capabilities."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Threat models connect harms to actors and capabilities.",
+    "graph_placement_weight": {
+      "p8_ai_safety_alignment_intro": 1
+    }
+  },
+  {
+    "id": "p8_ai_safety_alignment_intro_q5",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Autonomy should expand only after relevant safety evidence."
+      },
+      {
+        "id": "b",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "c",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "d",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Autonomy should expand only after relevant safety evidence.",
+    "graph_placement_weight": {
+      "p8_ai_safety_alignment_intro": 1
+    }
+  },
+  {
+    "id": "p8_ai_safety_alignment_intro_q6",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "b",
+        "text": "Scalable oversight must give reviewers enough evidence to judge complex work."
+      },
+      {
+        "id": "c",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "d",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Scalable oversight must give reviewers enough evidence to judge complex work.",
+    "graph_placement_weight": {
+      "p8_ai_safety_alignment_intro": 1
+    }
+  }
+]

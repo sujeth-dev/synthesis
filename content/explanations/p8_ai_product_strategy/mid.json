@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_ai_product_strategy",
+  "depth": "mid",
+  "title": "AI Product Strategy — Build a Value and Risk Thesis",
+  "key_insight": "Estimate benefit, adoption, error cost, human oversight, inference cost, and operational burden. Name the users and organization that capture each benefit or cost.",
+  "body": "## Build a Value and Risk Thesis\n\nA feature saves five minutes but creates reviews, support, and model cost worth ten. Gross capability is not net value.\n\nEstimate benefit, adoption, error cost, human oversight, inference cost, and operational burden. Name the users and organization that capture each benefit or cost.\n\nDefine a quality floor and unacceptable harms. A roadmap should retire ideas that cannot cross those gates.",
+  "common_mistakes": [
+    "An impressive model demo proves product value.",
+    "Inference price is the only product cost.",
+    "A strategy should continue regardless of failed milestones."
+  ],
+  "mini_exercise": "Draw “Build a Value and Risk Thesis” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Technical capability creates value only when it fits a user job, operating model, economics, and responsible adoption path.",
+  "explain_back_prompt": "Using “Build a Value and Risk Thesis,” explain AI Product Strategy without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Write an AI product thesis",
+    "context": "Turn AI Product Strategy into one small, inspectable artifact.",
+    "steps": [
+      "Define one user and painful job.",
+      "Describe the AI and deterministic parts.",
+      "Set value, quality, cost, and safety gates.",
+      "Plan the smallest experiment and a stop rule."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

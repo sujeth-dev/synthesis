@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_capstone_project",
+  "depth": "mid",
+  "title": "AI Engineering Capstone — Build the Thin Vertical Slice",
+  "key_insight": "Connect one input through data preparation, model or retrieval, validation, output, and logging as early as possible.",
+  "body": "## Build the Thin Vertical Slice\n\nThe interface, retrieval, model, and evaluation are built separately for weeks and never connect. Integration risk remains until the end.\n\nConnect one input through data preparation, model or retrieval, validation, output, and logging as early as possible.\n\nUse versioned configuration and a representative evaluation set. Add order/fill practice evidence and a guided build record as part of the learning artifact.",
+  "common_mistakes": [
+    "The largest possible scope makes the strongest capstone.",
+    "A happy-path demo proves production readiness.",
+    "Code alone explains every design tradeoff."
+  ],
+  "mini_exercise": "Draw “Build the Thin Vertical Slice” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "A complete artifact demonstrates integration across data, models, product decisions, safety, and reliable delivery.",
+  "explain_back_prompt": "Using “Build the Thin Vertical Slice,” explain AI Engineering Capstone without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Ship the curriculum capstone",
+    "context": "Turn AI Engineering Capstone into one small, inspectable artifact.",
+    "steps": [
+      "Choose and scope one AI product.",
+      "Build a traceable end-to-end slice.",
+      "Run quality, safety, latency, cost, and failure tests.",
+      "Deploy in a bounded setting and write the decision report."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

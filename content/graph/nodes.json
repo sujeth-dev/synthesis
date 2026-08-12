@@ -2226,21 +2226,31 @@
     "label": "AI System Design",
     "phase": "phase_8_mastery",
     "difficulty_base": 5,
-    "question_ids": [],
+    "question_ids": [
+      "p8_system_design_ai_q1",
+      "p8_system_design_ai_q2",
+      "p8_system_design_ai_q3",
+      "p8_system_design_ai_q4",
+      "p8_system_design_ai_q5",
+      "p8_system_design_ai_q6",
+      "p8_system_design_ai_order1",
+      "p8_system_design_ai_fill1"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p8_system_design_ai_beginner",
+      "mid": "p8_system_design_ai_mid",
+      "advanced": "p8_system_design_ai_advanced",
+      "expert": "p8_system_design_ai_expert"
     },
     "tags": [
       "system-design",
       "architecture",
-      "scalability"
+      "reliability"
     ],
     "deprecated": false,
-    "intuition": "Designing AI systems means thinking about data flow, latency, cost, reliability, and how the AI component fits into a larger product.",
-    "analogy": "Like designing a city — not just the buildings, but the roads, utilities, and how people flow through it.",
-    "why_it_matters": "This is what senior AI engineers do. It's the skill that separates practitioners from architects.",
+    "intuition": "AI system design connects user needs, data, models, safeguards, and operations into one dependable route.",
+    "analogy": "Like designing a city by planning roads, utilities, emergency routes, and daily traffic together.",
+    "why_it_matters": "Senior AI work requires reasoning about the whole product route rather than optimizing one model in isolation.",
     "topic": "Systems at Scale",
     "topic_order": 1
   },
@@ -3522,5 +3532,296 @@
     "why_it_matters": "AI delivery pipelines test code, prompts, models, data contracts, and safety before controlled release.",
     "topic": "Operating in Production",
     "topic_order": 3
+  },
+  {
+    "id": "p8_scaling_ai_systems",
+    "label": "Scaling AI Systems",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_scaling_ai_systems_q1",
+      "p8_scaling_ai_systems_q2",
+      "p8_scaling_ai_systems_q3",
+      "p8_scaling_ai_systems_q4",
+      "p8_scaling_ai_systems_q5",
+      "p8_scaling_ai_systems_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_scaling_ai_systems_beginner",
+      "mid": "p8_scaling_ai_systems_mid",
+      "advanced": "p8_scaling_ai_systems_advanced",
+      "expert": "p8_scaling_ai_systems_expert"
+    },
+    "tags": [
+      "scaling",
+      "capacity",
+      "distributed-systems"
+    ],
+    "deprecated": false,
+    "intuition": "Scaling means preserving useful service as traffic, data, and model work grow.",
+    "analogy": "Like widening the right roads after measuring where traffic actually queues.",
+    "why_it_matters": "AI workloads combine bursty requests, large inputs, expensive inference, and shared capacity.",
+    "topic": "Systems at Scale",
+    "topic_order": 2
+  },
+  {
+    "id": "p8_mlops",
+    "label": "MLOps",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_mlops_q1",
+      "p8_mlops_q2",
+      "p8_mlops_q3",
+      "p8_mlops_q4",
+      "p8_mlops_q5",
+      "p8_mlops_q6",
+      "p8_mlops_order1",
+      "p8_mlops_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_mlops_beginner",
+      "mid": "p8_mlops_mid",
+      "advanced": "p8_mlops_advanced",
+      "expert": "p8_mlops_expert"
+    },
+    "tags": [
+      "mlops",
+      "model-registry",
+      "retraining"
+    ],
+    "deprecated": false,
+    "intuition": "MLOps makes data, training, evaluation, deployment, and monitoring reproducible and governable.",
+    "analogy": "Like a manufacturing record that tracks every material, machine setting, inspection, and shipment.",
+    "why_it_matters": "Models and their data change, so production quality depends on lifecycle controls beyond ordinary code deployment.",
+    "topic": "Systems at Scale",
+    "topic_order": 3
+  },
+  {
+    "id": "p8_multi_agent_systems",
+    "label": "Multi-Agent Systems",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_multi_agent_systems_q1",
+      "p8_multi_agent_systems_q2",
+      "p8_multi_agent_systems_q3",
+      "p8_multi_agent_systems_q4",
+      "p8_multi_agent_systems_q5",
+      "p8_multi_agent_systems_q6",
+      "p8_multi_agent_systems_order1",
+      "p8_multi_agent_systems_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_multi_agent_systems_beginner",
+      "mid": "p8_multi_agent_systems_mid",
+      "advanced": "p8_multi_agent_systems_advanced",
+      "expert": "p8_multi_agent_systems_expert"
+    },
+    "tags": [
+      "multi-agent",
+      "coordination",
+      "orchestration"
+    ],
+    "deprecated": false,
+    "intuition": "A multi-agent system divides work among bounded roles and coordinates their shared state and actions.",
+    "analogy": "Like a team with clear jobs, handoffs, permissions, and one shared work board.",
+    "why_it_matters": "Multiple model-driven workers can help on decomposable work, but coordination can add cost, delay, and new failure modes.",
+    "topic": "Systems at Scale",
+    "topic_order": 4
+  },
+  {
+    "id": "p8_ai_ethics_bias",
+    "label": "AI Ethics & Bias",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_ai_ethics_bias_q1",
+      "p8_ai_ethics_bias_q2",
+      "p8_ai_ethics_bias_q3",
+      "p8_ai_ethics_bias_q4",
+      "p8_ai_ethics_bias_q5",
+      "p8_ai_ethics_bias_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_ai_ethics_bias_beginner",
+      "mid": "p8_ai_ethics_bias_mid",
+      "advanced": "p8_ai_ethics_bias_advanced",
+      "expert": "p8_ai_ethics_bias_expert"
+    },
+    "tags": [
+      "ethics",
+      "bias",
+      "fairness"
+    ],
+    "deprecated": false,
+    "intuition": "Responsible AI examines who benefits, who bears risk, and how data and decisions distribute errors.",
+    "analogy": "Like checking not only whether a bridge stands, but who can use it and who is placed in danger.",
+    "why_it_matters": "AI systems affect people through data collection, ranking, access, and automated decisions.",
+    "topic": "Responsibility & Frontier",
+    "topic_order": 1
+  },
+  {
+    "id": "p8_ai_safety_alignment_intro",
+    "label": "AI Safety & Alignment",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_ai_safety_alignment_intro_q1",
+      "p8_ai_safety_alignment_intro_q2",
+      "p8_ai_safety_alignment_intro_q3",
+      "p8_ai_safety_alignment_intro_q4",
+      "p8_ai_safety_alignment_intro_q5",
+      "p8_ai_safety_alignment_intro_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_ai_safety_alignment_intro_beginner",
+      "mid": "p8_ai_safety_alignment_intro_mid",
+      "advanced": "p8_ai_safety_alignment_intro_advanced",
+      "expert": "p8_ai_safety_alignment_intro_expert"
+    },
+    "tags": [
+      "ai-safety",
+      "alignment",
+      "risk"
+    ],
+    "deprecated": false,
+    "intuition": "AI alignment asks whether a system reliably pursues intended goals and stays within acceptable boundaries.",
+    "analogy": "Like giving a powerful helper a destination, rules of the road, and an emergency brake—then testing unusual routes.",
+    "why_it_matters": "More capable and autonomous systems can amplify specification mistakes, misuse, and unexpected behavior.",
+    "topic": "Responsibility & Frontier",
+    "topic_order": 2
+  },
+  {
+    "id": "p8_staying_current_with_research",
+    "label": "Staying Current with AI Research",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_staying_current_with_research_q1",
+      "p8_staying_current_with_research_q2",
+      "p8_staying_current_with_research_q3",
+      "p8_staying_current_with_research_q4",
+      "p8_staying_current_with_research_q5",
+      "p8_staying_current_with_research_q6",
+      "p8_staying_current_with_research_order1",
+      "p8_staying_current_with_research_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_staying_current_with_research_beginner",
+      "mid": "p8_staying_current_with_research_mid",
+      "advanced": "p8_staying_current_with_research_advanced",
+      "expert": "p8_staying_current_with_research_expert"
+    },
+    "tags": [
+      "research",
+      "papers",
+      "evidence"
+    ],
+    "deprecated": false,
+    "intuition": "Staying current means finding reliable work, reading claims critically, reproducing key evidence, and updating a structured map.",
+    "analogy": "Like maintaining a map from surveyed landmarks instead of chasing every new signpost.",
+    "why_it_matters": "AI changes quickly, but engineering judgment depends on distinguishing durable evidence from headlines and benchmark noise.",
+    "topic": "Responsibility & Frontier",
+    "topic_order": 3
+  },
+  {
+    "id": "p8_case_studies_of_real_systems",
+    "label": "Case Studies of Real AI Systems",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_case_studies_of_real_systems_q1",
+      "p8_case_studies_of_real_systems_q2",
+      "p8_case_studies_of_real_systems_q3",
+      "p8_case_studies_of_real_systems_q4",
+      "p8_case_studies_of_real_systems_q5",
+      "p8_case_studies_of_real_systems_q6",
+      "p8_case_studies_of_real_systems_order1",
+      "p8_case_studies_of_real_systems_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_case_studies_of_real_systems_beginner",
+      "mid": "p8_case_studies_of_real_systems_mid",
+      "advanced": "p8_case_studies_of_real_systems_advanced",
+      "expert": "p8_case_studies_of_real_systems_expert"
+    },
+    "tags": [
+      "case-study",
+      "architecture",
+      "postmortem"
+    ],
+    "deprecated": false,
+    "intuition": "A useful case study connects requirements and constraints to architecture, evidence, outcomes, and lessons.",
+    "analogy": "Like studying a bridge through its load, materials, inspections, failures, and repairs—not its photograph.",
+    "why_it_matters": "Real systems show how model choices interact with users, data, organizations, and operations.",
+    "topic": "Responsibility & Frontier",
+    "topic_order": 4
+  },
+  {
+    "id": "p8_ai_product_strategy",
+    "label": "AI Product Strategy",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_ai_product_strategy_q1",
+      "p8_ai_product_strategy_q2",
+      "p8_ai_product_strategy_q3",
+      "p8_ai_product_strategy_q4",
+      "p8_ai_product_strategy_q5",
+      "p8_ai_product_strategy_q6",
+      "p8_ai_product_strategy_order1",
+      "p8_ai_product_strategy_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_ai_product_strategy_beginner",
+      "mid": "p8_ai_product_strategy_mid",
+      "advanced": "p8_ai_product_strategy_advanced",
+      "expert": "p8_ai_product_strategy_expert"
+    },
+    "tags": [
+      "product-strategy",
+      "roadmap",
+      "ai-product"
+    ],
+    "deprecated": false,
+    "intuition": "AI product strategy chooses valuable problems and builds evidence that uncertain model behavior can create durable user outcomes.",
+    "analogy": "Like choosing which mountain is worth climbing before optimizing the climbing gear.",
+    "why_it_matters": "Technical capability creates value only when it fits a user job, operating model, economics, and responsible adoption path.",
+    "topic": "Practice & Capstone",
+    "topic_order": 1
+  },
+  {
+    "id": "p8_capstone_project",
+    "label": "AI Engineering Capstone",
+    "phase": "phase_8_mastery",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p8_capstone_project_q1",
+      "p8_capstone_project_q2",
+      "p8_capstone_project_q3",
+      "p8_capstone_project_q4",
+      "p8_capstone_project_q5",
+      "p8_capstone_project_q6",
+      "p8_capstone_project_order1",
+      "p8_capstone_project_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p8_capstone_project_beginner",
+      "mid": "p8_capstone_project_mid",
+      "advanced": "p8_capstone_project_advanced",
+      "expert": "p8_capstone_project_expert"
+    },
+    "tags": [
+      "capstone",
+      "portfolio",
+      "ai-engineering"
+    ],
+    "deprecated": false,
+    "intuition": "The capstone proves mastery by shipping one traceable AI product from problem definition through evaluation and operations.",
+    "analogy": "Like a final expedition that uses navigation, tools, safety checks, and field notes together.",
+    "why_it_matters": "A complete artifact demonstrates integration across data, models, product decisions, safety, and reliable delivery.",
+    "topic": "Practice & Capstone",
+    "topic_order": 2
   }
 ]

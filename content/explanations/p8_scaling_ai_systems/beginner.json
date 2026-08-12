@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_scaling_ai_systems",
+  "depth": "beginner",
+  "title": "Scaling AI Systems — Find the Crowded Station",
+  "key_insight": "Scaling begins by measuring throughput, queue depth, utilization, and tail latency at each station. The bottleneck is the stage that limits the whole route.",
+  "body": "## Find the Crowded Station\n\nTraffic doubles and response time becomes ten times worse. Adding servers at random does not help because one shared model queue is full.\n\nScaling begins by measuring throughput, queue depth, utilization, and tail latency at each station. The bottleneck is the stage that limits the whole route.\n\nReduce its work, add capacity, or control incoming demand. Then measure again because the bottleneck may move.",
+  "common_mistakes": [
+    "Adding random servers always removes the bottleneck.",
+    "Every AI request consumes equal compute.",
+    "Average traffic alone proves burst capacity."
+  ],
+  "mini_exercise": "Draw “Find the Crowded Station” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI workloads combine bursty requests, large inputs, expensive inference, and shared capacity.",
+  "explain_back_prompt": "Using “Find the Crowded Station,” explain Scaling AI Systems without assuming the listener knows AI engineering."
+}

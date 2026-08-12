@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_system_design_ai",
+  "depth": "beginner",
+  "title": "AI System Design — Draw the Whole Route",
+  "key_insight": "An AI system includes input, data preparation, retrieval or tools, the model, validation, storage, monitoring, and a user-facing fallback.",
+  "body": "## Draw the Whole Route\n\nA model demo answers perfectly, but the product fails because documents arrive late and users cannot recover from errors. The missing design is outside the model.\n\nAn AI system includes input, data preparation, retrieval or tools, the model, validation, storage, monitoring, and a user-facing fallback.\n\nDraw the route before choosing technology. Mark where data enters, where decisions happen, and what the user sees when each step fails.",
+  "common_mistakes": [
+    "Choosing the largest model completes the entire system design.",
+    "A successful demo proves every dependency is reliable.",
+    "Production results need no record of their configuration version."
+  ],
+  "mini_exercise": "Draw “Draw the Whole Route” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Senior AI work requires reasoning about the whole product route rather than optimizing one model in isolation.",
+  "explain_back_prompt": "Using “Draw the Whole Route,” explain AI System Design without assuming the listener knows AI engineering."
+}

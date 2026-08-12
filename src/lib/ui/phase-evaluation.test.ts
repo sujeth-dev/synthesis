@@ -20,6 +20,7 @@ const PHASE_EVAL_FILES: Record<string, string> = {
   phase_5_deep_learning:   'p5_evaluation.json',
   phase_6_modern_ai:       'p6_evaluation.json',
   phase_7_real_world:      'p7_evaluation.json',
+  phase_8_mastery:         'p8_evaluation.json',
 }
 
 describe('phase evaluation content contract', () => {

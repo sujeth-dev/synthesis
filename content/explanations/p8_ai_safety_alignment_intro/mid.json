@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_safety_alignment_intro",
+  "depth": "mid",
+  "title": "AI Safety & Alignment — Separate Capability from Willingness",
+  "key_insight": "Safety work examines misuse, accidents, robustness, control, and monitoring. Threat models name who might cause harm and through which capability.",
+  "body": "## Separate Capability from Willingness\n\nA model knows how to follow a safety rule in a test but ignores it when wording changes. Knowing the rule is different from reliably acting on it.\n\nSafety work examines misuse, accidents, robustness, control, and monitoring. Threat models name who might cause harm and through which capability.\n\nUse layered mitigations: training, permissions, evaluations, human approval, containment, and incident response. No single layer proves alignment.",
+  "common_mistakes": [
+    "A high benchmark score proves complete alignment.",
+    "One safety prompt removes every misuse path.",
+    "Human approval is meaningful even when the reviewer cannot assess the work."
+  ],
+  "mini_exercise": "Draw “Separate Capability from Willingness” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "More capable and autonomous systems can amplify specification mistakes, misuse, and unexpected behavior.",
+  "explain_back_prompt": "Using “Separate Capability from Willingness,” explain AI Safety & Alignment without assuming the listener knows AI engineering."
+}

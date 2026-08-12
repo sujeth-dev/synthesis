@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p8_capstone_project_q1",
+    "skill_id": "p8_capstone_project",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Engineering Capstone: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A capstone should solve one bounded user job end to end."
+      },
+      {
+        "id": "b",
+        "text": "The largest possible scope makes the strongest capstone."
+      },
+      {
+        "id": "c",
+        "text": "A happy-path demo proves production readiness."
+      },
+      {
+        "id": "d",
+        "text": "Code alone explains every design tradeoff."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A capstone should solve one bounded user job end to end.",
+    "graph_placement_weight": {
+      "p8_capstone_project": 1
+    }
+  },
+  {
+    "id": "p8_capstone_project_q2",
+    "skill_id": "p8_capstone_project",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Engineering Capstone: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The largest possible scope makes the strongest capstone."
+      },
+      {
+        "id": "b",
+        "text": "Acceptance criteria belong before implementation."
+      },
+      {
+        "id": "c",
+        "text": "A happy-path demo proves production readiness."
+      },
+      {
+        "id": "d",
+        "text": "Code alone explains every design tradeoff."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Acceptance criteria belong before implementation.",
+    "graph_placement_weight": {
+      "p8_capstone_project": 1
+    }
+  },
+  {
+    "id": "p8_capstone_project_q3",
+    "skill_id": "p8_capstone_project",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Engineering Capstone: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The largest possible scope makes the strongest capstone."
+      },
+      {
+        "id": "b",
+        "text": "A happy-path demo proves production readiness."
+      },
+      {
+        "id": "c",
+        "text": "A thin vertical slice reduces late integration risk."
+      },
+      {
+        "id": "d",
+        "text": "Code alone explains every design tradeoff."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "A thin vertical slice reduces late integration risk.",
+    "graph_placement_weight": {
+      "p8_capstone_project": 1
+    }
+  },
+  {
+    "id": "p8_capstone_project_q4",
+    "skill_id": "p8_capstone_project",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Engineering Capstone: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The largest possible scope makes the strongest capstone."
+      },
+      {
+        "id": "b",
+        "text": "A happy-path demo proves production readiness."
+      },
+      {
+        "id": "c",
+        "text": "Code alone explains every design tradeoff."
+      },
+      {
+        "id": "d",
+        "text": "Versioned configuration and evaluation evidence make results traceable."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Versioned configuration and evaluation evidence make results traceable.",
+    "graph_placement_weight": {
+      "p8_capstone_project": 1
+    }
+  },
+  {
+    "id": "p8_capstone_project_q5",
+    "skill_id": "p8_capstone_project",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Engineering Capstone: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Capstone verification includes edge, adversarial, and operational failures."
+      },
+      {
+        "id": "b",
+        "text": "The largest possible scope makes the strongest capstone."
+      },
+      {
+        "id": "c",
+        "text": "A happy-path demo proves production readiness."
+      },
+      {
+        "id": "d",
+        "text": "Code alone explains every design tradeoff."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Capstone verification includes edge, adversarial, and operational failures.",
+    "graph_placement_weight": {
+      "p8_capstone_project": 1
+    }
+  },
+  {
+    "id": "p8_capstone_project_q6",
+    "skill_id": "p8_capstone_project",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Engineering Capstone: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The largest possible scope makes the strongest capstone."
+      },
+      {
+        "id": "b",
+        "text": "A final defense connects requirements, alternatives, evidence, limits, and recovery."
+      },
+      {
+        "id": "c",
+        "text": "A happy-path demo proves production readiness."
+      },
+      {
+        "id": "d",
+        "text": "Code alone explains every design tradeoff."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A final defense connects requirements, alternatives, evidence, limits, and recovery.",
+    "graph_placement_weight": {
+      "p8_capstone_project": 1
+    }
+  },
+  {
+    "id": "p8_capstone_project_order1",
+    "skill_id": "p8_capstone_project",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this AI Engineering Capstone workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define the user job and acceptance criteria"
+      },
+      {
+        "id": "b",
+        "text": "build one end-to-end vertical slice"
+      },
+      {
+        "id": "c",
+        "text": "evaluate quality, safety, cost, and failures"
+      },
+      {
+        "id": "d",
+        "text": "deploy, document, and defend the result"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The defensible order is: define the user job and acceptance criteria → build one end-to-end vertical slice → evaluate quality, safety, cost, and failures → deploy, document, and defend the result."
+  },
+  {
+    "id": "p8_capstone_project_fill1",
+    "skill_id": "p8_capstone_project",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the AI Engineering Capstone decision.",
+    "options": [
+      {
+        "id": "a",
+        "text": "evaluation_set"
+      },
+      {
+        "id": "b",
+        "text": "marketing_copy"
+      },
+      {
+        "id": "c",
+        "text": "parameter_count"
+      },
+      {
+        "id": "d",
+        "text": "unbounded_scope"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "evaluation_set",
+    "explanation_after": "The correct choice is evaluation_set."
+  }
+]

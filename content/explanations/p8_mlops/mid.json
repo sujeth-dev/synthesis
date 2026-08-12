@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_mlops",
+  "depth": "mid",
+  "title": "MLOps — Promote Through a Model Registry",
+  "key_insight": "A model registry stores versions, metadata, metrics, and lifecycle state such as candidate, approved, or retired. Promotion applies explicit gates.",
+  "body": "## Promote Through a Model Registry\n\nA training job creates a promising model, but copying its file directly into production skips evidence and ownership.\n\nA model registry stores versions, metadata, metrics, and lifecycle state such as candidate, approved, or retired. Promotion applies explicit gates.\n\nPackage preprocessing with the model or version it as a required dependency. Training-serving mismatch can invalidate an otherwise good artifact.",
+  "common_mistakes": [
+    "MLOps means copying the newest model file into production.",
+    "Scheduled retraining makes data validation unnecessary.",
+    "A model name alone proves which data produced it."
+  ],
+  "mini_exercise": "Draw “Promote Through a Model Registry” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Models and their data change, so production quality depends on lifecycle controls beyond ordinary code deployment.",
+  "explain_back_prompt": "Using “Promote Through a Model Registry,” explain MLOps without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Draft a model promotion record",
+    "context": "Turn MLOps into one small, inspectable artifact.",
+    "steps": [
+      "Name the data and code versions.",
+      "List evaluation and safety gates.",
+      "Define approval and rollback owners.",
+      "Record monitoring signals and retraining triggers."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

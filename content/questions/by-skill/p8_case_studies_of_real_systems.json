@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p8_case_studies_of_real_systems_q1",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A case study begins with users, constraints, and success criteria."
+      },
+      {
+        "id": "b",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "c",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "d",
+        "text": "A postmortem is complete after blaming one operator."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A case study begins with users, constraints, and success criteria.",
+    "graph_placement_weight": {
+      "p8_case_studies_of_real_systems": 1
+    }
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_q2",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "b",
+        "text": "Architecture claims should be connected to measured outcomes."
+      },
+      {
+        "id": "c",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "d",
+        "text": "A postmortem is complete after blaming one operator."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Architecture claims should be connected to measured outcomes.",
+    "graph_placement_weight": {
+      "p8_case_studies_of_real_systems": 1
+    }
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_q3",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "b",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "c",
+        "text": "Public reports may omit costs and failures."
+      },
+      {
+        "id": "d",
+        "text": "A postmortem is complete after blaming one operator."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Public reports may omit costs and failures.",
+    "graph_placement_weight": {
+      "p8_case_studies_of_real_systems": 1
+    }
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_q4",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "b",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "c",
+        "text": "A postmortem is complete after blaming one operator."
+      },
+      {
+        "id": "d",
+        "text": "Choices should be mapped to the constraints that justified them."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Choices should be mapped to the constraints that justified them.",
+    "graph_placement_weight": {
+      "p8_case_studies_of_real_systems": 1
+    }
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_q5",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Postmortems examine contributing system conditions and corrective actions."
+      },
+      {
+        "id": "b",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "c",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "d",
+        "text": "A postmortem is complete after blaming one operator."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Postmortems examine contributing system conditions and corrective actions.",
+    "graph_placement_weight": {
+      "p8_case_studies_of_real_systems": 1
+    }
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_q6",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "b",
+        "text": "General lessons need stated conditions under which they apply."
+      },
+      {
+        "id": "c",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "d",
+        "text": "A postmortem is complete after blaming one operator."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "General lessons need stated conditions under which they apply.",
+    "graph_placement_weight": {
+      "p8_case_studies_of_real_systems": 1
+    }
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_order1",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Case Studies of Real AI Systems workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "record context and success criteria"
+      },
+      {
+        "id": "b",
+        "text": "trace architecture and decisions"
+      },
+      {
+        "id": "c",
+        "text": "compare evidence with outcomes"
+      },
+      {
+        "id": "d",
+        "text": "extract conditional lessons"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The defensible order is: record context and success criteria → trace architecture and decisions → compare evidence with outcomes → extract conditional lessons."
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_fill1",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Case Studies of Real AI Systems decision.",
+    "options": [
+      {
+        "id": "a",
+        "text": "constraints"
+      },
+      {
+        "id": "b",
+        "text": "headlines"
+      },
+      {
+        "id": "c",
+        "text": "vendor_name"
+      },
+      {
+        "id": "d",
+        "text": "parameter_count_only"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "constraints",
+    "explanation_after": "The correct choice is constraints."
+  }
+]

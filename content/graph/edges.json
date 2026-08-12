@@ -863,5 +863,90 @@
     "from": "p7_ci_cd_for_ai_apps",
     "to": "p8_system_design_ai",
     "strength": "hard"
+  },
+  {
+    "from": "p7_monitoring_observability",
+    "to": "p8_system_design_ai",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_system_design_ai",
+    "to": "p8_scaling_ai_systems",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_system_design_ai",
+    "to": "p8_mlops",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_tool_use_and_function_calling",
+    "to": "p8_multi_agent_systems",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_scaling_ai_systems",
+    "to": "p8_multi_agent_systems",
+    "strength": "soft"
+  },
+  {
+    "from": "p7_explainability_and_interpretability",
+    "to": "p8_ai_ethics_bias",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_safety_guardrails",
+    "to": "p8_ai_safety_alignment_intro",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_ai_ethics_bias",
+    "to": "p8_ai_safety_alignment_intro",
+    "strength": "soft"
+  },
+  {
+    "from": "p6_evaluating_and_choosing_llms",
+    "to": "p8_staying_current_with_research",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_system_design_ai",
+    "to": "p8_case_studies_of_real_systems",
+    "strength": "soft"
+  },
+  {
+    "from": "p8_staying_current_with_research",
+    "to": "p8_case_studies_of_real_systems",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_building_ai_app",
+    "to": "p8_ai_product_strategy",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_ai_ethics_bias",
+    "to": "p8_ai_product_strategy",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_mlops",
+    "to": "p8_capstone_project",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_multi_agent_systems",
+    "to": "p8_capstone_project",
+    "strength": "soft"
+  },
+  {
+    "from": "p8_case_studies_of_real_systems",
+    "to": "p8_capstone_project",
+    "strength": "hard"
+  },
+  {
+    "from": "p8_ai_product_strategy",
+    "to": "p8_capstone_project",
+    "strength": "hard"
   }
 ]

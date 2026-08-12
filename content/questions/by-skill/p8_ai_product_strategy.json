@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p8_ai_product_strategy_q1",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Product Strategy: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "AI product strategy starts from a valuable user problem."
+      },
+      {
+        "id": "b",
+        "text": "An impressive model demo proves product value."
+      },
+      {
+        "id": "c",
+        "text": "Inference price is the only product cost."
+      },
+      {
+        "id": "d",
+        "text": "A strategy should continue regardless of failed milestones."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "AI product strategy starts from a valuable user problem.",
+    "graph_placement_weight": {
+      "p8_ai_product_strategy": 1
+    }
+  },
+  {
+    "id": "p8_ai_product_strategy_q2",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Product Strategy: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An impressive model demo proves product value."
+      },
+      {
+        "id": "b",
+        "text": "A task may combine AI judgment with deterministic software."
+      },
+      {
+        "id": "c",
+        "text": "Inference price is the only product cost."
+      },
+      {
+        "id": "d",
+        "text": "A strategy should continue regardless of failed milestones."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A task may combine AI judgment with deterministic software.",
+    "graph_placement_weight": {
+      "p8_ai_product_strategy": 1
+    }
+  },
+  {
+    "id": "p8_ai_product_strategy_q3",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Product Strategy: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An impressive model demo proves product value."
+      },
+      {
+        "id": "b",
+        "text": "Inference price is the only product cost."
+      },
+      {
+        "id": "c",
+        "text": "Net value includes review, support, model, and error costs."
+      },
+      {
+        "id": "d",
+        "text": "A strategy should continue regardless of failed milestones."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Net value includes review, support, model, and error costs.",
+    "graph_placement_weight": {
+      "p8_ai_product_strategy": 1
+    }
+  },
+  {
+    "id": "p8_ai_product_strategy_q4",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Product Strategy: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An impressive model demo proves product value."
+      },
+      {
+        "id": "b",
+        "text": "Inference price is the only product cost."
+      },
+      {
+        "id": "c",
+        "text": "A strategy should continue regardless of failed milestones."
+      },
+      {
+        "id": "d",
+        "text": "Quality and harm gates belong in the roadmap."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Quality and harm gates belong in the roadmap.",
+    "graph_placement_weight": {
+      "p8_ai_product_strategy": 1
+    }
+  },
+  {
+    "id": "p8_ai_product_strategy_q5",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Product Strategy: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Durable advantage can come from workflow, feedback, evaluation, or reliability."
+      },
+      {
+        "id": "b",
+        "text": "An impressive model demo proves product value."
+      },
+      {
+        "id": "c",
+        "text": "Inference price is the only product cost."
+      },
+      {
+        "id": "d",
+        "text": "A strategy should continue regardless of failed milestones."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Durable advantage can come from workflow, feedback, evaluation, or reliability.",
+    "graph_placement_weight": {
+      "p8_ai_product_strategy": 1
+    }
+  },
+  {
+    "id": "p8_ai_product_strategy_q6",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Product Strategy: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An impressive model demo proves product value."
+      },
+      {
+        "id": "b",
+        "text": "Evidence milestones and stop rules manage uncertain investments."
+      },
+      {
+        "id": "c",
+        "text": "Inference price is the only product cost."
+      },
+      {
+        "id": "d",
+        "text": "A strategy should continue regardless of failed milestones."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Evidence milestones and stop rules manage uncertain investments.",
+    "graph_placement_weight": {
+      "p8_ai_product_strategy": 1
+    }
+  },
+  {
+    "id": "p8_ai_product_strategy_order1",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this AI Product Strategy workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "identify a valuable user struggle"
+      },
+      {
+        "id": "b",
+        "text": "state value, quality, and risk assumptions"
+      },
+      {
+        "id": "c",
+        "text": "test the riskiest assumption cheaply"
+      },
+      {
+        "id": "d",
+        "text": "scale only after evidence gates pass"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The defensible order is: identify a valuable user struggle → state value, quality, and risk assumptions → test the riskiest assumption cheaply → scale only after evidence gates pass."
+  },
+  {
+    "id": "p8_ai_product_strategy_fill1",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the AI Product Strategy decision.",
+    "options": [
+      {
+        "id": "a",
+        "text": "user_outcome"
+      },
+      {
+        "id": "b",
+        "text": "model_size"
+      },
+      {
+        "id": "c",
+        "text": "demo_applause"
+      },
+      {
+        "id": "d",
+        "text": "token_count_only"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "user_outcome",
+    "explanation_after": "The correct choice is user_outcome."
+  }
+]

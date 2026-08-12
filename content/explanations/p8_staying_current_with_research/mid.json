@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_staying_current_with_research",
+  "depth": "mid",
+  "title": "Staying Current with AI Research — Read the Claim and Its Evidence Separately",
+  "key_insight": "Identify the exact claim, baseline, dataset, metric, budget, and uncertainty. Read methods and limitations before trusting the conclusion.",
+  "body": "## Read the Claim and Its Evidence Separately\n\nA paper says “state of the art,” but the comparison used different data and more compute. The headline alone is not the result.\n\nIdentify the exact claim, baseline, dataset, metric, budget, and uncertainty. Read methods and limitations before trusting the conclusion.\n\nFollow citations backward for foundations and forward for replications or criticism. One paper is a proposal plus evidence, not the final word.",
+  "common_mistakes": [
+    "The newest paper is automatically the most reliable.",
+    "A title provides enough evidence for an engineering decision.",
+    "Bookmark count measures research understanding."
+  ],
+  "mini_exercise": "Draw “Read the Claim and Its Evidence Separately” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI changes quickly, but engineering judgment depends on distinguishing durable evidence from headlines and benchmark noise.",
+  "explain_back_prompt": "Using “Read the Claim and Its Evidence Separately,” explain Staying Current with AI Research without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Build a one-page evidence map",
+    "context": "Turn Staying Current with AI Research into one small, inspectable artifact.",
+    "steps": [
+      "Choose one narrow AI question.",
+      "Summarize three sources by claim and evidence.",
+      "List differences in data, metric, and compute.",
+      "Write what evidence would change your current decision."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_scaling_ai_systems",
+  "depth": "advanced",
+  "title": "Scaling AI Systems — Schedule Uneven Requests",
+  "key_insight": "Schedulers can group compatible lengths, preempt low-priority work, and continuously batch tokens from active requests.",
+  "body": "## Schedule Uneven Requests\n\nShort prompts wait behind huge generations, wasting user patience and accelerator slots. Request count alone hides the work size.\n\nSchedulers can group compatible lengths, preempt low-priority work, and continuously batch tokens from active requests.\n\nSet tenant quotas and priority classes using compute estimates. Fairness means sharing scarce work capacity, not giving identical counts of unequal requests.",
+  "common_mistakes": [
+    "Adding random servers always removes the bottleneck.",
+    "Every AI request consumes equal compute.",
+    "Average traffic alone proves burst capacity."
+  ],
+  "mini_exercise": "Draw “Schedule Uneven Requests” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI workloads combine bursty requests, large inputs, expensive inference, and shared capacity.",
+  "explain_back_prompt": "Using “Schedule Uneven Requests,” explain Scaling AI Systems without assuming the listener knows AI engineering."
+}

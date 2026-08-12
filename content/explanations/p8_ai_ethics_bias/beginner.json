@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_ethics_bias",
+  "depth": "beginner",
+  "title": "AI Ethics & Bias — Ask Who Pays for the Mistake",
+  "key_insight": "AI ethics asks who is represented, who decides the goal, who benefits, and who can challenge an error.",
+  "body": "## Ask Who Pays for the Mistake\n\nA hiring model is accurate overall but rejects qualified applicants from one smaller group more often. The average hid unequal harm.\n\nAI ethics asks who is represented, who decides the goal, who benefits, and who can challenge an error.\n\nList affected people before deployment. Include people who supply data or face decisions, not only paying users.",
+  "common_mistakes": [
+    "High average accuracy proves equal treatment.",
+    "Historical labels are always neutral truth.",
+    "Writing a broad value statement completes governance."
+  ],
+  "mini_exercise": "Draw “Ask Who Pays for the Mistake” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI systems affect people through data collection, ranking, access, and automated decisions.",
+  "explain_back_prompt": "Using “Ask Who Pays for the Mistake,” explain AI Ethics & Bias without assuming the listener knows AI engineering."
+}

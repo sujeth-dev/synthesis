@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_case_studies_of_real_systems",
+  "depth": "mid",
+  "title": "Case Studies of Real AI Systems — Reconstruct the Decision Tradeoffs",
+  "key_insight": "Map each major choice to a requirement or constraint. List alternatives and what would make another choice better.",
+  "body": "## Reconstruct the Decision Tradeoffs\n\nA team chose retrieval instead of fine-tuning. The useful question is not which method won, but why it fit their update rate and evidence needs.\n\nMap each major choice to a requirement or constraint. List alternatives and what would make another choice better.\n\nCompare systems only when their workloads match. Architecture copied without its constraints becomes cargo culting.",
+  "common_mistakes": [
+    "An architecture diagram proves business success.",
+    "A famous design should be copied regardless of workload.",
+    "A postmortem is complete after blaming one operator."
+  ],
+  "mini_exercise": "Draw “Reconstruct the Decision Tradeoffs” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Real systems show how model choices interact with users, data, organizations, and operations.",
+  "explain_back_prompt": "Using “Reconstruct the Decision Tradeoffs,” explain Case Studies of Real AI Systems without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Analyze one real AI system",
+    "context": "Turn Case Studies of Real AI Systems into one small, inspectable artifact.",
+    "steps": [
+      "Select a documented system or incident.",
+      "Write its user job, scale, and constraints.",
+      "Map three design choices to evidence.",
+      "Extract two lessons and the conditions where they apply."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

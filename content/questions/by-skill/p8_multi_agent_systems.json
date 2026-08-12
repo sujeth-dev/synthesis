@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p8_multi_agent_systems_q1",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Multiple agents are useful only when work benefits from distinct roles or parallelism."
+      },
+      {
+        "id": "b",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "c",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "d",
+        "text": "Every agent should receive all available permissions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Multiple agents are useful only when work benefits from distinct roles or parallelism.",
+    "graph_placement_weight": {
+      "p8_multi_agent_systems": 1
+    }
+  },
+  {
+    "id": "p8_multi_agent_systems_q2",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "b",
+        "text": "Roles need explicit inputs, outputs, tools, and stopping rules."
+      },
+      {
+        "id": "c",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "d",
+        "text": "Every agent should receive all available permissions."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Roles need explicit inputs, outputs, tools, and stopping rules.",
+    "graph_placement_weight": {
+      "p8_multi_agent_systems": 1
+    }
+  },
+  {
+    "id": "p8_multi_agent_systems_q3",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "b",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "c",
+        "text": "Structured shared state makes handoffs inspectable."
+      },
+      {
+        "id": "d",
+        "text": "Every agent should receive all available permissions."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Structured shared state makes handoffs inspectable.",
+    "graph_placement_weight": {
+      "p8_multi_agent_systems": 1
+    }
+  },
+  {
+    "id": "p8_multi_agent_systems_q4",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "b",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "c",
+        "text": "Every agent should receive all available permissions."
+      },
+      {
+        "id": "d",
+        "text": "Loop and resource limits bound coordination failures."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Loop and resource limits bound coordination failures.",
+    "graph_placement_weight": {
+      "p8_multi_agent_systems": 1
+    }
+  },
+  {
+    "id": "p8_multi_agent_systems_q5",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Identical agents do not provide independent evidence automatically."
+      },
+      {
+        "id": "b",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "c",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "d",
+        "text": "Every agent should receive all available permissions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Identical agents do not provide independent evidence automatically.",
+    "graph_placement_weight": {
+      "p8_multi_agent_systems": 1
+    }
+  },
+  {
+    "id": "p8_multi_agent_systems_q6",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "b",
+        "text": "Multi-agent side effects need idempotency and durable state."
+      },
+      {
+        "id": "c",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "d",
+        "text": "Every agent should receive all available permissions."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Multi-agent side effects need idempotency and durable state.",
+    "graph_placement_weight": {
+      "p8_multi_agent_systems": 1
+    }
+  },
+  {
+    "id": "p8_multi_agent_systems_order1",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Multi-Agent Systems workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "split a task into justified roles"
+      },
+      {
+        "id": "b",
+        "text": "define typed handoffs and shared state"
+      },
+      {
+        "id": "c",
+        "text": "run with tool and loop limits"
+      },
+      {
+        "id": "d",
+        "text": "evaluate against a simpler baseline"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The defensible order is: split a task into justified roles → define typed handoffs and shared state → run with tool and loop limits → evaluate against a simpler baseline."
+  },
+  {
+    "id": "p8_multi_agent_systems_fill1",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Multi-Agent Systems decision.",
+    "options": [
+      {
+        "id": "a",
+        "text": "orchestrator"
+      },
+      {
+        "id": "b",
+        "text": "tokenizer"
+      },
+      {
+        "id": "c",
+        "text": "dropout"
+      },
+      {
+        "id": "d",
+        "text": "normalizer"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "orchestrator",
+    "explanation_after": "The correct choice is orchestrator."
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_capstone_project",
+  "depth": "beginner",
+  "title": "AI Engineering Capstone — Choose One Complete, Small Product",
+  "key_insight": "Choose one user job and a small end-to-end slice with real inputs, a useful output, and a visible fallback.",
+  "body": "## Choose One Complete, Small Product\n\nA capstone tries to train a frontier model, serve millions, and solve five user problems. Its scope prevents any route from becoming complete.\n\nChoose one user job and a small end-to-end slice with real inputs, a useful output, and a visible fallback.\n\nWrite acceptance criteria before building. A modest deployed workflow with evidence teaches more than an unfinished grand design.",
+  "common_mistakes": [
+    "The largest possible scope makes the strongest capstone.",
+    "A happy-path demo proves production readiness.",
+    "Code alone explains every design tradeoff."
+  ],
+  "mini_exercise": "Draw “Choose One Complete, Small Product” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "A complete artifact demonstrates integration across data, models, product decisions, safety, and reliable delivery.",
+  "explain_back_prompt": "Using “Choose One Complete, Small Product,” explain AI Engineering Capstone without assuming the listener knows AI engineering."
+}

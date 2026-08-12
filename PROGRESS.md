@@ -6,7 +6,7 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-3 is blocked at the Set 6 boundary; Sets 1-5 are complete.** The approved five-node style checkpoint remains the binding content reference.
+**P2-3 is complete; all six sets are committed locally on `nodes-track` and the full curriculum contains 120 nodes.** The approved five-node style checkpoint remains the binding content reference for future additions.
 
 The checkpoint required three passes and settled two hard authoring rules for all remaining P2-3 content:
 1. **Zero background at every depth.** Expert depth covers harder material but teaches it as plainly and cumulatively as beginner depth. It may name advanced ideas only after making them understandable through a concrete situation or analogy; it cannot assume outside topic fluency.
@@ -22,11 +22,13 @@ Set 4 completed Phase 6 at 16 nodes across Representation, Transformer Architect
 
 Set 5 completed Phase 7 at 14 nodes across Shipping AI Products, Quality & Safety, Performance & Cost, and Operating in Production. All nodes have four discovery-first, three-slide explanation depths and six MCQs, with order/fill/build practice on suitable nodes. `p7_evaluation.json` has 18 MCQs with three at each Bloom level. The graph now has 111 nodes and 173 valid acyclic edges. All 58 tests, the production build, and content validation pass with zero errors and the same 115 pre-existing warnings.
 
+Set 6 completed Phase 8 at 10 nodes across Systems at Scale, Responsibility & Frontier, and Practice & Capstone. All nodes have four discovery-first, three-slide explanation depths and six MCQs, with order/fill/build practice on suitable nodes. `p8_evaluation.json` has 18 MCQs with three at each Bloom level. The final graph has 120 nodes and 190 valid acyclic edges; Phases 4-8 contain the planned 72 nodes. All 58 tests, the production build, the independent structural audit, and content validation pass with zero errors and the same 115 pre-existing warnings.
+
 ---
 
 ## Next action
 
-Await human direction on whether Set 6 should preserve all 10 named Phase 8 nodes and correct the full-curriculum total to 120 (recommended), or preserve the stated 119 total by removing one specifically identified planned node. Do not author Set 6 until this is resolved. Never push.
+P2-3 is complete. Await human direction before starting any Phase 3 roadmap work. Never push.
 
 ---
 
@@ -49,11 +51,13 @@ Await human direction on whether Set 6 should preserve all 10 named Phase 8 node
 15. **Pre-existing E2E flakiness discovered (not caused by this pass):** `tests/e2e/guided-learning.spec.ts` failed once, then passed on immediate retry, with no code or content change in between. Root cause: `pickGuidedQuestion()` (`src/lib/session/engine.ts:410`) picks uniformly at random from the eligible pool; the review tier already had exactly 2 questions before this pass, so if the practice-start flow calls it more than once for the same task, there's a real chance of two different (both valid) picks, which this test's assumption of a single stable pick doesn't tolerate. Not fixed here — pinning down whether there's an unnecessary double-fetch, or the test should tolerate any valid tiered question rather than an exact ID match, is a separate scoping decision.
 16. **BLOOM track redefined by human direction 2026-08-10 (BLOOM-2 through BLOOM-6).** Original design (Finding 06, `basic-guide.md`): a `bloom_level` field on every individual `Question`, retrofitted across 45 skills, wired into per-question selection. After discussion, redirected to a **Phase Evaluation** feature: skill/BKT tracking is the *micro* layer, Bloom's is a *macro* layer one level up — a phase-wide check across all 6 Bloom levels (Remember→Create), not a per-question label. One optional self-check evaluation set per phase (p1/p2/p3), ~2-3 questions per level (~12-18/phase), sampled across that phase's skills; each question still records through the existing single-skill `insertAttempt()`/BKT pipeline unchanged, avoiding the "redesigned `insertAttempt()`" that true multi-skill Composite Puzzles (`P3-4`) would need. Results shown as a per-Bloom-level breakdown. BLOOM-5 (wiring into `engine.ts`'s per-question selection) is dropped — with per-phase granularity there's no per-question signal left to select with. `MASTER_PLAN.md`, `basic-guide.md`, `findings/06-content-classification-gaps.md`, and `discovery-model.md` §2 all updated with visible correction notes (not silently overwritten) per this project's documentation convention. Per explicit direction: commit locally after each BLOOM-track step, push only once the whole track is done — do not push after every commit like earlier phases.
 
-17. **P2-3 Set 6 is blocked by the final-count contradiction:** the documented per-phase targets add to 120 nodes after the approved Phase 1 split and prerequisite additions (5 + 14 + 17 + 12 + 16 + 16 + 16 + 14 + 10), while the same plan states a 119-node full-curriculum total. Sets 2-5 were unambiguous and are now complete. Human direction is required: either retain all 10 named Phase 8 nodes and correct the total to 120 (recommended), or identify the planned node to remove so the total remains 119.
+17. ~~**P2-3 Set 6 blocked by a final-count contradiction.**~~ **Resolved by human direction:** retain all 10 named Phase 8 nodes and correct the stale full-curriculum total from 119 to 120. The earlier total omitted the approved OOP prerequisite; the authoritative phase sum is 5 + 14 + 17 + 12 + 16 + 16 + 16 + 14 + 10 = 120.
 
 ---
 
 ## Completed work (chronological)
+
+- 2026-08-13 — **P2-3 Set 6 and full track complete:** completed all 10 Phase 8 nodes across three topics, with four plain-language three-slide depths, six tiered MCQs per node, hands-on ladders where useful, 190 valid acyclic graph edges, and an enforced 18-question Phase 8 Bloom evaluation. The final independent audit confirms 120 total nodes and the planned 72-node Phase 4-8 scope. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings). Nothing was pushed.
 
 - 2026-08-12 — **P2-3 Set 5 complete:** completed all 14 Phase 7 nodes across four topics, with four plain-language three-slide depths, six tiered MCQs per node, hands-on ladders where useful, 173 valid acyclic graph edges, and an enforced 18-question Phase 7 Bloom evaluation. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings). Set 6 is blocked on the recorded curriculum-total contradiction.
 

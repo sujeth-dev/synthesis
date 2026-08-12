@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p8_scaling_ai_systems_q1",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Scaling starts by locating the real bottleneck."
+      },
+      {
+        "id": "b",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "c",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "d",
+        "text": "Average traffic alone proves burst capacity."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Scaling starts by locating the real bottleneck.",
+    "graph_placement_weight": {
+      "p8_scaling_ai_systems": 1
+    }
+  },
+  {
+    "id": "p8_scaling_ai_systems_q2",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "b",
+        "text": "Queue depth and tail latency reveal overload."
+      },
+      {
+        "id": "c",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "d",
+        "text": "Average traffic alone proves burst capacity."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Queue depth and tail latency reveal overload.",
+    "graph_placement_weight": {
+      "p8_scaling_ai_systems": 1
+    }
+  },
+  {
+    "id": "p8_scaling_ai_systems_q3",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "b",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "c",
+        "text": "Stateless and model-serving workers scale differently."
+      },
+      {
+        "id": "d",
+        "text": "Average traffic alone proves burst capacity."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Stateless and model-serving workers scale differently.",
+    "graph_placement_weight": {
+      "p8_scaling_ai_systems": 1
+    }
+  },
+  {
+    "id": "p8_scaling_ai_systems_q4",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "b",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "c",
+        "text": "Average traffic alone proves burst capacity."
+      },
+      {
+        "id": "d",
+        "text": "Backpressure prevents accepting unfinishable work."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Backpressure prevents accepting unfinishable work.",
+    "graph_placement_weight": {
+      "p8_scaling_ai_systems": 1
+    }
+  },
+  {
+    "id": "p8_scaling_ai_systems_q5",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Schedulers can separate requests by work size and priority."
+      },
+      {
+        "id": "b",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "c",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "d",
+        "text": "Average traffic alone proves burst capacity."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Schedulers can separate requests by work size and priority.",
+    "graph_placement_weight": {
+      "p8_scaling_ai_systems": 1
+    }
+  },
+  {
+    "id": "p8_scaling_ai_systems_q6",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "b",
+        "text": "Global routing must respect residency, latency, versions, and failure domains."
+      },
+      {
+        "id": "c",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "d",
+        "text": "Average traffic alone proves burst capacity."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Global routing must respect residency, latency, versions, and failure domains.",
+    "graph_placement_weight": {
+      "p8_scaling_ai_systems": 1
+    }
+  }
+]

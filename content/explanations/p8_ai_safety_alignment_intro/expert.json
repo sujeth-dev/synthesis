@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_safety_alignment_intro",
+  "depth": "expert",
+  "title": "AI Safety & Alignment — Oversight Must Scale with the Task",
+  "key_insight": "Scalable oversight breaks evaluation into checkable evidence, independent tests, or assistance that helps reviewers find errors. The overseer itself must be calibrated.",
+  "body": "## Oversight Must Scale with the Task\n\nA model produces work too complex for one reviewer to verify, so approval becomes a rubber stamp. Human-in-the-loop is not useful when the human cannot judge.\n\nScalable oversight breaks evaluation into checkable evidence, independent tests, or assistance that helps reviewers find errors. The overseer itself must be calibrated.\n\nSome frontier risks remain uncertain and contested. Record assumptions, update beliefs with evidence, and choose reversible steps when consequences could be severe.",
+  "common_mistakes": [
+    "A high benchmark score proves complete alignment.",
+    "One safety prompt removes every misuse path.",
+    "Human approval is meaningful even when the reviewer cannot assess the work."
+  ],
+  "mini_exercise": "Draw “Oversight Must Scale with the Task” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "More capable and autonomous systems can amplify specification mistakes, misuse, and unexpected behavior.",
+  "explain_back_prompt": "Using “Oversight Must Scale with the Task,” explain AI Safety & Alignment without assuming the listener knows AI engineering."
+}

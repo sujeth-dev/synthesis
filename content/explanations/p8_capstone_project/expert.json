@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_capstone_project",
+  "depth": "expert",
+  "title": "AI Engineering Capstone — Defend the Decisions and Limits",
+  "key_insight": "Write an engineering report connecting requirements to alternatives, decisions, evidence, tradeoffs, and unresolved risks. Reproduce the result from a clean setup.",
+  "body": "## Defend the Decisions and Limits\n\nA reviewer can see the code but cannot tell why the architecture was chosen or when it should not be used.\n\nWrite an engineering report connecting requirements to alternatives, decisions, evidence, tradeoffs, and unresolved risks. Reproduce the result from a clean setup.\n\nEnd with a live defense: demonstrate the workflow, trigger a failure, show observability and recovery, and explain the next experiment without overstating readiness.",
+  "common_mistakes": [
+    "The largest possible scope makes the strongest capstone.",
+    "A happy-path demo proves production readiness.",
+    "Code alone explains every design tradeoff."
+  ],
+  "mini_exercise": "Draw “Defend the Decisions and Limits” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "A complete artifact demonstrates integration across data, models, product decisions, safety, and reliable delivery.",
+  "explain_back_prompt": "Using “Defend the Decisions and Limits,” explain AI Engineering Capstone without assuming the listener knows AI engineering."
+}

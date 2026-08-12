@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_ethics_bias",
+  "depth": "mid",
+  "title": "AI Ethics & Bias — Trace Bias Through the Pipeline",
+  "key_insight": "Bias can enter through sampling, measurement, labels, objectives, thresholds, and deployment. Group metrics help locate unequal error patterns.",
+  "body": "## Trace Bias Through the Pipeline\n\nA model learns from historical approvals that already reflected unequal access. The label is not a neutral truth.\n\nBias can enter through sampling, measurement, labels, objectives, thresholds, and deployment. Group metrics help locate unequal error patterns.\n\nNo single fairness metric fits every setting. Some definitions conflict mathematically, so choose with the real decision and harm in view.",
+  "common_mistakes": [
+    "High average accuracy proves equal treatment.",
+    "Historical labels are always neutral truth.",
+    "Writing a broad value statement completes governance."
+  ],
+  "mini_exercise": "Draw “Trace Bias Through the Pipeline” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI systems affect people through data collection, ranking, access, and automated decisions.",
+  "explain_back_prompt": "Using “Trace Bias Through the Pipeline,” explain AI Ethics & Bias without assuming the listener knows AI engineering."
+}
