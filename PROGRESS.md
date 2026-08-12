@@ -19,7 +19,11 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Next action
 
-Resume the P2-3 checkpoint: re-derive the same 5-node sample (revise `p2_math_matrices`'s beginner/mid/advanced explanations; write full beginner/mid/advanced/expert explanations + questions for `p1b_oop_classes`, `p2_calculus_basics`, `p4_sklearn_workflow`, `p5_backpropagation`) applying the plain-language-at-every-depth rule throughout, then present the result for approval again before writing to disk or proceeding to Sets 1-6. See the exact handoff brief a human requested for this, dated 2026-08-12, for the full self-contained prompt to resume with.
+**Update, same day:** the 5-node sample WAS fully written (all 4 depths + questions for the 4 new nodes, plus the `p2_math_matrices` revision) and got substantially better on the plain-language front — but human review caught two more things after that draft:
+1. "Plain language" needs to mean **zero background**, not just "jargon explained before use." Every depth, including expert, must be independently followable by someone with no prior exposure — depth changes the topic's difficulty, never the simplicity of the explanation.
+2. **Body content is way too long.** It's discovered (not assumed) that `body` renders literally slide-by-slide in the app (`ProgressiveExplanation.tsx` + `splitExplanationSteps()`) — blank-line-separated chunks become slides, and a heading only merges with the one chunk right after it. Human direction: **cap `body` at 2-3 slides total, 2-3 lines each**, "like teaching a small kid." The already-written drafts (full multi-section bodies with several code blocks each) blow well past this even though their register was right.
+
+So: the written 5-node sample is not being committed as content yet (the graph-shape commit `e61e0e4` still stands and doesn't need to change). All 16 explanation files (4 depths × 4 new nodes) plus the 3 revised `p2_math_matrices` files need a length pass on top of the plain-language pass. See `feedback_content_plain_language_all_depths` in this session's saved memory for the full rule, and the handoff prompt a human requested (given directly in conversation, 2026-08-12) for the exact resume instructions.
 
 ---
 
