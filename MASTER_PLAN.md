@@ -138,16 +138,16 @@ Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section A.
 **Constraint:** lives entirely under `research/dkt/` (Python), never touches `package.json` or the Next.js runtime. Do not commit raw datasets — `.gitignore` them, commit only scripts + results.
 
-| ID | Task |
-|---|---|
-| DKT-1 | Download ASSISTments 2009-2010, record license/citation terms in `research/dkt/README.md` |
-| DKT-2 | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
-| DKT-3 | Split by student, not by interaction |
-| DKT-4 | Fit a proper per-skill BKT baseline on the same split |
-| DKT-5 | Train a small LSTM DKT on train/val |
-| DKT-6 | Evaluate DKT AUC vs. BKT AUC on held-out test set |
-| DKT-7 | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
-| DKT-8 | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+| ID | Status | Task |
+|---|---|---|
+| DKT-1 | done | Download ASSISTments 2009-2010, record license/citation terms in `research/dkt/README.md` |
+| DKT-2 | not_started | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
+| DKT-3 | not_started | Split by student, not by interaction |
+| DKT-4 | not_started | Fit a proper per-skill BKT baseline on the same split |
+| DKT-5 | not_started | Train a small LSTM DKT on train/val |
+| DKT-6 | not_started | Evaluate DKT AUC vs. BKT AUC on held-out test set |
+| DKT-7 | not_started | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
+| DKT-8 | not_started | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
 
 **Live cutover** (switching Synaptic's own engine to DKT) is Phase 3 item P3-3, gated at 50k+ real sessions — do not do this as part of this track.
 
