@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_caching_and_batching",
+  "depth": "expert",
+  "title": "Caching & Batching — Coordinate a Shared Cache Safely",
+  "key_insight": "Request coalescing lets one worker refresh while others wait or receive a stale-safe value. Randomized expiry prevents many keys expiring together.",
+  "body": "## Coordinate a Shared Cache Safely\n\nA popular key expires and thousands of requests recompute it at once. The cache miss becomes an outage.\n\nRequest coalescing lets one worker refresh while others wait or receive a stale-safe value. Randomized expiry prevents many keys expiring together.\n\nMeasure hit rate, saved cost, added lookup time, and stale-error rate. A high hit rate is harmful if the reused answers are no longer correct.",
+  "common_mistakes": [
+    "One global cache key is safe for private users.",
+    "Batching guarantees zero waiting time.",
+    "A high cache hit rate proves answers are fresh."
+  ],
+  "mini_exercise": "Draw “Coordinate a Shared Cache Safely” as three steps and explain each one.",
+  "real_world_usage": "Caching avoids repeated work and batching shares hardware work, but both require correctness and freshness rules.",
+  "explain_back_prompt": "Use “Coordinate a Shared Cache Safely” to explain Caching & Batching plainly."
+}

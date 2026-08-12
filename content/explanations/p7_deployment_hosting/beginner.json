@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_deployment_hosting",
+  "depth": "beginner",
+  "title": "Deployment & Hosting — Move Beyond the Laptop",
+  "key_insight": "Deployment packages code and dependencies into a repeatable runtime and exposes it through controlled infrastructure.",
+  "body": "## Move Beyond the Laptop\n\nAn app works on one developer’s machine but fails elsewhere because files, packages, and settings differ.\n\nDeployment packages code and dependencies into a repeatable runtime and exposes it through controlled infrastructure.\n\nKeep configuration outside code, secrets in a secret store, and health checks separate from model-quality checks.",
+  "common_mistakes": [
+    "A laptop environment is automatically reproducible.",
+    "Adding web servers fixes every downstream bottleneck.",
+    "Health checks prove model answer quality."
+  ],
+  "mini_exercise": "Draw “Move Beyond the Laptop” as three steps and explain each one.",
+  "real_world_usage": "Deployment turns a working AI service into a repeatable, secure, scalable runtime.",
+  "explain_back_prompt": "Use “Move Beyond the Laptop” to explain Deployment & Hosting plainly."
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_caching_and_batching",
+  "depth": "advanced",
+  "title": "Caching & Batching — Cache Meaning, Not Accidents",
+  "key_insight": "Similarity reuse risks returning an answer that is wrong for a subtle difference. Use it only where approximation is acceptable and verify permissions and freshness.",
+  "body": "## Cache Meaning, Not Accidents\n\nTwo prompts look different but ask the same thing; exact-string caching misses reuse. Semantic caching can find similar requests.\n\nSimilarity reuse risks returning an answer that is wrong for a subtle difference. Use it only where approximation is acceptable and verify permissions and freshness.\n\nVersion cache keys with model, prompt, retrieval corpus, and policy. Otherwise deployments serve stale behavior that no longer matches the system.",
+  "common_mistakes": [
+    "One global cache key is safe for private users.",
+    "Batching guarantees zero waiting time.",
+    "A high cache hit rate proves answers are fresh."
+  ],
+  "mini_exercise": "Draw “Cache Meaning, Not Accidents” as three steps and explain each one.",
+  "real_world_usage": "Caching avoids repeated work and batching shares hardware work, but both require correctness and freshness rules.",
+  "explain_back_prompt": "Use “Cache Meaning, Not Accidents” to explain Caching & Batching plainly.",
+  "build_task": {
+    "title": "Practice Caching & Batching",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "define a complete cache key",
+      "check for a safe fresh result",
+      "compute once on a miss",
+      "store with version and expiry"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

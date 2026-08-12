@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_deployment_hosting",
+  "depth": "mid",
+  "title": "Deployment & Hosting — Separate Build from Release",
+  "key_insight": "Create an immutable artifact, test it, then promote that exact artifact between environments. A release selects the version receiving traffic.",
+  "body": "## Separate Build from Release\n\nBuilding new code and sending all traffic to it in one step makes rollback difficult.\n\nCreate an immutable artifact, test it, then promote that exact artifact between environments. A release selects the version receiving traffic.\n\nRun database and index changes with compatibility windows so old and new application versions can coexist during rollout.",
+  "common_mistakes": [
+    "A laptop environment is automatically reproducible.",
+    "Adding web servers fixes every downstream bottleneck.",
+    "Health checks prove model answer quality."
+  ],
+  "mini_exercise": "Draw “Separate Build from Release” as three steps and explain each one.",
+  "real_world_usage": "Deployment turns a working AI service into a repeatable, secure, scalable runtime.",
+  "explain_back_prompt": "Use “Separate Build from Release” to explain Deployment & Hosting plainly."
+}

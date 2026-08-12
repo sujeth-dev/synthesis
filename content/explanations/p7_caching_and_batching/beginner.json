@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_caching_and_batching",
+  "depth": "beginner",
+  "title": "Caching & Batching — Do Not Recompute the Same Answer",
+  "key_insight": "A cache stores a result under a key and reuses it for matching requests. The key must include every input that can change the correct result.",
+  "body": "## Do Not Recompute the Same Answer\n\nThousands of users request the same public summary. Calling the model each time repeats cost and delay.\n\nA cache stores a result under a key and reuses it for matching requests. The key must include every input that can change the correct result.\n\nSet an expiry and a deletion path. Private results must be isolated by user or tenant.",
+  "common_mistakes": [
+    "One global cache key is safe for private users.",
+    "Batching guarantees zero waiting time.",
+    "A high cache hit rate proves answers are fresh."
+  ],
+  "mini_exercise": "Draw “Do Not Recompute the Same Answer” as three steps and explain each one.",
+  "real_world_usage": "Caching avoids repeated work and batching shares hardware work, but both require correctness and freshness rules.",
+  "explain_back_prompt": "Use “Do Not Recompute the Same Answer” to explain Caching & Batching plainly."
+}

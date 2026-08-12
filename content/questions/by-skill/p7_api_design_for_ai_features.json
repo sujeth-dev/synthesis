@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_api_design_for_ai_features_q1",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Product APIs should describe the user job rather than one model vendor."
+      },
+      {
+        "id": "b",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "c",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "d",
+        "text": "Model changes can never affect API behavior."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Product APIs should describe the user job rather than one model vendor.",
+    "graph_placement_weight": {
+      "p7_api_design_for_ai_features": 1
+    }
+  },
+  {
+    "id": "p7_api_design_for_ai_features_q2",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "b",
+        "text": "Asynchronous work can return a job ID."
+      },
+      {
+        "id": "c",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "d",
+        "text": "Model changes can never affect API behavior."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Asynchronous work can return a job ID.",
+    "graph_placement_weight": {
+      "p7_api_design_for_ai_features": 1
+    }
+  },
+  {
+    "id": "p7_api_design_for_ai_features_q3",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "b",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "c",
+        "text": "Job APIs need explicit status states."
+      },
+      {
+        "id": "d",
+        "text": "Model changes can never affect API behavior."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Job APIs need explicit status states.",
+    "graph_placement_weight": {
+      "p7_api_design_for_ai_features": 1
+    }
+  },
+  {
+    "id": "p7_api_design_for_ai_features_q4",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "b",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "c",
+        "text": "Model changes can never affect API behavior."
+      },
+      {
+        "id": "d",
+        "text": "Generated output must be validated against the response schema."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Generated output must be validated against the response schema.",
+    "graph_placement_weight": {
+      "p7_api_design_for_ai_features": 1
+    }
+  },
+  {
+    "id": "p7_api_design_for_ai_features_q5",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Idempotency prevents duplicate side effects on retries."
+      },
+      {
+        "id": "b",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "c",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "d",
+        "text": "Model changes can never affect API behavior."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Idempotency prevents duplicate side effects on retries.",
+    "graph_placement_weight": {
+      "p7_api_design_for_ai_features": 1
+    }
+  },
+  {
+    "id": "p7_api_design_for_ai_features_q6",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "b",
+        "text": "Capacity controls may count tokens and concurrency, not only requests."
+      },
+      {
+        "id": "c",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "d",
+        "text": "Model changes can never affect API behavior."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Capacity controls may count tokens and concurrency, not only requests.",
+    "graph_placement_weight": {
+      "p7_api_design_for_ai_features": 1
+    }
+  }
+]

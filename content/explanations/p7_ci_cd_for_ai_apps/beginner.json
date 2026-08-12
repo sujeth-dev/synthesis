@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_ci_cd_for_ai_apps",
+  "depth": "beginner",
+  "title": "CI/CD for AI Apps — Test More Than the Code",
+  "key_insight": "CI automatically checks each change. For AI apps it should test code plus prompt, schema, retrieval, safety, and evaluation behavior.",
+  "body": "## Test More Than the Code\n\nA code change passes unit tests, but a prompt edit makes the assistant ignore citations. The delivery gate tested the wrong artifact.\n\nCI automatically checks each change. For AI apps it should test code plus prompt, schema, retrieval, safety, and evaluation behavior.\n\nCD promotes a verified artifact through environments with approval and rollback rules.",
+  "common_mistakes": [
+    "Unit tests alone cover every AI behavior change.",
+    "Prompt versions need not be recorded.",
+    "Rollback always means changing only application code."
+  ],
+  "mini_exercise": "Draw “Test More Than the Code” as three steps and explain each one.",
+  "real_world_usage": "AI delivery pipelines test code, prompts, models, data contracts, and safety before controlled release.",
+  "explain_back_prompt": "Use “Test More Than the Code” to explain CI/CD for AI Apps plainly."
+}

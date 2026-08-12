@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_explainability_and_interpretability",
+  "depth": "expert",
+  "title": "Explainability & Interpretability — Trace Mechanisms Carefully",
+  "key_insight": "Interventions provide stronger evidence than observation: change an activation and measure the output effect while controlling alternatives.",
+  "body": "## Trace Mechanisms Carefully\n\nResearchers find a group of internal features linked to a behavior. Naming that group does not prove a complete causal circuit.\n\nInterventions provide stronger evidence than observation: change an activation and measure the output effect while controlling alternatives.\n\nLarge models represent concepts across many units and contexts. Mechanistic findings should state scope, uncertainty, and failure cases rather than becoming a universal story.",
+  "common_mistakes": [
+    "A colorful heatmap is always faithful.",
+    "One local explanation describes all global behavior.",
+    "Explainability removes the need for appeals."
+  ],
+  "mini_exercise": "Draw “Trace Mechanisms Carefully” as three steps and explain each one.",
+  "real_world_usage": "Explanations can help people inspect model behavior, but they must be tested rather than mistaken for proof.",
+  "explain_back_prompt": "Use “Trace Mechanisms Carefully” to explain Explainability & Interpretability plainly."
+}

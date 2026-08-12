@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p7_building_ai_app_q1",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An AI app should begin with a specific user job."
+      },
+      {
+        "id": "b",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "c",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "d",
+        "text": "A production app needs no fallback path."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An AI app should begin with a specific user job.",
+    "graph_placement_weight": {
+      "p7_building_ai_app": 1
+    }
+  },
+  {
+    "id": "p7_building_ai_app_q2",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "b",
+        "text": "Rules or search may beat AI for deterministic tasks."
+      },
+      {
+        "id": "c",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "d",
+        "text": "A production app needs no fallback path."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Rules or search may beat AI for deterministic tasks.",
+    "graph_placement_weight": {
+      "p7_building_ai_app": 1
+    }
+  },
+  {
+    "id": "p7_building_ai_app_q3",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "b",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "c",
+        "text": "Typed boundaries make orchestration failures visible."
+      },
+      {
+        "id": "d",
+        "text": "A production app needs no fallback path."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Typed boundaries make orchestration failures visible.",
+    "graph_placement_weight": {
+      "p7_building_ai_app": 1
+    }
+  },
+  {
+    "id": "p7_building_ai_app_q4",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "b",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "c",
+        "text": "A production app needs no fallback path."
+      },
+      {
+        "id": "d",
+        "text": "Feedback must be tied to the exact model context."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Feedback must be tied to the exact model context.",
+    "graph_placement_weight": {
+      "p7_building_ai_app": 1
+    }
+  },
+  {
+    "id": "p7_building_ai_app_q5",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Failure paths should preserve user work."
+      },
+      {
+        "id": "b",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "c",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "d",
+        "text": "A production app needs no fallback path."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Failure paths should preserve user work.",
+    "graph_placement_weight": {
+      "p7_building_ai_app": 1
+    }
+  },
+  {
+    "id": "p7_building_ai_app_q6",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "b",
+        "text": "Product success should measure task outcomes and harm."
+      },
+      {
+        "id": "c",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "d",
+        "text": "A production app needs no fallback path."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Product success should measure task outcomes and harm.",
+    "graph_placement_weight": {
+      "p7_building_ai_app": 1
+    }
+  },
+  {
+    "id": "p7_building_ai_app_order1",
+    "skill_id": "p7_building_ai_app",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Building an AI App workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define one user job"
+      },
+      {
+        "id": "b",
+        "text": "gather the needed context"
+      },
+      {
+        "id": "c",
+        "text": "call and validate the model"
+      },
+      {
+        "id": "d",
+        "text": "show a useful result or fallback"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "define one user job → gather the needed context → call and validate the model → show a useful result or fallback"
+  },
+  {
+    "id": "p7_building_ai_app_fill1",
+    "skill_id": "p7_building_ai_app",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the safest first action for Building an AI App.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define one user job"
+      },
+      {
+        "id": "b",
+        "text": "gather the needed context"
+      },
+      {
+        "id": "c",
+        "text": "call and validate the model"
+      },
+      {
+        "id": "d",
+        "text": "show a useful result or fallback"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "define one user job",
+    "explanation_after": "Start with define one user job."
+  }
+]

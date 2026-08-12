@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_content_moderation",
+  "depth": "mid",
+  "title": "Content Moderation — Use Scores to Route Cases",
+  "key_insight": "High-confidence safe cases can pass, uncertain cases can reach review, and severe high-confidence cases can block.",
+  "body": "## Use Scores to Route Cases\n\nA classifier returns likelihoods, not courtroom certainty. Different categories and actions need different thresholds.\n\nHigh-confidence safe cases can pass, uncertain cases can reach review, and severe high-confidence cases can block.\n\nCalibrate on representative languages and formats. Measure both harmful misses and legitimate content wrongly restricted.",
+  "common_mistakes": [
+    "A classifier removes the need for written policy.",
+    "Uncertain cases should always be treated as definitely harmful.",
+    "Reviewer safety has no effect on moderation quality."
+  ],
+  "mini_exercise": "Draw “Use Scores to Route Cases” as three steps and explain each one.",
+  "real_world_usage": "Moderation applies explicit policy to user and model content with calibrated automation and human escalation.",
+  "explain_back_prompt": "Use “Use Scores to Route Cases” to explain Content Moderation plainly."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_model_selection_tradeoffs",
+  "depth": "advanced",
+  "title": "Model Selection Tradeoffs — Quantization Changes the Deployment Point",
+  "key_insight": "Quantization reduces weight memory and can speed supported hardware, but accuracy and kernel behavior vary by model and precision.",
+  "body": "## Quantization Changes the Deployment Point\n\nA model barely misses the device memory budget. Lower-precision weights may make local serving possible.\n\nQuantization reduces weight memory and can speed supported hardware, but accuracy and kernel behavior vary by model and precision.\n\nBenchmark complete requests on target hardware. A theoretical memory saving does not guarantee lower tail latency.",
+  "common_mistakes": [
+    "Parameter count alone selects the best deployment.",
+    "Hosted and local models have identical privacy responsibilities.",
+    "A theoretical speedup guarantees lower production tail latency."
+  ],
+  "mini_exercise": "Draw “Quantization Changes the Deployment Point” as three steps and explain each one.",
+  "real_world_usage": "Real systems choose among local, hosted, small, and large models by workload-specific constraints.",
+  "explain_back_prompt": "Use “Quantization Changes the Deployment Point” to explain Model Selection Tradeoffs plainly."
+}

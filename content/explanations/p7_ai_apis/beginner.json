@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_ai_apis",
+  "depth": "beginner",
+  "title": "AI APIs & Production — Call a Model Without Hosting It",
+  "key_insight": "An API is a documented way for programs to exchange requests and responses. Your server sends input and receives model output.",
+  "body": "## Call a Model Without Hosting It\n\nA small app needs strong language features but cannot operate its own model servers. It can send a request to a hosted service.\n\nAn API is a documented way for programs to exchange requests and responses. Your server sends input and receives model output.\n\nKeep API keys on the server, never in browser code. Treat every response as untrusted data that still needs validation.",
+  "common_mistakes": [
+    "API keys are safest inside public browser code.",
+    "Every failed request should retry forever.",
+    "Model responses never require validation."
+  ],
+  "mini_exercise": "Draw “Call a Model Without Hosting It” as three steps and explain each one.",
+  "real_world_usage": "AI APIs let products use managed models while keeping credentials, errors, and costs under application control.",
+  "explain_back_prompt": "Use “Call a Model Without Hosting It” to explain AI APIs & Production plainly."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_content_moderation",
+  "depth": "beginner",
+  "title": "Content Moderation — Decide What the Community Allows",
+  "key_insight": "Content moderation maps content to a written policy and an action such as allow, limit, review, or remove.",
+  "body": "## Decide What the Community Allows\n\nA platform removes one harmful post but leaves a similar one because reviewers had no shared rule.\n\nContent moderation maps content to a written policy and an action such as allow, limit, review, or remove.\n\nDefine categories with examples and exceptions. A model cannot repair an unclear policy.",
+  "common_mistakes": [
+    "A classifier removes the need for written policy.",
+    "Uncertain cases should always be treated as definitely harmful.",
+    "Reviewer safety has no effect on moderation quality."
+  ],
+  "mini_exercise": "Draw “Decide What the Community Allows” as three steps and explain each one.",
+  "real_world_usage": "Moderation applies explicit policy to user and model content with calibrated automation and human escalation.",
+  "explain_back_prompt": "Use “Decide What the Community Allows” to explain Content Moderation plainly."
+}

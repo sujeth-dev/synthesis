@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_building_ai_app",
+  "depth": "advanced",
+  "title": "Building an AI App — Design the Failure Experience",
+  "key_insight": "Show clear retry, edit, or manual paths. Preserve the user’s input and avoid claiming success before downstream work completes.",
+  "body": "## Design the Failure Experience\n\nThe model times out, refuses, or produces invalid structure. A blank screen turns a model limitation into a product failure.\n\nShow clear retry, edit, or manual paths. Preserve the user’s input and avoid claiming success before downstream work completes.\n\nUse feature flags and staged rollout. A small audience reveals cost, latency, and misunderstanding before full exposure.",
+  "common_mistakes": [
+    "Adding a chat box automatically creates user value.",
+    "Fluent output proves the user task succeeded.",
+    "A production app needs no fallback path."
+  ],
+  "mini_exercise": "Draw “Design the Failure Experience” as three steps and explain each one.",
+  "real_world_usage": "A useful AI app connects a clear user job to context, model calls, validation, feedback, and fallback behavior.",
+  "explain_back_prompt": "Use “Design the Failure Experience” to explain Building an AI App plainly.",
+  "build_task": {
+    "title": "Practice Building an AI App",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "define one user job",
+      "gather the needed context",
+      "call and validate the model",
+      "show a useful result or fallback"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

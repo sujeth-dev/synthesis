@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p7_monitoring_observability_q1",
+    "skill_id": "p7_monitoring_observability",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Monitoring & Observability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Logs, metrics, and traces answer different operational questions."
+      },
+      {
+        "id": "b",
+        "text": "One final error count identifies every root cause."
+      },
+      {
+        "id": "c",
+        "text": "All user prompts should be logged forever."
+      },
+      {
+        "id": "d",
+        "text": "Fast responses guarantee useful answers."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Logs, metrics, and traces answer different operational questions.",
+    "graph_placement_weight": {
+      "p7_monitoring_observability": 1
+    }
+  },
+  {
+    "id": "p7_monitoring_observability_q2",
+    "skill_id": "p7_monitoring_observability",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Monitoring & Observability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One final error count identifies every root cause."
+      },
+      {
+        "id": "b",
+        "text": "Trace IDs connect stages of one request."
+      },
+      {
+        "id": "c",
+        "text": "All user prompts should be logged forever."
+      },
+      {
+        "id": "d",
+        "text": "Fast responses guarantee useful answers."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Trace IDs connect stages of one request.",
+    "graph_placement_weight": {
+      "p7_monitoring_observability": 1
+    }
+  },
+  {
+    "id": "p7_monitoring_observability_q3",
+    "skill_id": "p7_monitoring_observability",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Monitoring & Observability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One final error count identifies every root cause."
+      },
+      {
+        "id": "b",
+        "text": "All user prompts should be logged forever."
+      },
+      {
+        "id": "c",
+        "text": "Sensitive prompts should not be logged by default."
+      },
+      {
+        "id": "d",
+        "text": "Fast responses guarantee useful answers."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Sensitive prompts should not be logged by default.",
+    "graph_placement_weight": {
+      "p7_monitoring_observability": 1
+    }
+  },
+  {
+    "id": "p7_monitoring_observability_q4",
+    "skill_id": "p7_monitoring_observability",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Monitoring & Observability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One final error count identifies every root cause."
+      },
+      {
+        "id": "b",
+        "text": "All user prompts should be logged forever."
+      },
+      {
+        "id": "c",
+        "text": "Fast responses guarantee useful answers."
+      },
+      {
+        "id": "d",
+        "text": "User-visible indicators matter more than isolated infrastructure metrics."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "User-visible indicators matter more than isolated infrastructure metrics.",
+    "graph_placement_weight": {
+      "p7_monitoring_observability": 1
+    }
+  },
+  {
+    "id": "p7_monitoring_observability_q5",
+    "skill_id": "p7_monitoring_observability",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Monitoring & Observability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Alerts need owners and actions."
+      },
+      {
+        "id": "b",
+        "text": "One final error count identifies every root cause."
+      },
+      {
+        "id": "c",
+        "text": "All user prompts should be logged forever."
+      },
+      {
+        "id": "d",
+        "text": "Fast responses guarantee useful answers."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Alerts need owners and actions.",
+    "graph_placement_weight": {
+      "p7_monitoring_observability": 1
+    }
+  },
+  {
+    "id": "p7_monitoring_observability_q6",
+    "skill_id": "p7_monitoring_observability",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Monitoring & Observability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One final error count identifies every root cause."
+      },
+      {
+        "id": "b",
+        "text": "Semantic quality can drift while ordinary uptime stays healthy."
+      },
+      {
+        "id": "c",
+        "text": "All user prompts should be logged forever."
+      },
+      {
+        "id": "d",
+        "text": "Fast responses guarantee useful answers."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Semantic quality can drift while ordinary uptime stays healthy.",
+    "graph_placement_weight": {
+      "p7_monitoring_observability": 1
+    }
+  },
+  {
+    "id": "p7_monitoring_observability_order1",
+    "skill_id": "p7_monitoring_observability",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Monitoring & Observability workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "create a request trace id"
+      },
+      {
+        "id": "b",
+        "text": "record spans for each stage"
+      },
+      {
+        "id": "c",
+        "text": "emit safe metrics and errors"
+      },
+      {
+        "id": "d",
+        "text": "alert on user-facing failure"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "create a request trace id → record spans for each stage → emit safe metrics and errors → alert on user-facing failure"
+  },
+  {
+    "id": "p7_monitoring_observability_fill1",
+    "skill_id": "p7_monitoring_observability",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the safest first action for Monitoring & Observability.",
+    "options": [
+      {
+        "id": "a",
+        "text": "create a request trace id"
+      },
+      {
+        "id": "b",
+        "text": "record spans for each stage"
+      },
+      {
+        "id": "c",
+        "text": "emit safe metrics and errors"
+      },
+      {
+        "id": "d",
+        "text": "alert on user-facing failure"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "create a request trace id",
+    "explanation_after": "Start with create a request trace id."
+  }
+]

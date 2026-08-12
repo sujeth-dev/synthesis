@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_cost_latency_optimization",
+  "depth": "beginner",
+  "title": "Cost & Latency Optimization — Find Where Time and Money Go",
+  "key_insight": "Break one request into input tokens, output tokens, retrieval, model time, tool calls, and retries. Measure before changing.",
+  "body": "## Find Where Time and Money Go\n\nA feature is too expensive, so the team blindly shortens every answer. Quality falls while the real cost came from repeated context.\n\nBreak one request into input tokens, output tokens, retrieval, model time, tool calls, and retries. Measure before changing.\n\nSet a quality floor and optimize beneath it. The cheapest broken answer has no value.",
+  "common_mistakes": [
+    "The cheapest response is best even when wrong.",
+    "Average latency fully describes user experience.",
+    "Unlimited concurrency always reduces latency."
+  ],
+  "mini_exercise": "Draw “Find Where Time and Money Go” as three steps and explain each one.",
+  "real_world_usage": "Production AI must meet quality targets within token, compute, and response-time budgets.",
+  "explain_back_prompt": "Use “Find Where Time and Money Go” to explain Cost & Latency Optimization plainly."
+}

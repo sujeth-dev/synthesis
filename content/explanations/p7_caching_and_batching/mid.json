@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_caching_and_batching",
+  "depth": "mid",
+  "title": "Caching & Batching — Group Work for Efficient Processing",
+  "key_insight": "Static batches wait for a fixed group. Dynamic batching collects compatible requests for a short window, trading a little wait for higher throughput.",
+  "body": "## Group Work for Efficient Processing\n\nA GPU handles one tiny request poorly but can process several together. Batching combines work into a fuller operation.\n\nStatic batches wait for a fixed group. Dynamic batching collects compatible requests for a short window, trading a little wait for higher throughput.\n\nGroup by model and compatible settings. Very long requests can delay short ones, so schedulers may separate length ranges.",
+  "common_mistakes": [
+    "One global cache key is safe for private users.",
+    "Batching guarantees zero waiting time.",
+    "A high cache hit rate proves answers are fresh."
+  ],
+  "mini_exercise": "Draw “Group Work for Efficient Processing” as three steps and explain each one.",
+  "real_world_usage": "Caching avoids repeated work and batching shares hardware work, but both require correctness and freshness rules.",
+  "explain_back_prompt": "Use “Group Work for Efficient Processing” to explain Caching & Batching plainly.",
+  "build_task": {
+    "title": "Practice Caching & Batching",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "define a complete cache key",
+      "check for a safe fresh result",
+      "compute once on a miss",
+      "store with version and expiry"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

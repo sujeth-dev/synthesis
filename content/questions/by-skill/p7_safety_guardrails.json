@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_safety_guardrails_q1",
+    "skill_id": "p7_safety_guardrails",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Safety Guardrails: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Guardrails should cover inputs, tools, outputs, and escalation."
+      },
+      {
+        "id": "b",
+        "text": "One prompt instruction is a complete safety system."
+      },
+      {
+        "id": "c",
+        "text": "Blocking every uncertain request has no cost."
+      },
+      {
+        "id": "d",
+        "text": "Tool permissions are unnecessary when a filter exists."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Guardrails should cover inputs, tools, outputs, and escalation.",
+    "graph_placement_weight": {
+      "p7_safety_guardrails": 1
+    }
+  },
+  {
+    "id": "p7_safety_guardrails_q2",
+    "skill_id": "p7_safety_guardrails",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Safety Guardrails: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One prompt instruction is a complete safety system."
+      },
+      {
+        "id": "b",
+        "text": "Policy enforcement cannot rely only on prompt text."
+      },
+      {
+        "id": "c",
+        "text": "Blocking every uncertain request has no cost."
+      },
+      {
+        "id": "d",
+        "text": "Tool permissions are unnecessary when a filter exists."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Policy enforcement cannot rely only on prompt text.",
+    "graph_placement_weight": {
+      "p7_safety_guardrails": 1
+    }
+  },
+  {
+    "id": "p7_safety_guardrails_q3",
+    "skill_id": "p7_safety_guardrails",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Safety Guardrails: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One prompt instruction is a complete safety system."
+      },
+      {
+        "id": "b",
+        "text": "Blocking every uncertain request has no cost."
+      },
+      {
+        "id": "c",
+        "text": "Different risks need deterministic, model, or human checks."
+      },
+      {
+        "id": "d",
+        "text": "Tool permissions are unnecessary when a filter exists."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Different risks need deterministic, model, or human checks.",
+    "graph_placement_weight": {
+      "p7_safety_guardrails": 1
+    }
+  },
+  {
+    "id": "p7_safety_guardrails_q4",
+    "skill_id": "p7_safety_guardrails",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Safety Guardrails: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One prompt instruction is a complete safety system."
+      },
+      {
+        "id": "b",
+        "text": "Blocking every uncertain request has no cost."
+      },
+      {
+        "id": "c",
+        "text": "Tool permissions are unnecessary when a filter exists."
+      },
+      {
+        "id": "d",
+        "text": "Multi-step tests reveal composed bypasses."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Multi-step tests reveal composed bypasses.",
+    "graph_placement_weight": {
+      "p7_safety_guardrails": 1
+    }
+  },
+  {
+    "id": "p7_safety_guardrails_q5",
+    "skill_id": "p7_safety_guardrails",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Safety Guardrails: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tool permissions limit damage when filters fail."
+      },
+      {
+        "id": "b",
+        "text": "One prompt instruction is a complete safety system."
+      },
+      {
+        "id": "c",
+        "text": "Blocking every uncertain request has no cost."
+      },
+      {
+        "id": "d",
+        "text": "Tool permissions are unnecessary when a filter exists."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Tool permissions limit damage when filters fail.",
+    "graph_placement_weight": {
+      "p7_safety_guardrails": 1
+    }
+  },
+  {
+    "id": "p7_safety_guardrails_q6",
+    "skill_id": "p7_safety_guardrails",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Safety Guardrails: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One prompt instruction is a complete safety system."
+      },
+      {
+        "id": "b",
+        "text": "Thresholds should reflect error costs and calibration."
+      },
+      {
+        "id": "c",
+        "text": "Blocking every uncertain request has no cost."
+      },
+      {
+        "id": "d",
+        "text": "Tool permissions are unnecessary when a filter exists."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Thresholds should reflect error costs and calibration.",
+    "graph_placement_weight": {
+      "p7_safety_guardrails": 1
+    }
+  }
+]

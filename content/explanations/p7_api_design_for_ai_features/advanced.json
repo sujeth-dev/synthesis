@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_api_design_for_ai_features",
+  "depth": "advanced",
+  "title": "API Design for AI Features — Version Behavior and Schemas",
+  "key_insight": "Version response schemas and behavior that clients depend on. Validate generated structure before storing or returning it.",
+  "body": "## Version Behavior and Schemas\n\nA prompt improvement changes output fields and breaks old clients. A model update can be an API change even when the URL stays fixed.\n\nVersion response schemas and behavior that clients depend on. Validate generated structure before storing or returning it.\n\nUse idempotency keys for job creation and writes. The same retried request should not create duplicate work or duplicate charges.",
+  "common_mistakes": [
+    "Clients should parse arbitrary prose as an API contract.",
+    "A retry should always create another paid job.",
+    "Model changes can never affect API behavior."
+  ],
+  "mini_exercise": "Draw “Version Behavior and Schemas” as three steps and explain each one.",
+  "real_world_usage": "A stable product API hides model churn and gives clients clear states, errors, and versioned behavior.",
+  "explain_back_prompt": "Use “Version Behavior and Schemas” to explain API Design for AI Features plainly."
+}

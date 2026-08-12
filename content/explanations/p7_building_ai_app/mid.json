@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_building_ai_app",
+  "depth": "mid",
+  "title": "Building an AI App — Connect Input to a Checked Output",
+  "key_insight": "Separate the interface, orchestration, model adapter, and storage boundaries. Typed data between them makes failures visible.",
+  "body": "## Connect Input to a Checked Output\n\nA working prototype needs more than one prompt. It must gather context, call the model, validate output, and present a useful next action.\n\nSeparate the interface, orchestration, model adapter, and storage boundaries. Typed data between them makes failures visible.\n\nLog consent-safe events and user corrections. Feedback is valuable only when tied to the exact model, prompt, and context.",
+  "common_mistakes": [
+    "Adding a chat box automatically creates user value.",
+    "Fluent output proves the user task succeeded.",
+    "A production app needs no fallback path."
+  ],
+  "mini_exercise": "Draw “Connect Input to a Checked Output” as three steps and explain each one.",
+  "real_world_usage": "A useful AI app connects a clear user job to context, model calls, validation, feedback, and fallback behavior.",
+  "explain_back_prompt": "Use “Connect Input to a Checked Output” to explain Building an AI App plainly.",
+  "build_task": {
+    "title": "Practice Building an AI App",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "define one user job",
+      "gather the needed context",
+      "call and validate the model",
+      "show a useful result or fallback"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

@@ -2193,21 +2193,31 @@
     "label": "AI APIs & Production",
     "phase": "phase_7_real_world",
     "difficulty_base": 3,
-    "question_ids": [],
+    "question_ids": [
+      "p7_ai_apis_q1",
+      "p7_ai_apis_q2",
+      "p7_ai_apis_q3",
+      "p7_ai_apis_q4",
+      "p7_ai_apis_q5",
+      "p7_ai_apis_q6",
+      "p7_ai_apis_order1",
+      "p7_ai_apis_fill1"
+    ],
     "explanation_ids": {
-      "beginner": "",
-      "mid": "",
-      "advanced": ""
+      "beginner": "p7_ai_apis_beginner",
+      "mid": "p7_ai_apis_mid",
+      "advanced": "p7_ai_apis_advanced",
+      "expert": "p7_ai_apis_expert"
     },
     "tags": [
-      "API",
-      "deployment",
+      "api",
+      "http",
       "production"
     ],
     "deprecated": false,
-    "intuition": "An API lets your application talk to an AI model hosted elsewhere.",
-    "analogy": "Like ordering food delivery — you don't need a kitchen, just the menu (API docs) and a phone (HTTP request).",
-    "why_it_matters": "Most AI applications call APIs. Building your first AI product means knowing how to use them correctly.",
+    "intuition": "An API lets one program request work from another service.",
+    "analogy": "Call a Model Without Hosting It",
+    "why_it_matters": "AI APIs let products use managed models while keeping credentials, errors, and costs under application control.",
     "topic": "Shipping AI Products",
     "topic_order": 1
   },
@@ -3101,5 +3111,416 @@
     "why_it_matters": "Model families and versions change quickly, so a repeatable evaluation process is more durable than one recommendation.",
     "topic": "Applying LLMs",
     "topic_order": 4
+  },
+  {
+    "id": "p7_building_ai_app",
+    "label": "Building an AI App",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p7_building_ai_app_q1",
+      "p7_building_ai_app_q2",
+      "p7_building_ai_app_q3",
+      "p7_building_ai_app_q4",
+      "p7_building_ai_app_q5",
+      "p7_building_ai_app_q6",
+      "p7_building_ai_app_order1",
+      "p7_building_ai_app_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_building_ai_app_beginner",
+      "mid": "p7_building_ai_app_mid",
+      "advanced": "p7_building_ai_app_advanced",
+      "expert": "p7_building_ai_app_expert"
+    },
+    "tags": [
+      "ai-app",
+      "workflow",
+      "product"
+    ],
+    "deprecated": false,
+    "intuition": "An AI app should begin with a specific user job.",
+    "analogy": "Start with the User’s Stuck Moment",
+    "why_it_matters": "A useful AI app connects a clear user job to context, model calls, validation, feedback, and fallback behavior.",
+    "topic": "Shipping AI Products",
+    "topic_order": 2
+  },
+  {
+    "id": "p7_api_design_for_ai_features",
+    "label": "API Design for AI Features",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p7_api_design_for_ai_features_q1",
+      "p7_api_design_for_ai_features_q2",
+      "p7_api_design_for_ai_features_q3",
+      "p7_api_design_for_ai_features_q4",
+      "p7_api_design_for_ai_features_q5",
+      "p7_api_design_for_ai_features_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_api_design_for_ai_features_beginner",
+      "mid": "p7_api_design_for_ai_features_mid",
+      "advanced": "p7_api_design_for_ai_features_advanced",
+      "expert": "p7_api_design_for_ai_features_expert"
+    },
+    "tags": [
+      "api-design",
+      "contracts",
+      "async"
+    ],
+    "deprecated": false,
+    "intuition": "Product APIs should describe the user job rather than one model vendor.",
+    "analogy": "Expose the Job, Not the Vendor",
+    "why_it_matters": "A stable product API hides model churn and gives clients clear states, errors, and versioned behavior.",
+    "topic": "Shipping AI Products",
+    "topic_order": 3
+  },
+  {
+    "id": "p7_evaluating_llm_outputs",
+    "label": "Evaluating LLM Outputs",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_evaluating_llm_outputs_q1",
+      "p7_evaluating_llm_outputs_q2",
+      "p7_evaluating_llm_outputs_q3",
+      "p7_evaluating_llm_outputs_q4",
+      "p7_evaluating_llm_outputs_q5",
+      "p7_evaluating_llm_outputs_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_evaluating_llm_outputs_beginner",
+      "mid": "p7_evaluating_llm_outputs_mid",
+      "advanced": "p7_evaluating_llm_outputs_advanced",
+      "expert": "p7_evaluating_llm_outputs_expert"
+    },
+    "tags": [
+      "evaluation",
+      "rubric",
+      "llm"
+    ],
+    "deprecated": false,
+    "intuition": "Output evaluation should reflect the real user job.",
+    "analogy": "Grade the Job, Not the Eloquence",
+    "why_it_matters": "Repeatable output evaluation catches quality regressions and separates plausible language from task success.",
+    "topic": "Quality & Safety",
+    "topic_order": 1
+  },
+  {
+    "id": "p7_explainability_and_interpretability",
+    "label": "Explainability & Interpretability",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_explainability_and_interpretability_q1",
+      "p7_explainability_and_interpretability_q2",
+      "p7_explainability_and_interpretability_q3",
+      "p7_explainability_and_interpretability_q4",
+      "p7_explainability_and_interpretability_q5",
+      "p7_explainability_and_interpretability_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_explainability_and_interpretability_beginner",
+      "mid": "p7_explainability_and_interpretability_mid",
+      "advanced": "p7_explainability_and_interpretability_advanced",
+      "expert": "p7_explainability_and_interpretability_expert"
+    },
+    "tags": [
+      "explainability",
+      "interpretability",
+      "attribution"
+    ],
+    "deprecated": false,
+    "intuition": "Explainability provides evidence about model behavior.",
+    "analogy": "Ask Why the Model Chose This",
+    "why_it_matters": "Explanations can help people inspect model behavior, but they must be tested rather than mistaken for proof.",
+    "topic": "Quality & Safety",
+    "topic_order": 2
+  },
+  {
+    "id": "p7_safety_guardrails",
+    "label": "Safety Guardrails",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_safety_guardrails_q1",
+      "p7_safety_guardrails_q2",
+      "p7_safety_guardrails_q3",
+      "p7_safety_guardrails_q4",
+      "p7_safety_guardrails_q5",
+      "p7_safety_guardrails_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_safety_guardrails_beginner",
+      "mid": "p7_safety_guardrails_mid",
+      "advanced": "p7_safety_guardrails_advanced",
+      "expert": "p7_safety_guardrails_expert"
+    },
+    "tags": [
+      "safety",
+      "guardrails",
+      "policy"
+    ],
+    "deprecated": false,
+    "intuition": "Guardrails should cover inputs, tools, outputs, and escalation.",
+    "analogy": "Put More Than One Rail on the Bridge",
+    "why_it_matters": "Layered guardrails reduce harmful inputs, outputs, and actions while preserving legitimate use and escalation.",
+    "topic": "Quality & Safety",
+    "topic_order": 3
+  },
+  {
+    "id": "p7_prompt_injection_and_jailbreaks",
+    "label": "Prompt Injection & Jailbreaks",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_prompt_injection_and_jailbreaks_q1",
+      "p7_prompt_injection_and_jailbreaks_q2",
+      "p7_prompt_injection_and_jailbreaks_q3",
+      "p7_prompt_injection_and_jailbreaks_q4",
+      "p7_prompt_injection_and_jailbreaks_q5",
+      "p7_prompt_injection_and_jailbreaks_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_prompt_injection_and_jailbreaks_beginner",
+      "mid": "p7_prompt_injection_and_jailbreaks_mid",
+      "advanced": "p7_prompt_injection_and_jailbreaks_advanced",
+      "expert": "p7_prompt_injection_and_jailbreaks_expert"
+    },
+    "tags": [
+      "prompt-injection",
+      "jailbreak",
+      "security"
+    ],
+    "deprecated": false,
+    "intuition": "Prompt injection uses untrusted content to redirect model behavior.",
+    "analogy": "The Document Tries to Give Orders",
+    "why_it_matters": "Applications must treat model-readable content as untrusted because text can attempt to redirect instructions and tools.",
+    "topic": "Quality & Safety",
+    "topic_order": 4
+  },
+  {
+    "id": "p7_content_moderation",
+    "label": "Content Moderation",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p7_content_moderation_q1",
+      "p7_content_moderation_q2",
+      "p7_content_moderation_q3",
+      "p7_content_moderation_q4",
+      "p7_content_moderation_q5",
+      "p7_content_moderation_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_content_moderation_beginner",
+      "mid": "p7_content_moderation_mid",
+      "advanced": "p7_content_moderation_advanced",
+      "expert": "p7_content_moderation_expert"
+    },
+    "tags": [
+      "moderation",
+      "policy",
+      "classification"
+    ],
+    "deprecated": false,
+    "intuition": "Moderation maps content to a policy and action.",
+    "analogy": "Decide What the Community Allows",
+    "why_it_matters": "Moderation applies explicit policy to user and model content with calibrated automation and human escalation.",
+    "topic": "Quality & Safety",
+    "topic_order": 5
+  },
+  {
+    "id": "p7_cost_latency_optimization",
+    "label": "Cost & Latency Optimization",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_cost_latency_optimization_q1",
+      "p7_cost_latency_optimization_q2",
+      "p7_cost_latency_optimization_q3",
+      "p7_cost_latency_optimization_q4",
+      "p7_cost_latency_optimization_q5",
+      "p7_cost_latency_optimization_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_cost_latency_optimization_beginner",
+      "mid": "p7_cost_latency_optimization_mid",
+      "advanced": "p7_cost_latency_optimization_advanced",
+      "expert": "p7_cost_latency_optimization_expert"
+    },
+    "tags": [
+      "cost",
+      "latency",
+      "optimization"
+    ],
+    "deprecated": false,
+    "intuition": "Cost analysis should separate tokens, retrieval, tools, and retries.",
+    "analogy": "Find Where Time and Money Go",
+    "why_it_matters": "Production AI must meet quality targets within token, compute, and response-time budgets.",
+    "topic": "Performance & Cost",
+    "topic_order": 1
+  },
+  {
+    "id": "p7_caching_and_batching",
+    "label": "Caching & Batching",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_caching_and_batching_q1",
+      "p7_caching_and_batching_q2",
+      "p7_caching_and_batching_q3",
+      "p7_caching_and_batching_q4",
+      "p7_caching_and_batching_q5",
+      "p7_caching_and_batching_q6",
+      "p7_caching_and_batching_order1",
+      "p7_caching_and_batching_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_caching_and_batching_beginner",
+      "mid": "p7_caching_and_batching_mid",
+      "advanced": "p7_caching_and_batching_advanced",
+      "expert": "p7_caching_and_batching_expert"
+    },
+    "tags": [
+      "caching",
+      "batching",
+      "throughput"
+    ],
+    "deprecated": false,
+    "intuition": "A cache key must include inputs that affect correctness.",
+    "analogy": "Do Not Recompute the Same Answer",
+    "why_it_matters": "Caching avoids repeated work and batching shares hardware work, but both require correctness and freshness rules.",
+    "topic": "Performance & Cost",
+    "topic_order": 2
+  },
+  {
+    "id": "p7_model_selection_tradeoffs",
+    "label": "Model Selection Tradeoffs",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_model_selection_tradeoffs_q1",
+      "p7_model_selection_tradeoffs_q2",
+      "p7_model_selection_tradeoffs_q3",
+      "p7_model_selection_tradeoffs_q4",
+      "p7_model_selection_tradeoffs_q5",
+      "p7_model_selection_tradeoffs_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_model_selection_tradeoffs_beginner",
+      "mid": "p7_model_selection_tradeoffs_mid",
+      "advanced": "p7_model_selection_tradeoffs_advanced",
+      "expert": "p7_model_selection_tradeoffs_expert"
+    },
+    "tags": [
+      "model-selection",
+      "tradeoffs",
+      "local-model"
+    ],
+    "deprecated": false,
+    "intuition": "Model choice should use representative workload tests.",
+    "analogy": "Choose the Smallest Tool That Does the Job",
+    "why_it_matters": "Real systems choose among local, hosted, small, and large models by workload-specific constraints.",
+    "topic": "Performance & Cost",
+    "topic_order": 3
+  },
+  {
+    "id": "p7_deployment_hosting",
+    "label": "Deployment & Hosting",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 4,
+    "question_ids": [
+      "p7_deployment_hosting_q1",
+      "p7_deployment_hosting_q2",
+      "p7_deployment_hosting_q3",
+      "p7_deployment_hosting_q4",
+      "p7_deployment_hosting_q5",
+      "p7_deployment_hosting_q6"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_deployment_hosting_beginner",
+      "mid": "p7_deployment_hosting_mid",
+      "advanced": "p7_deployment_hosting_advanced",
+      "expert": "p7_deployment_hosting_expert"
+    },
+    "tags": [
+      "deployment",
+      "hosting",
+      "containers"
+    ],
+    "deprecated": false,
+    "intuition": "Deployment needs repeatable code and dependencies.",
+    "analogy": "Move Beyond the Laptop",
+    "why_it_matters": "Deployment turns a working AI service into a repeatable, secure, scalable runtime.",
+    "topic": "Operating in Production",
+    "topic_order": 1
+  },
+  {
+    "id": "p7_monitoring_observability",
+    "label": "Monitoring & Observability",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_monitoring_observability_q1",
+      "p7_monitoring_observability_q2",
+      "p7_monitoring_observability_q3",
+      "p7_monitoring_observability_q4",
+      "p7_monitoring_observability_q5",
+      "p7_monitoring_observability_q6",
+      "p7_monitoring_observability_order1",
+      "p7_monitoring_observability_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_monitoring_observability_beginner",
+      "mid": "p7_monitoring_observability_mid",
+      "advanced": "p7_monitoring_observability_advanced",
+      "expert": "p7_monitoring_observability_expert"
+    },
+    "tags": [
+      "monitoring",
+      "observability",
+      "tracing"
+    ],
+    "deprecated": false,
+    "intuition": "Logs, metrics, and traces answer different operational questions.",
+    "analogy": "Know Which Station Failed",
+    "why_it_matters": "Observability connects user outcomes to requests, retrieval, models, tools, costs, and failures without exposing sensitive data.",
+    "topic": "Operating in Production",
+    "topic_order": 2
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps",
+    "label": "CI/CD for AI Apps",
+    "phase": "phase_7_real_world",
+    "difficulty_base": 5,
+    "question_ids": [
+      "p7_ci_cd_for_ai_apps_q1",
+      "p7_ci_cd_for_ai_apps_q2",
+      "p7_ci_cd_for_ai_apps_q3",
+      "p7_ci_cd_for_ai_apps_q4",
+      "p7_ci_cd_for_ai_apps_q5",
+      "p7_ci_cd_for_ai_apps_q6",
+      "p7_ci_cd_for_ai_apps_order1",
+      "p7_ci_cd_for_ai_apps_fill1"
+    ],
+    "explanation_ids": {
+      "beginner": "p7_ci_cd_for_ai_apps_beginner",
+      "mid": "p7_ci_cd_for_ai_apps_mid",
+      "advanced": "p7_ci_cd_for_ai_apps_advanced",
+      "expert": "p7_ci_cd_for_ai_apps_expert"
+    },
+    "tags": [
+      "ci-cd",
+      "testing",
+      "versioning"
+    ],
+    "deprecated": false,
+    "intuition": "AI CI should test prompts, schemas, retrieval, and safety as well as code.",
+    "analogy": "Test More Than the Code",
+    "why_it_matters": "AI delivery pipelines test code, prompts, models, data contracts, and safety before controlled release.",
+    "topic": "Operating in Production",
+    "topic_order": 3
   }
 ]

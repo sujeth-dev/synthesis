@@ -793,5 +793,75 @@
     "from": "p6_evaluating_and_choosing_llms",
     "to": "p7_ai_apis",
     "strength": "hard"
+  },
+  {
+    "from": "p7_ai_apis",
+    "to": "p7_building_ai_app",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_building_ai_app",
+    "to": "p7_api_design_for_ai_features",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_building_ai_app",
+    "to": "p7_evaluating_llm_outputs",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_evaluating_llm_outputs",
+    "to": "p7_explainability_and_interpretability",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_evaluating_llm_outputs",
+    "to": "p7_safety_guardrails",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_safety_guardrails",
+    "to": "p7_prompt_injection_and_jailbreaks",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_safety_guardrails",
+    "to": "p7_content_moderation",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_ai_apis",
+    "to": "p7_cost_latency_optimization",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_cost_latency_optimization",
+    "to": "p7_caching_and_batching",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_cost_latency_optimization",
+    "to": "p7_model_selection_tradeoffs",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_api_design_for_ai_features",
+    "to": "p7_deployment_hosting",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_deployment_hosting",
+    "to": "p7_monitoring_observability",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_monitoring_observability",
+    "to": "p7_ci_cd_for_ai_apps",
+    "strength": "hard"
+  },
+  {
+    "from": "p7_ci_cd_for_ai_apps",
+    "to": "p8_system_design_ai",
+    "strength": "hard"
   }
 ]

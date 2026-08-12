@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_content_moderation_q1",
+    "skill_id": "p7_content_moderation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Content Moderation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Moderation maps content to a policy and action."
+      },
+      {
+        "id": "b",
+        "text": "A classifier removes the need for written policy."
+      },
+      {
+        "id": "c",
+        "text": "Uncertain cases should always be treated as definitely harmful."
+      },
+      {
+        "id": "d",
+        "text": "Reviewer safety has no effect on moderation quality."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Moderation maps content to a policy and action.",
+    "graph_placement_weight": {
+      "p7_content_moderation": 1
+    }
+  },
+  {
+    "id": "p7_content_moderation_q2",
+    "skill_id": "p7_content_moderation",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Content Moderation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A classifier removes the need for written policy."
+      },
+      {
+        "id": "b",
+        "text": "Clear policy comes before classifier automation."
+      },
+      {
+        "id": "c",
+        "text": "Uncertain cases should always be treated as definitely harmful."
+      },
+      {
+        "id": "d",
+        "text": "Reviewer safety has no effect on moderation quality."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Clear policy comes before classifier automation.",
+    "graph_placement_weight": {
+      "p7_content_moderation": 1
+    }
+  },
+  {
+    "id": "p7_content_moderation_q3",
+    "skill_id": "p7_content_moderation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Content Moderation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A classifier removes the need for written policy."
+      },
+      {
+        "id": "b",
+        "text": "Uncertain cases should always be treated as definitely harmful."
+      },
+      {
+        "id": "c",
+        "text": "Classifier thresholds can route uncertain cases to review."
+      },
+      {
+        "id": "d",
+        "text": "Reviewer safety has no effect on moderation quality."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Classifier thresholds can route uncertain cases to review.",
+    "graph_placement_weight": {
+      "p7_content_moderation": 1
+    }
+  },
+  {
+    "id": "p7_content_moderation_q4",
+    "skill_id": "p7_content_moderation",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Content Moderation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A classifier removes the need for written policy."
+      },
+      {
+        "id": "b",
+        "text": "Uncertain cases should always be treated as definitely harmful."
+      },
+      {
+        "id": "c",
+        "text": "Reviewer safety has no effect on moderation quality."
+      },
+      {
+        "id": "d",
+        "text": "Both harmful misses and wrongful blocks matter."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Both harmful misses and wrongful blocks matter.",
+    "graph_placement_weight": {
+      "p7_content_moderation": 1
+    }
+  },
+  {
+    "id": "p7_content_moderation_q5",
+    "skill_id": "p7_content_moderation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Content Moderation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Reviewer wellbeing is an operational requirement."
+      },
+      {
+        "id": "b",
+        "text": "A classifier removes the need for written policy."
+      },
+      {
+        "id": "c",
+        "text": "Uncertain cases should always be treated as definitely harmful."
+      },
+      {
+        "id": "d",
+        "text": "Reviewer safety has no effect on moderation quality."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Reviewer wellbeing is an operational requirement.",
+    "graph_placement_weight": {
+      "p7_content_moderation": 1
+    }
+  },
+  {
+    "id": "p7_content_moderation_q6",
+    "skill_id": "p7_content_moderation",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Content Moderation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A classifier removes the need for written policy."
+      },
+      {
+        "id": "b",
+        "text": "Adversarial behavior and policy changes create moderation drift."
+      },
+      {
+        "id": "c",
+        "text": "Uncertain cases should always be treated as definitely harmful."
+      },
+      {
+        "id": "d",
+        "text": "Reviewer safety has no effect on moderation quality."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Adversarial behavior and policy changes create moderation drift.",
+    "graph_placement_weight": {
+      "p7_content_moderation": 1
+    }
+  }
+]

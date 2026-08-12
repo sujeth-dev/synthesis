@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_explainability_and_interpretability_q1",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Explainability & Interpretability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Explainability provides evidence about model behavior."
+      },
+      {
+        "id": "b",
+        "text": "A colorful heatmap is always faithful."
+      },
+      {
+        "id": "c",
+        "text": "One local explanation describes all global behavior."
+      },
+      {
+        "id": "d",
+        "text": "Explainability removes the need for appeals."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Explainability provides evidence about model behavior.",
+    "graph_placement_weight": {
+      "p7_explainability_and_interpretability": 1
+    }
+  },
+  {
+    "id": "p7_explainability_and_interpretability_q2",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Explainability & Interpretability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A colorful heatmap is always faithful."
+      },
+      {
+        "id": "b",
+        "text": "An explanation is not automatic proof."
+      },
+      {
+        "id": "c",
+        "text": "One local explanation describes all global behavior."
+      },
+      {
+        "id": "d",
+        "text": "Explainability removes the need for appeals."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An explanation is not automatic proof.",
+    "graph_placement_weight": {
+      "p7_explainability_and_interpretability": 1
+    }
+  },
+  {
+    "id": "p7_explainability_and_interpretability_q3",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Explainability & Interpretability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A colorful heatmap is always faithful."
+      },
+      {
+        "id": "b",
+        "text": "One local explanation describes all global behavior."
+      },
+      {
+        "id": "c",
+        "text": "Local surrogates approximate behavior near one case."
+      },
+      {
+        "id": "d",
+        "text": "Explainability removes the need for appeals."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Local surrogates approximate behavior near one case.",
+    "graph_placement_weight": {
+      "p7_explainability_and_interpretability": 1
+    }
+  },
+  {
+    "id": "p7_explainability_and_interpretability_q4",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Explainability & Interpretability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A colorful heatmap is always faithful."
+      },
+      {
+        "id": "b",
+        "text": "One local explanation describes all global behavior."
+      },
+      {
+        "id": "c",
+        "text": "Explainability removes the need for appeals."
+      },
+      {
+        "id": "d",
+        "text": "Attribution depends on a baseline or comparison."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Attribution depends on a baseline or comparison.",
+    "graph_placement_weight": {
+      "p7_explainability_and_interpretability": 1
+    }
+  },
+  {
+    "id": "p7_explainability_and_interpretability_q5",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Explainability & Interpretability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sanity tests check whether explanations respond to meaningful changes."
+      },
+      {
+        "id": "b",
+        "text": "A colorful heatmap is always faithful."
+      },
+      {
+        "id": "c",
+        "text": "One local explanation describes all global behavior."
+      },
+      {
+        "id": "d",
+        "text": "Explainability removes the need for appeals."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Sanity tests check whether explanations respond to meaningful changes.",
+    "graph_placement_weight": {
+      "p7_explainability_and_interpretability": 1
+    }
+  },
+  {
+    "id": "p7_explainability_and_interpretability_q6",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Explainability & Interpretability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A colorful heatmap is always faithful."
+      },
+      {
+        "id": "b",
+        "text": "Interventions provide stronger causal evidence than observation alone."
+      },
+      {
+        "id": "c",
+        "text": "One local explanation describes all global behavior."
+      },
+      {
+        "id": "d",
+        "text": "Explainability removes the need for appeals."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Interventions provide stronger causal evidence than observation alone.",
+    "graph_placement_weight": {
+      "p7_explainability_and_interpretability": 1
+    }
+  }
+]

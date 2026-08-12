@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p7_caching_and_batching_q1",
+    "skill_id": "p7_caching_and_batching",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Caching & Batching: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A cache key must include inputs that affect correctness."
+      },
+      {
+        "id": "b",
+        "text": "One global cache key is safe for private users."
+      },
+      {
+        "id": "c",
+        "text": "Batching guarantees zero waiting time."
+      },
+      {
+        "id": "d",
+        "text": "A high cache hit rate proves answers are fresh."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A cache key must include inputs that affect correctness.",
+    "graph_placement_weight": {
+      "p7_caching_and_batching": 1
+    }
+  },
+  {
+    "id": "p7_caching_and_batching_q2",
+    "skill_id": "p7_caching_and_batching",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Caching & Batching: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One global cache key is safe for private users."
+      },
+      {
+        "id": "b",
+        "text": "Private cached results require tenant isolation."
+      },
+      {
+        "id": "c",
+        "text": "Batching guarantees zero waiting time."
+      },
+      {
+        "id": "d",
+        "text": "A high cache hit rate proves answers are fresh."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Private cached results require tenant isolation.",
+    "graph_placement_weight": {
+      "p7_caching_and_batching": 1
+    }
+  },
+  {
+    "id": "p7_caching_and_batching_q3",
+    "skill_id": "p7_caching_and_batching",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Caching & Batching: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One global cache key is safe for private users."
+      },
+      {
+        "id": "b",
+        "text": "Batching guarantees zero waiting time."
+      },
+      {
+        "id": "c",
+        "text": "Batching can improve hardware throughput."
+      },
+      {
+        "id": "d",
+        "text": "A high cache hit rate proves answers are fresh."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Batching can improve hardware throughput.",
+    "graph_placement_weight": {
+      "p7_caching_and_batching": 1
+    }
+  },
+  {
+    "id": "p7_caching_and_batching_q4",
+    "skill_id": "p7_caching_and_batching",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Caching & Batching: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One global cache key is safe for private users."
+      },
+      {
+        "id": "b",
+        "text": "Batching guarantees zero waiting time."
+      },
+      {
+        "id": "c",
+        "text": "A high cache hit rate proves answers are fresh."
+      },
+      {
+        "id": "d",
+        "text": "Dynamic batching trades a short wait for fuller batches."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Dynamic batching trades a short wait for fuller batches.",
+    "graph_placement_weight": {
+      "p7_caching_and_batching": 1
+    }
+  },
+  {
+    "id": "p7_caching_and_batching_q5",
+    "skill_id": "p7_caching_and_batching",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Caching & Batching: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Semantic caching is unsafe when subtle differences matter."
+      },
+      {
+        "id": "b",
+        "text": "One global cache key is safe for private users."
+      },
+      {
+        "id": "c",
+        "text": "Batching guarantees zero waiting time."
+      },
+      {
+        "id": "d",
+        "text": "A high cache hit rate proves answers are fresh."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Semantic caching is unsafe when subtle differences matter.",
+    "graph_placement_weight": {
+      "p7_caching_and_batching": 1
+    }
+  },
+  {
+    "id": "p7_caching_and_batching_q6",
+    "skill_id": "p7_caching_and_batching",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Caching & Batching: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One global cache key is safe for private users."
+      },
+      {
+        "id": "b",
+        "text": "Request coalescing prevents many workers rebuilding one expired value."
+      },
+      {
+        "id": "c",
+        "text": "Batching guarantees zero waiting time."
+      },
+      {
+        "id": "d",
+        "text": "A high cache hit rate proves answers are fresh."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Request coalescing prevents many workers rebuilding one expired value.",
+    "graph_placement_weight": {
+      "p7_caching_and_batching": 1
+    }
+  },
+  {
+    "id": "p7_caching_and_batching_order1",
+    "skill_id": "p7_caching_and_batching",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Caching & Batching workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define a complete cache key"
+      },
+      {
+        "id": "b",
+        "text": "check for a safe fresh result"
+      },
+      {
+        "id": "c",
+        "text": "compute once on a miss"
+      },
+      {
+        "id": "d",
+        "text": "store with version and expiry"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "define a complete cache key → check for a safe fresh result → compute once on a miss → store with version and expiry"
+  },
+  {
+    "id": "p7_caching_and_batching_fill1",
+    "skill_id": "p7_caching_and_batching",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the safest first action for Caching & Batching.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define a complete cache key"
+      },
+      {
+        "id": "b",
+        "text": "check for a safe fresh result"
+      },
+      {
+        "id": "c",
+        "text": "compute once on a miss"
+      },
+      {
+        "id": "d",
+        "text": "store with version and expiry"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "define a complete cache key",
+    "explanation_after": "Start with define a complete cache key."
+  }
+]

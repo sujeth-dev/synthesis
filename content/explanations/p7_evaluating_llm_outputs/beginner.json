@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_evaluating_llm_outputs",
+  "depth": "beginner",
+  "title": "Evaluating LLM Outputs — Grade the Job, Not the Eloquence",
+  "key_insight": "Write criteria for the actual job: correctness, evidence, completeness, format, and safety where relevant.",
+  "body": "## Grade the Job, Not the Eloquence\n\nA polished answer gives the wrong refund policy. Fluency distracted the reviewer from factual failure.\n\nWrite criteria for the actual job: correctness, evidence, completeness, format, and safety where relevant.\n\nCollect representative prompts and expected checks before changing prompts or models, so improvements have a stable judge.",
+  "common_mistakes": [
+    "One fluent sample proves production quality.",
+    "All good summaries must exactly match one sentence.",
+    "A model grader is a permanent ground truth."
+  ],
+  "mini_exercise": "Draw “Grade the Job, Not the Eloquence” as three steps and explain each one.",
+  "real_world_usage": "Repeatable output evaluation catches quality regressions and separates plausible language from task success.",
+  "explain_back_prompt": "Use “Grade the Job, Not the Eloquence” to explain Evaluating LLM Outputs plainly."
+}

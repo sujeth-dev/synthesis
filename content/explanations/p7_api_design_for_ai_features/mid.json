@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_api_design_for_ai_features",
+  "depth": "mid",
+  "title": "API Design for AI Features — Choose Synchronous or Asynchronous Work",
+  "key_insight": "Synchronous endpoints return the result directly. Asynchronous endpoints create a job ID, then expose status and result retrieval or callbacks.",
+  "body": "## Choose Synchronous or Asynchronous Work\n\nA short classification finishes during one request, but a long document job outlives normal network timeouts.\n\nSynchronous endpoints return the result directly. Asynchronous endpoints create a job ID, then expose status and result retrieval or callbacks.\n\nMake status states clear: queued, running, succeeded, failed, and cancelled. Define how long results and logs remain available.",
+  "common_mistakes": [
+    "Clients should parse arbitrary prose as an API contract.",
+    "A retry should always create another paid job.",
+    "Model changes can never affect API behavior."
+  ],
+  "mini_exercise": "Draw “Choose Synchronous or Asynchronous Work” as three steps and explain each one.",
+  "real_world_usage": "A stable product API hides model churn and gives clients clear states, errors, and versioned behavior.",
+  "explain_back_prompt": "Use “Choose Synchronous or Asynchronous Work” to explain API Design for AI Features plainly."
+}

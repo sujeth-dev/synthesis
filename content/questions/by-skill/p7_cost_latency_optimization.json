@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_cost_latency_optimization_q1",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Cost & Latency Optimization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cost analysis should separate tokens, retrieval, tools, and retries."
+      },
+      {
+        "id": "b",
+        "text": "The cheapest response is best even when wrong."
+      },
+      {
+        "id": "c",
+        "text": "Average latency fully describes user experience."
+      },
+      {
+        "id": "d",
+        "text": "Unlimited concurrency always reduces latency."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Cost analysis should separate tokens, retrieval, tools, and retries.",
+    "graph_placement_weight": {
+      "p7_cost_latency_optimization": 1
+    }
+  },
+  {
+    "id": "p7_cost_latency_optimization_q2",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Cost & Latency Optimization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The cheapest response is best even when wrong."
+      },
+      {
+        "id": "b",
+        "text": "Optimization needs a minimum quality target."
+      },
+      {
+        "id": "c",
+        "text": "Average latency fully describes user experience."
+      },
+      {
+        "id": "d",
+        "text": "Unlimited concurrency always reduces latency."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Optimization needs a minimum quality target.",
+    "graph_placement_weight": {
+      "p7_cost_latency_optimization": 1
+    }
+  },
+  {
+    "id": "p7_cost_latency_optimization_q3",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Cost & Latency Optimization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The cheapest response is best even when wrong."
+      },
+      {
+        "id": "b",
+        "text": "Average latency fully describes user experience."
+      },
+      {
+        "id": "c",
+        "text": "Trimming irrelevant context can reduce cost and latency."
+      },
+      {
+        "id": "d",
+        "text": "Unlimited concurrency always reduces latency."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Trimming irrelevant context can reduce cost and latency.",
+    "graph_placement_weight": {
+      "p7_cost_latency_optimization": 1
+    }
+  },
+  {
+    "id": "p7_cost_latency_optimization_q4",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Cost & Latency Optimization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The cheapest response is best even when wrong."
+      },
+      {
+        "id": "b",
+        "text": "Average latency fully describes user experience."
+      },
+      {
+        "id": "c",
+        "text": "Unlimited concurrency always reduces latency."
+      },
+      {
+        "id": "d",
+        "text": "First-token and full-response latency measure different experiences."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "First-token and full-response latency measure different experiences.",
+    "graph_placement_weight": {
+      "p7_cost_latency_optimization": 1
+    }
+  },
+  {
+    "id": "p7_cost_latency_optimization_q5",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Cost & Latency Optimization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tail percentiles reveal slow cases hidden by averages."
+      },
+      {
+        "id": "b",
+        "text": "The cheapest response is best even when wrong."
+      },
+      {
+        "id": "c",
+        "text": "Average latency fully describes user experience."
+      },
+      {
+        "id": "d",
+        "text": "Unlimited concurrency always reduces latency."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Tail percentiles reveal slow cases hidden by averages.",
+    "graph_placement_weight": {
+      "p7_cost_latency_optimization": 1
+    }
+  },
+  {
+    "id": "p7_cost_latency_optimization_q6",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Cost & Latency Optimization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The cheapest response is best even when wrong."
+      },
+      {
+        "id": "b",
+        "text": "Routing can reserve expensive models for cases that benefit."
+      },
+      {
+        "id": "c",
+        "text": "Average latency fully describes user experience."
+      },
+      {
+        "id": "d",
+        "text": "Unlimited concurrency always reduces latency."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Routing can reserve expensive models for cases that benefit.",
+    "graph_placement_weight": {
+      "p7_cost_latency_optimization": 1
+    }
+  }
+]

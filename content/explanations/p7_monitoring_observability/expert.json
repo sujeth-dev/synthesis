@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_monitoring_observability",
+  "depth": "expert",
+  "title": "Monitoring & Observability — Detect Semantic Drift",
+  "key_insight": "Track sampled quality evaluations, retrieval distributions, refusals, citation support, and user corrections by version and slice.",
+  "body": "## Detect Semantic Drift\n\nThe service stays fast and error-free while answer quality declines after a corpus or model change. Operational metrics look healthy.\n\nTrack sampled quality evaluations, retrieval distributions, refusals, citation support, and user corrections by version and slice.\n\nQuality monitoring is delayed and noisy, so connect it to controlled canaries and rollback evidence. Never use private content in evaluation without proper consent and handling.",
+  "common_mistakes": [
+    "One final error count identifies every root cause.",
+    "All user prompts should be logged forever.",
+    "Fast responses guarantee useful answers."
+  ],
+  "mini_exercise": "Draw “Detect Semantic Drift” as three steps and explain each one.",
+  "real_world_usage": "Observability connects user outcomes to requests, retrieval, models, tools, costs, and failures without exposing sensitive data.",
+  "explain_back_prompt": "Use “Detect Semantic Drift” to explain Monitoring & Observability plainly."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_deployment_hosting",
+  "depth": "advanced",
+  "title": "Deployment & Hosting — Scale the Right Bottleneck",
+  "key_insight": "Measure CPU, memory, accelerator use, network, provider quotas, and queue depth. Scale the constrained stage and cap upstream demand.",
+  "body": "## Scale the Right Bottleneck\n\nMore web servers do not help when every request waits on one model endpoint or GPU queue.\n\nMeasure CPU, memory, accelerator use, network, provider quotas, and queue depth. Scale the constrained stage and cap upstream demand.\n\nCold starts matter for large weights. Keep warm capacity or route initial requests to ready replicas.",
+  "common_mistakes": [
+    "A laptop environment is automatically reproducible.",
+    "Adding web servers fixes every downstream bottleneck.",
+    "Health checks prove model answer quality."
+  ],
+  "mini_exercise": "Draw “Scale the Right Bottleneck” as three steps and explain each one.",
+  "real_world_usage": "Deployment turns a working AI service into a repeatable, secure, scalable runtime.",
+  "explain_back_prompt": "Use “Scale the Right Bottleneck” to explain Deployment & Hosting plainly."
+}

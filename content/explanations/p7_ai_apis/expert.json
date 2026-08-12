@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_ai_apis",
+  "depth": "expert",
+  "title": "AI APIs & Production — Design for Provider Change",
+  "key_insight": "Put a narrow adapter around each provider and expose one internal request-result contract. Preserve provider-specific details only where the product truly needs them.",
+  "body": "## Design for Provider Change\n\nA provider changes a model version and one response field. Code tied directly to that shape breaks across the product.\n\nPut a narrow adapter around each provider and expose one internal request-result contract. Preserve provider-specific details only where the product truly needs them.\n\nUse idempotency and audit records around side effects. Test fallbacks under real failure modes, because a backup that is never exercised is only a hope.",
+  "common_mistakes": [
+    "API keys are safest inside public browser code.",
+    "Every failed request should retry forever.",
+    "Model responses never require validation."
+  ],
+  "mini_exercise": "Draw “Design for Provider Change” as three steps and explain each one.",
+  "real_world_usage": "AI APIs let products use managed models while keeping credentials, errors, and costs under application control.",
+  "explain_back_prompt": "Use “Design for Provider Change” to explain AI APIs & Production plainly."
+}

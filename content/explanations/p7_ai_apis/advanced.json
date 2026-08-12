@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_ai_apis",
+  "depth": "advanced",
+  "title": "AI APIs & Production — Stream, Cancel, and Bound Work",
+  "key_insight": "Streaming sends partial output as it arrives. Cancellation should propagate from the client through your server to the provider where supported.",
+  "body": "## Stream, Cancel, and Bound Work\n\nA long answer makes the interface feel frozen and continues spending money after the user leaves.\n\nStreaming sends partial output as it arrives. Cancellation should propagate from the client through your server to the provider where supported.\n\nSet maximum input and output tokens, concurrency, and deadlines. Backpressure keeps incoming demand from exhausting memory or provider quotas.",
+  "common_mistakes": [
+    "API keys are safest inside public browser code.",
+    "Every failed request should retry forever.",
+    "Model responses never require validation."
+  ],
+  "mini_exercise": "Draw “Stream, Cancel, and Bound Work” as three steps and explain each one.",
+  "real_world_usage": "AI APIs let products use managed models while keeping credentials, errors, and costs under application control.",
+  "explain_back_prompt": "Use “Stream, Cancel, and Bound Work” to explain AI APIs & Production plainly.",
+  "build_task": {
+    "title": "Practice AI APIs & Production",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "form the server request",
+      "send it with a timeout",
+      "validate the response",
+      "return a safe result to the client"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

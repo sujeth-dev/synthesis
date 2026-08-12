@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_building_ai_app",
+  "depth": "expert",
+  "title": "Building an AI App — Treat the Product as a Decision System",
+  "key_insight": "Define which decisions are advisory, automatically executed, or human-approved. Store enough evidence to explain and reverse important actions.",
+  "body": "## Treat the Product as a Decision System\n\nModel output changes what a user sees or what software does next. That makes thresholds, overrides, and accountability part of the design.\n\nDefine which decisions are advisory, automatically executed, or human-approved. Store enough evidence to explain and reverse important actions.\n\nMeasure task completion and harm, not merely messages sent. A fluent model can increase engagement while making the real job worse.",
+  "common_mistakes": [
+    "Adding a chat box automatically creates user value.",
+    "Fluent output proves the user task succeeded.",
+    "A production app needs no fallback path."
+  ],
+  "mini_exercise": "Draw “Treat the Product as a Decision System” as three steps and explain each one.",
+  "real_world_usage": "A useful AI app connects a clear user job to context, model calls, validation, feedback, and fallback behavior.",
+  "explain_back_prompt": "Use “Treat the Product as a Decision System” to explain Building an AI App plainly."
+}
