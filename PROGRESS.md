@@ -6,19 +6,19 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-3 is in progress; its mandatory five-node style checkpoint was approved on 2026-08-12.** The approved sample contains the revised beginner/mid/advanced explanations for `p2_math_matrices`, plus beginner/mid/advanced/expert explanations and question banks for `p1b_oop_classes`, `p2_calculus_basics`, `p4_sklearn_workflow`, and `p5_backpropagation`. The graph shape from `e61e0e4` remains unchanged.
+**P2-3 is in progress; Set 1 is complete and the next unit is Set 2 (Phase 4).** The approved five-node style checkpoint remains the binding content reference.
 
 The checkpoint required three passes and settled two hard authoring rules for all remaining P2-3 content:
 1. **Zero background at every depth.** Expert depth covers harder material but teaches it as plainly and cumulatively as beginner depth. It may name advanced ideas only after making them understandable through a concrete situation or analogy; it cannot assume outside topic fluency.
 2. **`body` is a micro-lesson, not an article.** Every body must resolve through `splitExplanationSteps()` to 2-3 short slides: one heading joined to its opening paragraph, then at most two short standalone paragraphs. Supporting fields stay outside the slide flow but follow the same plain-language rule.
 
-All 19 checkpoint bodies resolve to exactly three slides with one heading and no fenced code. `npm run validate` passes with 0 errors; its 115 stale-question-ID warnings predate this checkpoint and are unchanged. The content, questions, and this documentation update ship together in the local checkpoint commit; nothing is pushed.
+Set 1 added `topic`/`topic_order` to the schema and every graph node; split Phase 1 into 5-node Computer Basics and 14-node Programming Basics; split the old mixed Phase 1 evaluation into independently valid `p1_evaluation.json` and `p1b_evaluation.json`; authored `p2_data_cleaning_preprocessing`; and added a second harder MCQ to each checkpoint bank so every guided difficulty tier has two distinct MCQs. Its four new explanation bodies each resolve to exactly three slides. `npm test` (58 tests), `npm run build`, and `npm run validate` pass; the validator's 115 stale-question-ID warnings are pre-existing.
 
 ---
 
 ## Next action
 
-Continue Set 1 using the approved checkpoint as the style contract: add `topic`/`topic_order`, perform the real Phase 1 split into `phase_1b_programming_basics` (including the required Phase 1 evaluation handling), and author `p2_data_cleaning_preprocessing`. Stop at the Set 1 review/validation boundary before starting Sets 2-6. Do not redo the approved checkpoint or the graph entries already committed in `e61e0e4`.
+Continue with Set 2: complete all 16 Phase 4 nodes across the five topics in `node-audit-and-hero-path-plan.md` Section B, including four explanation depths, six MCQs per node, hands-on ladder items where they genuinely fit, graph edges, and `p4_evaluation.json`. Add Phase 4 to the validator/runtime evaluation maps, validate, build, test, update these docs, and commit locally before Set 3. Never push.
 
 ---
 
@@ -45,6 +45,7 @@ Continue Set 1 using the approved checkpoint as the style contract: add `topic`/
 
 ## Completed work (chronological)
 
+- 2026-08-12 — **P2-3 Set 1 complete:** introduced first-class topic placement, split Computer Basics from Programming Basics with separate Bloom evaluations, authored the data-cleaning prerequisite, and restored two distinct MCQs per guided tier for checkpoint nodes. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings).
 - 2026-08-10 — **P2-2A real-browser persistence regression added:** Playwright now creates an isolated learner against the running app/configured database, completes the lesson slide by slide, proves every answer is persisted, verifies a wrong Intermediate answer drops to a different Beginner question, recovers through Beginner → Intermediate → Mastery without switching skills or replaying the lesson, and confirms the optional Feynman action after the core journey. This exposed live schema drift that mocked DB tests could not detect; core-column fallback and persistence-before-session-count ordering fix the resulting repeat/progress bug. Expanded E2E, all 51 unit tests, and the production build are green.
 
 ### Prior to this planning pass (from git history, `git log --oneline`)

@@ -2,6 +2,7 @@ import type { SkillNode, LearnerSkillState } from '@/types'
 
 export const PHASE_ORDER = [
   'phase_1_computer_basics',
+  'phase_1b_programming_basics',
   'phase_2_cs_data',
   'phase_3_intro_ai',
   'phase_4_machine_learning',
@@ -17,6 +18,7 @@ export type PhaseKey = typeof PHASE_ORDER[number]
 // Mirrored in scripts/validate-content.js's phaseFileNames (plain JS, can't share this import).
 export const PHASE_EVALUATION_FILES: Partial<Record<PhaseKey, string>> = {
   phase_1_computer_basics: 'p1_evaluation.json',
+  phase_1b_programming_basics: 'p1b_evaluation.json',
   phase_2_cs_data:         'p2_evaluation.json',
   phase_3_intro_ai:        'p3_evaluation.json',
 }

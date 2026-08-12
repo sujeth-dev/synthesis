@@ -1,0 +1,15 @@
+{
+  "skill_id": "p2_data_cleaning_preprocessing",
+  "depth": "beginner",
+  "title": "Wash the Ingredients Before Cooking",
+  "key_insight": "Cleaning data means finding broken, missing, repeated, or mismatched values before a model mistakes them for real patterns.",
+  "body": "## A Messy Basket of Ingredients\n\nYou open a basket and find bruised fruit, two copies of one apple, and labels using both grams and kilograms. Cooking immediately would spread those mistakes through the meal.\n\nReal tables have the same trouble: blank cells, repeated rows, mixed units, and impossible values. Data cleaning means finding each problem and choosing a clear repair.\n\nA model trusts the table it receives. Clean, consistent rows let it learn the real pattern instead of memorizing accidents.",
+  "common_mistakes": [
+    "Deleting every row with a blank without checking how much useful data disappears.",
+    "Treating a repeated real event as an accidental duplicate.",
+    "Mixing units such as kilograms and grams in one column."
+  ],
+  "mini_exercise": "Make a five-row table with one blank, one repeated row, and one impossible age. Mark what you would repair, remove, or investigate.",
+  "real_world_usage": "Before training, teams check customer, sensor, image, and text datasets for missing fields, duplicates, impossible ranges, and inconsistent labels.",
+  "explain_back_prompt": "Use the ingredient basket to explain why a model cannot repair every data mistake by itself."
+}

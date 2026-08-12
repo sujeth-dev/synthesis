@@ -13,6 +13,7 @@ const MIN_PER_BLOOM_LEVEL = 2
 
 const PHASE_EVAL_FILES: Record<string, string> = {
   phase_1_computer_basics: 'p1_evaluation.json',
+  phase_1b_programming_basics: 'p1b_evaluation.json',
   phase_2_cs_data:         'p2_evaluation.json',
   phase_3_intro_ai:        'p3_evaluation.json',
 }

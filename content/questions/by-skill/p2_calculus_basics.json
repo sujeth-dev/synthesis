@@ -6,14 +6,28 @@
     "difficulty_tier": "review",
     "stem": "A car's distance reading is changing. Which quantity plays the role of its derivative?",
     "options": [
-      { "id": "a", "text": "Its current speed" },
-      { "id": "b", "text": "Its paint color" },
-      { "id": "c", "text": "Its total fuel-tank size" },
-      { "id": "d", "text": "The road's name" }
+      {
+        "id": "a",
+        "text": "Its current speed"
+      },
+      {
+        "id": "b",
+        "text": "Its paint color"
+      },
+      {
+        "id": "c",
+        "text": "Its total fuel-tank size"
+      },
+      {
+        "id": "d",
+        "text": "The road's name"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "Speed tells how quickly distance is changing right now. A derivative gives that same kind of local change rate for any output with respect to an input.",
-    "graph_placement_weight": { "p2_calculus_basics": 1.0 }
+    "graph_placement_weight": {
+      "p2_calculus_basics": 1
+    }
   },
   {
     "id": "p2_calc_q2",
@@ -22,14 +36,28 @@
     "difficulty_tier": "review",
     "stem": "A loss has a positive derivative with respect to one weight. Which small move is most likely to reduce the loss?",
     "options": [
-      { "id": "a", "text": "Increase the weight" },
-      { "id": "b", "text": "Decrease the weight" },
-      { "id": "c", "text": "Replace the loss with its square" },
-      { "id": "d", "text": "Change every unrelated input" }
+      {
+        "id": "a",
+        "text": "Increase the weight"
+      },
+      {
+        "id": "b",
+        "text": "Decrease the weight"
+      },
+      {
+        "id": "c",
+        "text": "Replace the loss with its square"
+      },
+      {
+        "id": "d",
+        "text": "Change every unrelated input"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "A positive derivative says the loss rises as the weight rises near the current point. A small move in the opposite direction therefore tends to lower it.",
-    "graph_placement_weight": { "p2_calculus_basics": 1.0 }
+    "graph_placement_weight": {
+      "p2_calculus_basics": 1
+    }
   },
   {
     "id": "p2_calc_q3",
@@ -38,14 +66,29 @@
     "difficulty_tier": "same",
     "stem": "If `u = 3w` and `loss = u²`, what does the chain rule say about `dloss/dw`?",
     "options": [
-      { "id": "a", "text": "Add `dloss/du` and `du/dw`" },
-      { "id": "b", "text": "Multiply `dloss/du` by `du/dw`" },
-      { "id": "c", "text": "Ignore the middle value `u`" },
-      { "id": "d", "text": "Differentiate only the first operation" }
+      {
+        "id": "a",
+        "text": "Add `dloss/du` and `du/dw`"
+      },
+      {
+        "id": "b",
+        "text": "Multiply `dloss/du` by `du/dw`"
+      },
+      {
+        "id": "c",
+        "text": "Ignore the middle value `u`"
+      },
+      {
+        "id": "d",
+        "text": "Differentiate only the first operation"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "The change travels through both links. The local effect from `w` to `u` is multiplied by the local effect from `u` to the loss.",
-    "graph_placement_weight": { "p2_calculus_basics": 1.0, "p5_backpropagation": 0.5 }
+    "graph_placement_weight": {
+      "p2_calculus_basics": 1,
+      "p5_backpropagation": 0.5
+    }
   },
   {
     "id": "p2_calc_q4",
@@ -54,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "For `loss = (w - 4)²`, what is the derivative at `w = 1`?",
     "options": [
-      { "id": "a", "text": "-6" },
-      { "id": "b", "text": "-3" },
-      { "id": "c", "text": "6" },
-      { "id": "d", "text": "8" }
+      {
+        "id": "a",
+        "text": "-6"
+      },
+      {
+        "id": "b",
+        "text": "-3"
+      },
+      {
+        "id": "c",
+        "text": "6"
+      },
+      {
+        "id": "d",
+        "text": "8"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "The derivative is `2(w - 4)`. At `w = 1`, that is `2 × -3 = -6`. The negative sign says increasing `w` slightly will lower the loss.",
-    "graph_placement_weight": { "p2_calculus_basics": 1.0 }
+    "graph_placement_weight": {
+      "p2_calculus_basics": 1
+    }
   },
   {
     "id": "p2_calc_q5",
@@ -70,13 +127,55 @@
     "difficulty_tier": "harder",
     "stem": "A function has millions of inputs and one scalar loss. Why is reverse-mode differentiation a natural choice?",
     "options": [
-      { "id": "a", "text": "One backward pass can obtain the loss derivative for every contributing input" },
-      { "id": "b", "text": "It avoids computing any intermediate values" },
-      { "id": "c", "text": "It makes the loss perfectly linear" },
-      { "id": "d", "text": "It always stores the full Jacobian" }
+      {
+        "id": "a",
+        "text": "One backward pass can obtain the loss derivative for every contributing input"
+      },
+      {
+        "id": "b",
+        "text": "It avoids computing any intermediate values"
+      },
+      {
+        "id": "c",
+        "text": "It makes the loss perfectly linear"
+      },
+      {
+        "id": "d",
+        "text": "It always stores the full Jacobian"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "Reverse mode starts from the one output concern—the loss—and carries sensitivity backward to all contributing inputs. It avoids materializing the full input-output derivative table.",
-    "graph_placement_weight": { "p2_calculus_basics": 1.0, "p5_backpropagation": 0.6 }
+    "graph_placement_weight": {
+      "p2_calculus_basics": 1,
+      "p5_backpropagation": 0.6
+    }
+  },
+  {
+    "id": "p2_calc_q6",
+    "skill_id": "p2_calculus_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why might a centered tiny-nudge check disagree when the nudge becomes unbelievably small?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The computer can round the two nearly equal results until their useful difference disappears"
+      },
+      {
+        "id": "b",
+        "text": "A derivative stops existing whenever a computer is used"
+      },
+      {
+        "id": "c",
+        "text": "The model automatically changes its target"
+      },
+      {
+        "id": "d",
+        "text": "Smaller nudges always create larger slopes"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Computers store numbers with limited detail. If two measured results are almost identical, subtraction can lose the tiny difference we wanted to inspect."
   }
 ]

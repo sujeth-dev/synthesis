@@ -6,14 +6,28 @@
     "difficulty_tier": "review",
     "stem": "A game needs 50 players with the same actions but separate health values. Which design best fits that need?",
     "options": [
-      { "id": "a", "text": "One `Player` class and 50 player objects made from it" },
-      { "id": "b", "text": "One health variable shared by every player" },
-      { "id": "c", "text": "Fifty unrelated copies of every function" },
-      { "id": "d", "text": "One object with no class or data" }
+      {
+        "id": "a",
+        "text": "One `Player` class and 50 player objects made from it"
+      },
+      {
+        "id": "b",
+        "text": "One health variable shared by every player"
+      },
+      {
+        "id": "c",
+        "text": "Fifty unrelated copies of every function"
+      },
+      {
+        "id": "d",
+        "text": "One object with no class or data"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "The class holds the shared blueprint, while every object receives its own instance data. That gives all players the same available actions without forcing them to share health.",
-    "graph_placement_weight": { "p1b_oop_classes": 1.0 }
+    "graph_placement_weight": {
+      "p1b_oop_classes": 1
+    }
   },
   {
     "id": "p1b_oop_q2",
@@ -22,14 +36,28 @@
     "difficulty_tier": "review",
     "stem": "Inside `mina.take_damage(10)`, what does `self` refer to?",
     "options": [
-      { "id": "a", "text": "The `Player` class itself" },
-      { "id": "b", "text": "The particular object stored in `mina`" },
-      { "id": "c", "text": "Every player object at once" },
-      { "id": "d", "text": "The number 10" }
+      {
+        "id": "a",
+        "text": "The `Player` class itself"
+      },
+      {
+        "id": "b",
+        "text": "The particular object stored in `mina`"
+      },
+      {
+        "id": "c",
+        "text": "Every player object at once"
+      },
+      {
+        "id": "d",
+        "text": "The number 10"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "`self` is the object receiving the method call. Here that object is Mina, so changes to `self.health` change Mina's health rather than every player's health.",
-    "graph_placement_weight": { "p1b_oop_classes": 1.0 }
+    "graph_placement_weight": {
+      "p1b_oop_classes": 1
+    }
   },
   {
     "id": "p1b_oop_q3",
@@ -38,14 +66,29 @@
     "difficulty_tier": "same",
     "stem": "Why must a PyTorch model's `__init__` normally call `super().__init__()`?",
     "options": [
-      { "id": "a", "text": "It makes Python syntax shorter" },
-      { "id": "b", "text": "It runs `nn.Module`'s setup so layers and parameters can be registered" },
-      { "id": "c", "text": "It trains the model immediately" },
-      { "id": "d", "text": "It converts every input to a tensor" }
+      {
+        "id": "a",
+        "text": "It makes Python syntax shorter"
+      },
+      {
+        "id": "b",
+        "text": "It runs `nn.Module`'s setup so layers and parameters can be registered"
+      },
+      {
+        "id": "c",
+        "text": "It trains the model immediately"
+      },
+      {
+        "id": "d",
+        "text": "It converts every input to a tensor"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "The parent `nn.Module` class has bookkeeping to prepare. Calling its setup lets it notice layers assigned on the child object and later find their trainable parameters.",
-    "graph_placement_weight": { "p1b_oop_classes": 1.0, "p5_neural_network_basics": 0.4 }
+    "graph_placement_weight": {
+      "p1b_oop_classes": 1,
+      "p5_neural_network_basics": 0.4
+    }
   },
   {
     "id": "p1b_oop_q4",
@@ -54,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "A `Predictor` uses a separate `Scaler` object to prepare features. What relationship does this show?",
     "options": [
-      { "id": "a", "text": "Composition: the predictor has and uses a scaler" },
-      { "id": "b", "text": "Inheritance: the predictor is a kind of scaler" },
-      { "id": "c", "text": "Recursion: the predictor calls itself" },
-      { "id": "d", "text": "A shared class attribute" }
+      {
+        "id": "a",
+        "text": "Composition: the predictor has and uses a scaler"
+      },
+      {
+        "id": "b",
+        "text": "Inheritance: the predictor is a kind of scaler"
+      },
+      {
+        "id": "c",
+        "text": "Recursion: the predictor calls itself"
+      },
+      {
+        "id": "d",
+        "text": "A shared class attribute"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "Composition means building an object from collaborating objects. The predictor is not a specialized scaler; it simply contains or receives one and uses its `transform` behavior.",
-    "graph_placement_weight": { "p1b_oop_classes": 1.0 }
+    "graph_placement_weight": {
+      "p1b_oop_classes": 1
+    }
   },
   {
     "id": "p1b_oop_q5",
@@ -70,14 +127,55 @@
     "difficulty_tier": "harder",
     "stem": "In cooperative multiple inheritance, what does `super().run()` mean?",
     "options": [
-      { "id": "a", "text": "Always call the first parent written anywhere in the program" },
-      { "id": "b", "text": "Continue to the next implementation in this object's method resolution order" },
-      { "id": "c", "text": "Call every parent method at the same time" },
-      { "id": "d", "text": "Skip all parent classes and call `object`" }
+      {
+        "id": "a",
+        "text": "Always call the first parent written anywhere in the program"
+      },
+      {
+        "id": "b",
+        "text": "Continue to the next implementation in this object's method resolution order"
+      },
+      {
+        "id": "c",
+        "text": "Call every parent method at the same time"
+      },
+      {
+        "id": "d",
+        "text": "Skip all parent classes and call `object`"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "`super()` follows the object's MRO. In a cooperative chain, each class does its part and then lets the next class in that ordered route continue.",
-    "graph_placement_weight": { "p1b_oop_classes": 1.0 }
+    "graph_placement_weight": {
+      "p1b_oop_classes": 1
+    }
+  },
+  {
+    "id": "p1b_oop_q6",
+    "skill_id": "p1b_oop_classes",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Two objects unexpectedly share one growing list. Which change best gives each object its own list?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Create the list during each object’s setup and store it on `self`"
+      },
+      {
+        "id": "b",
+        "text": "Keep one list on the class blueprint"
+      },
+      {
+        "id": "c",
+        "text": "Rename the shared list"
+      },
+      {
+        "id": "d",
+        "text": "Call the list twice"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A list created during object setup is fresh for that object. A list stored on the class is shared by every object made from the class."
   },
   {
     "id": "p1b_oop_order1",
@@ -86,14 +184,28 @@
     "difficulty_tier": "same",
     "prompt": "Arrange these lines so a `Player` class is defined, an object is created, and that object takes damage.",
     "options": [
-      { "id": "a", "text": "hero.take_damage(20)" },
-      { "id": "b", "text": "    def take_damage(self, amount): self.health -= amount" },
-      { "id": "c", "text": "hero = Player()" },
-      { "id": "d", "text": "class Player:" }
+      {
+        "id": "a",
+        "text": "hero.take_damage(20)"
+      },
+      {
+        "id": "b",
+        "text": "    def take_damage(self, amount): self.health -= amount"
+      },
+      {
+        "id": "c",
+        "text": "hero = Player()"
+      },
+      {
+        "id": "d",
+        "text": "class Player:"
+      }
     ],
     "correct_answer": "d,b,c,a",
     "explanation_after": "Define the class first, place the indented method inside it, create an object from the finished class, and only then call the object's method.",
-    "graph_placement_weight": { "p1b_oop_classes": 1.0 }
+    "graph_placement_weight": {
+      "p1b_oop_classes": 1
+    }
   },
   {
     "id": "p1b_oop_fill1",
@@ -102,14 +214,28 @@
     "difficulty_tier": "harder",
     "prompt": "Choose the chip that completes the method: `def rename(self, name): ____ = name`",
     "options": [
-      { "id": "a", "text": "class.name" },
-      { "id": "b", "text": "self.name" },
-      { "id": "c", "text": "Player" },
-      { "id": "d", "text": "return self" }
+      {
+        "id": "a",
+        "text": "class.name"
+      },
+      {
+        "id": "b",
+        "text": "self.name"
+      },
+      {
+        "id": "c",
+        "text": "Player"
+      },
+      {
+        "id": "d",
+        "text": "return self"
+      }
     ],
     "correct_option_id": "b",
     "correct_answer": "self.name",
     "explanation_after": "`self.name` stores the new name on the particular object receiving the method call. A bare local name would disappear when the method ends.",
-    "graph_placement_weight": { "p1b_oop_classes": 1.0 }
+    "graph_placement_weight": {
+      "p1b_oop_classes": 1
+    }
   }
 ]

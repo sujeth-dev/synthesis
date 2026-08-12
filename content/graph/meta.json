@@ -3,6 +3,7 @@
   "domain_name": "AI Engineering",
   "phases_active": [
     "phase_1_computer_basics",
+    "phase_1b_programming_basics",
     "phase_2_cs_data",
     "phase_3_intro_ai"
   ],
@@ -13,5 +14,5 @@
     "phase_7_real_world",
     "phase_8_mastery"
   ],
-  "last_updated": "2026-04-13"
+  "last_updated": "2026-08-12"
 }

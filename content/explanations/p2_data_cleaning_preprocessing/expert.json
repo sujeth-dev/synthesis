@@ -1,0 +1,16 @@
+{
+  "skill_id": "p2_data_cleaning_preprocessing",
+  "depth": "expert",
+  "title": "When the Missing Blank Is a Clue",
+  "key_insight": "A missing value can be random noise, a clue about another known fact, or a hidden signal about the missing value itself; each case needs different care.",
+  "body": "## Three Empty Seats\n\nOne survey answer is lost by accident. Another is blank mostly for younger users. A third is blank because people with very high income avoid answering. The empty cells look alike, but their causes differ.\n\nResearchers call these three patterns missing completely at random, missing at random given known facts, and missing not at random. A simple fill is safest in the first case and can bend results badly in the third.\n\nRecord why data may be missing, compare groups, and test more than one reasonable repair. Sometimes the best choice is to add a “was missing” flag or redesign collection rather than pretend one guessed value is true.",
+  "common_mistakes": [
+    "Treating all blanks as if they happened for the same reason.",
+    "Filling values once and forgetting that the guess adds uncertainty.",
+    "Using future or target information to choose a repair.",
+    "Removing rare groups until the remaining data looks clean but no longer represents the real population."
+  ],
+  "mini_exercise": "Invent one example for each of the three missing-data stories. For each, say whether a simple fill seems safe and what extra evidence you would seek.",
+  "real_world_usage": "Medical, survey, and financial teams study why fields are absent because the missing pattern itself can change risk estimates and fairness across groups.",
+  "explain_back_prompt": "Use the three empty seats to explain why identical blank cells can require different responses."
+}

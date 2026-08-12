@@ -1,96 +1,467 @@
 [
-  { "from": "p1_what_is_computer",  "to": "p1_input_output",       "strength": "soft" },
-  { "from": "p1_what_is_computer",  "to": "p1_binary_numbers",     "strength": "hard" },
-  { "from": "p1_binary_numbers",    "to": "p1_memory_storage",     "strength": "hard" },
-  { "from": "p1_binary_numbers",    "to": "p1_cpu_processing",     "strength": "soft" },
-  { "from": "p1_input_output",      "to": "p1_how_code_works",     "strength": "soft" },
-  { "from": "p1_what_is_computer",  "to": "p1_how_code_works",     "strength": "hard" },
-  { "from": "p1_how_code_works",    "to": "p1_python_intro",       "strength": "hard" },
-  { "from": "p1_python_intro",      "to": "p1_variables",          "strength": "hard" },
-  { "from": "p1_python_intro",      "to": "p1_operators",          "strength": "hard" },
-  { "from": "p1_variables",         "to": "p1_operators",          "strength": "soft" },
-  { "from": "p1_variables",         "to": "p1_data_types",         "strength": "hard" },
-  { "from": "p1_data_types",        "to": "p1_conditionals",       "strength": "hard" },
-  { "from": "p1_data_types",        "to": "p1_strings",            "strength": "hard" },
-  { "from": "p1_data_types",        "to": "p1_lists_intro",        "strength": "hard" },
-  { "from": "p1_operators",         "to": "p1_strings",            "strength": "soft" },
-  { "from": "p1_conditionals",      "to": "p1_loops",              "strength": "hard" },
-  { "from": "p1_conditionals",      "to": "p1_debugging",          "strength": "soft" },
-  { "from": "p1_loops",             "to": "p1_functions",          "strength": "hard" },
-  { "from": "p1_loops",             "to": "p1_lists_intro",        "strength": "soft" },
-  { "from": "p1_functions",         "to": "p1_scope",              "strength": "hard" },
-  { "from": "p1_variables",         "to": "p1_scope",              "strength": "hard" },
-  { "from": "p1_functions",         "to": "p1_debugging",          "strength": "soft" },
-  { "from": "p1_python_intro",      "to": "p1_modules_imports",    "strength": "soft" },
-  { "from": "p1_functions",         "to": "p1_modules_imports",    "strength": "hard" },
-  { "from": "p1_functions",         "to": "p2_lists_arrays",       "strength": "hard" },
-  { "from": "p1_lists_intro",       "to": "p2_lists_arrays",       "strength": "hard" },
-  { "from": "p1_data_types",        "to": "p2_lists_arrays",       "strength": "soft" },
-  { "from": "p1_scope",             "to": "p2_algorithms_intro",   "strength": "soft" },
-  { "from": "p1_modules_imports",   "to": "p2_numpy_basics",       "strength": "soft" },
-  { "from": "p2_lists_arrays",      "to": "p2_dictionaries",       "strength": "hard" },
-  { "from": "p2_lists_arrays",      "to": "p2_sets_tuples",        "strength": "hard" },
-  { "from": "p1_functions",         "to": "p2_algorithms_intro",   "strength": "soft" },
-  { "from": "p2_algorithms_intro",  "to": "p2_big_o_basics",       "strength": "hard" },
-  { "from": "p2_algorithms_intro",  "to": "p2_recursion",          "strength": "hard" },
-  { "from": "p2_algorithms_intro",  "to": "p2_sorting_searching",  "strength": "hard" },
-  { "from": "p2_big_o_basics",      "to": "p2_sorting_searching",  "strength": "hard" },
-  { "from": "p2_lists_arrays",      "to": "p2_numpy_basics",       "strength": "hard" },
-  { "from": "p2_numpy_basics",      "to": "p2_math_vectors",       "strength": "hard" },
-  { "from": "p2_math_vectors",      "to": "p2_math_matrices",      "strength": "hard" },
-  { "from": "p2_math_vectors",      "to": "p2_linear_functions",   "strength": "hard" },
-  { "from": "p2_math_matrices",     "to": "p2_linear_functions",   "strength": "hard" },
-  { "from": "p2_algorithms_intro",  "to": "p2_probability_basics", "strength": "soft" },
-  { "from": "p2_probability_basics","to": "p2_statistics_basics",  "strength": "hard" },
-  { "from": "p2_numpy_basics",      "to": "p2_statistics_basics",  "strength": "soft" },
-  { "from": "p2_numpy_basics",      "to": "p2_data_exploration",   "strength": "hard" },
-  { "from": "p2_statistics_basics", "to": "p2_data_exploration",   "strength": "hard" },
-  { "from": "p1_functions",         "to": "p2_problem_solving",    "strength": "soft" },
-  { "from": "p2_probability_basics","to": "p3_what_is_ai",         "strength": "soft" },
-  { "from": "p2_problem_solving",   "to": "p3_what_is_ai",         "strength": "soft" },
-  { "from": "p2_data_exploration",  "to": "p3_what_is_ai",         "strength": "soft" },
-  { "from": "p3_what_is_ai",        "to": "p3_ai_vs_ml_vs_dl",    "strength": "hard" },
-  { "from": "p3_what_is_ai",        "to": "p3_history_of_ai",      "strength": "soft" },
-  { "from": "p3_what_is_ai",        "to": "p3_how_machines_learn", "strength": "hard" },
-  { "from": "p3_what_is_ai",        "to": "p3_ai_applications",    "strength": "soft" },
-  { "from": "p3_ai_vs_ml_vs_dl",    "to": "p3_history_of_ai",      "strength": "soft" },
-  { "from": "p3_ai_vs_ml_vs_dl",    "to": "p3_types_of_learning",  "strength": "hard" },
-  { "from": "p3_how_machines_learn","to": "p3_training_vs_inference","strength": "hard" },
-  { "from": "p3_how_machines_learn","to": "p3_data_and_labels",    "strength": "hard" },
-  { "from": "p3_types_of_learning", "to": "p3_training_vs_inference","strength": "soft" },
-  { "from": "p3_data_and_labels",   "to": "p3_model_evaluation",   "strength": "hard" },
-  { "from": "p3_data_and_labels",   "to": "p3_feature_engineering","strength": "hard" },
-  { "from": "p3_training_vs_inference","to": "p3_model_evaluation","strength": "hard" },
-  { "from": "p3_model_evaluation",  "to": "p3_overfitting",        "strength": "hard" },
-  { "from": "p3_feature_engineering","to": "p3_ai_dev_cycle",      "strength": "hard" },
-  { "from": "p3_model_evaluation",  "to": "p3_ai_dev_cycle",       "strength": "hard" },
-  { "from": "p3_ai_applications",   "to": "p3_how_machines_learn", "strength": "soft" },
-  { "from": "p3_overfitting",       "to": "p4_data_pipeline",      "strength": "soft" },
-  { "from": "p3_ai_dev_cycle",      "to": "p4_data_pipeline",      "strength": "hard" },
-  { "from": "p3_ai_vs_ml_vs_dl",    "to": "p4_data_pipeline",      "strength": "hard" },
-  { "from": "p2_math_matrices",     "to": "p4_data_pipeline",      "strength": "soft" },
-  { "from": "p2_linear_functions",  "to": "p4_data_pipeline",      "strength": "soft" },
-  { "from": "p4_data_pipeline",     "to": "p4_supervised_learning","strength": "hard" },
-  { "from": "p4_supervised_learning","to": "p5_neural_network_basics","strength": "hard" },
-  { "from": "p2_math_matrices",     "to": "p5_neural_network_basics","strength": "hard" },
-  { "from": "p5_neural_network_basics","to": "p6_transformers",    "strength": "hard" },
-  { "from": "p2_math_vectors",      "to": "p6_embeddings",         "strength": "hard" },
-  { "from": "p6_transformers",      "to": "p6_embeddings",         "strength": "soft" },
-  { "from": "p6_embeddings",        "to": "p6_rag_systems",        "strength": "hard" },
-  { "from": "p6_rag_systems",       "to": "p7_ai_apis",            "strength": "soft" },
-  { "from": "p6_transformers",      "to": "p7_ai_apis",            "strength": "soft" },
-  { "from": "p7_ai_apis",           "to": "p8_system_design_ai",   "strength": "hard" },
-
-  { "from": "p1_functions",         "to": "p1b_oop_classes",       "strength": "hard" },
-  { "from": "p1_scope",             "to": "p1b_oop_classes",       "strength": "soft" },
-  { "from": "p1b_oop_classes",      "to": "p5_neural_network_basics","strength": "hard" },
-
-  { "from": "p2_linear_functions",  "to": "p2_calculus_basics",    "strength": "hard" },
-  { "from": "p2_math_vectors",      "to": "p2_calculus_basics",    "strength": "soft" },
-  { "from": "p2_calculus_basics",   "to": "p5_backpropagation",    "strength": "hard" },
-
-  { "from": "p4_supervised_learning","to": "p4_sklearn_workflow",  "strength": "hard" },
-  { "from": "p2_data_exploration",  "to": "p4_sklearn_workflow",   "strength": "soft" },
-
-  { "from": "p5_neural_network_basics","to": "p5_backpropagation", "strength": "hard" }
+  {
+    "from": "p1_what_is_computer",
+    "to": "p1_input_output",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_what_is_computer",
+    "to": "p1_binary_numbers",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_binary_numbers",
+    "to": "p1_memory_storage",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_binary_numbers",
+    "to": "p1_cpu_processing",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_input_output",
+    "to": "p1_how_code_works",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_what_is_computer",
+    "to": "p1_how_code_works",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_how_code_works",
+    "to": "p1_python_intro",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_python_intro",
+    "to": "p1_variables",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_python_intro",
+    "to": "p1_operators",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_variables",
+    "to": "p1_operators",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_variables",
+    "to": "p1_data_types",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_data_types",
+    "to": "p1_conditionals",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_data_types",
+    "to": "p1_strings",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_data_types",
+    "to": "p1_lists_intro",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_operators",
+    "to": "p1_strings",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_conditionals",
+    "to": "p1_loops",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_conditionals",
+    "to": "p1_debugging",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_loops",
+    "to": "p1_functions",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_loops",
+    "to": "p1_lists_intro",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_functions",
+    "to": "p1_scope",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_variables",
+    "to": "p1_scope",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_functions",
+    "to": "p1_debugging",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_python_intro",
+    "to": "p1_modules_imports",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_functions",
+    "to": "p1_modules_imports",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_functions",
+    "to": "p2_lists_arrays",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_lists_intro",
+    "to": "p2_lists_arrays",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_data_types",
+    "to": "p2_lists_arrays",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_scope",
+    "to": "p2_algorithms_intro",
+    "strength": "soft"
+  },
+  {
+    "from": "p1_modules_imports",
+    "to": "p2_numpy_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_lists_arrays",
+    "to": "p2_dictionaries",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_lists_arrays",
+    "to": "p2_sets_tuples",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_functions",
+    "to": "p2_algorithms_intro",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_algorithms_intro",
+    "to": "p2_big_o_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_algorithms_intro",
+    "to": "p2_recursion",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_algorithms_intro",
+    "to": "p2_sorting_searching",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_big_o_basics",
+    "to": "p2_sorting_searching",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_lists_arrays",
+    "to": "p2_numpy_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_numpy_basics",
+    "to": "p2_math_vectors",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_math_vectors",
+    "to": "p2_math_matrices",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_math_vectors",
+    "to": "p2_linear_functions",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_math_matrices",
+    "to": "p2_linear_functions",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_algorithms_intro",
+    "to": "p2_probability_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_probability_basics",
+    "to": "p2_statistics_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_numpy_basics",
+    "to": "p2_statistics_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_numpy_basics",
+    "to": "p2_data_exploration",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_statistics_basics",
+    "to": "p2_data_exploration",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_functions",
+    "to": "p2_problem_solving",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_probability_basics",
+    "to": "p3_what_is_ai",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_problem_solving",
+    "to": "p3_what_is_ai",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_data_exploration",
+    "to": "p3_what_is_ai",
+    "strength": "soft"
+  },
+  {
+    "from": "p3_what_is_ai",
+    "to": "p3_ai_vs_ml_vs_dl",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_what_is_ai",
+    "to": "p3_history_of_ai",
+    "strength": "soft"
+  },
+  {
+    "from": "p3_what_is_ai",
+    "to": "p3_how_machines_learn",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_what_is_ai",
+    "to": "p3_ai_applications",
+    "strength": "soft"
+  },
+  {
+    "from": "p3_ai_vs_ml_vs_dl",
+    "to": "p3_history_of_ai",
+    "strength": "soft"
+  },
+  {
+    "from": "p3_ai_vs_ml_vs_dl",
+    "to": "p3_types_of_learning",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_how_machines_learn",
+    "to": "p3_training_vs_inference",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_how_machines_learn",
+    "to": "p3_data_and_labels",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_types_of_learning",
+    "to": "p3_training_vs_inference",
+    "strength": "soft"
+  },
+  {
+    "from": "p3_data_and_labels",
+    "to": "p3_model_evaluation",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_data_and_labels",
+    "to": "p3_feature_engineering",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_training_vs_inference",
+    "to": "p3_model_evaluation",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_model_evaluation",
+    "to": "p3_overfitting",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_feature_engineering",
+    "to": "p3_ai_dev_cycle",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_model_evaluation",
+    "to": "p3_ai_dev_cycle",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_ai_applications",
+    "to": "p3_how_machines_learn",
+    "strength": "soft"
+  },
+  {
+    "from": "p3_overfitting",
+    "to": "p4_data_pipeline",
+    "strength": "soft"
+  },
+  {
+    "from": "p3_ai_dev_cycle",
+    "to": "p4_data_pipeline",
+    "strength": "hard"
+  },
+  {
+    "from": "p3_ai_vs_ml_vs_dl",
+    "to": "p4_data_pipeline",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_math_matrices",
+    "to": "p4_data_pipeline",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_linear_functions",
+    "to": "p4_data_pipeline",
+    "strength": "soft"
+  },
+  {
+    "from": "p4_data_pipeline",
+    "to": "p4_supervised_learning",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_supervised_learning",
+    "to": "p5_neural_network_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_math_matrices",
+    "to": "p5_neural_network_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p5_neural_network_basics",
+    "to": "p6_transformers",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_math_vectors",
+    "to": "p6_embeddings",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_transformers",
+    "to": "p6_embeddings",
+    "strength": "soft"
+  },
+  {
+    "from": "p6_embeddings",
+    "to": "p6_rag_systems",
+    "strength": "hard"
+  },
+  {
+    "from": "p6_rag_systems",
+    "to": "p7_ai_apis",
+    "strength": "soft"
+  },
+  {
+    "from": "p6_transformers",
+    "to": "p7_ai_apis",
+    "strength": "soft"
+  },
+  {
+    "from": "p7_ai_apis",
+    "to": "p8_system_design_ai",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_functions",
+    "to": "p1b_oop_classes",
+    "strength": "hard"
+  },
+  {
+    "from": "p1_scope",
+    "to": "p1b_oop_classes",
+    "strength": "soft"
+  },
+  {
+    "from": "p1b_oop_classes",
+    "to": "p5_neural_network_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_linear_functions",
+    "to": "p2_calculus_basics",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_math_vectors",
+    "to": "p2_calculus_basics",
+    "strength": "soft"
+  },
+  {
+    "from": "p2_calculus_basics",
+    "to": "p5_backpropagation",
+    "strength": "hard"
+  },
+  {
+    "from": "p4_supervised_learning",
+    "to": "p4_sklearn_workflow",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_data_exploration",
+    "to": "p4_sklearn_workflow",
+    "strength": "soft"
+  },
+  {
+    "from": "p5_neural_network_basics",
+    "to": "p5_backpropagation",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_data_exploration",
+    "to": "p2_data_cleaning_preprocessing",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_data_cleaning_preprocessing",
+    "to": "p4_data_pipeline",
+    "strength": "hard"
+  },
+  {
+    "from": "p2_data_cleaning_preprocessing",
+    "to": "p4_sklearn_workflow",
+    "strength": "hard"
+  }
 ]

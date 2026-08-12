@@ -1,0 +1,16 @@
+{
+  "skill_id": "p2_data_cleaning_preprocessing",
+  "depth": "advanced",
+  "title": "A Cleaning Rule That Survives Production",
+  "key_insight": "Production cleaning must be repeatable, measured, and able to reject data that no longer follows the training contract.",
+  "body": "## Yesterday's Cleaner Meets Tomorrow's Data\n\nA service expects ages from 0 to 120, but a new supplier sends birth years. The values are valid numbers, so a silent cleaner passes them through and the model produces nonsense.\n\nA data contract records column names, types, units, allowed ranges, and missing-value rules. Validation checks that contract before any repair or prediction happens.\n\nProduction also records how many rows were changed, rejected, or filled. Sudden jumps reveal drift—a change in incoming data—before it quietly harms every prediction.",
+  "common_mistakes": [
+    "Silently changing broken values without recording what happened.",
+    "Checking only data types while ignoring units and sensible ranges.",
+    "Letting training and serving use separately written cleaning code.",
+    "Treating every unusual value as an error instead of possible new behavior."
+  ],
+  "mini_exercise": "Write a small contract for an age column: name, number type, allowed range, missing rule, and what the service should do when the rule fails.",
+  "real_world_usage": "Production data systems validate schemas, quarantine bad batches, and monitor missing-value and category rates so upstream changes are caught before retraining or inference.",
+  "explain_back_prompt": "How do a data contract and repair counts catch a unit change that ordinary type checking would miss?"
+}

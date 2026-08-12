@@ -1,0 +1,29 @@
+{
+  "skill_id": "p2_data_cleaning_preprocessing",
+  "depth": "mid",
+  "title": "Teach the Cleaner Without Peeking",
+  "key_insight": "Any cleaning rule that learns from values—such as a typical replacement number—must learn from training rows only.",
+  "body": "## The Cleaner Peeks at the Test Answers\n\nA blank test value is filled using the average from the entire table. That average contains information from the held-out rows, so the training process has quietly peeked ahead.\n\nFirst split the data. Then let each cleaner learn only from training rows: an imputer learns replacement values, an encoder learns categories, and a scaler learns ranges.\n\nSave those learned rules and apply them unchanged to later rows. A pipeline keeps the order together and prevents the cleaner and model from seeing different versions of the data.",
+  "common_mistakes": [
+    "Filling blanks or scaling columns before the train/test split.",
+    "Using zero for every missing value without asking what zero means in that column.",
+    "Encoding categories differently in training and production.",
+    "Removing unusual values merely because they are rare."
+  ],
+  "mini_exercise": "Split a tiny table first, find the training median for one numeric column, and use that same median to fill blanks on both sides.",
+  "real_world_usage": "Machine-learning pipelines fit imputers, encoders, and scalers with training data, then store them beside the model so new requests receive identical preparation.",
+  "explain_back_prompt": "Why can a data cleaner leak test information, and how does fitting the cleaner after the split prevent it?",
+  "build_task": {
+    "title": "Clean a small customer table",
+    "context": "Turn a deliberately messy table into consistent model-ready rows without hiding what changed.",
+    "steps": [
+      "Create a pandas table with a missing age, a repeated row, and two spellings of the same city.",
+      "Remove only the true duplicate and make the city spellings consistent.",
+      "Split the rows, learn the training median age, and fill missing ages with that saved value.",
+      "Print the cleaned table and a short count of each repair."
+    ],
+    "expected_output": "A table with no accidental duplicate, one spelling per city, and no missing age, plus counts showing each repair.",
+    "hint": "Split before learning the median; the test rows must not help choose it.",
+    "starter_code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'age': [21, None, 35, 35],\n    'city': ['Delhi', 'delhi', 'Pune', 'Pune']\n})\n# TODO: clean, split, learn the training median, and report changes"
+  }
+}

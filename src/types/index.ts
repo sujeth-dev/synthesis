@@ -10,6 +10,7 @@ export type BloomLevel = 'remember' | 'understand' | 'apply' | 'analyze' | 'eval
 
 export type Phase =
   | 'phase_1_computer_basics'
+  | 'phase_1b_programming_basics'
   | 'phase_2_cs_data'
   | 'phase_3_intro_ai'
   | 'phase_4_machine_learning'
@@ -20,6 +21,7 @@ export type Phase =
 
 export interface SkillNode {
   id: string; label: string; phase: Phase; difficulty_base: number
+  topic: string; topic_order: number
   question_ids: string[]
   explanation_ids: { beginner: string; mid: string; advanced: string; expert?: string }
   tags: string[]; deprecated?: boolean

@@ -35,6 +35,10 @@ while (queue.length > 0) {
 console.log('Nodes & Edges')
 ok(`${nodes.length} nodes loaded`)
 ok(`${edges.length} edges valid`)
+for (const node of nodes) {
+  if (typeof node.topic !== 'string' || node.topic.trim() === '') { err(`Node ${node.id} missing non-empty topic`) }
+  if (!Number.isInteger(node.topic_order) || node.topic_order < 1) { err(`Node ${node.id} has invalid topic_order`) }
+}
 if (sorted !== nodes.length) {
   err('Cycle detected in prerequisite graph!')
 } else {
@@ -48,6 +52,18 @@ for (const node of nodes) {
   if (!fs.existsSync(qFile)) { warn(`Missing question file: ${node.id}.json`); qMissing++; continue }
   const qs = loadJSON(qFile)
   if (!qs) { continue }
+  const mcqs = qs.filter(q => q.format === 'mcq')
+  if (mcqs.length < 5) { err(`${node.id} has ${mcqs.length} MCQs; needs at least 5`) }
+  for (const q of qs) {
+    if (q.skill_id !== node.id) { err(`${qFile}: question "${q.id}" has skill_id "${q.skill_id}"`) }
+    if (q.format === 'mcq' || q.format === 'fill') {
+      if (!Array.isArray(q.options) || q.options.length < 2) { err(`${qFile}: question "${q.id}" needs at least 2 options`) }
+      else if (!q.options.some(o => o.id === q.correct_option_id)) { err(`${qFile}: question "${q.id}" correct_option_id doesn't match any option`) }
+    }
+    if (q.format === 'order' && (!Array.isArray(q.options) || !q.correct_answer)) {
+      err(`${qFile}: order question "${q.id}" needs options and correct_answer`)
+    }
+  }
   const fileIds = new Set(qs.map(q => q.id))
   for (const qid of node.question_ids) {
     if (!fileIds.has(qid)) { warn(`Node ${node.id} declares "${qid}" not found in file`) }
@@ -63,7 +79,7 @@ for (const node of nodes) {
   if (!fs.existsSync(qFile)) { continue }
   const expDir = path.join(CONTENT, 'explanations', node.id)
   if (!fs.existsSync(expDir)) { warn(`Active skill ${node.id} missing explanation directory`); continue }
-  for (const depth of ['beginner', 'mid', 'advanced']) {
+  for (const depth of ['beginner', 'mid', 'advanced', 'expert']) {
     const f = path.join(expDir, `${depth}.json`)
     if (!fs.existsSync(f)) { warn(`Missing ${depth}.json for: ${node.id}`); continue }
     const exp = loadJSON(f)
@@ -92,9 +108,10 @@ for (const node of nodes) {
 // BLOOM-6 gate: when a Phases 4-8 content pass (P2-3) completes, add that phase here
 // and to phaseFileNames below — its phase evaluation set must ship alongside the
 // by-skill content, not be retrofitted later. See MASTER_PLAN.md's P2-3/BLOOM-6.
-const authoredPhases = ['phase_1_computer_basics', 'phase_2_cs_data', 'phase_3_intro_ai']
+const authoredPhases = ['phase_1_computer_basics', 'phase_1b_programming_basics', 'phase_2_cs_data', 'phase_3_intro_ai']
 const phaseFileNames = {
   phase_1_computer_basics: 'p1_evaluation.json',
+  phase_1b_programming_basics: 'p1b_evaluation.json',
   phase_2_cs_data:         'p2_evaluation.json',
   phase_3_intro_ai:        'p3_evaluation.json',
 }
