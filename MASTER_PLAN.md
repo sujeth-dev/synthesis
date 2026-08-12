@@ -148,8 +148,15 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section A.
 | DKT-6 | done | Evaluate DKT AUC vs. BKT AUC on held-out test set |
 | DKT-7 | done | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
 | DKT-8 | done | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+| DKT-9 | not_started | Log real learner interactions in Synaptic's own `(student_id, skill_id, correct, timestamp)` shape as they happen — real training data for a Synaptic-native model, startable now |
+| DKT-10 | not_started · **depends on DKT-9's real volume** | Retrain DKT from scratch on Synaptic's own skill space (not ASSISTments') |
+| DKT-11 | not_started · **depends on DKT-10** | Build a live inference path and shadow-log DKT's predicted `p_know` alongside BKT's real one — never served, mirroring `fsrs_shadow_log` |
+| DKT-12 | not_started · **depends on DKT-11's shadow data** | Compare DKT's predictions against real learner outcomes — the Synaptic-specific evidence a live cutover needs |
+| DKT-13 (= `P3-3`) | not_started · **depends on DKT-12** | Live cutover decision + implementation, with human sign-off, only if DKT-12's evidence supports it |
 
-**Track status: all of DKT-1 through DKT-8 done (2026-08-12).** DKT AUC 0.8299 vs. BKT AUC 0.7296 on the held-out ASSISTments test split — see `research/dkt/RESULTS.md`. `pytest research/dkt/tests/` (4/4) and the full `download_data.py → preprocess.py → split.py → bkt_baseline.py → train_dkt.py → evaluate.py` pipeline both verified green against the real dataset. Committed locally on `dkt-track`, not pushed (final push happens once alongside `fsrs-track`, outside this session).
+**Track status: DKT-1 through DKT-8 done (2026-08-12).** DKT AUC 0.8299 vs. BKT AUC 0.7296 on the held-out ASSISTments test split — see `research/dkt/RESULTS.md`. `pytest research/dkt/tests/` (4/4) and the full `download_data.py → preprocess.py → split.py → bkt_baseline.py → train_dkt.py → evaluate.py` pipeline both verified green against the real dataset. Committed locally on `dkt-track`, not pushed (final push happens once alongside `fsrs-track`, outside this session).
+
+**DKT-9 through DKT-13 added 2026-08-12** after a direct request to make DKT live immediately surfaced two blockers that aren't policy caution — they're missing engineering: DKT's trained model has zero connection to Synaptic's actual skill graph (trained end-to-end on ASSISTments' own 123 skills, not Synaptic's), and no live inference path exists (today's code is an offline batch script). Full scoping in `v2/doc/vision/dkt-live-integration-scope.md`, including the exact 19 files a live cutover would touch. DKT-9 (real interaction logging) is genuinely startable now; DKT-10 through DKT-13 each depend on the previous step's real output, not a calendar date.
 
 **Live cutover** (switching Synaptic's own engine to DKT) is Phase 3 item P3-3, gated at 50k+ real sessions — do not do this as part of this track.
 
@@ -280,7 +287,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 |---|---|---|
 | P3-1 | Promise #10 — adopt Learner Profile schema (6 dimensions) + V6/V7 dashboard concepts | `08-interfaces.md`, `11-demo-masterplan.md` |
 | P3-2 | Promise #9 — build Code Editor + Debug the Machine construct (Track 2) | `09-library.md`, `13-content-structure.md` |
-| P3-3 | Promise #4 — DKT live cutover, gated at 50k+ real sessions (prior art: DKT-1..8 above) | `basic-guide.md` |
+| P3-3 | Promise #4 — DKT live cutover. ~~Gated at 50k+ real sessions (prior art: DKT-1..8 above)~~ **Scoped 2026-08-12:** this is DKT-9 through DKT-13 above, not a single task — see `v2/doc/vision/dkt-live-integration-scope.md` for why (skill-space mismatch + no live inference path, not just a volume gate) | `basic-guide.md`, `v2/doc/vision/dkt-live-integration-scope.md` |
 | P3-4 | Composite puzzles (`vision/discovery-model.md` §5) — needs BLOOM track done + redesigned `insertAttempt()` | `discovery-model.md` §5 |
 
 Each item's acceptance criteria is its own lab-doc's acceptance script, evaluated when the item is actually started (not defined in detail here to avoid staleness — re-derive from the cited doc at start time).
