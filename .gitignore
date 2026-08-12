@@ -19,3 +19,6 @@ research/dkt/.pytest_cache/
 
 logs/*.jsonl
 supabase/.temp/
+
+# Added by code-review-graph
+.code-review-graph/

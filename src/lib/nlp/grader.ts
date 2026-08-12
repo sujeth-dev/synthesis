@@ -5,10 +5,13 @@
  * rule-based classifier when every model fails or times out, NLP-5 caching
  * of repeated/near-identical explanations, and NLP-6 logging of every call.
  *
- * Observational only: nothing in src/app/api/attempt or src/lib/bkt imports
- * this module. The rule-based classifier remains the only thing wired into
- * the live grading path — see the NLP/LLM upgrade trigger note in
- * src/lib/feynman/classifier.ts.
+ * Live since 2026-08-12: src/app/api/attempt/route.ts calls gradeExplanation()
+ * as the primary reasoning-quality grader for 'explain'-format attempts, per the
+ * NLP/LLM upgrade trigger note in src/lib/feynman/classifier.ts (106-example
+ * labeled set, 96.2% vs 67.0% agreement with human labels, kappa 0.943 vs 0.498).
+ * The rule-based classifier stays as this module's own internal hard fallback
+ * (see below) and as the route's outer fail-open fallback if this module itself
+ * throws before reaching that fallback.
  */
 import { classifyExplanation, type ExplanationCategory } from '../feynman/classifier'
 import { buildGradingPrompt, parseGraderResponse, PROMPT_VERSION, type GraderMessage } from './prompts/v1'

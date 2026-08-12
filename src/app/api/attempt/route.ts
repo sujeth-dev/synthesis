@@ -5,6 +5,7 @@ import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
 import { computeFsrsSchedule, fsrsRatingFromCorrectness } from '@/lib/fsrs'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
+import { gradeExplanation } from '@/lib/nlp/grader'
 import { computeUnblocked } from '@/lib/graph'
 import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
@@ -77,13 +78,28 @@ export async function POST(req: NextRequest) {
   const schedule    = await getReviewSchedule(user.id, skill_id)
 
   // ── Update BKT
-  // Reasoning-quality evidence comes from the Feynman Loop classifier whenever the
-  // learner submitted free-text reasoning (question_format 'explain'); question types
-  // with no reasoning to evaluate (mcq/fill/code/order) keep the neutral modifier.
+  // Reasoning-quality evidence comes from grading free-text reasoning whenever the
+  // learner submitted it (question_format 'explain'); question types with no reasoning
+  // to evaluate (mcq/fill/code/order) keep the neutral modifier.
+  // NLP live cutover (2026-08-12): the LLM grader (src/lib/nlp/grader.ts) is now primary
+  // -- it measurably beats the rule-based classifier (96.2% vs 67.0% agreement with human
+  // labels, kappa 0.943 vs 0.498 on 106 examples, live-tested with real model failover)
+  // and internally hard-falls-back to the same rule-based classifier if every free-tier
+  // model fails. This call site adds one more layer of the same fail-open guarantee: any
+  // unexpected failure (e.g. catalog discovery throwing before its own model loop) still
+  // resolves to the rule-based classifier directly, so a grading failure of any kind can
+  // never block the attempt itself from being scored and persisted.
   const explanationText = typeof client_answer === 'string' ? client_answer.trim() : ''
-  const reasoningQuality = question_format === 'explain' && explanationText
-    ? reasoningQualityFromCategory(classifyExplanation(explanationText))
-    : 1
+  let reasoningQuality = 1
+  if (question_format === 'explain' && explanationText) {
+    const conceptNode = getAllNodes().find(n => n.id === skill_id)
+    try {
+      const graded = await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })
+      reasoningQuality = reasoningQualityFromCategory(graded.category)
+    } catch {
+      reasoningQuality = reasoningQualityFromCategory(classifyExplanation(explanationText))
+    }
+  }
   const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
   const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {
     reasoningQuality,
