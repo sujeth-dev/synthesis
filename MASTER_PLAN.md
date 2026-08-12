@@ -166,18 +166,22 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section B.
 | FSRS-6 | *(Optional, needs 5k+ real review events)* Refit FSRS's 17 parameters to Synaptic's own users | FSRS-5 |
 
 ### NLP/LLM reasoning grader (start once P1-1's rule-based classifier exists)
-Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C.
+Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C. Built on the `nlp-track` worktree/branch.
 
 **Live upgrade trigger:** keep the rule-based classifier primary until NLP-1 through NLP-3 show that the versioned API grader has reliably higher agreement with the same 50-200 human-labeled examples. A promoted API grader must retain the rules as its hard fallback; live cutover requires human sign-off.
 
-| ID | Task | Depends on |
-|---|---|---|
-| NLP-1 | Collect 50-200 labeled real/hand-authored explanation examples | P1-1 |
-| NLP-2 | Design the rubric-based grading prompt for the LLM API, versioned | NLP-1 |
-| NLP-3 | Run the API grader against the validation set; measure agreement (e.g. Cohen's kappa) vs. human labels | NLP-2 |
-| NLP-4 | Wire in the rule-based classifier as a hard fallback on API failure/timeout | NLP-3 |
-| NLP-5 | Add caching for repeated/near-identical explanations | NLP-4 |
-| NLP-6 | Log every graded call (input, output, rubric/prompt version) | NLP-4 |
+**Trigger met (2026-08-12):** NLP-3's run against all 106 labeled examples (real calls to live free-tier OpenRouter/Groq models, `scripts/run-nlp-eval.ts`, results in `src/lib/nlp/data/eval-results-v1.json`) shows the v1 API grader at 96.2% accuracy / Cohen's κ=0.943 vs. human labels, against the rule-based classifier's 67.0% / κ=0.498 on the same set — including 0% vs. 84.2% accuracy on the 19 examples deliberately written to fool the keyword-based classifier. This is a reliably higher agreement, satisfying the trigger condition. **This is a benchmark result only** — per the guardrail below, the rule-based classifier remains the only thing wired into `bktUpdate()`/`/api/attempt` (confirmed byte-for-byte unchanged); promoting the API grader to the live path is a separate, human-sign-off-gated decision, not automatic from this result.
+
+| ID | Status | Task | Depends on |
+|---|---|---|---|
+| NLP-1 | done | Collect 50-200 labeled real/hand-authored explanation examples | P1-1 |
+| NLP-2 | done | Design the rubric-based grading prompt for the LLM API, versioned | NLP-1 |
+| NLP-3 | done | Run the API grader against the validation set; measure agreement (e.g. Cohen's kappa) vs. human labels | NLP-2 |
+| NLP-4 | done | Wire in the rule-based classifier as a hard fallback on API failure/timeout | NLP-3 |
+| NLP-5 | done | Add caching for repeated/near-identical explanations | NLP-4 |
+| NLP-6 | done | Log every graded call (input, output, rubric/prompt version) | NLP-4 |
+
+**Acceptance:** `src/lib/nlp/grader.ts` (client + failover + NLP-4 fallback + NLP-5 cache + NLP-6 logging), `src/lib/nlp/prompts/v1.ts` (NLP-2 rubric), `src/lib/nlp/data/labeled-examples.ts` (NLP-1, 106 examples), `src/lib/nlp/catalog.ts` (live free-model discovery — never hardcodes model IDs as free, verifies pricing/availability against each provider's own catalog). 9 unit tests cover rate-limit/quota/timeout retry-to-next-model, chain exhaustion and empty-chain hard fallback, schema-validation fallback, cache hits, and log entries. `npm test` green (67/67). `git hash-object` on `src/app/api/attempt/route.ts` and `src/lib/bkt/index.ts` confirmed unchanged from pre-NLP-track baseline.
 
 ---
 
