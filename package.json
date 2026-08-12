@@ -12,7 +12,8 @@
     "validate": "node scripts/validate-content.js",
     "db:seed": "node scripts/seed.js",
     "db:migrate": "node scripts/apply-migrations.js",
-    "fsrs:compare": "node scripts/fsrs-shadow-comparison.js"
+    "fsrs:compare": "node scripts/fsrs-shadow-comparison.js",
+    "dkt:export": "node scripts/dkt-export-interactions.js"
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",
