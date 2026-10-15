@@ -1,5 +1,9 @@
 """Write everything the website needs into dkt-lab/web/public/data/ (committed).
 
+Adapted from Research/dkt/export_weights.py: the same base64 float32 weights
+format (written by dkt.weights_json) and the same --fixture idea for the
+browser parity test, here with a generic skill list instead of the curriculum.
+
 Every reported number is copied from results/<name>.json (written by the
 pipeline) without recomputation, so the website can be checked against the
 results files exactly (see check_web.py).

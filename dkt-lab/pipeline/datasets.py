@@ -1,5 +1,9 @@
 """Download every dataset the lab uses and convert it to one common schema.
 
+Adapted from Research/dkt/download_data.py (download + MD5 check) and
+Research/dkt/preprocess.py (ASSISTments 2009 cleaning rules, reproduced in
+convert_assist2009), generalised to several datasets and mirrors.
+
 Output per dataset, under pipeline/data/<name>/ (gitignored):
     sequences.csv     student_id, skill_id, correct, order[, t_days]
     provenance.json   source URL, mirror actually used, licence, citation,
