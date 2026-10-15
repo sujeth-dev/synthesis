@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_pytorch_intro",
+  "depth": "expert",
+  "title": "PyTorch Introduction — Eager Code, Compiled Regions, and Device Boundaries",
+  "key_insight": "PyTorch can capture and compile compatible regions into fewer optimized operations while falling back when dynamic behavior cannot be captured safely.",
+  "body": "## Eager Code, Compiled Regions, and Device Boundaries\n\nFlexible Python makes debugging easy, but launching many tiny operations can leave an accelerator waiting.\n\nPyTorch can capture and compile compatible regions into fewer optimized operations while falling back when dynamic behavior cannot be captured safely.\n\nMoving data between CPU and GPU is not free. Keep tensors and model parameters on the same device, batch transfers, and measure end-to-end time rather than kernel speed alone.",
+  "common_mistakes": [
+    "A tensor can contain only one number.",
+    "An nn.Module prevents parameters from being trained.",
+    "Autograd requires every derivative to be entered by hand."
+  ],
+  "mini_exercise": "Sketch the situation in “Eager Code, Compiled Regions, and Device Boundaries” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "PyTorch turns the phase’s equations into inspectable, trainable programs.",
+  "explain_back_prompt": "Using the “Eager Code, Compiled Regions, and Device Boundaries” situation, explain PyTorch Introduction without assuming the listener knows deep learning."
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p4_regularization_q1",
+    "skill_id": "p4_regularization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Regularization: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Regularization trades some training fit for a more restrained rule."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Regularization trades some training fit for a more restrained rule.",
+    "graph_placement_weight": {
+      "p4_regularization": 1
+    }
+  },
+  {
+    "id": "p4_regularization_q2",
+    "skill_id": "p4_regularization",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Regularization: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Stronger regularization usually shrinks learned weights more."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Stronger regularization usually shrinks learned weights more.",
+    "graph_placement_weight": {
+      "p4_regularization": 1
+    }
+  },
+  {
+    "id": "p4_regularization_q3",
+    "skill_id": "p4_regularization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Regularization: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "L2 smoothly shrinks weights while L1 can set some exactly to zero."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "L2 smoothly shrinks weights while L1 can set some exactly to zero.",
+    "graph_placement_weight": {
+      "p4_regularization": 1
+    }
+  },
+  {
+    "id": "p4_regularization_q4",
+    "skill_id": "p4_regularization",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Regularization: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Feature scaling matters because units change required weight size."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Feature scaling matters because units change required weight size.",
+    "graph_placement_weight": {
+      "p4_regularization": 1
+    }
+  },
+  {
+    "id": "p4_regularization_q5",
+    "skill_id": "p4_regularization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Regularization: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Elastic net combines L1 and L2 behavior."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Elastic net combines L1 and L2 behavior.",
+    "graph_placement_weight": {
+      "p4_regularization": 1
+    }
+  },
+  {
+    "id": "p4_regularization_q6",
+    "skill_id": "p4_regularization",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Regularization: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Regularization can be understood as a prior preference against extreme weights."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Regularization can be understood as a prior preference against extreme weights.",
+    "graph_placement_weight": {
+      "p4_regularization": 1
+    }
+  }
+]

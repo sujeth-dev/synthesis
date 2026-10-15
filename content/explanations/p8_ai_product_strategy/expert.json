@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_product_strategy",
+  "depth": "expert",
+  "title": "AI Product Strategy — Manage a Portfolio of Uncertainty",
+  "key_insight": "Stage investments around evidence milestones: problem proof, workflow proof, quality proof, safety proof, and scale proof. Preserve options until evidence supports commitment.",
+  "body": "## Manage a Portfolio of Uncertainty\n\nSeveral AI bets have unknown quality, adoption, regulation, and cost. Committing the full budget to one forecast hides uncertainty.\n\nStage investments around evidence milestones: problem proof, workflow proof, quality proof, safety proof, and scale proof. Preserve options until evidence supports commitment.\n\nStrategy includes a stop rule. Record what result would pause, narrow, or end the initiative so sunk cost does not become the decision maker.",
+  "common_mistakes": [
+    "An impressive model demo proves product value.",
+    "Inference price is the only product cost.",
+    "A strategy should continue regardless of failed milestones."
+  ],
+  "mini_exercise": "Draw “Manage a Portfolio of Uncertainty” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Technical capability creates value only when it fits a user job, operating model, economics, and responsible adoption path.",
+  "explain_back_prompt": "Using “Manage a Portfolio of Uncertainty,” explain AI Product Strategy without assuming the listener knows AI engineering."
+}

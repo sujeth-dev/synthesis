@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_bias_variance_tradeoff",
+  "depth": "mid",
+  "title": "Bias–Variance Tradeoff — Read the Two Learning Curves",
+  "key_insight": "High errors together suggest too much bias. A large gap suggests too much variance.",
+  "body": "## Read the Two Learning Curves\n\nTraining error and validation error stay high together, or training becomes excellent while validation remains poor.\n\nHigh errors together suggest too much bias. A large gap suggests too much variance.\n\nMore flexible features can reduce bias. More data, regularization, or a simpler model can reduce variance, but diagnose before choosing a remedy.",
+  "common_mistakes": [
+    "Calling every bad model overfit.",
+    "Choosing a remedy without comparing training and validation behavior.",
+    "Assuming model size alone determines effective complexity."
+  ],
+  "mini_exercise": "Draw the situation from “Read the Two Learning Curves” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The tradeoff explains underfitting, overfitting, and why model complexity needs validation.",
+  "explain_back_prompt": "Using the “Read the Two Learning Curves” story, explain Bias–Variance Tradeoff without assuming the listener knows machine learning."
+}

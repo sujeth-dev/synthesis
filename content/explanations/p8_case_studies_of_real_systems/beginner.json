@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_case_studies_of_real_systems",
+  "depth": "beginner",
+  "title": "Case Studies of Real AI Systems — Look Beyond the Architecture Diagram",
+  "key_insight": "Start with context: users, job, scale, constraints, and success criteria. Then trace the system route and the evidence for its results.",
+  "body": "## Look Beyond the Architecture Diagram\n\nA case study praises an impressive model but never states the user problem or whether outcomes improved. The picture cannot teach the decision.\n\nStart with context: users, job, scale, constraints, and success criteria. Then trace the system route and the evidence for its results.\n\nSeparate reported fact from your inference. Public case studies often omit costs, failures, and internal alternatives.",
+  "common_mistakes": [
+    "An architecture diagram proves business success.",
+    "A famous design should be copied regardless of workload.",
+    "A postmortem is complete after blaming one operator."
+  ],
+  "mini_exercise": "Draw “Look Beyond the Architecture Diagram” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Real systems show how model choices interact with users, data, organizations, and operations.",
+  "explain_back_prompt": "Using “Look Beyond the Architecture Diagram,” explain Case Studies of Real AI Systems without assuming the listener knows AI engineering."
+}

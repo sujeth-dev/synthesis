@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_linear_regression",
+  "depth": "beginner",
+  "title": "Linear Regression — Lay a Ruler Through the Dots",
+  "key_insight": "Linear regression learns that straight trend. Each input receives a weight that says how strongly it tilts the prediction.",
+  "body": "## Lay a Ruler Through the Dots\n\nHouse size and price form a cloud of dots. A ruler placed through the middle gives a simple guess for a house whose price is unknown.\n\nLinear regression learns that straight trend. Each input receives a weight that says how strongly it tilts the prediction.\n\nThe line will not touch every dot. Its job is to make the collection of misses small enough to predict new houses usefully.",
+  "common_mistakes": [
+    "Reading a learned weight as proof that one feature causes the answer.",
+    "Ignoring curved patterns left in the errors.",
+    "Comparing raw coefficient sizes when input units differ."
+  ],
+  "mini_exercise": "Draw the situation from “Lay a Ruler Through the Dots” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It is a fast, explainable baseline for numeric prediction and a foundation for many later models.",
+  "explain_back_prompt": "Using the “Lay a Ruler Through the Dots” story, explain Linear Regression without assuming the listener knows machine learning."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_multi_agent_systems",
+  "depth": "expert",
+  "title": "Multi-Agent Systems — Treat Coordination as a Distributed Protocol",
+  "key_insight": "Use idempotent tasks, durable event logs, leases, and version checks around side effects. Decide whether the workflow needs strict order or can accept eventual consistency.",
+  "body": "## Treat Coordination as a Distributed Protocol\n\nAgents retry, arrive late, and observe different state versions. Their language ability does not remove ordinary distributed-systems problems.\n\nUse idempotent tasks, durable event logs, leases, and version checks around side effects. Decide whether the workflow needs strict order or can accept eventual consistency.\n\nEvaluate the system on task success, total cost, latency, duplicate actions, and recovery. Compare it against a deterministic workflow and a single-agent baseline.",
+  "common_mistakes": [
+    "Adding more agents always improves every task.",
+    "Conversational memory replaces structured workflow state.",
+    "Every agent should receive all available permissions."
+  ],
+  "mini_exercise": "Draw “Treat Coordination as a Distributed Protocol” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Multiple model-driven workers can help on decomposable work, but coordination can add cost, delay, and new failure modes.",
+  "explain_back_prompt": "Using “Treat Coordination as a Distributed Protocol,” explain Multi-Agent Systems without assuming the listener knows AI engineering."
+}

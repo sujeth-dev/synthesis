@@ -1,0 +1,16 @@
+{
+  "skill_id": "p2_calculus_basics",
+  "depth": "expert",
+  "title": "Getting the Derivative You Need Without Building the Whole Table",
+  "key_insight": "With a giant switchboard, follow only the knob direction or bulb concern you need instead of writing down every hidden wire.",
+  "body": "## The Giant Switchboard\n\nImagine a million knobs connected to a million lightbulbs. Writing how every knob affects every bulb would make a gigantic pile of notes; people call that full pile a Jacobian.\n\nUsually you need less. Nudge a chosen group of knobs and watch all bulbs: that shortcut is a Jacobian-vector product. Choose one bulb and trace its wires backward: that is a vector-Jacobian product.\n\nForward-gradient research tests a few knob directions instead of tracing every wire backward. It can save stored work, but each test gives a noisier clue, so many clues may be needed.",
+  "common_mistakes": [
+    "Writing the whole knob-to-bulb table when the task asks about only one chosen direction.",
+    "Mixing up the two shortcuts — one pushes a knob movement forward, while the other traces a bulb concern backward.",
+    "Assuming the forward shortcut is always faster — it depends on how many knob directions and bulb concerns matter.",
+    "Treating one randomly chosen direction as the complete answer — it is a noisy clue that usually needs companions."
+  ],
+  "mini_exercise": "Draw three knobs connected to two bulbs. Pick one combined knob movement and describe how you would find both bulb changes without listing every possible movement.",
+  "real_world_usage": "Differentiation libraries offer forward and backward shortcuts for scientific models, sensitivity checks, and training. These shortcuts answer a chosen direction question without storing the enormous full connection table.",
+  "explain_back_prompt": "Using the switchboard, explain the full connection table, the push-forward shortcut, the trace-backward shortcut, and why random forward tests can be noisy."
+}

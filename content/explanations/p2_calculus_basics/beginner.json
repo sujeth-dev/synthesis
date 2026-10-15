@@ -1,0 +1,15 @@
+{
+  "skill_id": "p2_calculus_basics",
+  "depth": "beginner",
+  "title": "Which Way Is Downhill?",
+  "key_insight": "A derivative is a tiny test step on a foggy hill; a gradient collects those downhill clues when there are many directions.",
+  "body": "## Which Way Is Downhill?\n\nYou're on a foggy hill. You can't see far, but you can test a step downhill or uphill. That tiny test is a derivative—it tells you which way to go.\n\nA model does the same thing with a weight instead of your foot: nudge it a little, then see whether the error goes up or down.\n\nMove opposite the direction that increases error, and you're headed downhill. That is the basic idea behind training.",
+  "common_mistakes": [
+    "Thinking a derivative is the average change over the whole curve — it describes the change right near one chosen point.",
+    "Assuming a positive derivative is always good — for an error score, training usually wants to move in the direction that lowers the score.",
+    "Treating a gradient as one number — it contains one local slope for each adjustable input."
+  ],
+  "mini_exercise": "Estimate the slope of `y = x²` at `x = 2` using a step of `0.1`, then `0.01`. Compare both answers with the exact slope, which is `2 × x`.",
+  "real_world_usage": "Every call to `loss.backward()` in PyTorch asks the framework to find how the loss changes with each trainable weight. Optimizers use those derivatives to update the model.",
+  "explain_back_prompt": "Use the foggy-hill story to explain a derivative, a gradient, and why training moves opposite the gradient of error."
+}

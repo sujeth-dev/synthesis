@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_vanishing_exploding_gradients",
+  "depth": "beginner",
+  "title": "Vanishing & Exploding Gradients — The Backward Message Fades or Shouts",
+  "key_insight": "A vanishing gradient becomes too small as it travels backward. An exploding gradient becomes dangerously large.",
+  "body": "## The Backward Message Fades or Shouts\n\nThe last layer learns, but the first layers barely change. In another run, one update turns every value into an invalid number.\n\nA vanishing gradient becomes too small as it travels backward. An exploding gradient becomes dangerously large.\n\nWatch gradient sizes and loss. Flat learning can signal vanishing gradients; sudden spikes or invalid values can signal exploding gradients.",
+  "common_mistakes": [
+    "Vanishing gradients make every update infinitely large.",
+    "Gradient clipping creates new labels for the dataset.",
+    "Depth can never affect backward signal scale."
+  ],
+  "mini_exercise": "Sketch the situation in “The Backward Message Fades or Shouts” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Unhealthy gradient scale prevents early layers from learning and can make training numerically unstable.",
+  "explain_back_prompt": "Using the “The Backward Message Fades or Shouts” situation, explain Vanishing & Exploding Gradients without assuming the listener knows deep learning."
+}

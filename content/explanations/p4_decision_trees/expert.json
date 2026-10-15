@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_decision_trees",
+  "depth": "expert",
+  "title": "Decision Trees — A Staircase Approximation",
+  "key_insight": "This makes trees flexible but discontinuous: a tiny move across a split can jump the prediction. Oblique trees use angled cuts, while ordinary trees cut one feature at a time.",
+  "body": "## A Staircase Approximation\n\nA smooth landscape is covered with rectangular steps. Each leaf is one flat rectangle, so a deeper tree can trace a more detailed staircase.\n\nThis makes trees flexible but discontinuous: a tiny move across a split can jump the prediction. Oblique trees use angled cuts, while ordinary trees cut one feature at a time.\n\nExact best-tree search grows too quickly to try fully, so libraries use greedy building plus pruning. Fast implementations sort values and reuse split statistics.",
+  "common_mistakes": [
+    "Growing until every training row has its own leaf.",
+    "Reading one greedy split as the only valid explanation.",
+    "Ignoring the advantage given to features with many possible cut points."
+  ],
+  "mini_exercise": "Draw the situation from “A Staircase Approximation” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Trees handle curved rules and mixed features while remaining inspectable.",
+  "explain_back_prompt": "Using the “A Staircase Approximation” story, explain Decision Trees without assuming the listener knows machine learning."
+}

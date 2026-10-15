@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_prompt_engineering",
+  "depth": "advanced",
+  "title": "Prompt Engineering — Test Prompts Like Code",
+  "key_insight": "Keep a versioned evaluation set with normal, edge, and adversarial cases. Compare prompt versions on quality, latency, and token use.",
+  "body": "## Test Prompts Like Code\n\nA rewritten prompt fixes one example but breaks ten others. Judging from a chat window hid the regression.\n\nKeep a versioned evaluation set with normal, edge, and adversarial cases. Compare prompt versions on quality, latency, and token use.\n\nAvoid asking for hidden chain-of-thought. Request concise conclusions, supporting evidence, or checkable intermediate artifacts when reasoning transparency is needed.",
+  "common_mistakes": [
+    "Longer prompts are always more reliable.",
+    "Requested JSON is guaranteed to parse without checks.",
+    "One successful chat proves a prompt cannot regress."
+  ],
+  "mini_exercise": "Draw “Test Prompts Like Code” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Clear prompts improve reliability before more expensive retrieval, tuning, or model changes are attempted.",
+  "explain_back_prompt": "Using “Test Prompts Like Code,” explain Prompt Engineering without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Build and test one prompt",
+    "context": "Turn Prompt Engineering into one small, inspectable workflow.",
+    "steps": [
+      "Write a vague baseline prompt.",
+      "Add task, context, constraints, and output shape.",
+      "Test both on five varied inputs.",
+      "Record failures and revise once."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

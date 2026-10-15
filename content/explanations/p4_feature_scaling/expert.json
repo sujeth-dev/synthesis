@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_feature_scaling",
+  "depth": "expert",
+  "title": "Feature Scaling — Scaling Changes the Shape of Optimization",
+  "key_insight": "Scaling acts like choosing better coordinates, making the valley rounder so one step size works in more directions. This is a simple form of preconditioning.",
+  "body": "## Scaling Changes the Shape of Optimization\n\nA loss valley is narrow because one feature changes the prediction far more per numeric step than another. Gradient descent bounces across the valley.\n\nScaling acts like choosing better coordinates, making the valley rounder so one step size works in more directions. This is a simple form of preconditioning.\n\nWhitening goes further by removing linear correlation and equalizing variation, but it can amplify noisy directions and makes original features harder to explain.",
+  "common_mistakes": [
+    "Fitting the scaler before the train/test split.",
+    "Using min-max scaling without checking extreme outliers.",
+    "Centering a huge sparse matrix until it becomes dense."
+  ],
+  "mini_exercise": "Draw the situation from “Scaling Changes the Shape of Optimization” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Distance methods and gradient-based models can be distorted or slowed by mismatched feature units.",
+  "explain_back_prompt": "Using the “Scaling Changes the Shape of Optimization” story, explain Feature Scaling without assuming the listener knows machine learning."
+}

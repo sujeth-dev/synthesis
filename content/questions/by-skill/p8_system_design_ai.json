@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p8_system_design_ai_q1",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "AI system design covers the complete route around a model."
+      },
+      {
+        "id": "b",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "c",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "d",
+        "text": "Production results need no record of their configuration version."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "AI system design covers the complete route around a model.",
+    "graph_placement_weight": {
+      "p8_system_design_ai": 1
+    }
+  },
+  {
+    "id": "p8_system_design_ai_q2",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "b",
+        "text": "Measurable requirements should include quality, latency, privacy, availability, and cost."
+      },
+      {
+        "id": "c",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "d",
+        "text": "Production results need no record of their configuration version."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Measurable requirements should include quality, latency, privacy, availability, and cost.",
+    "graph_placement_weight": {
+      "p8_system_design_ai": 1
+    }
+  },
+  {
+    "id": "p8_system_design_ai_q3",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "b",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "c",
+        "text": "Budgets help divide latency and cost across stages."
+      },
+      {
+        "id": "d",
+        "text": "Production results need no record of their configuration version."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Budgets help divide latency and cost across stages.",
+    "graph_placement_weight": {
+      "p8_system_design_ai": 1
+    }
+  },
+  {
+    "id": "p8_system_design_ai_q4",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "b",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "c",
+        "text": "Production results need no record of their configuration version."
+      },
+      {
+        "id": "d",
+        "text": "Circuit breakers limit damage from failing dependencies."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Circuit breakers limit damage from failing dependencies.",
+    "graph_placement_weight": {
+      "p8_system_design_ai": 1
+    }
+  },
+  {
+    "id": "p8_system_design_ai_q5",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Partial-failure tests reveal degraded behavior."
+      },
+      {
+        "id": "b",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "c",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "d",
+        "text": "Production results need no record of their configuration version."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Partial-failure tests reveal degraded behavior.",
+    "graph_placement_weight": {
+      "p8_system_design_ai": 1
+    }
+  },
+  {
+    "id": "p8_system_design_ai_q6",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "b",
+        "text": "A control plane versions and distributes serving configuration separately from live request handling."
+      },
+      {
+        "id": "c",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "d",
+        "text": "Production results need no record of their configuration version."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A control plane versions and distributes serving configuration separately from live request handling.",
+    "graph_placement_weight": {
+      "p8_system_design_ai": 1
+    }
+  },
+  {
+    "id": "p8_system_design_ai_order1",
+    "skill_id": "p8_system_design_ai",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this AI System Design workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define the user job and requirements"
+      },
+      {
+        "id": "b",
+        "text": "draw the data and decision route"
+      },
+      {
+        "id": "c",
+        "text": "add failure handling and safeguards"
+      },
+      {
+        "id": "d",
+        "text": "measure and revise the design"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The defensible order is: define the user job and requirements → draw the data and decision route → add failure handling and safeguards → measure and revise the design."
+  },
+  {
+    "id": "p8_system_design_ai_fill1",
+    "skill_id": "p8_system_design_ai",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the AI System Design decision.",
+    "options": [
+      {
+        "id": "a",
+        "text": "requirements"
+      },
+      {
+        "id": "b",
+        "text": "gradients"
+      },
+      {
+        "id": "c",
+        "text": "tokens_only"
+      },
+      {
+        "id": "d",
+        "text": "dropout"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "requirements",
+    "explanation_after": "The correct choice is requirements."
+  }
+]

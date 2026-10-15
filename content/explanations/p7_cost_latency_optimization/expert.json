@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_cost_latency_optimization",
+  "depth": "expert",
+  "title": "Cost & Latency Optimization — Route by Marginal Value",
+  "key_insight": "Use a router or cascade: start with an efficient path and escalate when risk or checks justify the added cost.",
+  "body": "## Route by Marginal Value\n\nA larger model improves only the hardest ten percent of cases. Paying for it on every request wastes the quality advantage.\n\nUse a router or cascade: start with an efficient path and escalate when risk or checks justify the added cost.\n\nEstimate total cost of ownership, including engineering, hosting, retries, evaluation, and incidents. Token price alone can mislead.",
+  "common_mistakes": [
+    "The cheapest response is best even when wrong.",
+    "Average latency fully describes user experience.",
+    "Unlimited concurrency always reduces latency."
+  ],
+  "mini_exercise": "Draw “Route by Marginal Value” as three steps and explain each one.",
+  "real_world_usage": "Production AI must meet quality targets within token, compute, and response-time budgets.",
+  "explain_back_prompt": "Use “Route by Marginal Value” to explain Cost & Latency Optimization plainly."
+}

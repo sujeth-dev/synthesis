@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_unsupervised_learning",
+  "depth": "advanced",
+  "title": "Unsupervised Learning — Fold a Wide Map",
+  "key_insight": "Dimensionality reduction builds a smaller set of summary directions. Principal component analysis keeps directions that preserve the most variation.",
+  "body": "## Fold a Wide Map\n\nA table has hundreds of columns, making it hard to draw or compare. Many columns move together, so the table contains fewer independent directions than it appears.\n\nDimensionality reduction builds a smaller set of summary directions. Principal component analysis keeps directions that preserve the most variation.\n\nCompression can reveal structure and speed later work, but summary directions may be hard to explain and high variation is not always the useful signal.",
+  "common_mistakes": [
+    "Calling clusters true labels without inspecting them.",
+    "Using distance before putting features on comparable scales.",
+    "Choosing the number of groups only because one chart looks attractive."
+  ],
+  "mini_exercise": "Draw the situation from “Fold a Wide Map” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Many datasets have no labels, yet their groups, unusual cases, and compressed structure are valuable.",
+  "explain_back_prompt": "Using the “Fold a Wide Map” story, explain Unsupervised Learning without assuming the listener knows machine learning."
+}

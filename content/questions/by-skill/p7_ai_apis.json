@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p7_ai_apis_q1",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An API lets one program request work from another service."
+      },
+      {
+        "id": "b",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "c",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "d",
+        "text": "Model responses never require validation."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An API lets one program request work from another service.",
+    "graph_placement_weight": {
+      "p7_ai_apis": 1
+    }
+  },
+  {
+    "id": "p7_ai_apis_q2",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "b",
+        "text": "API keys belong on a trusted server."
+      },
+      {
+        "id": "c",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "d",
+        "text": "Model responses never require validation."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "API keys belong on a trusted server.",
+    "graph_placement_weight": {
+      "p7_ai_apis": 1
+    }
+  },
+  {
+    "id": "p7_ai_apis_q3",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "b",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "c",
+        "text": "Requests must follow the provider contract."
+      },
+      {
+        "id": "d",
+        "text": "Model responses never require validation."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Requests must follow the provider contract.",
+    "graph_placement_weight": {
+      "p7_ai_apis": 1
+    }
+  },
+  {
+    "id": "p7_ai_apis_q4",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "b",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "c",
+        "text": "Model responses never require validation."
+      },
+      {
+        "id": "d",
+        "text": "Retries need limits and should target safe transient failures."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Retries need limits and should target safe transient failures.",
+    "graph_placement_weight": {
+      "p7_ai_apis": 1
+    }
+  },
+  {
+    "id": "p7_ai_apis_q5",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Streaming can improve perceived latency."
+      },
+      {
+        "id": "b",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "c",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "d",
+        "text": "Model responses never require validation."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Streaming can improve perceived latency.",
+    "graph_placement_weight": {
+      "p7_ai_apis": 1
+    }
+  },
+  {
+    "id": "p7_ai_apis_q6",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "b",
+        "text": "A provider adapter reduces coupling to one external response shape."
+      },
+      {
+        "id": "c",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "d",
+        "text": "Model responses never require validation."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A provider adapter reduces coupling to one external response shape.",
+    "graph_placement_weight": {
+      "p7_ai_apis": 1
+    }
+  },
+  {
+    "id": "p7_ai_apis_order1",
+    "skill_id": "p7_ai_apis",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this AI APIs & Production workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "form the server request"
+      },
+      {
+        "id": "b",
+        "text": "send it with a timeout"
+      },
+      {
+        "id": "c",
+        "text": "validate the response"
+      },
+      {
+        "id": "d",
+        "text": "return a safe result to the client"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "form the server request → send it with a timeout → validate the response → return a safe result to the client"
+  },
+  {
+    "id": "p7_ai_apis_fill1",
+    "skill_id": "p7_ai_apis",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the safest first action for AI APIs & Production.",
+    "options": [
+      {
+        "id": "a",
+        "text": "form the server request"
+      },
+      {
+        "id": "b",
+        "text": "send it with a timeout"
+      },
+      {
+        "id": "c",
+        "text": "validate the response"
+      },
+      {
+        "id": "d",
+        "text": "return a safe result to the client"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "form the server request",
+    "explanation_after": "Start with form the server request."
+  }
+]

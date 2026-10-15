@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_content_moderation",
+  "depth": "advanced",
+  "title": "Content Moderation — Give Reviewers Context and Care",
+  "key_insight": "Prioritize by severity and reach, group duplicates, and give reviewers policy snippets plus needed conversation context.",
+  "body": "## Give Reviewers Context and Care\n\nA human queue grows faster than the team can inspect it. Repeated exposure also harms reviewers.\n\nPrioritize by severity and reach, group duplicates, and give reviewers policy snippets plus needed conversation context.\n\nProtect reviewer wellbeing with rotation, controls, and support. Audit appeals to find inconsistent rules and classifier blind spots.",
+  "common_mistakes": [
+    "A classifier removes the need for written policy.",
+    "Uncertain cases should always be treated as definitely harmful.",
+    "Reviewer safety has no effect on moderation quality."
+  ],
+  "mini_exercise": "Draw “Give Reviewers Context and Care” as three steps and explain each one.",
+  "real_world_usage": "Moderation applies explicit policy to user and model content with calibrated automation and human escalation.",
+  "explain_back_prompt": "Use “Give Reviewers Context and Care” to explain Content Moderation plainly."
+}

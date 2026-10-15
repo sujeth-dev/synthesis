@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_neural_network_basics",
+  "depth": "expert",
+  "title": "Neural Networks — A Function Built from Smaller Functions",
+  "key_insight": "Each layer is a function with saved parameters. Composing layers means the output of one becomes the input of the next, creating one larger function.",
+  "body": "## A Function Built from Smaller Functions\n\nA deep model looks like one enormous formula, yet software trains it as a chain of small operations. That structure is what makes the work manageable.\n\nEach layer is a function with saved parameters. Composing layers means the output of one becomes the input of the next, creating one larger function.\n\nInitialization chooses the starting scale of weights so signals neither disappear nor explode. Residual paths later help information and gradients travel through very deep chains.",
+  "common_mistakes": [
+    "Every layer stores only words and never numbers.",
+    "Training keeps all weights fixed forever.",
+    "Adding layers guarantees a correct answer without data."
+  ],
+  "mini_exercise": "Sketch the situation in “A Function Built from Smaller Functions” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Neural networks are the shared foundation of modern image, language, speech, and recommendation systems.",
+  "explain_back_prompt": "Using the “A Function Built from Smaller Functions” situation, explain Neural Networks without assuming the listener knows deep learning."
+}

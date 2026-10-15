@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_deployment_hosting",
+  "depth": "expert",
+  "title": "Deployment & Hosting — Roll Out Without Betting Everything",
+  "key_insight": "Canary releases send a small share of traffic to the new stack while comparing errors, latency, cost, and quality signals.",
+  "body": "## Roll Out Without Betting Everything\n\nA new model changes output behavior despite identical API fields. A standard code health check cannot catch it.\n\nCanary releases send a small share of traffic to the new stack while comparing errors, latency, cost, and quality signals.\n\nAutomate rollback for clear operational failures and retain human review for ambiguous quality shifts. Store artifact and configuration versions with every result.",
+  "common_mistakes": [
+    "A laptop environment is automatically reproducible.",
+    "Adding web servers fixes every downstream bottleneck.",
+    "Health checks prove model answer quality."
+  ],
+  "mini_exercise": "Draw “Roll Out Without Betting Everything” as three steps and explain each one.",
+  "real_world_usage": "Deployment turns a working AI service into a repeatable, secure, scalable runtime.",
+  "explain_back_prompt": "Use “Roll Out Without Betting Everything” to explain Deployment & Hosting plainly."
+}

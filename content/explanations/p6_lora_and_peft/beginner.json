@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_lora_and_peft",
+  "depth": "beginner",
+  "title": "LoRA & Parameter-Efficient Fine-Tuning — Attach a Small Learned Overlay",
+  "key_insight": "LoRA freezes the base weights and learns a small adjustment for selected layers. Each task can store only its lightweight adapter.",
+  "body": "## Attach a Small Learned Overlay\n\nA team needs three specialized versions of a huge model. Saving and training three complete copies is too expensive.\n\nLoRA freezes the base weights and learns a small adjustment for selected layers. Each task can store only its lightweight adapter.\n\nAt use time, the adapter is applied with the base model or merged into it. The base model version must match the adapter.",
+  "common_mistakes": [
+    "LoRA retrains every base parameter by definition.",
+    "An adapter works with any unrelated base model.",
+    "Lower precision can never affect speed or quality."
+  ],
+  "mini_exercise": "Draw “Attach a Small Learned Overlay” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Parameter-efficient tuning makes adaptation possible with less training memory and smaller task-specific artifacts.",
+  "explain_back_prompt": "Using “Attach a Small Learned Overlay,” explain LoRA & Parameter-Efficient Fine-Tuning without assuming the listener knows modern AI."
+}

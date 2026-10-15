@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_ethics_bias",
+  "depth": "advanced",
+  "title": "AI Ethics & Bias — Measure Intersections and Feedback",
+  "key_insight": "Audit intersectional slices where sample size permits and report uncertainty. Qualitative reports can surface harms missing from the table.",
+  "body": "## Measure Intersections and Feedback\n\nResults look fair by gender and by region separately, yet one gender-region intersection receives poor service. Broad groups hide smaller harms.\n\nAudit intersectional slices where sample size permits and report uncertainty. Qualitative reports can surface harms missing from the table.\n\nWatch feedback loops: predictions change opportunities, and those changed outcomes become future training data.",
+  "common_mistakes": [
+    "High average accuracy proves equal treatment.",
+    "Historical labels are always neutral truth.",
+    "Writing a broad value statement completes governance."
+  ],
+  "mini_exercise": "Draw “Measure Intersections and Feedback” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI systems affect people through data collection, ranking, access, and automated decisions.",
+  "explain_back_prompt": "Using “Measure Intersections and Feedback,” explain AI Ethics & Bias without assuming the listener knows AI engineering."
+}

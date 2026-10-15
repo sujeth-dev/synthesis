@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_staying_current_with_research",
+  "depth": "advanced",
+  "title": "Staying Current with AI Research — Reproduce the Smallest Decisive Result",
+  "key_insight": "Reproduction can mean rerunning released code, checking evaluation, or rebuilding a smaller experiment. Record environment, seeds, data versions, and deviations.",
+  "body": "## Reproduce the Smallest Decisive Result\n\nThe full training run costs millions, but one ablation or evaluation can still test the central explanation.\n\nReproduction can mean rerunning released code, checking evaluation, or rebuilding a smaller experiment. Record environment, seeds, data versions, and deviations.\n\nA failed reproduction is evidence only after checking implementation and scope. Share precise conditions rather than declaring the entire idea false.",
+  "common_mistakes": [
+    "The newest paper is automatically the most reliable.",
+    "A title provides enough evidence for an engineering decision.",
+    "Bookmark count measures research understanding."
+  ],
+  "mini_exercise": "Draw “Reproduce the Smallest Decisive Result” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI changes quickly, but engineering judgment depends on distinguishing durable evidence from headlines and benchmark noise.",
+  "explain_back_prompt": "Using “Reproduce the Smallest Decisive Result,” explain Staying Current with AI Research without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Build a one-page evidence map",
+    "context": "Turn Staying Current with AI Research into one small, inspectable artifact.",
+    "steps": [
+      "Choose one narrow AI question.",
+      "Summarize three sources by claim and evidence.",
+      "List differences in data, metric, and compute.",
+      "Write what evidence would change your current decision."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

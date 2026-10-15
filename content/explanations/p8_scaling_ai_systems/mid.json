@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_scaling_ai_systems",
+  "depth": "mid",
+  "title": "Scaling AI Systems — Scale Stateless and Stateful Work Differently",
+  "key_insight": "Stateless services scale horizontally behind a load balancer. Stateful model workers need placement, warm capacity, and request routing that respects loaded weights and cache.",
+  "body": "## Scale Stateless and Stateful Work Differently\n\nWeb handlers can be copied easily, but a large model and its cache cannot jump between machines without cost.\n\nStateless services scale horizontally behind a load balancer. Stateful model workers need placement, warm capacity, and request routing that respects loaded weights and cache.\n\nQueue long work and apply backpressure. An overloaded system should reject or defer predictably instead of accepting work it cannot finish.",
+  "common_mistakes": [
+    "Adding random servers always removes the bottleneck.",
+    "Every AI request consumes equal compute.",
+    "Average traffic alone proves burst capacity."
+  ],
+  "mini_exercise": "Draw “Scale Stateless and Stateful Work Differently” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI workloads combine bursty requests, large inputs, expensive inference, and shared capacity.",
+  "explain_back_prompt": "Using “Scale Stateless and Stateful Work Differently,” explain Scaling AI Systems without assuming the listener knows AI engineering."
+}

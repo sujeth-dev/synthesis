@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_knn_and_svm",
+  "depth": "expert",
+  "title": "K-Nearest Neighbors & Support Vector Machines — Distance Fades in Many Dimensions",
+  "key_insight": "This is part of the curse of dimensionality. Feature selection, compression, or a distance shaped by domain knowledge can restore useful neighborhoods.",
+  "body": "## Distance Fades in Many Dimensions\n\nIn a room with thousands of directions, the nearest and farthest points can become surprisingly similar in distance. Neighborhoods stop feeling local.\n\nThis is part of the curse of dimensionality. Feature selection, compression, or a distance shaped by domain knowledge can restore useful neighborhoods.\n\nSVM boundaries depend only on support vectors because other points sit safely away from the margin. Dual optimization makes kernels possible by working through pairwise similarities.",
+  "common_mistakes": [
+    "Using either method before scaling features.",
+    "Choosing K or kernel settings on the test set.",
+    "Assuming KNN training is costly while ignoring its prediction-time search."
+  ],
+  "mini_exercise": "Draw the situation from “Distance Fades in Many Dimensions” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "These contrasting methods teach how distance, boundaries, and scaling shape classification.",
+  "explain_back_prompt": "Using the “Distance Fades in Many Dimensions” story, explain K-Nearest Neighbors & Support Vector Machines without assuming the listener knows machine learning."
+}

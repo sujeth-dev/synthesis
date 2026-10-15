@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_multi_agent_systems",
+  "depth": "beginner",
+  "title": "Multi-Agent Systems — Do Not Add a Team Before There Is Teamwork",
+  "key_insight": "Use multiple agents only when work has distinct roles, parallel branches, or useful independent checks.",
+  "body": "## Do Not Add a Team Before There Is Teamwork\n\nOne assistant can complete a task, but the design creates five agents that repeat each other and argue. More speakers did not create more capability.\n\nUse multiple agents only when work has distinct roles, parallel branches, or useful independent checks.\n\nDefine each role’s input, output, tools, and stopping condition. A simpler single workflow remains the baseline to beat.",
+  "common_mistakes": [
+    "Adding more agents always improves every task.",
+    "Conversational memory replaces structured workflow state.",
+    "Every agent should receive all available permissions."
+  ],
+  "mini_exercise": "Draw “Do Not Add a Team Before There Is Teamwork” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Multiple model-driven workers can help on decomposable work, but coordination can add cost, delay, and new failure modes.",
+  "explain_back_prompt": "Using “Do Not Add a Team Before There Is Teamwork,” explain Multi-Agent Systems without assuming the listener knows AI engineering."
+}

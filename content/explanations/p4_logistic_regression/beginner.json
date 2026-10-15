@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_logistic_regression",
+  "depth": "beginner",
+  "title": "Logistic Regression — A Score That Must Become a Chance",
+  "key_insight": "Logistic regression bends the score through an S-shaped gate. The result can be read as the model’s estimated probability of the positive class.",
+  "body": "## A Score That Must Become a Chance\n\nA spam filter adds clues such as suspicious links and unknown senders. The raw score can be any size, but a chance must stay between zero and one.\n\nLogistic regression bends the score through an S-shaped gate. The result can be read as the model’s estimated probability of the positive class.\n\nA threshold turns that chance into a decision. Moving the threshold changes which kinds of mistakes the filter makes.",
+  "common_mistakes": [
+    "Treating the output probability as certainty.",
+    "Using the default threshold without considering error costs.",
+    "Explaining an odds change as the same-sized probability change."
+  ],
+  "mini_exercise": "Draw the situation from “A Score That Must Become a Chance” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It is a strong, explainable baseline for binary classification.",
+  "explain_back_prompt": "Using the “A Score That Must Become a Chance” story, explain Logistic Regression without assuming the listener knows machine learning."
+}

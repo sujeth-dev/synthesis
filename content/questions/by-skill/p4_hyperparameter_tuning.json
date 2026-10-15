@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_hyperparameter_tuning_q1",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Hyperparameter Tuning: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Hyperparameters are chosen before fitting while parameters are learned."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Hyperparameters are chosen before fitting while parameters are learned.",
+    "graph_placement_weight": {
+      "p4_hyperparameter_tuning": 1
+    }
+  },
+  {
+    "id": "p4_hyperparameter_tuning_q2",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Hyperparameter Tuning: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Validation data guides setting choices while test data stays sealed."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Validation data guides setting choices while test data stays sealed.",
+    "graph_placement_weight": {
+      "p4_hyperparameter_tuning": 1
+    }
+  },
+  {
+    "id": "p4_hyperparameter_tuning_q3",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Hyperparameter Tuning: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Grid search tries listed combinations while random search samples them."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Grid search tries listed combinations while random search samples them.",
+    "graph_placement_weight": {
+      "p4_hyperparameter_tuning": 1
+    }
+  },
+  {
+    "id": "p4_hyperparameter_tuning_q4",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Hyperparameter Tuning: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Preprocessing must remain inside every search fold."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Preprocessing must remain inside every search fold.",
+    "graph_placement_weight": {
+      "p4_hyperparameter_tuning": 1
+    }
+  },
+  {
+    "id": "p4_hyperparameter_tuning_q5",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Hyperparameter Tuning: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Successive halving gives more resources to promising trials."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Successive halving gives more resources to promising trials.",
+    "graph_placement_weight": {
+      "p4_hyperparameter_tuning": 1
+    }
+  },
+  {
+    "id": "p4_hyperparameter_tuning_q6",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Hyperparameter Tuning: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nested evaluation measures the full tuning procedure on outer held-out folds."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Nested evaluation measures the full tuning procedure on outer held-out folds.",
+    "graph_placement_weight": {
+      "p4_hyperparameter_tuning": 1
+    }
+  },
+  {
+    "id": "p4_hyperparameter_tuning_order1",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Hyperparameter Tuning workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define a pipeline"
+      },
+      {
+        "id": "b",
+        "text": "define candidate settings"
+      },
+      {
+        "id": "c",
+        "text": "search with cross-validation"
+      },
+      {
+        "id": "d",
+        "text": "evaluate the winner on test data"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: define a pipeline → define candidate settings → search with cross-validation → evaluate the winner on test data."
+  },
+  {
+    "id": "p4_hyperparameter_tuning_fill1",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Hyperparameter Tuning step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "GridSearchCV"
+      },
+      {
+        "id": "b",
+        "text": "LinearRegression"
+      },
+      {
+        "id": "c",
+        "text": "confusion_matrix"
+      },
+      {
+        "id": "d",
+        "text": "drop_duplicates"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "GridSearchCV",
+    "explanation_after": "The correct choice is GridSearchCV."
+  }
+]

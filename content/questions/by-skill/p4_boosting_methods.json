@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p4_boosting_methods_q1",
+    "skill_id": "p4_boosting_methods",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Boosting Methods: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Boosting adds learners in sequence to correct earlier errors."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Boosting adds learners in sequence to correct earlier errors.",
+    "graph_placement_weight": {
+      "p4_boosting_methods": 1
+    }
+  },
+  {
+    "id": "p4_boosting_methods_q2",
+    "skill_id": "p4_boosting_methods",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Boosting Methods: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A new learner focuses on the loss left by the current ensemble."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A new learner focuses on the loss left by the current ensemble.",
+    "graph_placement_weight": {
+      "p4_boosting_methods": 1
+    }
+  },
+  {
+    "id": "p4_boosting_methods_q3",
+    "skill_id": "p4_boosting_methods",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Boosting Methods: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The learning rate controls how strongly each correction joins."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "The learning rate controls how strongly each correction joins.",
+    "graph_placement_weight": {
+      "p4_boosting_methods": 1
+    }
+  },
+  {
+    "id": "p4_boosting_methods_q4",
+    "skill_id": "p4_boosting_methods",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Boosting Methods: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Early stopping can halt before later corrections chase noise."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Early stopping can halt before later corrections chase noise.",
+    "graph_placement_weight": {
+      "p4_boosting_methods": 1
+    }
+  },
+  {
+    "id": "p4_boosting_methods_q5",
+    "skill_id": "p4_boosting_methods",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Boosting Methods: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "XGBoost adds regularization and efficient engineering around boosted trees."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "XGBoost adds regularization and efficient engineering around boosted trees.",
+    "graph_placement_weight": {
+      "p4_boosting_methods": 1
+    }
+  },
+  {
+    "id": "p4_boosting_methods_q6",
+    "skill_id": "p4_boosting_methods",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Boosting Methods: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Functional gradient descent treats each new tree as a step that changes the prediction function."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Functional gradient descent treats each new tree as a step that changes the prediction function.",
+    "graph_placement_weight": {
+      "p4_boosting_methods": 1
+    }
+  }
+]

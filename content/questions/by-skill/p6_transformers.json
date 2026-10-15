@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_transformers_q1",
+    "skill_id": "p6_transformers",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Transformer Architecture: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A transformer block alternates attention and feed-forward processing."
+      },
+      {
+        "id": "b",
+        "text": "A transformer contains attention and nothing else."
+      },
+      {
+        "id": "c",
+        "text": "Decoder generation should read future unseen tokens."
+      },
+      {
+        "id": "d",
+        "text": "A key-value cache makes memory use shrink as context grows."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A transformer block alternates attention and feed-forward processing.",
+    "graph_placement_weight": {
+      "p6_transformers": 1
+    }
+  },
+  {
+    "id": "p6_transformers_q2",
+    "skill_id": "p6_transformers",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Transformer Architecture: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A transformer contains attention and nothing else."
+      },
+      {
+        "id": "b",
+        "text": "Residual paths and normalization support deep stacks."
+      },
+      {
+        "id": "c",
+        "text": "Decoder generation should read future unseen tokens."
+      },
+      {
+        "id": "d",
+        "text": "A key-value cache makes memory use shrink as context grows."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Residual paths and normalization support deep stacks.",
+    "graph_placement_weight": {
+      "p6_transformers": 1
+    }
+  },
+  {
+    "id": "p6_transformers_q3",
+    "skill_id": "p6_transformers",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Transformer Architecture: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A transformer contains attention and nothing else."
+      },
+      {
+        "id": "b",
+        "text": "Decoder generation should read future unseen tokens."
+      },
+      {
+        "id": "c",
+        "text": "Encoders can attend both directions."
+      },
+      {
+        "id": "d",
+        "text": "A key-value cache makes memory use shrink as context grows."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Encoders can attend both directions.",
+    "graph_placement_weight": {
+      "p6_transformers": 1
+    }
+  },
+  {
+    "id": "p6_transformers_q4",
+    "skill_id": "p6_transformers",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Transformer Architecture: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A transformer contains attention and nothing else."
+      },
+      {
+        "id": "b",
+        "text": "Decoder generation should read future unseen tokens."
+      },
+      {
+        "id": "c",
+        "text": "A key-value cache makes memory use shrink as context grows."
+      },
+      {
+        "id": "d",
+        "text": "Decoder-only language models use causal attention."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Decoder-only language models use causal attention.",
+    "graph_placement_weight": {
+      "p6_transformers": 1
+    }
+  },
+  {
+    "id": "p6_transformers_q5",
+    "skill_id": "p6_transformers",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Transformer Architecture: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A key-value cache avoids recomputing earlier attention projections."
+      },
+      {
+        "id": "b",
+        "text": "A transformer contains attention and nothing else."
+      },
+      {
+        "id": "c",
+        "text": "Decoder generation should read future unseen tokens."
+      },
+      {
+        "id": "d",
+        "text": "A key-value cache makes memory use shrink as context grows."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A key-value cache avoids recomputing earlier attention projections.",
+    "graph_placement_weight": {
+      "p6_transformers": 1
+    }
+  },
+  {
+    "id": "p6_transformers_q6",
+    "skill_id": "p6_transformers",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Transformer Architecture: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A transformer contains attention and nothing else."
+      },
+      {
+        "id": "b",
+        "text": "Distributed transformer training trades device memory against communication."
+      },
+      {
+        "id": "c",
+        "text": "Decoder generation should read future unseen tokens."
+      },
+      {
+        "id": "d",
+        "text": "A key-value cache makes memory use shrink as context grows."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Distributed transformer training trades device memory against communication.",
+    "graph_placement_weight": {
+      "p6_transformers": 1
+    }
+  }
+]

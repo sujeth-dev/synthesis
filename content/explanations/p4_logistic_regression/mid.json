@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_logistic_regression",
+  "depth": "mid",
+  "title": "Logistic Regression — Move in Log-Odds Steps",
+  "key_insight": "Logistic regression works with odds, then takes their logarithm to make weighted effects add cleanly. Each coefficient changes these log-odds by a fixed amount.",
+  "body": "## Move in Log-Odds Steps\n\nA one-point score increase should have a consistent meaning even near very small and very large probabilities. Ordinary probability steps cannot do that.\n\nLogistic regression works with odds, then takes their logarithm to make weighted effects add cleanly. Each coefficient changes these log-odds by a fixed amount.\n\nConvert coefficients back carefully when explaining them. An effect on odds is not the same as adding that amount directly to probability.",
+  "common_mistakes": [
+    "Treating the output probability as certainty.",
+    "Using the default threshold without considering error costs.",
+    "Explaining an odds change as the same-sized probability change."
+  ],
+  "mini_exercise": "Draw the situation from “Move in Log-Odds Steps” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It is a strong, explainable baseline for binary classification.",
+  "explain_back_prompt": "Using the “Move in Log-Odds Steps” story, explain Logistic Regression without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "Build a probability classifier",
+    "context": "Turn the Logistic Regression idea into one small, inspectable workflow.",
+    "steps": [
+      "Load a small binary dataset.",
+      "Split and scale it safely.",
+      "Fit logistic regression.",
+      "Compare probabilities and decisions at two thresholds."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}

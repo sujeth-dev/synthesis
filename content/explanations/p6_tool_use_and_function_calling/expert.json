@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_tool_use_and_function_calling",
+  "depth": "expert",
+  "title": "Tool Use & Function Calling — Plans Cross a Trust Boundary at Every Tool",
+  "key_insight": "Keep tool policy outside untrusted context, filter outputs, and never expose secrets the model does not need. Authorize each call from application state, not model confidence.",
+  "body": "## Plans Cross a Trust Boundary at Every Tool\n\nA retrieved webpage tells the agent to reveal secrets through another tool. The text is data, but the model may mistake it for an instruction.\n\nKeep tool policy outside untrusted context, filter outputs, and never expose secrets the model does not need. Authorize each call from application state, not model confidence.\n\nFor multi-step work, persist a state machine with completed actions and compensating steps. This makes retries observable and prevents duplicate side effects.",
+  "common_mistakes": [
+    "A model response automatically has every system credential.",
+    "Tool arguments never need validation.",
+    "Retries are safe even when they repeat payments."
+  ],
+  "mini_exercise": "Draw “Plans Cross a Trust Boundary at Every Tool” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Models need tools to query live systems, calculate reliably, and take controlled actions beyond text generation.",
+  "explain_back_prompt": "Using “Plans Cross a Trust Boundary at Every Tool,” explain Tool Use & Function Calling without assuming the listener knows modern AI."
+}

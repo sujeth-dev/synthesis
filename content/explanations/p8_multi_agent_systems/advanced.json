@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_multi_agent_systems",
+  "depth": "advanced",
+  "title": "Multi-Agent Systems — Separate Independence from Redundancy",
+  "key_insight": "Diverse methods or information sources can make review more useful. Arbitration should compare evidence and rubric results, not simply count votes.",
+  "body": "## Separate Independence from Redundancy\n\nTwo reviewers use the same prompt, evidence, and model, then agree. Their matching answer is not truly independent evidence.\n\nDiverse methods or information sources can make review more useful. Arbitration should compare evidence and rubric results, not simply count votes.\n\nAuthorize tools per role and isolate private context. A research role should not inherit a deployment role’s write permissions.",
+  "common_mistakes": [
+    "Adding more agents always improves every task.",
+    "Conversational memory replaces structured workflow state.",
+    "Every agent should receive all available permissions."
+  ],
+  "mini_exercise": "Draw “Separate Independence from Redundancy” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Multiple model-driven workers can help on decomposable work, but coordination can add cost, delay, and new failure modes.",
+  "explain_back_prompt": "Using “Separate Independence from Redundancy,” explain Multi-Agent Systems without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Design a bounded two-role workflow",
+    "context": "Turn Multi-Agent Systems into one small, inspectable artifact.",
+    "steps": [
+      "Choose a task with two genuinely distinct roles.",
+      "Define each role’s inputs and output schema.",
+      "Add a coordinator and stop rules.",
+      "List duplicate-action and recovery tests."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

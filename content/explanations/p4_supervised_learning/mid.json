@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_supervised_learning",
+  "depth": "mid",
+  "title": "Supervised Learning — Two Kinds of Answer",
+  "key_insight": "Predicting a number is regression. Choosing a category is classification. The model and score should match the kind of answer needed.",
+  "body": "## Two Kinds of Answer\n\nOne shop predicts tomorrow’s sales number; another predicts whether a message is spam. Both learn from examples, but their answers have different shapes.\n\nPredicting a number is regression. Choosing a category is classification. The model and score should match the kind of answer needed.\n\nKeep training, validation, and test examples separate. Validation guides choices, while the untouched test set gives the final honest check.",
+  "common_mistakes": [
+    "Treating training accuracy as proof that new cases will work.",
+    "Using a classification score for a numeric prediction problem.",
+    "Assuming every recorded label is perfectly correct."
+  ],
+  "mini_exercise": "Draw the situation from “Two Kinds of Answer” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Most practical prediction systems begin with labeled historical examples.",
+  "explain_back_prompt": "Using the “Two Kinds of Answer” story, explain Supervised Learning without assuming the listener knows machine learning."
+}

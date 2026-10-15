@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_evaluation_metrics",
+  "depth": "mid",
+  "title": "Evaluation Metrics — Balance Two Kinds of Mistake",
+  "key_insight": "F1 combines precision and recall into one score that falls when either is weak. It is useful when both mistake types matter.",
+  "body": "## Balance Two Kinds of Mistake\n\nA strict alarm has few false alerts but misses danger; a loose alarm catches danger but interrupts everyone.\n\nF1 combines precision and recall into one score that falls when either is weak. It is useful when both mistake types matter.\n\nThe threshold sets the tradeoff. Compare metrics across possible thresholds instead of treating the default cutoff as a law.",
+  "common_mistakes": [
+    "Using accuracy for a rare positive class.",
+    "Comparing AUC without choosing a deployment threshold.",
+    "Treating a tiny metric difference as meaningful without uncertainty."
+  ],
+  "mini_exercise": "Draw the situation from “Balance Two Kinds of Mistake” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The wrong metric rewards the wrong model, especially with rare events.",
+  "explain_back_prompt": "Using the “Balance Two Kinds of Mistake” story, explain Evaluation Metrics without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "Build a threshold report",
+    "context": "Turn the Evaluation Metrics idea into one small, inspectable workflow.",
+    "steps": [
+      "Create true labels and prediction probabilities.",
+      "Try several thresholds.",
+      "Print precision and recall for each.",
+      "Choose one threshold and explain the error tradeoff."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}

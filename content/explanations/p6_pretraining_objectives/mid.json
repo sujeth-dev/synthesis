@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_pretraining_objectives",
+  "depth": "mid",
+  "title": "Pretraining Objectives — Predict Missing or Future Pieces",
+  "key_insight": "Masked-language training hides selected tokens and reconstructs them using surrounding context. Causal training predicts each next token under a future-blocking mask.",
+  "body": "## Predict Missing or Future Pieces\n\nOne model reads both sides of a hidden word; another generates left to right and must not see the future. Their objectives create different strengths.\n\nMasked-language training hides selected tokens and reconstructs them using surrounding context. Causal training predicts each next token under a future-blocking mask.\n\nThe loss averages many token decisions. Padding and intentionally ignored positions must be removed from that average.",
+  "common_mistakes": [
+    "Pretraining guarantees every generated claim is true.",
+    "A causal model trains by reading the answer tokens ahead.",
+    "Data quality cannot affect a fixed mathematical loss."
+  ],
+  "mini_exercise": "Draw “Predict Missing or Future Pieces” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The objective determines what patterns a foundation model is rewarded for learning before task-specific adaptation.",
+  "explain_back_prompt": "Using “Predict Missing or Future Pieces,” explain Pretraining Objectives without assuming the listener knows modern AI."
+}

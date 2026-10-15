@@ -1,0 +1,506 @@
+[
+  {
+    "id": "p7_eval_remember_1",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An API lets one program request work from another service."
+      },
+      {
+        "id": "b",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "c",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "d",
+        "text": "Model responses never require validation."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An API lets one program request work from another service.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p7_eval_remember_2",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An AI app should begin with a specific user job."
+      },
+      {
+        "id": "b",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "c",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "d",
+        "text": "A production app needs no fallback path."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An AI app should begin with a specific user job.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p7_eval_remember_3",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Product APIs should describe the user job rather than one model vendor."
+      },
+      {
+        "id": "b",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "c",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "d",
+        "text": "Model changes can never affect API behavior."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Product APIs should describe the user job rather than one model vendor.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p7_eval_understand_1",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "b",
+        "text": "Fluency does not prove factual correctness."
+      },
+      {
+        "id": "c",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "d",
+        "text": "A model grader is a permanent ground truth."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Fluency does not prove factual correctness.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p7_eval_understand_2",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "mcq",
+    "stem": "Explainability & Interpretability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A colorful heatmap is always faithful."
+      },
+      {
+        "id": "b",
+        "text": "An explanation is not automatic proof."
+      },
+      {
+        "id": "c",
+        "text": "One local explanation describes all global behavior."
+      },
+      {
+        "id": "d",
+        "text": "Explainability removes the need for appeals."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An explanation is not automatic proof.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p7_eval_understand_3",
+    "skill_id": "p7_safety_guardrails",
+    "format": "mcq",
+    "stem": "Safety Guardrails: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One prompt instruction is a complete safety system."
+      },
+      {
+        "id": "b",
+        "text": "Policy enforcement cannot rely only on prompt text."
+      },
+      {
+        "id": "c",
+        "text": "Blocking every uncertain request has no cost."
+      },
+      {
+        "id": "d",
+        "text": "Tool permissions are unnecessary when a filter exists."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Policy enforcement cannot rely only on prompt text.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p7_eval_apply_1",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "mcq",
+    "stem": "Prompt Injection & Jailbreaks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A confident model request proves authorization."
+      },
+      {
+        "id": "b",
+        "text": "Keywords catch every future injection."
+      },
+      {
+        "id": "c",
+        "text": "Application code must authorize tool actions."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should be allowed to grant permissions."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Application code must authorize tool actions.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p7_eval_apply_2",
+    "skill_id": "p7_content_moderation",
+    "format": "mcq",
+    "stem": "Content Moderation: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A classifier removes the need for written policy."
+      },
+      {
+        "id": "b",
+        "text": "Uncertain cases should always be treated as definitely harmful."
+      },
+      {
+        "id": "c",
+        "text": "Classifier thresholds can route uncertain cases to review."
+      },
+      {
+        "id": "d",
+        "text": "Reviewer safety has no effect on moderation quality."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Classifier thresholds can route uncertain cases to review.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p7_eval_apply_3",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "mcq",
+    "stem": "Cost & Latency Optimization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The cheapest response is best even when wrong."
+      },
+      {
+        "id": "b",
+        "text": "Average latency fully describes user experience."
+      },
+      {
+        "id": "c",
+        "text": "Trimming irrelevant context can reduce cost and latency."
+      },
+      {
+        "id": "d",
+        "text": "Unlimited concurrency always reduces latency."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Trimming irrelevant context can reduce cost and latency.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p7_eval_analyze_1",
+    "skill_id": "p7_caching_and_batching",
+    "format": "mcq",
+    "stem": "Caching & Batching: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One global cache key is safe for private users."
+      },
+      {
+        "id": "b",
+        "text": "Batching guarantees zero waiting time."
+      },
+      {
+        "id": "c",
+        "text": "A high cache hit rate proves answers are fresh."
+      },
+      {
+        "id": "d",
+        "text": "Dynamic batching trades a short wait for fuller batches."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Dynamic batching trades a short wait for fuller batches.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p7_eval_analyze_2",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "mcq",
+    "stem": "Model Selection Tradeoffs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parameter count alone selects the best deployment."
+      },
+      {
+        "id": "b",
+        "text": "Hosted and local models have identical privacy responsibilities."
+      },
+      {
+        "id": "c",
+        "text": "A theoretical speedup guarantees lower production tail latency."
+      },
+      {
+        "id": "d",
+        "text": "Licensing and data retention affect selection."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Licensing and data retention affect selection.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p7_eval_analyze_3",
+    "skill_id": "p7_deployment_hosting",
+    "format": "mcq",
+    "stem": "Deployment & Hosting: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A laptop environment is automatically reproducible."
+      },
+      {
+        "id": "b",
+        "text": "Adding web servers fixes every downstream bottleneck."
+      },
+      {
+        "id": "c",
+        "text": "Health checks prove model answer quality."
+      },
+      {
+        "id": "d",
+        "text": "Scaling must target the actual bottleneck."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Scaling must target the actual bottleneck.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p7_eval_evaluate_1",
+    "skill_id": "p7_monitoring_observability",
+    "format": "mcq",
+    "stem": "Monitoring & Observability: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Alerts need owners and actions."
+      },
+      {
+        "id": "b",
+        "text": "One final error count identifies every root cause."
+      },
+      {
+        "id": "c",
+        "text": "All user prompts should be logged forever."
+      },
+      {
+        "id": "d",
+        "text": "Fast responses guarantee useful answers."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Alerts need owners and actions.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p7_eval_evaluate_2",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "mcq",
+    "stem": "CI/CD for AI Apps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Severe failures matter even when averages pass."
+      },
+      {
+        "id": "b",
+        "text": "Unit tests alone cover every AI behavior change."
+      },
+      {
+        "id": "c",
+        "text": "Prompt versions need not be recorded."
+      },
+      {
+        "id": "d",
+        "text": "Rollback always means changing only application code."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Severe failures matter even when averages pass.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p7_eval_evaluate_3",
+    "skill_id": "p7_ai_apis",
+    "format": "mcq",
+    "stem": "AI APIs & Production: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Streaming can improve perceived latency."
+      },
+      {
+        "id": "b",
+        "text": "API keys are safest inside public browser code."
+      },
+      {
+        "id": "c",
+        "text": "Every failed request should retry forever."
+      },
+      {
+        "id": "d",
+        "text": "Model responses never require validation."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Streaming can improve perceived latency.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p7_eval_create_1",
+    "skill_id": "p7_building_ai_app",
+    "format": "mcq",
+    "stem": "Building an AI App: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding a chat box automatically creates user value."
+      },
+      {
+        "id": "b",
+        "text": "Product success should measure task outcomes and harm."
+      },
+      {
+        "id": "c",
+        "text": "Fluent output proves the user task succeeded."
+      },
+      {
+        "id": "d",
+        "text": "A production app needs no fallback path."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Product success should measure task outcomes and harm.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p7_eval_create_2",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "mcq",
+    "stem": "API Design for AI Features: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Clients should parse arbitrary prose as an API contract."
+      },
+      {
+        "id": "b",
+        "text": "Capacity controls may count tokens and concurrency, not only requests."
+      },
+      {
+        "id": "c",
+        "text": "A retry should always create another paid job."
+      },
+      {
+        "id": "d",
+        "text": "Model changes can never affect API behavior."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Capacity controls may count tokens and concurrency, not only requests.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p7_eval_create_3",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "b",
+        "text": "Automated graders need calibration and uncertainty checks."
+      },
+      {
+        "id": "c",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "d",
+        "text": "A model grader is a permanent ground truth."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Automated graders need calibration and uncertainty checks.",
+    "phase": "phase_7_real_world",
+    "bloom_level": "create"
+  }
+]

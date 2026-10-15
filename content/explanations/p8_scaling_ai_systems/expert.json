@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_scaling_ai_systems",
+  "depth": "expert",
+  "title": "Scaling AI Systems — Scale Across Failure and Geography",
+  "key_insight": "Global routing considers residency, model availability, network delay, and failure domains. Replication improves resilience but makes versions and caches harder to coordinate.",
+  "body": "## Scale Across Failure and Geography\n\nOne region has spare capacity while another is overloaded, but private data and latency rules limit where requests may travel.\n\nGlobal routing considers residency, model availability, network delay, and failure domains. Replication improves resilience but makes versions and caches harder to coordinate.\n\nUse load tests that include bursts, failures, and realistic token lengths. Capacity plans based on average requests miss the tail that triggers collapse.",
+  "common_mistakes": [
+    "Adding random servers always removes the bottleneck.",
+    "Every AI request consumes equal compute.",
+    "Average traffic alone proves burst capacity."
+  ],
+  "mini_exercise": "Draw “Scale Across Failure and Geography” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI workloads combine bursty requests, large inputs, expensive inference, and shared capacity.",
+  "explain_back_prompt": "Using “Scale Across Failure and Geography,” explain Scaling AI Systems without assuming the listener knows AI engineering."
+}

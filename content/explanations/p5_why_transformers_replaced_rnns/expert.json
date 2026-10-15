@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_why_transformers_replaced_rnns",
+  "depth": "expert",
+  "title": "Why Transformers Replaced RNNs — Shorter Paths Improve Credit Assignment",
+  "key_insight": "Self-attention creates a short connection between distant positions, which can make learning long-range relationships easier. Multiple heads provide several learned relationship maps.",
+  "body": "## Shorter Paths Improve Credit Assignment\n\nA correction for one token must influence a far earlier token. In a recurrent chain, that path crosses every intermediate step.\n\nSelf-attention creates a short connection between distant positions, which can make learning long-range relationships easier. Multiple heads provide several learned relationship maps.\n\nTransformers also rely on residual connections, normalization, and feed-forward layers; attention alone is not the entire architecture. Phase 6 assembles these pieces and explains their cost.",
+  "common_mistakes": [
+    "Transformers read only the immediately previous token.",
+    "Parallel training means token order no longer matters.",
+    "Attention has zero memory cost at every sequence length."
+  ],
+  "mini_exercise": "Sketch the situation in “Shorter Paths Improve Credit Assignment” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This bridge explains the practical problems attention solves before Phase 6 teaches transformer mechanics.",
+  "explain_back_prompt": "Using the “Shorter Paths Improve Credit Assignment” situation, explain Why Transformers Replaced RNNs without assuming the listener knows deep learning."
+}

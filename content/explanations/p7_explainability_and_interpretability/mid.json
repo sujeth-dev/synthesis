@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_explainability_and_interpretability",
+  "depth": "mid",
+  "title": "Explainability & Interpretability — Compare with a Simpler Local Story",
+  "key_insight": "Local surrogate methods fit a simpler model around one prediction. Feature attribution methods divide a prediction difference among inputs.",
+  "body": "## Compare with a Simpler Local Story\n\nA complex predictor curves across the whole dataset, but near one case a small approximation can show which changes matter most.\n\nLocal surrogate methods fit a simpler model around one prediction. Feature attribution methods divide a prediction difference among inputs.\n\nResults depend on the baseline and neighborhood chosen. State those choices when presenting an explanation.",
+  "common_mistakes": [
+    "A colorful heatmap is always faithful.",
+    "One local explanation describes all global behavior.",
+    "Explainability removes the need for appeals."
+  ],
+  "mini_exercise": "Draw “Compare with a Simpler Local Story” as three steps and explain each one.",
+  "real_world_usage": "Explanations can help people inspect model behavior, but they must be tested rather than mistaken for proof.",
+  "explain_back_prompt": "Use “Compare with a Simpler Local Story” to explain Explainability & Interpretability plainly."
+}

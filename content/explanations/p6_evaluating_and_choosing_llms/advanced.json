@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_evaluating_and_choosing_llms",
+  "depth": "advanced",
+  "title": "Evaluating & Choosing LLMs — Measure Variability and Failure Tails",
+  "key_insight": "Repeat stochastic cases, report distributions, and track severe-failure rates. Test long inputs, missing context, adversarial wording, and provider errors.",
+  "body": "## Measure Variability and Failure Tails\n\nOne run looks excellent, but repeated generations sometimes violate the format. Average quality hides the bad tail.\n\nRepeat stochastic cases, report distributions, and track severe-failure rates. Test long inputs, missing context, adversarial wording, and provider errors.\n\nVersion prompts, model identifiers, settings, tools, and evaluation data. Re-run the suite before accepting a provider or model update.",
+  "common_mistakes": [
+    "The biggest model is automatically best for every product.",
+    "One public benchmark replaces task-specific testing.",
+    "A model-based grader is perfectly objective and never changes."
+  ],
+  "mini_exercise": "Draw “Measure Variability and Failure Tails” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Model families and versions change quickly, so a repeatable evaluation process is more durable than one recommendation.",
+  "explain_back_prompt": "Using “Measure Variability and Failure Tails,” explain Evaluating & Choosing LLMs without assuming the listener knows modern AI."
+}

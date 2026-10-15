@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_monitoring_observability",
+  "depth": "mid",
+  "title": "Monitoring & Observability — Carry One Trace Across the System",
+  "key_insight": "Create a trace ID at entry and pass it through every safe call. Spans record timing, status, and chosen metadata for each stage.",
+  "body": "## Carry One Trace Across the System\n\nA request crosses a browser, API, retriever, model provider, and database. Separate logs cannot be joined.\n\nCreate a trace ID at entry and pass it through every safe call. Spans record timing, status, and chosen metadata for each stage.\n\nDo not log raw prompts or personal data by default. Redact, sample, and restrict access according to purpose.",
+  "common_mistakes": [
+    "One final error count identifies every root cause.",
+    "All user prompts should be logged forever.",
+    "Fast responses guarantee useful answers."
+  ],
+  "mini_exercise": "Draw “Carry One Trace Across the System” as three steps and explain each one.",
+  "real_world_usage": "Observability connects user outcomes to requests, retrieval, models, tools, costs, and failures without exposing sensitive data.",
+  "explain_back_prompt": "Use “Carry One Trace Across the System” to explain Monitoring & Observability plainly.",
+  "build_task": {
+    "title": "Practice Monitoring & Observability",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "create a request trace id",
+      "record spans for each stage",
+      "emit safe metrics and errors",
+      "alert on user-facing failure"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_rnn_basics",
+  "depth": "mid",
+  "title": "RNN Basics — Unroll the Reused Rule",
+  "key_insight": "Unrolling draws the reused cell once per time step. Backpropagation through time sends correction backward through those linked uses.",
+  "body": "## Unroll the Reused Rule\n\nOne RNN cell appears in the code, but a ten-word sentence creates ten linked calculations.\n\nUnrolling draws the reused cell once per time step. Backpropagation through time sends correction backward through those linked uses.\n\nSequences in a batch may have different lengths. Padding makes a common shape, while masks stop padded positions from affecting loss or state.",
+  "common_mistakes": [
+    "An RNN treats every sequence position as unrelated.",
+    "Hidden state is always a human-readable sentence.",
+    "Padding should contribute to the training loss as real data."
+  ],
+  "mini_exercise": "Sketch the situation in “Unroll the Reused Rule” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RNNs introduce sequence state and make the limitations that motivated transformers concrete.",
+  "explain_back_prompt": "Using the “Unroll the Reused Rule” situation, explain RNN Basics without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Trace a short recurrent sequence",
+    "context": "Turn the RNN Basics idea into one small, inspectable workflow.",
+    "steps": [
+      "Create three small input vectors.",
+      "Pass them through one RNN cell in order.",
+      "Print the hidden state after each step.",
+      "Compare with the reversed input order."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

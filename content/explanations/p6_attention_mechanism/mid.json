@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_attention_mechanism",
+  "depth": "mid",
+  "title": "Attention Mechanism — Ask, Match, and Gather",
+  "key_insight": "These roles are called query, key, and value. Query-key matches become scores; softmax turns them into weights; the weighted values are added.",
+  "body": "## Ask, Match, and Gather\n\nA word needs one representation to ask what it needs, another to advertise what it contains, and another to supply information.\n\nThese roles are called query, key, and value. Query-key matches become scores; softmax turns them into weights; the weighted values are added.\n\nScaling the scores keeps softmax from becoming too extreme when vectors are wide. Masks block positions that must not be consulted.",
+  "common_mistakes": [
+    "Attention always selects exactly one word.",
+    "Queries, keys, and values are raw English questions and answers.",
+    "A causal mask reveals future tokens during generation."
+  ],
+  "mini_exercise": "Draw “Ask, Match, and Gather” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Attention is the core routing idea that lets transformers connect distant information.",
+  "explain_back_prompt": "Using “Ask, Match, and Gather,” explain Attention Mechanism without assuming the listener knows modern AI."
+}

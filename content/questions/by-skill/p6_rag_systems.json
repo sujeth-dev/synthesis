@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p6_rag_systems_q1",
+    "skill_id": "p6_rag_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "RAG Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RAG retrieves sources before generating an answer."
+      },
+      {
+        "id": "b",
+        "text": "RAG permanently writes every document into model weights."
+      },
+      {
+        "id": "c",
+        "text": "Retrieval guarantees the final answer is correct."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should override system instructions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "RAG retrieves sources before generating an answer.",
+    "graph_placement_weight": {
+      "p6_rag_systems": 1
+    }
+  },
+  {
+    "id": "p6_rag_systems_q2",
+    "skill_id": "p6_rag_systems",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "RAG Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RAG permanently writes every document into model weights."
+      },
+      {
+        "id": "b",
+        "text": "RAG can use knowledge newer than model training."
+      },
+      {
+        "id": "c",
+        "text": "Retrieval guarantees the final answer is correct."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should override system instructions."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "RAG can use knowledge newer than model training.",
+    "graph_placement_weight": {
+      "p6_rag_systems": 1
+    }
+  },
+  {
+    "id": "p6_rag_systems_q3",
+    "skill_id": "p6_rag_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "RAG Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RAG permanently writes every document into model weights."
+      },
+      {
+        "id": "b",
+        "text": "Retrieval guarantees the final answer is correct."
+      },
+      {
+        "id": "c",
+        "text": "Documents are often divided into retrievable chunks."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should override system instructions."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Documents are often divided into retrievable chunks.",
+    "graph_placement_weight": {
+      "p6_rag_systems": 1
+    }
+  },
+  {
+    "id": "p6_rag_systems_q4",
+    "skill_id": "p6_rag_systems",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "RAG Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RAG permanently writes every document into model weights."
+      },
+      {
+        "id": "b",
+        "text": "Retrieval guarantees the final answer is correct."
+      },
+      {
+        "id": "c",
+        "text": "Retrieved documents should override system instructions."
+      },
+      {
+        "id": "d",
+        "text": "Hybrid retrieval combines semantic and keyword signals."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Hybrid retrieval combines semantic and keyword signals.",
+    "graph_placement_weight": {
+      "p6_rag_systems": 1
+    }
+  },
+  {
+    "id": "p6_rag_systems_q5",
+    "skill_id": "p6_rag_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "RAG Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Retrieval quality should be measured separately from generation."
+      },
+      {
+        "id": "b",
+        "text": "RAG permanently writes every document into model weights."
+      },
+      {
+        "id": "c",
+        "text": "Retrieval guarantees the final answer is correct."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should override system instructions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Retrieval quality should be measured separately from generation.",
+    "graph_placement_weight": {
+      "p6_rag_systems": 1
+    }
+  },
+  {
+    "id": "p6_rag_systems_q6",
+    "skill_id": "p6_rag_systems",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "RAG Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RAG permanently writes every document into model weights."
+      },
+      {
+        "id": "b",
+        "text": "Retrieved text must be treated as untrusted data and permission-filtered."
+      },
+      {
+        "id": "c",
+        "text": "Retrieval guarantees the final answer is correct."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should override system instructions."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Retrieved text must be treated as untrusted data and permission-filtered.",
+    "graph_placement_weight": {
+      "p6_rag_systems": 1
+    }
+  },
+  {
+    "id": "p6_rag_systems_order1",
+    "skill_id": "p6_rag_systems",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this RAG Systems workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "chunk and index trusted documents"
+      },
+      {
+        "id": "b",
+        "text": "embed or search the user query"
+      },
+      {
+        "id": "c",
+        "text": "rerank and select evidence"
+      },
+      {
+        "id": "d",
+        "text": "generate an answer with citations"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: chunk and index trusted documents → embed or search the user query → rerank and select evidence → generate an answer with citations."
+  },
+  {
+    "id": "p6_rag_systems_fill1",
+    "skill_id": "p6_rag_systems",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the RAG Systems step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "retrieve"
+      },
+      {
+        "id": "b",
+        "text": "backward"
+      },
+      {
+        "id": "c",
+        "text": "dropout"
+      },
+      {
+        "id": "d",
+        "text": "normalize_labels"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "retrieve",
+    "explanation_after": "The correct choice is retrieve."
+  }
+]

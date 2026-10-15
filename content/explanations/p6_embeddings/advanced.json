@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_embeddings",
+  "depth": "advanced",
+  "title": "Embeddings — One Vector Can Hide Several Meanings",
+  "key_insight": "Contextual embeddings use the surrounding sequence to produce a different vector for each occurrence. Sentence models then pool token information into a search-ready vector.",
+  "body": "## One Vector Can Hide Several Meanings\n\nThe word “bank” appears in finance and river sentences. A fixed word lookup gives it one vector, but context should change its location.\n\nContextual embeddings use the surrounding sequence to produce a different vector for each occurrence. Sentence models then pool token information into a search-ready vector.\n\nTest retrieval on real queries. Generic similarity benchmarks can hide failures on names, numbers, negation, or specialized language.",
+  "common_mistakes": [
+    "An embedding is always a readable paragraph.",
+    "Vector closeness proves two statements are factually true.",
+    "Every similarity metric ranks all vectors identically."
+  ],
+  "mini_exercise": "Draw “One Vector Can Hide Several Meanings” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Embeddings connect text, images, and users to search, recommendation, retrieval, and neural computation.",
+  "explain_back_prompt": "Using “One Vector Can Hide Several Meanings,” explain Embeddings without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Build a tiny semantic search",
+    "context": "Turn Embeddings into one small, inspectable workflow.",
+    "steps": [
+      "Write five short notes.",
+      "Embed the notes and one query.",
+      "Compute similarity scores.",
+      "Print the two nearest notes and inspect whether they help."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

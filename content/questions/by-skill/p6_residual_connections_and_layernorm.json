@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_residual_connections_and_layernorm_q1",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Residual Connections & Layer Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual connections add a block input to its transformed output."
+      },
+      {
+        "id": "b",
+        "text": "Residual connections permanently skip every transformation."
+      },
+      {
+        "id": "c",
+        "text": "Layer normalization averages unrelated users together."
+      },
+      {
+        "id": "d",
+        "text": "Normalization removes all learned scale and shift."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Residual connections add a block input to its transformed output.",
+    "graph_placement_weight": {
+      "p6_residual_connections_and_layernorm": 1
+    }
+  },
+  {
+    "id": "p6_residual_connections_and_layernorm_q2",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Residual Connections & Layer Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual connections permanently skip every transformation."
+      },
+      {
+        "id": "b",
+        "text": "Residual blocks can learn corrections to an identity path."
+      },
+      {
+        "id": "c",
+        "text": "Layer normalization averages unrelated users together."
+      },
+      {
+        "id": "d",
+        "text": "Normalization removes all learned scale and shift."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Residual blocks can learn corrections to an identity path.",
+    "graph_placement_weight": {
+      "p6_residual_connections_and_layernorm": 1
+    }
+  },
+  {
+    "id": "p6_residual_connections_and_layernorm_q3",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Residual Connections & Layer Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual connections permanently skip every transformation."
+      },
+      {
+        "id": "b",
+        "text": "Layer normalization averages unrelated users together."
+      },
+      {
+        "id": "c",
+        "text": "Layer normalization rescales features within each token."
+      },
+      {
+        "id": "d",
+        "text": "Normalization removes all learned scale and shift."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Layer normalization rescales features within each token.",
+    "graph_placement_weight": {
+      "p6_residual_connections_and_layernorm": 1
+    }
+  },
+  {
+    "id": "p6_residual_connections_and_layernorm_q4",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Residual Connections & Layer Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual connections permanently skip every transformation."
+      },
+      {
+        "id": "b",
+        "text": "Layer normalization averages unrelated users together."
+      },
+      {
+        "id": "c",
+        "text": "Normalization removes all learned scale and shift."
+      },
+      {
+        "id": "d",
+        "text": "Pre-norm places normalization before the main sublayer."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Pre-norm places normalization before the main sublayer.",
+    "graph_placement_weight": {
+      "p6_residual_connections_and_layernorm": 1
+    }
+  },
+  {
+    "id": "p6_residual_connections_and_layernorm_q5",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Residual Connections & Layer Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Layer norm does not need batch running statistics."
+      },
+      {
+        "id": "b",
+        "text": "Residual connections permanently skip every transformation."
+      },
+      {
+        "id": "c",
+        "text": "Layer normalization averages unrelated users together."
+      },
+      {
+        "id": "d",
+        "text": "Normalization removes all learned scale and shift."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Layer norm does not need batch running statistics.",
+    "graph_placement_weight": {
+      "p6_residual_connections_and_layernorm": 1
+    }
+  },
+  {
+    "id": "p6_residual_connections_and_layernorm_q6",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Residual Connections & Layer Normalization: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual connections permanently skip every transformation."
+      },
+      {
+        "id": "b",
+        "text": "Residual scaling can keep deep branch updates proportionate."
+      },
+      {
+        "id": "c",
+        "text": "Layer normalization averages unrelated users together."
+      },
+      {
+        "id": "d",
+        "text": "Normalization removes all learned scale and shift."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Residual scaling can keep deep branch updates proportionate.",
+    "graph_placement_weight": {
+      "p6_residual_connections_and_layernorm": 1
+    }
+  }
+]

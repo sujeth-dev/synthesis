@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_safety_guardrails",
+  "depth": "mid",
+  "title": "Safety Guardrails — Separate Policy from the Prompt",
+  "key_insight": "Use deterministic validation where rules are crisp, classifiers where language judgment is needed, and human review for uncertain high-impact cases.",
+  "body": "## Separate Policy from the Prompt\n\nA policy written only inside model instructions can be ignored or manipulated. Enforcement needs code and permissions too.\n\nUse deterministic validation where rules are crisp, classifiers where language judgment is needed, and human review for uncertain high-impact cases.\n\nLog decisions with policy versions and reasons. Users need a safe appeal or correction path when a guardrail is wrong.",
+  "common_mistakes": [
+    "One prompt instruction is a complete safety system.",
+    "Blocking every uncertain request has no cost.",
+    "Tool permissions are unnecessary when a filter exists."
+  ],
+  "mini_exercise": "Draw “Separate Policy from the Prompt” as three steps and explain each one.",
+  "real_world_usage": "Layered guardrails reduce harmful inputs, outputs, and actions while preserving legitimate use and escalation.",
+  "explain_back_prompt": "Use “Separate Policy from the Prompt” to explain Safety Guardrails plainly."
+}

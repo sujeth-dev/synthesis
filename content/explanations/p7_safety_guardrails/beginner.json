@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_safety_guardrails",
+  "depth": "beginner",
+  "title": "Safety Guardrails — Put More Than One Rail on the Bridge",
+  "key_insight": "Guardrails are layered controls around inputs, model behavior, tools, outputs, and human escalation.",
+  "body": "## Put More Than One Rail on the Bridge\n\nA prompt filter catches obvious abuse, but a harmless-looking request still leads to a dangerous tool action. One check is not enough.\n\nGuardrails are layered controls around inputs, model behavior, tools, outputs, and human escalation.\n\nDefine the harm being reduced and the legitimate use to preserve. Overblocking is also a product failure.",
+  "common_mistakes": [
+    "One prompt instruction is a complete safety system.",
+    "Blocking every uncertain request has no cost.",
+    "Tool permissions are unnecessary when a filter exists."
+  ],
+  "mini_exercise": "Draw “Put More Than One Rail on the Bridge” as three steps and explain each one.",
+  "real_world_usage": "Layered guardrails reduce harmful inputs, outputs, and actions while preserving legitimate use and escalation.",
+  "explain_back_prompt": "Use “Put More Than One Rail on the Bridge” to explain Safety Guardrails plainly."
+}

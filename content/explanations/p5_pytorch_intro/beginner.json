@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_pytorch_intro",
+  "depth": "beginner",
+  "title": "PyTorch Introduction — A Number Container That Knows Its Shape",
+  "key_insight": "A PyTorch tensor is an arranged block of numbers with a shape, data type, and device such as CPU or GPU.",
+  "body": "## A Number Container That Knows Its Shape\n\nA training program needs to hold batches of images and move them to fast hardware without rewriting every calculation.\n\nA PyTorch tensor is an arranged block of numbers with a shape, data type, and device such as CPU or GPU.\n\nTensor operations build model calculations. Print shape, dtype, and device often; most early framework bugs become obvious there.",
+  "common_mistakes": [
+    "A tensor can contain only one number.",
+    "An nn.Module prevents parameters from being trained.",
+    "Autograd requires every derivative to be entered by hand."
+  ],
+  "mini_exercise": "Sketch the situation in “A Number Container That Knows Its Shape” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "PyTorch turns the phase’s equations into inspectable, trainable programs.",
+  "explain_back_prompt": "Using the “A Number Container That Knows Its Shape” situation, explain PyTorch Introduction without assuming the listener knows deep learning."
+}

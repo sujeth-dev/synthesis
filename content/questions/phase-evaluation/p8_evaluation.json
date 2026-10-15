@@ -1,0 +1,506 @@
+[
+  {
+    "id": "p8_eval_remember_1",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "AI system design covers the complete route around a model."
+      },
+      {
+        "id": "b",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "c",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "d",
+        "text": "Production results need no record of their configuration version."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "AI system design covers the complete route around a model.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p8_eval_remember_2",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Scaling starts by locating the real bottleneck."
+      },
+      {
+        "id": "b",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "c",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "d",
+        "text": "Average traffic alone proves burst capacity."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Scaling starts by locating the real bottleneck.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p8_eval_remember_3",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MLOps covers the model lifecycle beyond code deployment."
+      },
+      {
+        "id": "b",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "c",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "d",
+        "text": "A model name alone proves which data produced it."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "MLOps covers the model lifecycle beyond code deployment.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "remember"
+  },
+  {
+    "id": "p8_eval_understand_1",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "b",
+        "text": "Roles need explicit inputs, outputs, tools, and stopping rules."
+      },
+      {
+        "id": "c",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "d",
+        "text": "Every agent should receive all available permissions."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Roles need explicit inputs, outputs, tools, and stopping rules.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p8_eval_understand_2",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "b",
+        "text": "Overall accuracy can hide unequal group harm."
+      },
+      {
+        "id": "c",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "d",
+        "text": "Writing a broad value statement completes governance."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Overall accuracy can hide unequal group harm.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p8_eval_understand_3",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "b",
+        "text": "A reward can permit harmful shortcuts."
+      },
+      {
+        "id": "c",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "d",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A reward can permit harmful shortcuts.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "understand"
+  },
+  {
+    "id": "p8_eval_apply_1",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "b",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "c",
+        "text": "Fair comparison requires matching data, metrics, and budgets."
+      },
+      {
+        "id": "d",
+        "text": "Bookmark count measures research understanding."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Fair comparison requires matching data, metrics, and budgets.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p8_eval_apply_2",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "b",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "c",
+        "text": "Public reports may omit costs and failures."
+      },
+      {
+        "id": "d",
+        "text": "A postmortem is complete after blaming one operator."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Public reports may omit costs and failures.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p8_eval_apply_3",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "mcq",
+    "stem": "AI Product Strategy: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An impressive model demo proves product value."
+      },
+      {
+        "id": "b",
+        "text": "Inference price is the only product cost."
+      },
+      {
+        "id": "c",
+        "text": "Net value includes review, support, model, and error costs."
+      },
+      {
+        "id": "d",
+        "text": "A strategy should continue regardless of failed milestones."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Net value includes review, support, model, and error costs.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "apply"
+  },
+  {
+    "id": "p8_eval_analyze_1",
+    "skill_id": "p8_capstone_project",
+    "format": "mcq",
+    "stem": "AI Engineering Capstone: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The largest possible scope makes the strongest capstone."
+      },
+      {
+        "id": "b",
+        "text": "A happy-path demo proves production readiness."
+      },
+      {
+        "id": "c",
+        "text": "Code alone explains every design tradeoff."
+      },
+      {
+        "id": "d",
+        "text": "Versioned configuration and evaluation evidence make results traceable."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Versioned configuration and evaluation evidence make results traceable.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p8_eval_analyze_2",
+    "skill_id": "p8_system_design_ai",
+    "format": "mcq",
+    "stem": "AI System Design: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Choosing the largest model completes the entire system design."
+      },
+      {
+        "id": "b",
+        "text": "A successful demo proves every dependency is reliable."
+      },
+      {
+        "id": "c",
+        "text": "Production results need no record of their configuration version."
+      },
+      {
+        "id": "d",
+        "text": "Circuit breakers limit damage from failing dependencies."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Circuit breakers limit damage from failing dependencies.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p8_eval_analyze_3",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "mcq",
+    "stem": "Scaling AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adding random servers always removes the bottleneck."
+      },
+      {
+        "id": "b",
+        "text": "Every AI request consumes equal compute."
+      },
+      {
+        "id": "c",
+        "text": "Average traffic alone proves burst capacity."
+      },
+      {
+        "id": "d",
+        "text": "Backpressure prevents accepting unfinishable work."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Backpressure prevents accepting unfinishable work.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "analyze"
+  },
+  {
+    "id": "p8_eval_evaluate_1",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Retraining triggers still require validation and comparison gates."
+      },
+      {
+        "id": "b",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "c",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "d",
+        "text": "A model name alone proves which data produced it."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Retraining triggers still require validation and comparison gates.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p8_eval_evaluate_2",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "mcq",
+    "stem": "Multi-Agent Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Identical agents do not provide independent evidence automatically."
+      },
+      {
+        "id": "b",
+        "text": "Adding more agents always improves every task."
+      },
+      {
+        "id": "c",
+        "text": "Conversational memory replaces structured workflow state."
+      },
+      {
+        "id": "d",
+        "text": "Every agent should receive all available permissions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Identical agents do not provide independent evidence automatically.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p8_eval_evaluate_3",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Intersectional slices can reveal hidden failures."
+      },
+      {
+        "id": "b",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "c",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "d",
+        "text": "Writing a broad value statement completes governance."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Intersectional slices can reveal hidden failures.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "evaluate"
+  },
+  {
+    "id": "p8_eval_create_1",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "mcq",
+    "stem": "AI Safety & Alignment: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A high benchmark score proves complete alignment."
+      },
+      {
+        "id": "b",
+        "text": "Scalable oversight must give reviewers enough evidence to judge complex work."
+      },
+      {
+        "id": "c",
+        "text": "One safety prompt removes every misuse path."
+      },
+      {
+        "id": "d",
+        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Scalable oversight must give reviewers enough evidence to judge complex work.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p8_eval_create_2",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "b",
+        "text": "An evidence table supports belief updates across differing studies."
+      },
+      {
+        "id": "c",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "d",
+        "text": "Bookmark count measures research understanding."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An evidence table supports belief updates across differing studies.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "create"
+  },
+  {
+    "id": "p8_eval_create_3",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "mcq",
+    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An architecture diagram proves business success."
+      },
+      {
+        "id": "b",
+        "text": "General lessons need stated conditions under which they apply."
+      },
+      {
+        "id": "c",
+        "text": "A famous design should be copied regardless of workload."
+      },
+      {
+        "id": "d",
+        "text": "A postmortem is complete after blaming one operator."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "General lessons need stated conditions under which they apply.",
+    "phase": "phase_8_mastery",
+    "bloom_level": "create"
+  }
+]

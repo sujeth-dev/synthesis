@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_activation_functions",
+  "depth": "expert",
+  "title": "Activation Functions — The Bend Controls Signal Geometry",
+  "key_insight": "The activation’s slope controls how much correction passes backward. Saturating gates have nearly flat ends, so large inputs can carry almost no gradient.",
+  "body": "## The Bend Controls Signal Geometry\n\nA deep chain repeatedly stretches numbers and bends them. A small choice at each bend can decide whether distant layers can coordinate.\n\nThe activation’s slope controls how much correction passes backward. Saturating gates have nearly flat ends, so large inputs can carry almost no gradient.\n\nModern gated units multiply one learned stream by another, letting the network control information flow. Their extra cost can pay off in large language and vision models.",
+  "common_mistakes": [
+    "Activations permanently remove the need for weights.",
+    "Every activation produces text labels directly.",
+    "The same output gate is correct for every possible task."
+  ],
+  "mini_exercise": "Sketch the situation in “The Bend Controls Signal Geometry” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The activation choice changes signal flow, output meaning, and how easily a network trains.",
+  "explain_back_prompt": "Using the “The Bend Controls Signal Geometry” situation, explain Activation Functions without assuming the listener knows deep learning."
+}

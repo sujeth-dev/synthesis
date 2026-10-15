@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_system_design_ai",
+  "depth": "advanced",
+  "title": "AI System Design — Remove Single Points of Failure",
+  "key_insight": "Identify failure domains and decide which need redundancy, graceful degradation, or an explicit stop. Circuit breakers prevent a failing dependency from consuming all capacity.",
+  "body": "## Remove Single Points of Failure\n\nEvery request depends on one provider and one retrieval index. Either outage stops the product.\n\nIdentify failure domains and decide which need redundancy, graceful degradation, or an explicit stop. Circuit breakers prevent a failing dependency from consuming all capacity.\n\nTest partial failures, not only total outages. A stale cache, slow index, or malformed model response often causes subtler damage than a clean error.",
+  "common_mistakes": [
+    "Choosing the largest model completes the entire system design.",
+    "A successful demo proves every dependency is reliable.",
+    "Production results need no record of their configuration version."
+  ],
+  "mini_exercise": "Draw “Remove Single Points of Failure” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Senior AI work requires reasoning about the whole product route rather than optimizing one model in isolation.",
+  "explain_back_prompt": "Using “Remove Single Points of Failure,” explain AI System Design without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Design one AI request path",
+    "context": "Turn AI System Design into one small, inspectable artifact.",
+    "steps": [
+      "Choose one concrete user request.",
+      "Draw every service and data boundary.",
+      "Add timeout, fallback, and permission decisions.",
+      "Estimate latency and cost at each stage."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

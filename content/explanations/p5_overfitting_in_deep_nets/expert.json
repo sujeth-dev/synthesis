@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_overfitting_in_deep_nets",
+  "depth": "expert",
+  "title": "Overfitting in Deep Networks — Capacity Is Not Just Parameter Count",
+  "key_insight": "Optimization, architecture, augmentation, and weight scale create implicit preferences among many solutions. This is why a large network can sometimes generalize despite having enough parameters to memorize.",
+  "body": "## Capacity Is Not Just Parameter Count\n\nTwo networks have the same number of weights, yet one memorizes and the other generalizes. Their training paths chose different functions.\n\nOptimization, architecture, augmentation, and weight scale create implicit preferences among many solutions. This is why a large network can sometimes generalize despite having enough parameters to memorize.\n\nMeasure results across seeds and data sizes. A method that wins only once may have benefited from noise rather than a dependable regularizing effect.",
+  "common_mistakes": [
+    "Overfitting means both training and validation are always perfect.",
+    "Dropout permanently deletes the same units at deployment.",
+    "The test set should guide every training decision."
+  ],
+  "mini_exercise": "Sketch the situation in “Capacity Is Not Just Parameter Count” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Deep networks have enough capacity to memorize easily, so validation and regularization are essential.",
+  "explain_back_prompt": "Using the “Capacity Is Not Just Parameter Count” situation, explain Overfitting in Deep Networks without assuming the listener knows deep learning."
+}

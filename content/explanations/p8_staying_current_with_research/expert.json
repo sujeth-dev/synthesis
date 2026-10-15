@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_staying_current_with_research",
+  "depth": "expert",
+  "title": "Staying Current with AI Research — Update Beliefs, Not Just Bookmarks",
+  "key_insight": "Maintain an evidence table with assumptions, effect sizes, costs, and external validity. Weight independent replication and realistic comparisons more heavily.",
+  "body": "## Update Beliefs, Not Just Bookmarks\n\nSeveral studies disagree because their tasks and budgets differ. Counting papers cannot resolve the question.\n\nMaintain an evidence table with assumptions, effect sizes, costs, and external validity. Weight independent replication and realistic comparisons more heavily.\n\nSet a review cadence and decision trigger. Research tracking is useful when it changes an experiment, architecture, or risk assessment—not when it merely grows a reading list.",
+  "common_mistakes": [
+    "The newest paper is automatically the most reliable.",
+    "A title provides enough evidence for an engineering decision.",
+    "Bookmark count measures research understanding."
+  ],
+  "mini_exercise": "Draw “Update Beliefs, Not Just Bookmarks” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI changes quickly, but engineering judgment depends on distinguishing durable evidence from headlines and benchmark noise.",
+  "explain_back_prompt": "Using “Update Beliefs, Not Just Bookmarks,” explain Staying Current with AI Research without assuming the listener knows AI engineering."
+}

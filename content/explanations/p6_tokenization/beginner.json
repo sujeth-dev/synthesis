@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_tokenization",
+  "depth": "beginner",
+  "title": "Tokenization — Cut a Sentence into Reusable Pieces",
+  "key_insight": "A tokenizer splits text into tokens and assigns each token a number. A token may be a word, part of a word, punctuation, or even a byte.",
+  "body": "## Cut a Sentence into Reusable Pieces\n\nA model receives “unbelievable,” but it cannot store every possible word anyone might invent. It needs a smaller set of reusable pieces.\n\nA tokenizer splits text into tokens and assigns each token a number. A token may be a word, part of a word, punctuation, or even a byte.\n\nThe model sees token numbers, not raw letters. Decoding later joins predicted tokens back into readable text.",
+  "common_mistakes": [
+    "A tokenizer directly verifies every factual answer.",
+    "Every token is always one complete English word.",
+    "Token numbers have the same meaning across all models."
+  ],
+  "mini_exercise": "Draw “Cut a Sentence into Reusable Pieces” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every language-model input and output passes through a tokenizer, so its choices affect meaning, length, and cost.",
+  "explain_back_prompt": "Using “Cut a Sentence into Reusable Pieces,” explain Tokenization without assuming the listener knows modern AI."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_finetuning_methods",
+  "depth": "advanced",
+  "title": "Fine-Tuning Methods — Full Updates Are Expensive",
+  "key_insight": "Full fine-tuning offers maximum flexibility. Parameter-efficient methods train small additions or selected parameters while keeping most base weights frozen.",
+  "body": "## Full Updates Are Expensive\n\nUpdating every parameter requires gradients and optimizer state for the whole model. That can use several times the weight memory.\n\nFull fine-tuning offers maximum flexibility. Parameter-efficient methods train small additions or selected parameters while keeping most base weights frozen.\n\nChoose by data size, compute, deployment, and behavior gap. A tiny dataset with full updates can overfit or damage useful general behavior.",
+  "common_mistakes": [
+    "Fine-tuning changes behavior without any examples.",
+    "Every input token should always be treated as the desired assistant output.",
+    "A preference dataset represents universal values automatically."
+  ],
+  "mini_exercise": "Draw “Full Updates Are Expensive” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Fine-tuning can shape format, domain behavior, and task skill when prompting or retrieval is insufficient.",
+  "explain_back_prompt": "Using “Full Updates Are Expensive,” explain Fine-Tuning Methods without assuming the listener knows modern AI."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_residual_connections_and_layernorm",
+  "depth": "beginner",
+  "title": "Residual Connections & Layer Normalization — Keep an Express Lane Open",
+  "key_insight": "A residual connection adds a block’s input to its transformed output. The block only needs to learn a useful change, not rebuild everything.",
+  "body": "## Keep an Express Lane Open\n\nA useful message passes through many transformations and becomes distorted. A direct copy around each transformation protects the original signal.\n\nA residual connection adds a block’s input to its transformed output. The block only needs to learn a useful change, not rebuild everything.\n\nLayer normalization rescales the features within each token to a steadier range, then learns an adjustable scale and shift.",
+  "common_mistakes": [
+    "Residual connections permanently skip every transformation.",
+    "Layer normalization averages unrelated users together.",
+    "Normalization removes all learned scale and shift."
+  ],
+  "mini_exercise": "Draw “Keep an Express Lane Open” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "These support stable information and gradient flow through deep transformer stacks.",
+  "explain_back_prompt": "Using “Keep an Express Lane Open,” explain Residual Connections & Layer Normalization without assuming the listener knows modern AI."
+}

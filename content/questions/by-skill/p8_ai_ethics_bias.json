@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p8_ai_ethics_bias_q1",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ethical evaluation asks who benefits and who bears errors."
+      },
+      {
+        "id": "b",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "c",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "d",
+        "text": "Writing a broad value statement completes governance."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Ethical evaluation asks who benefits and who bears errors.",
+    "graph_placement_weight": {
+      "p8_ai_ethics_bias": 1
+    }
+  },
+  {
+    "id": "p8_ai_ethics_bias_q2",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "b",
+        "text": "Overall accuracy can hide unequal group harm."
+      },
+      {
+        "id": "c",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "d",
+        "text": "Writing a broad value statement completes governance."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Overall accuracy can hide unequal group harm.",
+    "graph_placement_weight": {
+      "p8_ai_ethics_bias": 1
+    }
+  },
+  {
+    "id": "p8_ai_ethics_bias_q3",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "b",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "c",
+        "text": "Bias can enter through data, labels, objectives, and deployment."
+      },
+      {
+        "id": "d",
+        "text": "Writing a broad value statement completes governance."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Bias can enter through data, labels, objectives, and deployment.",
+    "graph_placement_weight": {
+      "p8_ai_ethics_bias": 1
+    }
+  },
+  {
+    "id": "p8_ai_ethics_bias_q4",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "b",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "c",
+        "text": "Writing a broad value statement completes governance."
+      },
+      {
+        "id": "d",
+        "text": "Fairness definitions can conflict in one setting."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Fairness definitions can conflict in one setting.",
+    "graph_placement_weight": {
+      "p8_ai_ethics_bias": 1
+    }
+  },
+  {
+    "id": "p8_ai_ethics_bias_q5",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Intersectional slices can reveal hidden failures."
+      },
+      {
+        "id": "b",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "c",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "d",
+        "text": "Writing a broad value statement completes governance."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Intersectional slices can reveal hidden failures.",
+    "graph_placement_weight": {
+      "p8_ai_ethics_bias": 1
+    }
+  },
+  {
+    "id": "p8_ai_ethics_bias_q6",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "AI Ethics & Bias: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "High average accuracy proves equal treatment."
+      },
+      {
+        "id": "b",
+        "text": "Governance turns values into owners, gates, appeals, and remedies."
+      },
+      {
+        "id": "c",
+        "text": "Historical labels are always neutral truth."
+      },
+      {
+        "id": "d",
+        "text": "Writing a broad value statement completes governance."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Governance turns values into owners, gates, appeals, and remedies.",
+    "graph_placement_weight": {
+      "p8_ai_ethics_bias": 1
+    }
+  }
+]

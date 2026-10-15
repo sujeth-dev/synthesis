@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_supervised_learning",
+  "depth": "expert",
+  "title": "Supervised Learning — Learning Under a Shifted World",
+  "key_insight": "This change is distribution shift. Some shifts change only who arrives; others change what an answer means or how inputs connect to it.",
+  "body": "## Learning Under a Shifted World\n\nA loan model trains on last year’s applicants, but a policy change brings a different population this year. The old input-answer relationship may no longer hold.\n\nThis change is distribution shift. Some shifts change only who arrives; others change what an answer means or how inputs connect to it.\n\nMeasure performance by time and group, not only one average. If the relationship changed, weighting old data may help, but fresh representative labels are stronger evidence.",
+  "common_mistakes": [
+    "Treating training accuracy as proof that new cases will work.",
+    "Using a classification score for a numeric prediction problem.",
+    "Assuming every recorded label is perfectly correct."
+  ],
+  "mini_exercise": "Draw the situation from “Learning Under a Shifted World” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Most practical prediction systems begin with labeled historical examples.",
+  "explain_back_prompt": "Using the “Learning Under a Shifted World” story, explain Supervised Learning without assuming the listener knows machine learning."
+}

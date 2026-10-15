@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_linear_regression",
+  "depth": "expert",
+  "title": "Linear Regression — A Probability Story Behind the Line",
+  "key_insight": "This connection lets uncertainty be estimated, but only if the noise and sampling assumptions are reasonable. Broken assumptions weaken confidence ranges before they necessarily ruin predictions.",
+  "body": "## A Probability Story Behind the Line\n\nImagine every true answer sitting around the line with random bell-shaped noise. Under that story, the most likely line is the same one chosen by least squares.\n\nThis connection lets uncertainty be estimated, but only if the noise and sampling assumptions are reasonable. Broken assumptions weaken confidence ranges before they necessarily ruin predictions.\n\nFor streams or huge tables, update the fit in pieces or solve with stable matrix methods. Avoid directly turning a nearly ambiguous matrix upside down, because rounding can explode.",
+  "common_mistakes": [
+    "Reading a learned weight as proof that one feature causes the answer.",
+    "Ignoring curved patterns left in the errors.",
+    "Comparing raw coefficient sizes when input units differ."
+  ],
+  "mini_exercise": "Draw the situation from “A Probability Story Behind the Line” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It is a fast, explainable baseline for numeric prediction and a foundation for many later models.",
+  "explain_back_prompt": "Using the “A Probability Story Behind the Line” story, explain Linear Regression without assuming the listener knows machine learning."
+}

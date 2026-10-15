@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_mlops",
+  "depth": "beginner",
+  "title": "MLOps — Know Which Model Is Serving",
+  "key_insight": "MLOps records the route from data and training through evaluation, approval, deployment, and monitoring.",
+  "body": "## Know Which Model Is Serving\n\nA prediction fails and nobody knows which data, code, or model file produced it. The team cannot reproduce or repair the behavior.\n\nMLOps records the route from data and training through evaluation, approval, deployment, and monitoring.\n\nGive datasets, runs, models, and deployments stable versions. A production result should point back to the artifact and configuration that made it.",
+  "common_mistakes": [
+    "MLOps means copying the newest model file into production.",
+    "Scheduled retraining makes data validation unnecessary.",
+    "A model name alone proves which data produced it."
+  ],
+  "mini_exercise": "Draw “Know Which Model Is Serving” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Models and their data change, so production quality depends on lifecycle controls beyond ordinary code deployment.",
+  "explain_back_prompt": "Using “Know Which Model Is Serving,” explain MLOps without assuming the listener knows AI engineering."
+}

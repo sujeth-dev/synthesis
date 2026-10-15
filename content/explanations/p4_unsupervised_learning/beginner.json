@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_unsupervised_learning",
+  "depth": "beginner",
+  "title": "Unsupervised Learning — Sort the Mystery Drawer",
+  "key_insight": "Unsupervised learning searches for patterns without an answer key. Clustering places similar examples together.",
+  "body": "## Sort the Mystery Drawer\n\nA drawer contains buttons with no labels. You might group them by color, size, or number of holes, and several groupings could be reasonable.\n\nUnsupervised learning searches for patterns without an answer key. Clustering places similar examples together.\n\nThe groups are suggestions, not discovered truth. A person must inspect whether the grouping is useful for the real problem.",
+  "common_mistakes": [
+    "Calling clusters true labels without inspecting them.",
+    "Using distance before putting features on comparable scales.",
+    "Choosing the number of groups only because one chart looks attractive."
+  ],
+  "mini_exercise": "Draw the situation from “Sort the Mystery Drawer” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Many datasets have no labels, yet their groups, unusual cases, and compressed structure are valuable.",
+  "explain_back_prompt": "Using the “Sort the Mystery Drawer” story, explain Unsupervised Learning without assuming the listener knows machine learning."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_training_loops_epochs_batches",
+  "depth": "beginner",
+  "title": "Training Loops, Epochs & Batches — Practice the Deck in Small Hands",
+  "key_insight": "A batch is one small group of examples. An epoch is one complete pass through the training dataset.",
+  "body": "## Practice the Deck in Small Hands\n\nA dataset is too large to study all at once. Split it into small hands, learn from each hand, then continue through the deck.\n\nA batch is one small group of examples. An epoch is one complete pass through the training dataset.\n\nMore epochs mean more practice, not guaranteed improvement. Check separate validation data to see when practice starts becoming memorization.",
+  "common_mistakes": [
+    "An epoch is one single number inside a feature.",
+    "Validation should secretly train the model.",
+    "Larger batches always fit in memory and always improve accuracy."
+  ],
+  "mini_exercise": "Sketch the situation in “Practice the Deck in Small Hands” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Correct loop structure keeps data, gradients, evaluation, and progress measurements in the right order.",
+  "explain_back_prompt": "Using the “Practice the Deck in Small Hands” situation, explain Training Loops, Epochs & Batches without assuming the listener knows deep learning."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_learning_rate_and_hyperparameters",
+  "depth": "advanced",
+  "title": "Learning Rate & Hyperparameters — Settings Interact",
+  "key_insight": "Hyperparameters form a system, not independent knobs. Batch size affects update noise and hardware use; learning rate and warmup often need to change with it.",
+  "body": "## Settings Interact\n\nA learning rate works for a small batch but fails after the batch becomes eight times larger. The amount of gradient noise changed too.\n\nHyperparameters form a system, not independent knobs. Batch size affects update noise and hardware use; learning rate and warmup often need to change with it.\n\nLog every setting with the result and random seed. Without that record, a good run cannot be reproduced or compared fairly.",
+  "common_mistakes": [
+    "The learning rate is the model’s final accuracy.",
+    "Hyperparameters are always discovered perfectly without experiments.",
+    "Warmup begins with the largest possible update."
+  ],
+  "mini_exercise": "Sketch the situation in “Settings Interact” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Good architecture can fail when its training settings make steps unstable, slow, or poorly timed.",
+  "explain_back_prompt": "Using the “Settings Interact” situation, explain Learning Rate & Hyperparameters without assuming the listener knows deep learning."
+}

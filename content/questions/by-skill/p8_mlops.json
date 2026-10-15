@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p8_mlops_q1",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MLOps covers the model lifecycle beyond code deployment."
+      },
+      {
+        "id": "b",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "c",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "d",
+        "text": "A model name alone proves which data produced it."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "MLOps covers the model lifecycle beyond code deployment.",
+    "graph_placement_weight": {
+      "p8_mlops": 1
+    }
+  },
+  {
+    "id": "p8_mlops_q2",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "b",
+        "text": "Production outputs should be traceable to model and data versions."
+      },
+      {
+        "id": "c",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "d",
+        "text": "A model name alone proves which data produced it."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Production outputs should be traceable to model and data versions.",
+    "graph_placement_weight": {
+      "p8_mlops": 1
+    }
+  },
+  {
+    "id": "p8_mlops_q3",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "b",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "c",
+        "text": "A registry records model versions, evidence, and lifecycle state."
+      },
+      {
+        "id": "d",
+        "text": "A model name alone proves which data produced it."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "A registry records model versions, evidence, and lifecycle state.",
+    "graph_placement_weight": {
+      "p8_mlops": 1
+    }
+  },
+  {
+    "id": "p8_mlops_q4",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "b",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "c",
+        "text": "A model name alone proves which data produced it."
+      },
+      {
+        "id": "d",
+        "text": "Preprocessing versions must match training and serving."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Preprocessing versions must match training and serving.",
+    "graph_placement_weight": {
+      "p8_mlops": 1
+    }
+  },
+  {
+    "id": "p8_mlops_q5",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Retraining triggers still require validation and comparison gates."
+      },
+      {
+        "id": "b",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "c",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "d",
+        "text": "A model name alone proves which data produced it."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Retraining triggers still require validation and comparison gates.",
+    "graph_placement_weight": {
+      "p8_mlops": 1
+    }
+  },
+  {
+    "id": "p8_mlops_q6",
+    "skill_id": "p8_mlops",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "MLOps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MLOps means copying the newest model file into production."
+      },
+      {
+        "id": "b",
+        "text": "Data lineage records sources and transformations behind derived artifacts."
+      },
+      {
+        "id": "c",
+        "text": "Scheduled retraining makes data validation unnecessary."
+      },
+      {
+        "id": "d",
+        "text": "A model name alone proves which data produced it."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Data lineage records sources and transformations behind derived artifacts.",
+    "graph_placement_weight": {
+      "p8_mlops": 1
+    }
+  },
+  {
+    "id": "p8_mlops_order1",
+    "skill_id": "p8_mlops",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this MLOps workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "version data and training configuration"
+      },
+      {
+        "id": "b",
+        "text": "train and evaluate a candidate"
+      },
+      {
+        "id": "c",
+        "text": "register and approve the artifact"
+      },
+      {
+        "id": "d",
+        "text": "deploy, monitor, and retain rollback"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The defensible order is: version data and training configuration → train and evaluate a candidate → register and approve the artifact → deploy, monitor, and retain rollback."
+  },
+  {
+    "id": "p8_mlops_fill1",
+    "skill_id": "p8_mlops",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the MLOps decision.",
+    "options": [
+      {
+        "id": "a",
+        "text": "model_registry"
+      },
+      {
+        "id": "b",
+        "text": "chat_history"
+      },
+      {
+        "id": "c",
+        "text": "softmax_only"
+      },
+      {
+        "id": "d",
+        "text": "random_seed_only"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "model_registry",
+    "explanation_after": "The correct choice is model_registry."
+  }
+]

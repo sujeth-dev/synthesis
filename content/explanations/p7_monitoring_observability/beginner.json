@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_monitoring_observability",
+  "depth": "beginner",
+  "title": "Monitoring & Observability — Know Which Station Failed",
+  "key_insight": "Logs record events, metrics summarize trends, and traces connect the steps of one request. Together they make the route inspectable.",
+  "body": "## Know Which Station Failed\n\nUsers report slow wrong answers, but one final error count cannot show whether retrieval, the model, or a tool caused them.\n\nLogs record events, metrics summarize trends, and traces connect the steps of one request. Together they make the route inspectable.\n\nStart with user-visible success, errors, latency, and cost. Add component detail that helps explain those outcomes.",
+  "common_mistakes": [
+    "One final error count identifies every root cause.",
+    "All user prompts should be logged forever.",
+    "Fast responses guarantee useful answers."
+  ],
+  "mini_exercise": "Draw “Know Which Station Failed” as three steps and explain each one.",
+  "real_world_usage": "Observability connects user outcomes to requests, retrieval, models, tools, costs, and failures without exposing sensitive data.",
+  "explain_back_prompt": "Use “Know Which Station Failed” to explain Monitoring & Observability plainly."
+}

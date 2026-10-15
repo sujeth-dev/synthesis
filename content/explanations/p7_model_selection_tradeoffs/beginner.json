@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_model_selection_tradeoffs",
+  "depth": "beginner",
+  "title": "Model Selection Tradeoffs — Choose the Smallest Tool That Does the Job",
+  "key_insight": "Compare candidates on representative tasks and constraints. A smaller model that meets the quality floor is often easier to serve.",
+  "body": "## Choose the Smallest Tool That Does the Job\n\nA large model writes excellent poetry but is used only to classify three ticket types. Its extra ability creates unnecessary cost.\n\nCompare candidates on representative tasks and constraints. A smaller model that meets the quality floor is often easier to serve.\n\nKeep a fallback for cases outside the smaller model’s competence rather than forcing one model onto every request.",
+  "common_mistakes": [
+    "Parameter count alone selects the best deployment.",
+    "Hosted and local models have identical privacy responsibilities.",
+    "A theoretical speedup guarantees lower production tail latency."
+  ],
+  "mini_exercise": "Draw “Choose the Smallest Tool That Does the Job” as three steps and explain each one.",
+  "real_world_usage": "Real systems choose among local, hosted, small, and large models by workload-specific constraints.",
+  "explain_back_prompt": "Use “Choose the Smallest Tool That Does the Job” to explain Model Selection Tradeoffs plainly."
+}

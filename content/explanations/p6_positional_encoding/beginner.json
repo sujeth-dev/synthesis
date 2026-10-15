@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_positional_encoding",
+  "depth": "beginner",
+  "title": "Positional Encoding — Number the Shuffled Cards",
+  "key_insight": "Positional encoding adds information about where each token sits. Attention can then combine content with order.",
+  "body": "## Number the Shuffled Cards\n\n“Dog bites person” and “person bites dog” contain the same words but mean different things. A bag of words cannot tell them apart.\n\nPositional encoding adds information about where each token sits. Attention can then combine content with order.\n\nThe position signal must be distinct yet compatible with token vectors, because both enter the same transformer blocks.",
+  "common_mistakes": [
+    "Position information alphabetically sorts every sentence.",
+    "Word order never changes meaning.",
+    "Rotary encoding deletes token content."
+  ],
+  "mini_exercise": "Draw “Number the Shuffled Cards” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Language meaning depends on order, and position design affects how models handle lengths beyond training.",
+  "explain_back_prompt": "Using “Number the Shuffled Cards,” explain Positional Encoding without assuming the listener knows modern AI."
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_deployment_hosting_q1",
+    "skill_id": "p7_deployment_hosting",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Deployment & Hosting: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Deployment needs repeatable code and dependencies."
+      },
+      {
+        "id": "b",
+        "text": "A laptop environment is automatically reproducible."
+      },
+      {
+        "id": "c",
+        "text": "Adding web servers fixes every downstream bottleneck."
+      },
+      {
+        "id": "d",
+        "text": "Health checks prove model answer quality."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Deployment needs repeatable code and dependencies.",
+    "graph_placement_weight": {
+      "p7_deployment_hosting": 1
+    }
+  },
+  {
+    "id": "p7_deployment_hosting_q2",
+    "skill_id": "p7_deployment_hosting",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Deployment & Hosting: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A laptop environment is automatically reproducible."
+      },
+      {
+        "id": "b",
+        "text": "Secrets should stay outside source code."
+      },
+      {
+        "id": "c",
+        "text": "Adding web servers fixes every downstream bottleneck."
+      },
+      {
+        "id": "d",
+        "text": "Health checks prove model answer quality."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Secrets should stay outside source code.",
+    "graph_placement_weight": {
+      "p7_deployment_hosting": 1
+    }
+  },
+  {
+    "id": "p7_deployment_hosting_q3",
+    "skill_id": "p7_deployment_hosting",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Deployment & Hosting: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A laptop environment is automatically reproducible."
+      },
+      {
+        "id": "b",
+        "text": "Adding web servers fixes every downstream bottleneck."
+      },
+      {
+        "id": "c",
+        "text": "Immutable artifacts separate build from release."
+      },
+      {
+        "id": "d",
+        "text": "Health checks prove model answer quality."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Immutable artifacts separate build from release.",
+    "graph_placement_weight": {
+      "p7_deployment_hosting": 1
+    }
+  },
+  {
+    "id": "p7_deployment_hosting_q4",
+    "skill_id": "p7_deployment_hosting",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Deployment & Hosting: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A laptop environment is automatically reproducible."
+      },
+      {
+        "id": "b",
+        "text": "Adding web servers fixes every downstream bottleneck."
+      },
+      {
+        "id": "c",
+        "text": "Health checks prove model answer quality."
+      },
+      {
+        "id": "d",
+        "text": "Scaling must target the actual bottleneck."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Scaling must target the actual bottleneck.",
+    "graph_placement_weight": {
+      "p7_deployment_hosting": 1
+    }
+  },
+  {
+    "id": "p7_deployment_hosting_q5",
+    "skill_id": "p7_deployment_hosting",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Deployment & Hosting: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Large models can create cold-start delays."
+      },
+      {
+        "id": "b",
+        "text": "A laptop environment is automatically reproducible."
+      },
+      {
+        "id": "c",
+        "text": "Adding web servers fixes every downstream bottleneck."
+      },
+      {
+        "id": "d",
+        "text": "Health checks prove model answer quality."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Large models can create cold-start delays.",
+    "graph_placement_weight": {
+      "p7_deployment_hosting": 1
+    }
+  },
+  {
+    "id": "p7_deployment_hosting_q6",
+    "skill_id": "p7_deployment_hosting",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Deployment & Hosting: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A laptop environment is automatically reproducible."
+      },
+      {
+        "id": "b",
+        "text": "Canary releases limit exposure while comparing a new stack."
+      },
+      {
+        "id": "c",
+        "text": "Adding web servers fixes every downstream bottleneck."
+      },
+      {
+        "id": "d",
+        "text": "Health checks prove model answer quality."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Canary releases limit exposure while comparing a new stack.",
+    "graph_placement_weight": {
+      "p7_deployment_hosting": 1
+    }
+  }
+]

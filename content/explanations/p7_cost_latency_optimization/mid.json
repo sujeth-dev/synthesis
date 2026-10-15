@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_cost_latency_optimization",
+  "depth": "mid",
+  "title": "Cost & Latency Optimization — Reduce Work That Adds No Value",
+  "key_insight": "Trim history, retrieve fewer better chunks, cap output, and choose a smaller model for simpler work.",
+  "body": "## Reduce Work That Adds No Value\n\nEvery request sends the full conversation and ten documents even when only one passage matters.\n\nTrim history, retrieve fewer better chunks, cap output, and choose a smaller model for simpler work.\n\nRun independent calls concurrently, but bound concurrency to avoid rate limits and overload. Track first-token and full-response latency separately.",
+  "common_mistakes": [
+    "The cheapest response is best even when wrong.",
+    "Average latency fully describes user experience.",
+    "Unlimited concurrency always reduces latency."
+  ],
+  "mini_exercise": "Draw “Reduce Work That Adds No Value” as three steps and explain each one.",
+  "real_world_usage": "Production AI must meet quality targets within token, compute, and response-time budgets.",
+  "explain_back_prompt": "Use “Reduce Work That Adds No Value” to explain Cost & Latency Optimization plainly."
+}

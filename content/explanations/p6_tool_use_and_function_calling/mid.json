@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_tool_use_and_function_calling",
+  "depth": "mid",
+  "title": "Tool Use & Function Calling — Use a Typed Contract",
+  "key_insight": "A function schema defines argument names, types, required fields, and allowed values. Validate the proposed arguments before calling real code.",
+  "body": "## Use a Typed Contract\n\nA weather tool expects a city and date, but the model supplies a sentence in the wrong field. Free-form parsing is fragile.\n\nA function schema defines argument names, types, required fields, and allowed values. Validate the proposed arguments before calling real code.\n\nReturn structured results and explicit errors. The model can then answer from the result or correct a safe invalid request.",
+  "common_mistakes": [
+    "A model response automatically has every system credential.",
+    "Tool arguments never need validation.",
+    "Retries are safe even when they repeat payments."
+  ],
+  "mini_exercise": "Draw “Use a Typed Contract” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Models need tools to query live systems, calculate reliably, and take controlled actions beyond text generation.",
+  "explain_back_prompt": "Using “Use a Typed Contract,” explain Tool Use & Function Calling without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Mock one safe tool call",
+    "context": "Turn Tool Use & Function Calling into one small, inspectable workflow.",
+    "steps": [
+      "Define a read-only tool with typed inputs.",
+      "Validate one valid and one invalid proposal.",
+      "Execute only the valid proposal.",
+      "Return a structured result and log the decision."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_ai_apis",
+  "depth": "mid",
+  "title": "AI APIs & Production — Build a Reliable Request",
+  "key_insight": "Follow the API contract for authentication, endpoint, fields, and response parsing. Set timeouts and handle rate-limit and server errors separately.",
+  "body": "## Build a Reliable Request\n\nA request works in a test console but fails in the app because its headers, model name, or message shape differ.\n\nFollow the API contract for authentication, endpoint, fields, and response parsing. Set timeouts and handle rate-limit and server errors separately.\n\nRetry only safe failures with delay and randomness. Record request IDs so provider support and your logs can trace one call.",
+  "common_mistakes": [
+    "API keys are safest inside public browser code.",
+    "Every failed request should retry forever.",
+    "Model responses never require validation."
+  ],
+  "mini_exercise": "Draw “Build a Reliable Request” as three steps and explain each one.",
+  "real_world_usage": "AI APIs let products use managed models while keeping credentials, errors, and costs under application control.",
+  "explain_back_prompt": "Use “Build a Reliable Request” to explain AI APIs & Production plainly.",
+  "build_task": {
+    "title": "Practice AI APIs & Production",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "form the server request",
+      "send it with a timeout",
+      "validate the response",
+      "return a safe result to the client"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

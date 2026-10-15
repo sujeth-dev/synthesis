@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_train_test_cross_validation",
+  "depth": "expert",
+  "title": "Train/Test Splits & Cross-Validation — Selection Makes Validation Optimistic",
+  "key_insight": "Nested cross-validation puts the setting search inside an outer evaluation loop. The outer folds judge the entire selection process, not one chosen fit.",
+  "body": "## Selection Makes Validation Optimistic\n\nHundreds of model settings compete on the same validation folds. The winner partly wins by luck because the search repeatedly looked at those scores.\n\nNested cross-validation puts the setting search inside an outer evaluation loop. The outer folds judge the entire selection process, not one chosen fit.\n\nUncertainty also comes from data sampling. Report fold results or confidence ranges, and compare practical effect size rather than declaring victory from a tiny score gap.",
+  "common_mistakes": [
+    "Using the test set to choose model settings.",
+    "Randomly splitting time-ordered or grouped records.",
+    "Reporting only the best fold instead of the full variation."
+  ],
+  "mini_exercise": "Draw the situation from “Selection Makes Validation Optimistic” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Without a fair split, every model comparison can be confidently wrong.",
+  "explain_back_prompt": "Using the “Selection Makes Validation Optimistic” story, explain Train/Test Splits & Cross-Validation without assuming the listener knows machine learning."
+}

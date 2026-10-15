@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_case_studies_of_real_systems",
+  "depth": "expert",
+  "title": "Case Studies of Real AI Systems — Generalize at the Right Level",
+  "key_insight": "Extract principles such as bounded work, provenance, staged rollout, or human remedy. State the conditions under which each principle applies.",
+  "body": "## Generalize at the Right Level\n\nThree successful systems all use queues, but for different reasons. Copying queues is less useful than understanding the shared pressure they absorb.\n\nExtract principles such as bounded work, provenance, staged rollout, or human remedy. State the conditions under which each principle applies.\n\nBuild a case library with comparable fields and revisit it after new evidence. The goal is transferable judgment, not a collection of famous names.",
+  "common_mistakes": [
+    "An architecture diagram proves business success.",
+    "A famous design should be copied regardless of workload.",
+    "A postmortem is complete after blaming one operator."
+  ],
+  "mini_exercise": "Draw “Generalize at the Right Level” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Real systems show how model choices interact with users, data, organizations, and operations.",
+  "explain_back_prompt": "Using “Generalize at the Right Level,” explain Case Studies of Real AI Systems without assuming the listener knows AI engineering."
+}

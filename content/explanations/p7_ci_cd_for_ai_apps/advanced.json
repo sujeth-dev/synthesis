@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_ci_cd_for_ai_apps",
+  "depth": "advanced",
+  "title": "CI/CD for AI Apps — Use Gates Proportional to Risk",
+  "key_insight": "Use fast deterministic checks first, then targeted model evaluations for affected behavior, and broader suites before release.",
+  "body": "## Use Gates Proportional to Risk\n\nRunning every expensive model evaluation on each typo wastes time, but skipping it for prompt changes invites regressions.\n\nUse fast deterministic checks first, then targeted model evaluations for affected behavior, and broader suites before release.\n\nSet explicit pass thresholds and inspect severe cases even when averages pass. Flaky graders need repeated runs or human review, not ignored failures.",
+  "common_mistakes": [
+    "Unit tests alone cover every AI behavior change.",
+    "Prompt versions need not be recorded.",
+    "Rollback always means changing only application code."
+  ],
+  "mini_exercise": "Draw “Use Gates Proportional to Risk” as three steps and explain each one.",
+  "real_world_usage": "AI delivery pipelines test code, prompts, models, data contracts, and safety before controlled release.",
+  "explain_back_prompt": "Use “Use Gates Proportional to Risk” to explain CI/CD for AI Apps plainly.",
+  "build_task": {
+    "title": "Practice CI/CD for AI Apps",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "run fast code and schema checks",
+      "run targeted AI evaluations",
+      "build a versioned release artifact",
+      "canary, observe, and promote or roll back"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

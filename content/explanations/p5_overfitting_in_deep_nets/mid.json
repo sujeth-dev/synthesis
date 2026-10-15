@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_overfitting_in_deep_nets",
+  "depth": "mid",
+  "title": "Overfitting in Deep Networks — Make Memorization Harder",
+  "key_insight": "Dropout randomly hides some units during training, encouraging several pathways to share the work. Weight decay discourages unnecessarily large weights.",
+  "body": "## Make Memorization Harder\n\nA network relies on one fragile pathway. If that pathway is unavailable, its prediction collapses.\n\nDropout randomly hides some units during training, encouraging several pathways to share the work. Weight decay discourages unnecessarily large weights.\n\nData augmentation creates believable variations of training examples. The right variation teaches invariance without changing the true label.",
+  "common_mistakes": [
+    "Overfitting means both training and validation are always perfect.",
+    "Dropout permanently deletes the same units at deployment.",
+    "The test set should guide every training decision."
+  ],
+  "mini_exercise": "Sketch the situation in “Make Memorization Harder” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Deep networks have enough capacity to memorize easily, so validation and regularization are essential.",
+  "explain_back_prompt": "Using the “Make Memorization Harder” situation, explain Overfitting in Deep Networks without assuming the listener knows deep learning."
+}

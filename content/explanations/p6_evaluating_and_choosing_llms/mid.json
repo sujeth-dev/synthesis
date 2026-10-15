@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_evaluating_and_choosing_llms",
+  "depth": "mid",
+  "title": "Evaluating & Choosing LLMs — Use Checks That Match the Output",
+  "key_insight": "Use deterministic checks for structure and known facts, model-based rubrics for scalable judgment, and human review for ambiguous or high-impact cases.",
+  "body": "## Use Checks That Match the Output\n\nExact answers can use exact matching, but summaries and explanations allow many good phrasings. One metric cannot grade every task.\n\nUse deterministic checks for structure and known facts, model-based rubrics for scalable judgment, and human review for ambiguous or high-impact cases.\n\nCalibrate automated graders against human-labeled examples. A grader model has its own bias, failures, and version drift.",
+  "common_mistakes": [
+    "The biggest model is automatically best for every product.",
+    "One public benchmark replaces task-specific testing.",
+    "A model-based grader is perfectly objective and never changes."
+  ],
+  "mini_exercise": "Draw “Use Checks That Match the Output” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Model families and versions change quickly, so a repeatable evaluation process is more durable than one recommendation.",
+  "explain_back_prompt": "Using “Use Checks That Match the Output,” explain Evaluating & Choosing LLMs without assuming the listener knows modern AI."
+}

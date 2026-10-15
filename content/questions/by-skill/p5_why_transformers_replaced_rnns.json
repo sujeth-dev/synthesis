@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p5_why_transformers_replaced_rnns_q1",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Attention lets positions consult distant positions directly."
+      },
+      {
+        "id": "b",
+        "text": "Transformers read only the immediately previous token."
+      },
+      {
+        "id": "c",
+        "text": "Parallel training means token order no longer matters."
+      },
+      {
+        "id": "d",
+        "text": "Attention has zero memory cost at every sequence length."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Attention lets positions consult distant positions directly.",
+    "graph_placement_weight": {
+      "p5_why_transformers_replaced_rnns": 1
+    }
+  },
+  {
+    "id": "p5_why_transformers_replaced_rnns_q2",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Transformers read only the immediately previous token."
+      },
+      {
+        "id": "b",
+        "text": "Transformer training can process many sequence positions in parallel."
+      },
+      {
+        "id": "c",
+        "text": "Parallel training means token order no longer matters."
+      },
+      {
+        "id": "d",
+        "text": "Attention has zero memory cost at every sequence length."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Transformer training can process many sequence positions in parallel.",
+    "graph_placement_weight": {
+      "p5_why_transformers_replaced_rnns": 1
+    }
+  },
+  {
+    "id": "p5_why_transformers_replaced_rnns_q3",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Transformers read only the immediately previous token."
+      },
+      {
+        "id": "b",
+        "text": "Parallel training means token order no longer matters."
+      },
+      {
+        "id": "c",
+        "text": "Position information restores token order."
+      },
+      {
+        "id": "d",
+        "text": "Attention has zero memory cost at every sequence length."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Position information restores token order.",
+    "graph_placement_weight": {
+      "p5_why_transformers_replaced_rnns": 1
+    }
+  },
+  {
+    "id": "p5_why_transformers_replaced_rnns_q4",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Transformers read only the immediately previous token."
+      },
+      {
+        "id": "b",
+        "text": "Parallel training means token order no longer matters."
+      },
+      {
+        "id": "c",
+        "text": "Attention has zero memory cost at every sequence length."
+      },
+      {
+        "id": "d",
+        "text": "Standard attention cost grows roughly with the square of sequence length."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Standard attention cost grows roughly with the square of sequence length.",
+    "graph_placement_weight": {
+      "p5_why_transformers_replaced_rnns": 1
+    }
+  },
+  {
+    "id": "p5_why_transformers_replaced_rnns_q5",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "RNNs can remain useful for streaming or constrained devices."
+      },
+      {
+        "id": "b",
+        "text": "Transformers read only the immediately previous token."
+      },
+      {
+        "id": "c",
+        "text": "Parallel training means token order no longer matters."
+      },
+      {
+        "id": "d",
+        "text": "Attention has zero memory cost at every sequence length."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "RNNs can remain useful for streaming or constrained devices.",
+    "graph_placement_weight": {
+      "p5_why_transformers_replaced_rnns": 1
+    }
+  },
+  {
+    "id": "p5_why_transformers_replaced_rnns_q6",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Transformers read only the immediately previous token."
+      },
+      {
+        "id": "b",
+        "text": "Short attention paths can help learn long-range relationships."
+      },
+      {
+        "id": "c",
+        "text": "Parallel training means token order no longer matters."
+      },
+      {
+        "id": "d",
+        "text": "Attention has zero memory cost at every sequence length."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Short attention paths can help learn long-range relationships.",
+    "graph_placement_weight": {
+      "p5_why_transformers_replaced_rnns": 1
+    }
+  }
+]

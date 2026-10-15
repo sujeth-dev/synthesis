@@ -1,13 +1,15 @@
 {
   "skill_id": "p2_math_matrices",
   "depth": "mid",
-  "title": "Matrices \u2014 Grids of Numbers (Mid)",
-  "key_insight": "A matrix is a grid of numbers. Every neural network layer is a matrix multiplication.",
-  "body": "## What is a Matrix?\n\n```python\nimport numpy as np\n\nmatrix = np.array([[1, 2, 3],\n                   [4, 5, 6]])\n\nprint(matrix.shape)  # (2, 3)\n```\n\n## Matrix Multiplication \u2014 The Key Operation\n\n```python\nA = np.array([[1, 2], [3, 4]])  # 2\u00d72\nB = np.array([[5, 6], [7, 8]])  # 2\u00d72\n\nC = A @ B  # matrix multiply\n# C[0,0] = 1\u00d75 + 2\u00d77 = 19\n# C[0,1] = 1\u00d76 + 2\u00d78 = 22\n```\n\n## The Linear Layer Equation\n\n```python\n# y = x @ W.T + b\n# x: input  (batch_size, input_dim)\n# W: weights (output_dim, input_dim)\n# b: bias   (output_dim,)\n# y: output (batch_size, output_dim)\n\nbatch = np.random.rand(32, 128)  # (32, 128)\nW     = np.random.rand(64, 128)  # (64, 128)\nb     = np.random.rand(64)       # (64,)\n\ny = batch @ W.T + b  # (32, 64)\n```",
+  "title": "Turning a Whole Batch into Predictions",
+  "key_insight": "A linear layer uses one learned grid to mix every example in a batch, then adds a small adjustable offset to each result.",
+  "body": "## Thirty-Two Trays at Once\n\nA model receives 32 trays, each holding 128 feature numbers. It needs 64 new numbers per tray, so one learned grid mixes every tray by the same recipe.\n\nPeople call this the linear layer equation: multiply the input grid by the weight grid, then add one small offset, called a bias, to every result.\n\nKeeping examples in one batch lets the computer do the repeated work together. The outer sizes tell you the answer shape: 32 trays still come out, now with 64 numbers each.",
   "common_mistakes": [
-    "Using A * B for matrix multiply \u2014 that's element-wise! Use A @ B",
-    "Wrong shape: (3,4) @ (5,2) fails. Inner dimensions must match: (3,4) @ (4,5) works",
-    "Matrix multiply is not commutative: A @ B \u2260 B @ A"
+    "Turning the weight grid the wrong way — check which side lists incoming features and which side lists outgoing features.",
+    "Mixing up examples and features — rows usually hold separate examples, while columns hold the features being mixed.",
+    "Trusting an offset just because the program accepts its shape — confirm that the same intended offset reaches every example."
   ],
-  "mini_exercise": "Create a (3\u00d72) matrix A and a (2\u00d74) matrix B. Compute A @ B. What shape is the result? Now try B @ A \u2014 does it work? This shape rule prevents 90% of PyTorch shape errors."
+  "mini_exercise": "Make four pretend examples with three features each. Choose a weight grid that turns three features into two outputs, run the multiplication, and explain why four examples still come out.",
+  "real_world_usage": "PyTorch linear layers perform this same batched mixing. Transformer models repeat it to create several useful views of every piece of text.",
+  "explain_back_prompt": "Explain how a batch, a weight grid, and a bias work together without using a formula."
 }

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_cost_latency_optimization",
+  "depth": "advanced",
+  "title": "Cost & Latency Optimization — Optimize the Tail, Not Only the Average",
+  "key_insight": "Report percentiles such as p50, p95, and p99 by workload. Set timeouts and fallbacks around the user’s patience budget.",
+  "body": "## Optimize the Tail, Not Only the Average\n\nMost requests finish quickly, but one in a hundred takes ten seconds and drives user complaints.\n\nReport percentiles such as p50, p95, and p99 by workload. Set timeouts and fallbacks around the user’s patience budget.\n\nQueueing rises sharply near full capacity. Leave headroom and shed low-priority load before every request slows.",
+  "common_mistakes": [
+    "The cheapest response is best even when wrong.",
+    "Average latency fully describes user experience.",
+    "Unlimited concurrency always reduces latency."
+  ],
+  "mini_exercise": "Draw “Optimize the Tail, Not Only the Average” as three steps and explain each one.",
+  "real_world_usage": "Production AI must meet quality targets within token, compute, and response-time budgets.",
+  "explain_back_prompt": "Use “Optimize the Tail, Not Only the Average” to explain Cost & Latency Optimization plainly."
+}

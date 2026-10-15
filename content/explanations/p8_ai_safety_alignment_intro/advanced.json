@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_safety_alignment_intro",
+  "depth": "advanced",
+  "title": "AI Safety & Alignment — Test Outside the Friendly Distribution",
+  "key_insight": "Capability and safety evaluations should include distribution shift, adversarial pressure, long-horizon tasks, and attempts to bypass oversight.",
+  "body": "## Test Outside the Friendly Distribution\n\nA system behaves safely on familiar prompts but fails after gaining a new tool or entering a competitive setting. The deployment changed the incentives.\n\nCapability and safety evaluations should include distribution shift, adversarial pressure, long-horizon tasks, and attempts to bypass oversight.\n\nIncrease autonomy and access gradually. Gate each expansion on evidence, and retain a reliable way to stop or limit the system.",
+  "common_mistakes": [
+    "A high benchmark score proves complete alignment.",
+    "One safety prompt removes every misuse path.",
+    "Human approval is meaningful even when the reviewer cannot assess the work."
+  ],
+  "mini_exercise": "Draw “Test Outside the Friendly Distribution” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "More capable and autonomous systems can amplify specification mistakes, misuse, and unexpected behavior.",
+  "explain_back_prompt": "Using “Test Outside the Friendly Distribution,” explain AI Safety & Alignment without assuming the listener knows AI engineering."
+}

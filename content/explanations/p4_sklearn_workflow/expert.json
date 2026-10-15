@@ -1,0 +1,17 @@
+{
+  "skill_id": "p4_sklearn_workflow",
+  "depth": "expert",
+  "title": "Designing an Estimator That Plays Well with the Ecosystem",
+  "key_insight": "A custom model joins scikit-learn’s team when creation stores choices, fitting learns fresh state, and prediction reads that state without secretly relearning.",
+  "body": "## A Model That Fails the Team Tryout\n\nA custom model can predict alone yet break scikit-learn's search tools. Those tools need a simple promise: creation stores choices, fit learns from data, and predict only uses what fit learned.\n\nScikit-learn makes clean copies for different trials. Keeping choices separate from learned values prevents one trial's answers from leaking into another, while clear parameter names let search tools adjust nested pipeline parts.\n\nThe fitted pipeline is a packaged artifact, not a timeless object. Record its data columns, code version, and library versions, then reject production inputs whose columns no longer match.",
+  "common_mistakes": [
+    "Learning from data while the object is being created — creation should only remember the user’s choices.",
+    "Hiding which values were learned during fitting, making it hard to tell whether the model is ready.",
+    "Changing the user’s original settings during fitting, which makes clean copying unreliable.",
+    "Accepting production columns in a different order merely because the number of columns still matches.",
+    "Assuming a saved Python model is safe from any source or guaranteed to open under every future library version."
+  ],
+  "mini_exercise": "Build a tiny predictor that remembers one user setting when created, learns the average answer during fit, and repeats that learned average during predict. Confirm a fresh copy has no learned average yet.",
+  "real_world_usage": "This small promise lets scikit-learn copy built-in and custom models for fair trials, connect them in pipelines, and search their settings through one shared interface.",
+  "explain_back_prompt": "Why must user choices and learned values be kept separate when scikit-learn creates a fresh model copy for each trial?"
+}

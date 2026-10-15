@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p5_vanishing_exploding_gradients_q1",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vanishing gradients become too small for useful early-layer updates."
+      },
+      {
+        "id": "b",
+        "text": "Vanishing gradients make every update infinitely large."
+      },
+      {
+        "id": "c",
+        "text": "Gradient clipping creates new labels for the dataset."
+      },
+      {
+        "id": "d",
+        "text": "Depth can never affect backward signal scale."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Vanishing gradients become too small for useful early-layer updates.",
+    "graph_placement_weight": {
+      "p5_vanishing_exploding_gradients": 1
+    }
+  },
+  {
+    "id": "p5_vanishing_exploding_gradients_q2",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vanishing gradients make every update infinitely large."
+      },
+      {
+        "id": "b",
+        "text": "Exploding gradients can cause spikes and invalid numbers."
+      },
+      {
+        "id": "c",
+        "text": "Gradient clipping creates new labels for the dataset."
+      },
+      {
+        "id": "d",
+        "text": "Depth can never affect backward signal scale."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Exploding gradients can cause spikes and invalid numbers.",
+    "graph_placement_weight": {
+      "p5_vanishing_exploding_gradients": 1
+    }
+  },
+  {
+    "id": "p5_vanishing_exploding_gradients_q3",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vanishing gradients make every update infinitely large."
+      },
+      {
+        "id": "b",
+        "text": "Gradient clipping creates new labels for the dataset."
+      },
+      {
+        "id": "c",
+        "text": "Repeated multiplication through layer slopes changes gradient scale."
+      },
+      {
+        "id": "d",
+        "text": "Depth can never affect backward signal scale."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Repeated multiplication through layer slopes changes gradient scale.",
+    "graph_placement_weight": {
+      "p5_vanishing_exploding_gradients": 1
+    }
+  },
+  {
+    "id": "p5_vanishing_exploding_gradients_q4",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vanishing gradients make every update infinitely large."
+      },
+      {
+        "id": "b",
+        "text": "Gradient clipping creates new labels for the dataset."
+      },
+      {
+        "id": "c",
+        "text": "Depth can never affect backward signal scale."
+      },
+      {
+        "id": "d",
+        "text": "Initialization helps keep signals in a workable range."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Initialization helps keep signals in a workable range.",
+    "graph_placement_weight": {
+      "p5_vanishing_exploding_gradients": 1
+    }
+  },
+  {
+    "id": "p5_vanishing_exploding_gradients_q5",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Residual connections provide shorter paths through deep networks."
+      },
+      {
+        "id": "b",
+        "text": "Vanishing gradients make every update infinitely large."
+      },
+      {
+        "id": "c",
+        "text": "Gradient clipping creates new labels for the dataset."
+      },
+      {
+        "id": "d",
+        "text": "Depth can never affect backward signal scale."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Residual connections provide shorter paths through deep networks.",
+    "graph_placement_weight": {
+      "p5_vanishing_exploding_gradients": 1
+    }
+  },
+  {
+    "id": "p5_vanishing_exploding_gradients_q6",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vanishing gradients make every update infinitely large."
+      },
+      {
+        "id": "b",
+        "text": "Gradient clipping limits an excessively large gradient norm."
+      },
+      {
+        "id": "c",
+        "text": "Gradient clipping creates new labels for the dataset."
+      },
+      {
+        "id": "d",
+        "text": "Depth can never affect backward signal scale."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Gradient clipping limits an excessively large gradient norm.",
+    "graph_placement_weight": {
+      "p5_vanishing_exploding_gradients": 1
+    }
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_ci_cd_for_ai_apps",
+  "depth": "expert",
+  "title": "CI/CD for AI Apps — Promote with Evidence and Roll Back with State",
+  "key_insight": "Record a release manifest covering every component and migration. Design backward-compatible changes or paired rollback steps.",
+  "body": "## Promote with Evidence and Roll Back with State\n\nA release changes prompts, indexes, and model routing together. Rolling back only code leaves incompatible state.\n\nRecord a release manifest covering every component and migration. Design backward-compatible changes or paired rollback steps.\n\nCanaries compare the new manifest against the old under real traffic. Promotion should require both operational health and quality evidence.",
+  "common_mistakes": [
+    "Unit tests alone cover every AI behavior change.",
+    "Prompt versions need not be recorded.",
+    "Rollback always means changing only application code."
+  ],
+  "mini_exercise": "Draw “Promote with Evidence and Roll Back with State” as three steps and explain each one.",
+  "real_world_usage": "AI delivery pipelines test code, prompts, models, data contracts, and safety before controlled release.",
+  "explain_back_prompt": "Use “Promote with Evidence and Roll Back with State” to explain CI/CD for AI Apps plainly."
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_build_your_first_network",
+  "depth": "advanced",
+  "title": "Build Your First Network — Save Enough to Continue Honestly",
+  "key_insight": "A training checkpoint should include model parameters, optimizer state, scheduler state, epoch or step, settings, and random seeds where practical.",
+  "body": "## Save Enough to Continue Honestly\n\nA run stops after two hours. Loading only model weights changes the next updates because optimizer momentum and schedule position disappeared.\n\nA training checkpoint should include model parameters, optimizer state, scheduler state, epoch or step, settings, and random seeds where practical.\n\nSave the best validation checkpoint separately from the latest recovery checkpoint. Test loading by starting a fresh process and reproducing a prediction.",
+  "common_mistakes": [
+    "A model learns merely because its script exits successfully.",
+    "Only the final accuracy number is needed to reproduce a run.",
+    "Validation rows should be used for every weight update."
+  ],
+  "mini_exercise": "Sketch the situation in “Save Enough to Continue Honestly” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This capstone proves the learner can connect Phase 5’s parts into a working training system.",
+  "explain_back_prompt": "Using the “Save Enough to Continue Honestly” situation, explain Build Your First Network without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Train and save your first complete network",
+    "context": "Turn the Build Your First Network idea into one small, inspectable workflow.",
+    "steps": [
+      "Load a small built-in classification dataset.",
+      "Define a two-layer network.",
+      "Train while printing epoch loss.",
+      "Evaluate held-out accuracy and reload the best checkpoint."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

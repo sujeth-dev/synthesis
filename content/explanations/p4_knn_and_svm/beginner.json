@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_knn_and_svm",
+  "depth": "beginner",
+  "title": "K-Nearest Neighbors & Support Vector Machines — Neighbors or a Safety Fence",
+  "key_insight": "K-nearest neighbors uses the first idea. A support vector machine uses the second, building a boundary from the closest examples.",
+  "body": "## Neighbors or a Safety Fence\n\nA new fruit sits near several labeled fruits on a table. You can ask its nearest neighbors, or draw a fence that leaves the widest gap between fruit groups.\n\nK-nearest neighbors uses the first idea. A support vector machine uses the second, building a boundary from the closest examples.\n\nBoth depend on distance, so centimeters and kilograms must be put on comparable scales before either method can judge closeness fairly.",
+  "common_mistakes": [
+    "Using either method before scaling features.",
+    "Choosing K or kernel settings on the test set.",
+    "Assuming KNN training is costly while ignoring its prediction-time search."
+  ],
+  "mini_exercise": "Draw the situation from “Neighbors or a Safety Fence” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "These contrasting methods teach how distance, boundaries, and scaling shape classification.",
+  "explain_back_prompt": "Using the “Neighbors or a Safety Fence” story, explain K-Nearest Neighbors & Support Vector Machines without assuming the listener knows machine learning."
+}

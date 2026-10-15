@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_tokenization",
+  "depth": "advanced",
+  "title": "Tokenization — Length Is Measured in Tokens",
+  "key_insight": "Context limits and API charges are usually counted in tokens. Inspect token counts before truncating, batching, or promising a maximum document size.",
+  "body": "## Length Is Measured in Tokens\n\nTwo prompts have the same character count, yet one costs twice as much because its language and symbols split into more pieces.\n\nContext limits and API charges are usually counted in tokens. Inspect token counts before truncating, batching, or promising a maximum document size.\n\nNormalization and whitespace rules can change tokenization. Preserve the same preprocessing in training and serving, especially for code and multilingual text.",
+  "common_mistakes": [
+    "A tokenizer directly verifies every factual answer.",
+    "Every token is always one complete English word.",
+    "Token numbers have the same meaning across all models."
+  ],
+  "mini_exercise": "Draw “Length Is Measured in Tokens” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every language-model input and output passes through a tokenizer, so its choices affect meaning, length, and cost.",
+  "explain_back_prompt": "Using “Length Is Measured in Tokens,” explain Tokenization without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Inspect how text becomes tokens",
+    "context": "Turn Tokenization into one small, inspectable workflow.",
+    "steps": [
+      "Choose two short sentences.",
+      "Encode both with one tokenizer.",
+      "Print token pieces and counts.",
+      "Decode the ids and compare with the originals."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p4_supervised_learning_q1",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Supervised Learning: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Supervised examples pair inputs with known answers."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Supervised examples pair inputs with known answers.",
+    "graph_placement_weight": {
+      "p4_supervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_supervised_learning_q2",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Supervised Learning: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Regression predicts numbers while classification predicts categories."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Regression predicts numbers while classification predicts categories.",
+    "graph_placement_weight": {
+      "p4_supervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_supervised_learning_q3",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Supervised Learning: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An untouched test set checks performance after choices are finished."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "An untouched test set checks performance after choices are finished.",
+    "graph_placement_weight": {
+      "p4_supervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_supervised_learning_q4",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Supervised Learning: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Label noise means some recorded answers are wrong or uncertain."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Label noise means some recorded answers are wrong or uncertain.",
+    "graph_placement_weight": {
+      "p4_supervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_supervised_learning_q5",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Supervised Learning: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Group-level checks can reveal failures hidden by one overall score."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Group-level checks can reveal failures hidden by one overall score.",
+    "graph_placement_weight": {
+      "p4_supervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_supervised_learning_q6",
+    "skill_id": "p4_supervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Supervised Learning: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Distribution shift can change who arrives or how inputs relate to answers."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Distribution shift can change who arrives or how inputs relate to answers.",
+    "graph_placement_weight": {
+      "p4_supervised_learning": 1
+    }
+  }
+]

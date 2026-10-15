@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_staying_current_with_research",
+  "depth": "beginner",
+  "title": "Staying Current with AI Research — Start from a Question, Not a Firehose",
+  "key_insight": "Choose a topic and keep a small map of problems, standard methods, evaluation sets, and unresolved claims.",
+  "body": "## Start from a Question, Not a Firehose\n\nA reader opens hundreds of new papers and remembers none. The missing filter is a concrete question.\n\nChoose a topic and keep a small map of problems, standard methods, evaluation sets, and unresolved claims.\n\nRead titles and abstracts to triage, then study the few papers that could change the map. Newer does not automatically mean more important.",
+  "common_mistakes": [
+    "The newest paper is automatically the most reliable.",
+    "A title provides enough evidence for an engineering decision.",
+    "Bookmark count measures research understanding."
+  ],
+  "mini_exercise": "Draw “Start from a Question, Not a Firehose” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI changes quickly, but engineering judgment depends on distinguishing durable evidence from headlines and benchmark noise.",
+  "explain_back_prompt": "Using “Start from a Question, Not a Firehose,” explain Staying Current with AI Research without assuming the listener knows AI engineering."
+}

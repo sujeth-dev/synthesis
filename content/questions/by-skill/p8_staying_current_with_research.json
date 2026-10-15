@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p8_staying_current_with_research_q1",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A focused research question helps filter new work."
+      },
+      {
+        "id": "b",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "c",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "d",
+        "text": "Bookmark count measures research understanding."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A focused research question helps filter new work.",
+    "graph_placement_weight": {
+      "p8_staying_current_with_research": 1
+    }
+  },
+  {
+    "id": "p8_staying_current_with_research_q2",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "b",
+        "text": "A paper claim must be separated from its evidence."
+      },
+      {
+        "id": "c",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "d",
+        "text": "Bookmark count measures research understanding."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A paper claim must be separated from its evidence.",
+    "graph_placement_weight": {
+      "p8_staying_current_with_research": 1
+    }
+  },
+  {
+    "id": "p8_staying_current_with_research_q3",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "b",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "c",
+        "text": "Fair comparison requires matching data, metrics, and budgets."
+      },
+      {
+        "id": "d",
+        "text": "Bookmark count measures research understanding."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Fair comparison requires matching data, metrics, and budgets.",
+    "graph_placement_weight": {
+      "p8_staying_current_with_research": 1
+    }
+  },
+  {
+    "id": "p8_staying_current_with_research_q4",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "b",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "c",
+        "text": "Bookmark count measures research understanding."
+      },
+      {
+        "id": "d",
+        "text": "Citations can reveal foundations, replications, and criticism."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Citations can reveal foundations, replications, and criticism.",
+    "graph_placement_weight": {
+      "p8_staying_current_with_research": 1
+    }
+  },
+  {
+    "id": "p8_staying_current_with_research_q5",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Small reproductions can test decisive parts of an expensive claim."
+      },
+      {
+        "id": "b",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "c",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "d",
+        "text": "Bookmark count measures research understanding."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Small reproductions can test decisive parts of an expensive claim.",
+    "graph_placement_weight": {
+      "p8_staying_current_with_research": 1
+    }
+  },
+  {
+    "id": "p8_staying_current_with_research_q6",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Staying Current with AI Research: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The newest paper is automatically the most reliable."
+      },
+      {
+        "id": "b",
+        "text": "An evidence table supports belief updates across differing studies."
+      },
+      {
+        "id": "c",
+        "text": "A title provides enough evidence for an engineering decision."
+      },
+      {
+        "id": "d",
+        "text": "Bookmark count measures research understanding."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "An evidence table supports belief updates across differing studies.",
+    "graph_placement_weight": {
+      "p8_staying_current_with_research": 1
+    }
+  },
+  {
+    "id": "p8_staying_current_with_research_order1",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Staying Current with AI Research workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "define a focused research question"
+      },
+      {
+        "id": "b",
+        "text": "triage and select relevant papers"
+      },
+      {
+        "id": "c",
+        "text": "extract claims, evidence, and limits"
+      },
+      {
+        "id": "d",
+        "text": "reproduce or compare the decisive evidence"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The defensible order is: define a focused research question → triage and select relevant papers → extract claims, evidence, and limits → reproduce or compare the decisive evidence."
+  },
+  {
+    "id": "p8_staying_current_with_research_fill1",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Staying Current with AI Research decision.",
+    "options": [
+      {
+        "id": "a",
+        "text": "ablation"
+      },
+      {
+        "id": "b",
+        "text": "deployment_key"
+      },
+      {
+        "id": "c",
+        "text": "user_password"
+      },
+      {
+        "id": "d",
+        "text": "random_guess"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "ablation",
+    "explanation_after": "The correct choice is ablation."
+  }
+]

@@ -1,0 +1,219 @@
+[
+  {
+    "id": "p2_clean_q1",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Which table problem is an accidental duplicate?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The same event was imported twice with identical identifying details"
+      },
+      {
+        "id": "b",
+        "text": "One customer legitimately bought twice"
+      },
+      {
+        "id": "c",
+        "text": "Two people share an age"
+      },
+      {
+        "id": "d",
+        "text": "A column contains numbers"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A duplicate repeats the same real record because of collection or import trouble. Two genuine events can look similar without being duplicates."
+  },
+  {
+    "id": "p2_clean_q2",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Why is mixing kilograms and grams in one numeric column dangerous?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The model treats the numbers as one scale and may learn a false pattern"
+      },
+      {
+        "id": "b",
+        "text": "Models cannot read any numbers"
+      },
+      {
+        "id": "c",
+        "text": "Units matter only when printing"
+      },
+      {
+        "id": "d",
+        "text": "It automatically removes every row"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A value of 5 kilograms and 5000 grams describe the same weight but look vastly different. Standardizing units makes the numbers comparable."
+  },
+  {
+    "id": "p2_clean_q3",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "When should an imputer learn its replacement value?",
+    "options": [
+      {
+        "id": "a",
+        "text": "After splitting, from training rows only"
+      },
+      {
+        "id": "b",
+        "text": "From the full table before splitting"
+      },
+      {
+        "id": "c",
+        "text": "From test answers only"
+      },
+      {
+        "id": "d",
+        "text": "After production predictions are returned"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Learning the replacement from all rows lets held-out data influence training. Fit the imputer on training rows and reuse its saved value later."
+  },
+  {
+    "id": "p2_clean_q4",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "A new supplier sends birth years in a column that used to contain ages. Which check catches this best?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An allowed range and unit rule in the data contract"
+      },
+      {
+        "id": "b",
+        "text": "Checking that every value is numeric"
+      },
+      {
+        "id": "c",
+        "text": "Sorting the rows alphabetically"
+      },
+      {
+        "id": "d",
+        "text": "Changing the model name"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Both ages and birth years are numbers, so type checking alone passes them. A range and unit rule describes what the numbers are supposed to mean."
+  },
+  {
+    "id": "p2_clean_q5",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Why might adding a “was missing” flag help a model?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The fact that a value is absent may itself carry useful information"
+      },
+      {
+        "id": "b",
+        "text": "It guarantees every guessed value is correct"
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to inspect missingness"
+      },
+      {
+        "id": "d",
+        "text": "It converts all columns to text"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Sometimes missingness follows a real pattern. The flag lets the model use that pattern separately from the filled numeric value."
+  },
+  {
+    "id": "p2_clean_q6",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "A field is often missing because people with unusually high values avoid answering. Why can filling every blank with the average be misleading?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The missing group is systematically different, so the average hides the pattern and pulls estimates downward"
+      },
+      {
+        "id": "b",
+        "text": "Averages are never numbers"
+      },
+      {
+        "id": "c",
+        "text": "Every blank happened by pure accident"
+      },
+      {
+        "id": "d",
+        "text": "The model will refuse all complete rows"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "The blanks are linked to the hidden value itself. Replacing them with an ordinary average makes that special group look typical and can bias conclusions."
+  },
+  {
+    "id": "p2_clean_order1",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange a leakage-safe preparation flow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "Apply the saved cleaning rules to test rows"
+      },
+      {
+        "id": "b",
+        "text": "Split rows into training and test groups"
+      },
+      {
+        "id": "c",
+        "text": "Fit the cleaning rules on training rows"
+      },
+      {
+        "id": "d",
+        "text": "Train the model on cleaned training rows"
+      }
+    ],
+    "correct_answer": "b,c,d,a",
+    "explanation_after": "Split first, learn cleaning rules from training rows, train on the cleaned training data, and only then apply the saved rules to held-out rows."
+  },
+  {
+    "id": "p2_clean_fill1",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip: `imputer.____(X_train)` should learn replacement values from training rows.",
+    "options": [
+      {
+        "id": "a",
+        "text": "fit"
+      },
+      {
+        "id": "b",
+        "text": "predict"
+      },
+      {
+        "id": "c",
+        "text": "score"
+      },
+      {
+        "id": "d",
+        "text": "delete"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "fit",
+    "explanation_after": "`fit` learns and stores the replacement values. Later, `transform` applies those saved values without learning from held-out rows."
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p4_unsupervised_learning_q1",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Unsupervised Learning: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unsupervised learning works without known answer labels."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Unsupervised learning works without known answer labels.",
+    "graph_placement_weight": {
+      "p4_unsupervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_unsupervised_learning_q2",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Unsupervised Learning: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Clustering groups examples that look similar by chosen features."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Clustering groups examples that look similar by chosen features.",
+    "graph_placement_weight": {
+      "p4_unsupervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_unsupervised_learning_q3",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Unsupervised Learning: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "K-means repeatedly assigns points and moves group centers."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "K-means repeatedly assigns points and moves group centers.",
+    "graph_placement_weight": {
+      "p4_unsupervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_unsupervised_learning_q4",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Unsupervised Learning: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Feature scale can dominate distance and change clusters."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Feature scale can dominate distance and change clusters.",
+    "graph_placement_weight": {
+      "p4_unsupervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_unsupervised_learning_q5",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Unsupervised Learning: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Dimensionality reduction compresses many columns into fewer summary directions."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Dimensionality reduction compresses many columns into fewer summary directions.",
+    "graph_placement_weight": {
+      "p4_unsupervised_learning": 1
+    }
+  },
+  {
+    "id": "p4_unsupervised_learning_q6",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Unsupervised Learning: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Stable and useful groups matter more than treating one clustering score as truth."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Stable and useful groups matter more than treating one clustering score as truth.",
+    "graph_placement_weight": {
+      "p4_unsupervised_learning": 1
+    }
+  }
+]

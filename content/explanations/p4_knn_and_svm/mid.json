@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_knn_and_svm",
+  "depth": "mid",
+  "title": "K-Nearest Neighbors & Support Vector Machines — Choose K and the Margin",
+  "key_insight": "K controls that balance. For an SVM, the margin is the safety gap, and a penalty setting decides how much to bend the rule for misclassified training points.",
+  "body": "## Choose K and the Margin\n\nOne nearest neighbor can copy a noisy label, while too many neighbors can wash away a small local group.\n\nK controls that balance. For an SVM, the margin is the safety gap, and a penalty setting decides how much to bend the rule for misclassified training points.\n\nChoose these settings with validation. KNN stores the examples; an SVM stores the boundary-defining support vectors.",
+  "common_mistakes": [
+    "Using either method before scaling features.",
+    "Choosing K or kernel settings on the test set.",
+    "Assuming KNN training is costly while ignoring its prediction-time search."
+  ],
+  "mini_exercise": "Draw the situation from “Choose K and the Margin” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "These contrasting methods teach how distance, boundaries, and scaling shape classification.",
+  "explain_back_prompt": "Using the “Choose K and the Margin” story, explain K-Nearest Neighbors & Support Vector Machines without assuming the listener knows machine learning."
+}

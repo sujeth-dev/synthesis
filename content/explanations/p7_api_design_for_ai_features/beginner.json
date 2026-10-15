@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_api_design_for_ai_features",
+  "depth": "beginner",
+  "title": "API Design for AI Features — Expose the Job, Not the Vendor",
+  "key_insight": "Design your API around the product job, such as extracting an invoice or drafting a reply. The server can change models behind that contract.",
+  "body": "## Expose the Job, Not the Vendor\n\nA mobile client calls a provider-specific “chat completions” route even though the product feature is invoice extraction. Provider changes leak everywhere.\n\nDesign your API around the product job, such as extracting an invoice or drafting a reply. The server can change models behind that contract.\n\nReturn stable fields and explicit errors. Clients should not parse prose to discover whether the job succeeded.",
+  "common_mistakes": [
+    "Clients should parse arbitrary prose as an API contract.",
+    "A retry should always create another paid job.",
+    "Model changes can never affect API behavior."
+  ],
+  "mini_exercise": "Draw “Expose the Job, Not the Vendor” as three steps and explain each one.",
+  "real_world_usage": "A stable product API hides model churn and gives clients clear states, errors, and versioned behavior.",
+  "explain_back_prompt": "Use “Expose the Job, Not the Vendor” to explain API Design for AI Features plainly."
+}

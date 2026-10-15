@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_loss_functions",
+  "depth": "expert",
+  "title": "Loss Functions — A Loss Shapes the Surface",
+  "key_insight": "A smooth loss provides gradual slopes; a sharp or flat region can make steps unstable or uninformative. Surrogate losses replace a difficult real goal with a trainable approximation.",
+  "body": "## A Loss Shapes the Surface\n\nTwo objectives judge the same predictions differently, so they create different hills and valleys for the optimizer to travel.\n\nA smooth loss provides gradual slopes; a sharp or flat region can make steps unstable or uninformative. Surrogate losses replace a difficult real goal with a trainable approximation.\n\nFor several goals, combine losses only after checking their scales. One large-numbered term can silently drown out every other objective.",
+  "common_mistakes": [
+    "Loss is only a chart and never affects training.",
+    "The largest possible loss always means the best model.",
+    "One loss has the correct meaning for every output type."
+  ],
+  "mini_exercise": "Sketch the situation in “A Loss Shapes the Surface” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Training needs a meaningful numeric objective before it can decide how weights should change.",
+  "explain_back_prompt": "Using the “A Loss Shapes the Surface” situation, explain Loss Functions without assuming the listener knows deep learning."
+}

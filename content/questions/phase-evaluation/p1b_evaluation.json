@@ -1,0 +1,422 @@
+[
+  {
+    "id": "p1_eval_op_remember",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_operators",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "stem": "What does the `%` operator do in Python?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Multiplies two numbers"
+      },
+      {
+        "id": "b",
+        "text": "Returns the remainder after division"
+      },
+      {
+        "id": "c",
+        "text": "Converts a number to a percentage"
+      },
+      {
+        "id": "d",
+        "text": "Rounds a number down"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "`%` is the modulo operator — it returns the remainder of a division. `10 % 3` is 1, because 10 divided by 3 leaves a remainder of 1."
+  },
+  {
+    "id": "p1_eval_dt_understand",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_data_types",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "stem": "Why does Python treat `\"5\"` (a string) and `5` (an integer) as different things, even though they 'look' related?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Because a string is text made of characters, while an integer is a number you can do arithmetic on — they're stored and processed completely differently"
+      },
+      {
+        "id": "b",
+        "text": "Because Python has a bug that hasn't been fixed"
+      },
+      {
+        "id": "c",
+        "text": "There is no real difference; they're interchangeable"
+      },
+      {
+        "id": "d",
+        "text": "Because strings are always faster to compute with"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "`\"5\"` is a sequence of characters (just like `\"hello\"`), while `5` is a number the CPU can add, subtract, or compare mathematically. `\"5\" + \"5\"` concatenates to `\"55\"`, while `5 + 5` computes `10` — same-looking symbols, different underlying operations."
+  },
+  {
+    "id": "p1_eval_var_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_variables",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "stem": "What does this code print?\n\na = 4\nb = 9\na = b\nb = a\nprint(a, b)",
+    "options": [
+      {
+        "id": "a",
+        "text": "4 9"
+      },
+      {
+        "id": "b",
+        "text": "9 9"
+      },
+      {
+        "id": "c",
+        "text": "9 4"
+      },
+      {
+        "id": "d",
+        "text": "4 4"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "a = b sets a to 9 (a is now 9, b is still 9). Then b = a sets b to a's current value, which is 9. So both end up 9 — this is why swapping needs a temporary variable or tuple unpacking (a, b = b, a), not two sequential assignments."
+  },
+  {
+    "id": "p1_eval_cond_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_conditionals",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "stem": "What does this code print?\n\ntemp = 30\nif temp > 35:\n    print('Hot')\nelif temp > 25:\n    print('Warm')\nelif temp > 15:\n    print('Cool')\nelse:\n    print('Cold')",
+    "options": [
+      {
+        "id": "a",
+        "text": "Hot"
+      },
+      {
+        "id": "b",
+        "text": "Warm"
+      },
+      {
+        "id": "c",
+        "text": "Cool"
+      },
+      {
+        "id": "d",
+        "text": "Cold"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "temp = 30. Is 30 > 35? No. Is 30 > 25? Yes — print 'Warm' and stop checking the rest. Python evaluates conditions top to bottom and runs only the first true branch."
+  },
+  {
+    "id": "p1_eval_str_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_strings",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "stem": "Given `word = \"python\"`, what does `word[1:4]` return?",
+    "options": [
+      {
+        "id": "a",
+        "text": "\"pyt\""
+      },
+      {
+        "id": "b",
+        "text": "\"yth\""
+      },
+      {
+        "id": "c",
+        "text": "\"ytho\""
+      },
+      {
+        "id": "d",
+        "text": "\"ython\""
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Slicing `[1:4]` starts at index 1 (the second character, 'y') and goes up to but not including index 4. Indices: p=0, y=1, t=2, h=3, o=4. So `word[1:4]` = 'y','t','h' = \"yth\"."
+  },
+  {
+    "id": "p1_eval_loop_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_loops",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "stem": "How many times does 'here' print?\n\nfor i in range(2, 10, 3):\n    print('here')",
+    "options": [
+      {
+        "id": "a",
+        "text": "2 times"
+      },
+      {
+        "id": "b",
+        "text": "3 times"
+      },
+      {
+        "id": "c",
+        "text": "4 times"
+      },
+      {
+        "id": "d",
+        "text": "8 times"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "range(2, 10, 3) generates 2, 5, 8 — starting at 2, stepping by 3, stopping before 10 (11 would be next, which is >= 10, so it stops at 8). That's 3 values, so the loop body runs 3 times."
+  },
+  {
+    "id": "p1_eval_fn_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_functions",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "stem": "Why does this function always return 0, regardless of what's passed in?\n\ndef add_five(n):\n    n = n + 5\n    return 0",
+    "options": [
+      {
+        "id": "a",
+        "text": "Because Python functions can only return one fixed value"
+      },
+      {
+        "id": "b",
+        "text": "Because the function computes n + 5 but never uses that result — it explicitly returns the literal value 0 instead"
+      },
+      {
+        "id": "c",
+        "text": "Because `n = n + 5` causes an error that gets silently caught"
+      },
+      {
+        "id": "d",
+        "text": "It doesn't always return 0 — this is a trick question"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The line `n = n + 5` computes a new value and stores it in the local variable n, but that computation is thrown away the moment `return 0` runs — the return statement is what actually determines the function's output, and here it's hardcoded to 0 regardless of any prior computation. This is a common bug: computing something and forgetting to return it."
+  },
+  {
+    "id": "p1_eval_dbg_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_debugging",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "stem": "This code should print the average of the list, but crashes. What's the bug?\n\nscores = []\ntotal = sum(scores)\naverage = total / len(scores)\nprint(average)",
+    "options": [
+      {
+        "id": "a",
+        "text": "sum() doesn't work on empty lists"
+      },
+      {
+        "id": "b",
+        "text": "len(scores) is 0 for an empty list, causing a division-by-zero error"
+      },
+      {
+        "id": "c",
+        "text": "average should be spelled avg"
+      },
+      {
+        "id": "d",
+        "text": "Python lists cannot be empty"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "sum([]) is perfectly valid and returns 0 — the actual crash is total / len(scores), where len(scores) is 0 for an empty list, causing ZeroDivisionError. Tracing which line actually executes vs. which line looks suspicious is the key debugging skill here."
+  },
+  {
+    "id": "p1_eval_code_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_how_code_works",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "stem": "A team is choosing a language to write a quick one-off data-cleaning script they'll run once and never touch again. Which tradeoff matters most for this decision, and which kind of language fits better?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Raw execution speed matters most — a compiled language is better"
+      },
+      {
+        "id": "b",
+        "text": "Development speed matters most here (write it once, run it once) over raw execution speed — an interpreted language like Python, which skips the separate compile step, fits better"
+      },
+      {
+        "id": "c",
+        "text": "It makes no difference which type of language is used for any task"
+      },
+      {
+        "id": "d",
+        "text": "Compiled languages are always strictly better for every use case"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Compiled languages trade slower development (you must compile before running) for faster execution — valuable when a program runs millions of times. For a script run once, that upfront compile cost isn't worth paying; an interpreted language's faster write-and-run cycle wins. Neither type of language is universally 'better' — it depends on how the tradeoff plays out for the specific task."
+  },
+  {
+    "id": "p1_eval_scope_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_scope",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "stem": "A function needs to keep a running total across many calls. One option is a global variable the function modifies each time; another is passing the current total in and returning the new total out. Which is generally the better design, and why?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The global variable, because it's less code to type"
+      },
+      {
+        "id": "b",
+        "text": "Passing the total in/out, because it makes the function's behavior fully visible from its inputs and outputs, rather than depending on hidden external state that's easy to lose track of or accidentally modify elsewhere"
+      },
+      {
+        "id": "c",
+        "text": "Both are exactly equivalent in every way"
+      },
+      {
+        "id": "d",
+        "text": "The global variable, because global variables are always faster"
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A function that depends on and mutates a global variable is harder to reason about, test, and reuse — its behavior isn't fully determined by its arguments. Passing state explicitly in and out keeps the function self-contained and predictable, which is why relying on globals is generally considered poor practice once code grows beyond a quick script."
+  },
+  {
+    "id": "p1_eval_py_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_python_intro",
+    "bloom_level": "create",
+    "format": "mcq",
+    "stem": "You want to write a Python program that asks the user for their name and greets them by name. Which sequence of code correctly accomplishes this?",
+    "options": [
+      {
+        "id": "a",
+        "text": "name = input(\"What's your name? \")\nprint(\"Hello, \" + name + \"!\")"
+      },
+      {
+        "id": "b",
+        "text": "name = print(\"What's your name? \")\ninput(\"Hello, \" + name + \"!\")"
+      },
+      {
+        "id": "c",
+        "text": "input(name = \"What's your name?\")\nname.print(\"Hello!\")"
+      },
+      {
+        "id": "d",
+        "text": "name == input(\"What's your name? \")\nprint == \"Hello, \" + name"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "input() displays a prompt and returns what the user types, so it must be captured into a variable (name = input(...)). Then print() outputs a greeting built from that variable. Option (a) is the only one that correctly sequences 'ask, store, then use' — the others swap input/print's roles or misuse == for assignment."
+  },
+  {
+    "id": "p1_eval_list_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_lists_intro",
+    "bloom_level": "create",
+    "format": "mcq",
+    "stem": "You have a list of temperatures in Celsius and need to build a new list containing only the ones above freezing (0). Which code correctly builds that new list?",
+    "options": [
+      {
+        "id": "a",
+        "text": "above_freezing = []\nfor t in temps:\n    if t > 0:\n        above_freezing.append(t)"
+      },
+      {
+        "id": "b",
+        "text": "above_freezing = temps\nabove_freezing.remove(t > 0)"
+      },
+      {
+        "id": "c",
+        "text": "above_freezing = temps[0]"
+      },
+      {
+        "id": "d",
+        "text": "for t in temps:\n    above_freezing = t if t > 0"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Building a filtered list from scratch requires: start with an empty list, loop through the source list, test each item, and append the ones that pass the test. Option (a) does exactly this. The others either misuse .remove(), grab a single element (temps[0]), or write invalid syntax."
+  },
+  {
+    "id": "p1_eval_mod_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_modules_imports",
+    "bloom_level": "create",
+    "format": "mcq",
+    "stem": "You're writing a script that needs to generate a random number and also work with dates. Which import setup correctly sets you up to use both?",
+    "options": [
+      {
+        "id": "a",
+        "text": "import random\nimport datetime"
+      },
+      {
+        "id": "b",
+        "text": "include random, datetime"
+      },
+      {
+        "id": "c",
+        "text": "from python import random, datetime"
+      },
+      {
+        "id": "d",
+        "text": "random.import()\ndatetime.import()"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Python's import statement brings in a whole module by name — `import random` then lets you call `random.randint(...)`, and `import datetime` lets you use `datetime.date.today()`, etc. `include` isn't Python syntax, and modules don't call `.import()` on themselves."
+  },
+  {
+    "id": "p1b_eval_py_remember",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_python_intro",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "stem": "Which word asks Python to display a value?",
+    "options": [
+      {
+        "id": "a",
+        "text": "print"
+      },
+      {
+        "id": "b",
+        "text": "while"
+      },
+      {
+        "id": "c",
+        "text": "class"
+      },
+      {
+        "id": "d",
+        "text": "return"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "`print` sends a value to the program output so a person can see it."
+  },
+  {
+    "id": "p1b_eval_code_understand",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_how_code_works",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "stem": "Why must code state steps precisely?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The computer follows the written instructions rather than guessing the intended goal"
+      },
+      {
+        "id": "b",
+        "text": "The computer already knows every goal"
+      },
+      {
+        "id": "c",
+        "text": "Precise code always runs without hardware"
+      },
+      {
+        "id": "d",
+        "text": "Code is only decoration"
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A computer is literal: it performs the supplied instructions, including mistakes or missing steps."
+  }
+]

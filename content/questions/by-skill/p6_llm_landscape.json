@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_llm_landscape_q1",
+    "skill_id": "p6_llm_landscape",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "The LLM Landscape: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LLMs vary in capability, context, modality, cost, and access."
+      },
+      {
+        "id": "b",
+        "text": "One leaderboard winner is best for every application."
+      },
+      {
+        "id": "c",
+        "text": "A large context window guarantees perfect recall."
+      },
+      {
+        "id": "d",
+        "text": "Open weights always mean unrestricted use without a license."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "LLMs vary in capability, context, modality, cost, and access.",
+    "graph_placement_weight": {
+      "p6_llm_landscape": 1
+    }
+  },
+  {
+    "id": "p6_llm_landscape_q2",
+    "skill_id": "p6_llm_landscape",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "The LLM Landscape: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One leaderboard winner is best for every application."
+      },
+      {
+        "id": "b",
+        "text": "Model choice should begin from workload constraints."
+      },
+      {
+        "id": "c",
+        "text": "A large context window guarantees perfect recall."
+      },
+      {
+        "id": "d",
+        "text": "Open weights always mean unrestricted use without a license."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Model choice should begin from workload constraints.",
+    "graph_placement_weight": {
+      "p6_llm_landscape": 1
+    }
+  },
+  {
+    "id": "p6_llm_landscape_q3",
+    "skill_id": "p6_llm_landscape",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "The LLM Landscape: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One leaderboard winner is best for every application."
+      },
+      {
+        "id": "b",
+        "text": "A large context window guarantees perfect recall."
+      },
+      {
+        "id": "c",
+        "text": "Open weights and hosted APIs create different operating responsibilities."
+      },
+      {
+        "id": "d",
+        "text": "Open weights always mean unrestricted use without a license."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Open weights and hosted APIs create different operating responsibilities.",
+    "graph_placement_weight": {
+      "p6_llm_landscape": 1
+    }
+  },
+  {
+    "id": "p6_llm_landscape_q4",
+    "skill_id": "p6_llm_landscape",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "The LLM Landscape: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One leaderboard winner is best for every application."
+      },
+      {
+        "id": "b",
+        "text": "A large context window guarantees perfect recall."
+      },
+      {
+        "id": "c",
+        "text": "Open weights always mean unrestricted use without a license."
+      },
+      {
+        "id": "d",
+        "text": "A context limit does not guarantee equal use of every position."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "A context limit does not guarantee equal use of every position.",
+    "graph_placement_weight": {
+      "p6_llm_landscape": 1
+    }
+  },
+  {
+    "id": "p6_llm_landscape_q5",
+    "skill_id": "p6_llm_landscape",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "The LLM Landscape: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parameter count alone does not determine latency."
+      },
+      {
+        "id": "b",
+        "text": "One leaderboard winner is best for every application."
+      },
+      {
+        "id": "c",
+        "text": "A large context window guarantees perfect recall."
+      },
+      {
+        "id": "d",
+        "text": "Open weights always mean unrestricted use without a license."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Parameter count alone does not determine latency.",
+    "graph_placement_weight": {
+      "p6_llm_landscape": 1
+    }
+  },
+  {
+    "id": "p6_llm_landscape_q6",
+    "skill_id": "p6_llm_landscape",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "The LLM Landscape: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One leaderboard winner is best for every application."
+      },
+      {
+        "id": "b",
+        "text": "Routing can send different requests to different models."
+      },
+      {
+        "id": "c",
+        "text": "A large context window guarantees perfect recall."
+      },
+      {
+        "id": "d",
+        "text": "Open weights always mean unrestricted use without a license."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Routing can send different requests to different models.",
+    "graph_placement_weight": {
+      "p6_llm_landscape": 1
+    }
+  }
+]

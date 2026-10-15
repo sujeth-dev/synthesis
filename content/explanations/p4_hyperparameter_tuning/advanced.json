@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_hyperparameter_tuning",
+  "depth": "advanced",
+  "title": "Hyperparameter Tuning — Stop Weak Trials Early",
+  "key_insight": "Successive halving starts many trials cheaply and gives more resources to promising ones. Bayesian optimization uses earlier results to choose informative next trials.",
+  "body": "## Stop Weak Trials Early\n\nSome settings look hopeless after a small amount of training, while others deserve more time. Giving every trial the full budget wastes work.\n\nSuccessive halving starts many trials cheaply and gives more resources to promising ones. Bayesian optimization uses earlier results to choose informative next trials.\n\nParallel trials compete for memory and data access. Treat compute budget, wall time, and reproducibility as part of the search design.",
+  "common_mistakes": [
+    "Calling learned weights hyperparameters.",
+    "Tuning on the final test set.",
+    "Reporting only the winning trial and hiding instability around it."
+  ],
+  "mini_exercise": "Draw the situation from “Stop Weak Trials Early” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Good settings can matter as much as the chosen algorithm, but careless search overfits validation data.",
+  "explain_back_prompt": "Using the “Stop Weak Trials Early” story, explain Hyperparameter Tuning without assuming the listener knows machine learning."
+}

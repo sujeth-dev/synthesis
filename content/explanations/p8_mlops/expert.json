@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_mlops",
+  "depth": "expert",
+  "title": "MLOps — Preserve Lineage Across Recomputed Data",
+  "key_insight": "Lineage records source versions, transformation code, parameters, and timestamps so derived data can be reconstructed or explained. Immutable snapshots protect past evidence.",
+  "body": "## Preserve Lineage Across Recomputed Data\n\nA feature table is rebuilt after an upstream correction. The same query now returns different training rows even though its name is unchanged.\n\nLineage records source versions, transformation code, parameters, and timestamps so derived data can be reconstructed or explained. Immutable snapshots protect past evidence.\n\nGovernance adds approvals, access, retention, and audit. The goal is not paperwork; it is making high-impact model changes accountable and reversible.",
+  "common_mistakes": [
+    "MLOps means copying the newest model file into production.",
+    "Scheduled retraining makes data validation unnecessary.",
+    "A model name alone proves which data produced it."
+  ],
+  "mini_exercise": "Draw “Preserve Lineage Across Recomputed Data” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Models and their data change, so production quality depends on lifecycle controls beyond ordinary code deployment.",
+  "explain_back_prompt": "Using “Preserve Lineage Across Recomputed Data,” explain MLOps without assuming the listener knows AI engineering."
+}

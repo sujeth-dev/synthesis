@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_prompt_engineering",
+  "depth": "expert",
+  "title": "Prompt Engineering — Prompts Compete for Limited Attention",
+  "key_insight": "Put stable high-priority rules in their proper message role, trim irrelevant history, and order context so critical evidence is easy to locate.",
+  "body": "## Prompts Compete for Limited Attention\n\nSystem rules, conversation history, retrieved text, examples, and the user request all occupy the same context and can conflict.\n\nPut stable high-priority rules in their proper message role, trim irrelevant history, and order context so critical evidence is easy to locate.\n\nPrompt optimization can search templates automatically, but it can overfit the evaluation set. Keep a final holdout and inspect whether improvements reflect real behavior rather than formatting tricks.",
+  "common_mistakes": [
+    "Longer prompts are always more reliable.",
+    "Requested JSON is guaranteed to parse without checks.",
+    "One successful chat proves a prompt cannot regress."
+  ],
+  "mini_exercise": "Draw “Prompts Compete for Limited Attention” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Clear prompts improve reliability before more expensive retrieval, tuning, or model changes are attempted.",
+  "explain_back_prompt": "Using “Prompts Compete for Limited Attention,” explain Prompt Engineering without assuming the listener knows modern AI."
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_pytorch_intro",
+  "depth": "mid",
+  "title": "PyTorch Introduction — Put Layers Inside a Module",
+  "key_insight": "A class derived from `nn.Module` registers its layers and parameters. Its `forward` method describes how an input travels through them.",
+  "body": "## Put Layers Inside a Module\n\nA model has several layers and learned weights that must be saved, moved, and called together. Loose variables become hard to manage.\n\nA class derived from `nn.Module` registers its layers and parameters. Its `forward` method describes how an input travels through them.\n\nCalling the model runs that forward route. The module can then switch modes, move devices, and expose all trainable parameters to an optimizer.",
+  "common_mistakes": [
+    "A tensor can contain only one number.",
+    "An nn.Module prevents parameters from being trained.",
+    "Autograd requires every derivative to be entered by hand."
+  ],
+  "mini_exercise": "Sketch the situation in “Put Layers Inside a Module” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "PyTorch turns the phase’s equations into inspectable, trainable programs.",
+  "explain_back_prompt": "Using the “Put Layers Inside a Module” situation, explain PyTorch Introduction without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Build a two-layer PyTorch module",
+    "context": "Turn the PyTorch Introduction idea into one small, inspectable workflow.",
+    "steps": [
+      "Subclass nn.Module.",
+      "Create two linear layers in the constructor.",
+      "Connect them with ReLU in forward.",
+      "Run a small batch and print output shape."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

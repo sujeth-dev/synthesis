@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_unsupervised_learning",
+  "depth": "mid",
+  "title": "Unsupervised Learning — Move the Group Centers",
+  "key_insight": "That procedure is K-means clustering. After assignment, each center moves to the average position of its group, and the cycle repeats.",
+  "body": "## Move the Group Centers\n\nDots on a map seem to form neighborhoods, but nobody marked the borders. Start with a few centers and repeatedly assign each dot to its nearest center.\n\nThat procedure is K-means clustering. After assignment, each center moves to the average position of its group, and the cycle repeats.\n\nScaling matters because a large-numbered feature can dominate distance. The chosen number of groups also changes the story you find.",
+  "common_mistakes": [
+    "Calling clusters true labels without inspecting them.",
+    "Using distance before putting features on comparable scales.",
+    "Choosing the number of groups only because one chart looks attractive."
+  ],
+  "mini_exercise": "Draw the situation from “Move the Group Centers” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Many datasets have no labels, yet their groups, unusual cases, and compressed structure are valuable.",
+  "explain_back_prompt": "Using the “Move the Group Centers” story, explain Unsupervised Learning without assuming the listener knows machine learning."
+}

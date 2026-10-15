@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_ethics_bias",
+  "depth": "expert",
+  "title": "AI Ethics & Bias — Turn Values into Governed Decisions",
+  "key_insight": "Translate values into measurable constraints, documented tradeoffs, review authority, and remedy. An impact assessment records intended use, affected groups, evidence, and open risks.",
+  "body": "## Turn Values into Governed Decisions\n\nA team writes “be fair” but gives no owner, threshold, appeal path, or release gate. The value cannot guide action.\n\nTranslate values into measurable constraints, documented tradeoffs, review authority, and remedy. An impact assessment records intended use, affected groups, evidence, and open risks.\n\nParticipation matters because designers cannot infer every lived cost. Governance should give affected people meaningful input and a route to correction.",
+  "common_mistakes": [
+    "High average accuracy proves equal treatment.",
+    "Historical labels are always neutral truth.",
+    "Writing a broad value statement completes governance."
+  ],
+  "mini_exercise": "Draw “Turn Values into Governed Decisions” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "AI systems affect people through data collection, ranking, access, and automated decisions.",
+  "explain_back_prompt": "Using “Turn Values into Governed Decisions,” explain AI Ethics & Bias without assuming the listener knows AI engineering."
+}

@@ -1,0 +1,28 @@
+{
+  "skill_id": "p6_rag_systems",
+  "depth": "advanced",
+  "title": "RAG Systems — Retrieve Broadly, Then Rerank",
+  "key_insight": "Hybrid search combines vector and keyword signals. A reranker then scores a smaller candidate set with deeper query-document comparison.",
+  "body": "## Retrieve Broadly, Then Rerank\n\nThe nearest embeddings are topically related but do not answer the exact question. Semantic similarity alone is too broad.\n\nHybrid search combines vector and keyword signals. A reranker then scores a smaller candidate set with deeper query-document comparison.\n\nEvaluate retrieval separately with known relevant passages. If the source never reaches the prompt, changing generation instructions cannot fix the answer.",
+  "common_mistakes": [
+    "RAG permanently writes every document into model weights.",
+    "Retrieval guarantees the final answer is correct.",
+    "Retrieved documents should override system instructions."
+  ],
+  "mini_exercise": "Draw “Retrieve Broadly, Then Rerank” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RAG connects models to current or private knowledge without retraining the model for every document change.",
+  "explain_back_prompt": "Using “Retrieve Broadly, Then Rerank,” explain RAG Systems without assuming the listener knows modern AI.",
+  "build_task": {
+    "title": "Build a tiny grounded-answer flow",
+    "context": "Turn RAG Systems into one small, inspectable workflow.",
+    "steps": [
+      "Create five short source passages.",
+      "Retrieve passages for three questions.",
+      "Build a prompt containing only selected evidence.",
+      "Print answers with source identifiers and an abstention case."
+    ],
+    "expected_output": "Printed inputs, intermediate results, and outputs that make each step visible.",
+    "hint": "Keep the example small and validate each boundary before continuing.",
+    "starter_code": "# Complete one step at a time.\n# Print each result before moving on."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_explainability_and_interpretability",
+  "depth": "beginner",
+  "title": "Explainability & Interpretability — Ask Why the Model Chose This",
+  "key_insight": "Explainability methods provide evidence about inputs, examples, or internal behavior that influenced an output.",
+  "body": "## Ask Why the Model Chose This\n\nA loan applicant receives a rejection with no usable reason. A prediction without context cannot be checked or challenged.\n\nExplainability methods provide evidence about inputs, examples, or internal behavior that influenced an output.\n\nAn explanation is a model of the model, not automatic truth. Pair it with performance checks and a real appeal path.",
+  "common_mistakes": [
+    "A colorful heatmap is always faithful.",
+    "One local explanation describes all global behavior.",
+    "Explainability removes the need for appeals."
+  ],
+  "mini_exercise": "Draw “Ask Why the Model Chose This” as three steps and explain each one.",
+  "real_world_usage": "Explanations can help people inspect model behavior, but they must be tested rather than mistaken for proof.",
+  "explain_back_prompt": "Use “Ask Why the Model Chose This” to explain Explainability & Interpretability plainly."
+}

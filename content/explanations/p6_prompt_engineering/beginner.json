@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_prompt_engineering",
+  "depth": "beginner",
+  "title": "Prompt Engineering — Turn a Vague Request into a Work Order",
+  "key_insight": "A good prompt states the task, supplies relevant context, names constraints, and describes the expected output.",
+  "body": "## Turn a Vague Request into a Work Order\n\n“Summarize this” produces the wrong length and audience. The model was never told what a useful result should look like.\n\nA good prompt states the task, supplies relevant context, names constraints, and describes the expected output.\n\nSeparate instructions from quoted data with clear labels. The model should know which text to follow and which text merely to process.",
+  "common_mistakes": [
+    "Longer prompts are always more reliable.",
+    "Requested JSON is guaranteed to parse without checks.",
+    "One successful chat proves a prompt cannot regress."
+  ],
+  "mini_exercise": "Draw “Turn a Vague Request into a Work Order” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Clear prompts improve reliability before more expensive retrieval, tuning, or model changes are attempted.",
+  "explain_back_prompt": "Using “Turn a Vague Request into a Work Order,” explain Prompt Engineering without assuming the listener knows modern AI."
+}

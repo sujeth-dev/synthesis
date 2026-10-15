@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_model_selection_tradeoffs_q1",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Model Selection Tradeoffs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Model choice should use representative workload tests."
+      },
+      {
+        "id": "b",
+        "text": "Parameter count alone selects the best deployment."
+      },
+      {
+        "id": "c",
+        "text": "Hosted and local models have identical privacy responsibilities."
+      },
+      {
+        "id": "d",
+        "text": "A theoretical speedup guarantees lower production tail latency."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Model choice should use representative workload tests.",
+    "graph_placement_weight": {
+      "p7_model_selection_tradeoffs": 1
+    }
+  },
+  {
+    "id": "p7_model_selection_tradeoffs_q2",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Model Selection Tradeoffs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parameter count alone selects the best deployment."
+      },
+      {
+        "id": "b",
+        "text": "The smallest model meeting quality can reduce cost."
+      },
+      {
+        "id": "c",
+        "text": "Hosted and local models have identical privacy responsibilities."
+      },
+      {
+        "id": "d",
+        "text": "A theoretical speedup guarantees lower production tail latency."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "The smallest model meeting quality can reduce cost.",
+    "graph_placement_weight": {
+      "p7_model_selection_tradeoffs": 1
+    }
+  },
+  {
+    "id": "p7_model_selection_tradeoffs_q3",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Model Selection Tradeoffs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parameter count alone selects the best deployment."
+      },
+      {
+        "id": "b",
+        "text": "Hosted and local models have identical privacy responsibilities."
+      },
+      {
+        "id": "c",
+        "text": "Local and hosted models create different control and operations tradeoffs."
+      },
+      {
+        "id": "d",
+        "text": "A theoretical speedup guarantees lower production tail latency."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Local and hosted models create different control and operations tradeoffs.",
+    "graph_placement_weight": {
+      "p7_model_selection_tradeoffs": 1
+    }
+  },
+  {
+    "id": "p7_model_selection_tradeoffs_q4",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Model Selection Tradeoffs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parameter count alone selects the best deployment."
+      },
+      {
+        "id": "b",
+        "text": "Hosted and local models have identical privacy responsibilities."
+      },
+      {
+        "id": "c",
+        "text": "A theoretical speedup guarantees lower production tail latency."
+      },
+      {
+        "id": "d",
+        "text": "Licensing and data retention affect selection."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Licensing and data retention affect selection.",
+    "graph_placement_weight": {
+      "p7_model_selection_tradeoffs": 1
+    }
+  },
+  {
+    "id": "p7_model_selection_tradeoffs_q5",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Model Selection Tradeoffs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Quantization must be benchmarked on target hardware."
+      },
+      {
+        "id": "b",
+        "text": "Parameter count alone selects the best deployment."
+      },
+      {
+        "id": "c",
+        "text": "Hosted and local models have identical privacy responsibilities."
+      },
+      {
+        "id": "d",
+        "text": "A theoretical speedup guarantees lower production tail latency."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Quantization must be benchmarked on target hardware.",
+    "graph_placement_weight": {
+      "p7_model_selection_tradeoffs": 1
+    }
+  },
+  {
+    "id": "p7_model_selection_tradeoffs_q6",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Model Selection Tradeoffs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parameter count alone selects the best deployment."
+      },
+      {
+        "id": "b",
+        "text": "A reusable evaluation suite allows model choices to be revisited."
+      },
+      {
+        "id": "c",
+        "text": "Hosted and local models have identical privacy responsibilities."
+      },
+      {
+        "id": "d",
+        "text": "A theoretical speedup guarantees lower production tail latency."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A reusable evaluation suite allows model choices to be revisited.",
+    "graph_placement_weight": {
+      "p7_model_selection_tradeoffs": 1
+    }
+  }
+]

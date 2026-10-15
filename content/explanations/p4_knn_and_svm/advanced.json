@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_knn_and_svm",
+  "depth": "advanced",
+  "title": "K-Nearest Neighbors & Support Vector Machines — Bend the Fence Without Drawing New Features",
+  "key_insight": "This shortcut is the kernel trick. A radial kernel can create curved boundaries, but its width and penalty settings need careful scaling and tuning.",
+  "body": "## Bend the Fence Without Drawing New Features\n\nTwo groups form rings, so no straight fence separates them. Comparing pairs of examples can act as if the data were placed in a curved feature space.\n\nThis shortcut is the kernel trick. A radial kernel can create curved boundaries, but its width and penalty settings need careful scaling and tuning.\n\nKNN prediction slows as stored data grows, while kernel SVM training can become expensive. Approximation or a different model may be better at large scale.",
+  "common_mistakes": [
+    "Using either method before scaling features.",
+    "Choosing K or kernel settings on the test set.",
+    "Assuming KNN training is costly while ignoring its prediction-time search."
+  ],
+  "mini_exercise": "Draw the situation from “Bend the Fence Without Drawing New Features” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "These contrasting methods teach how distance, boundaries, and scaling shape classification.",
+  "explain_back_prompt": "Using the “Bend the Fence Without Drawing New Features” story, explain K-Nearest Neighbors & Support Vector Machines without assuming the listener knows machine learning."
+}

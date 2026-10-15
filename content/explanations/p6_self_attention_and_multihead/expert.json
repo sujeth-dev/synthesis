@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_self_attention_and_multihead",
+  "depth": "expert",
+  "title": "Self-Attention & Multiple Heads — Heads Share Capacity, Not Necessarily Work Evenly",
+  "key_insight": "Grouped-query attention shares key and value heads across several query heads. It reduces the key-value cache used during generation while retaining many query views.",
+  "body": "## Heads Share Capacity, Not Necessarily Work Evenly\n\nSome heads learn sharp reusable patterns; others remain diffuse or redundant. More heads do not guarantee more independent reasoning.\n\nGrouped-query attention shares key and value heads across several query heads. It reduces the key-value cache used during generation while retaining many query views.\n\nHead pruning and interpretability plots are evidence tools, not proof of a complete explanation. Test the output change when a head is removed before assigning it a role.",
+  "common_mistakes": [
+    "Every attention head is manually programmed with a grammar rule.",
+    "Self-attention compares a sequence only with an unrelated database.",
+    "Causal language models should train by looking at future answers."
+  ],
+  "mini_exercise": "Draw “Heads Share Capacity, Not Necessarily Work Evenly” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This is the working mechanism that turns attention intuition into transformer representations.",
+  "explain_back_prompt": "Using “Heads Share Capacity, Not Necessarily Work Evenly,” explain Self-Attention & Multiple Heads without assuming the listener knows modern AI."
+}

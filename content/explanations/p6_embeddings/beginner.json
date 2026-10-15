@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_embeddings",
+  "depth": "beginner",
+  "title": "Embeddings — Put Meanings on a Map",
+  "key_insight": "An embedding turns an item into a list of numbers. Similar items are trained to land near one another in that number-space.",
+  "body": "## Put Meanings on a Map\n\nA search for “puppy” should find a note about “dogs” even when the exact word never appears. Letter matching alone misses the relationship.\n\nAn embedding turns an item into a list of numbers. Similar items are trained to land near one another in that number-space.\n\nDistance is useful only for the purpose the embedding learned. Nearby does not mean identical or true in every sense.",
+  "common_mistakes": [
+    "An embedding is always a readable paragraph.",
+    "Vector closeness proves two statements are factually true.",
+    "Every similarity metric ranks all vectors identically."
+  ],
+  "mini_exercise": "Draw “Put Meanings on a Map” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Embeddings connect text, images, and users to search, recommendation, retrieval, and neural computation.",
+  "explain_back_prompt": "Using “Put Meanings on a Map,” explain Embeddings without assuming the listener knows modern AI."
+}

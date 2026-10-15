@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_safety_guardrails",
+  "depth": "expert",
+  "title": "Safety Guardrails — Tune Thresholds by Expected Harm",
+  "key_insight": "Calibrate scores on representative data and choose separate thresholds for allow, review, and block. Monitor false positives across groups and languages.",
+  "body": "## Tune Thresholds by Expected Harm\n\nA classifier score of 0.7 has no universal meaning. The right action depends on error costs and what happens next.\n\nCalibrate scores on representative data and choose separate thresholds for allow, review, and block. Monitor false positives across groups and languages.\n\nWhen consequences are high, use conservative actions that remain reversible. Safety metrics should include both prevented harm and denied legitimate use.",
+  "common_mistakes": [
+    "One prompt instruction is a complete safety system.",
+    "Blocking every uncertain request has no cost.",
+    "Tool permissions are unnecessary when a filter exists."
+  ],
+  "mini_exercise": "Draw “Tune Thresholds by Expected Harm” as three steps and explain each one.",
+  "real_world_usage": "Layered guardrails reduce harmful inputs, outputs, and actions while preserving legitimate use and escalation.",
+  "explain_back_prompt": "Use “Tune Thresholds by Expected Harm” to explain Safety Guardrails plainly."
+}

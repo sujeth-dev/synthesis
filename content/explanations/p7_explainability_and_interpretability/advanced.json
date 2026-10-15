@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_explainability_and_interpretability",
+  "depth": "advanced",
+  "title": "Explainability & Interpretability — Test Whether the Explanation Is Faithful",
+  "key_insight": "Sanity tests change inputs or model components and check whether the explanation responds. Counterfactual tests ask what feasible change would alter the outcome.",
+  "body": "## Test Whether the Explanation Is Faithful\n\nA heatmap looks convincing even after model weights are randomized. Its visual appeal did not prove connection to the prediction.\n\nSanity tests change inputs or model components and check whether the explanation responds. Counterfactual tests ask what feasible change would alter the outcome.\n\nAvoid suggesting impossible or harmful changes. Explanations for people must also be understandable and actionable for that audience.",
+  "common_mistakes": [
+    "A colorful heatmap is always faithful.",
+    "One local explanation describes all global behavior.",
+    "Explainability removes the need for appeals."
+  ],
+  "mini_exercise": "Draw “Test Whether the Explanation Is Faithful” as three steps and explain each one.",
+  "real_world_usage": "Explanations can help people inspect model behavior, but they must be tested rather than mistaken for proof.",
+  "explain_back_prompt": "Use “Test Whether the Explanation Is Faithful” to explain Explainability & Interpretability plainly."
+}

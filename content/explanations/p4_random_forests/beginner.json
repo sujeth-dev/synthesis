@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_random_forests",
+  "depth": "beginner",
+  "title": "Random Forests — Ask a Crowd of Trees",
+  "key_insight": "A random forest is that crowd. Each tree trains on a slightly different sample and considers a random selection of features.",
+  "body": "## Ask a Crowd of Trees\n\nOne tree makes a shaky decision from one path. Ask many different trees and let them vote, and one odd path matters less.\n\nA random forest is that crowd. Each tree trains on a slightly different sample and considers a random selection of features.\n\nThe variation makes their mistakes less alike. Voting handles categories, while averaging handles numeric predictions.",
+  "common_mistakes": [
+    "Assuming more trees repair biased or bad data.",
+    "Trusting split importance as unbiased evidence.",
+    "Ignoring prediction cost when serving a very large forest."
+  ],
+  "mini_exercise": "Draw the situation from “Ask a Crowd of Trees” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Random forests are dependable tabular-data models with little tuning.",
+  "explain_back_prompt": "Using the “Ask a Crowd of Trees” story, explain Random Forests without assuming the listener knows machine learning."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_vector_databases",
+  "depth": "expert",
+  "title": "Vector Databases — Graph and Partition Indexes Take Different Shortcuts",
+  "key_insight": "Graph indexes often give strong recall with memory-heavy links. Partitioned indexes can compress vectors and suit larger collections, but require careful training and probing.",
+  "body": "## Graph and Partition Indexes Take Different Shortcuts\n\nOne index links each vector to promising neighbors; another divides space into regions and searches only selected regions. Both avoid a full scan differently.\n\nGraph indexes often give strong recall with memory-heavy links. Partitioned indexes can compress vectors and suit larger collections, but require careful training and probing.\n\nBenchmark with production-sized data and concurrency. Cache behavior, filtered searches, write rate, and tail latency can matter more than a single-query average.",
+  "common_mistakes": [
+    "A vector database removes the need to store source text.",
+    "Approximate search is guaranteed to return the exact same neighbors.",
+    "Access control should be applied only after private text reaches the model."
+  ],
+  "mini_exercise": "Draw “Graph and Partition Indexes Take Different Shortcuts” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Large retrieval systems need fast similarity search plus filters, updates, metadata, and operational guarantees.",
+  "explain_back_prompt": "Using “Graph and Partition Indexes Take Different Shortcuts,” explain Vector Databases without assuming the listener knows modern AI."
+}

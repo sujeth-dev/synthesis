@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_attention_mechanism",
+  "depth": "beginner",
+  "title": "Attention Mechanism — Highlight the Clue That Matters",
+  "key_insight": "Attention lets the current position assign relevance to other positions, then gather more information from the useful ones.",
+  "body": "## Highlight the Clue That Matters\n\nIn “The trophy did not fit in the suitcase because it was too big,” the word “it” needs the right earlier clue. Nearby distance alone is not enough.\n\nAttention lets the current position assign relevance to other positions, then gather more information from the useful ones.\n\nThe relevance pattern changes with context. Attention is a learned information route, not a fixed grammar rule.",
+  "common_mistakes": [
+    "Attention always selects exactly one word.",
+    "Queries, keys, and values are raw English questions and answers.",
+    "A causal mask reveals future tokens during generation."
+  ],
+  "mini_exercise": "Draw “Highlight the Clue That Matters” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Attention is the core routing idea that lets transformers connect distant information.",
+  "explain_back_prompt": "Using “Highlight the Clue That Matters,” explain Attention Mechanism without assuming the listener knows modern AI."
+}

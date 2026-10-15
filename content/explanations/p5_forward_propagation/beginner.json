@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_forward_propagation",
+  "depth": "beginner",
+  "title": "Forward Propagation — Follow One Message Forward",
+  "key_insight": "Forward propagation moves the numbers from the input layer through each hidden layer to the output. Each layer transforms what it receives.",
+  "body": "## Follow One Message Forward\n\nA handwritten digit enters a model as pixel numbers. Before anything can be corrected, the model must first make a prediction.\n\nForward propagation moves the numbers from the input layer through each hidden layer to the output. Each layer transforms what it receives.\n\nWrite down the value or shape after every step when learning. The route becomes understandable instead of feeling like one mysterious call.",
+  "common_mistakes": [
+    "A forward pass updates every weight before producing output.",
+    "Batches must contain exactly one example.",
+    "Evaluation mode randomly removes more units than training mode."
+  ],
+  "mini_exercise": "Sketch the situation in “Follow One Message Forward” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every training step and every real prediction begins with a correct forward pass.",
+  "explain_back_prompt": "Using the “Follow One Message Forward” situation, explain Forward Propagation without assuming the listener knows deep learning."
+}

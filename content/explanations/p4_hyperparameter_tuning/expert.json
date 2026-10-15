@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_hyperparameter_tuning",
+  "depth": "expert",
+  "title": "Hyperparameter Tuning — The Search Overfits Its Judge",
+  "key_insight": "Nested evaluation measures the entire search procedure on outer folds it did not tune against. A final untouched test offers another boundary.",
+  "body": "## The Search Overfits Its Judge\n\nThousands of trials repeatedly consult the same validation folds. Eventually one setting looks best partly because of noise.\n\nNested evaluation measures the entire search procedure on outer folds it did not tune against. A final untouched test offers another boundary.\n\nPrefer stable regions over one sharp winning point. If tiny setting changes collapse performance, deployment drift or retraining noise may erase the apparent gain.",
+  "common_mistakes": [
+    "Calling learned weights hyperparameters.",
+    "Tuning on the final test set.",
+    "Reporting only the winning trial and hiding instability around it."
+  ],
+  "mini_exercise": "Draw the situation from “The Search Overfits Its Judge” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Good settings can matter as much as the chosen algorithm, but careless search overfits validation data.",
+  "explain_back_prompt": "Using the “The Search Overfits Its Judge” story, explain Hyperparameter Tuning without assuming the listener knows machine learning."
+}

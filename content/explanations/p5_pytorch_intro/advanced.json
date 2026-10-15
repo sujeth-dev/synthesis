@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_pytorch_intro",
+  "depth": "advanced",
+  "title": "PyTorch Introduction — Let Operations Record the Gradient Trail",
+  "key_insight": "Autograd records operations involving tensors that require gradients. Calling `backward()` follows that graph in reverse and fills each parameter’s gradient field.",
+  "body": "## Let Operations Record the Gradient Trail\n\nWriting every derivative by hand would make even a small network fragile. The framework already saw each operation during the forward pass.\n\nAutograd records operations involving tensors that require gradients. Calling `backward()` follows that graph in reverse and fills each parameter’s gradient field.\n\nGradients accumulate by default. Clear them deliberately, and use `no_grad` or inference mode when no backward pass will follow.",
+  "common_mistakes": [
+    "A tensor can contain only one number.",
+    "An nn.Module prevents parameters from being trained.",
+    "Autograd requires every derivative to be entered by hand."
+  ],
+  "mini_exercise": "Sketch the situation in “Let Operations Record the Gradient Trail” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "PyTorch turns the phase’s equations into inspectable, trainable programs.",
+  "explain_back_prompt": "Using the “Let Operations Record the Gradient Trail” situation, explain PyTorch Introduction without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Build a two-layer PyTorch module",
+    "context": "Turn the PyTorch Introduction idea into one small, inspectable workflow.",
+    "steps": [
+      "Subclass nn.Module.",
+      "Create two linear layers in the constructor.",
+      "Connect them with ReLU in forward.",
+      "Run a small batch and print output shape."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

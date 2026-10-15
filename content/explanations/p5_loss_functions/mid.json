@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_loss_functions",
+  "depth": "mid",
+  "title": "Loss Functions — Choose a Loss That Matches the Output",
+  "key_insight": "Mean squared error averages squared numeric misses. Cross-entropy rewards high probability on the correct class and strongly penalizes confident wrong answers.",
+  "body": "## Choose a Loss That Matches the Output\n\nA house-price model predicts numbers, while an image model chooses among classes. Using one loss for both gives the outputs the wrong interpretation.\n\nMean squared error averages squared numeric misses. Cross-entropy rewards high probability on the correct class and strongly penalizes confident wrong answers.\n\nLibraries often combine a final transformation with the loss for numerical safety. Read whether the function expects raw scores or probabilities before adding your own activation.",
+  "common_mistakes": [
+    "Loss is only a chart and never affects training.",
+    "The largest possible loss always means the best model.",
+    "One loss has the correct meaning for every output type."
+  ],
+  "mini_exercise": "Sketch the situation in “Choose a Loss That Matches the Output” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Training needs a meaningful numeric objective before it can decide how weights should change.",
+  "explain_back_prompt": "Using the “Choose a Loss That Matches the Output” situation, explain Loss Functions without assuming the listener knows deep learning."
+}

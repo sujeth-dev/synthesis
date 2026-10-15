@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_decision_trees_q1",
+    "skill_id": "p4_decision_trees",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Decision Trees: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A decision tree predicts by following feature questions to a leaf."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A decision tree predicts by following feature questions to a leaf.",
+    "graph_placement_weight": {
+      "p4_decision_trees": 1
+    }
+  },
+  {
+    "id": "p4_decision_trees_q2",
+    "skill_id": "p4_decision_trees",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Decision Trees: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A split is useful when it makes the resulting groups less mixed."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A split is useful when it makes the resulting groups less mixed.",
+    "graph_placement_weight": {
+      "p4_decision_trees": 1
+    }
+  },
+  {
+    "id": "p4_decision_trees_q3",
+    "skill_id": "p4_decision_trees",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Decision Trees: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tree building chooses a strong next split without guaranteeing the best whole tree."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Tree building chooses a strong next split without guaranteeing the best whole tree.",
+    "graph_placement_weight": {
+      "p4_decision_trees": 1
+    }
+  },
+  {
+    "id": "p4_decision_trees_q4",
+    "skill_id": "p4_decision_trees",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Decision Trees: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Depth and minimum-leaf controls can reduce memorization."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Depth and minimum-leaf controls can reduce memorization.",
+    "graph_placement_weight": {
+      "p4_decision_trees": 1
+    }
+  },
+  {
+    "id": "p4_decision_trees_q5",
+    "skill_id": "p4_decision_trees",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Decision Trees: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A tiny feature change can cross a split and cause a sudden prediction jump."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A tiny feature change can cross a split and cause a sudden prediction jump.",
+    "graph_placement_weight": {
+      "p4_decision_trees": 1
+    }
+  },
+  {
+    "id": "p4_decision_trees_q6",
+    "skill_id": "p4_decision_trees",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Decision Trees: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Libraries use greedy search because trying every possible complete tree is impractical."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Libraries use greedy search because trying every possible complete tree is impractical.",
+    "graph_placement_weight": {
+      "p4_decision_trees": 1
+    }
+  },
+  {
+    "id": "p4_decision_trees_order1",
+    "skill_id": "p4_decision_trees",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Decision Trees workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "measure the current mix"
+      },
+      {
+        "id": "b",
+        "text": "try candidate splits"
+      },
+      {
+        "id": "c",
+        "text": "choose the strongest split"
+      },
+      {
+        "id": "d",
+        "text": "repeat on the child groups"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: measure the current mix → try candidate splits → choose the strongest split → repeat on the child groups."
+  },
+  {
+    "id": "p4_decision_trees_fill1",
+    "skill_id": "p4_decision_trees",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Decision Trees step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "max_depth"
+      },
+      {
+        "id": "b",
+        "text": "random_state"
+      },
+      {
+        "id": "c",
+        "text": "probability"
+      },
+      {
+        "id": "d",
+        "text": "mean"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "max_depth",
+    "explanation_after": "The correct choice is max_depth."
+  }
+]

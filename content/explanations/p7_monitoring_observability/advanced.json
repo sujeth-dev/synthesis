@@ -1,0 +1,28 @@
+{
+  "skill_id": "p7_monitoring_observability",
+  "depth": "advanced",
+  "title": "Monitoring & Observability — Alert on Symptoms Users Feel",
+  "key_insight": "Define service-level indicators for availability, latency, and task success. Alert when error budgets burn fast enough to require action.",
+  "body": "## Alert on Symptoms Users Feel\n\nA CPU alert fires nightly but users notice nothing; answer failures rise silently with no alert. Infrastructure alone is the wrong signal.\n\nDefine service-level indicators for availability, latency, and task success. Alert when error budgets burn fast enough to require action.\n\nUse dashboards for investigation and alerts for action. Every page should have an owner and a clear first response.",
+  "common_mistakes": [
+    "One final error count identifies every root cause.",
+    "All user prompts should be logged forever.",
+    "Fast responses guarantee useful answers."
+  ],
+  "mini_exercise": "Draw “Alert on Symptoms Users Feel” as three steps and explain each one.",
+  "real_world_usage": "Observability connects user outcomes to requests, retrieval, models, tools, costs, and failures without exposing sensitive data.",
+  "explain_back_prompt": "Use “Alert on Symptoms Users Feel” to explain Monitoring & Observability plainly.",
+  "build_task": {
+    "title": "Practice Monitoring & Observability",
+    "context": "Build one small, inspectable workflow.",
+    "steps": [
+      "create a request trace id",
+      "record spans for each stage",
+      "emit safe metrics and errors",
+      "alert on user-facing failure"
+    ],
+    "expected_output": "A visible result and log for every step.",
+    "hint": "Validate each boundary before continuing.",
+    "starter_code": "# Complete and inspect one step at a time."
+  }
+}

@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_neural_network_basics_q1",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A neural network passes numbers through connected layers."
+      },
+      {
+        "id": "b",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "c",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "d",
+        "text": "Adding layers guarantees a correct answer without data."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A neural network passes numbers through connected layers.",
+    "graph_placement_weight": {
+      "p5_neural_network_basics": 1
+    }
+  },
+  {
+    "id": "p5_neural_network_basics_q2",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "b",
+        "text": "Weights control how strongly one signal affects the next layer."
+      },
+      {
+        "id": "c",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "d",
+        "text": "Adding layers guarantees a correct answer without data."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Weights control how strongly one signal affects the next layer.",
+    "graph_placement_weight": {
+      "p5_neural_network_basics": 1
+    }
+  },
+  {
+    "id": "p5_neural_network_basics_q3",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "b",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "c",
+        "text": "A layer can compute many weighted connections with matrix multiplication."
+      },
+      {
+        "id": "d",
+        "text": "Adding layers guarantees a correct answer without data."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "A layer can compute many weighted connections with matrix multiplication.",
+    "graph_placement_weight": {
+      "p5_neural_network_basics": 1
+    }
+  },
+  {
+    "id": "p5_neural_network_basics_q4",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "b",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "c",
+        "text": "Adding layers guarantees a correct answer without data."
+      },
+      {
+        "id": "d",
+        "text": "Non-linear activations stop stacked layers from collapsing into one linear rule."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Non-linear activations stop stacked layers from collapsing into one linear rule.",
+    "graph_placement_weight": {
+      "p5_neural_network_basics": 1
+    }
+  },
+  {
+    "id": "p5_neural_network_basics_q5",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adjacent layer shapes must agree."
+      },
+      {
+        "id": "b",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "c",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "d",
+        "text": "Adding layers guarantees a correct answer without data."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Adjacent layer shapes must agree.",
+    "graph_placement_weight": {
+      "p5_neural_network_basics": 1
+    }
+  },
+  {
+    "id": "p5_neural_network_basics_q6",
+    "skill_id": "p5_neural_network_basics",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Neural Networks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Every layer stores only words and never numbers."
+      },
+      {
+        "id": "b",
+        "text": "Initialization scale affects whether signals remain usable through deep networks."
+      },
+      {
+        "id": "c",
+        "text": "Training keeps all weights fixed forever."
+      },
+      {
+        "id": "d",
+        "text": "Adding layers guarantees a correct answer without data."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Initialization scale affects whether signals remain usable through deep networks.",
+    "graph_placement_weight": {
+      "p5_neural_network_basics": 1
+    }
+  },
+  {
+    "id": "p5_neural_network_basics_order1",
+    "skill_id": "p5_neural_network_basics",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Neural Networks workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "prepare one input batch"
+      },
+      {
+        "id": "b",
+        "text": "run the input through each layer"
+      },
+      {
+        "id": "c",
+        "text": "turn final scores into a prediction"
+      },
+      {
+        "id": "d",
+        "text": "compare with the known answer"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: prepare one input batch → run the input through each layer → turn final scores into a prediction → compare with the known answer."
+  },
+  {
+    "id": "p5_neural_network_basics_fill1",
+    "skill_id": "p5_neural_network_basics",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Neural Networks step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "forward"
+      },
+      {
+        "id": "b",
+        "text": "delete"
+      },
+      {
+        "id": "c",
+        "text": "shuffle"
+      },
+      {
+        "id": "d",
+        "text": "rename"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "forward",
+    "explanation_after": "The correct choice is forward."
+  }
+]

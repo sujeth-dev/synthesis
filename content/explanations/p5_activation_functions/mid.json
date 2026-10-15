@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_activation_functions",
+  "depth": "mid",
+  "title": "Activation Functions — Match the Final Gate to the Answer",
+  "key_insight": "Sigmoid squeezes one score between zero and one for a binary chance. Softmax turns several scores into positive shares that add to one.",
+  "body": "## Match the Final Gate to the Answer\n\nA model must return one probability for “fraud” or a set of probabilities for several animals. The final numbers need the right meaning.\n\nSigmoid squeezes one score between zero and one for a binary chance. Softmax turns several scores into positive shares that add to one.\n\nHidden layers and output layers have different jobs. Choose the output activation together with the loss so their mathematical meanings agree.",
+  "common_mistakes": [
+    "Activations permanently remove the need for weights.",
+    "Every activation produces text labels directly.",
+    "The same output gate is correct for every possible task."
+  ],
+  "mini_exercise": "Sketch the situation in “Match the Final Gate to the Answer” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The activation choice changes signal flow, output meaning, and how easily a network trains.",
+  "explain_back_prompt": "Using the “Match the Final Gate to the Answer” situation, explain Activation Functions without assuming the listener knows deep learning."
+}

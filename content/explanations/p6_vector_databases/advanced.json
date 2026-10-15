@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_vector_databases",
+  "depth": "advanced",
+  "title": "Vector Databases — Updates Change the Index",
+  "key_insight": "Use stable document and chunk IDs, upsert new versions, and delete stale entries. Keep the embedding-model version in metadata so incompatible spaces are never mixed.",
+  "body": "## Updates Change the Index\n\nDocuments are edited and deleted while the service is live. Old vectors can remain searchable unless identity and version rules are explicit.\n\nUse stable document and chunk IDs, upsert new versions, and delete stale entries. Keep the embedding-model version in metadata so incompatible spaces are never mixed.\n\nCombine vector similarity with structured filters for tenant, time, permission, or category. Enforce access before retrieved text reaches the model.",
+  "common_mistakes": [
+    "A vector database removes the need to store source text.",
+    "Approximate search is guaranteed to return the exact same neighbors.",
+    "Access control should be applied only after private text reaches the model."
+  ],
+  "mini_exercise": "Draw “Updates Change the Index” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Large retrieval systems need fast similarity search plus filters, updates, metadata, and operational guarantees.",
+  "explain_back_prompt": "Using “Updates Change the Index,” explain Vector Databases without assuming the listener knows modern AI."
+}

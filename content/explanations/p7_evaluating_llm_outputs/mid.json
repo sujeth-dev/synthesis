@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_evaluating_llm_outputs",
+  "depth": "mid",
+  "title": "Evaluating LLM Outputs — Combine Several Kinds of Judge",
+  "key_insight": "Use deterministic checks for facts and structure, rubric-based model graders for scale, and humans for calibration and high-impact ambiguity.",
+  "body": "## Combine Several Kinds of Judge\n\nExact matching works for IDs but unfairly rejects good summaries. Human review is nuanced but slow.\n\nUse deterministic checks for facts and structure, rubric-based model graders for scale, and humans for calibration and high-impact ambiguity.\n\nBlind model names during comparison. Randomize answer order so presentation does not decide the result.",
+  "common_mistakes": [
+    "One fluent sample proves production quality.",
+    "All good summaries must exactly match one sentence.",
+    "A model grader is a permanent ground truth."
+  ],
+  "mini_exercise": "Draw “Combine Several Kinds of Judge” as three steps and explain each one.",
+  "real_world_usage": "Repeatable output evaluation catches quality regressions and separates plausible language from task success.",
+  "explain_back_prompt": "Use “Combine Several Kinds of Judge” to explain Evaluating LLM Outputs plainly."
+}

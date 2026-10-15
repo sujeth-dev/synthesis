@@ -1,0 +1,28 @@
+{
+  "skill_id": "p4_linear_regression",
+  "depth": "mid",
+  "title": "Linear Regression — Square the Misses",
+  "key_insight": "Least squares adds the squared misses. Squaring makes every miss positive and makes large misses especially costly.",
+  "body": "## Square the Misses\n\nA fitted line misses one price by 2 and another by 10. The larger miss should matter much more when choosing a better line.\n\nLeast squares adds the squared misses. Squaring makes every miss positive and makes large misses especially costly.\n\nThe fitted coefficients show how the prediction changes when one feature rises while the others stay fixed, but that is an association, not automatic proof of cause.",
+  "common_mistakes": [
+    "Reading a learned weight as proof that one feature causes the answer.",
+    "Ignoring curved patterns left in the errors.",
+    "Comparing raw coefficient sizes when input units differ."
+  ],
+  "mini_exercise": "Draw the situation from “Square the Misses” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It is a fast, explainable baseline for numeric prediction and a foundation for many later models.",
+  "explain_back_prompt": "Using the “Square the Misses” story, explain Linear Regression without assuming the listener knows machine learning.",
+  "build_task": {
+    "title": "Fit a house-price baseline",
+    "context": "Turn the Linear Regression idea into one small, inspectable workflow.",
+    "steps": [
+      "Create a tiny size-and-price table.",
+      "Split it into training and test rows.",
+      "Fit linear regression.",
+      "Print predictions and mean absolute error."
+    ],
+    "expected_output": "A printed result that shows every requested step completed and lets you compare the model output with the known answer.",
+    "hint": "Keep test data outside every step that learns from examples.",
+    "starter_code": "# Follow the steps above one at a time.\n# Print each important result before moving on."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_prompt_injection_and_jailbreaks",
+  "depth": "mid",
+  "title": "Prompt Injection & Jailbreaks — Authorize Actions Outside the Model",
+  "key_insight": "Application code should validate tool arguments and authorize each action from the signed-in user, resource, and policy.",
+  "body": "## Authorize Actions Outside the Model\n\nThe model confidently asks to email a private file. Confidence is not permission.\n\nApplication code should validate tool arguments and authorize each action from the signed-in user, resource, and policy.\n\nUse least-privilege tools and require confirmation for important writes. Retrieved text must never grant itself more authority.",
+  "common_mistakes": [
+    "A confident model request proves authorization.",
+    "Keywords catch every future injection.",
+    "Retrieved documents should be allowed to grant permissions."
+  ],
+  "mini_exercise": "Draw “Authorize Actions Outside the Model” as three steps and explain each one.",
+  "real_world_usage": "Applications must treat model-readable content as untrusted because text can attempt to redirect instructions and tools.",
+  "explain_back_prompt": "Use “Authorize Actions Outside the Model” to explain Prompt Injection & Jailbreaks plainly."
+}

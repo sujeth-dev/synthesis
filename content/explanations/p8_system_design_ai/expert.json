@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_system_design_ai",
+  "depth": "expert",
+  "title": "AI System Design — Design the Control Plane and Data Plane",
+  "key_insight": "The data plane handles live requests. The control plane versions and distributes models, prompts, indexes, policies, and routing configuration.",
+  "body": "## Design the Control Plane and Data Plane\n\nUser requests compete with deployments, evaluations, index rebuilds, and policy changes. Mixing all control work into the request path makes serving fragile.\n\nThe data plane handles live requests. The control plane versions and distributes models, prompts, indexes, policies, and routing configuration.\n\nMake every served result traceable to a control-plane version. Safe rollout then becomes a state transition with canaries and rollback, not an unrecorded file replacement.",
+  "common_mistakes": [
+    "Choosing the largest model completes the entire system design.",
+    "A successful demo proves every dependency is reliable.",
+    "Production results need no record of their configuration version."
+  ],
+  "mini_exercise": "Draw “Design the Control Plane and Data Plane” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Senior AI work requires reasoning about the whole product route rather than optimizing one model in isolation.",
+  "explain_back_prompt": "Using “Design the Control Plane and Data Plane,” explain AI System Design without assuming the listener knows AI engineering."
+}

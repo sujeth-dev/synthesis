@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_evaluating_llm_outputs",
+  "depth": "expert",
+  "title": "Evaluating LLM Outputs — Estimate Uncertainty in the Judge",
+  "key_insight": "Measure agreement, review disagreements, and report confidence ranges. Pairwise comparison often gives more consistent judgments than absolute scoring.",
+  "body": "## Estimate Uncertainty in the Judge\n\nTwo graders disagree on borderline answers. Treating either label as perfect makes small score differences look certain.\n\nMeasure agreement, review disagreements, and report confidence ranges. Pairwise comparison often gives more consistent judgments than absolute scoring.\n\nA grader can be gamed by verbose or rubric-mimicking text. Validate it against adversarial answers and refresh calibration when the grader version changes.",
+  "common_mistakes": [
+    "One fluent sample proves production quality.",
+    "All good summaries must exactly match one sentence.",
+    "A model grader is a permanent ground truth."
+  ],
+  "mini_exercise": "Draw “Estimate Uncertainty in the Judge” as three steps and explain each one.",
+  "real_world_usage": "Repeatable output evaluation catches quality regressions and separates plausible language from task success.",
+  "explain_back_prompt": "Use “Estimate Uncertainty in the Judge” to explain Evaluating LLM Outputs plainly."
+}

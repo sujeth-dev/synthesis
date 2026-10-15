@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_positional_encoding",
+  "depth": "advanced",
+  "title": "Positional Encoding — Rotate by Relative Distance",
+  "key_insight": "Rotary position encoding rotates parts of query and key vectors according to position. Their match then carries relative-distance information.",
+  "body": "## Rotate by Relative Distance\n\nMany tasks care more that two tokens are five steps apart than that they occupy absolute positions 100 and 105.\n\nRotary position encoding rotates parts of query and key vectors according to position. Their match then carries relative-distance information.\n\nLong-context extensions rescale or interpolate positions, but quality must be measured across distance. Fitting more tokens in memory does not prove the model uses them well.",
+  "common_mistakes": [
+    "Position information alphabetically sorts every sentence.",
+    "Word order never changes meaning.",
+    "Rotary encoding deletes token content."
+  ],
+  "mini_exercise": "Draw “Rotate by Relative Distance” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Language meaning depends on order, and position design affects how models handle lengths beyond training.",
+  "explain_back_prompt": "Using “Rotate by Relative Distance,” explain Positional Encoding without assuming the listener knows modern AI."
+}

@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_build_your_first_network_q1",
+    "skill_id": "p5_build_your_first_network",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Build Your First Network: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A complete project connects data, model, loss, optimizer, and loop."
+      },
+      {
+        "id": "b",
+        "text": "A model learns merely because its script exits successfully."
+      },
+      {
+        "id": "c",
+        "text": "Only the final accuracy number is needed to reproduce a run."
+      },
+      {
+        "id": "d",
+        "text": "Validation rows should be used for every weight update."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A complete project connects data, model, loss, optimizer, and loop.",
+    "graph_placement_weight": {
+      "p5_build_your_first_network": 1
+    }
+  },
+  {
+    "id": "p5_build_your_first_network_q2",
+    "skill_id": "p5_build_your_first_network",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Build Your First Network: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model learns merely because its script exits successfully."
+      },
+      {
+        "id": "b",
+        "text": "A tiny-batch overfit test can expose wiring problems."
+      },
+      {
+        "id": "c",
+        "text": "Only the final accuracy number is needed to reproduce a run."
+      },
+      {
+        "id": "d",
+        "text": "Validation rows should be used for every weight update."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A tiny-batch overfit test can expose wiring problems.",
+    "graph_placement_weight": {
+      "p5_build_your_first_network": 1
+    }
+  },
+  {
+    "id": "p5_build_your_first_network_q3",
+    "skill_id": "p5_build_your_first_network",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Build Your First Network: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model learns merely because its script exits successfully."
+      },
+      {
+        "id": "b",
+        "text": "Only the final accuracy number is needed to reproduce a run."
+      },
+      {
+        "id": "c",
+        "text": "Training and validation need separate measurements."
+      },
+      {
+        "id": "d",
+        "text": "Validation rows should be used for every weight update."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Training and validation need separate measurements.",
+    "graph_placement_weight": {
+      "p5_build_your_first_network": 1
+    }
+  },
+  {
+    "id": "p5_build_your_first_network_q4",
+    "skill_id": "p5_build_your_first_network",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Build Your First Network: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model learns merely because its script exits successfully."
+      },
+      {
+        "id": "b",
+        "text": "Only the final accuracy number is needed to reproduce a run."
+      },
+      {
+        "id": "c",
+        "text": "Validation rows should be used for every weight update."
+      },
+      {
+        "id": "d",
+        "text": "A resumable checkpoint includes optimizer and schedule state."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "A resumable checkpoint includes optimizer and schedule state.",
+    "graph_placement_weight": {
+      "p5_build_your_first_network": 1
+    }
+  },
+  {
+    "id": "p5_build_your_first_network_q5",
+    "skill_id": "p5_build_your_first_network",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Build Your First Network: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A fresh-process load test verifies the saved artifact."
+      },
+      {
+        "id": "b",
+        "text": "A model learns merely because its script exits successfully."
+      },
+      {
+        "id": "c",
+        "text": "Only the final accuracy number is needed to reproduce a run."
+      },
+      {
+        "id": "d",
+        "text": "Validation rows should be used for every weight update."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A fresh-process load test verifies the saved artifact.",
+    "graph_placement_weight": {
+      "p5_build_your_first_network": 1
+    }
+  },
+  {
+    "id": "p5_build_your_first_network_q6",
+    "skill_id": "p5_build_your_first_network",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Build Your First Network: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A model learns merely because its script exits successfully."
+      },
+      {
+        "id": "b",
+        "text": "A deep model should beat a simple baseline by a stable useful margin."
+      },
+      {
+        "id": "c",
+        "text": "Only the final accuracy number is needed to reproduce a run."
+      },
+      {
+        "id": "d",
+        "text": "Validation rows should be used for every weight update."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A deep model should beat a simple baseline by a stable useful margin.",
+    "graph_placement_weight": {
+      "p5_build_your_first_network": 1
+    }
+  },
+  {
+    "id": "p5_build_your_first_network_order1",
+    "skill_id": "p5_build_your_first_network",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Build Your First Network workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "load and split the dataset"
+      },
+      {
+        "id": "b",
+        "text": "define the model and loss"
+      },
+      {
+        "id": "c",
+        "text": "train on batches"
+      },
+      {
+        "id": "d",
+        "text": "evaluate and save the best model"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: load and split the dataset → define the model and loss → train on batches → evaluate and save the best model."
+  },
+  {
+    "id": "p5_build_your_first_network_fill1",
+    "skill_id": "p5_build_your_first_network",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Build Your First Network step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "loss.backward()"
+      },
+      {
+        "id": "b",
+        "text": "model.delete()"
+      },
+      {
+        "id": "c",
+        "text": "test.fit()"
+      },
+      {
+        "id": "d",
+        "text": "labels.shuffle()"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "loss.backward()",
+    "explanation_after": "The correct choice is loss.backward()."
+  }
+]

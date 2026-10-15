@@ -1,13 +1,16 @@
 {
   "skill_id": "p2_math_matrices",
   "depth": "advanced",
-  "title": "Matrices \u2014 Grids of Numbers (Advanced)",
-  "key_insight": "A matrix is a grid of numbers. Every neural network layer is a matrix multiplication.",
-  "body": "## What is a Matrix?\n\n```python\nimport numpy as np\n\nmatrix = np.array([[1, 2, 3],\n                   [4, 5, 6]])\n\nprint(matrix.shape)  # (2, 3)\n```\n\n## Matrix Multiplication \u2014 The Key Operation\n\n```python\nA = np.array([[1, 2], [3, 4]])  # 2\u00d72\nB = np.array([[5, 6], [7, 8]])  # 2\u00d72\n\nC = A @ B  # matrix multiply\n# C[0,0] = 1\u00d75 + 2\u00d77 = 19\n# C[0,1] = 1\u00d76 + 2\u00d78 = 22\n```\n\n## The Linear Layer Equation\n\n```python\n# y = x @ W.T + b\n# x: input  (batch_size, input_dim)\n# W: weights (output_dim, input_dim)\n# b: bias   (output_dim,)\n# y: output (batch_size, output_dim)\n\nbatch = np.random.rand(32, 128)  # (32, 128)\nW     = np.random.rand(64, 128)  # (64, 128)\nb     = np.random.rand(64)       # (64,)\n\ny = batch @ W.T + b  # (32, 64)\n```",
+  "title": "When the Same Answer Costs Ten Times More",
+  "key_insight": "Fast matrix work is like an efficient kitchen: group similar orders, keep ingredients nearby, and avoid moving the same supplies again and again.",
+  "body": "## The Same Recipe, Ten Times Faster\n\nTwo kitchens make the same meals, but one cooks plates singly while the other fills a whole oven tray. Batching works the same way: larger groups keep the computer busy with less repeated setup.\n\nEngineers estimate the arithmetic with FLOPs, meaning individual number operations. But speed also depends on moving the numbers from memory, just as fetching ingredients can take longer than mixing them.\n\nMemory layout means keeping numbers that are used together close together. Good batches and tidy layouts reduce fetching, while smaller number formats can save space if they keep enough detail for reliable results.",
   "common_mistakes": [
-    "Using A * B for matrix multiply \u2014 that's element-wise! Use A @ B",
-    "Wrong shape: (3,4) @ (5,2) fails. Inner dimensions must match: (3,4) @ (4,5) works",
-    "Matrix multiply is not commutative: A @ B \u2260 B @ A"
+    "Counting arithmetic alone — fetching numbers and starting many tiny jobs can take more time than the multiplication.",
+    "Assuming turning a grid sideways is always free — a later step may need to copy the numbers into a tidier order.",
+    "Making batches larger without checking waiting time and memory use.",
+    "Moving data between the main processor and graphics processor between nearby steps."
   ],
-  "mini_exercise": "Create a (3\u00d72) matrix A and a (2\u00d74) matrix B. Compute A @ B. What shape is the result? Now try B @ A \u2014 does it work? This shape rule prevents 90% of PyTorch shape errors."
+  "mini_exercise": "Time 64 separate matrix jobs, then place the same 64 inputs in one batch and time one larger job. Check that both routes produce matching answers.",
+  "real_world_usage": "Training and serving systems send matrix work to highly tuned processor libraries, then group compatible requests so the hardware spends more time calculating and less time setting up.",
+  "explain_back_prompt": "Use the kitchen story to explain why batching and keeping nearby numbers together can make the same calculation finish sooner."
 }

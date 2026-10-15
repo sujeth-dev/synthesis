@@ -1,0 +1,16 @@
+{
+  "skill_id": "p1b_oop_classes",
+  "depth": "advanced",
+  "title": "A Class That Survives a Growing Codebase",
+  "key_insight": "A sturdy class gives every object its own belongings, allows only sensible states, and is handed replaceable helpers instead of hiding them.",
+  "body": "## The Shared Notebook Surprise\n\nTwo workers receive separate folders, yet notes written in one appear in the other. This happens when a changeable list is stored on the class itself instead of giving each object its own list.\n\nA sturdy class keeps each object's belongings separate and allows only sensible states, like “ready” or “fitted.” Its methods move between those states instead of leaving callers to juggle confusing switches.\n\nIt should also be handed helpers such as a logger or data cleaner, rather than secretly creating them. Then each helper can be replaced, tested, and closed without disturbing the rest.",
+  "common_mistakes": [
+    "Putting one changeable list or dictionary on the shared blueprint when every object needs its own copy.",
+    "Using several yes-or-no switches for one lifecycle, which can create impossible combinations.",
+    "Secretly creating databases, loggers, or model stores inside the class, which makes replacements and small tests harder.",
+    "Building a tall family tree of classes when smaller objects working together would show the design more clearly."
+  ],
+  "mini_exercise": "Make two batch objects that each start with a fresh empty failed-row list. Add a row to only one batch and confirm the other list stays empty.",
+  "real_world_usage": "Prediction services often use separate objects for cleaning inputs, running the model, recording events, and formatting answers. Each piece can then be tested or replaced on its own.",
+  "explain_back_prompt": "Why should two objects not share a changeable list, and why is handing a helper to an object easier to test than creating the helper secretly?"
+}

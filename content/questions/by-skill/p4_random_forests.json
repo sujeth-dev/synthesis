@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p4_random_forests_q1",
+    "skill_id": "p4_random_forests",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Random Forests: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A random forest combines votes or averages from many decision trees."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A random forest combines votes or averages from many decision trees.",
+    "graph_placement_weight": {
+      "p4_random_forests": 1
+    }
+  },
+  {
+    "id": "p4_random_forests_q2",
+    "skill_id": "p4_random_forests",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Random Forests: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Bootstrap samples draw rows with replacement."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Bootstrap samples draw rows with replacement.",
+    "graph_placement_weight": {
+      "p4_random_forests": 1
+    }
+  },
+  {
+    "id": "p4_random_forests_q3",
+    "skill_id": "p4_random_forests",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Random Forests: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Random feature choices make tree errors less alike."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Random feature choices make tree errors less alike.",
+    "graph_placement_weight": {
+      "p4_random_forests": 1
+    }
+  },
+  {
+    "id": "p4_random_forests_q4",
+    "skill_id": "p4_random_forests",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Random Forests: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Rows left out of one tree’s sample can help estimate performance."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Rows left out of one tree’s sample can help estimate performance.",
+    "graph_placement_weight": {
+      "p4_random_forests": 1
+    }
+  },
+  {
+    "id": "p4_random_forests_q5",
+    "skill_id": "p4_random_forests",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Random Forests: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Permutation importance measures the damage from shuffling a feature."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Permutation importance measures the damage from shuffling a feature.",
+    "graph_placement_weight": {
+      "p4_random_forests": 1
+    }
+  },
+  {
+    "id": "p4_random_forests_q6",
+    "skill_id": "p4_random_forests",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Random Forests: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Averaging mainly helps when useful trees do not make identical errors."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Averaging mainly helps when useful trees do not make identical errors.",
+    "graph_placement_weight": {
+      "p4_random_forests": 1
+    }
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_prompt_injection_and_jailbreaks",
+  "depth": "advanced",
+  "title": "Prompt Injection & Jailbreaks — Assume Detection Will Miss Some Attacks",
+  "key_insight": "Combine detection with architectural controls: scoped data, output filtering, isolated execution, quotas, and audit logs.",
+  "body": "## Assume Detection Will Miss Some Attacks\n\nA detector catches known phrases but attackers reword them. Blocking by keywords becomes an endless chase.\n\nCombine detection with architectural controls: scoped data, output filtering, isolated execution, quotas, and audit logs.\n\nTest indirect injection through documents, emails, tool results, and images. Track the complete path from content to possible side effect.",
+  "common_mistakes": [
+    "A confident model request proves authorization.",
+    "Keywords catch every future injection.",
+    "Retrieved documents should be allowed to grant permissions."
+  ],
+  "mini_exercise": "Draw “Assume Detection Will Miss Some Attacks” as three steps and explain each one.",
+  "real_world_usage": "Applications must treat model-readable content as untrusted because text can attempt to redirect instructions and tools.",
+  "explain_back_prompt": "Use “Assume Detection Will Miss Some Attacks” to explain Prompt Injection & Jailbreaks plainly."
+}

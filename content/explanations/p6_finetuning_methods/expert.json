@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_finetuning_methods",
+  "depth": "expert",
+  "title": "Fine-Tuning Methods — Preference Data Teaches Relative Choices",
+  "key_insight": "Preference optimization changes relative likelihoods while a reference or regularizer limits drift. The result reflects the annotators and prompt distribution, not universal human values.",
+  "body": "## Preference Data Teaches Relative Choices\n\nTwo answers may both be plausible, but a reviewer prefers one. Pairwise data can teach a model or reward scorer which response better follows a rubric.\n\nPreference optimization changes relative likelihoods while a reference or regularizer limits drift. The result reflects the annotators and prompt distribution, not universal human values.\n\nWatch reward hacking and style shortcuts. Use blinded human evaluation and adversarial cases outside the training preference set.",
+  "common_mistakes": [
+    "Fine-tuning changes behavior without any examples.",
+    "Every input token should always be treated as the desired assistant output.",
+    "A preference dataset represents universal values automatically."
+  ],
+  "mini_exercise": "Draw “Preference Data Teaches Relative Choices” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Fine-tuning can shape format, domain behavior, and task skill when prompting or retrieval is insufficient.",
+  "explain_back_prompt": "Using “Preference Data Teaches Relative Choices,” explain Fine-Tuning Methods without assuming the listener knows modern AI."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p1b_oop_classes",
+  "depth": "beginner",
+  "title": "One Player Template, Many Separate Players",
+  "key_insight": "When a game needs 100 similar players with separate health, one class can hold the shared rules while each object keeps its own data.",
+  "body": "## One Cutter, Many Cookies\n\nYou need 100 game players with the same abilities but different names and health. A class is the reusable cutter; each player object is a separate cookie made from it.\n\nThe setup method fills in a new object's starting data. Inside a method, self simply means “this particular object,” so damaging Mina does not damage Leo.\n\nModels use classes for the same reason: each model keeps its own learned numbers beside the actions that use them.",
+  "common_mistakes": [
+    "Thinking the class is one of the players — the class is the blueprint; `mina` and `leo` are objects made from it.",
+    "Leaving `self` out of a method — Python needs it to know which object's data the method should use.",
+    "Expecting one object's change to affect every object — values stored on `self` belong to that one object."
+  ],
+  "mini_exercise": "Add a `heal(amount)` method that increases one player's health. Create two players, heal only one, and print both health values.",
+  "real_world_usage": "PyTorch models inherit from `nn.Module`. A model object keeps layers and learned parameters together and provides a `forward` method that describes how input data moves through them.",
+  "explain_back_prompt": "Explain the difference between a class and an object using the two-player example. What does `self` point to?"
+}

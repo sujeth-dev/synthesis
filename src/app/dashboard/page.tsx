@@ -13,7 +13,8 @@ import type { LearnerSkillState, SkillNode } from '@/types'
 // ─── Display constants ────────────────────────────────────────────────────────
 
 const PHASE_LABELS: Record<string, string> = {
-  phase_1_computer_basics:  'Phase 1 — Computer & Python Basics',
+  phase_1_computer_basics:  'Phase 1 — Computer Basics',
+  phase_1b_programming_basics: 'Phase 1B — Programming Basics',
   phase_2_cs_data:          'Phase 2 — CS & Data Thinking',
   phase_3_intro_ai:         'Phase 3 — Intro to AI',
   phase_4_machine_learning: 'Phase 4 — Machine Learning',
@@ -25,6 +26,7 @@ const PHASE_LABELS: Record<string, string> = {
 
 const PHASE_SHORT: Record<string, string> = {
   phase_1_computer_basics:  'Phase 1',
+  phase_1b_programming_basics: 'Phase 1B',
   phase_2_cs_data:          'Phase 2',
   phase_3_intro_ai:         'Phase 3',
   phase_4_machine_learning: 'Phase 4',

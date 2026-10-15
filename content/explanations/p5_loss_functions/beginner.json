@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_loss_functions",
+  "depth": "beginner",
+  "title": "Loss Functions — Give the Model a Scorecard",
+  "key_insight": "A loss function produces a number that measures the mismatch. Smaller loss means the prediction better matches the training answer under that scorecard.",
+  "body": "## Give the Model a Scorecard\n\nA network guesses 8 when the answer is 10. Saying “wrong” is not enough; training needs to know how bad the miss was.\n\nA loss function produces a number that measures the mismatch. Smaller loss means the prediction better matches the training answer under that scorecard.\n\nDifferent problems need different scorecards. Numeric prediction and category prediction do not measure mistakes in the same way.",
+  "common_mistakes": [
+    "Loss is only a chart and never affects training.",
+    "The largest possible loss always means the best model.",
+    "One loss has the correct meaning for every output type."
+  ],
+  "mini_exercise": "Sketch the situation in “Give the Model a Scorecard” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Training needs a meaningful numeric objective before it can decide how weights should change.",
+  "explain_back_prompt": "Using the “Give the Model a Scorecard” situation, explain Loss Functions without assuming the listener knows deep learning."
+}

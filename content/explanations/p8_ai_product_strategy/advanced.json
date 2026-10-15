@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_ai_product_strategy",
+  "depth": "advanced",
+  "title": "AI Product Strategy — Create a Defensible Learning Loop",
+  "key_insight": "Defensibility may come from trusted workflow integration, proprietary consented feedback, evaluation expertise, distribution, or operational reliability.",
+  "body": "## Create a Defensible Learning Loop\n\nCompetitors can call the same model API. A prompt alone is rarely a durable advantage.\n\nDefensibility may come from trusted workflow integration, proprietary consented feedback, evaluation expertise, distribution, or operational reliability.\n\nDesign feedback that improves the product without exploiting users or collecting unnecessary data. Track whether learning transfers when model providers change.",
+  "common_mistakes": [
+    "An impressive model demo proves product value.",
+    "Inference price is the only product cost.",
+    "A strategy should continue regardless of failed milestones."
+  ],
+  "mini_exercise": "Draw “Create a Defensible Learning Loop” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Technical capability creates value only when it fits a user job, operating model, economics, and responsible adoption path.",
+  "explain_back_prompt": "Using “Create a Defensible Learning Loop,” explain AI Product Strategy without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Write an AI product thesis",
+    "context": "Turn AI Product Strategy into one small, inspectable artifact.",
+    "steps": [
+      "Define one user and painful job.",
+      "Describe the AI and deterministic parts.",
+      "Set value, quality, cost, and safety gates.",
+      "Plan the smallest experiment and a stop rule."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

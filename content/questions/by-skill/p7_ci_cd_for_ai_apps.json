@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p7_ci_cd_for_ai_apps_q1",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "CI/CD for AI Apps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "AI CI should test prompts, schemas, retrieval, and safety as well as code."
+      },
+      {
+        "id": "b",
+        "text": "Unit tests alone cover every AI behavior change."
+      },
+      {
+        "id": "c",
+        "text": "Prompt versions need not be recorded."
+      },
+      {
+        "id": "d",
+        "text": "Rollback always means changing only application code."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "AI CI should test prompts, schemas, retrieval, and safety as well as code.",
+    "graph_placement_weight": {
+      "p7_ci_cd_for_ai_apps": 1
+    }
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_q2",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "CI/CD for AI Apps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unit tests alone cover every AI behavior change."
+      },
+      {
+        "id": "b",
+        "text": "CD promotes verified artifacts through environments."
+      },
+      {
+        "id": "c",
+        "text": "Prompt versions need not be recorded."
+      },
+      {
+        "id": "d",
+        "text": "Rollback always means changing only application code."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "CD promotes verified artifacts through environments.",
+    "graph_placement_weight": {
+      "p7_ci_cd_for_ai_apps": 1
+    }
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_q3",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "CI/CD for AI Apps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unit tests alone cover every AI behavior change."
+      },
+      {
+        "id": "b",
+        "text": "Prompt versions need not be recorded."
+      },
+      {
+        "id": "c",
+        "text": "Behavior depends on versions beyond source code."
+      },
+      {
+        "id": "d",
+        "text": "Rollback always means changing only application code."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Behavior depends on versions beyond source code.",
+    "graph_placement_weight": {
+      "p7_ci_cd_for_ai_apps": 1
+    }
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_q4",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "CI/CD for AI Apps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unit tests alone cover every AI behavior change."
+      },
+      {
+        "id": "b",
+        "text": "Prompt versions need not be recorded."
+      },
+      {
+        "id": "c",
+        "text": "Rollback always means changing only application code."
+      },
+      {
+        "id": "d",
+        "text": "Fast checks can precede expensive model evaluations."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Fast checks can precede expensive model evaluations.",
+    "graph_placement_weight": {
+      "p7_ci_cd_for_ai_apps": 1
+    }
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_q5",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "CI/CD for AI Apps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Severe failures matter even when averages pass."
+      },
+      {
+        "id": "b",
+        "text": "Unit tests alone cover every AI behavior change."
+      },
+      {
+        "id": "c",
+        "text": "Prompt versions need not be recorded."
+      },
+      {
+        "id": "d",
+        "text": "Rollback always means changing only application code."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Severe failures matter even when averages pass.",
+    "graph_placement_weight": {
+      "p7_ci_cd_for_ai_apps": 1
+    }
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_q6",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "CI/CD for AI Apps: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unit tests alone cover every AI behavior change."
+      },
+      {
+        "id": "b",
+        "text": "A release manifest supports complete rollback."
+      },
+      {
+        "id": "c",
+        "text": "Prompt versions need not be recorded."
+      },
+      {
+        "id": "d",
+        "text": "Rollback always means changing only application code."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "A release manifest supports complete rollback.",
+    "graph_placement_weight": {
+      "p7_ci_cd_for_ai_apps": 1
+    }
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_order1",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this CI/CD for AI Apps workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "run fast code and schema checks"
+      },
+      {
+        "id": "b",
+        "text": "run targeted AI evaluations"
+      },
+      {
+        "id": "c",
+        "text": "build a versioned release artifact"
+      },
+      {
+        "id": "d",
+        "text": "canary, observe, and promote or roll back"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "run fast code and schema checks → run targeted AI evaluations → build a versioned release artifact → canary, observe, and promote or roll back"
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_fill1",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the safest first action for CI/CD for AI Apps.",
+    "options": [
+      {
+        "id": "a",
+        "text": "run fast code and schema checks"
+      },
+      {
+        "id": "b",
+        "text": "run targeted AI evaluations"
+      },
+      {
+        "id": "c",
+        "text": "build a versioned release artifact"
+      },
+      {
+        "id": "d",
+        "text": "canary, observe, and promote or roll back"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "run fast code and schema checks",
+    "explanation_after": "Start with run fast code and schema checks."
+  }
+]

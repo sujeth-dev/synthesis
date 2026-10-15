@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_activation_functions",
+  "depth": "advanced",
+  "title": "Activation Functions — Dead Gates and Smooth Alternatives",
+  "key_insight": "This is a dying ReLU. Leaky ReLU keeps a small negative slope, while GELU changes signals smoothly instead of cutting them sharply.",
+  "body": "## Dead Gates and Smooth Alternatives\n\nMany ReLU units receive negative inputs for every example. They output zero and their weights stop receiving a useful correction.\n\nThis is a dying ReLU. Leaky ReLU keeps a small negative slope, while GELU changes signals smoothly instead of cutting them sharply.\n\nWatch activation distributions during training. A gate is useful only when enough units respond and the values stay in a workable range.",
+  "common_mistakes": [
+    "Activations permanently remove the need for weights.",
+    "Every activation produces text labels directly.",
+    "The same output gate is correct for every possible task."
+  ],
+  "mini_exercise": "Sketch the situation in “Dead Gates and Smooth Alternatives” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The activation choice changes signal flow, output meaning, and how easily a network trains.",
+  "explain_back_prompt": "Using the “Dead Gates and Smooth Alternatives” situation, explain Activation Functions without assuming the listener knows deep learning."
+}

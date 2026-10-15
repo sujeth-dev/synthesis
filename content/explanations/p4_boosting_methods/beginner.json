@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_boosting_methods",
+  "depth": "beginner",
+  "title": "Boosting Methods — Fix What the Last Helper Missed",
+  "key_insight": "Boosting combines that sequence of small corrections. Each new learner joins the existing prediction instead of voting independently.",
+  "body": "## Fix What the Last Helper Missed\n\nA first helper makes rough guesses. A second studies the leftover mistakes, and a third focuses on what the first two still miss.\n\nBoosting combines that sequence of small corrections. Each new learner joins the existing prediction instead of voting independently.\n\nSmall steps make the team learn carefully. Too many aggressive corrections can start chasing noise.",
+  "common_mistakes": [
+    "Confusing boosting with independent-tree voting.",
+    "Using a large learning rate and many deep trees without validation.",
+    "Treating library defaults as a substitute for leakage-safe evaluation."
+  ],
+  "mini_exercise": "Draw the situation from “Fix What the Last Helper Missed” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Boosted trees are among the strongest methods for structured tables.",
+  "explain_back_prompt": "Using the “Fix What the Last Helper Missed” story, explain Boosting Methods without assuming the listener knows machine learning."
+}

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_feature_scaling",
+  "depth": "advanced",
+  "title": "Feature Scaling — Sparse Data Loses Its Sparsity",
+  "key_insight": "Sparse-aware scaling avoids centering or uses methods designed to preserve zeros. The correct choice depends on what zero means and what the model accepts.",
+  "body": "## Sparse Data Loses Its Sparsity\n\nA text table contains mostly zeros. Subtracting a mean from every cell turns those zeros into nonzero values and fills memory.\n\nSparse-aware scaling avoids centering or uses methods designed to preserve zeros. The correct choice depends on what zero means and what the model accepts.\n\nMonitor production ranges. Values far beyond training scale can signal drift, unit changes, or clipping that deserves an alert.",
+  "common_mistakes": [
+    "Fitting the scaler before the train/test split.",
+    "Using min-max scaling without checking extreme outliers.",
+    "Centering a huge sparse matrix until it becomes dense."
+  ],
+  "mini_exercise": "Draw the situation from “Sparse Data Loses Its Sparsity” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Distance methods and gradient-based models can be distorted or slowed by mismatched feature units.",
+  "explain_back_prompt": "Using the “Sparse Data Loses Its Sparsity” story, explain Feature Scaling without assuming the listener knows machine learning."
+}

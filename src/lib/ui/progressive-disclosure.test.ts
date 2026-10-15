@@ -10,7 +10,7 @@ function source(relativePath: string): string {
 }
 
 describe('guided explanation contract', () => {
-  it('keeps every guided question multiple-choice', () => {
+  it('keeps every guided-stage pool multiple-choice while allowing separate ladder questions', () => {
     const questionsDirectory = path.join(root, 'content/questions/by-skill')
     const files = fs.readdirSync(questionsDirectory).filter(file => file.endsWith('.json'))
     const questions = files.flatMap(file => JSON.parse(
@@ -23,8 +23,7 @@ describe('guided explanation contract', () => {
     }>
 
     expect(questions.length).toBeGreaterThan(0)
-    for (const question of questions) {
-      expect(question.format, question.id).toBe('mcq')
+    for (const question of questions.filter(question => question.format === 'mcq')) {
       expect(question.options?.length, question.id).toBeGreaterThanOrEqual(2)
       expect(question.options?.some(option => option.id === question.correct_option_id), question.id).toBe(true)
     }

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_api_design_for_ai_features",
+  "depth": "expert",
+  "title": "API Design for AI Features — Control Capacity at the Boundary",
+  "key_insight": "Rate limits can consider tokens, concurrent jobs, and compute estimates. Admission control rejects or queues work before overloaded dependencies collapse.",
+  "body": "## Control Capacity at the Boundary\n\nTenants send bursts with very different token sizes. Counting only requests lets one large customer exhaust shared capacity.\n\nRate limits can consider tokens, concurrent jobs, and compute estimates. Admission control rejects or queues work before overloaded dependencies collapse.\n\nPublish retry hints and quotas, then observe tail latency by tenant and workload. Fairness needs measured resource units, not identical request counts.",
+  "common_mistakes": [
+    "Clients should parse arbitrary prose as an API contract.",
+    "A retry should always create another paid job.",
+    "Model changes can never affect API behavior."
+  ],
+  "mini_exercise": "Draw “Control Capacity at the Boundary” as three steps and explain each one.",
+  "real_world_usage": "A stable product API hides model churn and gives clients clear states, errors, and versioned behavior.",
+  "explain_back_prompt": "Use “Control Capacity at the Boundary” to explain API Design for AI Features plainly."
+}

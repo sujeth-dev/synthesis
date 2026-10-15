@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p4_bias_variance_tradeoff_q1",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Bias–Variance Tradeoff: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Bias is a consistent miss from an overly limited model."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Bias is a consistent miss from an overly limited model.",
+    "graph_placement_weight": {
+      "p4_bias_variance_tradeoff": 1
+    }
+  },
+  {
+    "id": "p4_bias_variance_tradeoff_q2",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Bias–Variance Tradeoff: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Variance is sensitivity to the particular training sample."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Variance is sensitivity to the particular training sample.",
+    "graph_placement_weight": {
+      "p4_bias_variance_tradeoff": 1
+    }
+  },
+  {
+    "id": "p4_bias_variance_tradeoff_q3",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Bias–Variance Tradeoff: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "High training and validation error together suggest high bias."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "High training and validation error together suggest high bias.",
+    "graph_placement_weight": {
+      "p4_bias_variance_tradeoff": 1
+    }
+  },
+  {
+    "id": "p4_bias_variance_tradeoff_q4",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Bias–Variance Tradeoff: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A large train-validation gap suggests high variance."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A large train-validation gap suggests high variance.",
+    "graph_placement_weight": {
+      "p4_bias_variance_tradeoff": 1
+    }
+  },
+  {
+    "id": "p4_bias_variance_tradeoff_q5",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Bias–Variance Tradeoff: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Some error remains because available inputs cannot explain all randomness."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Some error remains because available inputs cannot explain all randomness.",
+    "graph_placement_weight": {
+      "p4_bias_variance_tradeoff": 1
+    }
+  },
+  {
+    "id": "p4_bias_variance_tradeoff_q6",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Bias–Variance Tradeoff: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Double descent shows that performance need not follow one simple U-shaped curve as capacity grows."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Double descent shows that performance need not follow one simple U-shaped curve as capacity grows.",
+    "graph_placement_weight": {
+      "p4_bias_variance_tradeoff": 1
+    }
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_logistic_regression",
+  "depth": "advanced",
+  "title": "Logistic Regression — A Perfect Divider Breaks the Fit",
+  "key_insight": "This is complete separation. Regularization places a cost on extreme weights and produces a usable boundary.",
+  "body": "## A Perfect Divider Breaks the Fit\n\nOne feature separates every positive example from every negative one. The model keeps making its weight larger because no finite value feels perfect enough.\n\nThis is complete separation. Regularization places a cost on extreme weights and produces a usable boundary.\n\nCheck calibration as well as ranking. A model can sort risky cases correctly while saying 90% when only 60% of similar cases happen.",
+  "common_mistakes": [
+    "Treating the output probability as certainty.",
+    "Using the default threshold without considering error costs.",
+    "Explaining an odds change as the same-sized probability change."
+  ],
+  "mini_exercise": "Draw the situation from “A Perfect Divider Breaks the Fit” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "It is a strong, explainable baseline for binary classification.",
+  "explain_back_prompt": "Using the “A Perfect Divider Breaks the Fit” story, explain Logistic Regression without assuming the listener knows machine learning."
+}

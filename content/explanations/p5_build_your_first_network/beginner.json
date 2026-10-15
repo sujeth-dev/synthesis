@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_build_your_first_network",
+  "depth": "beginner",
+  "title": "Build Your First Network — Assemble the Five Pieces",
+  "key_insight": "A small project needs data batches, a model, a matching loss, an optimizer, and a loop that repeats prediction and correction.",
+  "body": "## Assemble the Five Pieces\n\nLayers, losses, and optimizers make sense separately, but a model learns only when they are connected in the right order.\n\nA small project needs data batches, a model, a matching loss, an optimizer, and a loop that repeats prediction and correction.\n\nStart with a tiny known dataset. A simple task makes wiring mistakes easier to see before scale hides them.",
+  "common_mistakes": [
+    "A model learns merely because its script exits successfully.",
+    "Only the final accuracy number is needed to reproduce a run.",
+    "Validation rows should be used for every weight update."
+  ],
+  "mini_exercise": "Sketch the situation in “Assemble the Five Pieces” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "This capstone proves the learner can connect Phase 5’s parts into a working training system.",
+  "explain_back_prompt": "Using the “Assemble the Five Pieces” situation, explain Build Your First Network without assuming the listener knows deep learning."
+}

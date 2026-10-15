@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_transformers",
+  "depth": "advanced",
+  "title": "Transformer Architecture — Generation Reuses Earlier Work",
+  "key_insight": "A key-value cache stores earlier attention projections so each decoding step computes only the new token’s pieces. The cache grows with layers, sequence length, and key-value heads.",
+  "body": "## Generation Reuses Earlier Work\n\nGenerating one token at a time would repeatedly recompute keys and values for the entire prefix. That waste grows with every new token.\n\nA key-value cache stores earlier attention projections so each decoding step computes only the new token’s pieces. The cache grows with layers, sequence length, and key-value heads.\n\nBatching requests improves hardware use, but different prompt and output lengths create scheduling challenges. Serving design is part of transformer performance.",
+  "common_mistakes": [
+    "A transformer contains attention and nothing else.",
+    "Decoder generation should read future unseen tokens.",
+    "A key-value cache makes memory use shrink as context grows."
+  ],
+  "mini_exercise": "Draw “Generation Reuses Earlier Work” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Transformers are the architecture behind modern language models and many vision and multimodal systems.",
+  "explain_back_prompt": "Using “Generation Reuses Earlier Work,” explain Transformer Architecture without assuming the listener knows modern AI."
+}

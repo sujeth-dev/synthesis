@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_transformers",
+  "depth": "expert",
+  "title": "Transformer Architecture — Most Cost Lives in Predictable Blocks",
+  "key_insight": "Dense projections and feed-forward layers use matrix multiplications; attention adds sequence-pair work and cache reads. At short contexts weights may dominate, while long contexts make attention and cache more important.",
+  "body": "## Most Cost Lives in Predictable Blocks\n\nA model description lists billions of parameters, but runtime depends on how those parameters and activations move through hardware.\n\nDense projections and feed-forward layers use matrix multiplications; attention adds sequence-pair work and cache reads. At short contexts weights may dominate, while long contexts make attention and cache more important.\n\nParallel training splits data, tensor dimensions, layers, or optimizer state across devices. Each split saves a resource but adds communication, so topology and workload decide the useful combination.",
+  "common_mistakes": [
+    "A transformer contains attention and nothing else.",
+    "Decoder generation should read future unseen tokens.",
+    "A key-value cache makes memory use shrink as context grows."
+  ],
+  "mini_exercise": "Draw “Most Cost Lives in Predictable Blocks” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Transformers are the architecture behind modern language models and many vision and multimodal systems.",
+  "explain_back_prompt": "Using “Most Cost Lives in Predictable Blocks,” explain Transformer Architecture without assuming the listener knows modern AI."
+}

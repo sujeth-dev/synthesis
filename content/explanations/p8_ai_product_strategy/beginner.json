@@ -1,0 +1,15 @@
+{
+  "skill_id": "p8_ai_product_strategy",
+  "depth": "beginner",
+  "title": "AI Product Strategy — Choose a Pain Worth Solving",
+  "key_insight": "Find a frequent, important user struggle and describe the better outcome. Decide which part needs judgment or generation and which part should stay deterministic.",
+  "body": "## Choose a Pain Worth Solving\n\nA team showcases generated text but users still spend the same time completing their work. The demo never addressed the bottleneck.\n\nFind a frequent, important user struggle and describe the better outcome. Decide which part needs judgment or generation and which part should stay deterministic.\n\nTest the riskiest assumption with a small workflow before building a platform. Evidence should measure the user job, not excitement about AI.",
+  "common_mistakes": [
+    "An impressive model demo proves product value.",
+    "Inference price is the only product cost.",
+    "A strategy should continue regardless of failed milestones."
+  ],
+  "mini_exercise": "Draw “Choose a Pain Worth Solving” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Technical capability creates value only when it fits a user job, operating model, economics, and responsible adoption path.",
+  "explain_back_prompt": "Using “Choose a Pain Worth Solving,” explain AI Product Strategy without assuming the listener knows AI engineering."
+}

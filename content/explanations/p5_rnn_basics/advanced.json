@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_rnn_basics",
+  "depth": "advanced",
+  "title": "RNN Basics — Build a Better Memory Gate",
+  "key_insight": "LSTM and GRU cells use learned gates to decide what to keep, add, reveal, or forget. A more direct memory path helps gradients survive longer.",
+  "body": "## Build a Better Memory Gate\n\nA plain RNN forgets an important clue from the start of a long paragraph before reaching the end.\n\nLSTM and GRU cells use learned gates to decide what to keep, add, reveal, or forget. A more direct memory path helps gradients survive longer.\n\nBidirectional RNNs read both directions when the full sequence is available. They cannot be used unchanged for live generation that must not look into future tokens.",
+  "common_mistakes": [
+    "An RNN treats every sequence position as unrelated.",
+    "Hidden state is always a human-readable sentence.",
+    "Padding should contribute to the training loss as real data."
+  ],
+  "mini_exercise": "Sketch the situation in “Build a Better Memory Gate” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RNNs introduce sequence state and make the limitations that motivated transformers concrete.",
+  "explain_back_prompt": "Using the “Build a Better Memory Gate” situation, explain RNN Basics without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Trace a short recurrent sequence",
+    "context": "Turn the RNN Basics idea into one small, inspectable workflow.",
+    "steps": [
+      "Create three small input vectors.",
+      "Pass them through one RNN cell in order.",
+      "Print the hidden state after each step.",
+      "Compare with the reversed input order."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

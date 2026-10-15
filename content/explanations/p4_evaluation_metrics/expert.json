@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_evaluation_metrics",
+  "depth": "expert",
+  "title": "Evaluation Metrics — A Metric Is a Decision Contract",
+  "key_insight": "Decision analysis assigns costs or benefits to outcomes and selects a threshold for that setting. Expected utility makes the tradeoff explicit.",
+  "body": "## A Metric Is a Decision Contract\n\nTwo hospitals value missed disease differently because follow-up cost and patient harm differ. No universal score can choose their operating point.\n\nDecision analysis assigns costs or benefits to outcomes and selects a threshold for that setting. Expected utility makes the tradeoff explicit.\n\nConfidence intervals and paired tests show whether a score difference is stable. Segment results reveal whether an average gain hides harm to a subgroup.",
+  "common_mistakes": [
+    "Using accuracy for a rare positive class.",
+    "Comparing AUC without choosing a deployment threshold.",
+    "Treating a tiny metric difference as meaningful without uncertainty."
+  ],
+  "mini_exercise": "Draw the situation from “A Metric Is a Decision Contract” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "The wrong metric rewards the wrong model, especially with rare events.",
+  "explain_back_prompt": "Using the “A Metric Is a Decision Contract” story, explain Evaluation Metrics without assuming the listener knows machine learning."
+}

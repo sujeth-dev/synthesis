@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_forward_propagation",
+  "depth": "advanced",
+  "title": "Forward Propagation — Training Mode Changes the Route",
+  "key_insight": "Dropout randomly hides units only in training. Batch normalization also uses batch measurements during training but saved measurements during evaluation.",
+  "body": "## Training Mode Changes the Route\n\nThe same input produces slightly different outputs during training and deployment. Nothing is random in the data, so the model mode is the likely cause.\n\nDropout randomly hides units only in training. Batch normalization also uses batch measurements during training but saved measurements during evaluation.\n\nCall the framework’s training or evaluation mode deliberately. Then disable gradient tracking for inference to save memory and time.",
+  "common_mistakes": [
+    "A forward pass updates every weight before producing output.",
+    "Batches must contain exactly one example.",
+    "Evaluation mode randomly removes more units than training mode."
+  ],
+  "mini_exercise": "Sketch the situation in “Training Mode Changes the Route” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every training step and every real prediction begins with a correct forward pass.",
+  "explain_back_prompt": "Using the “Training Mode Changes the Route” situation, explain Forward Propagation without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Inspect a forward pass",
+    "context": "Turn the Forward Propagation idea into one small, inspectable workflow.",
+    "steps": [
+      "Create a two-layer model.",
+      "Make a small input batch.",
+      "Print the shape after each layer.",
+      "Run evaluation mode and print the final output."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

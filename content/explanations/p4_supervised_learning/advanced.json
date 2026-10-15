@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_supervised_learning",
+  "depth": "advanced",
+  "title": "Supervised Learning — The Label Is Not Always Truth",
+  "key_insight": "Label noise means some recorded answers are wrong or uncertain. Clear instructions, repeated reviews, and agreement checks reveal how trustworthy labels are.",
+  "body": "## The Label Is Not Always Truth\n\nTwo reviewers disagree about whether a support message is angry. The label looks definite in the table, but it came from a human judgment.\n\nLabel noise means some recorded answers are wrong or uncertain. Clear instructions, repeated reviews, and agreement checks reveal how trustworthy labels are.\n\nAlso check who is missing from the data. A model can score well overall while failing a smaller group that received fewer or poorer labels.",
+  "common_mistakes": [
+    "Treating training accuracy as proof that new cases will work.",
+    "Using a classification score for a numeric prediction problem.",
+    "Assuming every recorded label is perfectly correct."
+  ],
+  "mini_exercise": "Draw the situation from “The Label Is Not Always Truth” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Most practical prediction systems begin with labeled historical examples.",
+  "explain_back_prompt": "Using the “The Label Is Not Always Truth” story, explain Supervised Learning without assuming the listener knows machine learning."
+}

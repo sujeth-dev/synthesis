@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_prompt_injection_and_jailbreaks_q1",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Prompt Injection & Jailbreaks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Prompt injection uses untrusted content to redirect model behavior."
+      },
+      {
+        "id": "b",
+        "text": "A confident model request proves authorization."
+      },
+      {
+        "id": "c",
+        "text": "Keywords catch every future injection."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should be allowed to grant permissions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Prompt injection uses untrusted content to redirect model behavior.",
+    "graph_placement_weight": {
+      "p7_prompt_injection_and_jailbreaks": 1
+    }
+  },
+  {
+    "id": "p7_prompt_injection_and_jailbreaks_q2",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Prompt Injection & Jailbreaks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A confident model request proves authorization."
+      },
+      {
+        "id": "b",
+        "text": "Text separators alone are not a complete defense."
+      },
+      {
+        "id": "c",
+        "text": "Keywords catch every future injection."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should be allowed to grant permissions."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Text separators alone are not a complete defense.",
+    "graph_placement_weight": {
+      "p7_prompt_injection_and_jailbreaks": 1
+    }
+  },
+  {
+    "id": "p7_prompt_injection_and_jailbreaks_q3",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Prompt Injection & Jailbreaks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A confident model request proves authorization."
+      },
+      {
+        "id": "b",
+        "text": "Keywords catch every future injection."
+      },
+      {
+        "id": "c",
+        "text": "Application code must authorize tool actions."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should be allowed to grant permissions."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Application code must authorize tool actions.",
+    "graph_placement_weight": {
+      "p7_prompt_injection_and_jailbreaks": 1
+    }
+  },
+  {
+    "id": "p7_prompt_injection_and_jailbreaks_q4",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Prompt Injection & Jailbreaks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A confident model request proves authorization."
+      },
+      {
+        "id": "b",
+        "text": "Keywords catch every future injection."
+      },
+      {
+        "id": "c",
+        "text": "Retrieved documents should be allowed to grant permissions."
+      },
+      {
+        "id": "d",
+        "text": "Least privilege limits the impact of a successful attack."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Least privilege limits the impact of a successful attack.",
+    "graph_placement_weight": {
+      "p7_prompt_injection_and_jailbreaks": 1
+    }
+  },
+  {
+    "id": "p7_prompt_injection_and_jailbreaks_q5",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Prompt Injection & Jailbreaks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Indirect injection can arrive through retrieved content or tool output."
+      },
+      {
+        "id": "b",
+        "text": "A confident model request proves authorization."
+      },
+      {
+        "id": "c",
+        "text": "Keywords catch every future injection."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should be allowed to grant permissions."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Indirect injection can arrive through retrieved content or tool output.",
+    "graph_placement_weight": {
+      "p7_prompt_injection_and_jailbreaks": 1
+    }
+  },
+  {
+    "id": "p7_prompt_injection_and_jailbreaks_q6",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Prompt Injection & Jailbreaks: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A confident model request proves authorization."
+      },
+      {
+        "id": "b",
+        "text": "Trust-zone design preserves provenance outside the model text stream."
+      },
+      {
+        "id": "c",
+        "text": "Keywords catch every future injection."
+      },
+      {
+        "id": "d",
+        "text": "Retrieved documents should be allowed to grant permissions."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Trust-zone design preserves provenance outside the model text stream.",
+    "graph_placement_weight": {
+      "p7_prompt_injection_and_jailbreaks": 1
+    }
+  }
+]

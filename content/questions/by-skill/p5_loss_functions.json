@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p5_loss_functions_q1",
+    "skill_id": "p5_loss_functions",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Loss Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A loss turns prediction error into a number to reduce."
+      },
+      {
+        "id": "b",
+        "text": "Loss is only a chart and never affects training."
+      },
+      {
+        "id": "c",
+        "text": "The largest possible loss always means the best model."
+      },
+      {
+        "id": "d",
+        "text": "One loss has the correct meaning for every output type."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A loss turns prediction error into a number to reduce.",
+    "graph_placement_weight": {
+      "p5_loss_functions": 1
+    }
+  },
+  {
+    "id": "p5_loss_functions_q2",
+    "skill_id": "p5_loss_functions",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Loss Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Loss is only a chart and never affects training."
+      },
+      {
+        "id": "b",
+        "text": "Mean squared error fits numeric targets."
+      },
+      {
+        "id": "c",
+        "text": "The largest possible loss always means the best model."
+      },
+      {
+        "id": "d",
+        "text": "One loss has the correct meaning for every output type."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Mean squared error fits numeric targets.",
+    "graph_placement_weight": {
+      "p5_loss_functions": 1
+    }
+  },
+  {
+    "id": "p5_loss_functions_q3",
+    "skill_id": "p5_loss_functions",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Loss Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Loss is only a chart and never affects training."
+      },
+      {
+        "id": "b",
+        "text": "The largest possible loss always means the best model."
+      },
+      {
+        "id": "c",
+        "text": "Cross-entropy fits category probabilities or raw class scores as documented."
+      },
+      {
+        "id": "d",
+        "text": "One loss has the correct meaning for every output type."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Cross-entropy fits category probabilities or raw class scores as documented.",
+    "graph_placement_weight": {
+      "p5_loss_functions": 1
+    }
+  },
+  {
+    "id": "p5_loss_functions_q4",
+    "skill_id": "p5_loss_functions",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Loss Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Loss is only a chart and never affects training."
+      },
+      {
+        "id": "b",
+        "text": "The largest possible loss always means the best model."
+      },
+      {
+        "id": "c",
+        "text": "One loss has the correct meaning for every output type."
+      },
+      {
+        "id": "d",
+        "text": "Class weighting can give rare costly cases more influence."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Class weighting can give rare costly cases more influence.",
+    "graph_placement_weight": {
+      "p5_loss_functions": 1
+    }
+  },
+  {
+    "id": "p5_loss_functions_q5",
+    "skill_id": "p5_loss_functions",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Loss Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Huber loss reduces the pull of extreme numeric errors."
+      },
+      {
+        "id": "b",
+        "text": "Loss is only a chart and never affects training."
+      },
+      {
+        "id": "c",
+        "text": "The largest possible loss always means the best model."
+      },
+      {
+        "id": "d",
+        "text": "One loss has the correct meaning for every output type."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Huber loss reduces the pull of extreme numeric errors.",
+    "graph_placement_weight": {
+      "p5_loss_functions": 1
+    }
+  },
+  {
+    "id": "p5_loss_functions_q6",
+    "skill_id": "p5_loss_functions",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Loss Functions: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Loss is only a chart and never affects training."
+      },
+      {
+        "id": "b",
+        "text": "Combined objectives need compatible scales so one term does not dominate."
+      },
+      {
+        "id": "c",
+        "text": "The largest possible loss always means the best model."
+      },
+      {
+        "id": "d",
+        "text": "One loss has the correct meaning for every output type."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Combined objectives need compatible scales so one term does not dominate.",
+    "graph_placement_weight": {
+      "p5_loss_functions": 1
+    }
+  }
+]

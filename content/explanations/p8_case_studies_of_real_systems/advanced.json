@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_case_studies_of_real_systems",
+  "depth": "advanced",
+  "title": "Case Studies of Real AI Systems — Study Incidents as System Evidence",
+  "key_insight": "A postmortem builds a timeline, impact, contributing conditions, detection gap, response, and corrective actions without stopping at one human mistake.",
+  "body": "## Study Incidents as System Evidence\n\nAn assistant leaked private content after retrieval. Blaming “the model” hides the permission and logging failures around it.\n\nA postmortem builds a timeline, impact, contributing conditions, detection gap, response, and corrective actions without stopping at one human mistake.\n\nCheck whether fixes change the system or merely remind operators. Durable lessons create tests, permissions, or design changes.",
+  "common_mistakes": [
+    "An architecture diagram proves business success.",
+    "A famous design should be copied regardless of workload.",
+    "A postmortem is complete after blaming one operator."
+  ],
+  "mini_exercise": "Draw “Study Incidents as System Evidence” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Real systems show how model choices interact with users, data, organizations, and operations.",
+  "explain_back_prompt": "Using “Study Incidents as System Evidence,” explain Case Studies of Real AI Systems without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Analyze one real AI system",
+    "context": "Turn Case Studies of Real AI Systems into one small, inspectable artifact.",
+    "steps": [
+      "Select a documented system or incident.",
+      "Write its user job, scale, and constraints.",
+      "Map three design choices to evidence.",
+      "Extract two lessons and the conditions where they apply."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

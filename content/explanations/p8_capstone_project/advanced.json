@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_capstone_project",
+  "depth": "advanced",
+  "title": "AI Engineering Capstone — Prove Quality, Safety, and Operations",
+  "key_insight": "Test normal, missing-evidence, adversarial, and failure cases. Report quality slices, latency percentiles, cost, permissions, and rollback behavior.",
+  "body": "## Prove Quality, Safety, and Operations\n\nA demo answers the happy path, but there is no evidence for edge cases, privacy, latency, cost, or recovery.\n\nTest normal, missing-evidence, adversarial, and failure cases. Report quality slices, latency percentiles, cost, permissions, and rollback behavior.\n\nDeploy to a bounded audience or realistic staging environment. Capture one incident drill and the improvement it caused.",
+  "common_mistakes": [
+    "The largest possible scope makes the strongest capstone.",
+    "A happy-path demo proves production readiness.",
+    "Code alone explains every design tradeoff."
+  ],
+  "mini_exercise": "Draw “Prove Quality, Safety, and Operations” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "A complete artifact demonstrates integration across data, models, product decisions, safety, and reliable delivery.",
+  "explain_back_prompt": "Using “Prove Quality, Safety, and Operations,” explain AI Engineering Capstone without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Ship the curriculum capstone",
+    "context": "Turn AI Engineering Capstone into one small, inspectable artifact.",
+    "steps": [
+      "Choose and scope one AI product.",
+      "Build a traceable end-to-end slice.",
+      "Run quality, safety, latency, cost, and failure tests.",
+      "Deploy in a bounded setting and write the decision report."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

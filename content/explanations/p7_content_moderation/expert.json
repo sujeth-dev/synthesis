@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_content_moderation",
+  "depth": "expert",
+  "title": "Content Moderation — Moderation Is an Adversarial Operations Loop",
+  "key_insight": "Monitor drift, emerging abuse patterns, and coordinated behavior. Version policy, models, thresholds, and reviewer guidance together.",
+  "body": "## Moderation Is an Adversarial Operations Loop\n\nAttackers adapt spelling and imagery after learning what passes. A frozen classifier decays even without code changes.\n\nMonitor drift, emerging abuse patterns, and coordinated behavior. Version policy, models, thresholds, and reviewer guidance together.\n\nPrivacy and legal duties vary by region and product. Retain only necessary evidence and document who may access it.",
+  "common_mistakes": [
+    "A classifier removes the need for written policy.",
+    "Uncertain cases should always be treated as definitely harmful.",
+    "Reviewer safety has no effect on moderation quality."
+  ],
+  "mini_exercise": "Draw “Moderation Is an Adversarial Operations Loop” as three steps and explain each one.",
+  "real_world_usage": "Moderation applies explicit policy to user and model content with calibrated automation and human escalation.",
+  "explain_back_prompt": "Use “Moderation Is an Adversarial Operations Loop” to explain Content Moderation plainly."
+}

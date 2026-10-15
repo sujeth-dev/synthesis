@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_data_pipeline",
+  "depth": "advanced",
+  "title": "Data → Model → Prediction — The River Changes Upstream",
+  "key_insight": "Production pipelines check data contracts and record how values change at each station. They also watch drift, meaning the live data no longer resembles training data.",
+  "body": "## The River Changes Upstream\n\nA prediction service grows worse although its code has not changed. A supplier altered a column, so the river entering the pipeline is different.\n\nProduction pipelines check data contracts and record how values change at each station. They also watch drift, meaning the live data no longer resembles training data.\n\nMake each run repeatable and observable. Saved inputs, versions, counts, and timing turn a silent quality drop into a specific upstream alert.",
+  "common_mistakes": [
+    "Changing serving-time cleaning without retraining the model.",
+    "Saving the model but not its learned preprocessing.",
+    "Running a pipeline without recording versions or data-quality counts."
+  ],
+  "mini_exercise": "Draw the situation from “The River Changes Upstream” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Every ML project needs a traceable path from source data to a monitored prediction.",
+  "explain_back_prompt": "Using the “The River Changes Upstream” story, explain Data → Model → Prediction without assuming the listener knows machine learning."
+}

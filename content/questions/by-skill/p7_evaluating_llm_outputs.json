@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p7_evaluating_llm_outputs_q1",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Output evaluation should reflect the real user job."
+      },
+      {
+        "id": "b",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "c",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "d",
+        "text": "A model grader is a permanent ground truth."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Output evaluation should reflect the real user job.",
+    "graph_placement_weight": {
+      "p7_evaluating_llm_outputs": 1
+    }
+  },
+  {
+    "id": "p7_evaluating_llm_outputs_q2",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "b",
+        "text": "Fluency does not prove factual correctness."
+      },
+      {
+        "id": "c",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "d",
+        "text": "A model grader is a permanent ground truth."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Fluency does not prove factual correctness.",
+    "graph_placement_weight": {
+      "p7_evaluating_llm_outputs": 1
+    }
+  },
+  {
+    "id": "p7_evaluating_llm_outputs_q3",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "b",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "c",
+        "text": "Different criteria need different judging methods."
+      },
+      {
+        "id": "d",
+        "text": "A model grader is a permanent ground truth."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Different criteria need different judging methods.",
+    "graph_placement_weight": {
+      "p7_evaluating_llm_outputs": 1
+    }
+  },
+  {
+    "id": "p7_evaluating_llm_outputs_q4",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "b",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "c",
+        "text": "A model grader is a permanent ground truth."
+      },
+      {
+        "id": "d",
+        "text": "Blinded comparisons reduce brand and order bias."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Blinded comparisons reduce brand and order bias.",
+    "graph_placement_weight": {
+      "p7_evaluating_llm_outputs": 1
+    }
+  },
+  {
+    "id": "p7_evaluating_llm_outputs_q5",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Slice metrics can reveal failures hidden by averages."
+      },
+      {
+        "id": "b",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "c",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "d",
+        "text": "A model grader is a permanent ground truth."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Slice metrics can reveal failures hidden by averages.",
+    "graph_placement_weight": {
+      "p7_evaluating_llm_outputs": 1
+    }
+  },
+  {
+    "id": "p7_evaluating_llm_outputs_q6",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Evaluating LLM Outputs: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "One fluent sample proves production quality."
+      },
+      {
+        "id": "b",
+        "text": "Automated graders need calibration and uncertainty checks."
+      },
+      {
+        "id": "c",
+        "text": "All good summaries must exactly match one sentence."
+      },
+      {
+        "id": "d",
+        "text": "A model grader is a permanent ground truth."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Automated graders need calibration and uncertainty checks.",
+    "graph_placement_weight": {
+      "p7_evaluating_llm_outputs": 1
+    }
+  }
+]

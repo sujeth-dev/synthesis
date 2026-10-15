@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_building_ai_app",
+  "depth": "beginner",
+  "title": "Building an AI App — Start with the User’s Stuck Moment",
+  "key_insight": "Describe who is stuck, what input they have, and what successful output lets them do next. Then choose the smallest AI step that helps.",
+  "body": "## Start with the User’s Stuck Moment\n\nA team begins with “add AI” and builds a chat box nobody needs. The missing piece is a specific job.\n\nDescribe who is stuck, what input they have, and what successful output lets them do next. Then choose the smallest AI step that helps.\n\nKeep a non-AI path for cases where rules or search solve the task more reliably.",
+  "common_mistakes": [
+    "Adding a chat box automatically creates user value.",
+    "Fluent output proves the user task succeeded.",
+    "A production app needs no fallback path."
+  ],
+  "mini_exercise": "Draw “Start with the User’s Stuck Moment” as three steps and explain each one.",
+  "real_world_usage": "A useful AI app connects a clear user job to context, model calls, validation, feedback, and fallback behavior.",
+  "explain_back_prompt": "Use “Start with the User’s Stuck Moment” to explain Building an AI App plainly."
+}

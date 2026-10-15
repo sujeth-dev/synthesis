@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_safety_guardrails",
+  "depth": "advanced",
+  "title": "Safety Guardrails — Test Bypasses and Compositions",
+  "key_insight": "Red-team multi-turn conversations, encoded text, role confusion, and tool chains. Rate severity and reproducibility, then add fixed regression tests.",
+  "body": "## Test Bypasses and Compositions\n\nEach individual request looks safe, but several steps combine into a prohibited outcome. Single-turn tests miss the path.\n\nRed-team multi-turn conversations, encoded text, role confusion, and tool chains. Rate severity and reproducibility, then add fixed regression tests.\n\nLimit tool authority and data access even if content filtering fails. Defense in depth assumes any one layer can break.",
+  "common_mistakes": [
+    "One prompt instruction is a complete safety system.",
+    "Blocking every uncertain request has no cost.",
+    "Tool permissions are unnecessary when a filter exists."
+  ],
+  "mini_exercise": "Draw “Test Bypasses and Compositions” as three steps and explain each one.",
+  "real_world_usage": "Layered guardrails reduce harmful inputs, outputs, and actions while preserving legitimate use and escalation.",
+  "explain_back_prompt": "Use “Test Bypasses and Compositions” to explain Safety Guardrails plainly."
+}

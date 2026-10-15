@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_model_selection_tradeoffs",
+  "depth": "expert",
+  "title": "Model Selection Tradeoffs — Maintain a Portfolio, Not a Permanent Winner",
+  "key_insight": "Use an internal contract and evaluation suite so candidates can be retested and swapped. Route by task, risk, and budget when several models remain useful.",
+  "body": "## Maintain a Portfolio, Not a Permanent Winner\n\nProvider prices, model versions, and workloads change. A choice made once becomes stale.\n\nUse an internal contract and evaluation suite so candidates can be retested and swapped. Route by task, risk, and budget when several models remain useful.\n\nAccount for switching cost and correlated failures. Two endpoints backed by the same infrastructure may not be a real fallback.",
+  "common_mistakes": [
+    "Parameter count alone selects the best deployment.",
+    "Hosted and local models have identical privacy responsibilities.",
+    "A theoretical speedup guarantees lower production tail latency."
+  ],
+  "mini_exercise": "Draw “Maintain a Portfolio, Not a Permanent Winner” as three steps and explain each one.",
+  "real_world_usage": "Real systems choose among local, hosted, small, and large models by workload-specific constraints.",
+  "explain_back_prompt": "Use “Maintain a Portfolio, Not a Permanent Winner” to explain Model Selection Tradeoffs plainly."
+}

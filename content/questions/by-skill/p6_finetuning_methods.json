@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p6_finetuning_methods_q1",
+    "skill_id": "p6_finetuning_methods",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Fine-Tuning Methods: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fine-tuning continues training a pretrained model."
+      },
+      {
+        "id": "b",
+        "text": "Fine-tuning changes behavior without any examples."
+      },
+      {
+        "id": "c",
+        "text": "Every input token should always be treated as the desired assistant output."
+      },
+      {
+        "id": "d",
+        "text": "A preference dataset represents universal values automatically."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Fine-tuning continues training a pretrained model.",
+    "graph_placement_weight": {
+      "p6_finetuning_methods": 1
+    }
+  },
+  {
+    "id": "p6_finetuning_methods_q2",
+    "skill_id": "p6_finetuning_methods",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Fine-Tuning Methods: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fine-tuning changes behavior without any examples."
+      },
+      {
+        "id": "b",
+        "text": "It can teach response behavior and format."
+      },
+      {
+        "id": "c",
+        "text": "Every input token should always be treated as the desired assistant output."
+      },
+      {
+        "id": "d",
+        "text": "A preference dataset represents universal values automatically."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "It can teach response behavior and format.",
+    "graph_placement_weight": {
+      "p6_finetuning_methods": 1
+    }
+  },
+  {
+    "id": "p6_finetuning_methods_q3",
+    "skill_id": "p6_finetuning_methods",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Fine-Tuning Methods: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fine-tuning changes behavior without any examples."
+      },
+      {
+        "id": "b",
+        "text": "Every input token should always be treated as the desired assistant output."
+      },
+      {
+        "id": "c",
+        "text": "Changing factual knowledge may be better handled with retrieval."
+      },
+      {
+        "id": "d",
+        "text": "A preference dataset represents universal values automatically."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Changing factual knowledge may be better handled with retrieval.",
+    "graph_placement_weight": {
+      "p6_finetuning_methods": 1
+    }
+  },
+  {
+    "id": "p6_finetuning_methods_q4",
+    "skill_id": "p6_finetuning_methods",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Fine-Tuning Methods: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fine-tuning changes behavior without any examples."
+      },
+      {
+        "id": "b",
+        "text": "Every input token should always be treated as the desired assistant output."
+      },
+      {
+        "id": "c",
+        "text": "A preference dataset represents universal values automatically."
+      },
+      {
+        "id": "d",
+        "text": "Loss masks can exclude user or padding tokens."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Loss masks can exclude user or padding tokens.",
+    "graph_placement_weight": {
+      "p6_finetuning_methods": 1
+    }
+  },
+  {
+    "id": "p6_finetuning_methods_q5",
+    "skill_id": "p6_finetuning_methods",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Fine-Tuning Methods: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Full fine-tuning updates all model parameters."
+      },
+      {
+        "id": "b",
+        "text": "Fine-tuning changes behavior without any examples."
+      },
+      {
+        "id": "c",
+        "text": "Every input token should always be treated as the desired assistant output."
+      },
+      {
+        "id": "d",
+        "text": "A preference dataset represents universal values automatically."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Full fine-tuning updates all model parameters.",
+    "graph_placement_weight": {
+      "p6_finetuning_methods": 1
+    }
+  },
+  {
+    "id": "p6_finetuning_methods_q6",
+    "skill_id": "p6_finetuning_methods",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Fine-Tuning Methods: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fine-tuning changes behavior without any examples."
+      },
+      {
+        "id": "b",
+        "text": "Preference tuning reflects its rubric, annotators, and prompt distribution."
+      },
+      {
+        "id": "c",
+        "text": "Every input token should always be treated as the desired assistant output."
+      },
+      {
+        "id": "d",
+        "text": "A preference dataset represents universal values automatically."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Preference tuning reflects its rubric, annotators, and prompt distribution.",
+    "graph_placement_weight": {
+      "p6_finetuning_methods": 1
+    }
+  }
+]

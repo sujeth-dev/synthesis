@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p4_data_pipeline_q1",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Data → Model → Prediction: Which statement gives the basic purpose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A pipeline makes the route from raw data to prediction visible."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A pipeline makes the route from raw data to prediction visible.",
+    "graph_placement_weight": {
+      "p4_data_pipeline": 1
+    }
+  },
+  {
+    "id": "p4_data_pipeline_q2",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Data → Model → Prediction: Which statement describes the central idea?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Training learns reusable rules while prediction applies saved rules."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Training learns reusable rules while prediction applies saved rules.",
+    "graph_placement_weight": {
+      "p4_data_pipeline": 1
+    }
+  },
+  {
+    "id": "p4_data_pipeline_q3",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Data → Model → Prediction: Which statement shows a sound use?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Training and serving should use the same preparation steps."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Training and serving should use the same preparation steps.",
+    "graph_placement_weight": {
+      "p4_data_pipeline": 1
+    }
+  },
+  {
+    "id": "p4_data_pipeline_q4",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Data → Model → Prediction: Which statement describes the mechanism correctly?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Data contracts help catch upstream changes before prediction."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Data contracts help catch upstream changes before prediction.",
+    "graph_placement_weight": {
+      "p4_data_pipeline": 1
+    }
+  },
+  {
+    "id": "p4_data_pipeline_q5",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Data → Model → Prediction: Which caution is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Drift means live data no longer resembles the data used for training."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Drift means live data no longer resembles the data used for training.",
+    "graph_placement_weight": {
+      "p4_data_pipeline": 1
+    }
+  },
+  {
+    "id": "p4_data_pipeline_q6",
+    "skill_id": "p4_data_pipeline",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Data → Model → Prediction: Which deeper statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A directed acyclic graph can represent branching pipeline dependencies without loops."
+      },
+      {
+        "id": "b",
+        "text": "It guarantees perfect predictions without representative data."
+      },
+      {
+        "id": "c",
+        "text": "It removes the need to test the finished workflow on unseen cases."
+      },
+      {
+        "id": "d",
+        "text": "It works only by renaming columns and does not change learning."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "A directed acyclic graph can represent branching pipeline dependencies without loops.",
+    "graph_placement_weight": {
+      "p4_data_pipeline": 1
+    }
+  },
+  {
+    "id": "p4_data_pipeline_order1",
+    "skill_id": "p4_data_pipeline",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Data → Model → Prediction workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "split the data"
+      },
+      {
+        "id": "b",
+        "text": "fit cleaning on training rows"
+      },
+      {
+        "id": "c",
+        "text": "fit the model"
+      },
+      {
+        "id": "d",
+        "text": "predict new rows"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: split the data → fit cleaning on training rows → fit the model → predict new rows."
+  },
+  {
+    "id": "p4_data_pipeline_fill1",
+    "skill_id": "p4_data_pipeline",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Data → Model → Prediction step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "fit"
+      },
+      {
+        "id": "b",
+        "text": "predict"
+      },
+      {
+        "id": "c",
+        "text": "delete"
+      },
+      {
+        "id": "d",
+        "text": "rename"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "fit",
+    "explanation_after": "The correct choice is fit."
+  }
+]

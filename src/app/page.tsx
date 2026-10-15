@@ -1,14 +1,15 @@
 import Link from 'next/link'
 
 const PHASES = [
-  { num: '01', title: 'Computer Basics',       count: 12, active: true,  desc: 'CPU, memory, binary, how code runs' },
-  { num: '02', title: 'CS & Data Foundations', count: 9,  active: true,  desc: 'NumPy, vectors, algorithms, Big O' },
-  { num: '03', title: 'Intro to AI',            count: 2,  active: false, desc: 'What AI is, ML vs DL' },
-  { num: '04', title: 'Machine Learning',       count: 2,  active: false, desc: 'Supervised learning, data pipelines' },
-  { num: '05', title: 'Deep Learning',          count: 1,  active: false, desc: 'Neural networks, backprop' },
-  { num: '06', title: 'Modern AI Systems',      count: 3,  active: false, desc: 'Transformers, embeddings, RAG' },
-  { num: '07', title: 'Real-World Products',    count: 1,  active: false, desc: 'APIs, production, deployment' },
-  { num: '08', title: 'Mastery & Design',       count: 1,  active: false, desc: 'System design, architecture' },
+  { num: '01', title: 'Computer Basics',        count: 5,  active: true,  desc: 'CPU, memory, binary, input and output' },
+  { num: '1B', title: 'Programming Basics',     count: 14, active: true,  desc: 'Python, control flow, functions, classes' },
+  { num: '02', title: 'CS & Data Foundations', count: 17, active: true,  desc: 'Data structures, algorithms, math, cleaning' },
+  { num: '03', title: 'Intro to AI',            count: 12, active: true,  desc: 'Learning, data, evaluation, applications' },
+  { num: '04', title: 'Machine Learning',       count: 16, active: false, desc: 'Classical models, evaluation, workflows' },
+  { num: '05', title: 'Deep Learning',          count: 16, active: false, desc: 'Networks, training, architectures' },
+  { num: '06', title: 'Modern AI Systems',      count: 16, active: false, desc: 'Transformers, adaptation, RAG, tools' },
+  { num: '07', title: 'Real-World Products',    count: 14, active: false, desc: 'Quality, safety, cost, operations' },
+  { num: '08', title: 'Mastery & Design',       count: 10, active: false, desc: 'Systems, responsibility, capstone' },
 ]
 
 export default function Home() {

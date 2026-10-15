@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_mlops",
+  "depth": "advanced",
+  "title": "MLOps — Retrain Only with a Defined Trigger",
+  "key_insight": "Triggers may use enough new labeled data, measured drift, performance decay, or a deliberate product change. Every run still needs data validation and comparison gates.",
+  "body": "## Retrain Only with a Defined Trigger\n\nA scheduled retraining job runs weekly even when data is broken. Automation repeats the damage faster.\n\nTriggers may use enough new labeled data, measured drift, performance decay, or a deliberate product change. Every run still needs data validation and comparison gates.\n\nUse a champion-challenger process: the candidate must beat the current model on agreed slices without breaking safety or operational limits.",
+  "common_mistakes": [
+    "MLOps means copying the newest model file into production.",
+    "Scheduled retraining makes data validation unnecessary.",
+    "A model name alone proves which data produced it."
+  ],
+  "mini_exercise": "Draw “Retrain Only with a Defined Trigger” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Models and their data change, so production quality depends on lifecycle controls beyond ordinary code deployment.",
+  "explain_back_prompt": "Using “Retrain Only with a Defined Trigger,” explain MLOps without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Draft a model promotion record",
+    "context": "Turn MLOps into one small, inspectable artifact.",
+    "steps": [
+      "Name the data and code versions.",
+      "List evaluation and safety gates.",
+      "Define approval and rollback owners.",
+      "Record monitoring signals and retraining triggers."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

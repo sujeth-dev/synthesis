@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_batch_normalization",
+  "depth": "beginner",
+  "title": "Batch Normalization — Keep the Gauges Readable",
+  "key_insight": "Batch normalization recenters and rescales a layer’s values using measurements from the current training batch.",
+  "body": "## Keep the Gauges Readable\n\nValues entering a deep layer become huge in one batch and tiny in another. The next layer must keep adapting to a moving scale.\n\nBatch normalization recenters and rescales a layer’s values using measurements from the current training batch.\n\nIt then learns its own shift and scale, so normalization does not remove the model’s ability to represent useful ranges.",
+  "common_mistakes": [
+    "Batch normalization removes every learned parameter.",
+    "Evaluation should always use random batch measurements.",
+    "Normalization guarantees that overfitting cannot occur."
+  ],
+  "mini_exercise": "Sketch the situation in “Keep the Gauges Readable” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Stable activation scales can allow faster, less fragile deep-network training.",
+  "explain_back_prompt": "Using the “Keep the Gauges Readable” situation, explain Batch Normalization without assuming the listener knows deep learning."
+}

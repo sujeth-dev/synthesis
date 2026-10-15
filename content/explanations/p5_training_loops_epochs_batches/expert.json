@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_training_loops_epochs_batches",
+  "depth": "expert",
+  "title": "Training Loops, Epochs & Batches — One Logical Batch Across Many Devices",
+  "key_insight": "Data-parallel training averages gradients across devices, making the combined update resemble one larger batch. Communication happens before each shared optimizer step.",
+  "body": "## One Logical Batch Across Many Devices\n\nA model trains on several accelerators. Each device sees different examples, so their gradients disagree before the update.\n\nData-parallel training averages gradients across devices, making the combined update resemble one larger batch. Communication happens before each shared optimizer step.\n\nGradient accumulation imitates a larger batch by summing several smaller ones before updating. Scale the loss consistently and count scheduler steps by optimizer updates, not raw mini-batches.",
+  "common_mistakes": [
+    "An epoch is one single number inside a feature.",
+    "Validation should secretly train the model.",
+    "Larger batches always fit in memory and always improve accuracy."
+  ],
+  "mini_exercise": "Sketch the situation in “One Logical Batch Across Many Devices” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Correct loop structure keeps data, gradients, evaluation, and progress measurements in the right order.",
+  "explain_back_prompt": "Using the “One Logical Batch Across Many Devices” situation, explain Training Loops, Epochs & Batches without assuming the listener knows deep learning."
+}

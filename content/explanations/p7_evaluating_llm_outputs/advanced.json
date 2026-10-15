@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_evaluating_llm_outputs",
+  "depth": "advanced",
+  "title": "Evaluating LLM Outputs — Find the Failure Slice",
+  "key_insight": "Tag evaluations by task, risk, language, length, and source. Report slice results and severe-failure rates beside averages.",
+  "body": "## Find the Failure Slice\n\nAverage score rises while questions in one language become worse. One number hid the regression.\n\nTag evaluations by task, risk, language, length, and source. Report slice results and severe-failure rates beside averages.\n\nAdd every confirmed production failure to a regression set after removing sensitive data. Keep a separate holdout to avoid tuning only to known failures.",
+  "common_mistakes": [
+    "One fluent sample proves production quality.",
+    "All good summaries must exactly match one sentence.",
+    "A model grader is a permanent ground truth."
+  ],
+  "mini_exercise": "Draw “Find the Failure Slice” as three steps and explain each one.",
+  "real_world_usage": "Repeatable output evaluation catches quality regressions and separates plausible language from task success.",
+  "explain_back_prompt": "Use “Find the Failure Slice” to explain Evaluating LLM Outputs plainly."
+}

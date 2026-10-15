@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_embeddings",
+  "depth": "expert",
+  "title": "Embeddings — Geometry Comes from the Training Signal",
+  "key_insight": "Contrastive training pulls chosen positive pairs together and pushes negatives apart. Hard negatives—plausible but wrong matches—teach finer boundaries.",
+  "body": "## Geometry Comes from the Training Signal\n\nA map groups documents by writing style when the application needed topic. The geometry learned exactly what its training comparisons rewarded.\n\nContrastive training pulls chosen positive pairs together and pushes negatives apart. Hard negatives—plausible but wrong matches—teach finer boundaries.\n\nHigh-dimensional vectors can crowd into narrow directions. Centering, normalization, or retraining may help, but measure downstream retrieval before altering the space.",
+  "common_mistakes": [
+    "An embedding is always a readable paragraph.",
+    "Vector closeness proves two statements are factually true.",
+    "Every similarity metric ranks all vectors identically."
+  ],
+  "mini_exercise": "Draw “Geometry Comes from the Training Signal” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Embeddings connect text, images, and users to search, recommendation, retrieval, and neural computation.",
+  "explain_back_prompt": "Using “Geometry Comes from the Training Signal,” explain Embeddings without assuming the listener knows modern AI."
+}

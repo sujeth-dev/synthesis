@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_llm_landscape",
+  "depth": "expert",
+  "title": "The LLM Landscape — Route Workloads Instead of Crowning One Winner",
+  "key_insight": "Routing uses signals such as task type, uncertainty, risk, and budget. Cascades try a small model first and escalate when checks fail.",
+  "body": "## Route Workloads Instead of Crowning One Winner\n\nEasy requests waste money on the strongest model, while difficult cases fail on the cheapest. A router can choose by request.\n\nRouting uses signals such as task type, uncertainty, risk, and budget. Cascades try a small model first and escalate when checks fail.\n\nThe router needs its own evaluation because selection errors become system errors. Include provider outages, version changes, and fallback behavior in the comparison.",
+  "common_mistakes": [
+    "One leaderboard winner is best for every application.",
+    "A large context window guarantees perfect recall.",
+    "Open weights always mean unrestricted use without a license."
+  ],
+  "mini_exercise": "Draw “Route Workloads Instead of Crowning One Winner” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Sound model choice begins with the workload and constraints, not a leaderboard winner.",
+  "explain_back_prompt": "Using “Route Workloads Instead of Crowning One Winner,” explain The LLM Landscape without assuming the listener knows modern AI."
+}

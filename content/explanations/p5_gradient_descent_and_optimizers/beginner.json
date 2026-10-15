@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_gradient_descent_and_optimizers",
+  "depth": "beginner",
+  "title": "Gradient Descent & Optimizers — Walk Downhill in Fog",
+  "key_insight": "A gradient tells how loss changes around the current weights. Gradient descent moves weights in the opposite direction because that direction lowers loss nearby.",
+  "body": "## Walk Downhill in Fog\n\nA hiker cannot see the whole valley but can feel which direction slopes downward. One careful step should move closer to the low point.\n\nA gradient tells how loss changes around the current weights. Gradient descent moves weights in the opposite direction because that direction lowers loss nearby.\n\nTraining repeats: predict, measure loss, find gradients, and update. One step rarely solves the whole problem.",
+  "common_mistakes": [
+    "An optimizer creates training labels from nothing.",
+    "Weights should move in the direction that raises loss.",
+    "Momentum deletes all information from earlier steps."
+  ],
+  "mini_exercise": "Sketch the situation in “Walk Downhill in Fog” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Backpropagation finds directions; the optimizer decides the actual size and pattern of every update.",
+  "explain_back_prompt": "Using the “Walk Downhill in Fog” situation, explain Gradient Descent & Optimizers without assuming the listener knows deep learning."
+}

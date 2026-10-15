@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_prompt_injection_and_jailbreaks",
+  "depth": "expert",
+  "title": "Prompt Injection & Jailbreaks — Model the System as Trust Zones",
+  "key_insight": "Maintain provenance metadata and enforce policy at boundaries. Taint-style tracking can mark values derived from untrusted content before sensitive sinks.",
+  "body": "## Model the System as Trust Zones\n\nInstructions, user input, retrieved content, tool output, and secrets have different trust. Combining them as one text stream erases that distinction.\n\nMaintain provenance metadata and enforce policy at boundaries. Taint-style tracking can mark values derived from untrusted content before sensitive sinks.\n\nNo current defense guarantees perfect prompt-injection resistance. Design for containment, detection, human review, and recovery when prevention fails.",
+  "common_mistakes": [
+    "A confident model request proves authorization.",
+    "Keywords catch every future injection.",
+    "Retrieved documents should be allowed to grant permissions."
+  ],
+  "mini_exercise": "Draw “Model the System as Trust Zones” as three steps and explain each one.",
+  "real_world_usage": "Applications must treat model-readable content as untrusted because text can attempt to redirect instructions and tools.",
+  "explain_back_prompt": "Use “Model the System as Trust Zones” to explain Prompt Injection & Jailbreaks plainly."
+}

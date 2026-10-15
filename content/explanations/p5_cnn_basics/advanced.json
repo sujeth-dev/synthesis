@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_cnn_basics",
+  "depth": "advanced",
+  "title": "CNN Basics — See More Without One Giant Filter",
+  "key_insight": "The receptive field is the input area that can affect one later value. Pooling or strided convolution reduces spatial size and increases context per value.",
+  "body": "## See More Without One Giant Filter\n\nA model needs broader context, but one huge filter would add many parameters. Stacking small filters grows the visible region gradually.\n\nThe receptive field is the input area that can affect one later value. Pooling or strided convolution reduces spatial size and increases context per value.\n\nDownsampling saves computation but can erase fine detail. Detection and segmentation models often preserve or restore high-resolution paths.",
+  "common_mistakes": [
+    "A CNN requires a separate full model for every pixel.",
+    "Stride means the number of class labels.",
+    "Padding always deletes the image border."
+  ],
+  "mini_exercise": "Sketch the situation in “See More Without One Giant Filter” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "CNNs exploit image structure, using fewer parameters than connecting every pixel to every output.",
+  "explain_back_prompt": "Using the “See More Without One Giant Filter” situation, explain CNN Basics without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Inspect an image feature map",
+    "context": "Turn the CNN Basics idea into one small, inspectable workflow.",
+    "steps": [
+      "Create one tiny grayscale image tensor.",
+      "Apply one convolution filter.",
+      "Print input and output shapes.",
+      "Display or print the resulting feature values."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

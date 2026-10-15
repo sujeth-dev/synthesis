@@ -1,0 +1,15 @@
+{
+  "skill_id": "p5_cnn_basics",
+  "depth": "beginner",
+  "title": "CNN Basics — Slide One Detector Across the Picture",
+  "key_insight": "A convolution slides one small filter across the image. The same filter looks for the same pattern wherever it appears.",
+  "body": "## Slide One Detector Across the Picture\n\nAn edge can appear in the top-left or bottom-right of an image. Learning a separate detector for every location wastes effort.\n\nA convolution slides one small filter across the image. The same filter looks for the same pattern wherever it appears.\n\nDifferent filters learn different patterns. Early layers may find edges; later layers combine them into textures, parts, and objects.",
+  "common_mistakes": [
+    "A CNN requires a separate full model for every pixel.",
+    "Stride means the number of class labels.",
+    "Padding always deletes the image border."
+  ],
+  "mini_exercise": "Sketch the situation in “Slide One Detector Across the Picture” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "CNNs exploit image structure, using fewer parameters than connecting every pixel to every output.",
+  "explain_back_prompt": "Using the “Slide One Detector Across the Picture” situation, explain CNN Basics without assuming the listener knows deep learning."
+}

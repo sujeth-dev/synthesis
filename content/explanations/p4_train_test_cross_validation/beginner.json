@@ -1,0 +1,15 @@
+{
+  "skill_id": "p4_train_test_cross_validation",
+  "depth": "beginner",
+  "title": "Train/Test Splits & Cross-Validation — Seal the Final Exam",
+  "key_insight": "Training rows teach the model. Test rows stay sealed until the model and its settings are finished.",
+  "body": "## Seal the Final Exam\n\nA student practices on every question, including the final exam, then reports a perfect score. The score tells us nothing about new questions.\n\nTraining rows teach the model. Test rows stay sealed until the model and its settings are finished.\n\nThe test result estimates how the finished process handles unseen cases. It must not guide the process it judges.",
+  "common_mistakes": [
+    "Using the test set to choose model settings.",
+    "Randomly splitting time-ordered or grouped records.",
+    "Reporting only the best fold instead of the full variation."
+  ],
+  "mini_exercise": "Draw the situation from “Seal the Final Exam” with three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Without a fair split, every model comparison can be confidently wrong.",
+  "explain_back_prompt": "Using the “Seal the Final Exam” story, explain Train/Test Splits & Cross-Validation without assuming the listener knows machine learning."
+}

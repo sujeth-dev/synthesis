@@ -1,0 +1,237 @@
+[
+  {
+    "id": "p5_gradient_descent_and_optimizers_q1",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Gradient descent moves weights opposite the local loss slope."
+      },
+      {
+        "id": "b",
+        "text": "An optimizer creates training labels from nothing."
+      },
+      {
+        "id": "c",
+        "text": "Weights should move in the direction that raises loss."
+      },
+      {
+        "id": "d",
+        "text": "Momentum deletes all information from earlier steps."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Gradient descent moves weights opposite the local loss slope.",
+    "graph_placement_weight": {
+      "p5_gradient_descent_and_optimizers": 1
+    }
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_q2",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "mcq",
+    "difficulty_tier": "review",
+    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An optimizer creates training labels from nothing."
+      },
+      {
+        "id": "b",
+        "text": "Training repeats prediction, loss, gradient, and update steps."
+      },
+      {
+        "id": "c",
+        "text": "Weights should move in the direction that raises loss."
+      },
+      {
+        "id": "d",
+        "text": "Momentum deletes all information from earlier steps."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Training repeats prediction, loss, gradient, and update steps.",
+    "graph_placement_weight": {
+      "p5_gradient_descent_and_optimizers": 1
+    }
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_q3",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An optimizer creates training labels from nothing."
+      },
+      {
+        "id": "b",
+        "text": "Weights should move in the direction that raises loss."
+      },
+      {
+        "id": "c",
+        "text": "Momentum smooths updates by remembering recent directions."
+      },
+      {
+        "id": "d",
+        "text": "Momentum deletes all information from earlier steps."
+      }
+    ],
+    "correct_option_id": "c",
+    "explanation_after": "Momentum smooths updates by remembering recent directions.",
+    "graph_placement_weight": {
+      "p5_gradient_descent_and_optimizers": 1
+    }
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_q4",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "mcq",
+    "difficulty_tier": "same",
+    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An optimizer creates training labels from nothing."
+      },
+      {
+        "id": "b",
+        "text": "Weights should move in the direction that raises loss."
+      },
+      {
+        "id": "c",
+        "text": "Momentum deletes all information from earlier steps."
+      },
+      {
+        "id": "d",
+        "text": "Adam keeps adaptive per-parameter update scales."
+      }
+    ],
+    "correct_option_id": "d",
+    "explanation_after": "Adam keeps adaptive per-parameter update scales.",
+    "graph_placement_weight": {
+      "p5_gradient_descent_and_optimizers": 1
+    }
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_q5",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Optimizer state must be saved for a faithful training resume."
+      },
+      {
+        "id": "b",
+        "text": "An optimizer creates training labels from nothing."
+      },
+      {
+        "id": "c",
+        "text": "Weights should move in the direction that raises loss."
+      },
+      {
+        "id": "d",
+        "text": "Momentum deletes all information from earlier steps."
+      }
+    ],
+    "correct_option_id": "a",
+    "explanation_after": "Optimizer state must be saved for a faithful training resume.",
+    "graph_placement_weight": {
+      "p5_gradient_descent_and_optimizers": 1
+    }
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_q6",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "mcq",
+    "difficulty_tier": "harder",
+    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An optimizer creates training labels from nothing."
+      },
+      {
+        "id": "b",
+        "text": "Full curvature methods are often too expensive for deep networks."
+      },
+      {
+        "id": "c",
+        "text": "Weights should move in the direction that raises loss."
+      },
+      {
+        "id": "d",
+        "text": "Momentum deletes all information from earlier steps."
+      }
+    ],
+    "correct_option_id": "b",
+    "explanation_after": "Full curvature methods are often too expensive for deep networks.",
+    "graph_placement_weight": {
+      "p5_gradient_descent_and_optimizers": 1
+    }
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_order1",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "order",
+    "difficulty_tier": "same",
+    "prompt": "Arrange this Gradient Descent & Optimizers workflow.",
+    "options": [
+      {
+        "id": "a",
+        "text": "clear old gradients"
+      },
+      {
+        "id": "b",
+        "text": "compute predictions and loss"
+      },
+      {
+        "id": "c",
+        "text": "run backward propagation"
+      },
+      {
+        "id": "d",
+        "text": "take an optimizer step"
+      }
+    ],
+    "correct_answer": "a,b,c,d",
+    "explanation_after": "The safe order is: clear old gradients → compute predictions and loss → run backward propagation → take an optimizer step."
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_fill1",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "fill",
+    "difficulty_tier": "harder",
+    "prompt": "Choose the chip that completes the Gradient Descent & Optimizers step.",
+    "options": [
+      {
+        "id": "a",
+        "text": "optimizer.step()"
+      },
+      {
+        "id": "b",
+        "text": "model.eval()"
+      },
+      {
+        "id": "c",
+        "text": "data.shuffle()"
+      },
+      {
+        "id": "d",
+        "text": "loss.item()"
+      }
+    ],
+    "correct_option_id": "a",
+    "correct_answer": "optimizer.step()",
+    "explanation_after": "The correct choice is optimizer.step()."
+  }
+]

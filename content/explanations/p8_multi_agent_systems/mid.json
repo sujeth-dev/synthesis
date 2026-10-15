@@ -1,0 +1,28 @@
+{
+  "skill_id": "p8_multi_agent_systems",
+  "depth": "mid",
+  "title": "Multi-Agent Systems — Coordinate Through Explicit State",
+  "key_insight": "An orchestrator or state machine assigns tasks and stores structured status, artifacts, and dependencies. Handoffs use typed results rather than vague prose.",
+  "body": "## Coordinate Through Explicit State\n\nAgents pass long conversational messages and lose track of which steps are complete. Shared work needs a clearer record.\n\nAn orchestrator or state machine assigns tasks and stores structured status, artifacts, and dependencies. Handoffs use typed results rather than vague prose.\n\nSet limits on turns, tokens, tools, and time. Detect repeated states so a disagreement cannot loop forever.",
+  "common_mistakes": [
+    "Adding more agents always improves every task.",
+    "Conversational memory replaces structured workflow state.",
+    "Every agent should receive all available permissions."
+  ],
+  "mini_exercise": "Draw “Coordinate Through Explicit State” as three labeled steps, then explain the decision at each step.",
+  "real_world_usage": "Multiple model-driven workers can help on decomposable work, but coordination can add cost, delay, and new failure modes.",
+  "explain_back_prompt": "Using “Coordinate Through Explicit State,” explain Multi-Agent Systems without assuming the listener knows AI engineering.",
+  "build_task": {
+    "title": "Design a bounded two-role workflow",
+    "context": "Turn Multi-Agent Systems into one small, inspectable artifact.",
+    "steps": [
+      "Choose a task with two genuinely distinct roles.",
+      "Define each role’s inputs and output schema.",
+      "Add a coordinator and stop rules.",
+      "List duplicate-action and recovery tests."
+    ],
+    "expected_output": "A versioned artifact with visible decisions, evidence, and failure handling.",
+    "hint": "Keep the scope bounded and record why each decision was made.",
+    "starter_code": "# Complete one step at a time.\n# Record evidence and limits as you go."
+  }
+}

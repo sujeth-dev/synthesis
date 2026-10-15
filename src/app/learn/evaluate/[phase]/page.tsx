@@ -11,7 +11,7 @@ const BLOOM_LABELS: Record<BloomLevel, string> = {
   analyze: 'Analyze', evaluate: 'Evaluate', create: 'Create',
 }
 const PHASE_LABELS: Record<string, string> = {
-  phase_1_computer_basics: 'Phase 1', phase_2_cs_data: 'Phase 2', phase_3_intro_ai: 'Phase 3',
+  phase_1_computer_basics: 'Phase 1', phase_1b_programming_basics: 'Phase 1B', phase_2_cs_data: 'Phase 2', phase_3_intro_ai: 'Phase 3',
 }
 
 interface EvalResult { question_id: string; skill_id: string; bloom_level: BloomLevel; correct: boolean }

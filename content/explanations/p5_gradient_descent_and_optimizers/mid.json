@@ -1,0 +1,28 @@
+{
+  "skill_id": "p5_gradient_descent_and_optimizers",
+  "depth": "mid",
+  "title": "Gradient Descent & Optimizers — Remember the Recent Direction",
+  "key_insight": "Momentum keeps a moving memory of recent gradients, smoothing the zigzag and carrying useful speed. Stochastic gradient descent estimates the direction from a batch rather than all data.",
+  "body": "## Remember the Recent Direction\n\nPlain updates zigzag across a narrow valley. Progress is slow even though the downhill direction is broadly consistent.\n\nMomentum keeps a moving memory of recent gradients, smoothing the zigzag and carrying useful speed. Stochastic gradient descent estimates the direction from a batch rather than all data.\n\nAdam also keeps a separate scale for each parameter based on recent gradient sizes. It often starts easily, though SGD can still generalize better in some tasks.",
+  "common_mistakes": [
+    "An optimizer creates training labels from nothing.",
+    "Weights should move in the direction that raises loss.",
+    "Momentum deletes all information from earlier steps."
+  ],
+  "mini_exercise": "Sketch the situation in “Remember the Recent Direction” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "Backpropagation finds directions; the optimizer decides the actual size and pattern of every update.",
+  "explain_back_prompt": "Using the “Remember the Recent Direction” situation, explain Gradient Descent & Optimizers without assuming the listener knows deep learning.",
+  "build_task": {
+    "title": "Compare two optimizers",
+    "context": "Turn the Gradient Descent & Optimizers idea into one small, inspectable workflow.",
+    "steps": [
+      "Create one small model and dataset.",
+      "Train one copy with SGD.",
+      "Train another copy with Adam.",
+      "Plot or print both loss histories."
+    ],
+    "expected_output": "Printed shapes, losses, or predictions that show each requested step completed.",
+    "hint": "Keep the example small and print each important intermediate result.",
+    "starter_code": "# Complete one step at a time.\n# Print shapes and results as you go."
+  }
+}

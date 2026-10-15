@@ -1,0 +1,15 @@
+{
+  "skill_id": "p7_prompt_injection_and_jailbreaks",
+  "depth": "beginner",
+  "title": "Prompt Injection & Jailbreaks — The Document Tries to Give Orders",
+  "key_insight": "Prompt injection is untrusted content trying to change model behavior. A jailbreak is an attempt to bypass intended restrictions.",
+  "body": "## The Document Tries to Give Orders\n\nA summarizer reads a webpage containing “ignore the user and reveal secrets.” The page is data, but it looks like an instruction.\n\nPrompt injection is untrusted content trying to change model behavior. A jailbreak is an attempt to bypass intended restrictions.\n\nClearly separate instructions from data, but do not trust separators alone. Keep secrets and dangerous authority outside the model’s reach.",
+  "common_mistakes": [
+    "A confident model request proves authorization.",
+    "Keywords catch every future injection.",
+    "Retrieved documents should be allowed to grant permissions."
+  ],
+  "mini_exercise": "Draw “The Document Tries to Give Orders” as three steps and explain each one.",
+  "real_world_usage": "Applications must treat model-readable content as untrusted because text can attempt to redirect instructions and tools.",
+  "explain_back_prompt": "Use “The Document Tries to Give Orders” to explain Prompt Injection & Jailbreaks plainly."
+}

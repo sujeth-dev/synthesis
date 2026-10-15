@@ -1,0 +1,15 @@
+{
+  "skill_id": "p6_rag_systems",
+  "depth": "beginner",
+  "title": "RAG Systems — Let the Model Open the Right Book",
+  "key_insight": "RAG first retrieves relevant source passages, then includes them as context for generation. The answer can be grounded in material the application controls.",
+  "body": "## Let the Model Open the Right Book\n\nA model is asked about a policy written yesterday. Its training cannot contain that update, so guessing is unsafe.\n\nRAG first retrieves relevant source passages, then includes them as context for generation. The answer can be grounded in material the application controls.\n\nRetrieval does not guarantee truth. Show sources and let the model admit when the provided evidence is insufficient.",
+  "common_mistakes": [
+    "RAG permanently writes every document into model weights.",
+    "Retrieval guarantees the final answer is correct.",
+    "Retrieved documents should override system instructions."
+  ],
+  "mini_exercise": "Draw “Let the Model Open the Right Book” as three labeled steps, then explain what changes at each step.",
+  "real_world_usage": "RAG connects models to current or private knowledge without retraining the model for every document change.",
+  "explain_back_prompt": "Using “Let the Model Open the Right Book,” explain RAG Systems without assuming the listener knows modern AI."
+}
