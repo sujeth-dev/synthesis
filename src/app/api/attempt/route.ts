@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
-import { computeFsrsSchedule, fsrsRatingFromCorrectness } from '@/lib/fsrs'
+import { computeFsrsSchedule, fsrsRatingFromCorrectness, type FsrsSchedule } from '@/lib/fsrs'
+import { activeScheduler, chooseSchedule } from '@/lib/fsrs/scheduler'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
 import { gradeExplanation } from '@/lib/nlp/grader'
@@ -108,36 +109,38 @@ export async function POST(req: NextRequest) {
     behavior: behaviorModifier,
   })
 
-  // ── Update SM-2
-  // ── FSRS shadow mode (FSRS-3): computed alongside SM-2 from the same
-  // correctness/latency evidence, but never read from or served to the
-  // learner — SM-2's write above is the only thing that stays live. Any
-  // failure here (e.g. migration 004 not yet applied on some deployment)
-  // must not affect the real SM-2 write, so it's isolated and fail-open.
+  // ── Update SM-2, with FSRS alongside (FSRS-3 shadow mode). FSRS is always
+  // computed and logged from the same correctness/latency evidence; it only
+  // sets the live due date when the deployment opts in with SCHEDULER=fsrs
+  // (FSRS-5). Any FSRS failure (e.g. migration 004 missing) is isolated and
+  // falls back to SM-2's own schedule.
   let fsrsShadow: { sm2_interval_days: number; fsrs_interval_days: number; fsrs_stability: number; fsrs_difficulty: number; fsrs_due_at: string } | null = null
   if (schedule) {
-    const quality         = bktToQuality(correct, safe_latency)
-    const updatedSchedule = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, quality)
-    await upsertReviewSchedule(updatedSchedule)
+    const quality     = bktToQuality(correct, safe_latency)
+    const sm2Schedule = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, quality)
 
+    let fsrsResult: FsrsSchedule | null = null
     try {
       const previousShadow = await getLastFsrsShadowEntry(user.id, skill_id)
-      const fsrsResult = computeFsrsSchedule(
+      fsrsResult = computeFsrsSchedule(
         previousShadow
           ? { stability: previousShadow.fsrs_stability, difficulty: previousShadow.fsrs_difficulty, last_review: previousShadow.created_at }
           : null,
         fsrsRatingFromCorrectness(correct, safe_latency),
       )
       fsrsShadow = {
-        sm2_interval_days: updatedSchedule.interval_days,
+        sm2_interval_days: sm2Schedule.interval_days,
         fsrs_interval_days: fsrsResult.interval_days,
         fsrs_stability: fsrsResult.stability,
         fsrs_difficulty: fsrsResult.difficulty,
         fsrs_due_at: fsrsResult.due_at,
       }
     } catch {
+      fsrsResult = null
       fsrsShadow = null
     }
+
+    await upsertReviewSchedule(chooseSchedule(sm2Schedule, fsrsResult, activeScheduler()))
   }
 
   // ── Update motivation

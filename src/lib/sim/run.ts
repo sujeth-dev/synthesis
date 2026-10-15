@@ -14,7 +14,8 @@ import { createRng, type Rng } from './rng'
 import { practice, sampleLearnerParams, trueRecallProbability, type LearnerParams, type TrueSkillMemory } from './learner'
 import { auc, logLoss, mean, type Prediction } from './metrics'
 
-export type SchedulerKind = 'sm2' | 'fsrs'
+export type { SchedulerKind } from '@/lib/fsrs/scheduler'
+import type { SchedulerKind } from '@/lib/fsrs/scheduler'
 
 export interface SimSkill { id: string; hardPrereqs: string[] }
 

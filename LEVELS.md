@@ -19,6 +19,7 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 | 2 | DKT trained on Synaptic's own 120 skills (DKT-10), compared with the app's live BKT, a fitted BKT, and a ground-truth ceiling | `npm run sim` then `cd Research/dkt && python3 train_synaptic.py` |
 | 3 | DKT runs inside the app in TypeScript (DKT-11), verified against PyTorch; optional shadow logging next to BKT | `npm run dkt:predict` |
 | 4 | DKT evaluated against live BKT on unseen learners (DKT-12) + an automatic cutover gate (DKT-13) | `npm run dkt:compare -- --sim` |
+| 5 | FSRS vs SM-2 compared on simulated learners (FSRS-4) + a live scheduler switch (FSRS-5) | `npm run sim`, then set `SCHEDULER=fsrs` |
 
 ## Level details
 
@@ -46,3 +47,8 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 - `npm run dkt:compare -- --sim` — 300 fresh simulated learners (seed never used in training) through the app's TypeScript DKT and BKT. Result (**synthetic**): DKT AUC 0.723 vs live BKT 0.718 (ceiling 0.839) → gate says **don't switch**. Matches the Python result, confirming the shipped model end to end.
 - `npm run dkt:compare` (no flag) — same report on real `dkt_shadow_log` rows once Level 3's shadow mode has collected data.
 - `src/lib/dkt/index.ts` now steps the LSTM incrementally (`stepDkt`, `predictSkill`); `predictNext` is unchanged.
+
+### Level 5 — FSRS: comparison and switch
+- `npm run sim` now also writes `Research/sim/results/scheduler-comparison.md` (**synthetic**, 2,000 learners × 90 days): FSRS uses ~14% more reviews and cuts forgotten skills from 4.7% to 3.1%; it ranks recall better than SM-2 (AUC 0.62 vs 0.52) but default parameters are over-confident.
+- `SCHEDULER=fsrs` makes FSRS set live review due dates (`src/lib/fsrs/scheduler.ts`). Default stays SM-2. SM-2's bookkeeping is always updated so switching either way is instant; any FSRS failure falls back to SM-2. FSRS shadow logging is unchanged.
+- Not done: FSRS-6 (refitting FSRS's parameters) needs real review logs, which a simulator can't stand in for.
