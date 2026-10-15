@@ -62,6 +62,13 @@ class DKTModel(nn.Module):
         return torch.sigmoid(self.output(out))
 
 
+def json_safe_skill_id(skill_id):
+    """ASSISTments skill IDs load as numpy ints (not JSON-serializable);
+    Synaptic's are strings like "p1_what_is_computer". Keep each dataset's
+    native type rather than forcing int(), which raised on Synaptic's IDs."""
+    return int(skill_id) if isinstance(skill_id, (int, np.integer)) else str(skill_id)
+
+
 def build_skill_index(df: pd.DataFrame) -> dict:
     skill_ids = sorted(df["skill_id"].unique().tolist())
     return {skill_id: idx for idx, skill_id in enumerate(skill_ids)}
@@ -245,7 +252,7 @@ def main() -> None:
                 predictions.append(
                     {
                         "student_id": int(student_id),
-                        "skill_id": int(index_to_skill[skills[t + 1]]),
+                        "skill_id": json_safe_skill_id(index_to_skill[skills[t + 1]]),
                         "timestamp": int(timestamps[t + 1]),
                         "actual": int(corrects[t + 1]),
                         "predicted": float(pred_for_target[0, t].item()),
