@@ -138,44 +138,61 @@ Doc ref: `v2/doc/findings/06-content-classification-gaps.md`, `basic-guide.md`'s
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section A.
 **Constraint:** lives entirely under `research/dkt/` (Python), never touches `package.json` or the Next.js runtime. Do not commit raw datasets — `.gitignore` them, commit only scripts + results.
 
-| ID | Task |
-|---|---|
-| DKT-1 | Download ASSISTments 2009-2010, record license/citation terms in `research/dkt/README.md` |
-| DKT-2 | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
-| DKT-3 | Split by student, not by interaction |
-| DKT-4 | Fit a proper per-skill BKT baseline on the same split |
-| DKT-5 | Train a small LSTM DKT on train/val |
-| DKT-6 | Evaluate DKT AUC vs. BKT AUC on held-out test set |
-| DKT-7 | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
-| DKT-8 | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+| ID | Status | Task |
+|---|---|---|
+| DKT-1 | done | Download ASSISTments 2009-2010, record license/citation terms in `research/dkt/README.md` |
+| DKT-2 | done | Preprocess into `(student_id, skill_id, correct, timestamp)` sequences |
+| DKT-3 | done | Split by student, not by interaction |
+| DKT-4 | done | Fit a proper per-skill BKT baseline on the same split |
+| DKT-5 | done | Train a small LSTM DKT on train/val |
+| DKT-6 | done | Evaluate DKT AUC vs. BKT AUC on held-out test set |
+| DKT-7 | done | Unit-test the DKT training loop against a synthetic tiny batch (loss decreases, no mask leakage, correct output shapes) |
+| DKT-8 | done | Write up the result, labeled explicitly as a benchmark-dataset result, not a Synaptic-production result |
+| DKT-9 | done | Export real learner interactions already logged by `insertAttempt()` into the `(student_id, skill_id, correct, timestamp)` CSV shape `Research/dkt/preprocess.py` expects, plus a real volume report — logging itself already existed via `attempt_events`, this built the export + report. Real result (2026-08-12): 416 rows, 5 students, 40 skills — 416 / 50,000 (0.83%), volume threshold not yet met |
+| DKT-10 | not_started · **depends on DKT-9's real volume** | Retrain DKT from scratch on Synaptic's own skill space (not ASSISTments') |
+| DKT-11 | not_started · **depends on DKT-10** | Build a live inference path and shadow-log DKT's predicted `p_know` alongside BKT's real one — never served, mirroring `fsrs_shadow_log` |
+| DKT-12 | not_started · **depends on DKT-11's shadow data** | Compare DKT's predictions against real learner outcomes — the Synaptic-specific evidence a live cutover needs |
+| DKT-13 (= `P3-3`) | not_started · **depends on DKT-12** | Live cutover decision + implementation, with human sign-off, only if DKT-12's evidence supports it |
+
+**Track status: DKT-1 through DKT-8 done (2026-08-12).** DKT AUC 0.8299 vs. BKT AUC 0.7296 on the held-out ASSISTments test split — see `research/dkt/RESULTS.md`. `pytest research/dkt/tests/` (4/4) and the full `download_data.py → preprocess.py → split.py → bkt_baseline.py → train_dkt.py → evaluate.py` pipeline both verified green against the real dataset. Committed locally on `dkt-track`, not pushed (final push happens once alongside `fsrs-track`, outside this session).
+
+**DKT-9 through DKT-13 added 2026-08-12** after a direct request to make DKT live immediately surfaced two blockers that aren't policy caution — they're missing engineering: DKT's trained model has zero connection to Synaptic's actual skill graph (trained end-to-end on ASSISTments' own 123 skills, not Synaptic's), and no live inference path exists (today's code is an offline batch script). Full scoping in `v2/doc/vision/dkt-live-integration-scope.md`, including the exact 19 files a live cutover would touch. DKT-9 (real interaction logging) is genuinely startable now; DKT-10 through DKT-13 each depend on the previous step's real output, not a calendar date.
+
+**DKT-9 done (2026-08-12, `dkt-live-track` worktree).** `scripts/dkt-export-interactions.js` (`npm run dkt:export`) queries live `attempt_events` read-only and writes `Research/dkt/data/synaptic_interactions.csv` (gitignored, confirmed via `git check-ignore -v` — the `.gitignore` pattern's lowercase `research/dkt/data/` still matches the real `Research/dkt/` directory because git on this Windows checkout matches case-insensitively; no `.gitignore` edit was needed). Real result: 416 interactions, 5 students, 40 skills — 416 / 50,000 (0.83%), so DKT-10 retraining is not yet volume-justified. Flagged, not fixed here (out of scope per the execution guide): `train_dkt.py:248`'s `int(index_to_skill[...])` cast assumes ASSISTments' numeric skill IDs and will throw on Synaptic's string ones (`p1_what_is_computer` etc.) — DKT-10's job when it starts. No unit test added: the script is a thin query-and-write with no branching logic worth testing in isolation. Committed locally on `dkt-live-track`, not pushed, not merged into `v2`.
 
 **Live cutover** (switching Synaptic's own engine to DKT) is Phase 3 item P3-3, gated at 50k+ real sessions — do not do this as part of this track.
 
 ### FSRS (start anytime after P0-2's SM-2 behavior is well-tested)
 Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section B.
 
-| ID | Task | Depends on |
-|---|---|---|
-| FSRS-1 | Pull FSRS's published default parameters from a reference implementation (e.g. `ts-fsrs`) | none |
-| FSRS-2 | Test FSRS interval output against the reference implementation for known inputs | FSRS-1 |
-| FSRS-3 | Run FSRS in shadow mode alongside SM-2 for ≥1 full review cycle (compute + log both, serve SM-2 live) | FSRS-2, P0-2 done |
-| FSRS-4 | Compare shadow-mode logs; decide on cutover | FSRS-3 |
-| FSRS-5 | Switch live scheduling to FSRS (only after FSRS-4 looks right — human sign-off recommended before this one, see `DEVELOPMENT_LOOP.md` blocker rules) | FSRS-4 |
-| FSRS-6 | *(Optional, needs 5k+ real review events)* Refit FSRS's 17 parameters to Synaptic's own users | FSRS-5 |
+**Blocked on a missing credential, 2026-08-12 (FSRS-3/FSRS-4):** FSRS-1 and FSRS-2 are fully done. FSRS-3's code (migration `supabase/migrations/004_fsrs_shadow_log.sql`, the shadow-mode hook in `src/app/api/attempt/route.ts`, and a route-level integration test) is complete and tested, but the migration has **not been applied to the live Supabase database** — the documented path (`npm run db:migrate`) needs `SUPABASE_DB_URL` in `.env.local`, which isn't configured in this worktree, and this track's plan explicitly excludes falling back to the Supabase CLI one-off used for migrations 002/003. So no real learner has any `fsrs_shadow_log` rows, and FSRS-3's "≥1 full review cycle" requirement hasn't happened against production data — only against the mocked integration test's simulated cycle. FSRS-4's comparison tooling (`src/lib/fsrs/comparison.ts`, `scripts/fsrs-shadow-comparison.js`, `npm run fsrs:compare`) is built and unit-tested, and `Research/fsrs-shadow-comparison.md` documents the methodology, but it deliberately stops short of a cutover recommendation since there is no real data yet to compare — see `PROGRESS.md`'s Blockers section for the full record. **Needs human action:** add `SUPABASE_DB_URL` to `.env.local` (or otherwise get migration 004 applied to the live database), let the app run for ≥1 real review cycle, then run `npm run fsrs:compare` and write the actual recommendation into `Research/fsrs-shadow-comparison.md`.
+
+| ID | Status | Task | Depends on |
+|---|---|---|---|
+| FSRS-1 | done | Pull FSRS's published default parameters from a reference implementation (e.g. `ts-fsrs`) | none |
+| FSRS-2 | done | Test FSRS interval output against the reference implementation for known inputs | FSRS-1 |
+| FSRS-3 | blocked | Run FSRS in shadow mode alongside SM-2 for ≥1 full review cycle (compute + log both, serve SM-2 live) — code/tests done, live migration application blocked (see note above) | FSRS-2, P0-2 done |
+| FSRS-4 | blocked | Compare shadow-mode logs; decide on cutover — tooling/methodology done, real comparison blocked on FSRS-3's live data (see note above) | FSRS-3 |
+| FSRS-5 | not_started | Switch live scheduling to FSRS (only after FSRS-4 looks right — human sign-off recommended before this one, see `DEVELOPMENT_LOOP.md` blocker rules) | FSRS-4 |
+| FSRS-6 | not_started | *(Optional, needs 5k+ real review events)* Refit FSRS's 17 parameters to Synaptic's own users | FSRS-5 |
 
 ### NLP/LLM reasoning grader (start once P1-1's rule-based classifier exists)
-Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C.
+Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C. Built on the `nlp-track` worktree/branch.
 
 **Live upgrade trigger:** keep the rule-based classifier primary until NLP-1 through NLP-3 show that the versioned API grader has reliably higher agreement with the same 50-200 human-labeled examples. A promoted API grader must retain the rules as its hard fallback; live cutover requires human sign-off.
 
-| ID | Task | Depends on |
-|---|---|---|
-| NLP-1 | Collect 50-200 labeled real/hand-authored explanation examples | P1-1 |
-| NLP-2 | Design the rubric-based grading prompt for the LLM API, versioned | NLP-1 |
-| NLP-3 | Run the API grader against the validation set; measure agreement (e.g. Cohen's kappa) vs. human labels | NLP-2 |
-| NLP-4 | Wire in the rule-based classifier as a hard fallback on API failure/timeout | NLP-3 |
-| NLP-5 | Add caching for repeated/near-identical explanations | NLP-4 |
-| NLP-6 | Log every graded call (input, output, rubric/prompt version) | NLP-4 |
+**Trigger met (2026-08-12):** NLP-3's run against all 106 labeled examples (real calls to live free-tier OpenRouter/Groq models, `scripts/run-nlp-eval.ts`, results in `src/lib/nlp/data/eval-results-v1.json`) shows the v1 API grader at 96.2% accuracy / Cohen's κ=0.943 vs. human labels, against the rule-based classifier's 67.0% / κ=0.498 on the same set — including 0% vs. 84.2% accuracy on the 19 examples deliberately written to fool the keyword-based classifier. This is a reliably higher agreement, satisfying the trigger condition. **This is a benchmark result only** — per the guardrail below, the rule-based classifier remains the only thing wired into `bktUpdate()`/`/api/attempt` (confirmed byte-for-byte unchanged); promoting the API grader to the live path is a separate, human-sign-off-gated decision, not automatic from this result.
+
+| ID | Status | Task | Depends on |
+|---|---|---|---|
+| NLP-1 | done | Collect 50-200 labeled real/hand-authored explanation examples | P1-1 |
+| NLP-2 | done | Design the rubric-based grading prompt for the LLM API, versioned | NLP-1 |
+| NLP-3 | done | Run the API grader against the validation set; measure agreement (e.g. Cohen's kappa) vs. human labels | NLP-2 |
+| NLP-4 | done | Wire in the rule-based classifier as a hard fallback on API failure/timeout | NLP-3 |
+| NLP-5 | done | Add caching for repeated/near-identical explanations | NLP-4 |
+| NLP-6 | done | Log every graded call (input, output, rubric/prompt version) | NLP-4 |
+
+**Acceptance:** `src/lib/nlp/grader.ts` (client + failover + NLP-4 fallback + NLP-5 cache + NLP-6 logging), `src/lib/nlp/prompts/v1.ts` (NLP-2 rubric), `src/lib/nlp/data/labeled-examples.ts` (NLP-1, 106 examples), `src/lib/nlp/catalog.ts` (live free-model discovery — never hardcodes model IDs as free, verifies pricing/availability against each provider's own catalog). 9 unit tests cover rate-limit/quota/timeout retry-to-next-model, chain exhaustion and empty-chain hard fallback, schema-validation fallback, cache hits, and log entries. `npm test` green (67/67). `git hash-object` on `src/app/api/attempt/route.ts` and `src/lib/bkt/index.ts` confirmed unchanged from pre-NLP-track baseline.
 
 ---
 
@@ -277,7 +294,7 @@ Originally a separate pure-classifier task per `basic-guide.md`'s Mixture Strate
 |---|---|---|
 | P3-1 | Promise #10 — adopt Learner Profile schema (6 dimensions) + V6/V7 dashboard concepts | `08-interfaces.md`, `11-demo-masterplan.md` |
 | P3-2 | Promise #9 — build Code Editor + Debug the Machine construct (Track 2) | `09-library.md`, `13-content-structure.md` |
-| P3-3 | Promise #4 — DKT live cutover, gated at 50k+ real sessions (prior art: DKT-1..8 above) | `basic-guide.md` |
+| P3-3 | Promise #4 — DKT live cutover. ~~Gated at 50k+ real sessions (prior art: DKT-1..8 above)~~ **Scoped 2026-08-12:** this is DKT-9 through DKT-13 above, not a single task — see `v2/doc/vision/dkt-live-integration-scope.md` for why (skill-space mismatch + no live inference path, not just a volume gate) | `basic-guide.md`, `v2/doc/vision/dkt-live-integration-scope.md` |
 | P3-4 | Composite puzzles (`vision/discovery-model.md` §5) — needs BLOOM track done + redesigned `insertAttempt()` | `discovery-model.md` §5 |
 
 Each item's acceptance criteria is its own lab-doc's acceptance script, evaluated when the item is actually started (not defined in detail here to avoid staleness — re-derive from the cited doc at start time).

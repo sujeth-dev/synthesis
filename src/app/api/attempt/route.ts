@@ -2,15 +2,21 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
+import { computeFsrsSchedule, fsrsRatingFromCorrectness, type FsrsSchedule } from '@/lib/fsrs'
+import { activeScheduler, chooseSchedule } from '@/lib/fsrs/scheduler'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
+import { gradeExplanation } from '@/lib/nlp/grader'
 import { computeUnblocked } from '@/lib/graph'
 import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
   getMotivationState, upsertMotivationState, insertAttempt,
   incrementSessionCounts, getSession, getAllSkillStates, schedulePhaseReview,
   getRecentAttemptsForSkill, getSessionBehaviorAttempts,
+  getLastFsrsShadowEntry, insertFsrsShadowLog,
+  getAttemptHistory, insertDktShadowLog,
 } from '@/lib/db/queries'
+import { DKT_HISTORY_LIMIT, getBundledDktModel, isDktShadowEnabled, predictForAttempt } from '@/lib/dkt/shadow'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat } from '@/types'
 import { canChooseTopicSwitch, getGuidedArcProgress } from '@/lib/session/engine'
@@ -75,24 +81,66 @@ export async function POST(req: NextRequest) {
   const schedule    = await getReviewSchedule(user.id, skill_id)
 
   // ── Update BKT
-  // Reasoning-quality evidence comes from the Feynman Loop classifier whenever the
-  // learner submitted free-text reasoning (question_format 'explain'); question types
-  // with no reasoning to evaluate (mcq/fill/code/order) keep the neutral modifier.
+  // Reasoning-quality evidence comes from grading free-text reasoning whenever the
+  // learner submitted it (question_format 'explain'); question types with no reasoning
+  // to evaluate (mcq/fill/code/order) keep the neutral modifier.
+  // NLP live cutover (2026-08-12): the LLM grader (src/lib/nlp/grader.ts) is now primary
+  // -- it measurably beats the rule-based classifier (96.2% vs 67.0% agreement with human
+  // labels, kappa 0.943 vs 0.498 on 106 examples, live-tested with real model failover)
+  // and internally hard-falls-back to the same rule-based classifier if every free-tier
+  // model fails. This call site adds one more layer of the same fail-open guarantee: any
+  // unexpected failure (e.g. catalog discovery throwing before its own model loop) still
+  // resolves to the rule-based classifier directly, so a grading failure of any kind can
+  // never block the attempt itself from being scored and persisted.
   const explanationText = typeof client_answer === 'string' ? client_answer.trim() : ''
-  const reasoningQuality = question_format === 'explain' && explanationText
-    ? reasoningQualityFromCategory(classifyExplanation(explanationText))
-    : 1
+  let reasoningQuality = 1
+  if (question_format === 'explain' && explanationText) {
+    const conceptNode = getAllNodes().find(n => n.id === skill_id)
+    try {
+      const graded = await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })
+      reasoningQuality = reasoningQualityFromCategory(graded.category)
+    } catch {
+      reasoningQuality = reasoningQualityFromCategory(classifyExplanation(explanationText))
+    }
+  }
   const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
   const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {
     reasoningQuality,
     behavior: behaviorModifier,
   })
 
-  // ── Update SM-2
+  // ── Update SM-2, with FSRS alongside (FSRS-3 shadow mode). FSRS is always
+  // computed and logged from the same correctness/latency evidence; it only
+  // sets the live due date when the deployment opts in with SCHEDULER=fsrs
+  // (FSRS-5). Any FSRS failure (e.g. migration 004 missing) is isolated and
+  // falls back to SM-2's own schedule.
+  let fsrsShadow: { sm2_interval_days: number; fsrs_interval_days: number; fsrs_stability: number; fsrs_difficulty: number; fsrs_due_at: string } | null = null
   if (schedule) {
-    const quality         = bktToQuality(correct, safe_latency)
-    const updatedSchedule = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, quality)
-    await upsertReviewSchedule(updatedSchedule)
+    const quality     = bktToQuality(correct, safe_latency)
+    const sm2Schedule = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, quality)
+
+    let fsrsResult: FsrsSchedule | null = null
+    try {
+      const previousShadow = await getLastFsrsShadowEntry(user.id, skill_id)
+      fsrsResult = computeFsrsSchedule(
+        previousShadow
+          ? { stability: previousShadow.fsrs_stability, difficulty: previousShadow.fsrs_difficulty, last_review: previousShadow.created_at }
+          : null,
+        fsrsRatingFromCorrectness(correct, safe_latency),
+      )
+      fsrsShadow = {
+        sm2_interval_days: sm2Schedule.interval_days,
+        fsrs_interval_days: fsrsResult.interval_days,
+        fsrs_stability: fsrsResult.stability,
+        fsrs_difficulty: fsrsResult.difficulty,
+        fsrs_due_at: fsrsResult.due_at,
+      }
+    } catch {
+      fsrsResult = null
+      fsrsShadow = null
+    }
+
+    await upsertReviewSchedule(chooseSchedule(sm2Schedule, fsrsResult, activeScheduler()))
   }
 
   // ── Update motivation
@@ -142,6 +190,33 @@ export async function POST(req: NextRequest) {
     ...behaviorSnapshot,
   })
   if (session_id) await incrementSessionCounts(session_id, correct)
+
+  if (fsrsShadow) {
+    try {
+      await insertFsrsShadowLog({ learner_id: user.id, skill_id, attempt_id, ...fsrsShadow })
+    } catch {
+      // Observational only — see the SM-2 block above.
+    }
+  }
+
+  // ── DKT shadow mode (DKT-11): DKT's prediction for this attempt from the
+  // learner's earlier history, logged next to live BKT's and the outcome.
+  // Opt-in (DKT_SHADOW=1), never read back, and fail-open like FSRS above.
+  if (isDktShadowEnabled()) {
+    try {
+      const history = (await getAttemptHistory(user.id, DKT_HISTORY_LIMIT + 1))
+        .filter(a => a.id !== attempt_id)
+      const prediction = predictForAttempt(await getBundledDktModel(), history, skill_id)
+      if (prediction) {
+        await insertDktShadowLog({
+          learner_id: user.id, skill_id, attempt_id, correct, ...prediction,
+          bkt_p_correct: skillState.p_know * (1 - skillState.p_slip) + (1 - skillState.p_know) * skillState.p_guess,
+        })
+      }
+    } catch {
+      // Observational only — never affects the learner's attempt.
+    }
+  }
 
   const bktMovement = session_id && isFeynmanAttempt(question_id)
     ? computeBktMovementComparison(

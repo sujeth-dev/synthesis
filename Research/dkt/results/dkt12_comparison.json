@@ -1,0 +1,20 @@
+{
+  "synthetic": true,
+  "learners": 300,
+  "seed": 9001,
+  "comparison": {
+    "n": 95585,
+    "dkt": {
+      "auc": 0.7231424093697153,
+      "logLoss": 0.5977858214934308
+    },
+    "bkt": {
+      "auc": 0.7175188268371812,
+      "logLoss": 0.6095878716221108
+    }
+  },
+  "decision": {
+    "recommend": false,
+    "reason": "dkt_not_better"
+  }
+}

@@ -9,3 +9,17 @@ data/*.bak
 .env.local
 *.DS_Store
 .claude/
+
+# Research/dkt (DKT-1): raw ASSISTments data and Python env/artifacts, never committed
+Research/dkt/data/
+Research/dkt/.venv/
+Research/dkt/__pycache__/
+Research/dkt/**/__pycache__/
+Research/dkt/.pytest_cache/
+
+logs/*.jsonl
+supabase/.temp/
+
+# Added by code-review-graph
+.code-review-graph/
+Research/sim/output/

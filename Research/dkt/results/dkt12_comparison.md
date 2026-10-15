@@ -1,0 +1,15 @@
+# DKT vs live BKT (DKT-12) and cutover gate (DKT-13)
+
+**SYNTHETIC** -- 300 fresh simulated learners (seed 9001, never seen in training), run through the app's own TypeScript DKT and BKT. Validates the evaluation pipeline; not evidence about real learners.
+
+| Model | AUC | Log-loss |
+|---|---|---|
+| DKT (TypeScript, bundled model) | 0.7231 | 0.5978 |
+| Live BKT | 0.7175 | 0.6096 |
+| Ceiling (true recall, approx.) | 0.8387 | 0.4644 |
+
+Attempts compared: 95585 (decision needs >= 5000).
+
+**Cutover gate:** do not switch (dkt not better).
+
+A live switch must only ever be decided on real-learner rows (run without `--sim`).

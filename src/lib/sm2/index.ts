@@ -27,7 +27,7 @@ export function reconcileBktSm2OnLoad(
   }
 }
 
-export function updateSM2(schedule: ReviewSchedule, quality: number): ReviewSchedule {
+export function updateSM2(schedule: ReviewSchedule, quality: number, now = new Date()): ReviewSchedule {
   const s = { ...schedule }
   if (quality >= 3) {
     if (s.repetitions === 0) s.interval_days = 1
@@ -36,13 +36,13 @@ export function updateSM2(schedule: ReviewSchedule, quality: number): ReviewSche
     s.repetitions += 1
   } else { s.repetitions = 0; s.interval_days = 1 }
   s.ease_factor = Math.max(1.3, s.ease_factor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)))
-  s.due_at = addDays(new Date(), s.interval_days).toISOString()
-  s.last_reviewed_at = new Date().toISOString()
+  s.due_at = addDays(now, s.interval_days).toISOString()
+  s.last_reviewed_at = now.toISOString()
   return s
 }
 
-export function initSM2(learner_id: string, skill_id: string): ReviewSchedule {
-  return { learner_id, skill_id, interval_days: 1, ease_factor: 2.5, repetitions: 0, due_at: addDays(new Date(), 1).toISOString(), last_reviewed_at: null }
+export function initSM2(learner_id: string, skill_id: string, now = new Date()): ReviewSchedule {
+  return { learner_id, skill_id, interval_days: 1, ease_factor: 2.5, repetitions: 0, due_at: addDays(now, 1).toISOString(), last_reviewed_at: null }
 }
 
 export function bktToQuality(correct: boolean, latency_ms: number): number {
@@ -52,8 +52,8 @@ export function bktToQuality(correct: boolean, latency_ms: number): number {
   return 3
 }
 
-export function reconcileBktSm2(p_know_new: number, wasMastered: boolean, schedule: ReviewSchedule, quality: number): ReviewSchedule {
-  if (wasMastered && p_know_new < 0.50) return { ...schedule, interval_days: 1, due_at: addDays(new Date(), 1).toISOString() }
-  if (p_know_new >= 0.95 && schedule.repetitions >= 6) { const u = updateSM2(schedule, quality); return { ...u, interval_days: Math.min(60, u.interval_days) } }
-  return updateSM2(schedule, quality)
+export function reconcileBktSm2(p_know_new: number, wasMastered: boolean, schedule: ReviewSchedule, quality: number, now = new Date()): ReviewSchedule {
+  if (wasMastered && p_know_new < 0.50) return { ...schedule, interval_days: 1, due_at: addDays(now, 1).toISOString() }
+  if (p_know_new >= 0.95 && schedule.repetitions >= 6) { const u = updateSM2(schedule, quality, now); return { ...u, interval_days: Math.min(60, u.interval_days) } }
+  return updateSM2(schedule, quality, now)
 }

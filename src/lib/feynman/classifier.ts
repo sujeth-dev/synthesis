@@ -25,12 +25,15 @@ const METHOD_MARKERS = [
 ]
 
 /**
- * NLP/LLM upgrade trigger (P1-5): keep this rule-based classifier primary until
- * NLP-1 through NLP-3 compare it with a versioned API grader on the same 50-200
- * human-labeled explanations and the API grader shows a reliable improvement in
- * agreement with those labels. If promoted, the API augments rather than removes
- * this function: these rules remain the hard fallback for failure, timeout, or
- * cost-based disablement. See v2/doc/basic-guide.md section C.
+ * ~~NLP/LLM upgrade trigger (P1-5): keep this rule-based classifier primary until
+ * NLP-1 through NLP-3 compare it with a versioned API grader...~~
+ * **Trigger met, live cutover done 2026-08-12:** the API grader
+ * (src/lib/nlp/grader.ts, gradeExplanation()) showed reliably higher agreement
+ * with the same 106 human-labeled explanations (96.2% vs 67.0%, kappa 0.943 vs
+ * 0.498) and is now primary in src/app/api/attempt/route.ts. Per the original
+ * plan, this function was not removed — it remains the API grader's own
+ * internal hard fallback for failure/timeout/cost-based disablement, and the
+ * route's outer fail-open fallback besides. See v2/doc/basic-guide.md section C.
  */
 
 /**
