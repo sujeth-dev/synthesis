@@ -7,6 +7,9 @@ import { renderModels } from './tabs/models'
 import { renderCurves } from './tabs/curves'
 import { renderHeatmap } from './tabs/heatmap'
 import { renderExplainer } from './tabs/explainer'
+import { renderScheduling } from './tabs/scheduling'
+import { renderReport } from './tabs/report'
+import { renderMethod } from './tabs/method'
 import { loadIndex, type DatasetEntry, type LabIndex } from './data'
 
 export interface TabContext {
@@ -22,10 +25,6 @@ interface TabDef {
   usesDataset: boolean
 }
 
-const placeholder = (lab: number) => (root: HTMLElement) => {
-  root.append(h('div.empty', `This section arrives in Lab ${lab}.`))
-}
-
 const TABS: TabDef[] = [
   { id: 'overview', label: 'Overview', render: renderOverview, usesDataset: true },
   { id: 'datasets', label: 'Datasets', render: renderDatasets, usesDataset: false },
@@ -33,9 +32,9 @@ const TABS: TabDef[] = [
   { id: 'curves', label: 'Learning curves', render: renderCurves, usesDataset: true },
   { id: 'heatmap', label: 'Skill heatmap', render: renderHeatmap, usesDataset: true },
   { id: 'explainer', label: 'How BKT & DKT work', render: renderExplainer, usesDataset: true },
-  { id: 'scheduling', label: 'Scheduling', render: placeholder(5), usesDataset: false },
-  { id: 'report', label: 'Report outputs', render: placeholder(5), usesDataset: true },
-  { id: 'method', label: 'Method & limitations', render: placeholder(5), usesDataset: false },
+  { id: 'scheduling', label: 'Scheduling', render: renderScheduling, usesDataset: false },
+  { id: 'report', label: 'Report outputs', render: renderReport, usesDataset: true },
+  { id: 'method', label: 'Method & limitations', render: renderMethod, usesDataset: false },
 ]
 
 const main = document.getElementById('main')!

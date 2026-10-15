@@ -99,7 +99,7 @@ export async function renderExplainer(root: HTMLElement, ctx: TabContext): Promi
       dktStrip,
       h('p.small.muted', { style: { margin: '8px 0 2px' } }, `Prediction for all ${model.skills.length} skills (bar height), answered skill marked:`),
       dktAll,
-      h('h3', { style: { marginTop: '12px' } }, h('span.small', 'Skills in this sequence')), dktMeters,
+      h('h3', { style: { marginTop: '12px' } }, h('span.small', 'Recently answered skills (and the next one)')), dktMeters,
       h('h3', { style: { marginTop: '12px' } }, h('span.small', 'Biggest moves on skills not yet practised (transfer)')), dktTransfer, dktNote),
   ))
 
@@ -175,8 +175,16 @@ export async function renderExplainer(root: HTMLElement, ctx: TabContext): Promi
     timer = window.setInterval(tick, Number(speed.value))
   }
 
-  // Skills shown as meters: those in the sequence, in first-seen order.
-  const seqSkills = () => [...new Set(seq.map(a => a.skill))]
+  // Skills shown as meters: the most recently answered ones up to the cursor,
+  // plus the next skill to be answered (long sequences would otherwise list dozens).
+  const SHOWN = 12
+  const seqSkills = () => {
+    const recent: string[] = []
+    for (let i = Math.min(t, seq.length) - 1; i >= 0 && recent.length < SHOWN; i--) if (!recent.includes(seq[i].skill)) recent.push(seq[i].skill)
+    const next = seq[t]?.skill
+    if (next && !recent.includes(next)) recent.unshift(next)
+    return recent.slice(0, SHOWN)
+  }
 
   function meter(kind: 'bkt' | 'dkt', skill: string, value: number, prev: number, extra = '', cls = ''): HTMLElement {
     const delta = value - prev
@@ -227,6 +235,7 @@ export async function renderExplainer(root: HTMLElement, ctx: TabContext): Promi
         `P(correct) ${(pCorrect(trace.bktBelief[t][i], bktParamsOf(sk)) * 100).toFixed(0)}%`, i === curIdx ? '.active' : ''))
     }
     if (!seq.length) bktMeters.append(h('p.small.muted', 'No answers yet.'))
+    else bktMeters.append(h('p.small.muted', { style: { gridColumn: '1 / -1', margin: '4px 0 0' } }, `Showing the next skill and up to ${SHOWN} most recently answered skills.`))
 
     // DKT hidden state strip
     const hState = trace.dktState[t].h

@@ -27,6 +27,20 @@ dkt-lab/
     └── src/              dashboard + in-browser BKT/DKT inference
 ```
 
+## Website tabs
+
+1. **Overview** – dataset picker, headline tiles, one-line verdict chosen from the numbers.
+2. **Datasets** – stats table, sequence-length distributions, full provenance, skipped datasets.
+3. **Model comparison** – BKT vs DKT on AUC / log-loss / RMSE / accuracy, ROC curves, per-skill AUC, cross-dataset table (and, from Lab 6, the DKT tuning section).
+4. **Learning curves** – P(correct) by practice opportunity: actual vs BKT vs DKT.
+5. **Skill heatmap** – predicted P(correct) per skill for 20 held-out students, BKT and DKT side by side.
+6. **How BKT & DKT work** – the live explainer: step through a held-out student or build a sequence; BKT's Bayes update per step vs the LSTM's hidden state, all-skill predictions and transfer; running AUC.
+7. **Scheduling** – SM-2 vs FSRS from `Research/sim/results/scheduler-comparison.json` (copied unchanged; synthetic).
+8. **Report outputs** – `[VALUE]`, `[TABLE]`, `[GRAPH]`, `[TEXT]` placeholders filled with this lab's numbers, copy buttons, graphs as PNG via `canvas.toDataURL`.
+9. **Method & limitations** – pipeline and caveats.
+
+BKT is always blue and DKT always rust; light and dark themes; works at 400 px; `prefers-reduced-motion` disables animation.
+
 ## Datasets
 
 | Dataset | Type | Retrieved from | Licence |

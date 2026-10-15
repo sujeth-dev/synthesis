@@ -185,6 +185,7 @@ tr:last-child td { border-bottom: 0; }
 .ph-head .tag { color: var(--ink-3); }
 .ph-body { padding: 10px 12px; font-size: 14px; }
 .ph-body .val { font-family: var(--mono); font-size: 18px; font-weight: 600; }
+.ph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0 10px; }
 .copied { color: var(--good); font-size: 12px; }
 
 /* ── explainer ─────────────────────────────────────── */
