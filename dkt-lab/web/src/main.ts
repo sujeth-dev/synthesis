@@ -2,6 +2,10 @@ import { h, clear } from './ui/dom'
 import { initTheme } from './ui/theme'
 import { destroyCharts } from './ui/charts'
 import { renderDatasets } from './tabs/datasets'
+import { renderOverview } from './tabs/overview'
+import { renderModels } from './tabs/models'
+import { renderCurves } from './tabs/curves'
+import { renderHeatmap } from './tabs/heatmap'
 import { loadIndex, type DatasetEntry, type LabIndex } from './data'
 
 export interface TabContext {
@@ -22,11 +26,11 @@ const placeholder = (lab: number) => (root: HTMLElement) => {
 }
 
 const TABS: TabDef[] = [
-  { id: 'overview', label: 'Overview', render: placeholder(3), usesDataset: true },
+  { id: 'overview', label: 'Overview', render: renderOverview, usesDataset: true },
   { id: 'datasets', label: 'Datasets', render: renderDatasets, usesDataset: false },
-  { id: 'models', label: 'Model comparison', render: placeholder(3), usesDataset: true },
-  { id: 'curves', label: 'Learning curves', render: placeholder(3), usesDataset: true },
-  { id: 'heatmap', label: 'Skill heatmap', render: placeholder(3), usesDataset: true },
+  { id: 'models', label: 'Model comparison', render: renderModels, usesDataset: true },
+  { id: 'curves', label: 'Learning curves', render: renderCurves, usesDataset: true },
+  { id: 'heatmap', label: 'Skill heatmap', render: renderHeatmap, usesDataset: true },
   { id: 'explainer', label: 'How BKT & DKT work', render: placeholder(4), usesDataset: true },
   { id: 'scheduling', label: 'Scheduling', render: placeholder(5), usesDataset: false },
   { id: 'report', label: 'Report outputs', render: placeholder(5), usesDataset: true },

@@ -55,3 +55,31 @@ export function loadJson<T>(path: string): Promise<T> {
 }
 
 export const loadIndex = () => loadJson<LabIndex>('index.json')
+
+export interface Scores { auc: number; log_loss: number; rmse: number; accuracy: number; n: number }
+export interface Metrics {
+  protocol: string
+  bkt: Scores & { fit_seconds: number }
+  dkt: Scores & { train_seconds: number }
+  roc: { bkt: { fpr: number[]; tpr: number[] }; dkt: { fpr: number[]; tpr: number[] } }
+  per_skill_auc: { skill_id: string; label: string; n: number; bkt: number; dkt: number }[]
+  dkt_config: Record<string, number | boolean>
+  dkt_history: { epoch: number; train_loss: number; val_auc: number; seconds: number }[]
+  test_students: number
+}
+export interface Curves { max_opportunity: number; min_rows: number; points: { opportunity: number; n: number; actual: number; bkt: number; dkt: number }[] }
+export interface Heatmap {
+  quantity: string
+  skills: { skill_id: string; label: string }[]
+  students: { student_id: string; length: number; bkt: number[]; dkt: number[]; practised: number[] }[]
+}
+export interface Samples { max_steps: number; students: { student_id: string; length: number; steps: [string, number][] }[] }
+export interface BktParamsFile { skills: { skill_id: string; label: string; p_init: number; p_transit: number; p_slip: number; p_guess: number; n_train_sequences: number; default: boolean; hidden_concept?: number }[] }
+export interface SummaryRow { id: string; name: string; kind_label: string; n: number; auc_gain: number; bkt: Omit<Scores, 'n'>; dkt: Omit<Scores, 'n'> }
+
+export const loadMetrics = (id: string) => loadJson<Metrics>(`${id}/metrics.json`)
+export const loadCurves = (id: string) => loadJson<Curves>(`${id}/curves.json`)
+export const loadHeatmap = (id: string) => loadJson<Heatmap>(`${id}/heatmap.json`)
+export const loadSamples = (id: string) => loadJson<Samples>(`${id}/samples.json`)
+export const loadBktParams = (id: string) => loadJson<BktParamsFile>(`${id}/bkt_params.json`)
+export const loadSummary = () => loadJson<{ datasets: SummaryRow[] }>('summary.json')
