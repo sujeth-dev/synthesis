@@ -17,6 +17,7 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 | 0 | `main` (120-node curriculum) + `v2` (FSRS shadow, DKT benchmark, LLM grader) on one branch | `npm run dev`, `npm test` |
 | 1 | Learner simulator: virtual students with a known true memory, driving the real BKT / SM-2 / FSRS code. All its output is **synthetic** | `npm run sim -- --learners 200 --days 60` |
 | 2 | DKT trained on Synaptic's own 120 skills (DKT-10), compared with the app's live BKT, a fitted BKT, and a ground-truth ceiling | `npm run sim` then `cd Research/dkt && python3 train_synaptic.py` |
+| 3 | DKT runs inside the app in TypeScript (DKT-11), verified against PyTorch; optional shadow logging next to BKT | `npm run dkt:predict` |
 
 ## Level details
 
@@ -31,3 +32,10 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 - Results: `Research/dkt/results/synaptic_dkt_results.md` — **synthetic** (simulated learners). AUC on 300 held-out simulated students: ceiling 0.839, fitted BKT 0.735, **DKT 0.722**, live app BKT 0.717 (8 epochs, ~3 min on CPU).
 - Fixed `train_dkt.py`'s `int(skill_id)` crash on text skill IDs, and `.gitignore` paths that said `research/` while the folder is `Research/` (Linux is case-sensitive, so data files weren't actually ignored).
 - Python deps: `pip install -r Research/dkt/requirements.txt`. Tests: `python3 -m pytest Research/dkt/tests`.
+
+### Level 3 — DKT inside the app (shadow mode)
+- `src/lib/dkt/index.ts` — LSTM forward pass in TypeScript; no Python service. `src/lib/dkt/model/synaptic-dkt.json` is the Level 2 model (2 MB, trained on **simulated** learners, flagged `synthetic: true`).
+- Parity: `Research/dkt/export_weights.py --fixture` writes PyTorch outputs; `src/lib/dkt/dkt.test.ts` checks TypeScript matches to 5 decimals on every skill.
+- Shadow mode: with `DKT_SHADOW=1` and migration `005_dkt_shadow_log.sql` applied, every attempt logs DKT's prediction, live BKT's, and the outcome to `dkt_shadow_log`. Off by default; fail-open; BKT stays the live model. Learners see no difference.
+- Demo without a database: `npm run dkt:predict` prints DKT's per-skill predictions for one simulated learner next to BKT's.
+- Retrain and re-export: `python3 train_synaptic.py && python3 export_weights.py` (in `Research/dkt`).

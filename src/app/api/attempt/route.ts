@@ -13,7 +13,9 @@ import {
   incrementSessionCounts, getSession, getAllSkillStates, schedulePhaseReview,
   getRecentAttemptsForSkill, getSessionBehaviorAttempts,
   getLastFsrsShadowEntry, insertFsrsShadowLog,
+  getAttemptHistory, insertDktShadowLog,
 } from '@/lib/db/queries'
+import { DKT_HISTORY_LIMIT, getBundledDktModel, isDktShadowEnabled, predictForAttempt } from '@/lib/dkt/shadow'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat } from '@/types'
 import { canChooseTopicSwitch, getGuidedArcProgress } from '@/lib/session/engine'
@@ -191,6 +193,25 @@ export async function POST(req: NextRequest) {
       await insertFsrsShadowLog({ learner_id: user.id, skill_id, attempt_id, ...fsrsShadow })
     } catch {
       // Observational only — see the SM-2 block above.
+    }
+  }
+
+  // ── DKT shadow mode (DKT-11): DKT's prediction for this attempt from the
+  // learner's earlier history, logged next to live BKT's and the outcome.
+  // Opt-in (DKT_SHADOW=1), never read back, and fail-open like FSRS above.
+  if (isDktShadowEnabled()) {
+    try {
+      const history = (await getAttemptHistory(user.id, DKT_HISTORY_LIMIT + 1))
+        .filter(a => a.id !== attempt_id)
+      const prediction = predictForAttempt(await getBundledDktModel(), history, skill_id)
+      if (prediction) {
+        await insertDktShadowLog({
+          learner_id: user.id, skill_id, attempt_id, correct, ...prediction,
+          bkt_p_correct: skillState.p_know * (1 - skillState.p_slip) + (1 - skillState.p_know) * skillState.p_guess,
+        })
+      }
+    } catch {
+      // Observational only — never affects the learner's attempt.
     }
   }
 

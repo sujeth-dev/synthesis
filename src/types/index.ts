@@ -94,6 +94,15 @@ export interface FsrsShadowLogEntry {
   created_at: string
 }
 
+// One row per attempt, logging DKT's prediction alongside live BKT's —
+// observational only, see MASTER_PLAN.md's DKT-11.
+export interface DktShadowLogEntry {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  dkt_p_correct: number; bkt_p_correct: number; correct: boolean
+  history_length: number; model_synthetic: boolean
+  created_at: string
+}
+
 export interface AttemptEvent {
   id: string; learner_id: string; skill_id: string; question_id: string
   session_id: string | null; correct: boolean; latency_ms: number

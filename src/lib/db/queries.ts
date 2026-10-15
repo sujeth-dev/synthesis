@@ -1,7 +1,7 @@
 import { getDb, generateId } from '@/lib/db'
 import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
-  AttemptEvent, Session, MotivationState, FsrsShadowLogEntry,
+  AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -296,6 +296,30 @@ export async function insertFsrsShadowLog(entry: Omit<FsrsShadowLogEntry, 'id' |
     created_at: new Date().toISOString(),
   })
   if (error) throw new Error(`FSRS shadow log insert failed: ${error.message}`)
+}
+
+// ─────────────────────────────────────────────
+// DKT SHADOW LOG (observational only — BKT remains the live knowledge model)
+// ─────────────────────────────────────────────
+
+// The learner's most recent attempts, oldest first — DKT's input sequence.
+export async function getAttemptHistory(learnerId: string, limit: number): Promise<Array<{ id: string; skill_id: string; correct: boolean }>> {
+  const { data } = await getDb()
+    .from('attempt_events')
+    .select('id, skill_id, correct, attempted_at')
+    .eq('learner_id', learnerId)
+    .order('attempted_at', { ascending: false })
+    .limit(limit)
+  return (data ?? []).reverse()
+}
+
+export async function insertDktShadowLog(entry: Omit<DktShadowLogEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('dkt_shadow_log').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`DKT shadow log insert failed: ${error.message}`)
 }
 
 // ─────────────────────────────────────────────
