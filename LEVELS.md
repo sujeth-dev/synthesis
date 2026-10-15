@@ -18,6 +18,7 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 | 1 | Learner simulator: virtual students with a known true memory, driving the real BKT / SM-2 / FSRS code. All its output is **synthetic** | `npm run sim -- --learners 200 --days 60` |
 | 2 | DKT trained on Synaptic's own 120 skills (DKT-10), compared with the app's live BKT, a fitted BKT, and a ground-truth ceiling | `npm run sim` then `cd Research/dkt && python3 train_synaptic.py` |
 | 3 | DKT runs inside the app in TypeScript (DKT-11), verified against PyTorch; optional shadow logging next to BKT | `npm run dkt:predict` |
+| 4 | DKT evaluated against live BKT on unseen learners (DKT-12) + an automatic cutover gate (DKT-13) | `npm run dkt:compare -- --sim` |
 
 ## Level details
 
@@ -39,3 +40,9 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 - Shadow mode: with `DKT_SHADOW=1` and migration `005_dkt_shadow_log.sql` applied, every attempt logs DKT's prediction, live BKT's, and the outcome to `dkt_shadow_log`. Off by default; fail-open; BKT stays the live model. Learners see no difference.
 - Demo without a database: `npm run dkt:predict` prints DKT's per-skill predictions for one simulated learner next to BKT's.
 - Retrain and re-export: `python3 train_synaptic.py && python3 export_weights.py` (in `Research/dkt`).
+
+### Level 4 — DKT evaluation and cutover gate
+- `src/lib/dkt/compare.ts` — scores DKT vs live BKT on the same attempts; `cutoverDecision()` recommends a switch only with ≥ 5,000 attempts **and** ≥ 0.02 AUC gain **and** no worse log-loss. A recommendation is for a human to review; nothing switches automatically.
+- `npm run dkt:compare -- --sim` — 300 fresh simulated learners (seed never used in training) through the app's TypeScript DKT and BKT. Result (**synthetic**): DKT AUC 0.723 vs live BKT 0.718 (ceiling 0.839) → gate says **don't switch**. Matches the Python result, confirming the shipped model end to end.
+- `npm run dkt:compare` (no flag) — same report on real `dkt_shadow_log` rows once Level 3's shadow mode has collected data.
+- `src/lib/dkt/index.ts` now steps the LSTM incrementally (`stepDkt`, `predictSkill`); `predictNext` is unchanged.

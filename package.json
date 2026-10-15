@@ -15,7 +15,8 @@
     "fsrs:compare": "node scripts/fsrs-shadow-comparison.js",
     "dkt:export": "node scripts/dkt-export-interactions.js",
     "sim": "tsx scripts/sim-run.ts",
-    "dkt:predict": "tsx scripts/dkt-predict.ts"
+    "dkt:predict": "tsx scripts/dkt-predict.ts",
+    "dkt:compare": "tsx scripts/dkt-compare.ts"
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",

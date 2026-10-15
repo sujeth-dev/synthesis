@@ -62,45 +62,54 @@ export function loadDktModel(file: DktWeightsFile): DktModel {
 
 const sigmoid = (x: number) => 1 / (1 + Math.exp(-x))
 
-// Runs the LSTM over a learner's history and returns P(correct) for every
-// skill on their *next* attempt. Interactions on skills the model doesn't
-// know are skipped. An empty history returns the model's cold-start output
-// (all-zero state), matching an untouched LSTM.
-export function predictNext(model: DktModel, history: DktInteraction[]): Map<string, number> {
-  const { H, weightIh, weightHh, bias, outWeight, outBias, skills } = model
+export interface DktState { h: Float32Array; c: Float32Array }
+
+export function initialDktState(model: DktModel): DktState {
+  return { h: new Float32Array(model.H), c: new Float32Array(model.H) }
+}
+
+// Advances the LSTM by one interaction. Interactions on skills the model
+// doesn't know leave the state unchanged.
+export function stepDkt(model: DktModel, state: DktState, { skill_id, correct }: DktInteraction): DktState {
+  const s = model.skillIndex.get(skill_id)
+  if (s === undefined) return state
+  const { H, weightIh, weightHh, bias, skills } = model
   const inputSize = 2 * skills.length
-  let h = new Float32Array(H)
-  const c = new Float32Array(H)
+  const column = correct ? s : skills.length + s
   const gates = new Float32Array(4 * H)
-
-  for (const { skill_id, correct } of history) {
-    const s = model.skillIndex.get(skill_id)
-    if (s === undefined) continue
-    const column = correct ? s : skills.length + s
-    for (let r = 0; r < 4 * H; r++) {
-      let sum = bias[r] + weightIh[r * inputSize + column]
-      const row = r * H
-      for (let k = 0; k < H; k++) sum += weightHh[row + k] * h[k]
-      gates[r] = sum
-    }
-    const next = new Float32Array(H)
-    for (let j = 0; j < H; j++) {
-      const i = sigmoid(gates[j])
-      const f = sigmoid(gates[H + j])
-      const g = Math.tanh(gates[2 * H + j])
-      const o = sigmoid(gates[3 * H + j])
-      c[j] = f * c[j] + i * g
-      next[j] = o * Math.tanh(c[j])
-    }
-    h = next
+  for (let r = 0; r < 4 * H; r++) {
+    let sum = bias[r] + weightIh[r * inputSize + column]
+    const row = r * H
+    for (let k = 0; k < H; k++) sum += weightHh[row + k] * state.h[k]
+    gates[r] = sum
   }
-
-  const out = new Map<string, number>()
-  for (let s = 0; s < skills.length; s++) {
-    let sum = outBias[s]
-    const row = s * H
-    for (let k = 0; k < H; k++) sum += outWeight[row + k] * h[k]
-    out.set(skills[s], sigmoid(sum))
+  const h = new Float32Array(H)
+  const c = new Float32Array(H)
+  for (let j = 0; j < H; j++) {
+    const i = sigmoid(gates[j])
+    const f = sigmoid(gates[H + j])
+    const g = Math.tanh(gates[2 * H + j])
+    const o = sigmoid(gates[3 * H + j])
+    c[j] = f * state.c[j] + i * g
+    h[j] = o * Math.tanh(c[j])
   }
-  return out
+  return { h, c }
+}
+
+// P(correct) on one skill's next attempt, from the current state.
+export function predictSkill(model: DktModel, state: DktState, skillId: string): number | undefined {
+  const s = model.skillIndex.get(skillId)
+  if (s === undefined) return undefined
+  let sum = model.outBias[s]
+  const row = s * model.H
+  for (let k = 0; k < model.H; k++) sum += model.outWeight[row + k] * state.h[k]
+  return sigmoid(sum)
+}
+
+// Runs the LSTM over a learner's history and returns P(correct) for every
+// skill on their *next* attempt. An empty history returns the model's
+// cold-start output (all-zero state), matching an untouched LSTM.
+export function predictNext(model: DktModel, history: DktInteraction[]): Map<string, number> {
+  const state = history.reduce((st, interaction) => stepDkt(model, st, interaction), initialDktState(model))
+  return new Map(model.skills.map(skill => [skill, predictSkill(model, state, skill)!]))
 }
