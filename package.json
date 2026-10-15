@@ -13,7 +13,8 @@
     "db:seed": "node scripts/seed.js",
     "db:migrate": "node scripts/apply-migrations.js",
     "fsrs:compare": "node scripts/fsrs-shadow-comparison.js",
-    "dkt:export": "node scripts/dkt-export-interactions.js"
+    "dkt:export": "node scripts/dkt-export-interactions.js",
+    "sim": "tsx scripts/sim-run.ts"
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",

@@ -1,0 +1,63 @@
+{
+  "synthetic": true,
+  "note": "Simulated learners with a known ground-truth memory model (src/lib/sim/learner.ts). Not real-user evidence.",
+  "config": {
+    "seed": 2026,
+    "learners": 2000,
+    "days": 90,
+    "skills": 120
+  },
+  "generated_at": "2026-10-15T13:12:08.577Z",
+  "reports": [
+    {
+      "scheduler": "sm2",
+      "learners": 2000,
+      "days": 90,
+      "attempts": 648609,
+      "reviewAttempts": 279890,
+      "reviewsPerLearner": 139.945,
+      "skillsLearnedPerLearner": 27.184,
+      "endRetention": 0.9178962397775476,
+      "forgottenFraction": 0.04706812831077104,
+      "bkt": {
+        "logLoss": 0.6059934933123136,
+        "auc": 0.7203675620761828
+      },
+      "recallPrediction": {
+        "sm2": {
+          "logLoss": 0.6549948657392334,
+          "auc": 0.5185134577865098
+        },
+        "fsrs": {
+          "logLoss": 0.7348278959101284,
+          "auc": 0.6216075734016754
+        }
+      }
+    },
+    {
+      "scheduler": "fsrs",
+      "learners": 2000,
+      "days": 90,
+      "attempts": 673189,
+      "reviewAttempts": 319906,
+      "reviewsPerLearner": 159.953,
+      "skillsLearnedPerLearner": 26.757,
+      "endRetention": 0.9315687465205639,
+      "forgottenFraction": 0.03090779982808237,
+      "bkt": {
+        "logLoss": 0.5744701274466867,
+        "auc": 0.7364228803693672
+      },
+      "recallPrediction": {
+        "sm2": {
+          "logLoss": 0.6167412028780433,
+          "auc": 0.5580889041931076
+        },
+        "fsrs": {
+          "logLoss": 0.6250395195062318,
+          "auc": 0.597526414738913
+        }
+      }
+    }
+  ]
+}
