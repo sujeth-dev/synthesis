@@ -1,0 +1,12 @@
+# DKT Lab — everything here is local to dkt-lab/
+node_modules/
+web/node_modules/
+web/dist/
+.vercel/
+
+# Python pipeline: raw downloads, converted sequences, checkpoints
+pipeline/data/
+pipeline/.venv/
+**/__pycache__/
+.pytest_cache/
+pipeline/.pytest_cache/

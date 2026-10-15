@@ -1,0 +1,15 @@
+{
+  "name": "dkt-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone BKT vs DKT research lab. Deploys separately from the Synaptic app (Vercel root: dkt-lab/web).",
+  "scripts": {
+    "install:web": "npm --prefix web install",
+    "dev": "npm --prefix web run dev",
+    "build": "npm --prefix web run build",
+    "test": "npm --prefix web test",
+    "typecheck": "npm --prefix web run typecheck",
+    "pipeline": "cd pipeline && python run_all.py",
+    "test:pipeline": "cd pipeline && python -m pytest -q"
+  }
+}
