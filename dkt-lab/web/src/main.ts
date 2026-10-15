@@ -1,5 +1,7 @@
 import { h, clear } from './ui/dom'
 import { initTheme } from './ui/theme'
+import { destroyCharts } from './ui/charts'
+import { renderDatasets } from './tabs/datasets'
 import { loadIndex, type DatasetEntry, type LabIndex } from './data'
 
 export interface TabContext {
@@ -21,7 +23,7 @@ const placeholder = (lab: number) => (root: HTMLElement) => {
 
 const TABS: TabDef[] = [
   { id: 'overview', label: 'Overview', render: placeholder(3), usesDataset: true },
-  { id: 'datasets', label: 'Datasets', render: placeholder(2), usesDataset: false },
+  { id: 'datasets', label: 'Datasets', render: renderDatasets, usesDataset: false },
   { id: 'models', label: 'Model comparison', render: placeholder(3), usesDataset: true },
   { id: 'curves', label: 'Learning curves', render: placeholder(3), usesDataset: true },
   { id: 'heatmap', label: 'Skill heatmap', render: placeholder(3), usesDataset: true },
@@ -68,6 +70,7 @@ async function render(): Promise<void> {
   const def = TABS.find(t => t.id === tab)!
   ;(document.getElementById('ds-picker-wrap') as HTMLElement).style.visibility = def.usesDataset && index.datasets.length ? 'visible' : 'hidden'
   renderNav(tab)
+  destroyCharts()
   clear(main)
   main.setAttribute('aria-labelledby', `tab-${tab}`)
   try {

@@ -1,0 +1,181 @@
+{
+ "provenance": {
+  "id": "assist2015",
+  "name": "ASSISTments 2015 skill builder",
+  "kind": "real",
+  "kind_label": "real",
+  "source_url": "https://sites.google.com/site/assistmentsdata/datasets/2015-assistments-skill-builder-data",
+  "licence": "ASSISTments research data, free for research use with citation per the ASSISTments terms. The official Google-Sites/Drive download is blocked from this build environment, so the widely used DKVMN preprocessed copy is used; that mirror repository has no licence file.",
+  "citation": "Heffernan, N. T., & Heffernan, C. L. (2014). The ASSISTments ecosystem. International Journal of Artificial Intelligence in Education, 24(4), 470-497. Mirror: Zhang, J., Shi, X., King, I., & Yeung, D.-Y. (2017). Dynamic Key-Value Memory Networks for Knowledge Tracing. WWW.",
+  "notes": [
+   "Mirror format: three lines per student (length, skill ids, answers), 100 skills. The mirror's train and test files are concatenated and re-split by student with this lab's seed.",
+   "Original student ids and log ids are not in the mirror: students are numbered in file order, and no time features are available."
+  ],
+  "downloaded_from": "jennyzhang0215/DKVMN @ 96c2834, data/assist2015/assist2015_train.csv + _test.csv",
+  "download_url": "https://raw.githubusercontent.com/jennyzhang0215/DKVMN/96c2834ae6968fbfb761b5ba96be26b054c7c1c3/data/assist2015/",
+  "md5": {
+   "train": "2d268cf11d35982c7cbdff8ebbcac85b",
+   "test": "9971ba9215e6dc703590b5410ad877ce"
+  },
+  "download_failures": [],
+  "skill_trimming": null,
+  "students": 19840,
+  "skills": 100,
+  "interactions": 683801,
+  "has_timestamps": false
+ },
+ "stats": {
+  "students": 19840,
+  "skills": 100,
+  "interactions": 683801,
+  "pct_correct": 0.7317611410337218,
+  "sequence_length": {
+   "min": 1,
+   "p10": 3.0,
+   "p25": 8.0,
+   "median": 20.0,
+   "p75": 45.0,
+   "p90": 84.0,
+   "max": 618,
+   "mean": 34.46577620967742,
+   "hist": {
+    "edges": [
+     1,
+     2,
+     3,
+     5,
+     9,
+     15,
+     25,
+     43,
+     73,
+     124,
+     212,
+     362,
+     619
+    ],
+    "counts": [
+     490,
+     257,
+     1978,
+     2252,
+     2867,
+     3346,
+     3384,
+     2664,
+     1838,
+     596,
+     157,
+     11
+    ]
+   }
+  },
+  "skills_per_student_median": 4.0,
+  "split": {
+   "train": {
+    "students": 13888,
+    "interactions": 476428
+   },
+   "val": {
+    "students": 2976,
+    "interactions": 104547
+   },
+   "test": {
+    "students": 2976,
+    "interactions": 102826
+   }
+  },
+  "top_skills": [
+   {
+    "skill_id": "11",
+    "label": "skill 11",
+    "count": 21694,
+    "pct_correct": 0.6576472757444455
+   },
+   {
+    "skill_id": "28",
+    "label": "skill 28",
+    "count": 16664,
+    "pct_correct": 0.8424747959673548
+   },
+   {
+    "skill_id": "72",
+    "label": "skill 72",
+    "count": 15580,
+    "pct_correct": 0.6541720154043645
+   },
+   {
+    "skill_id": "29",
+    "label": "skill 29",
+    "count": 15181,
+    "pct_correct": 0.5805941637573282
+   },
+   {
+    "skill_id": "37",
+    "label": "skill 37",
+    "count": 14744,
+    "pct_correct": 0.7768583830710798
+   },
+   {
+    "skill_id": "44",
+    "label": "skill 44",
+    "count": 14584,
+    "pct_correct": 0.8722572682391662
+   },
+   {
+    "skill_id": "26",
+    "label": "skill 26",
+    "count": 14114,
+    "pct_correct": 0.6635255774408388
+   },
+   {
+    "skill_id": "48",
+    "label": "skill 48",
+    "count": 13742,
+    "pct_correct": 0.5749526997525833
+   },
+   {
+    "skill_id": "3",
+    "label": "skill 3",
+    "count": 13432,
+    "pct_correct": 0.7589338892197737
+   },
+   {
+    "skill_id": "43",
+    "label": "skill 43",
+    "count": 13342,
+    "pct_correct": 0.7124868835257083
+   },
+   {
+    "skill_id": "5",
+    "label": "skill 5",
+    "count": 13238,
+    "pct_correct": 0.731908143224052
+   },
+   {
+    "skill_id": "61",
+    "label": "skill 61",
+    "count": 13075,
+    "pct_correct": 0.618585086042065
+   },
+   {
+    "skill_id": "19",
+    "label": "skill 19",
+    "count": 11959,
+    "pct_correct": 0.5439418011539426
+   },
+   {
+    "skill_id": "16",
+    "label": "skill 16",
+    "count": 11480,
+    "pct_correct": 0.6006968641114983
+   },
+   {
+    "skill_id": "10",
+    "label": "skill 10",
+    "count": 11421,
+    "pct_correct": 0.6790999036861921
+   }
+  ]
+ }
+}

@@ -1,0 +1,180 @@
+{
+ "provenance": {
+  "id": "assist2009",
+  "name": "ASSISTments 2009-2010 skill builder",
+  "kind": "real",
+  "kind_label": "real",
+  "source_url": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
+  "licence": "Figshare copy (skill_builder_data.csv): CC BY 4.0. The 'corrected' release used when Figshare is unreachable is the same ASSISTments data, distributed for research with citation required by the ASSISTments terms; the GitHub mirror has no licence file of its own.",
+  "citation": "Feng, M., Heffernan, N., & Koedinger, K. (2009). Addressing the assessment challenge with an online system that tutors as it assesses. User Modeling and User-Adapted Interaction, 19(3), 243-266.",
+  "notes": [
+   "Cleaning follows Research/dkt/preprocess.py: drop rows with no skill_id; drop duplicate (user_id, order_id, skill_id) rows; multi-skill problems stay one row per skill.",
+   "No wall-clock timestamp in this export: order_id is the ordering key, so no time features."
+  ],
+  "downloaded_from": "GitHub mirror of the official corrected release, skill_builder_data_corrected.csv (LegionKing/Dynamic-Cognitive-Diagnosis @ fbc29da)",
+  "download_url": "https://raw.githubusercontent.com/LegionKing/Dynamic-Cognitive-Diagnosis/fbc29da881775905bcfc1f39832f554f9a9f6cab/data/assist2009/skill_builder_data_corrected.csv",
+  "md5": "a8c89f7ccc6836041ba7b33a47c40375",
+  "download_failures": [
+   "https://ndownloader.figshare.com/files/44732737: URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+  ],
+  "skill_trimming": null,
+  "students": 4163,
+  "skills": 123,
+  "interactions": 338001,
+  "has_timestamps": false
+ },
+ "stats": {
+  "students": 4163,
+  "skills": 123,
+  "interactions": 338001,
+  "pct_correct": 0.65325842231236,
+  "sequence_length": {
+   "min": 1,
+   "p10": 4.0,
+   "p25": 9.0,
+   "median": 23.0,
+   "p75": 69.0,
+   "p90": 195.0,
+   "max": 1295,
+   "mean": 81.19168868604372,
+   "hist": {
+    "edges": [
+     1,
+     2,
+     3,
+     6,
+     11,
+     20,
+     36,
+     65,
+     119,
+     216,
+     392,
+     713,
+     1296
+    ],
+    "counts": [
+     116,
+     163,
+     353,
+     576,
+     652,
+     707,
+     501,
+     393,
+     334,
+     160,
+     121,
+     87
+    ]
+   }
+  },
+  "skills_per_student_median": 4.0,
+  "split": {
+   "train": {
+    "students": 2914,
+    "interactions": 242765
+   },
+   "val": {
+    "students": 624,
+    "interactions": 45887
+   },
+   "test": {
+    "students": 625,
+    "interactions": 49349
+   }
+  },
+  "top_skills": [
+   {
+    "skill_id": "311",
+    "label": "Equation Solving Two or Fewer Steps",
+    "count": 24253,
+    "pct_correct": 0.6790500144312044
+   },
+   {
+    "skill_id": "47",
+    "label": "Conversion of Fraction Decimals Percents",
+    "count": 18742,
+    "pct_correct": 0.6373919539003308
+   },
+   {
+    "skill_id": "277",
+    "label": "Addition and Subtraction Integers",
+    "count": 12741,
+    "pct_correct": 0.5992465269602072
+   },
+   {
+    "skill_id": "280",
+    "label": "Addition and Subtraction Fractions",
+    "count": 11334,
+    "pct_correct": 0.6769895888477149
+   },
+   {
+    "skill_id": "70",
+    "label": "Percent Of",
+    "count": 9497,
+    "pct_correct": 0.5950300094766768
+   },
+   {
+    "skill_id": "79",
+    "label": "Proportion",
+    "count": 9054,
+    "pct_correct": 0.6411530815109344
+   },
+   {
+    "skill_id": "50",
+    "label": "Ordering Fractions",
+    "count": 8539,
+    "pct_correct": 0.7920131162899637
+   },
+   {
+    "skill_id": "312",
+    "label": "Equation Solving More Than Two Steps",
+    "count": 8115,
+    "pct_correct": 0.7583487369069624
+   },
+   {
+    "skill_id": "17",
+    "label": "Probability of Two Distinct Events",
+    "count": 7963,
+    "pct_correct": 0.49001632550546276
+   },
+   {
+    "skill_id": "77",
+    "label": "Finding Percents",
+    "count": 7694,
+    "pct_correct": 0.5382115934494411
+   },
+   {
+    "skill_id": "74",
+    "label": "Subtraction Whole Numbers",
+    "count": 7669,
+    "pct_correct": 0.6414134828530448
+   },
+   {
+    "skill_id": "18",
+    "label": "Probability of a Single Event",
+    "count": 7438,
+    "pct_correct": 0.7424038720086045
+   },
+   {
+    "skill_id": "92",
+    "label": "Pattern Finding ",
+    "count": 7343,
+    "pct_correct": 0.6000272368241863
+   },
+   {
+    "skill_id": "49",
+    "label": "Ordering Positive Decimals",
+    "count": 7317,
+    "pct_correct": 0.7496241629082957
+   },
+   {
+    "skill_id": "85",
+    "label": "Absolute Value",
+    "count": 7127,
+    "pct_correct": 0.7617510874140592
+   }
+  ]
+ }
+}
