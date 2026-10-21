@@ -83,9 +83,8 @@ beforeEach(() => {
   idCounter.n = 0
 
   // Kept low so bktUpdate() never crosses MASTERY_THRESHOLD across the up-to-two
-  // correct answers these tests submit — the newly-mastered unlock branch in
-  // route.ts calls getAllNodes(), whose static require() doesn't resolve under
-  // Vitest and is unrelated to what FSRS-3 is testing here.
+  // correct answers these tests submit, keeping route.ts's newly-mastered
+  // prerequisite-unlock branch out of scope here.
   tables.learner_skill_states.push({
     learner_id: learnerId, skill_id: skillId, p_know: 0.01,
     p_slip: 0.1, p_guess: 0.2, p_transit: 0.15, mastery_state: 'ready',
@@ -178,5 +177,46 @@ describe('FSRS shadow mode alongside SM-2 in POST /api/attempt (FSRS-3)', () => 
     expect(tables.attempt_events).toHaveLength(1)
 
     tables.fsrs_shadow_log.push = originalPush
+  })
+})
+
+// Level 6: `order` questions had no server-side verification branch, so they fell
+// through to body.correct — which the client never sends for them — and scored
+// wrong however the learner answered.
+describe('order questions in POST /api/attempt (Level 6)', () => {
+  const orderSkill = 'p1b_oop_classes'
+  const orderQuestion = 'p1b_oop_order1'
+
+  beforeEach(() => {
+    tables.learner_skill_states.push({
+      ...tables.learner_skill_states[0], skill_id: orderSkill,
+    })
+    tables.review_schedules.push({
+      ...tables.review_schedules[0], skill_id: orderSkill,
+    })
+  })
+
+  const submitOrder = (answer: string) => POST(fakeRequest({
+    question_id: orderQuestion, skill_id: orderSkill, client_answer: answer,
+    latency_ms: 2000, difficulty_tier: 'same', question_format: 'order',
+  }))
+
+  it('scores the authored sequence correct without the client claiming a verdict', async () => {
+    const res = await submitOrder('d,b,c,a')
+    expect(res.status).toBe(200)
+    expect((await res.json()).correct).toBe(true)
+  })
+
+  it('scores a permuted sequence wrong', async () => {
+    expect((await (await submitOrder('a,b,c,d')).json()).correct).toBe(false)
+    expect((await (await submitOrder('d,b,a,c')).json()).correct).toBe(false)
+  })
+
+  it('does not let the client assert correctness for an order question', async () => {
+    const res = await POST(fakeRequest({
+      question_id: orderQuestion, skill_id: orderSkill, client_answer: 'a,b,c,d', correct: true,
+      latency_ms: 2000, difficulty_tier: 'same', question_format: 'order',
+    }))
+    expect((await res.json()).correct).toBe(false)
   })
 })

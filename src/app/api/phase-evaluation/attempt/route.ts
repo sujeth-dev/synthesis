@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
   let question: PhaseEvaluationQuestion | undefined
   try {
-    const questions: PhaseEvaluationQuestion[] = require(`@/../content/questions/phase-evaluation/${fileName}`)
+    const questions: PhaseEvaluationQuestion[] = require(`../../../../../content/questions/phase-evaluation/${fileName}`)
     question = questions.find(q => q.id === question_id)
   } catch {
     return NextResponse.json({ error: 'Phase evaluation not found' }, { status: 404 })

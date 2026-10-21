@@ -6,6 +6,7 @@ import type {
   ReviewUrgency, GuidedArcProgress, GuidedArcStage,
 } from '@/types'
 import { QuestionCard }     from '@/components/learning/QuestionCard'
+import { canSubmitAnswer }  from '@/lib/ui/answer-readiness'
 import { FeedbackBanner }   from '@/components/learning/FeedbackBanner'
 import { MotivationBanner } from '@/components/learning/MotivationBanner'
 import { Spinner }          from '@/components/ui/Spinner'
@@ -763,7 +764,7 @@ function LearnPageInner() {
               {phase === 'question' && (
                 <button
                   onClick={submit}
-                  disabled={!selected && !fillAnswer.trim() && task.question.format !== 'explain'}
+                  disabled={!canSubmitAnswer(task.question, selected, fillAnswer)}
                   className="w-full py-4 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[15px] font-medium transition-all hover:scale-[1.01] disabled:opacity-40"
                 >
                   Submit

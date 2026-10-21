@@ -8,6 +8,7 @@ import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMot
 import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
 import { gradeExplanation } from '@/lib/nlp/grader'
 import { computeUnblocked } from '@/lib/graph'
+import { isOrderAnswerCorrect } from '@/lib/ui/order-answer'
 import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
   getMotivationState, upsertMotivationState, insertAttempt,
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
     question_id.endsWith('_explain_back') || question_id.endsWith('_feynman_loop')
   )
   try {
-    const questions: Question[] = require(`@/../content/questions/by-skill/${skill_id}.json`)
+    const questions: Question[] = require(`../../../../content/questions/by-skill/${skill_id}.json`)
     const q = questions.find(q => q.id === question_id)
     if (!q && !isGuidedReflection) return NextResponse.json({ error: 'Unknown question_id' }, { status: 400 })
 
@@ -50,6 +51,8 @@ export async function POST(req: NextRequest) {
       const ans = (client_answer || '').toString().trim().toLowerCase()
       correct = ans === (q.correct_answer || '').trim().toLowerCase() ||
                 (q.keywords || []).some((kw: string) => ans.includes(kw.toLowerCase()))
+    } else if (q?.format === 'order') {
+      correct = isOrderAnswerCorrect((client_answer || '').toString(), q.correct_answer)
     } else {
       correct = typeof body.correct === 'boolean' ? body.correct : false
     }

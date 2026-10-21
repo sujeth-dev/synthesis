@@ -34,11 +34,11 @@ export async function GET(req: NextRequest) {
   const depth = chooseDepth(skillState)
   let explanation: Explanation | null = null
   try {
-    explanation = require(`@/../content/explanations/${skill_id}/${depth}.json`) as Explanation
+    explanation = require(`../../../../content/explanations/${skill_id}/${depth}.json`) as Explanation
   } catch {
     for (const fb of ['beginner', 'mid', 'advanced', 'expert'] as ExplanationDepth[]) {
       try {
-        explanation = require(`@/../content/explanations/${skill_id}/${fb}.json`) as Explanation
+        explanation = require(`../../../../content/explanations/${skill_id}/${fb}.json`) as Explanation
         break
       } catch { continue }
     }
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
 
   let question: Question | null = null
   try {
-    const allQs: Question[] = require(`@/../content/questions/by-skill/${skill_id}.json`)
+    const allQs: Question[] = require(`../../../../content/questions/by-skill/${skill_id}.json`)
     if (allQs.length > 0) question = allQs[Math.floor(Math.random() * allQs.length)]
   } catch { /* stub skill */ }
 
