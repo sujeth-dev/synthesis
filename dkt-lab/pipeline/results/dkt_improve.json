@@ -1,0 +1,1005 @@
+{
+ "question": "DKT's aggregate metrics are fine and its learning curve is too shallow. Does the published DKT+ remedy fix the curve when it is judged on the curve?",
+ "selection_rule": "closest validation cohort-curve slope ratio to 1.0, among candidates within 0.005 validation AUC of the Lab 3 baseline",
+ "protocol": "choices on validation; each candidate touches the test split once after training; every variant run is reported, including the ones that do not help",
+ "cohort_min_opportunities": 10,
+ "runs": [
+  {
+   "dataset": "assist2009",
+   "model": "BKT",
+   "variant": "per-skill BKT (EM)",
+   "config": {
+    "forgetting": false
+   },
+   "val": {
+    "auc": 0.724620006580954,
+    "log_loss": 0.5687512314982253,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.6762969155740348,
+     "curve_mae": 0.036941588481494876,
+     "curve_bias": 0.036414805818812866
+    }
+   },
+   "test": {
+    "auc": 0.7302361005324135,
+    "log_loss": 0.5566570744054034,
+    "rmse": 0.4325075697053968,
+    "accuracy": 0.7260898120022986,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.8217858261225274,
+     "curve_mae": 0.027189076969936516,
+     "curve_bias": 0.025215474514831335
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 15.2
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 10,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8092788155879993,
+    "log_loss": 0.4876774473250811,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.48436985354699286,
+     "curve_mae": 0.022905017686413384,
+     "curve_bias": -0.0002068513928433457
+    }
+   },
+   "test": {
+    "auc": 0.8167198935860005,
+    "log_loss": 0.47038882472245935,
+    "rmse": 0.39501509668844725,
+    "accuracy": 0.7713652409490189,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.5598316427458103,
+     "curve_mae": 0.020003136764661294,
+     "curve_bias": -0.0038471264922550455
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.047309402376413345,
+     "fraction_positive": 0.7888455724401304
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.030314765870571136,
+     "fraction_negative": 0.7315060418508694
+    },
+    "separation": 0.07762417197227478,
+    "w1": 0.032110169529914856,
+    "w2": 0.054504089057445526,
+    "reconstruction_error": 0.2729870012028215,
+    "n_steps": 19355
+   },
+   "epochs_run": 10,
+   "train_seconds": 35.5
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "early stopping + dropout 0.2",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8148683459290824,
+    "log_loss": 0.4765746743612109,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.5006901662562415,
+     "curve_mae": 0.028212654947413478,
+     "curve_bias": 0.02663955632044387
+    }
+   },
+   "test": {
+    "auc": 0.8222712108657919,
+    "log_loss": 0.45907041817218003,
+    "rmse": 0.3899431169815445,
+    "accuracy": 0.7776044659715952,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.5759521701477502,
+     "curve_mae": 0.020488904364485392,
+     "curve_bias": 0.020488904364485392
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.04297978803515434,
+     "fraction_positive": 0.7446097541570531
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.015581582672894001,
+     "fraction_negative": 0.7058650162098438
+    },
+    "separation": 0.05856136977672577,
+    "w1": 0.03962073475122452,
+    "w2": 0.06560789793729782,
+    "reconstruction_error": 0.2703595464078791,
+    "n_steps": 19355
+   },
+   "epochs_run": 17,
+   "train_seconds": 65.0
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "DKT+ reconstruction only (r 0.1)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.1,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8128226462098376,
+    "log_loss": 0.4795994087612911,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.564980244014693,
+     "curve_mae": 0.025083641758378458,
+     "curve_bias": 0.022867268562630584
+    }
+   },
+   "test": {
+    "auc": 0.820150770105398,
+    "log_loss": 0.461765165870794,
+    "rmse": 0.3919208526755042,
+    "accuracy": 0.7740333305968311,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.6958969496179234,
+     "curve_mae": 0.018438395727514798,
+     "curve_bias": 0.018278333815674588
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.08196157962083817,
+     "fraction_positive": 0.730845731561779
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.08344392478466034,
+     "fraction_negative": 0.7073386383731212
+    },
+    "separation": 0.1654055118560791,
+    "w1": 0.05434560403227806,
+    "w2": 0.08505997806787491,
+    "reconstruction_error": 0.21215522710092594,
+    "n_steps": 19355
+   },
+   "epochs_run": 23,
+   "train_seconds": 87.3
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "DKT+ reconstruction strong (r 0.5)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.5,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8041101005020896,
+    "log_loss": 0.5068224993577449,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.6285781313484464,
+     "curve_mae": 0.026637849443706358,
+     "curve_bias": 0.026374351482619712
+    }
+   },
+   "test": {
+    "auc": 0.8113259876404633,
+    "log_loss": 0.48865210731802045,
+    "rmse": 0.40361914061764925,
+    "accuracy": 0.7596872177982104,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.709317096789174,
+     "curve_mae": 0.025363097315288047,
+     "curve_bias": 0.022829952170410225
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.13194036483764648,
+     "fraction_positive": 0.7341872861802848
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.18619227409362793,
+     "fraction_negative": 0.7285587975243147
+    },
+    "separation": 0.3181326389312744,
+    "w1": 0.06748765707015991,
+    "w2": 0.10335197299718857,
+    "reconstruction_error": 0.13471919162326718,
+    "n_steps": 19355
+   },
+   "epochs_run": 23,
+   "train_seconds": 84.2
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "DKT+ reconstruction only (r 1.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 1.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.799875374901423,
+    "log_loss": 0.5430706210118899,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.6536043143364911,
+     "curve_mae": 0.0197612456085278,
+     "curve_bias": 0.00860075916787479
+    }
+   },
+   "test": {
+    "auc": 0.8060067501122594,
+    "log_loss": 0.5234364418947008,
+    "rmse": 0.41748361158974356,
+    "accuracy": 0.7437402512109023,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.7390279173886489,
+     "curve_mae": 0.018503855768647805,
+     "curve_bias": 0.008628884187887962
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.16143549978733063,
+     "fraction_positive": 0.7352215768955367
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.23254521191120148,
+     "fraction_negative": 0.74447391688771
+    },
+    "separation": 0.3939807116985321,
+    "w1": 0.08925013244152069,
+    "w2": 0.13116596639156342,
+    "reconstruction_error": 0.09734014345155671,
+    "n_steps": 19355
+   },
+   "epochs_run": 30,
+   "train_seconds": 111.6
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "DKT+ published (r 0.1, w1 0.003, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.1,
+    "lambda_w1": 0.003,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8147991649813562,
+    "log_loss": 0.47770295156331777,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.5261489550679928,
+     "curve_mae": 0.024223501436632842,
+     "curve_bias": 0.018012031342984527
+    }
+   },
+   "test": {
+    "auc": 0.8226729915658654,
+    "log_loss": 0.4587176891826319,
+    "rmse": 0.3903442819598334,
+    "accuracy": 0.7763525162137755,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.6348665975112198,
+     "curve_mae": 0.0158165169081413,
+     "curve_bias": 0.015070365383714849
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.07370270043611526,
+     "fraction_positive": 0.7429389768478002
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.06947296857833862,
+     "fraction_negative": 0.7276746242263483
+    },
+    "separation": 0.1431756615638733,
+    "w1": 0.023280221968889236,
+    "w2": 0.04544828087091446,
+    "reconstruction_error": 0.22587981045296737,
+    "n_steps": 19355
+   },
+   "epochs_run": 28,
+   "train_seconds": 112.2
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "DKT+ weak waviness (r 0.1, w1 0.003, w2 0.3)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.1,
+    "lambda_w1": 0.003,
+    "lambda_w2": 0.3,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8128795812507384,
+    "log_loss": 0.47888349853532863,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.5065549988961222,
+     "curve_mae": 0.028300414220232852,
+     "curve_bias": 0.02761514626952164
+    }
+   },
+   "test": {
+    "auc": 0.8202637208733954,
+    "log_loss": 0.46162761356723403,
+    "rmse": 0.39113931761339915,
+    "accuracy": 0.7769066579098596,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.5857014760871397,
+     "curve_mae": 0.022403110051960686,
+     "curve_bias": 0.022403110051960686
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.07943955808877945,
+     "fraction_positive": 0.761715331370833
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.08005504310131073,
+     "fraction_negative": 0.7372531682876511
+    },
+    "separation": 0.15949460864067078,
+    "w1": 0.035877566784620285,
+    "w2": 0.061166685074567795,
+    "reconstruction_error": 0.22090963813167336,
+    "n_steps": 19355
+   },
+   "epochs_run": 17,
+   "train_seconds": 68.5
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "DKT+ strong both (r 0.5, w1 0.01, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.5,
+    "lambda_w1": 0.01,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8042921833654366,
+    "log_loss": 0.5012428226751884,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.6047485893145328,
+     "curve_mae": 0.02592859089109066,
+     "curve_bias": 0.025591131478391614
+    }
+   },
+   "test": {
+    "auc": 0.8118546923218048,
+    "log_loss": 0.48347615157464147,
+    "rmse": 0.40164609555542946,
+    "accuracy": 0.7603850258599458,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.6801487665966109,
+     "curve_mae": 0.023902386012007042,
+     "curve_bias": 0.02210666964741875
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.12630337476730347,
+     "fraction_positive": 0.7693531704988463
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.17652469873428345,
+     "fraction_negative": 0.7597995873857942
+    },
+    "separation": 0.3028280735015869,
+    "w1": 0.02848026156425476,
+    "w2": 0.05462124943733215,
+    "reconstruction_error": 0.14592321403381903,
+    "n_steps": 19355
+   },
+   "epochs_run": 23,
+   "train_seconds": 99.2
+  },
+  {
+   "dataset": "assist2009",
+   "model": "DKT",
+   "variant": "DKT+ smoothness only (w1 0.003, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.003,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.8146716428977219,
+    "log_loss": 0.4775755060262634,
+    "curve": {
+     "pairs": 1531,
+     "n_points": 10,
+     "observed_slope": 0.012892874756733569,
+     "slope_ratio": 0.4646530414562444,
+     "curve_mae": 0.04754306930371391,
+     "curve_bias": 0.04754306930371391
+    }
+   },
+   "test": {
+    "auc": 0.8233597691634202,
+    "log_loss": 0.4592011114352918,
+    "rmse": 0.3895756724968318,
+    "accuracy": 0.7782612265002873,
+    "n": 48724,
+    "curve": {
+     "pairs": 1685,
+     "n_points": 10,
+     "observed_slope": 0.012250222994935717,
+     "slope_ratio": 0.5449701427125724,
+     "curve_mae": 0.0423114296958186,
+     "curve_bias": 0.0423114296958186
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 12569,
+     "mean_delta": 0.03795159235596657,
+     "fraction_positive": 0.7664094200015912
+    },
+    "after_wrong": {
+     "n": 6786,
+     "mean_delta": -0.004961470607668161,
+     "fraction_negative": 0.7102858826996759
+    },
+    "separation": 0.04291306436061859,
+    "w1": 0.01966848038136959,
+    "w2": 0.0400228425860405,
+    "reconstruction_error": 0.2729314586296401,
+    "n_steps": 19355
+   },
+   "epochs_run": 19,
+   "train_seconds": 78.6
+  }
+ ],
+ "selection": {
+  "winner": "DKT+ strong both (r 0.5, w1 0.01, w2 3.0)",
+  "rule": "closest validation cohort-curve slope ratio to 1.0, among candidates within 0.005 validation AUC of the baseline (0.8093)",
+  "val_auc_floor": 0.8042788155879993,
+  "candidates_considered": 7,
+  "candidates_excluded_on_auc": [
+   "DKT+ reconstruction strong (r 0.5)",
+   "DKT+ reconstruction only (r 1.0)"
+  ]
+ },
+ "confirmation": [
+  {
+   "dataset": "assist2015",
+   "model": "BKT",
+   "variant": "per-skill BKT (EM)",
+   "config": {
+    "forgetting": false
+   },
+   "val": {
+    "auc": 0.699640521610347,
+    "log_loss": 0.5311661171634853,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.410942691598969,
+     "curve_mae": 0.13177211941586597,
+     "curve_bias": 0.13177211941586597
+    }
+   },
+   "test": {
+    "auc": 0.7027361875555099,
+    "log_loss": 0.5220084187830825,
+    "rmse": 0.4156715969173652,
+    "accuracy": 0.7519579369053581,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.43083582755001254,
+     "curve_mae": 0.12535642693769206,
+     "curve_bias": 0.12535642693769206
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 40.5
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 10,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7254464986862315,
+    "log_loss": 0.5181283872654101,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.32714427471232355,
+     "curve_mae": 0.11998582772204872,
+     "curve_bias": 0.11998582772204872
+    }
+   },
+   "test": {
+    "auc": 0.7243819594767371,
+    "log_loss": 0.5110497456669822,
+    "rmse": 0.4108132859699868,
+    "accuracy": 0.7556735102653981,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.3396739214632175,
+     "curve_mae": 0.11700697702571472,
+     "curve_bias": 0.11700697702571472
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.06569138914346695,
+     "fraction_positive": 0.9704908160192713
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.04791503772139549,
+     "fraction_negative": 0.8104026845637584
+    },
+    "separation": 0.11360642313957214,
+    "w1": 0.026013536378741264,
+    "w2": 0.036226917058229446,
+    "reconstruction_error": 0.27291889730337504,
+    "n_steps": 9026
+   },
+   "epochs_run": 10,
+   "train_seconds": 53.7
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "DKT+ strong both (r 0.5, w1 0.01, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.5,
+    "lambda_w1": 0.01,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7136884298248167,
+    "log_loss": 0.5481278985634664,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.33239807064529725,
+     "curve_mae": 0.08131734514126927,
+     "curve_bias": 0.07790286110018638
+    }
+   },
+   "test": {
+    "auc": 0.7117844747807791,
+    "log_loss": 0.5424023388599358,
+    "rmse": 0.42539358091176627,
+    "accuracy": 0.7252078117175763,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.3415590299487513,
+     "curve_mae": 0.0801826046952691,
+     "curve_bias": 0.07717304129352943
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.12322868406772614,
+     "fraction_positive": 0.9902137910267992
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.21072612702846527,
+     "fraction_negative": 0.9437919463087249
+    },
+    "separation": 0.3339548110961914,
+    "w1": 0.02078062854707241,
+    "w2": 0.03575720265507698,
+    "reconstruction_error": 0.1807161529622355,
+    "n_steps": 9026
+   },
+   "epochs_run": 18,
+   "train_seconds": 118.7
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "BKT",
+   "variant": "per-skill BKT (EM)",
+   "config": {
+    "forgetting": false
+   },
+   "val": {
+    "auc": 0.726743798751031,
+    "log_loss": 0.5998088040205287,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.871270855010336,
+     "curve_mae": 0.08185363513235788,
+     "curve_bias": 0.08109495128445993
+    }
+   },
+   "test": {
+    "auc": 0.7285095686505271,
+    "log_loss": 0.5984563675669328,
+    "rmse": 0.45272947681047093,
+    "accuracy": 0.6937079941909554,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.8947561929800685,
+     "curve_mae": 0.08059939173151756,
+     "curve_bias": 0.08059939173151756
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 5.1
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 10,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7012834664781431,
+    "log_loss": 0.6207913256696276,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.5449650095531856,
+     "curve_mae": 0.07968553314484644,
+     "curve_bias": 0.06982252509497208
+    }
+   },
+   "test": {
+    "auc": 0.7061904832730775,
+    "log_loss": 0.6181007518703797,
+    "rmse": 0.463092487096024,
+    "accuracy": 0.6621297578438988,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.5576942710823602,
+     "curve_mae": 0.07975267244225573,
+     "curve_bias": 0.06943872751443399
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.06186072900891304,
+     "fraction_positive": 0.9998238713086361
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.02349025569856167,
+     "fraction_negative": 0.850031806615776
+    },
+    "separation": 0.08535098284482956,
+    "w1": 0.008100193925201893,
+    "w2": 0.013269520364701748,
+    "reconstruction_error": 0.38905726078116704,
+    "n_steps": 29609
+   },
+   "epochs_run": 10,
+   "train_seconds": 7.6
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "DKT+ strong both (r 0.5, w1 0.01, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.5,
+    "lambda_w1": 0.01,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.6904996347354778,
+    "log_loss": 0.6294447757149365,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.46556870308205867,
+     "curve_mae": 0.08100520963987384,
+     "curve_bias": 0.06693587066180674
+    }
+   },
+   "test": {
+    "auc": 0.6942399008719641,
+    "log_loss": 0.6269443993492163,
+    "rmse": 0.46737321788098035,
+    "accuracy": 0.6561180722077746,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.4676488426851161,
+     "curve_mae": 0.08211774671902254,
+     "curve_bias": 0.06753876836653212
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.1518072485923767,
+     "fraction_positive": 1.0
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.10097116231918335,
+     "fraction_negative": 0.9753498727735369
+    },
+    "separation": 0.25277841091156006,
+    "w1": 0.01491091400384903,
+    "w2": 0.03014162927865982,
+    "reconstruction_error": 0.3043723262050563,
+    "n_steps": 29609
+   },
+   "epochs_run": 9,
+   "train_seconds": 7.6
+  }
+ ]
+}
