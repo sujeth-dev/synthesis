@@ -77,8 +77,66 @@ export interface Samples { max_steps: number; students: { student_id: string; le
 export interface BktParamsFile { skills: { skill_id: string; label: string; p_init: number; p_transit: number; p_slip: number; p_guess: number; n_train_sequences: number; default: boolean; hidden_concept?: number }[] }
 export interface SummaryRow { id: string; name: string; kind_label: string; n: number; auc_gain: number; bkt: Omit<Scores, 'n'>; dkt: Omit<Scores, 'n'> }
 
+// Lab 7/8 curve diagnostics (pipeline/diagnose.py). `model_cols` carry one key
+// per model and per no-learning baseline, so point/fidelity records are indexed
+// by name rather than having fixed bkt/dkt fields.
+export type ModelKey = 'bkt' | 'dkt' | 'global_rate' | 'skill_rate' | 'student_rate' | 'skill_and_student'
+
+export interface CurvePoint {
+  opportunity: number
+  from: number
+  to: number
+  label: string
+  n: number
+  actual: number
+  actual_ci?: [number, number]
+  [model: string]: number | string | [number, number] | undefined
+}
+
+export interface CurveFidelity {
+  n_points: number
+  actual_slope?: number
+  models: Record<string, { mae: number; bias: number; slope: number; slope_ratio: number }>
+}
+
+export interface Diagnostics {
+  question: string
+  protocol: string
+  kind: string
+  reproduction_check: { ok: boolean; max_abs_delta: number; tolerance: number }
+  all_model_scores: Record<string, Scores>
+  baselines_note: string
+  raw_curve: { kind: string; note: string; max_opportunity_in_data: number; min_rows: number; points: CurvePoint[] }
+  cohort_curve: { kind: string; note: string; min_opportunities: number; pairs: number; min_rows: number; points: CurvePoint[] }
+  raw_curve_fidelity: CurveFidelity
+  cohort_curve_fidelity: CurveFidelity
+  per_skill_fidelity: { skill_id: string; n: number; n_points: number; actual_slope: number; bkt: { mae: number; slope: number; slope_ratio: number }; dkt: { mae: number; slope: number; slope_ratio: number } }[]
+  within_pair_spread: { pairs: number; min_opportunities: number; models: Record<string, { mean_within_pair_sd: number; mean_first_to_last_change: number }> }
+  position_slices: { note: string; bins: { from: number; to: number; n: number; actual: number; bkt: PositionStat; dkt: PositionStat }[] }
+  evidence_response: { note: string; students_sampled: number; bkt: EvidenceStat; dkt: EvidenceStat }
+  consistency: { note: string; bkt: ConsistencyStat; dkt: ConsistencyStat }
+  dataset_audit: {
+    max_opportunity: number
+    mean_attempts_per_student_skill: number
+    fraction_pairs_with_one_attempt: number
+    fraction_eval_rows_at_opportunity_1: number
+    max_sequence_length: number
+    has_time: boolean
+    raw_multi_skill?: { file: string; mean_skills_per_problem: number; fraction_rows_from_multi_skill_problems: number }
+  }
+}
+
+export interface PositionStat { auc: number; log_loss: number; mean_pred: number; ece: number }
+export interface EvidenceStat {
+  after_correct: { n: number; mean_delta: number; fraction_positive: number }
+  after_wrong: { n: number; mean_delta: number; fraction_negative: number }
+  separation: number
+}
+export interface ConsistencyStat { w1: number; w2: number; reconstruction_error: number; n_steps: number }
+
 export const loadMetrics = (id: string) => loadJson<Metrics>(`${id}/metrics.json`)
 export const loadCurves = (id: string) => loadJson<Curves>(`${id}/curves.json`)
+export const loadDiagnostics = (id: string) => loadJson<Diagnostics>(`${id}/diagnostics.json`)
 export const loadHeatmap = (id: string) => loadJson<Heatmap>(`${id}/heatmap.json`)
 export const loadSamples = (id: string) => loadJson<Samples>(`${id}/samples.json`)
 export const loadBktParams = (id: string) => loadJson<BktParamsFile>(`${id}/bkt_params.json`)

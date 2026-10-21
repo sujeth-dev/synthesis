@@ -51,7 +51,7 @@ def export_dataset(name: str) -> dict:
     prov = res["provenance"]
     entry = {k: prov.get(k) for k in INDEX_KEYS}
     write_json(f"{name}/stats.json", {"provenance": entry, "stats": res["stats"]})
-    for part in ("metrics", "curves", "heatmap", "samples", "bkt_params"):
+    for part in ("metrics", "curves", "heatmap", "samples", "bkt_params", "diagnostics"):
         if part in res:
             write_json(f"{name}/{part}.json", res[part])
     weights = os.path.join(DATA_DIR, name, "dkt_weights.json")

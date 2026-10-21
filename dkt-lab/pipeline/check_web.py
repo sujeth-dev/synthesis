@@ -21,7 +21,7 @@ def main() -> int:
         res = load(os.path.join(RESULTS_DIR, f"{name}.json"))
         web_stats = load(os.path.join(WEB_DATA, name, "stats.json"))
         pairs = [("stats", web_stats["stats"])]
-        for part in ("metrics", "curves", "heatmap", "samples", "bkt_params"):
+        for part in ("metrics", "curves", "heatmap", "samples", "bkt_params", "diagnostics"):
             p = os.path.join(WEB_DATA, name, f"{part}.json")
             if part in res:
                 pairs.append((part, load(p) if os.path.exists(p) else None))

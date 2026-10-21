@@ -129,6 +129,8 @@ p { max-width: 75ch; }
   padding: 16px; box-shadow: var(--shadow); min-width: 0;
 }
 .card > h3 { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+/* A card carrying a caveat about the measurement rather than a result. */
+.card.warn-card { border-left: 3px solid var(--warn); }
 .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .spacer { flex: 1; }
 
@@ -155,6 +157,7 @@ p { max-width: 75ch; }
 .key { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
 .key::before { content: ''; width: 12px; height: 3px; background: currentColor; border-radius: 2px; }
 .key.bkt { color: var(--bkt); } .key.dkt { color: var(--dkt); } .key.actual { color: var(--actual); }
+.key.muted { color: var(--ink-3); }
 
 /* ── tables ────────────────────────────────────────── */
 .table-wrap { overflow-x: auto; }
@@ -164,6 +167,12 @@ th { font-weight: 600; color: var(--ink-2); font-size: 12px; text-transform: upp
 td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
 td.win { font-weight: 700; }
 td.bkt-c { color: var(--bkt); } td.dkt-c { color: var(--dkt); }
+/* Verdict colouring for curve-fidelity numbers, and de-emphasis for the
+   no-learning baseline rows that sit alongside the real models. */
+td.good-c { color: var(--good); font-weight: 600; }
+td.warn-c { color: var(--warn); font-weight: 600; }
+td.bad-c { color: var(--bad); font-weight: 600; }
+tr.muted-row td { color: var(--ink-3); }
 tr:last-child td { border-bottom: 0; }
 
 /* ── charts ────────────────────────────────────────── */
