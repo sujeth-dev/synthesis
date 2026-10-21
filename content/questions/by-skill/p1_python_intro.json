@@ -6,14 +6,28 @@
     "difficulty_tier": "review",
     "stem": "What will this Python code print?\n\nprint('Hello, World!')",
     "options": [
-      { "id": "a", "text": "Nothing" },
-      { "id": "b", "text": "Hello, World!" },
-      { "id": "c", "text": "print('Hello, World!')" },
-      { "id": "d", "text": "An error" }
+      {
+        "id": "a",
+        "text": "Nothing"
+      },
+      {
+        "id": "b",
+        "text": "Hello, World!"
+      },
+      {
+        "id": "c",
+        "text": "print('Hello, World!')"
+      },
+      {
+        "id": "d",
+        "text": "An error"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "print() is Python's way of outputting text. The text inside the quotes is displayed exactly as written. This is traditionally the first program every programmer writes.",
-    "graph_placement_weight": { "p1_python_intro": 1.0 }
+    "graph_placement_weight": {
+      "p1_python_intro": 1
+    }
   },
   {
     "id": "p1_py_q2",
@@ -22,14 +36,28 @@
     "difficulty_tier": "review",
     "stem": "Which of these is valid Python code?",
     "options": [
-      { "id": "a", "text": "PRINT 'hello'" },
-      { "id": "b", "text": "print(hello)" },
-      { "id": "c", "text": "print('hello')" },
-      { "id": "d", "text": "display 'hello'" }
+      {
+        "id": "a",
+        "text": "PRINT 'hello'"
+      },
+      {
+        "id": "b",
+        "text": "print(hello)"
+      },
+      {
+        "id": "c",
+        "text": "print('hello')"
+      },
+      {
+        "id": "d",
+        "text": "display 'hello'"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "Python is case-sensitive (print not PRINT). Strings must be in quotes. print(hello) would look for a variable called hello, not the text 'hello'.",
-    "graph_placement_weight": { "p1_python_intro": 1.0 }
+    "graph_placement_weight": {
+      "p1_python_intro": 1
+    }
   },
   {
     "id": "p1_py_q3",
@@ -38,14 +66,29 @@
     "difficulty_tier": "harder",
     "stem": "Why is Python particularly popular for AI and machine learning?",
     "options": [
-      { "id": "a", "text": "It was invented specifically for AI" },
-      { "id": "b", "text": "It's the fastest programming language" },
-      { "id": "c", "text": "It has a vast ecosystem of ML libraries and readable syntax" },
-      { "id": "d", "text": "AI can only be coded in Python" }
+      {
+        "id": "a",
+        "text": "It was invented specifically for AI"
+      },
+      {
+        "id": "b",
+        "text": "It's the fastest programming language"
+      },
+      {
+        "id": "c",
+        "text": "It has a vast ecosystem of ML libraries and readable syntax"
+      },
+      {
+        "id": "d",
+        "text": "AI can only be coded in Python"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "Python's readable syntax lowers the barrier to entry. Its ecosystem — NumPy, PyTorch, TensorFlow, scikit-learn, Hugging Face — is unmatched. Speed-critical parts are written in C/C++ underneath.",
-    "graph_placement_weight": { "p1_python_intro": 0.8, "p3_what_is_ai": 0.3 }
+    "graph_placement_weight": {
+      "p1_python_intro": 0.8,
+      "p3_what_is_ai": 0.3
+    }
   },
   {
     "id": "p1_py_q4",
@@ -54,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "Which Python line correctly prints the text YourName?",
     "options": [
-      { "id": "a", "text": "print(YourName)" },
-      { "id": "b", "text": "print['YourName']" },
-      { "id": "c", "text": "print('YourName')" },
-      { "id": "d", "text": "print = 'YourName'" }
+      {
+        "id": "a",
+        "text": "print(YourName)"
+      },
+      {
+        "id": "b",
+        "text": "print['YourName']"
+      },
+      {
+        "id": "c",
+        "text": "print('YourName')"
+      },
+      {
+        "id": "d",
+        "text": "print = 'YourName'"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "In Python, text (strings) must be wrapped in quotes — either single 'like this' or double \"like this\". Without quotes, Python treats it as a variable name.",
-    "graph_placement_weight": { "p1_python_intro": 1.0 }
+    "graph_placement_weight": {
+      "p1_python_intro": 1
+    }
   },
   {
     "id": "p1_py_q5",
@@ -70,14 +127,28 @@
     "difficulty_tier": "same",
     "stem": "What does this code print?\n\nprint('Value:', 5 + 3)",
     "options": [
-      { "id": "a", "text": "Value: 8" },
-      { "id": "b", "text": "Value: 5 + 3" },
-      { "id": "c", "text": "Value:8" },
-      { "id": "d", "text": "A syntax error" }
+      {
+        "id": "a",
+        "text": "Value: 8"
+      },
+      {
+        "id": "b",
+        "text": "Value: 5 + 3"
+      },
+      {
+        "id": "c",
+        "text": "Value:8"
+      },
+      {
+        "id": "d",
+        "text": "A syntax error"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "print() can take multiple comma-separated arguments and automatically inserts a space between them. Python first evaluates 5 + 3 to get 8, then prints the text 'Value:' followed by a space and 8, giving 'Value: 8'.",
-    "graph_placement_weight": { "p1_python_intro": 1.0 }
+    "graph_placement_weight": {
+      "p1_python_intro": 1
+    }
   },
   {
     "id": "p1_py_q6",
@@ -86,13 +157,35 @@
     "difficulty_tier": "harder",
     "stem": "NumPy and PyTorch are Python libraries, yet they perform millions of numeric computations very quickly. How is this possible if Python itself is a relatively slow, interpreted language?",
     "options": [
-      { "id": "a", "text": "Python secretly compiles itself into machine code at runtime for every program" },
-      { "id": "b", "text": "These libraries implement their core numeric operations in fast compiled languages like C, C++, or CUDA, and Python code simply calls into that fast compiled code" },
-      { "id": "c", "text": "They avoid using the Python interpreter entirely, even to write the surrounding code" },
-      { "id": "d", "text": "They only work on supercomputers, never on ordinary laptops" }
+      {
+        "id": "a",
+        "text": "Python secretly compiles itself into machine code at runtime for every program"
+      },
+      {
+        "id": "b",
+        "text": "These libraries implement their core numeric operations in fast compiled languages like C, C++, or CUDA, and Python code simply calls into that fast compiled code"
+      },
+      {
+        "id": "c",
+        "text": "They avoid using the Python interpreter entirely, even to write the surrounding code"
+      },
+      {
+        "id": "d",
+        "text": "They only work on supercomputers, never on ordinary laptops"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "This is the real reason Python dominates ML despite being 'slow': the heavy numeric lifting happens in optimized, compiled C/C++/CUDA code underneath, while Python provides the easy-to-read layer on top that calls into it. You write readable Python; the actual matrix multiplications run in fast, low-level code.",
-    "graph_placement_weight": { "p1_python_intro": 0.8 }
+    "graph_placement_weight": {
+      "p1_python_intro": 0.8
+    }
+  },
+  {
+    "id": "p1_python_intro_explain1",
+    "skill_id": "p1_python_intro",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "In your own words, explain Python: First Steps — what it is and why it matters. Use an example if it helps.",
+    "explanation_after": "Python reads almost like English — if you can write clear instructions, you can learn Python."
   }
 ]

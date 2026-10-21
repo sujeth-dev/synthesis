@@ -187,7 +187,9 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Python's plain arithmetic works fine without imports — the real reason ML code imports so much is reuse: NumPy's array operations, PyTorch's automatic differentiation engine, and scikit-learn's train_test_split represent years of optimization and correctness testing by many contributors. Importing them means standing on that work instead of reinventing (and likely getting wrong, or getting slow) the same complex machinery yourself.",
-    "graph_placement_weight": { "p1_modules_imports": 1.0 }
+    "graph_placement_weight": {
+      "p1_modules_imports": 1
+    }
   },
   {
     "id": "p1_modules_imports_q8",
@@ -215,6 +217,16 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Reproducibility is a serious concern in ML research and engineering: a library update can silently change how an operation rounds numbers, or deprecate a function your code relies on. Locking exact versions with requirements.txt means that when you (or someone else) rerun the experiment a year later, they get the identical software environment — and therefore a fair shot at reproducing the original results.",
-    "graph_placement_weight": { "p1_modules_imports": 1.0 }
+    "graph_placement_weight": {
+      "p1_modules_imports": 1
+    }
+  },
+  {
+    "id": "p1_modules_imports_explain1",
+    "skill_id": "p1_modules_imports",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is a module? What are the four ways to import from a module, and when would you use each? What does `pip install` do?",
+    "explanation_after": "You don't write everything from scratch. Python comes with hundreds of built-in modules (the standard library), and thousands more are available to install. Imports let you use this code in your programs."
   }
 ]

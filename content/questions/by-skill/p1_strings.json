@@ -187,7 +187,9 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "`.split()` breaks a string into a list of pieces on whitespace — the same core idea behind tokenization: breaking continuous text into discrete units a model can process. Real tokenizers used by models like GPT are more sophisticated (they split on subwords using algorithms like byte-pair encoding, not just whitespace), but the underlying goal is identical: turn one long string into a sequence of smaller pieces.",
-    "graph_placement_weight": { "p1_strings": 1.0 }
+    "graph_placement_weight": {
+      "p1_strings": 1
+    }
   },
   {
     "id": "p1_strings_q8",
@@ -215,6 +217,17 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "Because strings can't be changed in place, `result + next_word` builds a brand-new string every single time, re-copying everything accumulated so far. Over thousands of iterations this becomes quadratically slow. `''.join()` instead builds the final string once from a list, which is why it's the standard approach when assembling large text datasets for NLP preprocessing.",
-    "graph_placement_weight": { "p1_strings": 1.0, "p4_data_pipeline": 0.3 }
+    "graph_placement_weight": {
+      "p1_strings": 1,
+      "p4_data_pipeline": 0.3
+    }
+  },
+  {
+    "id": "p1_strings_explain1",
+    "skill_id": "p1_strings",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is string slicing and how does negative indexing work? What does split() return? What is an f-string and how is it different from string concatenation with `+`?",
+    "explanation_after": "Strings store text. Python makes text manipulation easy with built-in methods for finding, splitting, joining, and formatting strings. Almost every real program works with strings."
   }
 ]

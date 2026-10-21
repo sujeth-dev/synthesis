@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Oversampling before splitting means duplicated examples can land in both the train and test sets — the model is then partly tested on near-identical copies of data it trained on, artificially boosting scores. The correct order is to split first, then oversample only the training portion, leaving the test set as an untouched, realistic sample."
+  },
+  {
+    "id": "p3_data_and_labels_explain1",
+    "skill_id": "p3_data_and_labels",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is the difference between a feature and a label? Where do labels come from in a supervised learning system? What is self-supervised learning and why does it avoid the cost of human labelling?",
+    "explanation_after": "Data is what ML models train on. Labels are the correct answers attached to each example. Without good data, no algorithm can produce a good model."
   }
 ]

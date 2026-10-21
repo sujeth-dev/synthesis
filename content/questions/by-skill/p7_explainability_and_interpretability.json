@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_explainability_and_interpretability": 1
     }
+  },
+  {
+    "id": "p7_explainability_and_interpretability_explain1",
+    "skill_id": "p7_explainability_and_interpretability",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Ask Why the Model Chose This” to explain Explainability & Interpretability plainly.",
+    "explanation_after": "Explainability methods provide evidence about inputs, examples, or internal behavior that influenced an output."
   }
 ]

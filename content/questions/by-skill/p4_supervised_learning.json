@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p4_supervised_learning": 1
     }
+  },
+  {
+    "id": "p4_supervised_learning_explain1",
+    "skill_id": "p4_supervised_learning",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “The Covered Answer Key” story, explain Supervised Learning without assuming the listener knows machine learning.",
+    "explanation_after": "Supervised learning follows that pattern. Each training example has inputs and a known answer called a label."
   }
 ]

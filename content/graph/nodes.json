@@ -9,7 +9,8 @@
       "p1_comp_q2",
       "p1_comp_q3",
       "p1_comp_q4",
-      "p1_comp_q5"
+      "p1_comp_q5",
+      "p1_what_is_computer_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_what_is_computer_beg",
@@ -39,7 +40,8 @@
       "p1_io_q2",
       "p1_io_q3",
       "p1_io_q4",
-      "p1_io_q5"
+      "p1_io_q5",
+      "p1_input_output_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_input_output_beg",
@@ -69,7 +71,8 @@
       "p1_bin_q2",
       "p1_bin_q3",
       "p1_bin_q4",
-      "p1_bin_q5"
+      "p1_bin_q5",
+      "p1_binary_numbers_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_binary_beg",
@@ -99,7 +102,8 @@
       "p1_mem_q2",
       "p1_mem_q3",
       "p1_mem_q4",
-      "p1_mem_q5"
+      "p1_mem_q5",
+      "p1_memory_storage_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_memory_beg",
@@ -130,7 +134,8 @@
       "p1_cpu_q2",
       "p1_cpu_q3",
       "p1_cpu_q4",
-      "p1_cpu_q5"
+      "p1_cpu_q5",
+      "p1_cpu_processing_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_cpu_beg",
@@ -161,7 +166,8 @@
       "p1_code_q2",
       "p1_code_q3",
       "p1_code_q4",
-      "p1_code_q5"
+      "p1_code_q5",
+      "p1_how_code_works_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_code_beg",
@@ -191,7 +197,8 @@
       "p1_py_q2",
       "p1_py_q3",
       "p1_py_q4",
-      "p1_py_q5"
+      "p1_py_q5",
+      "p1_python_intro_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_python_beg",
@@ -222,7 +229,8 @@
       "p1_var_q2",
       "p1_var_q3",
       "p1_var_q4",
-      "p1_var_q5"
+      "p1_var_q5",
+      "p1_variables_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_variables_beg",
@@ -252,7 +260,8 @@
       "p1_dt_q2",
       "p1_dt_q3",
       "p1_dt_q4",
-      "p1_dt_q5"
+      "p1_dt_q5",
+      "p1_data_types_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_datatypes_beg",
@@ -284,7 +293,8 @@
       "p1_op_q2",
       "p1_op_q3",
       "p1_op_q4",
-      "p1_op_q5"
+      "p1_op_q5",
+      "p1_operators_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_operators_beg",
@@ -316,7 +326,8 @@
       "p1_str_q2",
       "p1_str_q3",
       "p1_str_q4",
-      "p1_str_q5"
+      "p1_str_q5",
+      "p1_strings_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_strings_beg",
@@ -348,7 +359,8 @@
       "p1_cond_q2",
       "p1_cond_q3",
       "p1_cond_q4",
-      "p1_cond_q5"
+      "p1_cond_q5",
+      "p1_conditionals_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_conditionals_beg",
@@ -380,7 +392,8 @@
       "p1_loop_q2",
       "p1_loop_q3",
       "p1_loop_q4",
-      "p1_loop_q5"
+      "p1_loop_q5",
+      "p1_loops_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_loops_beg",
@@ -412,7 +425,8 @@
       "p1_li_q2",
       "p1_li_q3",
       "p1_li_q4",
-      "p1_li_q5"
+      "p1_li_q5",
+      "p1_lists_intro_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_lists_intro_beg",
@@ -444,7 +458,8 @@
       "p1_fn_q2",
       "p1_fn_q3",
       "p1_fn_q4",
-      "p1_fn_q5"
+      "p1_fn_q5",
+      "p1_functions_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_functions_beg",
@@ -475,7 +490,8 @@
       "p1_dbg_q1",
       "p1_dbg_q2",
       "p1_dbg_q3",
-      "p1_dbg_q4"
+      "p1_dbg_q4",
+      "p1_debugging_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_debugging_beg",
@@ -506,7 +522,8 @@
       "p1_sc_q1",
       "p1_sc_q2",
       "p1_sc_q3",
-      "p1_sc_q4"
+      "p1_sc_q4",
+      "p1_scope_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_scope_beg",
@@ -538,7 +555,8 @@
       "p1_mod_q2",
       "p1_mod_q3",
       "p1_mod_q4",
-      "p1_mod_q5"
+      "p1_mod_q5",
+      "p1_modules_imports_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1_modules_beg",
@@ -573,7 +591,8 @@
       "p1b_oop_q5",
       "p1b_oop_q6",
       "p1b_oop_order1",
-      "p1b_oop_fill1"
+      "p1b_oop_fill1",
+      "p1b_oop_classes_explain1"
     ],
     "explanation_ids": {
       "beginner": "p1b_oop_beg",
@@ -605,7 +624,8 @@
       "p2_list_q2",
       "p2_list_q3",
       "p2_list_q4",
-      "p2_list_q5"
+      "p2_list_q5",
+      "p2_lists_arrays_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_lists_beg",
@@ -636,7 +656,8 @@
       "p2_dict_q2",
       "p2_dict_q3",
       "p2_dict_q4",
-      "p2_dict_q5"
+      "p2_dict_q5",
+      "p2_dictionaries_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_dict_beg",
@@ -666,7 +687,8 @@
       "p2_alg_q2",
       "p2_alg_q3",
       "p2_alg_q4",
-      "p2_alg_q5"
+      "p2_alg_q5",
+      "p2_algorithms_intro_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_algorithms_beg",
@@ -696,7 +718,8 @@
       "p2_bigo_q2",
       "p2_bigo_q3",
       "p2_bigo_q4",
-      "p2_bigo_q5"
+      "p2_bigo_q5",
+      "p2_big_o_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_bigo_beg",
@@ -726,7 +749,8 @@
       "p2_np_q2",
       "p2_np_q3",
       "p2_np_q4",
-      "p2_np_q5"
+      "p2_np_q5",
+      "p2_numpy_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_numpy_beg",
@@ -757,7 +781,8 @@
       "p2_vec_q2",
       "p2_vec_q3",
       "p2_vec_q4",
-      "p2_vec_q5"
+      "p2_vec_q5",
+      "p2_math_vectors_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_vectors_beg",
@@ -788,7 +813,8 @@
       "p2_mat_q2",
       "p2_mat_q3",
       "p2_mat_q4",
-      "p2_mat_q5"
+      "p2_mat_q5",
+      "p2_math_matrices_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_matrices_beg",
@@ -818,7 +844,8 @@
       "p2_prob_q2",
       "p2_prob_q3",
       "p2_prob_q4",
-      "p2_prob_q5"
+      "p2_prob_q5",
+      "p2_probability_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_prob_beg",
@@ -848,7 +875,8 @@
       "p2_ps_q2",
       "p2_ps_q3",
       "p2_ps_q4",
-      "p2_ps_q5"
+      "p2_ps_q5",
+      "p2_problem_solving_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_ps_beg",
@@ -878,7 +906,8 @@
       "p2_rec_q2",
       "p2_rec_q3",
       "p2_rec_q4",
-      "p2_rec_q5"
+      "p2_rec_q5",
+      "p2_recursion_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_recursion_beg",
@@ -908,7 +937,8 @@
       "p2_st_q1",
       "p2_st_q2",
       "p2_st_q3",
-      "p2_st_q4"
+      "p2_st_q4",
+      "p2_sets_tuples_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_sets_tuples_beg",
@@ -940,7 +970,8 @@
       "p2_stat_q2",
       "p2_stat_q3",
       "p2_stat_q4",
-      "p2_stat_q5"
+      "p2_stat_q5",
+      "p2_statistics_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_statistics_beg",
@@ -972,7 +1003,8 @@
       "p2_ss_q2",
       "p2_ss_q3",
       "p2_ss_q4",
-      "p2_ss_q5"
+      "p2_ss_q5",
+      "p2_sorting_searching_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_sorting_beg",
@@ -1004,7 +1036,8 @@
       "p2_lf_q2",
       "p2_lf_q3",
       "p2_lf_q4",
-      "p2_lf_q5"
+      "p2_lf_q5",
+      "p2_linear_functions_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_linear_beg",
@@ -1037,7 +1070,8 @@
       "p2_calc_q3",
       "p2_calc_q4",
       "p2_calc_q5",
-      "p2_calc_q6"
+      "p2_calc_q6",
+      "p2_calculus_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_calc_beg",
@@ -1069,7 +1103,8 @@
       "p2_de_q2",
       "p2_de_q3",
       "p2_de_q4",
-      "p2_de_q5"
+      "p2_de_q5",
+      "p2_data_exploration_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_dataexp_beg",
@@ -1106,7 +1141,8 @@
       "p2_clean_q5",
       "p2_clean_q6",
       "p2_clean_order1",
-      "p2_clean_fill1"
+      "p2_clean_fill1",
+      "p2_data_cleaning_preprocessing_explain1"
     ],
     "explanation_ids": {
       "beginner": "p2_clean_beg",
@@ -1136,7 +1172,8 @@
       "p3_ai_q2",
       "p3_ai_q3",
       "p3_ai_q4",
-      "p3_ai_q5"
+      "p3_ai_q5",
+      "p3_what_is_ai_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_what_is_ai_beg",
@@ -1166,7 +1203,8 @@
       "p3_aml_q2",
       "p3_aml_q3",
       "p3_aml_q4",
-      "p3_aml_q5"
+      "p3_aml_q5",
+      "p3_ai_vs_ml_vs_dl_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_taxonomy_beg",
@@ -1196,7 +1234,8 @@
       "p3_hist_q1",
       "p3_hist_q2",
       "p3_hist_q3",
-      "p3_hist_q4"
+      "p3_hist_q4",
+      "p3_history_of_ai_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_history_beg",
@@ -1228,7 +1267,8 @@
       "p3_hml_q2",
       "p3_hml_q3",
       "p3_hml_q4",
-      "p3_hml_q5"
+      "p3_hml_q5",
+      "p3_how_machines_learn_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_howlearn_beg",
@@ -1260,7 +1300,8 @@
       "p3_tol_q2",
       "p3_tol_q3",
       "p3_tol_q4",
-      "p3_tol_q5"
+      "p3_tol_q5",
+      "p3_types_of_learning_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_typelearn_beg",
@@ -1291,7 +1332,8 @@
       "p3_tvi_q2",
       "p3_tvi_q3",
       "p3_tvi_q4",
-      "p3_tvi_q5"
+      "p3_tvi_q5",
+      "p3_training_vs_inference_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_trvinf_beg",
@@ -1322,7 +1364,8 @@
       "p3_dal_q2",
       "p3_dal_q3",
       "p3_dal_q4",
-      "p3_dal_q5"
+      "p3_dal_q5",
+      "p3_data_and_labels_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_datalabel_beg",
@@ -1354,7 +1397,8 @@
       "p3_me_q2",
       "p3_me_q3",
       "p3_me_q4",
-      "p3_me_q5"
+      "p3_me_q5",
+      "p3_model_evaluation_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_eval_beg",
@@ -1386,7 +1430,8 @@
       "p3_ov_q2",
       "p3_ov_q3",
       "p3_ov_q4",
-      "p3_ov_q5"
+      "p3_ov_q5",
+      "p3_overfitting_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_overfit_beg",
@@ -1418,7 +1463,8 @@
       "p3_fe_q2",
       "p3_fe_q3",
       "p3_fe_q4",
-      "p3_fe_q5"
+      "p3_fe_q5",
+      "p3_feature_engineering_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_features_beg",
@@ -1449,7 +1495,8 @@
       "p3_app_q1",
       "p3_app_q2",
       "p3_app_q3",
-      "p3_app_q4"
+      "p3_app_q4",
+      "p3_ai_applications_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_apps_beg",
@@ -1481,7 +1528,8 @@
       "p3_adc_q2",
       "p3_adc_q3",
       "p3_adc_q4",
-      "p3_adc_q5"
+      "p3_adc_q5",
+      "p3_ai_dev_cycle_explain1"
     ],
     "explanation_ids": {
       "beginner": "p3_devcycle_beg",
@@ -1516,7 +1564,8 @@
       "p4_data_pipeline_q5",
       "p4_data_pipeline_q6",
       "p4_data_pipeline_order1",
-      "p4_data_pipeline_fill1"
+      "p4_data_pipeline_fill1",
+      "p4_data_pipeline_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_data_pipeline_beg",
@@ -1547,7 +1596,8 @@
       "p4_supervised_learning_q3",
       "p4_supervised_learning_q4",
       "p4_supervised_learning_q5",
-      "p4_supervised_learning_q6"
+      "p4_supervised_learning_q6",
+      "p4_supervised_learning_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_supervised_learning_beg",
@@ -1581,7 +1631,8 @@
       "p4_skl_q5",
       "p4_skl_q6",
       "p4_skl_order1",
-      "p4_skl_fill1"
+      "p4_skl_fill1",
+      "p4_sklearn_workflow_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_skl_beg",
@@ -1613,7 +1664,8 @@
       "p4_unsupervised_learning_q3",
       "p4_unsupervised_learning_q4",
       "p4_unsupervised_learning_q5",
-      "p4_unsupervised_learning_q6"
+      "p4_unsupervised_learning_q6",
+      "p4_unsupervised_learning_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_unsupervised_learning_beg",
@@ -1647,7 +1699,8 @@
       "p4_linear_regression_q5",
       "p4_linear_regression_q6",
       "p4_linear_regression_order1",
-      "p4_linear_regression_fill1"
+      "p4_linear_regression_fill1",
+      "p4_linear_regression_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_linear_regression_beg",
@@ -1680,7 +1733,8 @@
       "p4_logistic_regression_q5",
       "p4_logistic_regression_q6",
       "p4_logistic_regression_order1",
-      "p4_logistic_regression_fill1"
+      "p4_logistic_regression_fill1",
+      "p4_logistic_regression_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_logistic_regression_beg",
@@ -1713,7 +1767,8 @@
       "p4_decision_trees_q5",
       "p4_decision_trees_q6",
       "p4_decision_trees_order1",
-      "p4_decision_trees_fill1"
+      "p4_decision_trees_fill1",
+      "p4_decision_trees_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_decision_trees_beg",
@@ -1744,7 +1799,8 @@
       "p4_random_forests_q3",
       "p4_random_forests_q4",
       "p4_random_forests_q5",
-      "p4_random_forests_q6"
+      "p4_random_forests_q6",
+      "p4_random_forests_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_random_forests_beg",
@@ -1775,7 +1831,8 @@
       "p4_boosting_methods_q3",
       "p4_boosting_methods_q4",
       "p4_boosting_methods_q5",
-      "p4_boosting_methods_q6"
+      "p4_boosting_methods_q6",
+      "p4_boosting_methods_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_boosting_methods_beg",
@@ -1806,7 +1863,8 @@
       "p4_knn_and_svm_q3",
       "p4_knn_and_svm_q4",
       "p4_knn_and_svm_q5",
-      "p4_knn_and_svm_q6"
+      "p4_knn_and_svm_q6",
+      "p4_knn_and_svm_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_knn_and_svm_beg",
@@ -1840,7 +1898,8 @@
       "p4_train_test_cross_validation_q5",
       "p4_train_test_cross_validation_q6",
       "p4_train_test_cross_validation_order1",
-      "p4_train_test_cross_validation_fill1"
+      "p4_train_test_cross_validation_fill1",
+      "p4_train_test_cross_validation_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_train_test_cross_validation_beg",
@@ -1873,7 +1932,8 @@
       "p4_evaluation_metrics_q5",
       "p4_evaluation_metrics_q6",
       "p4_evaluation_metrics_order1",
-      "p4_evaluation_metrics_fill1"
+      "p4_evaluation_metrics_fill1",
+      "p4_evaluation_metrics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_evaluation_metrics_beg",
@@ -1906,7 +1966,8 @@
       "p4_bias_variance_tradeoff_q3",
       "p4_bias_variance_tradeoff_q4",
       "p4_bias_variance_tradeoff_q5",
-      "p4_bias_variance_tradeoff_q6"
+      "p4_bias_variance_tradeoff_q6",
+      "p4_bias_variance_tradeoff_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_bias_variance_tradeoff_beg",
@@ -1937,7 +1998,8 @@
       "p4_regularization_q3",
       "p4_regularization_q4",
       "p4_regularization_q5",
-      "p4_regularization_q6"
+      "p4_regularization_q6",
+      "p4_regularization_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_regularization_beg",
@@ -1972,7 +2034,8 @@
       "p4_hyperparameter_tuning_q5",
       "p4_hyperparameter_tuning_q6",
       "p4_hyperparameter_tuning_order1",
-      "p4_hyperparameter_tuning_fill1"
+      "p4_hyperparameter_tuning_fill1",
+      "p4_hyperparameter_tuning_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_hyperparameter_tuning_beg",
@@ -2005,7 +2068,8 @@
       "p4_feature_scaling_q5",
       "p4_feature_scaling_q6",
       "p4_feature_scaling_order1",
-      "p4_feature_scaling_fill1"
+      "p4_feature_scaling_fill1",
+      "p4_feature_scaling_explain1"
     ],
     "explanation_ids": {
       "beginner": "p4_feature_scaling_beg",
@@ -2038,7 +2102,8 @@
       "p5_neural_network_basics_q5",
       "p5_neural_network_basics_q6",
       "p5_neural_network_basics_order1",
-      "p5_neural_network_basics_fill1"
+      "p5_neural_network_basics_fill1",
+      "p5_neural_network_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_neural_network_basics_beginner",
@@ -2070,7 +2135,8 @@
       "p5_bp_q4",
       "p5_bp_q5",
       "p5_bp_q6",
-      "p5_bp_order1"
+      "p5_bp_order1",
+      "p5_backpropagation_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_bp_beg",
@@ -2102,7 +2168,8 @@
       "p6_transformers_q3",
       "p6_transformers_q4",
       "p6_transformers_q5",
-      "p6_transformers_q6"
+      "p6_transformers_q6",
+      "p6_transformers_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_transformers_beginner",
@@ -2135,7 +2202,8 @@
       "p6_embeddings_q5",
       "p6_embeddings_q6",
       "p6_embeddings_order1",
-      "p6_embeddings_fill1"
+      "p6_embeddings_fill1",
+      "p6_embeddings_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_embeddings_beginner",
@@ -2168,7 +2236,8 @@
       "p6_rag_systems_q5",
       "p6_rag_systems_q6",
       "p6_rag_systems_order1",
-      "p6_rag_systems_fill1"
+      "p6_rag_systems_fill1",
+      "p6_rag_systems_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_rag_systems_beginner",
@@ -2201,7 +2270,8 @@
       "p7_ai_apis_q5",
       "p7_ai_apis_q6",
       "p7_ai_apis_order1",
-      "p7_ai_apis_fill1"
+      "p7_ai_apis_fill1",
+      "p7_ai_apis_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_ai_apis_beginner",
@@ -2234,7 +2304,8 @@
       "p8_system_design_ai_q5",
       "p8_system_design_ai_q6",
       "p8_system_design_ai_order1",
-      "p8_system_design_ai_fill1"
+      "p8_system_design_ai_fill1",
+      "p8_system_design_ai_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_system_design_ai_beginner",
@@ -2265,7 +2336,8 @@
       "p5_activation_functions_q3",
       "p5_activation_functions_q4",
       "p5_activation_functions_q5",
-      "p5_activation_functions_q6"
+      "p5_activation_functions_q6",
+      "p5_activation_functions_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_activation_functions_beginner",
@@ -2299,7 +2371,8 @@
       "p5_forward_propagation_q5",
       "p5_forward_propagation_q6",
       "p5_forward_propagation_order1",
-      "p5_forward_propagation_fill1"
+      "p5_forward_propagation_fill1",
+      "p5_forward_propagation_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_forward_propagation_beginner",
@@ -2330,7 +2403,8 @@
       "p5_loss_functions_q3",
       "p5_loss_functions_q4",
       "p5_loss_functions_q5",
-      "p5_loss_functions_q6"
+      "p5_loss_functions_q6",
+      "p5_loss_functions_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_loss_functions_beginner",
@@ -2364,7 +2438,8 @@
       "p5_gradient_descent_and_optimizers_q5",
       "p5_gradient_descent_and_optimizers_q6",
       "p5_gradient_descent_and_optimizers_order1",
-      "p5_gradient_descent_and_optimizers_fill1"
+      "p5_gradient_descent_and_optimizers_fill1",
+      "p5_gradient_descent_and_optimizers_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_gradient_descent_and_optimizers_beginner",
@@ -2398,7 +2473,8 @@
       "p5_training_loops_epochs_batches_q5",
       "p5_training_loops_epochs_batches_q6",
       "p5_training_loops_epochs_batches_order1",
-      "p5_training_loops_epochs_batches_fill1"
+      "p5_training_loops_epochs_batches_fill1",
+      "p5_training_loops_epochs_batches_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_training_loops_epochs_batches_beginner",
@@ -2430,7 +2506,8 @@
       "p5_learning_rate_and_hyperparameters_q3",
       "p5_learning_rate_and_hyperparameters_q4",
       "p5_learning_rate_and_hyperparameters_q5",
-      "p5_learning_rate_and_hyperparameters_q6"
+      "p5_learning_rate_and_hyperparameters_q6",
+      "p5_learning_rate_and_hyperparameters_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_learning_rate_and_hyperparameters_beginner",
@@ -2461,7 +2538,8 @@
       "p5_overfitting_in_deep_nets_q3",
       "p5_overfitting_in_deep_nets_q4",
       "p5_overfitting_in_deep_nets_q5",
-      "p5_overfitting_in_deep_nets_q6"
+      "p5_overfitting_in_deep_nets_q6",
+      "p5_overfitting_in_deep_nets_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_overfitting_in_deep_nets_beginner",
@@ -2492,7 +2570,8 @@
       "p5_batch_normalization_q3",
       "p5_batch_normalization_q4",
       "p5_batch_normalization_q5",
-      "p5_batch_normalization_q6"
+      "p5_batch_normalization_q6",
+      "p5_batch_normalization_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_batch_normalization_beginner",
@@ -2523,7 +2602,8 @@
       "p5_vanishing_exploding_gradients_q3",
       "p5_vanishing_exploding_gradients_q4",
       "p5_vanishing_exploding_gradients_q5",
-      "p5_vanishing_exploding_gradients_q6"
+      "p5_vanishing_exploding_gradients_q6",
+      "p5_vanishing_exploding_gradients_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_vanishing_exploding_gradients_beginner",
@@ -2557,7 +2637,8 @@
       "p5_cnn_basics_q5",
       "p5_cnn_basics_q6",
       "p5_cnn_basics_order1",
-      "p5_cnn_basics_fill1"
+      "p5_cnn_basics_fill1",
+      "p5_cnn_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_cnn_basics_beginner",
@@ -2591,7 +2672,8 @@
       "p5_rnn_basics_q5",
       "p5_rnn_basics_q6",
       "p5_rnn_basics_order1",
-      "p5_rnn_basics_fill1"
+      "p5_rnn_basics_fill1",
+      "p5_rnn_basics_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_rnn_basics_beginner",
@@ -2622,7 +2704,8 @@
       "p5_why_transformers_replaced_rnns_q3",
       "p5_why_transformers_replaced_rnns_q4",
       "p5_why_transformers_replaced_rnns_q5",
-      "p5_why_transformers_replaced_rnns_q6"
+      "p5_why_transformers_replaced_rnns_q6",
+      "p5_why_transformers_replaced_rnns_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_why_transformers_replaced_rnns_beginner",
@@ -2656,7 +2739,8 @@
       "p5_pytorch_intro_q5",
       "p5_pytorch_intro_q6",
       "p5_pytorch_intro_order1",
-      "p5_pytorch_intro_fill1"
+      "p5_pytorch_intro_fill1",
+      "p5_pytorch_intro_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_pytorch_intro_beginner",
@@ -2690,7 +2774,8 @@
       "p5_build_your_first_network_q5",
       "p5_build_your_first_network_q6",
       "p5_build_your_first_network_order1",
-      "p5_build_your_first_network_fill1"
+      "p5_build_your_first_network_fill1",
+      "p5_build_your_first_network_explain1"
     ],
     "explanation_ids": {
       "beginner": "p5_build_your_first_network_beginner",
@@ -2724,7 +2809,8 @@
       "p6_tokenization_q5",
       "p6_tokenization_q6",
       "p6_tokenization_order1",
-      "p6_tokenization_fill1"
+      "p6_tokenization_fill1",
+      "p6_tokenization_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_tokenization_beginner",
@@ -2755,7 +2841,8 @@
       "p6_vector_databases_q3",
       "p6_vector_databases_q4",
       "p6_vector_databases_q5",
-      "p6_vector_databases_q6"
+      "p6_vector_databases_q6",
+      "p6_vector_databases_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_vector_databases_beginner",
@@ -2786,7 +2873,8 @@
       "p6_attention_mechanism_q3",
       "p6_attention_mechanism_q4",
       "p6_attention_mechanism_q5",
-      "p6_attention_mechanism_q6"
+      "p6_attention_mechanism_q6",
+      "p6_attention_mechanism_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_attention_mechanism_beginner",
@@ -2817,7 +2905,8 @@
       "p6_self_attention_and_multihead_q3",
       "p6_self_attention_and_multihead_q4",
       "p6_self_attention_and_multihead_q5",
-      "p6_self_attention_and_multihead_q6"
+      "p6_self_attention_and_multihead_q6",
+      "p6_self_attention_and_multihead_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_self_attention_and_multihead_beginner",
@@ -2848,7 +2937,8 @@
       "p6_positional_encoding_q3",
       "p6_positional_encoding_q4",
       "p6_positional_encoding_q5",
-      "p6_positional_encoding_q6"
+      "p6_positional_encoding_q6",
+      "p6_positional_encoding_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_positional_encoding_beginner",
@@ -2879,7 +2969,8 @@
       "p6_residual_connections_and_layernorm_q3",
       "p6_residual_connections_and_layernorm_q4",
       "p6_residual_connections_and_layernorm_q5",
-      "p6_residual_connections_and_layernorm_q6"
+      "p6_residual_connections_and_layernorm_q6",
+      "p6_residual_connections_and_layernorm_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_residual_connections_and_layernorm_beginner",
@@ -2910,7 +3001,8 @@
       "p6_pretraining_objectives_q3",
       "p6_pretraining_objectives_q4",
       "p6_pretraining_objectives_q5",
-      "p6_pretraining_objectives_q6"
+      "p6_pretraining_objectives_q6",
+      "p6_pretraining_objectives_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_pretraining_objectives_beginner",
@@ -2941,7 +3033,8 @@
       "p6_finetuning_methods_q3",
       "p6_finetuning_methods_q4",
       "p6_finetuning_methods_q5",
-      "p6_finetuning_methods_q6"
+      "p6_finetuning_methods_q6",
+      "p6_finetuning_methods_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_finetuning_methods_beginner",
@@ -2974,7 +3067,8 @@
       "p6_lora_and_peft_q5",
       "p6_lora_and_peft_q6",
       "p6_lora_and_peft_order1",
-      "p6_lora_and_peft_fill1"
+      "p6_lora_and_peft_fill1",
+      "p6_lora_and_peft_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_lora_and_peft_beginner",
@@ -3005,7 +3099,8 @@
       "p6_llm_landscape_q3",
       "p6_llm_landscape_q4",
       "p6_llm_landscape_q5",
-      "p6_llm_landscape_q6"
+      "p6_llm_landscape_q6",
+      "p6_llm_landscape_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_llm_landscape_beginner",
@@ -3038,7 +3133,8 @@
       "p6_prompt_engineering_q5",
       "p6_prompt_engineering_q6",
       "p6_prompt_engineering_order1",
-      "p6_prompt_engineering_fill1"
+      "p6_prompt_engineering_fill1",
+      "p6_prompt_engineering_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_prompt_engineering_beginner",
@@ -3071,7 +3167,8 @@
       "p6_tool_use_and_function_calling_q5",
       "p6_tool_use_and_function_calling_q6",
       "p6_tool_use_and_function_calling_order1",
-      "p6_tool_use_and_function_calling_fill1"
+      "p6_tool_use_and_function_calling_fill1",
+      "p6_tool_use_and_function_calling_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_tool_use_and_function_calling_beginner",
@@ -3102,7 +3199,8 @@
       "p6_evaluating_and_choosing_llms_q3",
       "p6_evaluating_and_choosing_llms_q4",
       "p6_evaluating_and_choosing_llms_q5",
-      "p6_evaluating_and_choosing_llms_q6"
+      "p6_evaluating_and_choosing_llms_q6",
+      "p6_evaluating_and_choosing_llms_explain1"
     ],
     "explanation_ids": {
       "beginner": "p6_evaluating_and_choosing_llms_beginner",
@@ -3135,7 +3233,8 @@
       "p7_building_ai_app_q5",
       "p7_building_ai_app_q6",
       "p7_building_ai_app_order1",
-      "p7_building_ai_app_fill1"
+      "p7_building_ai_app_fill1",
+      "p7_building_ai_app_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_building_ai_app_beginner",
@@ -3166,7 +3265,8 @@
       "p7_api_design_for_ai_features_q3",
       "p7_api_design_for_ai_features_q4",
       "p7_api_design_for_ai_features_q5",
-      "p7_api_design_for_ai_features_q6"
+      "p7_api_design_for_ai_features_q6",
+      "p7_api_design_for_ai_features_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_api_design_for_ai_features_beginner",
@@ -3197,7 +3297,8 @@
       "p7_evaluating_llm_outputs_q3",
       "p7_evaluating_llm_outputs_q4",
       "p7_evaluating_llm_outputs_q5",
-      "p7_evaluating_llm_outputs_q6"
+      "p7_evaluating_llm_outputs_q6",
+      "p7_evaluating_llm_outputs_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_evaluating_llm_outputs_beginner",
@@ -3228,7 +3329,8 @@
       "p7_explainability_and_interpretability_q3",
       "p7_explainability_and_interpretability_q4",
       "p7_explainability_and_interpretability_q5",
-      "p7_explainability_and_interpretability_q6"
+      "p7_explainability_and_interpretability_q6",
+      "p7_explainability_and_interpretability_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_explainability_and_interpretability_beginner",
@@ -3259,7 +3361,8 @@
       "p7_safety_guardrails_q3",
       "p7_safety_guardrails_q4",
       "p7_safety_guardrails_q5",
-      "p7_safety_guardrails_q6"
+      "p7_safety_guardrails_q6",
+      "p7_safety_guardrails_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_safety_guardrails_beginner",
@@ -3290,7 +3393,8 @@
       "p7_prompt_injection_and_jailbreaks_q3",
       "p7_prompt_injection_and_jailbreaks_q4",
       "p7_prompt_injection_and_jailbreaks_q5",
-      "p7_prompt_injection_and_jailbreaks_q6"
+      "p7_prompt_injection_and_jailbreaks_q6",
+      "p7_prompt_injection_and_jailbreaks_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_prompt_injection_and_jailbreaks_beginner",
@@ -3321,7 +3425,8 @@
       "p7_content_moderation_q3",
       "p7_content_moderation_q4",
       "p7_content_moderation_q5",
-      "p7_content_moderation_q6"
+      "p7_content_moderation_q6",
+      "p7_content_moderation_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_content_moderation_beginner",
@@ -3352,7 +3457,8 @@
       "p7_cost_latency_optimization_q3",
       "p7_cost_latency_optimization_q4",
       "p7_cost_latency_optimization_q5",
-      "p7_cost_latency_optimization_q6"
+      "p7_cost_latency_optimization_q6",
+      "p7_cost_latency_optimization_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_cost_latency_optimization_beginner",
@@ -3385,7 +3491,8 @@
       "p7_caching_and_batching_q5",
       "p7_caching_and_batching_q6",
       "p7_caching_and_batching_order1",
-      "p7_caching_and_batching_fill1"
+      "p7_caching_and_batching_fill1",
+      "p7_caching_and_batching_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_caching_and_batching_beginner",
@@ -3416,7 +3523,8 @@
       "p7_model_selection_tradeoffs_q3",
       "p7_model_selection_tradeoffs_q4",
       "p7_model_selection_tradeoffs_q5",
-      "p7_model_selection_tradeoffs_q6"
+      "p7_model_selection_tradeoffs_q6",
+      "p7_model_selection_tradeoffs_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_model_selection_tradeoffs_beginner",
@@ -3447,7 +3555,8 @@
       "p7_deployment_hosting_q3",
       "p7_deployment_hosting_q4",
       "p7_deployment_hosting_q5",
-      "p7_deployment_hosting_q6"
+      "p7_deployment_hosting_q6",
+      "p7_deployment_hosting_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_deployment_hosting_beginner",
@@ -3480,7 +3589,8 @@
       "p7_monitoring_observability_q5",
       "p7_monitoring_observability_q6",
       "p7_monitoring_observability_order1",
-      "p7_monitoring_observability_fill1"
+      "p7_monitoring_observability_fill1",
+      "p7_monitoring_observability_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_monitoring_observability_beginner",
@@ -3513,7 +3623,8 @@
       "p7_ci_cd_for_ai_apps_q5",
       "p7_ci_cd_for_ai_apps_q6",
       "p7_ci_cd_for_ai_apps_order1",
-      "p7_ci_cd_for_ai_apps_fill1"
+      "p7_ci_cd_for_ai_apps_fill1",
+      "p7_ci_cd_for_ai_apps_explain1"
     ],
     "explanation_ids": {
       "beginner": "p7_ci_cd_for_ai_apps_beginner",
@@ -3544,7 +3655,8 @@
       "p8_scaling_ai_systems_q3",
       "p8_scaling_ai_systems_q4",
       "p8_scaling_ai_systems_q5",
-      "p8_scaling_ai_systems_q6"
+      "p8_scaling_ai_systems_q6",
+      "p8_scaling_ai_systems_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_scaling_ai_systems_beginner",
@@ -3577,7 +3689,8 @@
       "p8_mlops_q5",
       "p8_mlops_q6",
       "p8_mlops_order1",
-      "p8_mlops_fill1"
+      "p8_mlops_fill1",
+      "p8_mlops_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_mlops_beginner",
@@ -3610,7 +3723,8 @@
       "p8_multi_agent_systems_q5",
       "p8_multi_agent_systems_q6",
       "p8_multi_agent_systems_order1",
-      "p8_multi_agent_systems_fill1"
+      "p8_multi_agent_systems_fill1",
+      "p8_multi_agent_systems_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_multi_agent_systems_beginner",
@@ -3641,7 +3755,8 @@
       "p8_ai_ethics_bias_q3",
       "p8_ai_ethics_bias_q4",
       "p8_ai_ethics_bias_q5",
-      "p8_ai_ethics_bias_q6"
+      "p8_ai_ethics_bias_q6",
+      "p8_ai_ethics_bias_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_ai_ethics_bias_beginner",
@@ -3672,7 +3787,8 @@
       "p8_ai_safety_alignment_intro_q3",
       "p8_ai_safety_alignment_intro_q4",
       "p8_ai_safety_alignment_intro_q5",
-      "p8_ai_safety_alignment_intro_q6"
+      "p8_ai_safety_alignment_intro_q6",
+      "p8_ai_safety_alignment_intro_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_ai_safety_alignment_intro_beginner",
@@ -3705,7 +3821,8 @@
       "p8_staying_current_with_research_q5",
       "p8_staying_current_with_research_q6",
       "p8_staying_current_with_research_order1",
-      "p8_staying_current_with_research_fill1"
+      "p8_staying_current_with_research_fill1",
+      "p8_staying_current_with_research_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_staying_current_with_research_beginner",
@@ -3738,7 +3855,8 @@
       "p8_case_studies_of_real_systems_q5",
       "p8_case_studies_of_real_systems_q6",
       "p8_case_studies_of_real_systems_order1",
-      "p8_case_studies_of_real_systems_fill1"
+      "p8_case_studies_of_real_systems_fill1",
+      "p8_case_studies_of_real_systems_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_case_studies_of_real_systems_beginner",
@@ -3771,7 +3889,8 @@
       "p8_ai_product_strategy_q5",
       "p8_ai_product_strategy_q6",
       "p8_ai_product_strategy_order1",
-      "p8_ai_product_strategy_fill1"
+      "p8_ai_product_strategy_fill1",
+      "p8_ai_product_strategy_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_ai_product_strategy_beginner",
@@ -3804,7 +3923,8 @@
       "p8_capstone_project_q5",
       "p8_capstone_project_q6",
       "p8_capstone_project_order1",
-      "p8_capstone_project_fill1"
+      "p8_capstone_project_fill1",
+      "p8_capstone_project_explain1"
     ],
     "explanation_ids": {
       "beginner": "p8_capstone_project_beginner",

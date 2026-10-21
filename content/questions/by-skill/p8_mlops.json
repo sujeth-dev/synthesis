@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "model_registry",
     "explanation_after": "The correct choice is model_registry."
+  },
+  {
+    "id": "p8_mlops_explain1",
+    "skill_id": "p8_mlops",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Know Which Model Is Serving,” explain MLOps without assuming the listener knows AI engineering.",
+    "explanation_after": "MLOps records the route from data and training through evaluation, approval, deployment, and monitoring."
   }
 ]

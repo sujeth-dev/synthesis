@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_llm_landscape": 1
     }
+  },
+  {
+    "id": "p6_llm_landscape_explain1",
+    "skill_id": "p6_llm_landscape",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Choose a Model for the Trip,” explain The LLM Landscape without assuming the listener knows modern AI.",
+    "explanation_after": "An LLM family includes models with related architecture or training. Models vary in parameter size, context length, supported inputs, and access method."
   }
 ]

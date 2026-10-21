@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_transformers": 1
     }
+  },
+  {
+    "id": "p6_transformers_explain1",
+    "skill_id": "p6_transformers",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Alternate Group Discussion and Desk Work,” explain Transformer Architecture without assuming the listener knows modern AI.",
+    "explanation_after": "A transformer block alternates attention, which mixes information across positions, with a feed-forward network, which transforms each position."
   }
 ]

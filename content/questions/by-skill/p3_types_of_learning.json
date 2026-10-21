@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "When ground-truth outcomes already exist for every input, as with historical prices, supervised learning can use them directly as training targets — far more sample-efficient than reinforcement learning. RL earns its keep when correct answers must be discovered through interaction and delayed reward (like the robot grasping example), not when labelled historical outcomes are already sitting in a dataset."
+  },
+  {
+    "id": "p3_types_of_learning_explain1",
+    "skill_id": "p3_types_of_learning",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain supervised, unsupervised, and reinforcement learning using a different analogy for each. Don't use the same examples as the lesson. Then give a real AI product that uses each type.",
+    "explanation_after": "There are three main flavours of machine learning — supervised (with answer keys), unsupervised (finding patterns alone), and reinforcement (learning from rewards)."
   }
 ]

@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p5_overfitting_in_deep_nets": 1
     }
+  },
+  {
+    "id": "p5_overfitting_in_deep_nets_explain1",
+    "skill_id": "p5_overfitting_in_deep_nets",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Perfect Practice, Poor Test” situation, explain Overfitting in Deep Networks without assuming the listener knows deep learning.",
+    "explanation_after": "A deep network overfits when training performance keeps improving while validation performance stops improving or gets worse."
   }
 ]

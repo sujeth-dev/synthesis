@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "LoraConfig",
     "explanation_after": "The correct choice is LoraConfig."
+  },
+  {
+    "id": "p6_lora_and_peft_explain1",
+    "skill_id": "p6_lora_and_peft",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Attach a Small Learned Overlay,” explain LoRA & Parameter-Efficient Fine-Tuning without assuming the listener knows modern AI.",
+    "explanation_after": "LoRA freezes the base weights and learns a small adjustment for selected layers. Each task can store only its lightweight adapter."
   }
 ]

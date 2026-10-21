@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_vector_databases": 1
     }
+  },
+  {
+    "id": "p6_vector_databases_explain1",
+    "skill_id": "p6_vector_databases",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Find a Neighbor Without Scanning the World,” explain Vector Databases without assuming the listener knows modern AI.",
+    "explanation_after": "A vector database stores vectors in an index built for nearest-neighbor search. It quickly returns items whose vectors are close to the query."
   }
 ]

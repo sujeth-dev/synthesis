@@ -24,9 +24,9 @@
       }
     ],
     "correct_option_id": "b",
-    "explanation_after": "A valid probability distribution must sum to exactly 1.0. 0.55+0.30+0.15=1.0. This constraint is enforced by the softmax function \u2014 the last layer of every language model.",
+    "explanation_after": "A valid probability distribution must sum to exactly 1.0. 0.55+0.30+0.15=1.0. This constraint is enforced by the softmax function — the last layer of every language model.",
     "graph_placement_weight": {
-      "p2_probability_basics": 1.0
+      "p2_probability_basics": 1
     }
   },
   {
@@ -56,7 +56,7 @@
     "correct_option_id": "b",
     "explanation_after": "0.92 is the model's confidence that this email belongs to class 'spam'. It does NOT mean 92% of words are spam. You still choose a threshold (often 0.5) to make the binary decision.",
     "graph_placement_weight": {
-      "p2_probability_basics": 1.0,
+      "p2_probability_basics": 1,
       "p4_supervised_learning": 0.4
     }
   },
@@ -67,13 +67,25 @@
     "difficulty_tier": "review",
     "stem": "What do probabilities of 0 and 1 mean?",
     "options": [
-      { "id": "a", "text": "0 means unlikely; 1 means likely" },
-      { "id": "b", "text": "0 means certain; 1 means impossible" },
-      { "id": "c", "text": "0 means impossible; 1 means certain" },
-      { "id": "d", "text": "Both mean the event is uncertain" }
+      {
+        "id": "a",
+        "text": "0 means unlikely; 1 means likely"
+      },
+      {
+        "id": "b",
+        "text": "0 means certain; 1 means impossible"
+      },
+      {
+        "id": "c",
+        "text": "0 means impossible; 1 means certain"
+      },
+      {
+        "id": "d",
+        "text": "Both mean the event is uncertain"
+      }
     ],
     "correct_option_id": "c",
-    "explanation_after": "Probability always lives between 0 (impossible) and 1 (certain). Real models almost never output exact 0s or 1s \u2014 they output values in between, reflecting genuine uncertainty.",
+    "explanation_after": "Probability always lives between 0 (impossible) and 1 (certain). Real models almost never output exact 0s or 1s — they output values in between, reflecting genuine uncertainty.",
     "graph_placement_weight": {
       "p2_probability_basics": 0.9
     }
@@ -85,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "A weather model says there's a 0.3 probability of rain tomorrow. What is the probability of no rain?",
     "options": [
-      { "id": "a", "text": "0.3" },
-      { "id": "b", "text": "0.7" },
-      { "id": "c", "text": "1.3" },
-      { "id": "d", "text": "Cannot be determined" }
+      {
+        "id": "a",
+        "text": "0.3"
+      },
+      {
+        "id": "b",
+        "text": "0.7"
+      },
+      {
+        "id": "c",
+        "text": "1.3"
+      },
+      {
+        "id": "d",
+        "text": "Cannot be determined"
+      }
     ],
     "correct_option_id": "b",
-    "explanation_after": "For any event, P(not A) = 1 \u2212 P(A), since the two outcomes are mutually exclusive and exhaustive. If P(rain) = 0.3, then P(no rain) = 0.7. This complement rule underlies binary classification thresholds: P(class 0) = 1 \u2212 P(class 1).",
-    "graph_placement_weight": { "p2_probability_basics": 1.0 }
+    "explanation_after": "For any event, P(not A) = 1 − P(A), since the two outcomes are mutually exclusive and exhaustive. If P(rain) = 0.3, then P(no rain) = 0.7. This complement rule underlies binary classification thresholds: P(class 0) = 1 − P(class 1).",
+    "graph_placement_weight": {
+      "p2_probability_basics": 1
+    }
   },
   {
     "id": "p2_prob_q5",
@@ -101,14 +127,28 @@
     "difficulty_tier": "same",
     "stem": "Two independent coin flips each have a 0.5 probability of landing heads. What is the probability that BOTH flips land heads?",
     "options": [
-      { "id": "a", "text": "1.0" },
-      { "id": "b", "text": "0.5" },
-      { "id": "c", "text": "0.25" },
-      { "id": "d", "text": "0.75" }
+      {
+        "id": "a",
+        "text": "1.0"
+      },
+      {
+        "id": "b",
+        "text": "0.5"
+      },
+      {
+        "id": "c",
+        "text": "0.25"
+      },
+      {
+        "id": "d",
+        "text": "0.75"
+      }
     ],
     "correct_option_id": "c",
-    "explanation_after": "For independent events, the probability of both happening is the product of their individual probabilities: 0.5 \u00d7 0.5 = 0.25. This multiplication rule for independent events is the basis for computing joint probabilities of independent predictions in a model.",
-    "graph_placement_weight": { "p2_probability_basics": 1.0 }
+    "explanation_after": "For independent events, the probability of both happening is the product of their individual probabilities: 0.5 × 0.5 = 0.25. This multiplication rule for independent events is the basis for computing joint probabilities of independent predictions in a model.",
+    "graph_placement_weight": {
+      "p2_probability_basics": 1
+    }
   },
   {
     "id": "p2_prob_q6",
@@ -117,13 +157,36 @@
     "difficulty_tier": "harder",
     "stem": "An image classifier outputs probabilities for 3 classes: cat 0.7, dog 0.2, bird 0.1. The true label is 'dog'. Why does the model's cross-entropy loss penalise this prediction, even though 'dog' still received a non-trivial probability?",
     "options": [
-      { "id": "a", "text": "Because cross-entropy loss increases as the predicted probability assigned to the TRUE class gets further from 1.0 \u2014 here only 0.2 was assigned to the correct class 'dog'" },
-      { "id": "b", "text": "Because the probabilities don't sum to exactly 1.0" },
-      { "id": "c", "text": "Because the model should have predicted exactly 0 or 1 for each class" },
-      { "id": "d", "text": "Because cross-entropy only cares about the highest predicted probability, regardless of which class it belongs to" }
+      {
+        "id": "a",
+        "text": "Because cross-entropy loss increases as the predicted probability assigned to the TRUE class gets further from 1.0 — here only 0.2 was assigned to the correct class 'dog'"
+      },
+      {
+        "id": "b",
+        "text": "Because the probabilities don't sum to exactly 1.0"
+      },
+      {
+        "id": "c",
+        "text": "Because the model should have predicted exactly 0 or 1 for each class"
+      },
+      {
+        "id": "d",
+        "text": "Because cross-entropy only cares about the highest predicted probability, regardless of which class it belongs to"
+      }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Cross-entropy loss is \u2212log(p_true_class). The lower the probability assigned to the actual correct class, the higher (worse) the loss \u2014 here \u2212log(0.2) is a fairly large penalty, even though 0.2 isn't the model's lowest probability. This is exactly how a probability distribution from softmax becomes a trainable signal: the model is nudged to shift more probability mass onto the true label.",
-    "graph_placement_weight": { "p2_probability_basics": 1.0, "p4_supervised_learning": 0.3 }
+    "explanation_after": "Cross-entropy loss is −log(p_true_class). The lower the probability assigned to the actual correct class, the higher (worse) the loss — here −log(0.2) is a fairly large penalty, even though 0.2 isn't the model's lowest probability. This is exactly how a probability distribution from softmax becomes a trainable signal: the model is nudged to shift more probability mass onto the true label.",
+    "graph_placement_weight": {
+      "p2_probability_basics": 1,
+      "p4_supervised_learning": 0.3
+    }
+  },
+  {
+    "id": "p2_probability_basics_explain1",
+    "skill_id": "p2_probability_basics",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "In your own words, explain Probability Basics — what it is and why it matters. Use an example if it helps.",
+    "explanation_after": "Probability is how AI systems express uncertainty. Every prediction is a probability, not a certainty."
   }
 ]

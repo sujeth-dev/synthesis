@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p4_regularization": 1
     }
+  },
+  {
+    "id": "p4_regularization_explain1",
+    "skill_id": "p4_regularization",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Charge Rent for Complicated Knobs” story, explain Regularization without assuming the listener knows machine learning.",
+    "explanation_after": "Regularization adds a cost for large weights. The model must balance fitting the examples with keeping its rule restrained."
   }
 ]

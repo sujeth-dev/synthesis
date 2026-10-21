@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_evaluating_llm_outputs": 1
     }
+  },
+  {
+    "id": "p7_evaluating_llm_outputs_explain1",
+    "skill_id": "p7_evaluating_llm_outputs",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Grade the Job, Not the Eloquence” to explain Evaluating LLM Outputs plainly.",
+    "explanation_after": "Write criteria for the actual job: correctness, evidence, completeness, format, and safety where relevant."
   }
 ]

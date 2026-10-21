@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "The same debugging discipline that applies to any bug — isolate what changed, inspect values at the point of failure rather than guessing — applies directly to ML training bugs. A NaN loss almost always traces back to a specific numerical cause (like an overly large learning rate causing exploding gradients, or a log(0) somewhere in the loss calculation), and finding it requires the same careful, methodical inspection as any other debugging session.",
-    "graph_placement_weight": { "p1_debugging": 1.0, "p4_supervised_learning": 0.3 }
+    "graph_placement_weight": {
+      "p1_debugging": 1,
+      "p4_supervised_learning": 0.3
+    }
   },
   {
     "id": "p1_debugging_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "This is the same 'change one thing at a time, isolate the variable' principle used to find any software bug, applied to an ML-specific failure mode. Good vs. bad performance between train and test data means something differs between them — different preprocessing, a data leak, or the model simply memorizing training examples (overfitting). Systematically isolating what's different between the two conditions is how you find it.",
-    "graph_placement_weight": { "p1_debugging": 1.0, "p4_supervised_learning": 0.3 }
+    "graph_placement_weight": {
+      "p1_debugging": 1,
+      "p4_supervised_learning": 0.3
+    }
+  },
+  {
+    "id": "p1_debugging_explain1",
+    "skill_id": "p1_debugging",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What are the 6 most common Python error types and what does each mean? What is the debugging process? Why is it important to change only one thing at a time when debugging?",
+    "explanation_after": "Bugs are not failures — they're information. Every error message tells you exactly where to look. Learning to read errors is the most high-leverage skill for a new programmer."
   }
 ]

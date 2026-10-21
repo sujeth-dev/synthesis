@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "max_depth",
     "explanation_after": "The correct choice is max_depth."
+  },
+  {
+    "id": "p4_decision_trees_explain1",
+    "skill_id": "p4_decision_trees",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Twenty Questions for a Prediction” story, explain Decision Trees without assuming the listener knows machine learning.",
+    "explanation_after": "A decision tree predicts the same way. Each split asks whether one feature falls on one side of a boundary."
   }
 ]

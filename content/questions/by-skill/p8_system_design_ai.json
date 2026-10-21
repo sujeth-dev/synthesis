@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "requirements",
     "explanation_after": "The correct choice is requirements."
+  },
+  {
+    "id": "p8_system_design_ai_explain1",
+    "skill_id": "p8_system_design_ai",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Draw the Whole Route,” explain AI System Design without assuming the listener knows AI engineering.",
+    "explanation_after": "An AI system includes input, data preparation, retrieval or tools, the model, validation, storage, monitoring, and a user-facing fallback."
   }
 ]

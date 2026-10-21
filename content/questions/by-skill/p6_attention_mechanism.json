@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_attention_mechanism": 1
     }
+  },
+  {
+    "id": "p6_attention_mechanism_explain1",
+    "skill_id": "p6_attention_mechanism",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Highlight the Clue That Matters,” explain Attention Mechanism without assuming the listener knows modern AI.",
+    "explanation_after": "Attention lets the current position assign relevance to other positions, then gather more information from the useful ones."
   }
 ]

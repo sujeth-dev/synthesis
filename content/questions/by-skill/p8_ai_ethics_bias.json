@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p8_ai_ethics_bias": 1
     }
+  },
+  {
+    "id": "p8_ai_ethics_bias_explain1",
+    "skill_id": "p8_ai_ethics_bias",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Ask Who Pays for the Mistake,” explain AI Ethics & Bias without assuming the listener knows AI engineering.",
+    "explanation_after": "AI ethics asks who is represented, who decides the goal, who benefits, and who can challenge an error."
   }
 ]

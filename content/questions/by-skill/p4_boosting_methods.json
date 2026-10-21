@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p4_boosting_methods": 1
     }
+  },
+  {
+    "id": "p4_boosting_methods_explain1",
+    "skill_id": "p4_boosting_methods",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Fix What the Last Helper Missed” story, explain Boosting Methods without assuming the listener knows machine learning.",
+    "explanation_after": "Boosting combines that sequence of small corrections. Each new learner joins the existing prediction instead of voting independently."
   }
 ]

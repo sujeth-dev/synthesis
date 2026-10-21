@@ -215,5 +215,13 @@
     "correct_option_id": "a",
     "correct_answer": "fit",
     "explanation_after": "`fit` learns and stores the replacement values. Later, `transform` applies those saved values without learning from held-out rows."
+  },
+  {
+    "id": "p2_data_cleaning_preprocessing_explain1",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use the ingredient basket to explain why a model cannot repair every data mistake by itself.",
+    "explanation_after": "Cleaning data means finding broken, missing, repeated, or mismatched values before a model mistakes them for real patterns."
   }
 ]

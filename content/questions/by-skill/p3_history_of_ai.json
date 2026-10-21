@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Minsky and Papert proved that single-layer perceptrons are limited to linearly separable problems and can't represent functions like XOR. Multi-layer networks don't have this limitation, but that wasn't practically demonstrated until backpropagation matured decades later — in the meantime, the book's critique substantially cooled funding and interest in neural network research."
+  },
+  {
+    "id": "p3_history_of_ai_explain1",
+    "skill_id": "p3_history_of_ai",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is an 'AI winter' and what causes them? Name two from history. What ended the most recent dark period and started the current AI boom?",
+    "explanation_after": "AI has been through multiple hype cycles — booms followed by crashes (AI winters). Each boom was driven by a new idea. The current one is driven by scale."
   }
 ]

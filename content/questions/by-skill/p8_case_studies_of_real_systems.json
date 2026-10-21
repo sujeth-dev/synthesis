@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "constraints",
     "explanation_after": "The correct choice is constraints."
+  },
+  {
+    "id": "p8_case_studies_of_real_systems_explain1",
+    "skill_id": "p8_case_studies_of_real_systems",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Look Beyond the Architecture Diagram,” explain Case Studies of Real AI Systems without assuming the listener knows AI engineering.",
+    "explanation_after": "Start with context: users, job, scale, constraints, and success criteria. Then trace the system route and the evidence for its results."
   }
 ]

@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_residual_connections_and_layernorm": 1
     }
+  },
+  {
+    "id": "p6_residual_connections_and_layernorm_explain1",
+    "skill_id": "p6_residual_connections_and_layernorm",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Keep an Express Lane Open,” explain Residual Connections & Layer Normalization without assuming the listener knows modern AI.",
+    "explanation_after": "A residual connection adds a block’s input to its transformed output. The block only needs to learn a useful change, not rebuild everything."
   }
 ]

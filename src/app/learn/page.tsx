@@ -357,8 +357,8 @@ function LearnPageInner() {
       body: JSON.stringify({
         question_id: `${task.skill_id}_feynman_loop`, skill_id: task.skill_id,
         session_id: sessionId, ...answerTimingPayload(timing.current),
-        client_answer: `${result.firstExplanation}\n---\n${result.secondExplanation}`,
-        correct: result.resolved, difficulty_tier: task.difficulty_tier, question_format: 'explain',
+        client_answer: result.secondExplanation, prior_answer: result.firstExplanation,
+        difficulty_tier: task.difficulty_tier, question_format: 'explain',
       }),
     })
     track({ name: 'feynman_loop_complete', props: { skill_id: task.skill_id, resolved: result.resolved } })

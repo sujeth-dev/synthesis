@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "nn.Module",
     "explanation_after": "The correct choice is nn.Module."
+  },
+  {
+    "id": "p5_pytorch_intro_explain1",
+    "skill_id": "p5_pytorch_intro",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “A Number Container That Knows Its Shape” situation, explain PyTorch Introduction without assuming the listener knows deep learning.",
+    "explanation_after": "A PyTorch tensor is an arranged block of numbers with a shape, data type, and device such as CPU or GPU."
   }
 ]

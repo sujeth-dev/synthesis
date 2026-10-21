@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_positional_encoding": 1
     }
+  },
+  {
+    "id": "p6_positional_encoding_explain1",
+    "skill_id": "p6_positional_encoding",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Number the Shuffled Cards,” explain Positional Encoding without assuming the listener knows modern AI.",
+    "explanation_after": "Positional encoding adds information about where each token sits. Attention can then combine content with order."
   }
 ]

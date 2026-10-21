@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_safety_guardrails": 1
     }
+  },
+  {
+    "id": "p7_safety_guardrails_explain1",
+    "skill_id": "p7_safety_guardrails",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Put More Than One Rail on the Bridge” to explain Safety Guardrails plainly.",
+    "explanation_after": "Guardrails are layered controls around inputs, model behavior, tools, outputs, and human escalation."
   }
 ]

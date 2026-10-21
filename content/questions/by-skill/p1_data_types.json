@@ -6,14 +6,28 @@
     "difficulty_tier": "review",
     "stem": "What is the data type of the value 3.14 in Python?",
     "options": [
-      { "id": "a", "text": "int (integer)" },
-      { "id": "b", "text": "str (string)" },
-      { "id": "c", "text": "float (floating-point number)" },
-      { "id": "d", "text": "bool (boolean)" }
+      {
+        "id": "a",
+        "text": "int (integer)"
+      },
+      {
+        "id": "b",
+        "text": "str (string)"
+      },
+      {
+        "id": "c",
+        "text": "float (floating-point number)"
+      },
+      {
+        "id": "d",
+        "text": "bool (boolean)"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "3.14 has a decimal point, making it a float. Integers (int) are whole numbers like 3 or -7. Floats have decimal points like 3.14 or -0.001. This matters in ML because model weights are floats — storing millions of precise decimal values. The difference between float32 and float16 directly affects model memory requirements.",
-    "graph_placement_weight": { "p1_data_types": 1.0 }
+    "graph_placement_weight": {
+      "p1_data_types": 1
+    }
   },
   {
     "id": "p1_dt_q2",
@@ -22,14 +36,28 @@
     "difficulty_tier": "harder",
     "stem": "What will this code output?\n\nx = 10\ny = 3\nprint(x / y)\nprint(x // y)",
     "options": [
-      { "id": "a", "text": "3.333... and 3" },
-      { "id": "b", "text": "3 and 3" },
-      { "id": "c", "text": "3.333... and 3.333..." },
-      { "id": "d", "text": "Error — can't divide integers" }
+      {
+        "id": "a",
+        "text": "3.333... and 3"
+      },
+      {
+        "id": "b",
+        "text": "3 and 3"
+      },
+      {
+        "id": "c",
+        "text": "3.333... and 3.333..."
+      },
+      {
+        "id": "d",
+        "text": "Error — can't divide integers"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "/ is true division — always returns a float. 10/3 = 3.3333... // is floor division — discards the decimal. 10//3 = 3. In ML, you'll often use // to calculate batch indices: batch_number = sample_index // batch_size.",
-    "graph_placement_weight": { "p1_data_types": 1.0 }
+    "graph_placement_weight": {
+      "p1_data_types": 1
+    }
   },
   {
     "id": "p1_dt_q3",
@@ -38,14 +66,28 @@
     "difficulty_tier": "review",
     "stem": "Which Python data type stores text values written inside quotes?",
     "options": [
-      { "id": "a", "text": "int" },
-      { "id": "b", "text": "bool" },
-      { "id": "c", "text": "float" },
-      { "id": "d", "text": "str" }
+      {
+        "id": "a",
+        "text": "int"
+      },
+      {
+        "id": "b",
+        "text": "bool"
+      },
+      {
+        "id": "c",
+        "text": "float"
+      },
+      {
+        "id": "d",
+        "text": "str"
+      }
     ],
     "correct_option_id": "d",
     "explanation_after": "str stands for string — a sequence of characters. 'hello', 'AI engineering', and '42' (with quotes) are all strings. Without quotes, 42 is an int and hello would be a variable name. In NLP and LLMs, all text input is processed as strings before being tokenised into numbers.",
-    "graph_placement_weight": { "p1_data_types": 0.9 }
+    "graph_placement_weight": {
+      "p1_data_types": 0.9
+    }
   },
   {
     "id": "p1_dt_q4",
@@ -54,14 +96,28 @@
     "difficulty_tier": "same",
     "stem": "What does `type(5)` return in Python?",
     "options": [
-      { "id": "a", "text": "<class 'int'>" },
-      { "id": "b", "text": "<class 'str'>" },
-      { "id": "c", "text": "<class 'float'>" },
-      { "id": "d", "text": "5" }
+      {
+        "id": "a",
+        "text": "<class 'int'>"
+      },
+      {
+        "id": "b",
+        "text": "<class 'str'>"
+      },
+      {
+        "id": "c",
+        "text": "<class 'float'>"
+      },
+      {
+        "id": "d",
+        "text": "5"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "type() returns the data type of a value. Since 5 has no decimal point and isn't in quotes, Python treats it as an int, so type(5) reports <class 'int'>. This function is a handy way to check what type you're actually working with, especially when debugging.",
-    "graph_placement_weight": { "p1_data_types": 1.0 }
+    "graph_placement_weight": {
+      "p1_data_types": 1
+    }
   },
   {
     "id": "p1_dt_q5",
@@ -70,14 +126,28 @@
     "difficulty_tier": "same",
     "stem": "What does this code print?\n\nx = '5'\ny = 5\nprint(x == y)",
     "options": [
-      { "id": "a", "text": "True" },
-      { "id": "b", "text": "False" },
-      { "id": "c", "text": "Error — can't compare a string and an int" },
-      { "id": "d", "text": "5" }
+      {
+        "id": "a",
+        "text": "True"
+      },
+      {
+        "id": "b",
+        "text": "False"
+      },
+      {
+        "id": "c",
+        "text": "Error — can't compare a string and an int"
+      },
+      {
+        "id": "d",
+        "text": "5"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "x is a string ('5') and y is an int (5) — different data types. Python's == does not raise an error when comparing different types; it simply returns False, because a string is never equal to an int no matter what characters or digits it contains. This is a common source of silent bugs when data isn't converted to the expected type.",
-    "graph_placement_weight": { "p1_data_types": 1.0 }
+    "graph_placement_weight": {
+      "p1_data_types": 1
+    }
   },
   {
     "id": "p1_dt_q6",
@@ -86,13 +156,36 @@
     "difficulty_tier": "harder",
     "stem": "Why might an ML engineer convert a trained model's weights from float32 to float16 — a process called quantization?",
     "options": [
-      { "id": "a", "text": "To make the stored numbers more accurate" },
-      { "id": "b", "text": "To reduce memory usage and increase computation speed, at the cost of some numeric precision" },
-      { "id": "c", "text": "float16 has no practical use in machine learning" },
-      { "id": "d", "text": "Because float32 cannot store numbers with a decimal point" }
+      {
+        "id": "a",
+        "text": "To make the stored numbers more accurate"
+      },
+      {
+        "id": "b",
+        "text": "To reduce memory usage and increase computation speed, at the cost of some numeric precision"
+      },
+      {
+        "id": "c",
+        "text": "float16 has no practical use in machine learning"
+      },
+      {
+        "id": "d",
+        "text": "Because float32 cannot store numbers with a decimal point"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "float32 uses 32 bits per number and float16 uses only 16, so switching halves the memory needed to store every weight — critical when a model has billions of parameters. The tradeoff is reduced numeric precision, which is usually an acceptable loss for the memory and speed gains. Understanding the difference between data types isn't just academic — it directly determines whether a model fits in memory.",
-    "graph_placement_weight": { "p1_data_types": 1.0, "p1_memory_storage": 0.3 }
+    "graph_placement_weight": {
+      "p1_data_types": 1,
+      "p1_memory_storage": 0.3
+    }
+  },
+  {
+    "id": "p1_data_types_explain1",
+    "skill_id": "p1_data_types",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "In your own words, explain Data Types — what it is and why it matters. Use an example if it helps.",
+    "explanation_after": "Every value has a type. The type determines what you can do with it."
   }
 ]

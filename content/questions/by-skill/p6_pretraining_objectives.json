@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_pretraining_objectives": 1
     }
+  },
+  {
+    "id": "p6_pretraining_objectives_explain1",
+    "skill_id": "p6_pretraining_objectives",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Turn Raw Text into Its Own Answer Key,” explain Pretraining Objectives without assuming the listener knows modern AI.",
+    "explanation_after": "Next-token prediction uses earlier tokens as the question and the actual next token as the answer. Every position supplies another training example."
   }
 ]

@@ -46,6 +46,7 @@ if (sorted !== nodes.length) {
 }
 console.log('\nQuestion Files')
 let qChecked = 0, qMissing = 0
+const formatCounts = new Map()
 for (const node of nodes) {
   if (!node.question_ids || node.question_ids.length === 0) { continue }
   const qFile = path.join(CONTENT, 'questions/by-skill', `${node.id}.json`)
@@ -63,6 +64,15 @@ for (const node of nodes) {
     if (q.format === 'order' && (!Array.isArray(q.options) || !q.correct_answer)) {
       err(`${qFile}: order question "${q.id}" needs options and correct_answer`)
     }
+    if (q.format === 'explain') {
+      if (typeof q.prompt !== 'string' || q.prompt.trim().length < 20) {
+        err(`${qFile}: explain question "${q.id}" needs a prompt the learner can answer in prose`)
+      }
+      if (Array.isArray(q.options) && q.options.length > 0) {
+        err(`${qFile}: explain question "${q.id}" must not carry options — it is graded as free text`)
+      }
+    }
+    formatCounts.set(q.format, (formatCounts.get(q.format) || 0) + 1)
   }
   const fileIds = new Set(qs.map(q => q.id))
   for (const qid of node.question_ids) {
@@ -71,6 +81,8 @@ for (const node of nodes) {
   qChecked++
 }
 ok(`${qChecked} question files validated`)
+const formatTotal = [...formatCounts.values()].reduce((a, b) => a + b, 0)
+ok(`${formatTotal} questions by format: ${[...formatCounts].sort().map(([f, n]) => `${n} ${f}`).join(', ')}`)
 if (qMissing) { warn(`${qMissing} question files missing`) }
 console.log('\nExplanation Files')
 let expChecked = 0

@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_evaluating_and_choosing_llms": 1
     }
+  },
+  {
+    "id": "p6_evaluating_and_choosing_llms_explain1",
+    "skill_id": "p6_evaluating_and_choosing_llms",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Run the Real Job as an Audition,” explain Evaluating & Choosing LLMs without assuming the listener knows modern AI.",
+    "explanation_after": "Build a small set of representative requests with expected qualities. Compare models on those cases before choosing one."
   }
 ]

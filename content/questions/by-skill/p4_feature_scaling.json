@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "StandardScaler",
     "explanation_after": "The correct choice is StandardScaler."
+  },
+  {
+    "id": "p4_feature_scaling_explain1",
+    "skill_id": "p4_feature_scaling",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Meters Beside Millimeters” story, explain Feature Scaling without assuming the listener knows machine learning.",
+    "explanation_after": "Feature scaling changes the numeric rulers without changing which row is which. Standardization centers a feature and measures it in typical-spread units."
   }
 ]

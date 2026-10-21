@@ -187,7 +187,9 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "This is the exact same reasoning behind avoiding global variables in general, applied to a real ML codebase: if any function can reach in and modify the model's weights, tracing an unexpected weight update becomes a hunt through the entire codebase instead of a quick look at one function's arguments. Passing the model explicitly makes the data flow visible and testable, which matters enormously in larger training pipelines.",
-    "graph_placement_weight": { "p1_scope": 1.0 }
+    "graph_placement_weight": {
+      "p1_scope": 1
+    }
   },
   {
     "id": "p1_scope_q8",
@@ -215,6 +217,16 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "train_step is a closure: it captures model and optimizer from the enclosing make_train_step scope, so every time train_step(batch) is called later, it still has access to them — without those variables needing to be global (avoiding the problems in the previous question) and without repeating them as arguments on every single call. This exact pattern shows up throughout real training code in frameworks like TensorFlow.",
-    "graph_placement_weight": { "p1_scope": 1.0 }
+    "graph_placement_weight": {
+      "p1_scope": 1
+    }
+  },
+  {
+    "id": "p1_scope_explain1",
+    "skill_id": "p1_scope",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is the difference between local and global scope? What is the LEGB rule? Why is using `global` inside a function generally considered bad practice?",
+    "explanation_after": "Scope determines which parts of your code can see a variable. Variables created inside a function are private to that function — they don't leak out. This is how functions stay self-contained."
   }
 ]

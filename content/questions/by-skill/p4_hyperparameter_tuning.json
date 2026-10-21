@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "GridSearchCV",
     "explanation_after": "The correct choice is GridSearchCV."
+  },
+  {
+    "id": "p4_hyperparameter_tuning_explain1",
+    "skill_id": "p4_hyperparameter_tuning",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Choose the Oven Before Baking” story, explain Hyperparameter Tuning without assuming the listener knows machine learning.",
+    "explanation_after": "Hyperparameters are choices made before training, such as tree depth. Parameters are values the model learns from data, such as split locations."
   }
 ]

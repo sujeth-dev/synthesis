@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p8_scaling_ai_systems": 1
     }
+  },
+  {
+    "id": "p8_scaling_ai_systems_explain1",
+    "skill_id": "p8_scaling_ai_systems",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Find the Crowded Station,” explain Scaling AI Systems without assuming the listener knows AI engineering.",
+    "explanation_after": "Scaling begins by measuring throughput, queue depth, utilization, and tail latency at each station. The bottleneck is the stage that limits the whole route."
   }
 ]

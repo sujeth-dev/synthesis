@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p4_random_forests": 1
     }
+  },
+  {
+    "id": "p4_random_forests_explain1",
+    "skill_id": "p4_random_forests",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Ask a Crowd of Trees” story, explain Random Forests without assuming the listener knows machine learning.",
+    "explanation_after": "A random forest is that crowd. Each tree trains on a slightly different sample and considers a random selection of features."
   }
 ]

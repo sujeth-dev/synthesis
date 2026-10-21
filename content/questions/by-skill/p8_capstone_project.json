@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "evaluation_set",
     "explanation_after": "The correct choice is evaluation_set."
+  },
+  {
+    "id": "p8_capstone_project_explain1",
+    "skill_id": "p8_capstone_project",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Choose One Complete, Small Product,” explain AI Engineering Capstone without assuming the listener knows AI engineering.",
+    "explanation_after": "Choose one user job and a small end-to-end slice with real inputs, a useful output, and a visible fallback."
   }
 ]

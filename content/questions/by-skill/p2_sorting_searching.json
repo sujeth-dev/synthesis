@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "A full sort costs O(n log n) over all 5 million scores just to read off the top 10. A size-k heap costs O(n log k); with k=10, log₂10 ≈ 3.3 versus log₂(5,000,000) ≈ 22.3, so the heap does roughly 6-7x fewer comparisons — and the gap widens as n grows. This exact top-k-out-of-millions pattern is why heaps (or approximate nearest-neighbour structures) power real-world recommendation and search systems.",
-    "graph_placement_weight": { "p2_sorting_searching": 1.0, "p2_big_o_basics": 0.3 }
+    "graph_placement_weight": {
+      "p2_sorting_searching": 1,
+      "p2_big_o_basics": 0.3
+    }
   },
   {
     "id": "p2_sorting_searching_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "With unsorted predictions, recomputing precision/recall from scratch at each of n thresholds costs O(n) per threshold, O(n²) total. Sorting once (O(n log n)) lets you sweep the threshold through the sorted predictions and update true/false positive counts incrementally in O(1) per step — O(n) total after the sort. This is exactly how scikit-learn's precision_recall_curve and roc_curve are implemented efficiently.",
-    "graph_placement_weight": { "p2_sorting_searching": 1.0, "p4_supervised_learning": 0.3 }
+    "graph_placement_weight": {
+      "p2_sorting_searching": 1,
+      "p4_supervised_learning": 0.3
+    }
+  },
+  {
+    "id": "p2_sorting_searching_explain1",
+    "skill_id": "p2_sorting_searching",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is the difference between linear search and binary search? Why does binary search require sorted data? When would you use a set instead of binary search?",
+    "explanation_after": "Sorting and searching are the most fundamental operations in computing. Python's built-in sort is excellent — but knowing when to use a sorted list, when to use binary search, and when to use a hash table changes performance from O(n) to O(1)."
   }
 ]

@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p5_loss_functions": 1
     }
+  },
+  {
+    "id": "p5_loss_functions_explain1",
+    "skill_id": "p5_loss_functions",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Give the Model a Scorecard” situation, explain Loss Functions without assuming the listener knows deep learning.",
+    "explanation_after": "A loss function produces a number that measures the mismatch. Smaller loss means the prediction better matches the training answer under that scorecard."
   }
 ]

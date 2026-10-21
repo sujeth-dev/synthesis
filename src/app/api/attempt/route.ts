@@ -5,7 +5,7 @@ import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
 import { computeFsrsSchedule, fsrsRatingFromCorrectness, type FsrsSchedule } from '@/lib/fsrs'
 import { activeScheduler, chooseSchedule } from '@/lib/fsrs/scheduler'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
-import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
+import { classifyExplanation, reasoningQualityFromCategory, type ExplanationCategory } from '@/lib/feynman/classifier'
 import { gradeExplanation } from '@/lib/nlp/grader'
 import { computeUnblocked } from '@/lib/graph'
 import { isOrderAnswerCorrect } from '@/lib/ui/order-answer'
@@ -102,12 +102,19 @@ export async function POST(req: NextRequest) {
   let reasoningQuality = 1
   if (question_format === 'explain' && explanationText) {
     const conceptNode = getAllNodes().find(n => n.id === skill_id)
+    let category: ExplanationCategory
     try {
-      const graded = await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })
-      reasoningQuality = reasoningQualityFromCategory(graded.category)
+      category = (await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })).category
     } catch {
-      reasoningQuality = reasoningQualityFromCategory(classifyExplanation(explanationText))
+      category = classifyExplanation(explanationText)
     }
+    reasoningQuality = reasoningQualityFromCategory(category)
+    // One attempt, one verdict. Free text has no answer key, so the grade above
+    // is the only verification there is: deriving `correct` from the same
+    // category that sets reasoningQuality makes a client-sent verdict (which
+    // used to come from the rule-based classifier while this graded with the
+    // LLM) unable to disagree with it.
+    correct = category === 'meaning-included'
   }
   const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
   const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {

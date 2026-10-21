@@ -69,6 +69,20 @@ vi.mock('@/lib/db/session', () => ({
   getCurrentUser: async () => ({ id: 'learner-fsrs-test', email: 'fsrs-test@example.com' }),
 }))
 
+// The real grader does live catalogue discovery over fetch and needs an API key,
+// so the LLM arm is stubbed per test; 'unavailable' exercises the route's
+// fail-open path onto the rule-based classifier, which is what answers offline.
+const graderMode = vi.hoisted(() => ({ value: 'unavailable' as 'unavailable' | 'meaning-included' | 'gap' }))
+vi.mock('@/lib/nlp/grader', () => ({
+  gradeExplanation: async () => {
+    if (graderMode.value === 'unavailable') throw new Error('no model available')
+    return {
+      category: graderMode.value, confidence: 0.91, rationale: 'stub',
+      servedBy: 'stub/model', promptVersion: 'v1', fromCache: false, attempts: 1, latencyMs: 12,
+    }
+  },
+}))
+
 import { POST } from './route'
 
 function fakeRequest(body: Record<string, unknown>) {
@@ -290,5 +304,53 @@ describe('measured response time in POST /api/attempt (Level 7)', () => {
       latency_ms: 20_000, difficulty_tier: 'review', question_format: 'mcq',
     }))
     expect(tables.attempt_events[0].hesitation_ms).toBe(0)
+  })
+})
+
+describe('explain questions are graded server-side in POST /api/attempt (Level 9)', () => {
+  const explainQuestionId = 'p1_binary_numbers_explain1'
+
+  function explainAttempt(body: Record<string, unknown> = {}) {
+    return POST(fakeRequest({
+      question_id: explainQuestionId, skill_id: skillId, question_format: 'explain',
+      client_answer: 'Binary uses only two digits because a wire is either on or off.',
+      latency_ms: 20_000, difficulty_tier: 'same', ...body,
+    }))
+  }
+
+  it('scores an authored explain question from the grade, with no verdict from the client', async () => {
+    graderMode.value = 'meaning-included'
+    const res = await explainAttempt()
+    expect(res.status).toBe(200)
+    expect((await res.json()).correct).toBe(true)
+    expect(tables.attempt_events[0]).toMatchObject({ question_format: 'explain', correct: true })
+  })
+
+  it('overrides a client-sent verdict that disagrees with the grade', async () => {
+    // The old Feynman client sent correct: true from the rule-based classifier
+    // while the server graded the text with the LLM. The grade now decides alone.
+    graderMode.value = 'gap'
+    const res = await explainAttempt({ correct: true })
+    expect((await res.json()).correct).toBe(false)
+    expect(tables.attempt_events[0].correct).toBe(false)
+  })
+
+  it('falls back to the rule-based classifier when the LLM grader fails, and still scores the attempt', async () => {
+    graderMode.value = 'unavailable'
+    const res = await explainAttempt()
+    expect(res.status).toBe(200)
+    // classifyExplanation sees 'because' — a meaning marker — so the fallback agrees.
+    expect((await res.json()).correct).toBe(true)
+
+    tables.attempt_events.length = 0
+    const hedged = await explainAttempt({ client_answer: 'I guess it is something about bits and wires inside.' })
+    expect((await hedged.json()).correct).toBe(false)
+  })
+
+  it('scores a guided-reflection explain attempt the same way, under its synthetic question id', async () => {
+    graderMode.value = 'meaning-included'
+    const res = await explainAttempt({ question_id: `${skillId}_feynman_loop` })
+    expect(res.status).toBe(200)
+    expect((await res.json()).correct).toBe(true)
   })
 })

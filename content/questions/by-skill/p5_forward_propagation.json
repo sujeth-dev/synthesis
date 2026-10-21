@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "model(x)",
     "explanation_after": "The correct choice is model(x)."
+  },
+  {
+    "id": "p5_forward_propagation_explain1",
+    "skill_id": "p5_forward_propagation",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Follow One Message Forward” situation, explain Forward Propagation without assuming the listener knows deep learning.",
+    "explanation_after": "Forward propagation moves the numbers from the input layer through each hidden layer to the output. Each layer transforms what it receives."
   }
 ]

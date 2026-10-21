@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p5_why_transformers_replaced_rnns": 1
     }
+  },
+  {
+    "id": "p5_why_transformers_replaced_rnns_explain1",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Stop Passing One Notebook Down the Line” situation, explain Why Transformers Replaced RNNs without assuming the listener knows deep learning.",
+    "explanation_after": "A transformer lets each position look directly at other positions through attention. A distant clue no longer has to survive one handoff at a time."
   }
 ]

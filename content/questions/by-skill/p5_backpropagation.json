@@ -210,5 +210,13 @@
     "graph_placement_weight": {
       "p5_backpropagation": 1
     }
+  },
+  {
+    "id": "p5_backpropagation_explain1",
+    "skill_id": "p5_backpropagation",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use the factory story to distinguish the forward pass, backpropagation, and the optimizer's update.",
+    "explanation_after": "Backpropagation follows a bad result backward through the steps that made it and gives every adjustable weight its share of the correction."
   }
 ]

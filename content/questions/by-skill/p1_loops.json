@@ -6,14 +6,28 @@
     "difficulty_tier": "review",
     "stem": "How many times will 'hello' be printed?\n\nfor i in range(3):\n    print('hello')",
     "options": [
-      { "id": "a", "text": "0 times" },
-      { "id": "b", "text": "1 time" },
-      { "id": "c", "text": "3 times" },
-      { "id": "d", "text": "Infinitely" }
+      {
+        "id": "a",
+        "text": "0 times"
+      },
+      {
+        "id": "b",
+        "text": "1 time"
+      },
+      {
+        "id": "c",
+        "text": "3 times"
+      },
+      {
+        "id": "d",
+        "text": "Infinitely"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "range(3) generates the sequence 0, 1, 2 — three values. The loop body runs once for each value. So 'hello' prints 3 times.",
-    "graph_placement_weight": { "p1_loops": 1.0 }
+    "graph_placement_weight": {
+      "p1_loops": 1
+    }
   },
   {
     "id": "p1_loop_q2",
@@ -22,14 +36,29 @@
     "difficulty_tier": "review",
     "stem": "What will this code output?\n\nfor num in [1, 2, 3]:\n    print(num * 2)",
     "options": [
-      { "id": "a", "text": "1 2 3" },
-      { "id": "b", "text": "2 4 6" },
-      { "id": "c", "text": "6 (just the total)" },
-      { "id": "d", "text": "num * 2 printed 3 times" }
+      {
+        "id": "a",
+        "text": "1 2 3"
+      },
+      {
+        "id": "b",
+        "text": "2 4 6"
+      },
+      {
+        "id": "c",
+        "text": "6 (just the total)"
+      },
+      {
+        "id": "d",
+        "text": "num * 2 printed 3 times"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "The loop iterates over each number in the list. For each, it prints that number multiplied by 2. So: 1×2=2, 2×2=4, 3×2=6.",
-    "graph_placement_weight": { "p1_loops": 1.0, "p2_lists_arrays": 0.3 }
+    "graph_placement_weight": {
+      "p1_loops": 1,
+      "p2_lists_arrays": 0.3
+    }
   },
   {
     "id": "p1_loop_q3",
@@ -38,14 +67,29 @@
     "difficulty_tier": "harder",
     "stem": "In machine learning, training a model for 100 'epochs' means:",
     "options": [
-      { "id": "a", "text": "Using 100 different models" },
-      { "id": "b", "text": "Running the full training loop 100 times over the dataset" },
-      { "id": "c", "text": "Using 100 training examples" },
-      { "id": "d", "text": "Taking 100 seconds to train" }
+      {
+        "id": "a",
+        "text": "Using 100 different models"
+      },
+      {
+        "id": "b",
+        "text": "Running the full training loop 100 times over the dataset"
+      },
+      {
+        "id": "c",
+        "text": "Using 100 training examples"
+      },
+      {
+        "id": "d",
+        "text": "Taking 100 seconds to train"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "An epoch = one full pass over the entire training dataset. Training for 100 epochs = the training loop runs 100 times. Understanding loops is essential to understanding how models learn.",
-    "graph_placement_weight": { "p1_loops": 0.8, "p4_data_pipeline": 0.4 }
+    "graph_placement_weight": {
+      "p1_loops": 0.8,
+      "p4_data_pipeline": 0.4
+    }
   },
   {
     "id": "p1_loop_q4",
@@ -54,14 +98,28 @@
     "difficulty_tier": "same",
     "stem": "What does this code print?\n\ncount = 0\nwhile count < 3:\n    print(count)\n    count += 1",
     "options": [
-      { "id": "a", "text": "0 1 2" },
-      { "id": "b", "text": "1 2 3" },
-      { "id": "c", "text": "0 1 2 3" },
-      { "id": "d", "text": "Infinite loop" }
+      {
+        "id": "a",
+        "text": "0 1 2"
+      },
+      {
+        "id": "b",
+        "text": "1 2 3"
+      },
+      {
+        "id": "c",
+        "text": "0 1 2 3"
+      },
+      {
+        "id": "d",
+        "text": "Infinite loop"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "A while loop keeps running as long as its condition is True. count starts at 0, prints, then increments: prints 0 (count becomes 1), prints 1 (count becomes 2), prints 2 (count becomes 3) — now count < 3 is False, so the loop stops. Output: 0 1 2.",
-    "graph_placement_weight": { "p1_loops": 1.0 }
+    "graph_placement_weight": {
+      "p1_loops": 1
+    }
   },
   {
     "id": "p1_loop_q5",
@@ -70,14 +128,28 @@
     "difficulty_tier": "same",
     "stem": "What does this code print?\n\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)",
     "options": [
-      { "id": "a", "text": "0 1 2" },
-      { "id": "b", "text": "0 1 2 3" },
-      { "id": "c", "text": "0 1 2 3 4" },
-      { "id": "d", "text": "3" }
+      {
+        "id": "a",
+        "text": "0 1 2"
+      },
+      {
+        "id": "b",
+        "text": "0 1 2 3"
+      },
+      {
+        "id": "c",
+        "text": "0 1 2 3 4"
+      },
+      {
+        "id": "d",
+        "text": "3"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "break immediately exits the loop entirely, skipping any remaining iterations. i takes values 0, 1, 2 and prints each. When i becomes 3, the if condition triggers break before print(i) runs, so 3 is never printed and the loop ends. Output: 0 1 2.",
-    "graph_placement_weight": { "p1_loops": 1.0 }
+    "graph_placement_weight": {
+      "p1_loops": 1
+    }
   },
   {
     "id": "p1_loop_q6",
@@ -86,13 +158,36 @@
     "difficulty_tier": "harder",
     "stem": "A typical training loop looks like:\n\nfor epoch in range(num_epochs):\n    for batch in dataloader:\n        pass  # train on this batch\n\nWhy are there two nested loops here instead of just one?",
     "options": [
-      { "id": "a", "text": "It's a mistake — a single loop would be simpler and equivalent" },
-      { "id": "b", "text": "The outer loop repeats over the whole dataset multiple times (epochs); the inner loop iterates over the smaller batches within a single pass through the data" },
-      { "id": "c", "text": "The inner loop exists only to print progress messages" },
-      { "id": "d", "text": "Nested loops are a Python syntax requirement for all training code" }
+      {
+        "id": "a",
+        "text": "It's a mistake — a single loop would be simpler and equivalent"
+      },
+      {
+        "id": "b",
+        "text": "The outer loop repeats over the whole dataset multiple times (epochs); the inner loop iterates over the smaller batches within a single pass through the data"
+      },
+      {
+        "id": "c",
+        "text": "The inner loop exists only to print progress messages"
+      },
+      {
+        "id": "d",
+        "text": "Nested loops are a Python syntax requirement for all training code"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Training data is usually too large to process all at once, so it's split into batches. The inner loop walks through every batch once — that's one epoch. The outer loop repeats that entire process multiple times, since a model typically needs to see the data many times to learn well. Two nested loops directly mirror the two concepts: epochs (full passes) and batches (chunks within a pass).",
-    "graph_placement_weight": { "p1_loops": 1.0, "p4_data_pipeline": 0.4 }
+    "graph_placement_weight": {
+      "p1_loops": 1,
+      "p4_data_pipeline": 0.4
+    }
+  },
+  {
+    "id": "p1_loops_explain1",
+    "skill_id": "p1_loops",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain the difference between a for loop and a while loop. When would you use each? Give a machine learning example of each.",
+    "explanation_after": "A loop is an instruction that says 'do this thing multiple times'. Without loops, you'd have to copy-paste code thousands of times."
   }
 ]

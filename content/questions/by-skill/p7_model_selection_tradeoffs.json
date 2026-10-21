@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_model_selection_tradeoffs": 1
     }
+  },
+  {
+    "id": "p7_model_selection_tradeoffs_explain1",
+    "skill_id": "p7_model_selection_tradeoffs",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Choose the Smallest Tool That Does the Job” to explain Model Selection Tradeoffs plainly.",
+    "explanation_after": "Compare candidates on representative tasks and constraints. A smaller model that meets the quality floor is often easier to serve."
   }
 ]

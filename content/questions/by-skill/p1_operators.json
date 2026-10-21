@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "10 % 4 = 2, since 10 divided by 4 is 2 remainder 2. The modulo operator naturally wraps indices in a cycle, which is exactly why it's used to assign samples to a fixed number of batches, or to loop through batches repeatedly across training epochs.",
-    "graph_placement_weight": { "p1_operators": 1.0, "p4_data_pipeline": 0.3 }
+    "graph_placement_weight": {
+      "p1_operators": 1,
+      "p4_data_pipeline": 0.3
+    }
   },
   {
     "id": "p1_operators_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "If errors could be negative, a model with predictions +10 too high and -10 too low on two examples would average to an error of 0 — masking real mistakes. Squaring removes the sign, so every error contributes positively, and larger errors are penalized disproportionately more (an error of 4 contributes 16, not just 4). The `**` operator is the direct mechanism that makes this loss function work.",
-    "graph_placement_weight": { "p1_operators": 1.0, "p4_supervised_learning": 0.4 }
+    "graph_placement_weight": {
+      "p1_operators": 1,
+      "p4_supervised_learning": 0.4
+    }
+  },
+  {
+    "id": "p1_operators_explain1",
+    "skill_id": "p1_operators",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain the difference between = and ==. What does % (modulo) do? What is the difference between `and` and `or`?",
+    "explanation_after": "Operators are symbols that perform operations on values. Python uses them for maths, comparisons, and logic — the building blocks of every calculation and decision in your code."
   }
 ]

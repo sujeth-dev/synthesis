@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_cost_latency_optimization": 1
     }
+  },
+  {
+    "id": "p7_cost_latency_optimization_explain1",
+    "skill_id": "p7_cost_latency_optimization",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Find Where Time and Money Go” to explain Cost & Latency Optimization plainly.",
+    "explanation_after": "Break one request into input tokens, output tokens, retrieval, model time, tool calls, and retries. Measure before changing."
   }
 ]

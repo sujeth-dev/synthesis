@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_finetuning_methods": 1
     }
+  },
+  {
+    "id": "p6_finetuning_methods_explain1",
+    "skill_id": "p6_finetuning_methods",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Teach the Generalist a Specific Job,” explain Fine-Tuning Methods without assuming the listener knows modern AI.",
+    "explanation_after": "Fine-tuning continues training on selected input-output pairs. Small weight changes make the demonstrated responses more likely."
   }
 ]

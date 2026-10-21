@@ -6,14 +6,28 @@
     "difficulty_tier": "review",
     "stem": "Which of these is an example of OUTPUT from a computer?",
     "options": [
-      { "id": "a", "text": "Pressing a key on the keyboard" },
-      { "id": "b", "text": "Moving the mouse" },
-      { "id": "c", "text": "Text appearing on the screen" },
-      { "id": "d", "text": "Plugging in a USB drive" }
+      {
+        "id": "a",
+        "text": "Pressing a key on the keyboard"
+      },
+      {
+        "id": "b",
+        "text": "Moving the mouse"
+      },
+      {
+        "id": "c",
+        "text": "Text appearing on the screen"
+      },
+      {
+        "id": "d",
+        "text": "Plugging in a USB drive"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "Output is what the computer sends back to you after processing. Text on screen, sound from speakers, and files saved to disk are all outputs. Keyboard and mouse are inputs — they send information TO the computer.",
-    "graph_placement_weight": { "p1_input_output": 1.0 }
+    "graph_placement_weight": {
+      "p1_input_output": 1
+    }
   },
   {
     "id": "p1_io_q2",
@@ -22,14 +36,29 @@
     "difficulty_tier": "harder",
     "stem": "A language model like GPT takes text as input and produces text as output. In a voice assistant, what is the INPUT and what is the OUTPUT?",
     "options": [
-      { "id": "a", "text": "Input: the speaker / Output: the microphone" },
-      { "id": "b", "text": "Input: your spoken words (via microphone) / Output: spoken response (via speaker)" },
-      { "id": "c", "text": "Input: the AI model / Output: the internet" },
-      { "id": "d", "text": "Input: electricity / Output: intelligence" }
+      {
+        "id": "a",
+        "text": "Input: the speaker / Output: the microphone"
+      },
+      {
+        "id": "b",
+        "text": "Input: your spoken words (via microphone) / Output: spoken response (via speaker)"
+      },
+      {
+        "id": "c",
+        "text": "Input: the AI model / Output: the internet"
+      },
+      {
+        "id": "d",
+        "text": "Input: electricity / Output: intelligence"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Every AI system is fundamentally an input-output machine. Voice → speech recognition converts audio to text (input). The model processes text and generates a response. Text-to-speech converts that back to audio (output). Understanding this pipeline is how you reason about any AI system.",
-    "graph_placement_weight": { "p1_input_output": 1.0, "p3_what_is_ai": 0.3 }
+    "graph_placement_weight": {
+      "p1_input_output": 1,
+      "p3_what_is_ai": 0.3
+    }
   },
   {
     "id": "p1_io_q3",
@@ -38,14 +67,28 @@
     "difficulty_tier": "review",
     "stem": "Which pairing correctly classifies a keyboard and a monitor?",
     "options": [
-      { "id": "a", "text": "Keyboard: output; monitor: input" },
-      { "id": "b", "text": "Keyboard: input; monitor: output" },
-      { "id": "c", "text": "Both are input devices" },
-      { "id": "d", "text": "Both are output devices" }
+      {
+        "id": "a",
+        "text": "Keyboard: output; monitor: input"
+      },
+      {
+        "id": "b",
+        "text": "Keyboard: input; monitor: output"
+      },
+      {
+        "id": "c",
+        "text": "Both are input devices"
+      },
+      {
+        "id": "d",
+        "text": "Both are output devices"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Input devices send data to the computer. Output devices receive data from the computer. Some devices are both — a touchscreen is input (you touch it) and output (it displays things).",
-    "graph_placement_weight": { "p1_input_output": 0.9 }
+    "graph_placement_weight": {
+      "p1_input_output": 0.9
+    }
   },
   {
     "id": "p1_io_q4",
@@ -54,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "When you send a document to a printer, which part is input and which is output?",
     "options": [
-      { "id": "a", "text": "The print job sent to the printer is input; the printed page is output" },
-      { "id": "b", "text": "The printed page is input; the print job is output" },
-      { "id": "c", "text": "Both the print job and the printed page are inputs" },
-      { "id": "d", "text": "Both the print job and the printed page are outputs" }
+      {
+        "id": "a",
+        "text": "The print job sent to the printer is input; the printed page is output"
+      },
+      {
+        "id": "b",
+        "text": "The printed page is input; the print job is output"
+      },
+      {
+        "id": "c",
+        "text": "Both the print job and the printed page are inputs"
+      },
+      {
+        "id": "d",
+        "text": "Both the print job and the printed page are outputs"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "From the printer's perspective, the print job (the document data) is input — it flows into the printer. The printed page is output — it's what the printer produces as a result. The same input/output logic applies no matter which device you're looking at.",
-    "graph_placement_weight": { "p1_input_output": 1.0 }
+    "graph_placement_weight": {
+      "p1_input_output": 1
+    }
   },
   {
     "id": "p1_io_q5",
@@ -70,14 +127,28 @@
     "difficulty_tier": "same",
     "stem": "A smart thermostat's sensor reports the room temperature to its computer, which then turns the heater on or off. Which part is input and which is output?",
     "options": [
-      { "id": "a", "text": "Sensor reading: output; heater command: input" },
-      { "id": "b", "text": "Sensor reading: input; heater command: output" },
-      { "id": "c", "text": "Both are inputs" },
-      { "id": "d", "text": "Both are outputs" }
+      {
+        "id": "a",
+        "text": "Sensor reading: output; heater command: input"
+      },
+      {
+        "id": "b",
+        "text": "Sensor reading: input; heater command: output"
+      },
+      {
+        "id": "c",
+        "text": "Both are inputs"
+      },
+      {
+        "id": "d",
+        "text": "Both are outputs"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "The temperature reading flows into the thermostat's computer — that's input. The decision to turn the heater on or off flows out to control another device — that's output. Sensors are almost always input devices; actuators (like a heater relay) are almost always output devices.",
-    "graph_placement_weight": { "p1_input_output": 0.9 }
+    "graph_placement_weight": {
+      "p1_input_output": 0.9
+    }
   },
   {
     "id": "p1_io_q6",
@@ -86,13 +157,36 @@
     "difficulty_tier": "harder",
     "stem": "In supervised learning, a spam classifier is trained on pairs of (email text, label). During training, what serves as the input and what serves as the output the model learns to predict?",
     "options": [
-      { "id": "a", "text": "Input: the label (spam/not spam); Output: the email text" },
-      { "id": "b", "text": "Input: the email text; Output: the label (spam/not spam) the model learns to predict" },
-      { "id": "c", "text": "Both the email and the label are outputs" },
-      { "id": "d", "text": "There is no input/output distinction in machine learning" }
+      {
+        "id": "a",
+        "text": "Input: the label (spam/not spam); Output: the email text"
+      },
+      {
+        "id": "b",
+        "text": "Input: the email text; Output: the label (spam/not spam) the model learns to predict"
+      },
+      {
+        "id": "c",
+        "text": "Both the email and the label are outputs"
+      },
+      {
+        "id": "d",
+        "text": "There is no input/output distinction in machine learning"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Supervised learning is fundamentally an input-output mapping problem: the model receives an input (the email text) and learns to produce an output (the predicted label) that matches the true label it was trained on. This is the same input-output framework you use for keyboards and monitors, just applied to a learning system instead of a physical device.",
-    "graph_placement_weight": { "p1_input_output": 1.0, "p4_supervised_learning": 0.4 }
+    "graph_placement_weight": {
+      "p1_input_output": 1,
+      "p4_supervised_learning": 0.4
+    }
+  },
+  {
+    "id": "p1_input_output_explain1",
+    "skill_id": "p1_input_output",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "In your own words, explain Input & Output — what it is and why it matters. Use an example if it helps.",
+    "explanation_after": "Every computer interaction is: you give something (input), it gives something back (output)."
   }
 ]

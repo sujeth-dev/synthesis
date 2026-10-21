@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "define a complete cache key",
     "explanation_after": "Start with define a complete cache key."
+  },
+  {
+    "id": "p7_caching_and_batching_explain1",
+    "skill_id": "p7_caching_and_batching",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Do Not Recompute the Same Answer” to explain Caching & Batching plainly.",
+    "explanation_after": "A cache stores a result under a key and reuses it for matching requests. The key must include every input that can change the correct result."
   }
 ]

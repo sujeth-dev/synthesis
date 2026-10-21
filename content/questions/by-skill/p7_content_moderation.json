@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_content_moderation": 1
     }
+  },
+  {
+    "id": "p7_content_moderation_explain1",
+    "skill_id": "p7_content_moderation",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Decide What the Community Allows” to explain Content Moderation plainly.",
+    "explanation_after": "Content moderation maps content to a written policy and an action such as allow, limit, review, or remove."
   }
 ]
