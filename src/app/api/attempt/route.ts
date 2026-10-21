@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
+import { adaptiveFsrsRating, adaptiveQuality, isAdaptiveQualityEnabled, type AttemptBehaviorSignals } from '@/lib/sm2/adaptive'
 import { computeFsrsSchedule, fsrsRatingFromCorrectness, type FsrsSchedule } from '@/lib/fsrs'
 import { activeScheduler, chooseSchedule } from '@/lib/fsrs/scheduler'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
@@ -16,10 +17,11 @@ import {
   getRecentAttemptsForSkill, getSessionBehaviorAttempts,
   getLastFsrsShadowEntry, insertFsrsShadowLog,
   getAttemptHistory, insertDktShadowLog, insertExplanationGrade,
+  insertBehaviorQualityShadow,
 } from '@/lib/db/queries'
 import { DKT_HISTORY_LIMIT, getBundledDktModel, isDktShadowEnabled, predictForAttempt } from '@/lib/dkt/shadow'
 import { getAllNodes } from '@/lib/graph'
-import type { Question, DifficultyTier, QuestionFormat } from '@/types'
+import type { Question, DifficultyTier, QuestionFormat, BehaviorQualityShadowEntry } from '@/types'
 import { canChooseTopicSwitch, getGuidedArcProgress } from '@/lib/session/engine'
 import { computeBktMovementComparison, isFeynmanAttempt } from '@/lib/analytics/bkt-movement'
 
@@ -136,9 +138,35 @@ export async function POST(req: NextRequest) {
   // (FSRS-5). Any FSRS failure (e.g. migration 004 missing) is isolated and
   // falls back to SM-2's own schedule.
   let fsrsShadow: { sm2_interval_days: number; fsrs_interval_days: number; fsrs_stability: number; fsrs_difficulty: number; fsrs_due_at: string } | null = null
+  // Level 11, in shadow: the behaviour-aware quality is computed from the same
+  // attempt and logged beside the live one, and only sets the live schedule
+  // under ADAPTIVE_QUALITY=1 (a live cutover, so off by default).
+  let behaviorQualityShadow: Omit<BehaviorQualityShadowEntry, 'id' | 'created_at' | 'learner_id' | 'skill_id' | 'attempt_id'> | null = null
   if (schedule) {
-    const quality     = bktToQuality(correct, safe_latency)
-    const sm2Schedule = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, quality)
+    const signals: AttemptBehaviorSignals = {
+      latency_ms: safe_latency, hesitation_ms: safe_hesitation,
+      revision_count: safe_revision_count, guided_reflection: isGuidedReflection,
+    }
+    const liveQuality     = bktToQuality(correct, safe_latency)
+    const behaviorQuality = adaptiveQuality(correct, signals)
+    const applyAdaptive   = isAdaptiveQualityEnabled()
+    // Both schedules come from the same starting point, so the log records the
+    // scheduling consequence of each quality and not only the tier.
+    const liveSchedule     = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, liveQuality)
+    const adaptiveSchedule = behaviorQuality === liveQuality
+      ? liveSchedule
+      : reconcileBktSm2(updatedState.p_know, wasMastered, schedule, behaviorQuality)
+    const sm2Schedule = applyAdaptive ? adaptiveSchedule : liveSchedule
+    behaviorQualityShadow = {
+      correct, latency_ms: safe_latency, hesitation_ms: safe_hesitation,
+      revision_count: safe_revision_count, guided_reflection: isGuidedReflection,
+      live_quality: liveQuality, adaptive_quality: behaviorQuality,
+      live_fsrs_rating: fsrsRatingFromCorrectness(correct, safe_latency),
+      adaptive_fsrs_rating: adaptiveFsrsRating(correct, signals),
+      live_interval_days: liveSchedule.interval_days,
+      adaptive_interval_days: adaptiveSchedule.interval_days,
+      applied: applyAdaptive,
+    }
 
     let fsrsResult: FsrsSchedule | null = null
     try {
@@ -147,7 +175,7 @@ export async function POST(req: NextRequest) {
         previousShadow
           ? { stability: previousShadow.fsrs_stability, difficulty: previousShadow.fsrs_difficulty, last_review: previousShadow.created_at }
           : null,
-        fsrsRatingFromCorrectness(correct, safe_latency),
+        applyAdaptive ? adaptiveFsrsRating(correct, signals) : fsrsRatingFromCorrectness(correct, safe_latency),
       )
       fsrsShadow = {
         sm2_interval_days: sm2Schedule.interval_days,
@@ -211,6 +239,14 @@ export async function POST(req: NextRequest) {
     ...behaviorSnapshot,
   })
   if (session_id) await incrementSessionCounts(session_id, correct)
+
+  if (behaviorQualityShadow) {
+    try {
+      await insertBehaviorQualityShadow({ learner_id: user.id, skill_id, attempt_id, ...behaviorQualityShadow })
+    } catch {
+      // Observational only — see the FSRS and DKT shadow writes below.
+    }
+  }
 
   if (grade) {
     try {

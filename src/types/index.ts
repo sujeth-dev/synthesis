@@ -107,6 +107,20 @@ export interface DktShadowLogEntry {
   created_at: string
 }
 
+// One row per attempt (Level 11): the live scheduling quality beside the
+// behaviour-aware one, with the signals that produced both. Observational
+// unless ADAPTIVE_QUALITY=1 — see src/lib/sm2/adaptive.ts.
+export interface BehaviorQualityShadowEntry {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  correct: boolean; latency_ms: number; hesitation_ms: number
+  revision_count: number; guided_reflection: boolean
+  live_quality: number; adaptive_quality: number
+  live_fsrs_rating: number; adaptive_fsrs_rating: number
+  live_interval_days: number; adaptive_interval_days: number
+  applied: boolean
+  created_at: string
+}
+
 // One row per free-text attempt (Level 10): the learner's explanation and the
 // grade the engine consumed for it, with the provenance a grade audit needs.
 export interface ExplanationGrade {

@@ -2,7 +2,7 @@ import { getDb, generateId } from '@/lib/db'
 import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
   AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
-  ExplanationGrade,
+  ExplanationGrade, BehaviorQualityShadowEntry,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -321,6 +321,31 @@ export async function insertDktShadowLog(entry: Omit<DktShadowLogEntry, 'id' | '
     created_at: new Date().toISOString(),
   })
   if (error) throw new Error(`DKT shadow log insert failed: ${error.message}`)
+}
+
+// ─────────────────────────────────────────────
+// BEHAVIOUR QUALITY SHADOW (Level 11 — requires migration 007)
+// ─────────────────────────────────────────────
+
+// Throws on failure; the attempt route swallows it, like the FSRS and DKT
+// shadow writes — an observational log can never fail an attempt.
+export async function insertBehaviorQualityShadow(entry: Omit<BehaviorQualityShadowEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('behavior_quality_shadow').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`Behaviour quality shadow insert failed: ${error.message}`)
+}
+
+export async function getBehaviorQualityShadow(learnerId: string, limit: number): Promise<BehaviorQualityShadowEntry[]> {
+  const { data } = await getDb()
+    .from('behavior_quality_shadow')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
 }
 
 // ─────────────────────────────────────────────

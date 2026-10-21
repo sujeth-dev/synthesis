@@ -12,6 +12,7 @@ const tables = vi.hoisted(() => ({
   motivation_states: [] as Row[],
   fsrs_shadow_log: [] as Row[],
   explanation_grades: [] as Row[],
+  behavior_quality_shadow: [] as Row[],
 }))
 // Tables whose insert fails, so a missing migration can be simulated.
 const unmigrated = vi.hoisted(() => new Set<string>())
@@ -417,5 +418,65 @@ describe('the explanation and its grade are persisted (Level 10)', () => {
       latency_ms: 2000, difficulty_tier: 'review', question_format: 'mcq',
     }))
     expect(tables.explanation_grades).toHaveLength(0)
+  })
+})
+
+describe('behaviour-aware scheduling quality, in shadow (Level 11)', () => {
+  function hesitantCorrect() {
+    return POST(fakeRequest({
+      question_id: 'p1_bin_q1', skill_id: skillId, client_answer: 'b',
+      latency_ms: 2_000, hesitation_ms: 1_800, revision_count: 3,
+      difficulty_tier: 'review', question_format: 'mcq',
+    }))
+  }
+
+  it('logs both qualities and their intervals, and schedules on the live one', async () => {
+    const body = await (await hesitantCorrect()).json()
+
+    expect(tables.behavior_quality_shadow).toHaveLength(1)
+    expect(tables.behavior_quality_shadow[0]).toMatchObject({
+      learner_id: learnerId, skill_id: skillId, attempt_id: body.attempt_id,
+      hesitation_ms: 1_800, revision_count: 3, guided_reflection: false,
+      // A fast answer the learner changed three times: 5 live, demoted to 4.
+      live_quality: 5, adaptive_quality: 4, applied: false,
+    })
+
+    // The live row is exactly what SM-2 alone would have written: ease 2.5 + 0.1
+    // for quality 5, not the 2.5 the adaptive quality 4 would have left.
+    expect(tables.review_schedules[0].ease_factor as number).toBeCloseTo(2.6, 8)
+    expect(tables.review_schedules[0].interval_days).toBe(Math.round(6 * 2.5))
+  })
+
+  it('records the interval the adaptive quality would have produced', async () => {
+    await hesitantCorrect()
+    const shadow = tables.behavior_quality_shadow[0]
+    // Same starting schedule, so the first interval matches; the demoted ease
+    // factor is what diverges on the next review.
+    expect(shadow.live_interval_days).toBe(15)
+    expect(shadow.adaptive_interval_days).toBe(15)
+    expect(shadow.live_fsrs_rating).not.toBe(shadow.adaptive_fsrs_rating)
+  })
+
+  it('does not fail the attempt when migration 007 is missing', async () => {
+    unmigrated.add('behavior_quality_shadow')
+    const res = await hesitantCorrect()
+
+    expect(res.status).toBe(200)
+    expect(tables.attempt_events).toHaveLength(1)
+    expect(tables.review_schedules).toHaveLength(1)
+    expect(tables.behavior_quality_shadow).toHaveLength(0)
+  })
+
+  it('gives a guided reflection a neutral tier rather than one derived from its duration', async () => {
+    graderMode.value = 'meaning-included'
+    await POST(fakeRequest({
+      question_id: `${skillId}_feynman_loop`, skill_id: skillId, question_format: 'explain',
+      client_answer: 'Binary uses two digits because a wire is either on or off.',
+      latency_ms: 240_000, hesitation_ms: 0, revision_count: 0, difficulty_tier: 'same',
+    }))
+
+    expect(tables.behavior_quality_shadow[0]).toMatchObject({
+      guided_reflection: true, live_quality: 3, adaptive_quality: 4,
+    })
   })
 })
