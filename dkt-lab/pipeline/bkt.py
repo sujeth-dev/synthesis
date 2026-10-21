@@ -146,3 +146,33 @@ def predict_with_beliefs(obs, params: dict) -> tuple[np.ndarray, float]:
 
 def p_correct(belief: float, params: dict) -> float:
     return belief * (1 - params["p_slip"]) + (1 - belief) * params["p_guess"]
+
+
+# ── whole-dataset helpers ───────────────────────────────────────────────────
+# These live here, rather than in run.py, so anything that needs a fitted BKT
+# can have one without importing torch (diagnose.py in particular).
+
+def fit_all_skills(train_df, skills: list[str], forgetting: bool = False) -> dict:
+    """Fit one BKT per skill on the training split. Skills with fewer than
+    MIN_TRAIN_SEQUENCES students fall back to DEFAULT_PARAMS, flagged so the
+    website can show which ones were not really fitted."""
+    params = {}
+    grouped = {k: g for k, g in train_df.groupby("skill_id")}
+    for s in skills:
+        g = grouped.get(s)
+        seqs = [] if g is None else [x["correct"].to_numpy() for _, x in g.groupby("student_id")]
+        if len(seqs) >= MIN_TRAIN_SEQUENCES:
+            params[s] = fit_skill_bkt(seqs, forgetting=forgetting)
+        else:
+            params[s] = dict(DEFAULT_PARAMS) | {"n_train_sequences": len(seqs), "em_iters": 0,
+                                                "log_likelihood": None, "default": True}
+    return params
+
+
+def predict_rows(df, params: dict):
+    """Forward-only BKT P(correct) for every row of df, per (student, skill)."""
+    import pandas as pd
+    out = pd.Series(np.nan, index=df.index)
+    for (_, s), g in df.groupby(["student_id", "skill_id"], sort=False):
+        out.loc[g.index] = predict_sequence(g["correct"].to_numpy(), params[s])
+    return out

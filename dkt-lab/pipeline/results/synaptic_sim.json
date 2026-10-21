@@ -7962,5 +7962,1447 @@
     "default": false
    }
   ]
+ },
+ "diagnostics": {
+  "question": "DKT wins the aggregate metrics and loses the learning curve. Which of six hypotheses explains it, and what does each measure say?",
+  "protocol": "identical held-out rows to metrics.json (every test interaction except each student's first); DKT reproduced from the committed weights with a numpy forward pass, BKT refitted by EM on the training split",
+  "kind": "Synaptic simulator (synthetic)",
+  "reproduction_check": {
+   "bkt": {
+    "reproduced": {
+     "auc": 0.7285095686505271,
+     "log_loss": 0.5984563675669328,
+     "rmse": 0.45272947681047093,
+     "accuracy": 0.6937079941909554,
+     "n": 29609
+    },
+    "committed": {
+     "auc": 0.7285095686505271,
+     "log_loss": 0.5984563675669328,
+     "rmse": 0.45272947681047093,
+     "accuracy": 0.6937079941909554,
+     "n": 29609
+    },
+    "max_abs_delta": 0.0,
+    "n_matches": true
+   },
+   "dkt": {
+    "reproduced": {
+     "auc": 0.7061904575969802,
+     "log_loss": 0.6181007519683868,
+     "rmse": 0.46309248714247114,
+     "accuracy": 0.6621297578438988,
+     "n": 29609
+    },
+    "committed": {
+     "auc": 0.7061904832730775,
+     "log_loss": 0.6181007518703797,
+     "rmse": 0.463092487096024,
+     "accuracy": 0.6621297578438988,
+     "n": 29609
+    },
+    "max_abs_delta": 2.5676097359372818e-08,
+    "n_matches": true
+   },
+   "max_abs_delta": 2.5676097359372818e-08,
+   "tolerance": 1e-06,
+   "ok": true
+  },
+  "all_model_scores": {
+   "bkt": {
+    "auc": 0.7285095686505271,
+    "log_loss": 0.5984563675669328,
+    "rmse": 0.45272947681047093,
+    "accuracy": 0.6937079941909554,
+    "n": 29609
+   },
+   "dkt": {
+    "auc": 0.7061904575969802,
+    "log_loss": 0.6181007519683868,
+    "rmse": 0.46309248714247114,
+    "accuracy": 0.6621297578438988,
+    "n": 29609
+   },
+   "global_rate": {
+    "auc": 0.5,
+    "log_loss": 0.6817907087656035,
+    "rmse": 0.494310812397182,
+    "accuracy": 0.5752642777533858,
+    "n": 29609
+   },
+   "skill_rate": {
+    "auc": 0.5533475520091294,
+    "log_loss": 0.6773760151778161,
+    "rmse": 0.4921483717901883,
+    "accuracy": 0.5752642777533858,
+    "n": 29609
+   },
+   "student_rate": {
+    "auc": 0.5628298374813209,
+    "log_loss": 0.7456294840483353,
+    "rmse": 0.49704142576681426,
+    "accuracy": 0.5718869262724172,
+    "n": 29609
+   },
+   "skill_and_student": {
+    "auc": 0.5886653717697228,
+    "log_loss": 0.7368109474516006,
+    "rmse": 0.4931985235296326,
+    "accuracy": 0.5830659596744233,
+    "n": 29609
+   }
+  },
+  "baselines_note": "global_rate, skill_rate, student_rate and skill_and_student contain no notion of practice on a skill. They are the control: a model whose curve looks like theirs has not learned learning.",
+  "raw_curve": {
+   "kind": "raw",
+   "note": "every held-out row, bucketed by opportunity. Later buckets average a different, more persistent population than earlier ones \u2014 see the cohort curve.",
+   "max_opportunity_in_data": 55,
+   "min_rows": 30,
+   "points": [
+    {
+     "opportunity": 1,
+     "from": 1,
+     "to": 1,
+     "label": "1",
+     "n": 2801,
+     "actual": 0.21956444127097466,
+     "bkt": 0.23570743868565674,
+     "dkt": 0.43655614751320637,
+     "global_rate": 0.5724552283588672,
+     "skill_rate": 0.5644700586619148,
+     "student_rate": 0.5782898920621442,
+     "skill_and_student": 0.5689486409636025,
+     "actual_ci": [
+      0.20384,
+      0.23492
+     ]
+    },
+    {
+     "opportunity": 2,
+     "from": 2,
+     "to": 2,
+     "label": "2",
+     "n": 2951,
+     "actual": 0.4235852253473399,
+     "bkt": 0.38154742253482654,
+     "dkt": 0.4451482745725609,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5686236031660856,
+     "student_rate": 0.5624653545247049,
+     "skill_and_student": 0.5584125905161571,
+     "actual_ci": [
+      0.40663,
+      0.44155
+     ]
+    },
+    {
+     "opportunity": 3,
+     "from": 3,
+     "to": 3,
+     "label": "3",
+     "n": 2927,
+     "actual": 0.5445848992142125,
+     "bkt": 0.4952491753546465,
+     "dkt": 0.4765207126977881,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5687366804705808,
+     "student_rate": 0.5465665263534512,
+     "skill_and_student": 0.5393322593984219,
+     "actual_ci": [
+      0.52545,
+      0.56408
+     ]
+    },
+    {
+     "opportunity": 4,
+     "from": 4,
+     "to": 4,
+     "label": "4",
+     "n": 2799,
+     "actual": 0.579849946409432,
+     "bkt": 0.5740583956051978,
+     "dkt": 0.5194292866032413,
+     "global_rate": 0.5724552283588672,
+     "skill_rate": 0.5692256560184347,
+     "student_rate": 0.5413176769807805,
+     "skill_and_student": 0.5370623911302351,
+     "actual_ci": [
+      0.56198,
+      0.59702
+     ]
+    },
+    {
+     "opportunity": 5,
+     "from": 5,
+     "to": 5,
+     "label": "5",
+     "n": 2592,
+     "actual": 0.6057098765432098,
+     "bkt": 0.6203415500361829,
+     "dkt": 0.5591295623286623,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5699045972431501,
+     "student_rate": 0.5387579677363247,
+     "skill_and_student": 0.5356058013032338,
+     "actual_ci": [
+      0.58757,
+      0.6254
+     ]
+    },
+    {
+     "opportunity": 6,
+     "from": 6,
+     "to": 6,
+     "label": "6",
+     "n": 2327,
+     "actual": 0.6235496347228191,
+     "bkt": 0.6472962550343234,
+     "dkt": 0.5871415745722958,
+     "global_rate": 0.5724552283588672,
+     "skill_rate": 0.571658784546521,
+     "student_rate": 0.5359228552380799,
+     "skill_and_student": 0.5345182461863544,
+     "actual_ci": [
+      0.60335,
+      0.64248
+     ]
+    },
+    {
+     "opportunity": 7,
+     "from": 7,
+     "to": 7,
+     "label": "7",
+     "n": 2069,
+     "actual": 0.6679555340744321,
+     "bkt": 0.6695575214469406,
+     "dkt": 0.613430671383793,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5723036538394867,
+     "student_rate": 0.5349309118403472,
+     "skill_and_student": 0.5343582078434503,
+     "actual_ci": [
+      0.65104,
+      0.68778
+     ]
+    },
+    {
+     "opportunity": 8,
+     "from": 8,
+     "to": 8,
+     "label": "8",
+     "n": 1838,
+     "actual": 0.690968443960827,
+     "bkt": 0.6864415064312771,
+     "dkt": 0.6378211155734518,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5734197016114235,
+     "student_rate": 0.5358867308547394,
+     "skill_and_student": 0.5364652210473876,
+     "actual_ci": [
+      0.66919,
+      0.70948
+     ]
+    },
+    {
+     "opportunity": 9,
+     "from": 9,
+     "to": 9,
+     "label": "9",
+     "n": 1574,
+     "actual": 0.6969504447268107,
+     "bkt": 0.6973509195009406,
+     "dkt": 0.649245922262202,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5748757197694333,
+     "student_rate": 0.5342605207983073,
+     "skill_and_student": 0.5364042851842397,
+     "actual_ci": [
+      0.67408,
+      0.72052
+     ]
+    },
+    {
+     "opportunity": 10,
+     "from": 10,
+     "to": 10,
+     "label": "10",
+     "n": 1298,
+     "actual": 0.6979969183359014,
+     "bkt": 0.7002971078342659,
+     "dkt": 0.6550269378316201,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819547,
+     "student_rate": 0.5261435536127487,
+     "skill_and_student": 0.5295718753292923,
+     "actual_ci": [
+      0.6718,
+      0.72188
+     ]
+    },
+    {
+     "opportunity": 11,
+     "from": 11,
+     "to": 11,
+     "label": "11",
+     "n": 1099,
+     "actual": 0.6979071883530482,
+     "bkt": 0.7060511877799994,
+     "dkt": 0.6640552707719799,
+     "global_rate": 0.5724552283588672,
+     "skill_rate": 0.5763828768635506,
+     "student_rate": 0.5224008660576875,
+     "skill_and_student": 0.5261452653819583,
+     "actual_ci": [
+      0.66968,
+      0.72429
+     ]
+    },
+    {
+     "opportunity": 12,
+     "from": 12,
+     "to": 12,
+     "label": "12",
+     "n": 932,
+     "actual": 0.694206008583691,
+     "bkt": 0.7082532995609642,
+     "dkt": 0.6711839062167555,
+     "global_rate": 0.5724552283588674,
+     "skill_rate": 0.5769252957416637,
+     "student_rate": 0.5207186213073852,
+     "skill_and_student": 0.525060685098673,
+     "actual_ci": [
+      0.66202,
+      0.72213
+     ]
+    },
+    {
+     "opportunity": 13,
+     "from": 13,
+     "to": 13,
+     "label": "13",
+     "n": 772,
+     "actual": 0.6748704663212435,
+     "bkt": 0.7065736905887868,
+     "dkt": 0.6747058208046764,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5764584868679935,
+     "student_rate": 0.5145919497527185,
+     "skill_and_student": 0.5185470851405231,
+     "actual_ci": [
+      0.64116,
+      0.70729
+     ]
+    },
+    {
+     "opportunity": 14,
+     "from": 14,
+     "to": 14,
+     "label": "14",
+     "n": 622,
+     "actual": 0.6816720257234726,
+     "bkt": 0.7005382081586918,
+     "dkt": 0.6724344945265367,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.576944960644857,
+     "student_rate": 0.5103399402513242,
+     "skill_and_student": 0.51474300587712,
+     "actual_ci": [
+      0.64469,
+      0.71865
+     ]
+    },
+    {
+     "opportunity": 15,
+     "from": 15,
+     "to": 15,
+     "label": "15",
+     "n": 516,
+     "actual": 0.686046511627907,
+     "bkt": 0.6993102761537069,
+     "dkt": 0.6704961661876578,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.578105726183254,
+     "student_rate": 0.5068066723694935,
+     "skill_and_student": 0.5123857472647549,
+     "actual_ci": [
+      0.64147,
+      0.72292
+     ]
+    },
+    {
+     "opportunity": 16,
+     "from": 16,
+     "to": 16,
+     "label": "16",
+     "n": 430,
+     "actual": 0.6883720930232559,
+     "bkt": 0.6985490300010034,
+     "dkt": 0.6703394549208321,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5771980002807614,
+     "student_rate": 0.5021604864767346,
+     "skill_and_student": 0.5068643099540011,
+     "actual_ci": [
+      0.64413,
+      0.72791
+     ]
+    },
+    {
+     "opportunity": 17,
+     "from": 17,
+     "to": 17,
+     "label": "17",
+     "n": 348,
+     "actual": 0.6724137931034483,
+     "bkt": 0.6967947254264928,
+     "dkt": 0.670461838049951,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5775979938570586,
+     "student_rate": 0.4985000278833805,
+     "skill_and_student": 0.5036487914034453,
+     "actual_ci": [
+      0.62349,
+      0.72126
+     ]
+    },
+    {
+     "opportunity": 18,
+     "from": 18,
+     "to": 18,
+     "label": "18",
+     "n": 283,
+     "actual": 0.657243816254417,
+     "bkt": 0.6873940341853436,
+     "dkt": 0.6615915679069111,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5766456488652324,
+     "student_rate": 0.4931151678793243,
+     "skill_and_student": 0.4974103601783137,
+     "actual_ci": [
+      0.597,
+      0.71378
+     ]
+    },
+    {
+     "opportunity": 19,
+     "from": 19,
+     "to": 19,
+     "label": "19",
+     "n": 229,
+     "actual": 0.6506550218340611,
+     "bkt": 0.6813813419539131,
+     "dkt": 0.6503132061320508,
+     "global_rate": 0.5724552283588672,
+     "skill_rate": 0.5767087105763846,
+     "student_rate": 0.4833326338792472,
+     "skill_and_student": 0.4877519551170026,
+     "actual_ci": [
+      0.58515,
+      0.70742
+     ]
+    },
+    {
+     "opportunity": 20,
+     "from": 20,
+     "to": 20,
+     "label": "20",
+     "n": 191,
+     "actual": 0.6178010471204188,
+     "bkt": 0.6800581287688513,
+     "dkt": 0.6497509559244052,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5774430199435997,
+     "student_rate": 0.47967104109115744,
+     "skill_and_student": 0.4848198332421245,
+     "actual_ci": [
+      0.55497,
+      0.68586
+     ]
+    },
+    {
+     "opportunity": 26.0,
+     "from": 21,
+     "to": 31,
+     "label": "21\u201331",
+     "n": 833,
+     "actual": 0.581032412965186,
+     "bkt": 0.6340864236875323,
+     "dkt": 0.6052915798561468,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5694423522296775,
+     "student_rate": 0.4611266436334505,
+     "skill_and_student": 0.45837113038482874,
+     "actual_ci": [
+      0.54742,
+      0.61104
+     ]
+    },
+    {
+     "opportunity": 39.5,
+     "from": 32,
+     "to": 47,
+     "label": "32\u201347",
+     "n": 164,
+     "actual": 0.5609756097560976,
+     "bkt": 0.6191518715429584,
+     "dkt": 0.5999224948735485,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5563783316376311,
+     "student_rate": 0.4337861711477749,
+     "skill_and_student": 0.4182497629992633,
+     "actual_ci": [
+      0.48171,
+      0.64024
+     ]
+    }
+   ]
+  },
+  "cohort_curve": {
+   "kind": "cohort",
+   "note": "only (student, skill) pairs with at least 10 attempts, restricted to their first 10. Same population at every point.",
+   "min_opportunities": 10,
+   "pairs": 1298,
+   "min_rows": 30,
+   "points": [
+    {
+     "opportunity": 1,
+     "from": 1,
+     "to": 1,
+     "label": "1",
+     "n": 1200,
+     "actual": 0.21416666666666667,
+     "bkt": 0.23763830301043565,
+     "dkt": 0.40880816838379086,
+     "global_rate": 0.5724552283588672,
+     "skill_rate": 0.5704827212360511,
+     "student_rate": 0.5567250943340922,
+     "skill_and_student": 0.5526561272687044,
+     "actual_ci": [
+      0.1925,
+      0.2375
+     ]
+    },
+    {
+     "opportunity": 2,
+     "from": 2,
+     "to": 2,
+     "label": "2",
+     "n": 1298,
+     "actual": 0.2465331278890601,
+     "bkt": 0.3678919509536487,
+     "dkt": 0.4244321998028531,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819545,
+     "student_rate": 0.5370323323109796,
+     "skill_and_student": 0.5403407191831897,
+     "actual_ci": [
+      0.22494,
+      0.2735
+     ]
+    },
+    {
+     "opportunity": 3,
+     "from": 3,
+     "to": 3,
+     "label": "3",
+     "n": 1298,
+     "actual": 0.35362095531587057,
+     "bkt": 0.4399385255411958,
+     "dkt": 0.439051729529954,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819546,
+     "student_rate": 0.5048267986202235,
+     "skill_and_student": 0.5033022502484668,
+     "actual_ci": [
+      0.3282,
+      0.37982
+     ]
+    },
+    {
+     "opportunity": 4,
+     "from": 4,
+     "to": 4,
+     "label": "4",
+     "n": 1298,
+     "actual": 0.40215716486902925,
+     "bkt": 0.5020868984013174,
+     "dkt": 0.4702611578947208,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819547,
+     "student_rate": 0.4997424995819879,
+     "skill_and_student": 0.501410407953383,
+     "actual_ci": [
+      0.37517,
+      0.4276
+     ]
+    },
+    {
+     "opportunity": 5,
+     "from": 5,
+     "to": 5,
+     "label": "5",
+     "n": 1298,
+     "actual": 0.4167950693374422,
+     "bkt": 0.5512499522996831,
+     "dkt": 0.5021632105051879,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819547,
+     "student_rate": 0.4986050158419641,
+     "skill_and_student": 0.5009459354213259,
+     "actual_ci": [
+      0.39137,
+      0.44068
+     ]
+    },
+    {
+     "opportunity": 6,
+     "from": 6,
+     "to": 6,
+     "label": "6",
+     "n": 1298,
+     "actual": 0.46147919876733434,
+     "bkt": 0.5861340166563946,
+     "dkt": 0.5329973133103489,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819547,
+     "student_rate": 0.5007970500390314,
+     "skill_and_student": 0.5033797383836924,
+     "actual_ci": [
+      0.43295,
+      0.48998
+     ]
+    },
+    {
+     "opportunity": 7,
+     "from": 7,
+     "to": 7,
+     "label": "7",
+     "n": 1298,
+     "actual": 0.522342064714946,
+     "bkt": 0.6190344665489411,
+     "dkt": 0.5682536841087794,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819547,
+     "student_rate": 0.5070481574909669,
+     "skill_and_student": 0.5099979614417463,
+     "actual_ci": [
+      0.49384,
+      0.54856
+     ]
+    },
+    {
+     "opportunity": 8,
+     "from": 8,
+     "to": 8,
+     "label": "8",
+     "n": 1298,
+     "actual": 0.5755007704160247,
+     "bkt": 0.6483925959887025,
+     "dkt": 0.6016480995831271,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819547,
+     "student_rate": 0.51404542035942,
+     "skill_and_student": 0.517185765479771,
+     "actual_ci": [
+      0.54775,
+      0.60096
+     ]
+    },
+    {
+     "opportunity": 9,
+     "from": 9,
+     "to": 9,
+     "label": "9",
+     "n": 1298,
+     "actual": 0.6371340523882897,
+     "bkt": 0.6767428992372425,
+     "dkt": 0.6289236537404989,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819546,
+     "student_rate": 0.5203713600791923,
+     "skill_and_student": 0.5237302376653264,
+     "actual_ci": [
+      0.61323,
+      0.6641
+     ]
+    },
+    {
+     "opportunity": 10,
+     "from": 10,
+     "to": 10,
+     "label": "10",
+     "n": 1298,
+     "actual": 0.6979969183359014,
+     "bkt": 0.7002971078342659,
+     "dkt": 0.6550269378316201,
+     "global_rate": 0.5724552283588673,
+     "skill_rate": 0.5761982354819547,
+     "student_rate": 0.5261435536127487,
+     "skill_and_student": 0.5295718753292923,
+     "actual_ci": [
+      0.6718,
+      0.72188
+     ]
+    }
+   ]
+  },
+  "raw_curve_fidelity": {
+   "n_points": 22,
+   "actual_slope": 0.01252394704825543,
+   "models": {
+    "bkt": {
+     "mae": 0.020188294652044594,
+     "bias": 0.00038830940338496826,
+     "slope": 0.015218810290337196,
+     "slope_ratio": 1.2151768313694011
+    },
+    "dkt": {
+     "mae": 0.057495534379640945,
+     "bias": -0.009828404869469108,
+     "slope": 0.01022477344699913,
+     "slope_ratio": 0.8164178120206463
+    },
+    "global_rate": {
+     "mae": 0.10510662900740832,
+     "bias": -0.0029798113437852066,
+     "slope": 2.9026449047366547e-18,
+     "slope_ratio": 2.317675804243351e-16
+    },
+    "skill_rate": {
+     "mae": 0.10307848085276544,
+     "bias": -0.004090060444417277,
+     "slope": 0.00033240276475231863,
+     "slope_ratio": 0.026541374174735267
+    },
+    "student_rate": {
+     "mae": 0.13498822569440097,
+     "bias": -0.03899731699326757,
+     "slope": -0.0039962743030123125,
+     "slope_ratio": -0.31909064192098996
+    },
+    "skill_and_student": {
+     "mae": 0.13390972411972688,
+     "bias": -0.040887206940998684,
+     "slope": -0.00357824252902216,
+     "slope_ratio": -0.285712045510493
+    }
+   }
+  },
+  "cohort_curve_fidelity": {
+   "n_points": 10,
+   "actual_slope": 0.052124525681331975,
+   "models": {
+    "bkt": {
+     "mae": 0.08059939173151756,
+     "bias": 0.08059939173151756,
+     "slope": 0.04663874215952041,
+     "slope_ratio": 0.8947561929800685
+    },
+    "dkt": {
+     "mae": 0.07975267292081442,
+     "bias": 0.06943872599651858,
+     "slope": 0.029069548494540742,
+     "slope_ratio": 0.5576942545676112
+    },
+    "global_rate": {
+     "mae": 0.15681469750505123,
+     "bias": 0.11786743143292412,
+     "slope": 5.7484795890153094e-18,
+     "slope_ratio": 1.102835855842442e-16
+    },
+    "skill_rate": {
+     "mae": 0.15790295092075357,
+     "bias": 0.12107801990245735,
+     "slope": 0.00029593618808614335,
+     "slope_ratio": 0.005677484528019998
+    },
+    "student_rate": {
+     "mae": 0.13526914214397012,
+     "bias": 0.06164017490626505,
+     "slope": -0.0018165907561546574,
+     "slope_ratio": -0.034850979119897416
+    },
+    "skill_and_student": {
+     "mae": 0.13443648043440426,
+     "bias": 0.06340257579399822,
+     "slope": -0.0012528611971767967,
+     "slope_ratio": -0.024035925138892918
+    }
+   }
+  },
+  "per_skill_fidelity": [
+   {
+    "skill_id": "p1_memory_storage",
+    "n": 2087,
+    "n_points": 8,
+    "actual_slope": 0.0565045802202308,
+    "bkt": {
+     "mae": 0.03663473120142597,
+     "slope": 0.06145504900737971,
+     "slope_ratio": 1.0876118142609696
+    },
+    "dkt": {
+     "mae": 0.05780685887911344,
+     "slope": 0.03868264657634884,
+     "slope_ratio": 0.684593114851581
+    }
+   },
+   {
+    "skill_id": "p1_binary_numbers",
+    "n": 2064,
+    "n_points": 8,
+    "actual_slope": 0.06461204220625914,
+    "bkt": {
+     "mae": 0.026431411537647703,
+     "slope": 0.06608690200887862,
+     "slope_ratio": 1.0228263919891485
+    },
+    "dkt": {
+     "mae": 0.05218256091483759,
+     "slope": 0.045549577796357564,
+     "slope_ratio": 0.7049704086267846
+    }
+   },
+   {
+    "skill_id": "p1_input_output",
+    "n": 1853,
+    "n_points": 8,
+    "actual_slope": 0.07419911255941067,
+    "bkt": {
+     "mae": 0.03573845719413244,
+     "slope": 0.07039228478126312,
+     "slope_ratio": 0.9486944298006335
+    },
+    "dkt": {
+     "mae": 0.06186586404610128,
+     "slope": 0.050253942356814164,
+     "slope_ratio": 0.677284951576425
+    }
+   },
+   {
+    "skill_id": "p1_python_intro",
+    "n": 1806,
+    "n_points": 8,
+    "actual_slope": 0.04724113356596988,
+    "bkt": {
+     "mae": 0.04407003636825812,
+     "slope": 0.058903004152780304,
+     "slope_ratio": 1.2468583987411141
+    },
+    "dkt": {
+     "mae": 0.06328816945511835,
+     "slope": 0.03191284386954427,
+     "slope_ratio": 0.6755308660191142
+    }
+   },
+   {
+    "skill_id": "p1_data_types",
+    "n": 1760,
+    "n_points": 8,
+    "actual_slope": 0.051415995289589705,
+    "bkt": {
+     "mae": 0.020538752470522895,
+     "slope": 0.053814774939583636,
+     "slope_ratio": 1.0466543463076676
+    },
+    "dkt": {
+     "mae": 0.057569082592258555,
+     "slope": 0.032731814109219576,
+     "slope_ratio": 0.6366076145149883
+    }
+   },
+   {
+    "skill_id": "p1_cpu_processing",
+    "n": 1738,
+    "n_points": 8,
+    "actual_slope": 0.06543495007788236,
+    "bkt": {
+     "mae": 0.026461010175335104,
+     "slope": 0.06659961719831074,
+     "slope_ratio": 1.0177988539617158
+    },
+    "dkt": {
+     "mae": 0.06432405555637599,
+     "slope": 0.04473562810592041,
+     "slope_ratio": 0.6836656565440169
+    }
+   },
+   {
+    "skill_id": "p1_what_is_computer",
+    "n": 1722,
+    "n_points": 7,
+    "actual_slope": 0.04299015442600907,
+    "bkt": {
+     "mae": 0.03359901182053459,
+     "slope": 0.05503722034546073,
+     "slope_ratio": 1.2802284867384235
+    },
+    "dkt": {
+     "mae": 0.024870167740265743,
+     "slope": 0.035611086106267696,
+     "slope_ratio": 0.828354458869377
+    }
+   },
+   {
+    "skill_id": "p1_how_code_works",
+    "n": 1668,
+    "n_points": 8,
+    "actual_slope": 0.06915552555979346,
+    "bkt": {
+     "mae": 0.03688913878269834,
+     "slope": 0.0701517424397577,
+     "slope_ratio": 1.0144054559906843
+    },
+    "dkt": {
+     "mae": 0.08287003811830737,
+     "slope": 0.04416564983233781,
+     "slope_ratio": 0.6386423857649838
+    }
+   },
+   {
+    "skill_id": "p1_variables",
+    "n": 1663,
+    "n_points": 8,
+    "actual_slope": 0.061624932991179986,
+    "bkt": {
+     "mae": 0.05483861822912821,
+     "slope": 0.059963252127878966,
+     "slope_ratio": 0.9730355753321656
+    },
+    "dkt": {
+     "mae": 0.10215390942404703,
+     "slope": 0.03591821968136119,
+     "slope_ratio": 0.5828520687641471
+    }
+   },
+   {
+    "skill_id": "p1_operators",
+    "n": 1563,
+    "n_points": 8,
+    "actual_slope": 0.06116202821197103,
+    "bkt": {
+     "mae": 0.021043365870542494,
+     "slope": 0.06408461890633382,
+     "slope_ratio": 1.047784397931244
+    },
+    "dkt": {
+     "mae": 0.07476664341877269,
+     "slope": 0.03597288531723854,
+     "slope_ratio": 0.5881571682444253
+    }
+   },
+   {
+    "skill_id": "p1_strings",
+    "n": 1410,
+    "n_points": 8,
+    "actual_slope": 0.03631303907579251,
+    "bkt": {
+     "mae": 0.063236666848294,
+     "slope": 0.05710802604544351,
+     "slope_ratio": 1.5726589538883744
+    },
+    "dkt": {
+     "mae": 0.09306575210077572,
+     "slope": 0.03056195943871702,
+     "slope_ratio": 0.8416249429007623
+    }
+   },
+   {
+    "skill_id": "p1_conditionals",
+    "n": 1352,
+    "n_points": 8,
+    "actual_slope": 0.06354414713877038,
+    "bkt": {
+     "mae": 0.04610746702095009,
+     "slope": 0.057279813091473605,
+     "slope_ratio": 0.9014176076103995
+    },
+    "dkt": {
+     "mae": 0.07725306040250941,
+     "slope": 0.02962814587659515,
+     "slope_ratio": 0.46626081567971883
+    }
+   },
+   {
+    "skill_id": "p1_loops",
+    "n": 1251,
+    "n_points": 8,
+    "actual_slope": 0.04057403552091373,
+    "bkt": {
+     "mae": 0.058772386306027914,
+     "slope": 0.06143190678838441,
+     "slope_ratio": 1.5140694288769863
+    },
+    "dkt": {
+     "mae": 0.07667519385261856,
+     "slope": 0.030514630633357107,
+     "slope_ratio": 0.752072852542076
+    }
+   },
+   {
+    "skill_id": "p1_lists_intro",
+    "n": 1026,
+    "n_points": 8,
+    "actual_slope": 0.05170518717428554,
+    "bkt": {
+     "mae": 0.03853928471585295,
+     "slope": 0.06784389869586022,
+     "slope_ratio": 1.3121294478090764
+    },
+    "dkt": {
+     "mae": 0.06194808002374287,
+     "slope": 0.03587865277255404,
+     "slope_ratio": 0.6939081885849456
+    }
+   },
+   {
+    "skill_id": "p1_functions",
+    "n": 925,
+    "n_points": 8,
+    "actual_slope": 0.05887419597241849,
+    "bkt": {
+     "mae": 0.03695649349803611,
+     "slope": 0.05739684971298253,
+     "slope_ratio": 0.9749067272166557
+    },
+    "dkt": {
+     "mae": 0.08460422608574066,
+     "slope": 0.026581423069252784,
+     "slope_ratio": 0.4514953050349207
+    }
+   },
+   {
+    "skill_id": "p1_debugging",
+    "n": 790,
+    "n_points": 8,
+    "actual_slope": 0.06624342699218853,
+    "bkt": {
+     "mae": 0.05036993980493064,
+     "slope": 0.07188883394289303,
+     "slope_ratio": 1.0852221451551745
+    },
+    "dkt": {
+     "mae": 0.0740658462828676,
+     "slope": 0.04068889521138414,
+     "slope_ratio": 0.614232944442657
+    }
+   },
+   {
+    "skill_id": "p1_scope",
+    "n": 760,
+    "n_points": 8,
+    "actual_slope": 0.04981561365699387,
+    "bkt": {
+     "mae": 0.0305317072243412,
+     "slope": 0.053839017955957504,
+     "slope_ratio": 1.080765928663789
+    },
+    "dkt": {
+     "mae": 0.06044254450500896,
+     "slope": 0.01736109307553627,
+     "slope_ratio": 0.3485070603581505
+    }
+   },
+   {
+    "skill_id": "p1_modules_imports",
+    "n": 638,
+    "n_points": 8,
+    "actual_slope": 0.08243550334465725,
+    "bkt": {
+     "mae": 0.043689614279315905,
+     "slope": 0.07069885343634817,
+     "slope_ratio": 0.8576262722720459
+    },
+    "dkt": {
+     "mae": 0.1136503306158968,
+     "slope": 0.0180974655384209,
+     "slope_ratio": 0.2195348460815072
+    }
+   },
+   {
+    "skill_id": "p1b_oop_classes",
+    "n": 535,
+    "n_points": 7,
+    "actual_slope": 0.06943492312212321,
+    "bkt": {
+     "mae": 0.04266129224435752,
+     "slope": 0.08674041468783324,
+     "slope_ratio": 1.2492332501797814
+    },
+    "dkt": {
+     "mae": 0.09714177511551472,
+     "slope": 0.00810344280433611,
+     "slope_ratio": 0.11670557753889424
+    }
+   },
+   {
+    "skill_id": "p2_lists_arrays",
+    "n": 535,
+    "n_points": 8,
+    "actual_slope": 0.07920376750637612,
+    "bkt": {
+     "mae": 0.057509791771692145,
+     "slope": 0.07193070351133299,
+     "slope_ratio": 0.9081727520795317
+    },
+    "dkt": {
+     "mae": 0.1500028958544665,
+     "slope": 0.0031150008065293543,
+     "slope_ratio": 0.03932894740491465
+    }
+   },
+   {
+    "skill_id": "p2_dictionaries",
+    "n": 414,
+    "n_points": 6,
+    "actual_slope": 0.08173856633149529,
+    "bkt": {
+     "mae": 0.044953176579619766,
+     "slope": 0.08372266820731547,
+     "slope_ratio": 1.0242737542982288
+    },
+    "dkt": {
+     "mae": 0.13379901050312243,
+     "slope": 0.003279490262429011,
+     "slope_ratio": 0.040121700313764455
+    }
+   },
+   {
+    "skill_id": "p2_algorithms_intro",
+    "n": 304,
+    "n_points": 5,
+    "actual_slope": 0.1226785868532435,
+    "bkt": {
+     "mae": 0.05712929606411011,
+     "slope": 0.12905375747657363,
+     "slope_ratio": 1.0519664497843992
+    },
+    "dkt": {
+     "mae": 0.15645267146113065,
+     "slope": 0.007958611018427377,
+     "slope_ratio": 0.06487367700076306
+    }
+   },
+   {
+    "skill_id": "p2_big_o_basics",
+    "n": 274,
+    "n_points": 4,
+    "actual_slope": 0.144281045751634,
+    "bkt": {
+     "mae": 0.05356041640191027,
+     "slope": 0.1309687439845505,
+     "slope_ratio": 0.9077335370163635
+    },
+    "dkt": {
+     "mae": 0.1296017976283578,
+     "slope": 0.00274787302424006,
+     "slope_ratio": 0.019045280756907323
+    }
+   },
+   {
+    "skill_id": "p2_numpy_basics",
+    "n": 258,
+    "n_points": 4,
+    "actual_slope": 0.07837011433129486,
+    "bkt": {
+     "mae": 0.07407383882331123,
+     "slope": 0.14231062163904176,
+     "slope_ratio": 1.8158787039336255
+    },
+    "dkt": {
+     "mae": 0.07241496913669795,
+     "slope": 0.013214836871424768,
+     "slope_ratio": 0.16862087013885857
+    }
+   },
+   {
+    "skill_id": "p2_math_vectors",
+    "n": 213,
+    "n_points": 3,
+    "actual_slope": 0.196969696969697,
+    "bkt": {
+     "mae": 0.06860413500146967,
+     "slope": 0.21963467959588184,
+     "slope_ratio": 1.1150683733329385
+    },
+    "dkt": {
+     "mae": 0.1358189053979828,
+     "slope": 0.008704638516908614,
+     "slope_ratio": 0.0441927801627668
+    }
+   }
+  ],
+  "within_pair_spread": {
+   "pairs": 2592,
+   "min_opportunities": 5,
+   "models": {
+    "bkt": {
+     "mean_within_pair_sd": 0.18745346899805237,
+     "mean_first_to_last_change": 0.540771809546977
+    },
+    "dkt": {
+     "mean_within_pair_sd": 0.12458847737352836,
+     "mean_first_to_last_change": 0.3113978975618565
+    },
+    "global_rate": {
+     "mean_within_pair_sd": 0.0,
+     "mean_first_to_last_change": 0.0
+    },
+    "skill_rate": {
+     "mean_within_pair_sd": 0.0,
+     "mean_first_to_last_change": 0.0
+    },
+    "student_rate": {
+     "mean_within_pair_sd": 0.03725323221900605,
+     "mean_first_to_last_change": 0.005879568850005179
+    },
+    "skill_and_student": {
+     "mean_within_pair_sd": 0.03713221568323945,
+     "mean_first_to_last_change": 0.00753785454372724
+    }
+   }
+  },
+  "position_slices": {
+   "note": "held-out rows sliced by absolute position in the student's sequence",
+   "bins": [
+    {
+     "from": 1,
+     "to": 19,
+     "n": 2850,
+     "actual": 0.48350877192982455,
+     "bkt": {
+      "auc": 0.6883938008771378,
+      "log_loss": 0.6363452553777061,
+      "mean_pred": 0.44946848384566124,
+      "ece": 0.03707449538202789
+     },
+     "dkt": {
+      "auc": 0.6611548124250646,
+      "log_loss": 0.6579668663443274,
+      "mean_pred": 0.4765213735689549,
+      "ece": 0.03693166342136768
+     }
+    },
+    {
+     "from": 20,
+     "to": 39,
+     "n": 3000,
+     "actual": 0.5306666666666666,
+     "bkt": {
+      "auc": 0.7025947832200777,
+      "log_loss": 0.6272980554314809,
+      "mean_pred": 0.515336486575865,
+      "ece": 0.037125515390559465
+     },
+     "dkt": {
+      "auc": 0.6768501598903609,
+      "log_loss": 0.6466802145048458,
+      "mean_pred": 0.5057288521462677,
+      "ece": 0.03355877215968144
+     }
+    },
+    {
+     "from": 40,
+     "to": 59,
+     "n": 2998,
+     "actual": 0.5496997998665777,
+     "bkt": {
+      "auc": 0.7049519057892845,
+      "log_loss": 0.6201720479062757,
+      "mean_pred": 0.5367695957307851,
+      "ece": 0.046949056990491
+     },
+     "dkt": {
+      "auc": 0.6927368752247393,
+      "log_loss": 0.633542534665827,
+      "mean_pred": 0.514243309411831,
+      "ece": 0.03545649045474662
+     }
+    },
+    {
+     "from": 60,
+     "to": 79,
+     "n": 2960,
+     "actual": 0.5635135135135135,
+     "bkt": {
+      "auc": 0.7225719424460433,
+      "log_loss": 0.6060083947872489,
+      "mean_pred": 0.5530827969123532,
+      "ece": 0.0324374456232735
+     },
+     "dkt": {
+      "auc": 0.7024406790357188,
+      "log_loss": 0.6251392268329593,
+      "mean_pred": 0.5265332851380845,
+      "ece": 0.04095619241419328
+     }
+    },
+    {
+     "from": 80,
+     "to": 99,
+     "n": 2937,
+     "actual": 0.5798433775961865,
+     "bkt": {
+      "auc": 0.7138401486175125,
+      "log_loss": 0.6095796396006168,
+      "mean_pred": 0.5836075834850771,
+      "ece": 0.01626201645684541
+     },
+     "dkt": {
+      "auc": 0.7110043197674806,
+      "log_loss": 0.615319353380229,
+      "mean_pred": 0.5590225926000453,
+      "ece": 0.034247065749974506
+     }
+    },
+    {
+     "from": 100,
+     "to": 119,
+     "n": 2893,
+     "actual": 0.5769097822329762,
+     "bkt": {
+      "auc": 0.7282980298170796,
+      "log_loss": 0.5990640425055279,
+      "mean_pred": 0.5978344256234932,
+      "ece": 0.027825335943009868
+     },
+     "dkt": {
+      "auc": 0.7246624333775852,
+      "log_loss": 0.6051871290959774,
+      "mean_pred": 0.5774435020420472,
+      "ece": 0.02564955659756235
+     }
+    },
+    {
+     "from": 120,
+     "to": 141,
+     "n": 3014,
+     "actual": 0.5955540809555409,
+     "bkt": {
+      "auc": 0.7245031659815228,
+      "log_loss": 0.5939679281773094,
+      "mean_pred": 0.6009227896884012,
+      "ece": 0.01210708633141888
+     },
+     "dkt": {
+      "auc": 0.7085775134191459,
+      "log_loss": 0.6102024347081292,
+      "mean_pred": 0.5952360031467449,
+      "ece": 0.03014045494033113
+     }
+    },
+    {
+     "from": 142,
+     "to": 166,
+     "n": 3014,
+     "actual": 0.6045122760451228,
+     "bkt": {
+      "auc": 0.7466721520712544,
+      "log_loss": 0.5746517235685306,
+      "mean_pred": 0.6192886795092899,
+      "ece": 0.021646486671935555
+     },
+     "dkt": {
+      "auc": 0.7379824516167055,
+      "log_loss": 0.5904978849403401,
+      "mean_pred": 0.6166079424413153,
+      "ece": 0.04291980971168002
+     }
+    },
+    {
+     "from": 167,
+     "to": 196,
+     "n": 2935,
+     "actual": 0.6279386712095401,
+     "bkt": {
+      "auc": 0.7524501181582027,
+      "log_loss": 0.5556637041475836,
+      "mean_pred": 0.6342300838738752,
+      "ece": 0.02666164926920138
+     },
+     "dkt": {
+      "auc": 0.723922216325906,
+      "log_loss": 0.5905468426765266,
+      "mean_pred": 0.638046903395129,
+      "ece": 0.03907525743817476
+     }
+    },
+    {
+     "from": 197,
+     "to": 367,
+     "n": 3008,
+     "actual": 0.6366356382978723,
+     "bkt": {
+      "auc": 0.7316022445230627,
+      "log_loss": 0.563376169037405,
+      "mean_pred": 0.6620875051628898,
+      "ece": 0.04724564032982778
+     },
+     "dkt": {
+      "auc": 0.6928156629297763,
+      "log_loss": 0.6071014860551511,
+      "mean_pred": 0.6427265643513578,
+      "ece": 0.029333670076407924
+     }
+    }
+   ]
+  },
+  "evidence_response": {
+   "note": "change in the predicted probability for a skill, from just before to just after an answer on that skill. A model that updates on evidence separates correct from wrong; near-zero means the answer changed nothing.",
+   "students_sampled": 150,
+   "dkt": {
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.06186072785214216,
+     "fraction_positive": 0.9998238713086361
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.023490252959630017,
+     "fraction_negative": 0.850031806615776
+    },
+    "separation": 0.08535098081177217
+   },
+   "bkt": {
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.09652984648410423,
+     "fraction_positive": 1.0
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.0006111139243261138,
+     "fraction_negative": 0.5403148854961832
+    },
+    "separation": 0.09714096040843034
+   }
+  },
+  "consistency": {
+   "note": "Yeung & Yeung (2018): w1/w2 measure how much the whole prediction vector thrashes between answers; reconstruction_error is the gap between the prediction for the skill just answered and that answer.",
+   "dkt": {
+    "w1": 0.008100194279395321,
+    "w2": 0.013269521105613214,
+    "reconstruction_error": 0.3890572621624708,
+    "n_steps": 29609
+   },
+   "bkt": {
+    "w1": 0.0016692736936859006,
+    "w2": 0.016816668962878815,
+    "reconstruction_error": 0.3534263473463745,
+    "n_steps": 29609
+   }
+  },
+  "dataset_audit": {
+   "max_opportunity": 74,
+   "mean_attempts_per_student_skill": 10.085501479440873,
+   "fraction_pairs_with_one_attempt": 0.0,
+   "fraction_eval_rows_at_opportunity_1": 0.09459961498193117,
+   "max_sequence_length": 368,
+   "has_time": true
+  },
+  "timing": {
+   "bkt_fit_seconds": 5.1,
+   "total_seconds": 7.8
+  }
  }
 }
