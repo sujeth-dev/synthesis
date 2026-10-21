@@ -15,6 +15,7 @@
     "fsrs:compare": "node scripts/fsrs-shadow-comparison.js",
     "dkt:export": "node scripts/dkt-export-interactions.js",
     "sim": "tsx scripts/sim-run.ts",
+    "sim:latency": "tsx scripts/sim-latency-bug.ts",
     "dkt:predict": "tsx scripts/dkt-predict.ts",
     "dkt:compare": "tsx scripts/dkt-compare.ts"
   },

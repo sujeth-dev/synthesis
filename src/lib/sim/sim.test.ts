@@ -2,8 +2,9 @@ import { describe, expect, it } from 'vitest'
 import { createRng } from './rng'
 import { practice, sampleLearnerParams, trueRecallProbability, type TrueSkillMemory } from './learner'
 import { auc, logLoss } from './metrics'
-import { simulate, type SimSkill } from './run'
+import { CRUSHED_LATENCY_MS, simulate, type SimSkill } from './run'
 import { curriculumSkills } from './skills'
+import { bktToQuality } from '@/lib/sm2'
 
 const CHAIN: SimSkill[] = [
   { id: 'a', hardPrereqs: [] },
@@ -85,5 +86,41 @@ describe('simulate', () => {
     expect(skills.length).toBe(120)
     const { events } = simulate({ seed: 3, learners: 3, days: 20, scheduler: 'fsrs', skills })
     expect(events.length).toBeGreaterThan(0)
+  })
+})
+
+// Level 8: what the client-side latency bug cost. 'crushed' tells the schedulers
+// every answer took CRUSHED_LATENCY_MS, which is what /api/attempt's clamp
+// produced once the client started sending ~0.
+describe('the latency signal the schedulers receive', () => {
+  const arms = (scheduler: 'sm2' | 'fsrs') => ({
+    measured: simulate({ seed: 7, learners: 40, days: 45, scheduler, skills: CHAIN }),
+    crushed: simulate({ seed: 7, learners: 40, days: 45, scheduler, skills: CHAIN, latencySignal: 'crushed' }),
+  })
+
+  it('collapses every correct answer into the top quality tier', () => {
+    const { measured } = arms('sm2')
+    const measuredTiers = new Set(measured.events.filter(e => e.correct)
+      .map(e => bktToQuality(true, e.latency_ms)))
+    expect(measuredTiers.size).toBeGreaterThan(1)
+    expect(bktToQuality(true, CRUSHED_LATENCY_MS)).toBe(5)
+  })
+
+  it('leaves the real response time untouched — only the evidence changes', () => {
+    const { measured, crushed } = arms('sm2')
+    for (const run of [measured, crushed]) {
+      expect(run.events.some(e => e.latency_ms > 8_000)).toBe(true)
+      expect(run.events.every(e => e.latency_ms > CRUSHED_LATENCY_MS)).toBe(true)
+    }
+  })
+
+  it('schedules fewer reviews and ends on weaker memory under both schedulers', () => {
+    for (const scheduler of ['sm2', 'fsrs'] as const) {
+      const { measured, crushed } = arms(scheduler)
+      expect(crushed.report.reviewsPerLearner, scheduler)
+        .toBeLessThan(measured.report.reviewsPerLearner)
+      expect(crushed.report.endRetention, scheduler)
+        .toBeLessThan(measured.report.endRetention)
+    }
   })
 })

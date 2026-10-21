@@ -26,7 +26,17 @@ export interface SimConfig {
   scheduler: SchedulerKind
   skills: SimSkill[]      // in study order; prerequisites must come first
   startDate?: Date
+  // 'crushed' reproduces the client-side latency bug fixed in Level 7: the
+  // schedulers are told every answer took CRUSHED_LATENCY_MS, whatever it
+  // really took. It changes only the evidence they receive, never the clock.
+  latencySignal?: LatencySignal
 }
+
+export type LatencySignal = 'measured' | 'crushed'
+
+// What src/app/api/attempt/route.ts's MIN_LATENCY clamp yielded once the client
+// sent ~0.
+export const CRUSHED_LATENCY_MS = 100
 
 export interface SimEvent {
   student_id: string
@@ -127,12 +137,15 @@ export function simulate(config: SimConfig): SimResult {
         const sm2Recall = seenBefore ? sm2ImpliedRecall(record.sm2, now) : null
 
         const outcome = practice(rng, params, record.memory, nowDays, prereqRecall)
+        // The learner still really took outcome.latencyMs — the clock below is
+        // unchanged. Only what the schedulers are told about it differs.
+        const signalLatency = config.latencySignal === 'crushed' ? CRUSHED_LATENCY_MS : outcome.latencyMs
 
         const wasMastered = record.bkt.mastery_state === 'mastered'
         record.bkt = bktUpdate(record.bkt, outcome.correct, record.sm2.repetitions)
         record.sm2 = reconcileBktSm2(record.bkt.p_know, wasMastered, record.sm2,
-          bktToQuality(outcome.correct, outcome.latencyMs), now)
-        const fsrs = computeFsrsSchedule(record.fsrs, fsrsRatingFromCorrectness(outcome.correct, outcome.latencyMs), now)
+          bktToQuality(outcome.correct, signalLatency), now)
+        const fsrs = computeFsrsSchedule(record.fsrs, fsrsRatingFromCorrectness(outcome.correct, signalLatency), now)
         const fsrsRecall = seenBefore && record.fsrs ? fsrs.retrievability : null
         record.fsrs = { stability: fsrs.stability, difficulty: fsrs.difficulty, last_review: now.toISOString() }
         record.fsrsDueMs = new Date(fsrs.due_at).getTime()

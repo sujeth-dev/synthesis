@@ -1,0 +1,197 @@
+{
+  "generated_at": "2026-10-21T17:43:23.963Z",
+  "synthetic": true,
+  "config": {
+    "learners": 500,
+    "days": 90,
+    "seed": 2026,
+    "skills": 120,
+    "crushed_latency_ms": 100
+  },
+  "evidence": {
+    "sm2_measured": {
+      "attempts": 164873,
+      "quality": {
+        "1": 0.3979244630715763,
+        "3": 0.08422240148477919,
+        "4": 0.3626185003002311,
+        "5": 0.1552346351434134
+      },
+      "rating": {
+        "Again": 0.3979244630715763,
+        "Hard": 0.08422240148477919,
+        "Good": 0.3626185003002311,
+        "Easy": 0.1552346351434134
+      }
+    },
+    "sm2_crushed": {
+      "attempts": 158899,
+      "quality": {
+        "1": 0.415886821188302,
+        "3": 0,
+        "4": 0,
+        "5": 0.584113178811698
+      },
+      "rating": {
+        "Again": 0.415886821188302,
+        "Hard": 0,
+        "Good": 0,
+        "Easy": 0.584113178811698
+      }
+    },
+    "fsrs_measured": {
+      "attempts": 170251,
+      "quality": {
+        "1": 0.3494722497958896,
+        "3": 0.08116251886919901,
+        "4": 0.40026783983647674,
+        "5": 0.16909739149843467
+      },
+      "rating": {
+        "Again": 0.3494722497958896,
+        "Hard": 0.08116251886919901,
+        "Good": 0.40026783983647674,
+        "Easy": 0.16909739149843467
+      }
+    },
+    "fsrs_crushed": {
+      "attempts": 142307,
+      "quality": {
+        "1": 0.3882240508197067,
+        "3": 0,
+        "4": 0,
+        "5": 0.6117759491802933
+      },
+      "rating": {
+        "Again": 0.3882240508197067,
+        "Hard": 0,
+        "Good": 0,
+        "Easy": 0.6117759491802933
+      }
+    }
+  },
+  "outcomes": {
+    "sm2_measured": {
+      "scheduler": "sm2",
+      "learners": 500,
+      "days": 90,
+      "attempts": 164873,
+      "reviewAttempts": 70807,
+      "reviewsPerLearner": 141.614,
+      "skillsLearnedPerLearner": 27.674,
+      "endRetention": 0.9180775784452188,
+      "forgottenFraction": 0.0474813904748139,
+      "bkt": {
+        "logLoss": 0.6042716635125928,
+        "auc": 0.7226100697598585
+      },
+      "recallPrediction": {
+        "sm2": {
+          "logLoss": 0.6523949022733904,
+          "auc": 0.5178745746205637
+        },
+        "fsrs": {
+          "logLoss": 0.7388693577961043,
+          "auc": 0.6198472133619807
+        }
+      }
+    },
+    "sm2_crushed": {
+      "scheduler": "sm2",
+      "learners": 500,
+      "days": 90,
+      "attempts": 158899,
+      "reviewAttempts": 64325,
+      "reviewsPerLearner": 128.65,
+      "skillsLearnedPerLearner": 27.65,
+      "endRetention": 0.9030293507955396,
+      "forgottenFraction": 0.05945750452079566,
+      "bkt": {
+        "logLoss": 0.6177673149469508,
+        "auc": 0.7133934625419791
+      },
+      "recallPrediction": {
+        "sm2": {
+          "logLoss": 0.6943852075453681,
+          "auc": 0.522244549795737
+        },
+        "fsrs": {
+          "logLoss": 0.8097409393574385,
+          "auc": 0.6012733564384454
+        }
+      }
+    },
+    "fsrs_measured": {
+      "scheduler": "fsrs",
+      "learners": 500,
+      "days": 90,
+      "attempts": 170251,
+      "reviewAttempts": 80495,
+      "reviewsPerLearner": 160.99,
+      "skillsLearnedPerLearner": 27.04,
+      "endRetention": 0.9319245418688558,
+      "forgottenFraction": 0.03076923076923077,
+      "bkt": {
+        "logLoss": 0.573325799926333,
+        "auc": 0.7376238822015939
+      },
+      "recallPrediction": {
+        "sm2": {
+          "logLoss": 0.6138812332442068,
+          "auc": 0.5593668226587076
+        },
+        "fsrs": {
+          "logLoss": 0.6255005563631244,
+          "auc": 0.6003163312739068
+        }
+      }
+    },
+    "fsrs_crushed": {
+      "scheduler": "fsrs",
+      "learners": 500,
+      "days": 90,
+      "attempts": 142307,
+      "reviewAttempts": 55093,
+      "reviewsPerLearner": 110.186,
+      "skillsLearnedPerLearner": 23.13,
+      "endRetention": 0.9051613433934012,
+      "forgottenFraction": 0.05118893212278426,
+      "bkt": {
+        "logLoss": 0.6033313107090773,
+        "auc": 0.7242135905867363
+      },
+      "recallPrediction": {
+        "sm2": {
+          "logLoss": 0.6855995117627839,
+          "auc": 0.5591857362741526
+        },
+        "fsrs": {
+          "logLoss": 0.7296115032455686,
+          "auc": 0.5889050441264503
+        }
+      }
+    }
+  },
+  "behaviour": {
+    "measured": {
+      "modifier": {
+        "1.00": 0.03314065978055837,
+        "0.85": 0.002486762538438677,
+        "0.80": 0.9006508039521328,
+        "0.65": 0.0637217737288701
+      },
+      "learnersReachingSlowStreak": 1,
+      "learners": 500
+    },
+    "crushed": {
+      "modifier": {
+        "1.00": 0.03625573477491992,
+        "0.85": 0,
+        "0.80": 0.96374426522508,
+        "0.65": 0
+      },
+      "learnersReachingSlowStreak": 0,
+      "learners": 500
+    }
+  }
+}
