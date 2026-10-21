@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
 
   const body = await req.json()
-  const { question_id, skill_id, session_id, latency_ms, client_answer,
+  const { question_id, skill_id, session_id, latency_ms, hesitation_ms, client_answer,
           difficulty_tier, question_format, revision_count } = body
 
   if (!question_id || !skill_id) return NextResponse.json({ error: 'question_id and skill_id required' }, { status: 400 })
@@ -70,6 +70,9 @@ export async function POST(req: NextRequest) {
   const safe_latency = Math.min(MAX_LATENCY, Math.max(MIN_LATENCY, latency_ms || 3000))
   const parsedRevisionCount = Number.isFinite(Number(revision_count)) ? Math.trunc(Number(revision_count)) : 0
   const safe_revision_count = Math.min(100, Math.max(0, parsedRevisionCount))
+  // Hesitation is the leading part of the attempt, so it can never exceed it.
+  const parsedHesitation = Number.isFinite(Number(hesitation_ms)) ? Math.trunc(Number(hesitation_ms)) : 0
+  const safe_hesitation = Math.min(safe_latency, Math.max(0, parsedHesitation))
 
   // ── Load current state (parallel)
   const [skillState, motivation] = await Promise.all([
@@ -148,7 +151,7 @@ export async function POST(req: NextRequest) {
 
   // ── Update motivation
   const updatedMotivation = updateMotivationState(motivation, correct, safe_latency, updatedState)
-  const behaviorSnapshot = buildAttemptBehaviorSnapshot(updatedMotivation, safe_latency, behaviorModifier)
+  const behaviorSnapshot = buildAttemptBehaviorSnapshot(updatedMotivation, behaviorModifier, safe_hesitation)
   await upsertMotivationState(updatedMotivation)
 
   // ── Update skill state

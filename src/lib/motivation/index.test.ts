@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import {
+  buildAttemptBehaviorSnapshot,
   deriveBehaviorEvidenceModifier,
   getMotivationMessage,
   initMotivationState,
@@ -49,6 +50,24 @@ describe('motivation evidence', () => {
     expect(deriveBehaviorEvidenceModifier(motivationState(), 1000)).toBe(1)
     expect(deriveBehaviorEvidenceModifier(motivationState({ consecutive_errors: 2 }), 1000)).toBe(0.8)
     expect(deriveBehaviorEvidenceModifier(motivationState({ state: 'frustrated' }), 16000)).toBe(0.65)
+  })
+
+  it('reaches the slow-response arm on its own, now that latency is really measured', () => {
+    // Until the client clock was fixed this value was unreachable in production:
+    // latency arrived as ~0 and was clamped to 100, so the modifier could only
+    // ever be 1 or 0.8.
+    expect(deriveBehaviorEvidenceModifier(motivationState(), 16000)).toBe(0.85)
+  })
+})
+
+describe('behaviour snapshot', () => {
+  it('carries the measured time to first interaction instead of deriving one', () => {
+    // The old shape derived hesitation as max(0, latency - 15000), so an answer
+    // the learner hesitated over for four seconds recorded nothing at all.
+    const state = motivationState()
+    expect(buildAttemptBehaviorSnapshot(state, 0.85, 4200).hesitation_ms).toBe(4200)
+    expect(buildAttemptBehaviorSnapshot(state, 0.85, 0).hesitation_ms).toBe(0)
+    expect(buildAttemptBehaviorSnapshot(state, 1, -5).hesitation_ms).toBe(0)
   })
 })
 

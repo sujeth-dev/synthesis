@@ -121,7 +121,11 @@ describe('attempt behavior analytics persistence', () => {
     const latencyMs = 16000
     const behaviorModifier = deriveBehaviorEvidenceModifier(currentMotivation, latencyMs)
     const updatedMotivation = updateMotivationState(currentMotivation, false, latencyMs, skillState)
-    const snapshot = buildAttemptBehaviorSnapshot(updatedMotivation, latencyMs, behaviorModifier)
+    // Time to first interaction, now measured at the client rather than derived
+    // from the total latency. Kept at 1000 so the persisted expectation below is
+    // the same value this test has always asserted.
+    const hesitationMs = 1000
+    const snapshot = buildAttemptBehaviorSnapshot(updatedMotivation, behaviorModifier, hesitationMs)
 
     await insertAttempt({
       learner_id: learnerId,

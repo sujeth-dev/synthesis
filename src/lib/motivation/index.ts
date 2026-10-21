@@ -36,17 +36,22 @@ export function initMotivationState(learner_id: string): MotivationState {
   return { learner_id, state: 'neutral', consecutive_errors: 0, slow_response_streak: 0, intervention_cooldown_until: null, updated_at: new Date().toISOString() }
 }
 
+// hesitation_ms arrives measured (time from the question rendering to the first
+// touch of the answer) rather than derived from the total latency. The old
+// derivation, max(0, latency - SLOW_RESPONSE_THRESHOLD_MS), carried no
+// information slow_response_streak did not already carry, and time to first
+// interaction is only observable in the browser.
 export function buildAttemptBehaviorSnapshot(
   updated: MotivationState,
-  latency_ms: number,
   behavior_modifier: number,
+  hesitation_ms: number,
 ): AttemptBehaviorSnapshot {
   return {
     motivation_state: updated.state,
     consecutive_errors: updated.consecutive_errors,
     slow_response_streak: updated.slow_response_streak,
     behavior_modifier,
-    hesitation_ms: Math.max(0, latency_ms - SLOW_RESPONSE_THRESHOLD_MS),
+    hesitation_ms: Math.max(0, hesitation_ms),
   }
 }
 

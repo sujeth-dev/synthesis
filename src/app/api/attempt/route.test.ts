@@ -220,3 +220,75 @@ describe('order questions in POST /api/attempt (Level 6)', () => {
     expect((await res.json()).correct).toBe(false)
   })
 })
+
+// Level 7: until the client clock was fixed, latency arrived as ~0 and the route
+// clamped it to MIN_LATENCY, so every correct answer was the fastest tier. Every
+// case above sends latency_ms: 2000, which is why the suite never saw it.
+describe('measured response time in POST /api/attempt (Level 7)', () => {
+  const slowCorrect = (extra: Record<string, unknown> = {}) => POST(fakeRequest({
+    question_id: 'p1_bin_q1', skill_id: skillId, client_answer: 'b', correct: true,
+    latency_ms: 20_000, hesitation_ms: 9_000, revision_count: 3,
+    difficulty_tier: 'review', question_format: 'mcq', ...extra,
+  }))
+
+  it('persists the real response time, hesitation and revision count', async () => {
+    expect((await slowCorrect()).status).toBe(200)
+    expect(tables.attempt_events).toHaveLength(1)
+    expect(tables.attempt_events[0]).toMatchObject({
+      latency_ms: 20_000, hesitation_ms: 9_000, revision_count: 3,
+      // Both only reachable now that latency is real: the slow arm of
+      // deriveBehaviorEvidenceModifier (1 - 0.15) and a non-zero slow streak.
+      behavior_modifier: 0.85, slow_response_streak: 1,
+    })
+  })
+
+  it('feeds the real response time into SM-2 quality instead of always scoring 5', async () => {
+    await slowCorrect()
+    // bktToQuality(correct, 20000) is 3 (>= 8s), so updateSM2 lowers the ease
+    // factor by 0.14. A fast correct answer scores 5 and raises it to 2.6.
+    expect(tables.review_schedules[0].ease_factor as number).toBeCloseTo(2.36, 8)
+
+    // updateSM2 applies the ease factor before updating it, so this review's
+    // interval is round(6 * 2.5) either way; the tier compounds into the next one.
+    expect(tables.review_schedules[0].interval_days).toBe(15)
+    await slowCorrect()
+    expect(tables.review_schedules[0].interval_days).toBe(Math.round(15 * 2.36))
+  })
+
+  it('rates a slow correct answer below the top FSRS tier', async () => {
+    await slowCorrect()
+    const fsrsInterval = tables.fsrs_shadow_log[0].fsrs_interval_days as number
+
+    for (const key of Object.keys(tables) as (keyof typeof tables)[]) tables[key].length = 0
+    idCounter.n = 0
+    tables.learner_skill_states.push({
+      learner_id: learnerId, skill_id: skillId, p_know: 0.01, p_slip: 0.1, p_guess: 0.2,
+      p_transit: 0.15, mastery_state: 'ready', consecutive_correct: 0, consecutive_wrong: 0,
+      total_attempts: 3, last_attempted_at: '2026-08-01T00:00:00.000Z',
+      first_seen_at: '2026-07-01T00:00:00.000Z', graph_stale: false,
+    })
+    tables.motivation_states.push({
+      learner_id: learnerId, state: 'neutral', consecutive_errors: 0, slow_response_streak: 0,
+      intervention_cooldown_until: null, updated_at: '2026-08-01T00:00:00.000Z',
+    })
+    tables.review_schedules.push({
+      learner_id: learnerId, skill_id: skillId, interval_days: 6, ease_factor: 2.5,
+      repetitions: 2, due_at: '2026-08-01T00:00:00.000Z', last_reviewed_at: '2026-07-26T00:00:00.000Z',
+    })
+    await slowCorrect({ latency_ms: 1_000, hesitation_ms: 200, revision_count: 0 })
+
+    expect(fsrsInterval).toBeLessThan(tables.fsrs_shadow_log[0].fsrs_interval_days as number)
+  })
+
+  it('clamps a hesitation longer than the attempt, and defaults a missing one to zero', async () => {
+    await slowCorrect({ hesitation_ms: 999_999 })
+    expect(tables.attempt_events[0].hesitation_ms).toBe(20_000)
+
+    tables.attempt_events.length = 0
+    await POST(fakeRequest({
+      question_id: 'p1_bin_q1', skill_id: skillId, client_answer: 'b', correct: true,
+      latency_ms: 20_000, difficulty_tier: 'review', question_format: 'mcq',
+    }))
+    expect(tables.attempt_events[0].hesitation_ms).toBe(0)
+  })
+})
