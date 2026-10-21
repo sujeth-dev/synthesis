@@ -5,8 +5,8 @@ import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
 import { computeFsrsSchedule, fsrsRatingFromCorrectness, type FsrsSchedule } from '@/lib/fsrs'
 import { activeScheduler, chooseSchedule } from '@/lib/fsrs/scheduler'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
-import { classifyExplanation, reasoningQualityFromCategory, type ExplanationCategory } from '@/lib/feynman/classifier'
-import { gradeExplanation } from '@/lib/nlp/grader'
+import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
+import { gradeExplanation, type GradeExplanationResult } from '@/lib/nlp/grader'
 import { computeUnblocked } from '@/lib/graph'
 import { isOrderAnswerCorrect } from '@/lib/ui/order-answer'
 import {
@@ -15,7 +15,7 @@ import {
   incrementSessionCounts, getSession, getAllSkillStates, schedulePhaseReview,
   getRecentAttemptsForSkill, getSessionBehaviorAttempts,
   getLastFsrsShadowEntry, insertFsrsShadowLog,
-  getAttemptHistory, insertDktShadowLog,
+  getAttemptHistory, insertDktShadowLog, insertExplanationGrade,
 } from '@/lib/db/queries'
 import { DKT_HISTORY_LIMIT, getBundledDktModel, isDktShadowEnabled, predictForAttempt } from '@/lib/dkt/shadow'
 import { getAllNodes } from '@/lib/graph'
@@ -99,22 +99,30 @@ export async function POST(req: NextRequest) {
   // resolves to the rule-based classifier directly, so a grading failure of any kind can
   // never block the attempt itself from being scored and persisted.
   const explanationText = typeof client_answer === 'string' ? client_answer.trim() : ''
+  const priorExplanation = typeof body.prior_answer === 'string' ? body.prior_answer.trim() : ''
   let reasoningQuality = 1
+  let grade: GradeExplanationResult | null = null
   if (question_format === 'explain' && explanationText) {
     const conceptNode = getAllNodes().find(n => n.id === skill_id)
-    let category: ExplanationCategory
     try {
-      category = (await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })).category
+      grade = await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })
     } catch {
-      category = classifyExplanation(explanationText)
+      // confidence 0 is the sentinel for "no model produced this grade", so a
+      // re-scoring harness can exclude these rows from model-vs-human comparisons.
+      grade = {
+        category: classifyExplanation(explanationText), confidence: 0,
+        rationale: 'rule-based fallback: the grader threw before producing a grade',
+        servedBy: 'rule-based-fallback', promptVersion: 'none', fromCache: false,
+        attempts: [], latencyMs: 0,
+      }
     }
-    reasoningQuality = reasoningQualityFromCategory(category)
+    reasoningQuality = reasoningQualityFromCategory(grade.category)
     // One attempt, one verdict. Free text has no answer key, so the grade above
     // is the only verification there is: deriving `correct` from the same
     // category that sets reasoningQuality makes a client-sent verdict (which
     // used to come from the rule-based classifier while this graded with the
     // LLM) unable to disagree with it.
-    correct = category === 'meaning-included'
+    correct = grade.category === 'meaning-included'
   }
   const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
   const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {
@@ -203,6 +211,23 @@ export async function POST(req: NextRequest) {
     ...behaviorSnapshot,
   })
   if (session_id) await incrementSessionCounts(session_id, correct)
+
+  if (grade) {
+    try {
+      await insertExplanationGrade({
+        learner_id: user.id, skill_id, attempt_id,
+        explanation_text: explanationText,
+        prior_explanation_text: priorExplanation || null,
+        category: grade.category, confidence: grade.confidence,
+        reasoning_quality: reasoningQuality, rationale: grade.rationale,
+        prompt_version: grade.promptVersion, served_by: grade.servedBy,
+        from_cache: grade.fromCache, grader_latency_ms: Math.round(grade.latencyMs),
+      })
+    } catch {
+      // Fail-open like the shadow logs below: a deployment without migration
+      // 006 loses the grade record, never the attempt that was already scored.
+    }
+  }
 
   if (fsrsShadow) {
     try {

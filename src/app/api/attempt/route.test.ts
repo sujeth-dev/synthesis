@@ -11,7 +11,10 @@ const tables = vi.hoisted(() => ({
   attempt_events: [] as Row[],
   motivation_states: [] as Row[],
   fsrs_shadow_log: [] as Row[],
+  explanation_grades: [] as Row[],
 }))
+// Tables whose insert fails, so a missing migration can be simulated.
+const unmigrated = vi.hoisted(() => new Set<string>())
 let idCounter = vi.hoisted(() => ({ n: 0 }))
 
 function matchesFilters(row: Row, filters: Record<string, unknown>) {
@@ -49,7 +52,11 @@ vi.mock('@/lib/db', () => {
         }
         return query
       },
-      insert: async (row: Row) => { tables[name].push(row); return { data: null, error: null } },
+      insert: async (row: Row) => {
+        if (unmigrated.has(name)) return { data: null, error: { code: 'PGRST205', message: `Could not find the table 'public.${name}'` } }
+        tables[name].push(row)
+        return { data: null, error: null }
+      },
       upsert: async (row: Row, opts: { onConflict: string }) => {
         const keys = opts.onConflict.split(',')
         const idx = tables[name].findIndex(r => keys.every(k => r[k] === row[k]))
@@ -95,6 +102,7 @@ const skillId = 'p1_binary_numbers'
 beforeEach(() => {
   for (const key of Object.keys(tables) as (keyof typeof tables)[]) tables[key].length = 0
   idCounter.n = 0
+  unmigrated.clear()
 
   // Kept low so bktUpdate() never crosses MASTERY_THRESHOLD across the up-to-two
   // correct answers these tests submit, keeping route.ts's newly-mastered
@@ -352,5 +360,62 @@ describe('explain questions are graded server-side in POST /api/attempt (Level 9
     const res = await explainAttempt({ question_id: `${skillId}_feynman_loop` })
     expect(res.status).toBe(200)
     expect((await res.json()).correct).toBe(true)
+  })
+})
+
+describe('the explanation and its grade are persisted (Level 10)', () => {
+  const explanationText = 'Binary uses only two digits because a wire is either on or off.'
+
+  function explainAttempt(body: Record<string, unknown> = {}) {
+    return POST(fakeRequest({
+      question_id: 'p1_binary_numbers_explain1', skill_id: skillId, question_format: 'explain',
+      client_answer: explanationText, latency_ms: 20_000, difficulty_tier: 'same', ...body,
+    }))
+  }
+
+  it('stores the learner\'s words, the grade, its provenance, and what BKT consumed', async () => {
+    graderMode.value = 'meaning-included'
+    const body = await (await explainAttempt({ prior_answer: 'Something with ones and zeroes.' })).json()
+
+    expect(tables.explanation_grades).toHaveLength(1)
+    expect(tables.explanation_grades[0]).toMatchObject({
+      learner_id: learnerId, skill_id: skillId, attempt_id: body.attempt_id,
+      explanation_text: explanationText,
+      prior_explanation_text: 'Something with ones and zeroes.',
+      category: 'meaning-included', confidence: 0.91,
+      // reasoningQualityFromCategory('meaning-included'), i.e. the evidence
+      // bktUpdate was actually given for this attempt.
+      reasoning_quality: 1,
+      served_by: 'stub/model', prompt_version: 'v1', from_cache: false,
+    })
+  })
+
+  it('marks a grade no model produced with the zero-confidence sentinel', async () => {
+    graderMode.value = 'unavailable'
+    await explainAttempt({ client_answer: 'I guess it is something about bits and wires inside.' })
+
+    expect(tables.explanation_grades[0]).toMatchObject({
+      served_by: 'rule-based-fallback', confidence: 0, prompt_version: 'none',
+      category: 'gap', reasoning_quality: 0.3, prior_explanation_text: null,
+    })
+  })
+
+  it('scores and persists the attempt even when migration 006 is missing', async () => {
+    graderMode.value = 'meaning-included'
+    unmigrated.add('explanation_grades')
+
+    const res = await explainAttempt()
+    expect(res.status).toBe(200)
+    expect((await res.json()).correct).toBe(true)
+    expect(tables.attempt_events).toHaveLength(1)
+    expect(tables.explanation_grades).toHaveLength(0)
+  })
+
+  it('writes no grade row for a question with an answer key', async () => {
+    await POST(fakeRequest({
+      question_id: 'p1_bin_q1', skill_id: skillId, client_answer: 'b',
+      latency_ms: 2000, difficulty_tier: 'review', question_format: 'mcq',
+    }))
+    expect(tables.explanation_grades).toHaveLength(0)
   })
 })

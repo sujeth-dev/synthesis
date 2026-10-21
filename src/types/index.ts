@@ -1,3 +1,7 @@
+// ExplanationCategory is owned by the classifier that produces it; this file
+// re-uses it rather than restating the union.
+import type { ExplanationCategory } from '@/lib/feynman/classifier'
+
 export type MasteryState = 'blocked' | 'ready' | 'learning' | 'fragile' | 'mastered'
 export type DifficultyTier = 'prerequisite' | 'review' | 'same' | 'harder'
 export type QuestionFormat = 'mcq' | 'fill' | 'explain' | 'code' | 'order'
@@ -100,6 +104,17 @@ export interface DktShadowLogEntry {
   id: string; learner_id: string; skill_id: string; attempt_id: string
   dkt_p_correct: number; bkt_p_correct: number; correct: boolean
   history_length: number; model_synthetic: boolean
+  created_at: string
+}
+
+// One row per free-text attempt (Level 10): the learner's explanation and the
+// grade the engine consumed for it, with the provenance a grade audit needs.
+export interface ExplanationGrade {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  explanation_text: string; prior_explanation_text: string | null
+  category: ExplanationCategory; confidence: number; reasoning_quality: number
+  rationale: string | null; prompt_version: string; served_by: string
+  from_cache: boolean; grader_latency_ms: number
   created_at: string
 }
 

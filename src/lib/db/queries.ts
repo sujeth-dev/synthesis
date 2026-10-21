@@ -2,6 +2,7 @@ import { getDb, generateId } from '@/lib/db'
 import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
   AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
+  ExplanationGrade,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -320,6 +321,31 @@ export async function insertDktShadowLog(entry: Omit<DktShadowLogEntry, 'id' | '
     created_at: new Date().toISOString(),
   })
   if (error) throw new Error(`DKT shadow log insert failed: ${error.message}`)
+}
+
+// ─────────────────────────────────────────────
+// EXPLANATION GRADES (Level 10 — requires migration 006)
+// ─────────────────────────────────────────────
+
+// Throws on failure; the attempt route swallows it, so a deployment without
+// migration 006 loses the grade record but still scores the attempt.
+export async function insertExplanationGrade(entry: Omit<ExplanationGrade, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('explanation_grades').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`Explanation grade insert failed: ${error.message}`)
+}
+
+export async function getExplanationGrades(learnerId: string, limit: number): Promise<ExplanationGrade[]> {
+  const { data } = await getDb()
+    .from('explanation_grades')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
 }
 
 // ─────────────────────────────────────────────
