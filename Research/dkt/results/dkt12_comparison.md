@@ -10,6 +10,18 @@
 
 Attempts compared: 95585 (decision needs >= 5000).
 
+## Cohort learning curve (growth)
+
+(learner, skill) pairs with at least 10 attempts, restricted to their first 10; the same pairs at every point. Mirrors dkt-lab/pipeline/curves.py.
+
+| | Slope | Slope ratio |
+|---|---|---|
+| Observed | 0.05374 | 1.0000 |
+| DKT | 0.03576 | 0.6654 |
+| Live BKT | 0.04682 | 0.8712 |
+
+Cohort pairs: 4532 (growth needs >= 200); curve points: 10.
+
 **Cutover gate:** do not switch (dkt not better).
 
 A live switch must only ever be decided on real-learner rows (run without `--sim`).

@@ -13,6 +13,19 @@
       "logLoss": 0.6095878716221108
     }
   },
+  "growth": {
+    "pairs": 4532,
+    "points": 10,
+    "actualSlope": 0.05374174222364867,
+    "dkt": {
+      "slope": 0.03576203342277984,
+      "slopeRatio": 0.6654423906458881
+    },
+    "bkt": {
+      "slope": 0.04681910242538404,
+      "slopeRatio": 0.8711869114801721
+    }
+  },
   "decision": {
     "recommend": false,
     "reason": "dkt_not_better"

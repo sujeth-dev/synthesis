@@ -12,7 +12,11 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
-import { compareDktVsBkt, cutoverDecision, MIN_ATTEMPTS_FOR_DECISION, type ShadowRow } from '../src/lib/dkt/compare'
+import {
+  compareDktVsBkt, compareGrowth, cutoverDecision,
+  MIN_ATTEMPTS_FOR_DECISION, MIN_COHORT_OPPORTUNITIES, MIN_COHORT_PAIRS,
+  type OpportunityRow,
+} from '../src/lib/dkt/compare'
 import { initialDktState, predictSkill, stepDkt } from '../src/lib/dkt'
 import { getBundledDktModel } from '../src/lib/dkt/shadow'
 import { auc, logLoss } from '../src/lib/sim/metrics'
@@ -29,7 +33,7 @@ const ROOT = path.resolve(__dirname, '..')
 async function simRows(learners: number, seed: number) {
   const model = await getBundledDktModel()
   const { events } = simulate({ seed, learners, days: 90, scheduler: 'sm2', skills: curriculumSkills() })
-  const rows: (ShadowRow & { true_recall: number })[] = []
+  const rows: (OpportunityRow & { true_recall: number })[] = []
   let student = ''
   let state = initialDktState(model)
   let seen = 0
@@ -39,7 +43,10 @@ async function simRows(learners: number, seed: number) {
     // this attempt; a learner's very first attempt has no history to use.
     const p = seen > 0 ? predictSkill(model, state, e.skill_id) : undefined
     if (p !== undefined) {
-      rows.push({ dkt_p_correct: p, bkt_p_correct: e.bkt_p_correct, correct: e.correct, true_recall: e.true_recall })
+      rows.push({
+        learner_id: e.student_id, skill_id: e.skill_id, dkt_p_correct: p,
+        bkt_p_correct: e.bkt_p_correct, correct: e.correct, true_recall: e.true_recall,
+      })
     }
     state = stepDkt(model, state, e)
     seen++
@@ -57,13 +64,17 @@ async function dbRows() {
     process.exit(1)
   }
   // pg ships without type declarations; type just the surface used here.
-  type Row = ShadowRow & { model_synthetic: boolean }
+  type Row = OpportunityRow & { model_synthetic: boolean }
   type PgClient = { connect(): Promise<void>; query(sql: string): Promise<{ rows: Row[] }>; end(): Promise<void> }
   const { Client } = require('pg') as { Client: new (config: object) => PgClient }
   const client = new Client({ connectionString: process.env.SUPABASE_DB_URL, ssl: { rejectUnauthorized: false } })
   await client.connect()
   try {
-    const { rows } = await client.query('SELECT dkt_p_correct, bkt_p_correct, correct, model_synthetic FROM dkt_shadow_log')
+    // Ordered so the opportunity index is deterministic: rows can share a
+    // created_at, so id breaks the tie.
+    const { rows } = await client.query(
+      'SELECT learner_id, skill_id, dkt_p_correct, bkt_p_correct, correct, model_synthetic' +
+      ' FROM dkt_shadow_log ORDER BY learner_id, skill_id, created_at, id')
     return { rows, synthetic: false, modelSynthetic: rows.some(r => r.model_synthetic) }
   } finally {
     await client.end()
@@ -76,7 +87,8 @@ async function main() {
   const seed = arg('seed', 9001)
   const { rows, synthetic, modelSynthetic } = sim ? await simRows(learners, seed) : await dbRows()
   const comparison = compareDktVsBkt(rows)
-  const decision = cutoverDecision(comparison)
+  const growth = compareGrowth(rows)
+  const decision = cutoverDecision(comparison, growth)
 
   const lines = [
     '# DKT vs live BKT (DKT-12) and cutover gate (DKT-13)\n',
@@ -88,10 +100,23 @@ async function main() {
     `| Live BKT | ${comparison.bkt.auc.toFixed(4)} | ${comparison.bkt.logLoss.toFixed(4)} |`,
   ]
   if (sim) {
-    const truth = (rows as (ShadowRow & { true_recall: number })[]).map(r => ({ predicted: r.true_recall * 0.9 + (1 - r.true_recall) * 0.22, actual: r.correct }))
+    const truth = (rows as (OpportunityRow & { true_recall: number })[]).map(r => ({ predicted: r.true_recall * 0.9 + (1 - r.true_recall) * 0.22, actual: r.correct }))
     lines.push(`| Ceiling (true recall, approx.) | ${auc(truth).toFixed(4)} | ${logLoss(truth).toFixed(4)} |`)
   }
-  lines.push('', `Attempts compared: ${comparison.n} (decision needs >= ${MIN_ATTEMPTS_FOR_DECISION}).`, '',
+  lines.push('',
+    `Attempts compared: ${comparison.n} (decision needs >= ${MIN_ATTEMPTS_FOR_DECISION}).`,
+    '',
+    `## Cohort learning curve (growth)`,
+    '',
+    `(learner, skill) pairs with at least ${MIN_COHORT_OPPORTUNITIES} attempts, restricted to their first ${MIN_COHORT_OPPORTUNITIES}; the same pairs at every point. Mirrors dkt-lab/pipeline/curves.py.`,
+    '',
+    '| | Slope | Slope ratio |', '|---|---|---|',
+    `| Observed | ${growth.actualSlope.toFixed(5)} | 1.0000 |`,
+    `| DKT | ${growth.dkt.slope.toFixed(5)} | ${growth.dkt.slopeRatio.toFixed(4)} |`,
+    `| Live BKT | ${growth.bkt.slope.toFixed(5)} | ${growth.bkt.slopeRatio.toFixed(4)} |`,
+    '',
+    `Cohort pairs: ${growth.pairs} (growth needs >= ${MIN_COHORT_PAIRS}); curve points: ${growth.points}.`,
+    '',
     `**Cutover gate:** ${decision.recommend ? 'DKT clears the bar -- recommend a human review of switching.' : `do not switch (${decision.reason.replace(/_/g, ' ')}).`}`,
     synthetic ? '\nA live switch must only ever be decided on real-learner rows (run without `--sim`).' : '')
   const report = lines.join('\n') + '\n'
@@ -101,7 +126,7 @@ async function main() {
     const dir = path.join(ROOT, 'Research/dkt/results')
     fs.writeFileSync(path.join(dir, 'dkt12_comparison.md'), report)
     fs.writeFileSync(path.join(dir, 'dkt12_comparison.json'),
-      JSON.stringify({ synthetic, learners, seed, comparison, decision }, null, 2) + '\n')
+      JSON.stringify({ synthetic, learners, seed, comparison, growth, decision }, null, 2) + '\n')
   }
 }
 
