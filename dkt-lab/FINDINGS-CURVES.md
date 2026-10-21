@@ -1,8 +1,8 @@
 # Why DKT loses the learning curve it should win
 
-**Status:** diagnosis complete; fixes in progress.
-**Reproduce:** `cd pipeline && python datasets.py && python split.py && python diagnose.py && python diagnosis_report.py`
-**Every number below is generated** by `diagnosis_report.py` from `results/<dataset>.json["diagnostics"]`. None is typed by hand.
+**Status:** diagnosis complete; fix found and measured.
+**Reproduce:** `cd pipeline && python datasets.py && python split.py && python diagnose.py && python improve.py && python diagnosis_report.py --write`
+**Every number below is generated** by `diagnosis_report.py` from `results/<dataset>.json["diagnostics"]` and `results/dkt_improve.json`. None is typed by hand.
 
 ---
 
@@ -202,19 +202,116 @@ and do the untouched skills stay still?
 
 ---
 
+## The fix (Lab 9)
+
+If the defect is that DKT's per-answer response is too weak and too noisy, the lever is
+the one term in DKT+ that asks the model to reproduce the answer it has just consumed:
+the **reconstruction** penalty `lambda_r`. The waviness penalties `lambda_w1` / `lambda_w2`
+do something different — they ask the prediction vector to *move less* between steps —
+and the diagnosis gives no reason to expect those to help a curve.
+
+Lab 6 ran DKT+ already and recorded that it "did not help". It was selected on
+validation **AUC**. Run against the curve instead, on `assist2009`:
+
+| `lambda_r` | test slope ratio | test AUC | evidence separation | reconstruction error |
+|---|---|---|---|---|
+| 0.0 (Lab 3 baseline) | 0.56 | 0.8167 | 0.0776 | 0.2730 |
+| 0.1 | **0.70** | **0.8202** | 0.1654 | 0.2122 |
+| 0.5 | 0.71 | 0.8113 | 0.3181 | 0.1347 |
+| 1.0 | **0.74** | 0.8060 | 0.3940 | 0.0973 |
+| 0.0, waviness only (w1 0.003, w2 3.0) | **0.54** | 0.8234 | 0.0429 | 0.2729 |
+
+Three things to take from this.
+
+**It is a dose, and the response is monotone.** Every column moves in step with
+`lambda_r`: the slope ratio rises 0.56 → 0.74, the model's response to an answer grows
+five-fold (0.078 → 0.394), and its reconstruction error falls by nearly two-thirds.
+
+**The mechanism is not the one predicted.** The hypothesis was that reconstruction would
+fix the wrong-way updates. It does not — the fraction of updates in the right direction
+barely moves (0.79 → 0.74 after correct answers; 0.73 → 0.74 after wrong ones). What
+changes is the *magnitude* of the response, not its consistency. DKT was not mostly
+updating the wrong way; it was updating too faintly, and a faint signal averaged over
+many answers is a shallow curve. Recorded here because it is a prediction that failed,
+and the corrected account is the useful one.
+
+**The waviness penalties make it worse.** Smoothness-only is the only variant with a
+*lower* slope ratio than the baseline (0.54 vs 0.56) and the lowest evidence separation
+of any model tested (0.0429). That is coherent: a penalty on the prediction vector
+moving is a penalty on responding to evidence. It buys the best AUC in the table
+(0.8234), which is exactly how a model that has stopped learning can still look good —
+and exactly the trap this whole investigation is about.
+
+**`lambda_r = 0.1` is close to free.** Against the Lab 3 baseline it improves the slope
+ratio from 0.56 to 0.70 *and* AUC from 0.8167 to 0.8202. Lab 6 could not see that,
+because against plain early stopping the AUC difference is −0.002 — noise — while the
+slope difference is +0.12.
+
+### A flaw in this experiment's own selection rule
+
+The rule was fixed in advance: closest validation slope ratio to 1.0, among candidates
+within 0.005 validation AUC of the baseline. It selected "DKT+ strong both
+(r 0.5, w1 0.01, w2 3.0)", and that choice does not deserve much weight:
+
+- The AUC floor landed at 0.80428. The winner scored 0.80428 and the better-growth
+  `lambda_r = 0.5` variant scored 0.80413 — excluded by 0.00015, which is noise.
+- Confirmed on the other datasets, the selected variant does not generalise: on
+  `assist2015` its slope ratio matches the baseline's (0.34) with worse AUC, and on the
+  simulator it is worse than the baseline on both (0.47 vs 0.56; AUC 0.6942 vs 0.7062).
+
+So the rule's winner is an artefact of a knife-edge threshold. The dose-response above
+is the finding; the single selected variant is not. The rule is left as it was written
+rather than retuned after seeing the results, and this paragraph is the correction.
+
 ## What this changes
 
-1. **The cutover gate is measuring the wrong thing.** `src/lib/dkt/compare.ts` requires
-   `n ≥ 5000 ∧ ΔAUC ≥ 0.02 ∧ log-loss no worse`. On `assist2009` DKT passes that
-   comfortably while reproducing only 56% of observed growth. A gate for an adaptive
-   tutor needs a growth term — a cohort-curve slope ratio floor — alongside the
-   ranking term. Proposed, not applied: nothing here switches anything live, per
-   `DEVELOPMENT_LOOP.md`'s human-sign-off rule.
-2. **`synthetic5` should stop being shown with a learning curve.** It cannot have one.
-3. **The published `assist2009` curve should be corrected, not deleted**, with the
-   selection effect made visible instead of mentioned in prose.
-4. **The fixes to try are now aimed at the right target** — the noisy, shallow growth
-   signal (H2), not a supposed inability to represent learning (H3, rejected).
+### 1. The cutover gate is measuring the wrong thing
+
+`src/lib/dkt/compare.ts` currently requires `n ≥ 5000 ∧ ΔAUC ≥ 0.02 ∧ log-loss no worse`.
+On `assist2009` DKT clears that comfortably while reproducing 56% of observed growth
+against BKT's 82%. **A cutover approved by that gate would hand scheduling to a model
+that is worse at the one thing scheduling depends on.**
+
+Proposed addition — a do-no-harm term on growth, stated relatively so it does not depend
+on what any particular dataset makes attainable:
+
+```
+cutover requires, in addition to the existing conditions:
+    cohortPairs           >= 200                       // the curve means something
+    candidateSlopeRatio   >= incumbentSlopeRatio - 0.05 // growth must not get worse
+```
+
+Why relative rather than an absolute floor: the attainable slope ratio varies a great
+deal by dataset — BKT reaches 0.82 on `assist2009` and 0.89 on the simulator but only
+0.43 on `assist2015` — so any fixed number would be arbitrary. "Do not make growth
+fidelity materially worse than the model you are replacing" is the property that
+actually matters, and it is measurable from shadow-log rows with
+`curves.cohort_curve` plus `curves.curve_fidelity`.
+
+The 200-pair minimum matters: with `DKT_SHADOW=1` and 416 real attempt rows today, there
+are nowhere near enough repeat attempts per (learner, skill) to measure a cohort slope
+at all. Until there are, the honest answer the gate should give is "not enough data to
+judge growth", not "approved on AUC".
+
+**This is a proposal, not a change.** No file under `src/` is modified by Labs 7–9, and
+`DEVELOPMENT_LOOP.md:113` requires human sign-off before any live cutover.
+
+### 2. Other consequences
+
+- **`synthetic5` should stop being shown with a learning curve.** It cannot have one —
+  maximum opportunity 1. *(Done: the tab now says so.)*
+- **The published `assist2009` curve needed correcting, not deleting**, with the
+  selection effect made visible rather than mentioned in prose. *(Done.)*
+- **`lambda_r = 0.1` should become the lab's default DKT configuration** if the
+  dose-response holds on the other datasets: against the Lab 3 baseline it improves both
+  the slope ratio (0.56 → 0.70) and AUC (0.8167 → 0.8202).
+- **The waviness penalties should not be used** to chase curve quality. They improve AUC
+  while reducing the model's response to evidence, which is the failure mode in
+  miniature.
+- **Synaptic's live BKT has a related weakness of its own.** It is classical absorbing
+  BKT — `src/lib/bkt/index.ts` has no forgetting term — and on the simulator that model
+  moves *down* after a wrong answer only 54% of the time. Whatever happens with DKT, a
+  learner who has been marked mastered is hard to un-master on current evidence.
 
 ## Method and limits
 

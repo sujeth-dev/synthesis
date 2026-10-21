@@ -207,15 +207,40 @@ def select(rows: list[dict], baseline_label: str) -> dict:
     }
 
 
-def sweep(name: str, log=print) -> list[dict]:
-    log(f"\n=== {name} ===")
+def sweep(name: str, only: list[str] | None = None, log=print) -> list[dict]:
+    """`only` filters candidates by substring, for re-running one family of
+    configurations on another dataset without paying for the whole sweep."""
+    chosen = [(l, c) for l, c in candidates() if not only or any(o.lower() in l.lower() for o in only)]
+    log(f"\n=== {name} ({len(chosen)} DKT candidates) ===")
     ex = Experiment(name)
     rows = [evaluate_bkt(ex, "per-skill BKT (EM)", False, log)]
     if "t_days" in ex.df.columns:
         rows.append(evaluate_bkt(ex, "BKT with forgetting", True, log))
-    for label, cfg in candidates():
+    for label, cfg in chosen:
         rows.append(evaluate_dkt(ex, label, cfg, log))
     return rows
+
+
+def dose_response(runs: list[dict]) -> list[dict]:
+    """The reconstruction term's effect, per dataset, as its strength rises.
+
+    Separated out because it is the finding: lambda_r is a dose with a
+    monotone effect on the curve, while the waviness terms are not."""
+    out = []
+    for r in runs:
+        if r["model"] != "DKT" or r["config"].get("lambda_w1") or r["config"].get("lambda_w2"):
+            continue
+        m = r.get("mechanism") or {}
+        out.append({
+            "dataset": r["dataset"], "variant": r["variant"],
+            "lambda_r": r["config"]["lambda_r"],
+            "test_slope_ratio": r["test"]["curve"]["slope_ratio"],
+            "test_auc": r["test"]["auc"], "test_log_loss": r["test"]["log_loss"],
+            "evidence_separation": m.get("separation"),
+            "reconstruction_error": m.get("reconstruction_error"),
+            "w1": m.get("w1"),
+        })
+    return sorted(out, key=lambda r: (r["dataset"], r["lambda_r"]))
 
 
 def confirm(name: str, label: str, cfg: dkt.DKTConfig, log=print) -> list[dict]:
@@ -246,12 +271,16 @@ def main() -> None:
     p.add_argument("--confirm", nargs="*", default=None,
                    help="datasets to re-run the winner on (default: the other two)")
     p.add_argument("--confirm-only", action="store_true")
+    p.add_argument("--variants", nargs="*", default=None,
+                   help="substrings selecting which candidates to run (default: all)")
+    p.add_argument("--append", action="store_true",
+                   help="add these runs to an existing results file instead of starting over")
     a = p.parse_args()
 
     import torch
     torch.set_num_threads(max(1, os.cpu_count() or 1))
 
-    state = json.load(open(OUT)) if os.path.exists(OUT) and a.confirm_only else {
+    state = json.load(open(OUT)) if os.path.exists(OUT) and (a.confirm_only or a.append) else {
         "question": "DKT's aggregate metrics are fine and its learning curve is too shallow. "
                     "Does the published DKT+ remedy fix the curve when it is judged on the curve?",
         "selection_rule": f"closest validation cohort-curve slope ratio to 1.0, among candidates "
@@ -264,9 +293,11 @@ def main() -> None:
 
     if not a.confirm_only:
         for name in (a.datasets or [SWEEP_DATASET]):
-            state["runs"] += sweep(name)
-        state["selection"] = select(state["runs"], "Lab 3 baseline (no regularisation)")
-        print(f"\nselected: {state['selection'].get('winner')!r}")
+            state["runs"] += sweep(name, a.variants)
+        if not a.append:
+            state["selection"] = select(state["runs"], "Lab 3 baseline (no regularisation)")
+            print(f"\nselected: {state['selection'].get('winner')!r}")
+        state["dose_response"] = dose_response(state["runs"])
         save(state)
 
     winner = state["selection"].get("winner")

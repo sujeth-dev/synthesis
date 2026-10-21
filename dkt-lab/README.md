@@ -32,7 +32,10 @@ dkt-lab/
 1. **Overview** – dataset picker, headline tiles, one-line verdict chosen from the numbers.
 2. **Datasets** – stats table, sequence-length distributions, full provenance, skipped datasets.
 3. **Model comparison** – BKT vs DKT on AUC / log-loss / RMSE / accuracy, ROC curves, per-skill AUC, cross-dataset table (and, from Lab 6, the DKT tuning section).
-4. **Learning curves** – P(correct) by practice opportunity: actual vs BKT vs DKT.
+4. **Learning curves** – P(correct) by practice opportunity: actual vs BKT vs DKT. From
+   Lab 7–9: a cohort curve that holds the (student, skill) population fixed, a growth-fidelity
+   table with no-learning baselines for comparison, the aggregate curve extended to each
+   dataset's real maximum with the selection effect quantified, and the mechanism measures.
 5. **Skill heatmap** – predicted P(correct) per skill for 20 held-out students, BKT and DKT side by side.
 6. **How BKT & DKT work** – the live explainer: step through a held-out student or build a sequence; BKT's Bayes update per step vs the LSTM's hidden state, all-skill predictions and transfer; running AUC.
 7. **Scheduling** – SM-2 vs FSRS from `Research/sim/results/scheduler-comparison.json` (copied unchanged; synthetic).
@@ -67,6 +70,11 @@ No dataset had more than 300 skills, so no skill trimming was needed (the code p
 BKT: per-skill EM. DKT: LSTM, hidden 100, lr 1e-3, 10 epochs, no tuning. These
 numbers are `pipeline/results/*.json`; `python pipeline/check_web.py` verifies the
 website's JSON equals them exactly.
+
+> **These are ranking metrics, and ranking is not the whole story.** Lab 7–9 found
+> that on ASSISTments 2009 DKT wins every column above while reproducing only 56% of
+> the growth a learner actually shows, against BKT's 82%. AUC cannot see a slope. See
+> [`FINDINGS-CURVES.md`](FINDINGS-CURVES.md) and the Learning curves tab.
 
 ## Lab 6: DKT tuning on the Synaptic simulator
 
@@ -142,7 +150,13 @@ python export.py && python export.py --fixture             # web/public/data + p
 python check_web.py                                        # site numbers == results
 python -m pytest -q tests
 python tune.py && python tuning_report.py && python export.py   # Lab 6 (about 15 min on 4 CPUs)
+python diagnose.py && python diagnosis_report.py --write        # Lab 7-8 curve diagnosis (~2 min, no torch)
+python improve.py                                               # Lab 9 fix sweep (about 20 min on 4 CPUs)
 ```
+
+`diagnose.py` needs no training and no torch: it reproduces the committed DKT
+predictions from `web/public/data/<dataset>/dkt_weights.json` with a numpy forward
+pass, and refuses to run if they do not match the committed metrics.
 
 Or everything at once: `python run_all.py --tuning`.
 

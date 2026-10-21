@@ -160,10 +160,70 @@ def section(title: str, d: dict) -> str:
     ])
 
 
+# ── Lab 9: the fix experiments ──────────────────────────────────────────────
+IMPROVE = os.path.join(RESULTS_DIR, "dkt_improve.json")
+
+
+def load_improve() -> dict:
+    if not os.path.exists(IMPROVE):
+        return {}
+    with open(IMPROVE) as f:
+        return json.load(f)
+
+
+def candidate_table(runs: list[dict], dataset: str) -> str:
+    rows = []
+    for r in runs:
+        if r["dataset"] != dataset:
+            continue
+        m = r.get("mechanism") or {}
+        sr = r["test"]["curve"]["slope_ratio"]
+        rows.append([r["variant"], _f(r["val"]["auc"]), _f(r["test"]["auc"]),
+                     _f(r["test"]["log_loss"]), _f(sr, 2) if sr is not None else "—",
+                     _f(m.get("separation"), 4) if m else "—",
+                     _f(m.get("reconstruction_error")) if m else "—"])
+    return table(["variant", "val AUC", "test AUC", "test log-loss", "test slope ratio",
+                  "evidence separation", "reconstruction error"], rows)
+
+
+def dose_table(dose: list[dict]) -> str:
+    rows = [[f"`{d['dataset']}`", _f(d["lambda_r"], 2), _f(d["test_slope_ratio"], 2),
+             _f(d["test_auc"]), _f(d["test_log_loss"]),
+             _f(d["evidence_separation"], 4), _f(d["reconstruction_error"]), _f(d["w1"], 5)]
+            for d in dose]
+    return table(["dataset", "lambda_r", "test slope ratio", "test AUC", "test log-loss",
+                  "evidence separation", "reconstruction error", "w1"], rows)
+
+
+def fixes_section() -> str:
+    s = load_improve()
+    if not s:
+        return "_No fix experiments found — run `python improve.py` first._\n"
+    datasets = []
+    for r in s.get("runs", []):
+        if r["dataset"] not in datasets:
+            datasets.append(r["dataset"])
+    parts = [
+        "**Selection rule used.** " + s.get("selection_rule", "—") + "", "",
+        "**Candidates, per dataset.** Every variant run is listed, including the ones that do not help.", "",
+    ]
+    for ds in datasets:
+        parts += [f"*`{ds}`*", "", candidate_table(s["runs"], ds), ""]
+    if s.get("confirmation"):
+        parts += ["**Confirmation of the selected variant elsewhere.**", ""]
+        for ds in dict.fromkeys(r["dataset"] for r in s["confirmation"]):
+            parts += [f"*`{ds}`*", "", candidate_table(s["confirmation"], ds), ""]
+    if s.get("dose_response"):
+        parts += ["**The reconstruction term as a dose.** Variants with no waviness penalty, ordered by strength.",
+                  "", dose_table(s["dose_response"]), ""]
+    return "\n".join(parts)
+
+
 def build() -> str:
     return "\n".join([
         section("Public benchmarks", load(PUBLIC)), "",
-        section("Synaptic simulator (synthetic — not evidence about real learners)", load(SIM)),
+        section("Synaptic simulator (synthetic — not evidence about real learners)", load(SIM)), "",
+        "### Fix experiments (Lab 9)", "", fixes_section(),
     ])
 
 
