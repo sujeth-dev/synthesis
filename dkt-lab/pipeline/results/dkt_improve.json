@@ -644,6 +644,656 @@
    },
    "epochs_run": 19,
    "train_seconds": 78.6
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "BKT",
+   "variant": "per-skill BKT (EM)",
+   "config": {
+    "forgetting": false
+   },
+   "val": {
+    "auc": 0.726743798751031,
+    "log_loss": 0.5998088040205287,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.871270855010336,
+     "curve_mae": 0.08185363513235788,
+     "curve_bias": 0.08109495128445993
+    }
+   },
+   "test": {
+    "auc": 0.7285095686505271,
+    "log_loss": 0.5984563675669328,
+    "rmse": 0.45272947681047093,
+    "accuracy": 0.6937079941909554,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.8947561929800685,
+     "curve_mae": 0.08059939173151756,
+     "curve_bias": 0.08059939173151756
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 5.0
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "BKT",
+   "variant": "BKT with forgetting",
+   "config": {
+    "forgetting": true
+   },
+   "val": {
+    "auc": 0.726342144456227,
+    "log_loss": 0.5999529924429844,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.8696412035953869,
+     "curve_mae": 0.08206125351357038,
+     "curve_bias": 0.08105043823641521
+    }
+   },
+   "test": {
+    "auc": 0.7281747243302142,
+    "log_loss": 0.5984882364113678,
+    "rmse": 0.4527389397004069,
+    "accuracy": 0.6938430882501943,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.8937284135266979,
+     "curve_mae": 0.08061031021029134,
+     "curve_bias": 0.08061031021029134
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 5.4
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 10,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7012834664781431,
+    "log_loss": 0.6207913256696276,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.5449650095531856,
+     "curve_mae": 0.07968553314484644,
+     "curve_bias": 0.06982252509497208
+    }
+   },
+   "test": {
+    "auc": 0.7061904832730775,
+    "log_loss": 0.6181007518703797,
+    "rmse": 0.463092487096024,
+    "accuracy": 0.6621297578438988,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.5576942710823602,
+     "curve_mae": 0.07975267244225573,
+     "curve_bias": 0.06943872751443399
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.06186072900891304,
+     "fraction_positive": 0.9998238713086361
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.02349025569856167,
+     "fraction_negative": 0.850031806615776
+    },
+    "separation": 0.08535098284482956,
+    "w1": 0.008100193925201893,
+    "w2": 0.013269520364701748,
+    "reconstruction_error": 0.38905726078116704,
+    "n_steps": 29609
+   },
+   "epochs_run": 10,
+   "train_seconds": 10.5
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "DKT+ reconstruction only (r 0.1)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.1,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7181646989513374,
+    "log_loss": 0.6079931473813722,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.7029691541199322,
+     "curve_mae": 0.07140235433078287,
+     "curve_bias": 0.06319208482414439
+    }
+   },
+   "test": {
+    "auc": 0.7192888595876378,
+    "log_loss": 0.6073104866419227,
+    "rmse": 0.4574127064585709,
+    "accuracy": 0.6847580127663886,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.7108715612202682,
+     "curve_mae": 0.07071268986959744,
+     "curve_bias": 0.06395282979115921
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.19411639869213104,
+     "fraction_positive": 1.0
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.06042845547199249,
+     "fraction_negative": 0.7489662849872774
+    },
+    "separation": 0.25454485416412354,
+    "w1": 0.03034234046936035,
+    "w2": 0.04668128862977028,
+    "reconstruction_error": 0.27722973817378394,
+    "n_steps": 29609
+   },
+   "epochs_run": 30,
+   "train_seconds": 33.0
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "DKT+ reconstruction only (r 1.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 1.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.6803118416401555,
+    "log_loss": 0.6356470806975276,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.41333972138300823,
+     "curve_mae": 0.08872658467037207,
+     "curve_bias": 0.07339946290344046
+    }
+   },
+   "test": {
+    "auc": 0.6855802705577214,
+    "log_loss": 0.6325296070067071,
+    "rmse": 0.47007281409483853,
+    "accuracy": 0.6423722516802324,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.4071624992193432,
+     "curve_mae": 0.08889392230002115,
+     "curve_bias": 0.07197999989619963
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.15158461034297943,
+     "fraction_positive": 1.0
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.10608189553022385,
+     "fraction_negative": 0.9866412213740458
+    },
+    "separation": 0.2576664984226227,
+    "w1": 0.01777554489672184,
+    "w2": 0.03102676384150982,
+    "reconstruction_error": 0.3067477308512896,
+    "n_steps": 29609
+   },
+   "epochs_run": 8,
+   "train_seconds": 127.0
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "DKT+ smoothness only (w1 0.003, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.003,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7223360268646165,
+    "log_loss": 0.605778878808,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.6658811577991003,
+     "curve_mae": 0.08589851574524439,
+     "curve_bias": 0.08012796063403989
+    }
+   },
+   "test": {
+    "auc": 0.7249454929130983,
+    "log_loss": 0.6043580777764518,
+    "rmse": 0.45609491273225705,
+    "accuracy": 0.6832044310851431,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.6777543965331808,
+     "curve_mae": 0.08450662841052488,
+     "curve_bias": 0.07966096797560965
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.12136853486299515,
+     "fraction_positive": 1.0
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.013413969427347183,
+     "fraction_negative": 0.6178435114503816
+    },
+    "separation": 0.13478250801563263,
+    "w1": 0.011097840964794159,
+    "w2": 0.022023286670446396,
+    "reconstruction_error": 0.3454808226118301,
+    "n_steps": 29609
+   },
+   "epochs_run": 30,
+   "train_seconds": 31.1
+  },
+  {
+   "dataset": "assist2015",
+   "model": "BKT",
+   "variant": "per-skill BKT (EM)",
+   "config": {
+    "forgetting": false
+   },
+   "val": {
+    "auc": 0.699640521610347,
+    "log_loss": 0.5311661171634853,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.410942691598969,
+     "curve_mae": 0.13177211941586597,
+     "curve_bias": 0.13177211941586597
+    }
+   },
+   "test": {
+    "auc": 0.7027361875555099,
+    "log_loss": 0.5220084187830825,
+    "rmse": 0.4156715969173652,
+    "accuracy": 0.7519579369053581,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.43083582755001254,
+     "curve_mae": 0.12535642693769206,
+     "curve_bias": 0.12535642693769206
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 37.1
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 10,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7254464986862315,
+    "log_loss": 0.5181283872654101,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.32714427471232355,
+     "curve_mae": 0.11998582772204872,
+     "curve_bias": 0.11998582772204872
+    }
+   },
+   "test": {
+    "auc": 0.7243819594767371,
+    "log_loss": 0.5110497456669822,
+    "rmse": 0.4108132859699868,
+    "accuracy": 0.7556735102653981,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.3396739214632175,
+     "curve_mae": 0.11700697702571472,
+     "curve_bias": 0.11700697702571472
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.06569138914346695,
+     "fraction_positive": 0.9704908160192713
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.04791503772139549,
+     "fraction_negative": 0.8104026845637584
+    },
+    "separation": 0.11360642313957214,
+    "w1": 0.026013536378741264,
+    "w2": 0.036226917058229446,
+    "reconstruction_error": 0.27291889730337504,
+    "n_steps": 9026
+   },
+   "epochs_run": 10,
+   "train_seconds": 54.4
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "DKT+ reconstruction only (r 0.1)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.1,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7249592518561289,
+    "log_loss": 0.5200608090376161,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.32958085044362223,
+     "curve_mae": 0.11086751438170835,
+     "curve_bias": 0.11075351288988207
+    }
+   },
+   "test": {
+    "auc": 0.7238474046340007,
+    "log_loss": 0.5131158938373753,
+    "rmse": 0.411824451873441,
+    "accuracy": 0.7536504757135704,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.32523781502207916,
+     "curve_mae": 0.10986894900327336,
+     "curve_bias": 0.10986894900327336
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.080092653632164,
+     "fraction_positive": 0.960252935862692
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.0897858664393425,
+     "fraction_negative": 0.87751677852349
+    },
+    "separation": 0.1698785126209259,
+    "w1": 0.03222410008311272,
+    "w2": 0.0455600880086422,
+    "reconstruction_error": 0.2488899353823406,
+    "n_steps": 9026
+   },
+   "epochs_run": 17,
+   "train_seconds": 102.6
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "DKT+ reconstruction only (r 1.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 1.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7047687204831223,
+    "log_loss": 0.5995225897711355,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.39553197838908544,
+     "curve_mae": 0.06071974487308082,
+     "curve_bias": 0.0511599840645166
+    }
+   },
+   "test": {
+    "auc": 0.7029488311670693,
+    "log_loss": 0.5934581339996542,
+    "rmse": 0.4457509370739157,
+    "accuracy": 0.700751126690035,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.407474796885161,
+     "curve_mae": 0.06619334079866425,
+     "curve_bias": 0.05348241027105566
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.16112340986728668,
+     "fraction_positive": 0.9689852454080097
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.2997652590274811,
+     "fraction_negative": 0.8959731543624161
+    },
+    "separation": 0.46088868379592896,
+    "w1": 0.053491730242967606,
+    "w2": 0.08054955303668976,
+    "reconstruction_error": 0.1286992304759472,
+    "n_steps": 9026
+   },
+   "epochs_run": 17,
+   "train_seconds": 98.2
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "DKT+ smoothness only (w1 0.003, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.003,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7276875444555617,
+    "log_loss": 0.5162903213048164,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.2708130477908612,
+     "curve_mae": 0.1258090047806558,
+     "curve_bias": 0.1258090047806558
+    }
+   },
+   "test": {
+    "auc": 0.7263340339027644,
+    "log_loss": 0.5092505713329666,
+    "rmse": 0.41021561223099434,
+    "accuracy": 0.7563244867300951,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.26935421141975513,
+     "curve_mae": 0.12440598906913411,
+     "curve_bias": 0.12440598906913411
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.05696022883057594,
+     "fraction_positive": 0.9844926227040048
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.04391339048743248,
+     "fraction_negative": 0.8359899328859061
+    },
+    "separation": 0.10087361931800842,
+    "w1": 0.013646562583744526,
+    "w2": 0.019914353266358376,
+    "reconstruction_error": 0.28089592589752355,
+    "n_steps": 9026
+   },
+   "epochs_run": 17,
+   "train_seconds": 102.9
   }
  ],
  "selection": {
@@ -1000,6 +1650,473 @@
    },
    "epochs_run": 9,
    "train_seconds": 7.6
+  },
+  {
+   "dataset": "assist2015",
+   "model": "BKT",
+   "variant": "per-skill BKT (EM)",
+   "config": {
+    "forgetting": false
+   },
+   "val": {
+    "auc": 0.699640521610347,
+    "log_loss": 0.5311661171634853,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.410942691598969,
+     "curve_mae": 0.13177211941586597,
+     "curve_bias": 0.13177211941586597
+    }
+   },
+   "test": {
+    "auc": 0.7027361875555099,
+    "log_loss": 0.5220084187830825,
+    "rmse": 0.4156715969173652,
+    "accuracy": 0.7519579369053581,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.43083582755001254,
+     "curve_mae": 0.12535642693769206,
+     "curve_bias": 0.12535642693769206
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 37.0
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 10,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7254464986862315,
+    "log_loss": 0.5181283872654101,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.32714427471232355,
+     "curve_mae": 0.11998582772204872,
+     "curve_bias": 0.11998582772204872
+    }
+   },
+   "test": {
+    "auc": 0.7243819594767371,
+    "log_loss": 0.5110497456669822,
+    "rmse": 0.4108132859699868,
+    "accuracy": 0.7556735102653981,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.3396739214632175,
+     "curve_mae": 0.11700697702571472,
+     "curve_bias": 0.11700697702571472
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.06569138914346695,
+     "fraction_positive": 0.9704908160192713
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.04791503772139549,
+     "fraction_negative": 0.8104026845637584
+    },
+    "separation": 0.11360642313957214,
+    "w1": 0.026013536378741264,
+    "w2": 0.036226917058229446,
+    "reconstruction_error": 0.27291889730337504,
+    "n_steps": 9026
+   },
+   "epochs_run": 10,
+   "train_seconds": 50.4
+  },
+  {
+   "dataset": "assist2015",
+   "model": "DKT",
+   "variant": "DKT+ strong both (r 0.5, w1 0.01, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.5,
+    "lambda_w1": 0.01,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7136884298248167,
+    "log_loss": 0.5481278985634664,
+    "curve": {
+     "pairs": 2360,
+     "n_points": 10,
+     "observed_slope": 0.02519341856297616,
+     "slope_ratio": 0.33239807064529725,
+     "curve_mae": 0.08131734514126927,
+     "curve_bias": 0.07790286110018638
+    }
+   },
+   "test": {
+    "auc": 0.7117844747807791,
+    "log_loss": 0.5424023388599358,
+    "rmse": 0.42539358091176627,
+    "accuracy": 0.7252078117175763,
+    "n": 99850,
+    "curve": {
+     "pairs": 2220,
+     "n_points": 10,
+     "observed_slope": 0.024982833326831502,
+     "slope_ratio": 0.3415590299487513,
+     "curve_mae": 0.0801826046952691,
+     "curve_bias": 0.07717304129352943
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 6642,
+     "mean_delta": 0.12322868406772614,
+     "fraction_positive": 0.9902137910267992
+    },
+    "after_wrong": {
+     "n": 2384,
+     "mean_delta": -0.21072612702846527,
+     "fraction_negative": 0.9437919463087249
+    },
+    "separation": 0.3339548110961914,
+    "w1": 0.02078062854707241,
+    "w2": 0.03575720265507698,
+    "reconstruction_error": 0.1807161529622355,
+    "n_steps": 9026
+   },
+   "epochs_run": 18,
+   "train_seconds": 110.3
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "BKT",
+   "variant": "per-skill BKT (EM)",
+   "config": {
+    "forgetting": false
+   },
+   "val": {
+    "auc": 0.726743798751031,
+    "log_loss": 0.5998088040205287,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.871270855010336,
+     "curve_mae": 0.08185363513235788,
+     "curve_bias": 0.08109495128445993
+    }
+   },
+   "test": {
+    "auc": 0.7285095686505271,
+    "log_loss": 0.5984563675669328,
+    "rmse": 0.45272947681047093,
+    "accuracy": 0.6937079941909554,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.8947561929800685,
+     "curve_mae": 0.08059939173151756,
+     "curve_bias": 0.08059939173151756
+    }
+   },
+   "mechanism": {},
+   "epochs_run": 0,
+   "train_seconds": 5.0
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 10,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.0,
+    "lambda_w1": 0.0,
+    "lambda_w2": 0.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.7012834664781431,
+    "log_loss": 0.6207913256696276,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.5449650095531856,
+     "curve_mae": 0.07968553314484644,
+     "curve_bias": 0.06982252509497208
+    }
+   },
+   "test": {
+    "auc": 0.7061904832730775,
+    "log_loss": 0.6181007518703797,
+    "rmse": 0.463092487096024,
+    "accuracy": 0.6621297578438988,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.5576942710823602,
+     "curve_mae": 0.07975267244225573,
+     "curve_bias": 0.06943872751443399
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.06186072900891304,
+     "fraction_positive": 0.9998238713086361
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.02349025569856167,
+     "fraction_negative": 0.850031806615776
+    },
+    "separation": 0.08535098284482956,
+    "w1": 0.008100193925201893,
+    "w2": 0.013269520364701748,
+    "reconstruction_error": 0.38905726078116704,
+    "n_steps": 29609
+   },
+   "epochs_run": 10,
+   "train_seconds": 9.1
+  },
+  {
+   "dataset": "synaptic_sim",
+   "model": "DKT",
+   "variant": "DKT+ strong both (r 0.5, w1 0.01, w2 3.0)",
+   "config": {
+    "hidden_size": 100,
+    "lr": 0.001,
+    "batch_size": 32,
+    "epochs": 30,
+    "dropout": 0.2,
+    "early_stopping": true,
+    "patience": 3,
+    "input_time": false,
+    "output_time": false,
+    "lambda_r": 0.5,
+    "lambda_w1": 0.01,
+    "lambda_w2": 3.0,
+    "seed": 42
+   },
+   "val": {
+    "auc": 0.6904996347354778,
+    "log_loss": 0.6294447757149365,
+    "curve": {
+     "pairs": 1317,
+     "n_points": 10,
+     "observed_slope": 0.05438553116533316,
+     "slope_ratio": 0.46556870308205867,
+     "curve_mae": 0.08100520963987384,
+     "curve_bias": 0.06693587066180674
+    }
+   },
+   "test": {
+    "auc": 0.6942399008719641,
+    "log_loss": 0.6269443993492163,
+    "rmse": 0.46737321788098035,
+    "accuracy": 0.6561180722077746,
+    "n": 29609,
+    "curve": {
+     "pairs": 1298,
+     "n_points": 10,
+     "observed_slope": 0.052124525681331975,
+     "slope_ratio": 0.4676488426851161,
+     "curve_mae": 0.08211774671902254,
+     "curve_bias": 0.06753876836653212
+    }
+   },
+   "mechanism": {
+    "students": 150,
+    "after_correct": {
+     "n": 17033,
+     "mean_delta": 0.1518072485923767,
+     "fraction_positive": 1.0
+    },
+    "after_wrong": {
+     "n": 12576,
+     "mean_delta": -0.10097116231918335,
+     "fraction_negative": 0.9753498727735369
+    },
+    "separation": 0.25277841091156006,
+    "w1": 0.01491091400384903,
+    "w2": 0.03014162927865982,
+    "reconstruction_error": 0.3043723262050563,
+    "n_steps": 29609
+   },
+   "epochs_run": 9,
+   "train_seconds": 10.0
+  }
+ ],
+ "dose_response": [
+  {
+   "dataset": "assist2009",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "lambda_r": 0.0,
+   "test_slope_ratio": 0.5598316427458103,
+   "test_auc": 0.8167198935860005,
+   "test_log_loss": 0.47038882472245935,
+   "evidence_separation": 0.07762417197227478,
+   "reconstruction_error": 0.2729870012028215,
+   "w1": 0.032110169529914856
+  },
+  {
+   "dataset": "assist2009",
+   "variant": "early stopping + dropout 0.2",
+   "lambda_r": 0.0,
+   "test_slope_ratio": 0.5759521701477502,
+   "test_auc": 0.8222712108657919,
+   "test_log_loss": 0.45907041817218003,
+   "evidence_separation": 0.05856136977672577,
+   "reconstruction_error": 0.2703595464078791,
+   "w1": 0.03962073475122452
+  },
+  {
+   "dataset": "assist2009",
+   "variant": "DKT+ reconstruction only (r 0.1)",
+   "lambda_r": 0.1,
+   "test_slope_ratio": 0.6958969496179234,
+   "test_auc": 0.820150770105398,
+   "test_log_loss": 0.461765165870794,
+   "evidence_separation": 0.1654055118560791,
+   "reconstruction_error": 0.21215522710092594,
+   "w1": 0.05434560403227806
+  },
+  {
+   "dataset": "assist2009",
+   "variant": "DKT+ reconstruction strong (r 0.5)",
+   "lambda_r": 0.5,
+   "test_slope_ratio": 0.709317096789174,
+   "test_auc": 0.8113259876404633,
+   "test_log_loss": 0.48865210731802045,
+   "evidence_separation": 0.3181326389312744,
+   "reconstruction_error": 0.13471919162326718,
+   "w1": 0.06748765707015991
+  },
+  {
+   "dataset": "assist2009",
+   "variant": "DKT+ reconstruction only (r 1.0)",
+   "lambda_r": 1.0,
+   "test_slope_ratio": 0.7390279173886489,
+   "test_auc": 0.8060067501122594,
+   "test_log_loss": 0.5234364418947008,
+   "evidence_separation": 0.3939807116985321,
+   "reconstruction_error": 0.09734014345155671,
+   "w1": 0.08925013244152069
+  },
+  {
+   "dataset": "assist2015",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "lambda_r": 0.0,
+   "test_slope_ratio": 0.3396739214632175,
+   "test_auc": 0.7243819594767371,
+   "test_log_loss": 0.5110497456669822,
+   "evidence_separation": 0.11360642313957214,
+   "reconstruction_error": 0.27291889730337504,
+   "w1": 0.026013536378741264
+  },
+  {
+   "dataset": "assist2015",
+   "variant": "DKT+ reconstruction only (r 0.1)",
+   "lambda_r": 0.1,
+   "test_slope_ratio": 0.32523781502207916,
+   "test_auc": 0.7238474046340007,
+   "test_log_loss": 0.5131158938373753,
+   "evidence_separation": 0.1698785126209259,
+   "reconstruction_error": 0.2488899353823406,
+   "w1": 0.03222410008311272
+  },
+  {
+   "dataset": "assist2015",
+   "variant": "DKT+ reconstruction only (r 1.0)",
+   "lambda_r": 1.0,
+   "test_slope_ratio": 0.407474796885161,
+   "test_auc": 0.7029488311670693,
+   "test_log_loss": 0.5934581339996542,
+   "evidence_separation": 0.46088868379592896,
+   "reconstruction_error": 0.1286992304759472,
+   "w1": 0.053491730242967606
+  },
+  {
+   "dataset": "synaptic_sim",
+   "variant": "Lab 3 baseline (no regularisation)",
+   "lambda_r": 0.0,
+   "test_slope_ratio": 0.5576942710823602,
+   "test_auc": 0.7061904832730775,
+   "test_log_loss": 0.6181007518703797,
+   "evidence_separation": 0.08535098284482956,
+   "reconstruction_error": 0.38905726078116704,
+   "w1": 0.008100193925201893
+  },
+  {
+   "dataset": "synaptic_sim",
+   "variant": "DKT+ reconstruction only (r 0.1)",
+   "lambda_r": 0.1,
+   "test_slope_ratio": 0.7108715612202682,
+   "test_auc": 0.7192888595876378,
+   "test_log_loss": 0.6073104866419227,
+   "evidence_separation": 0.25454485416412354,
+   "reconstruction_error": 0.27722973817378394,
+   "w1": 0.03034234046936035
+  },
+  {
+   "dataset": "synaptic_sim",
+   "variant": "DKT+ reconstruction only (r 1.0)",
+   "lambda_r": 1.0,
+   "test_slope_ratio": 0.4071624992193432,
+   "test_auc": 0.6855802705577214,
+   "test_log_loss": 0.6325296070067071,
+   "evidence_separation": 0.2576664984226227,
+   "reconstruction_error": 0.3067477308512896,
+   "w1": 0.01777554489672184
   }
  ]
 }

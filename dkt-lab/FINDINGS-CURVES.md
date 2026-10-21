@@ -198,6 +198,89 @@ and do the untouched skills stay still?
 |---|---|---|
 | `synaptic_sim` | 2.6e-08 | yes |
 
+
+### Fix experiments (Lab 9)
+
+**Selection rule used.** closest validation cohort-curve slope ratio to 1.0, among candidates within 0.005 validation AUC of the Lab 3 baseline
+
+**Candidates, per dataset.** Every variant run is listed, including the ones that do not help.
+
+*`assist2009`*
+
+| variant | val AUC | test AUC | test log-loss | test slope ratio | evidence separation | reconstruction error |
+|---|---|---|---|---|---|---|
+| per-skill BKT (EM) | 0.7246 | 0.7302 | 0.5567 | 0.82 | — | — |
+| Lab 3 baseline (no regularisation) | 0.8093 | 0.8167 | 0.4704 | 0.56 | 0.0776 | 0.2730 |
+| early stopping + dropout 0.2 | 0.8149 | 0.8223 | 0.4591 | 0.58 | 0.0586 | 0.2704 |
+| DKT+ reconstruction only (r 0.1) | 0.8128 | 0.8202 | 0.4618 | 0.70 | 0.1654 | 0.2122 |
+| DKT+ reconstruction strong (r 0.5) | 0.8041 | 0.8113 | 0.4887 | 0.71 | 0.3181 | 0.1347 |
+| DKT+ reconstruction only (r 1.0) | 0.7999 | 0.8060 | 0.5234 | 0.74 | 0.3940 | 0.0973 |
+| DKT+ published (r 0.1, w1 0.003, w2 3.0) | 0.8148 | 0.8227 | 0.4587 | 0.63 | 0.1432 | 0.2259 |
+| DKT+ weak waviness (r 0.1, w1 0.003, w2 0.3) | 0.8129 | 0.8203 | 0.4616 | 0.59 | 0.1595 | 0.2209 |
+| DKT+ strong both (r 0.5, w1 0.01, w2 3.0) | 0.8043 | 0.8119 | 0.4835 | 0.68 | 0.3028 | 0.1459 |
+| DKT+ smoothness only (w1 0.003, w2 3.0) | 0.8147 | 0.8234 | 0.4592 | 0.54 | 0.0429 | 0.2729 |
+
+*`synaptic_sim`*
+
+| variant | val AUC | test AUC | test log-loss | test slope ratio | evidence separation | reconstruction error |
+|---|---|---|---|---|---|---|
+| per-skill BKT (EM) | 0.7267 | 0.7285 | 0.5985 | 0.89 | — | — |
+| BKT with forgetting | 0.7263 | 0.7282 | 0.5985 | 0.89 | — | — |
+| Lab 3 baseline (no regularisation) | 0.7013 | 0.7062 | 0.6181 | 0.56 | 0.0854 | 0.3891 |
+| DKT+ reconstruction only (r 0.1) | 0.7182 | 0.7193 | 0.6073 | 0.71 | 0.2545 | 0.2772 |
+| DKT+ reconstruction only (r 1.0) | 0.6803 | 0.6856 | 0.6325 | 0.41 | 0.2577 | 0.3067 |
+| DKT+ smoothness only (w1 0.003, w2 3.0) | 0.7223 | 0.7249 | 0.6044 | 0.68 | 0.1348 | 0.3455 |
+
+*`assist2015`*
+
+| variant | val AUC | test AUC | test log-loss | test slope ratio | evidence separation | reconstruction error |
+|---|---|---|---|---|---|---|
+| per-skill BKT (EM) | 0.6996 | 0.7027 | 0.5220 | 0.43 | — | — |
+| Lab 3 baseline (no regularisation) | 0.7254 | 0.7244 | 0.5110 | 0.34 | 0.1136 | 0.2729 |
+| DKT+ reconstruction only (r 0.1) | 0.7250 | 0.7238 | 0.5131 | 0.33 | 0.1699 | 0.2489 |
+| DKT+ reconstruction only (r 1.0) | 0.7048 | 0.7029 | 0.5935 | 0.41 | 0.4609 | 0.1287 |
+| DKT+ smoothness only (w1 0.003, w2 3.0) | 0.7277 | 0.7263 | 0.5093 | 0.27 | 0.1009 | 0.2809 |
+
+**Confirmation of the selected variant elsewhere.**
+
+*`assist2015`*
+
+| variant | val AUC | test AUC | test log-loss | test slope ratio | evidence separation | reconstruction error |
+|---|---|---|---|---|---|---|
+| per-skill BKT (EM) | 0.6996 | 0.7027 | 0.5220 | 0.43 | — | — |
+| Lab 3 baseline (no regularisation) | 0.7254 | 0.7244 | 0.5110 | 0.34 | 0.1136 | 0.2729 |
+| DKT+ strong both (r 0.5, w1 0.01, w2 3.0) | 0.7137 | 0.7118 | 0.5424 | 0.34 | 0.3340 | 0.1807 |
+| per-skill BKT (EM) | 0.6996 | 0.7027 | 0.5220 | 0.43 | — | — |
+| Lab 3 baseline (no regularisation) | 0.7254 | 0.7244 | 0.5110 | 0.34 | 0.1136 | 0.2729 |
+| DKT+ strong both (r 0.5, w1 0.01, w2 3.0) | 0.7137 | 0.7118 | 0.5424 | 0.34 | 0.3340 | 0.1807 |
+
+*`synaptic_sim`*
+
+| variant | val AUC | test AUC | test log-loss | test slope ratio | evidence separation | reconstruction error |
+|---|---|---|---|---|---|---|
+| per-skill BKT (EM) | 0.7267 | 0.7285 | 0.5985 | 0.89 | — | — |
+| Lab 3 baseline (no regularisation) | 0.7013 | 0.7062 | 0.6181 | 0.56 | 0.0854 | 0.3891 |
+| DKT+ strong both (r 0.5, w1 0.01, w2 3.0) | 0.6905 | 0.6942 | 0.6269 | 0.47 | 0.2528 | 0.3044 |
+| per-skill BKT (EM) | 0.7267 | 0.7285 | 0.5985 | 0.89 | — | — |
+| Lab 3 baseline (no regularisation) | 0.7013 | 0.7062 | 0.6181 | 0.56 | 0.0854 | 0.3891 |
+| DKT+ strong both (r 0.5, w1 0.01, w2 3.0) | 0.6905 | 0.6942 | 0.6269 | 0.47 | 0.2528 | 0.3044 |
+
+**The reconstruction term as a dose.** Variants with no waviness penalty, ordered by strength.
+
+| dataset | lambda_r | test slope ratio | test AUC | test log-loss | evidence separation | reconstruction error | w1 |
+|---|---|---|---|---|---|---|---|
+| `assist2009` | 0.00 | 0.56 | 0.8167 | 0.4704 | 0.0776 | 0.2730 | 0.03211 |
+| `assist2009` | 0.00 | 0.58 | 0.8223 | 0.4591 | 0.0586 | 0.2704 | 0.03962 |
+| `assist2009` | 0.10 | 0.70 | 0.8202 | 0.4618 | 0.1654 | 0.2122 | 0.05435 |
+| `assist2009` | 0.50 | 0.71 | 0.8113 | 0.4887 | 0.3181 | 0.1347 | 0.06749 |
+| `assist2009` | 1.00 | 0.74 | 0.8060 | 0.5234 | 0.3940 | 0.0973 | 0.08925 |
+| `assist2015` | 0.00 | 0.34 | 0.7244 | 0.5110 | 0.1136 | 0.2729 | 0.02601 |
+| `assist2015` | 0.10 | 0.33 | 0.7238 | 0.5131 | 0.1699 | 0.2489 | 0.03222 |
+| `assist2015` | 1.00 | 0.41 | 0.7029 | 0.5935 | 0.4609 | 0.1287 | 0.05349 |
+| `synaptic_sim` | 0.00 | 0.56 | 0.7062 | 0.6181 | 0.0854 | 0.3891 | 0.00810 |
+| `synaptic_sim` | 0.10 | 0.71 | 0.7193 | 0.6073 | 0.2545 | 0.2772 | 0.03034 |
+| `synaptic_sim` | 1.00 | 0.41 | 0.6856 | 0.6325 | 0.2577 | 0.3067 | 0.01778 |
+
 <!-- END GENERATED TABLES -->
 
 ---
@@ -221,31 +304,70 @@ validation **AUC**. Run against the curve instead, on `assist2009`:
 | 1.0 | **0.74** | 0.8060 | 0.3940 | 0.0973 |
 | 0.0, waviness only (w1 0.003, w2 3.0) | **0.54** | 0.8234 | 0.0429 | 0.2729 |
 
-Three things to take from this.
+On `assist2009` alone this looks like a clean dose: the slope ratio rises monotonically
+with `lambda_r`, the model's response to an answer grows five-fold, and its
+reconstruction error falls by two-thirds. **That reading does not survive the other two
+datasets**, and the corrected version is below.
 
-**It is a dose, and the response is monotone.** Every column moves in step with
-`lambda_r`: the slope ratio rises 0.56 → 0.74, the model's response to an answer grows
-five-fold (0.078 → 0.394), and its reconstruction error falls by nearly two-thirds.
+> **Correction.** An earlier revision of this section claimed "it is a dose, and the
+> response is monotone" and "the waviness penalties make it worse", on `assist2009`
+> evidence only. Neither generalises. The claim that does survive is narrower and is
+> stated below. The superseded text is left described rather than silently replaced,
+> per `PROGRESS.md`'s convention.
 
-**The mechanism is not the one predicted.** The hypothesis was that reconstruction would
-fix the wrong-way updates. It does not — the fraction of updates in the right direction
-barely moves (0.79 → 0.74 after correct answers; 0.73 → 0.74 after wrong ones). What
-changes is the *magnitude* of the response, not its consistency. DKT was not mostly
-updating the wrong way; it was updating too faintly, and a faint signal averaged over
-many answers is a shallow curve. Recorded here because it is a prediction that failed,
-and the corrected account is the useful one.
+### What the same candidates do on all three datasets
 
-**The waviness penalties make it worse.** Smoothness-only is the only variant with a
-*lower* slope ratio than the baseline (0.54 vs 0.56) and the lowest evidence separation
-of any model tested (0.0429). That is coherent: a penalty on the prediction vector
-moving is a penalty on responding to evidence. It buys the best AUC in the table
-(0.8234), which is exactly how a model that has stopped learning can still look good —
-and exactly the trap this whole investigation is about.
+Change in test cohort-curve slope ratio and test AUC, each against that dataset's own
+Lab 3 baseline:
 
-**`lambda_r = 0.1` is close to free.** Against the Lab 3 baseline it improves the slope
-ratio from 0.56 to 0.70 *and* AUC from 0.8167 to 0.8202. Lab 6 could not see that,
-because against plain early stopping the AUC difference is −0.002 — noise — while the
-slope difference is +0.12.
+| variant | `assist2009` | `assist2015` | `synaptic_sim` |
+|---|---|---|---|
+| `lambda_r` 0.1 | **+0.14** slope, +0.0034 AUC | −0.01 slope, −0.0005 AUC | **+0.15** slope, +0.0131 AUC |
+| `lambda_r` 1.0 | +0.18 slope, −0.0107 AUC | +0.07 slope, −0.0214 AUC | **−0.15** slope, −0.0206 AUC |
+| waviness only | −0.01 slope, +0.0066 AUC | −0.07 slope, +0.0020 AUC | **+0.12** slope, +0.0188 AUC |
+
+**`lambda_r = 0.1` is the one result that holds up.** It improves growth fidelity
+substantially on two datasets and is neutral on the third, and it never costs more than
+0.0005 AUC — on `synaptic_sim` it *gains* 0.0131. That is a recommendation worth acting
+on, and it is the lab's new default DKT configuration.
+
+**Stronger reconstruction is not better.** `lambda_r = 1.0` is the best variant on
+`assist2009` (+0.18) and the worst on the simulator (−0.15). The monotone dose-response
+was an `assist2009` property, not a property of the method. Anyone reading only that
+dataset would have tuned `lambda_r` upward and made the simulator worse.
+
+**The waviness penalties are inconsistent, not uniformly harmful.** They hurt growth on
+both real datasets (−0.01, −0.07) and help on the simulator (+0.12). No recommendation
+either way; the earlier "makes it worse" was over-generalised from one dataset.
+
+**Why Lab 6 missed `lambda_r = 0.1` is unchanged and still the point.** Against plain
+early stopping on `assist2009` its AUC difference is −0.002 — noise — while its slope
+difference is +0.12. Selected on AUC, it looked like nothing.
+
+### The honest bottom line: the gap narrows, it does not close
+
+| dataset | per-skill BKT | DKT baseline | DKT at `lambda_r` 0.1 |
+|---|---|---|---|
+| `assist2009` | **0.82** | 0.56 | 0.70 |
+| `assist2015` | **0.43** | 0.34 | 0.33 |
+| `synaptic_sim` | **0.89** | 0.56 | 0.71 |
+
+Even fixed, DKT tracks learning worse than a per-skill EM BKT on **every** dataset
+tested, while beating it on AUC on two of the three. So the fix is real and worth
+shipping in the lab, and it does not make DKT ready to own scheduling. That conclusion
+is the same one the cutover gate should be reaching, and currently cannot.
+
+### A prediction of mine that failed
+
+The diagnosis said reconstruction would fix the wrong-way updates. It does not — on
+`assist2009` the fraction of updates in the right direction barely moves (0.79 → 0.74
+after correct answers; 0.73 → 0.74 after wrong ones). What changes is the *magnitude* of
+the response. So DKT was not mostly updating the wrong way; it was updating too faintly.
+
+That account is itself incomplete: on `assist2015` the baseline's evidence separation is
+already higher than `assist2009`'s (0.1136 vs 0.0776) and its slope ratio is lower (0.34
+vs 0.56), so response magnitude alone does not determine curve fidelity either. What
+`assist2015` is limited by is not established here.
 
 ### A flaw in this experiment's own selection rule
 
@@ -259,9 +381,16 @@ within 0.005 validation AUC of the baseline. It selected "DKT+ strong both
   `assist2015` its slope ratio matches the baseline's (0.34) with worse AUC, and on the
   simulator it is worse than the baseline on both (0.47 vs 0.56; AUC 0.6942 vs 0.7062).
 
-So the rule's winner is an artefact of a knife-edge threshold. The dose-response above
-is the finding; the single selected variant is not. The rule is left as it was written
-rather than retuned after seeing the results, and this paragraph is the correction.
+So the rule's winner is an artefact of a knife-edge threshold, and the variant it chose
+is not the recommendation. `lambda_r = 0.1` is, on the cross-dataset evidence above. The
+rule is left as it was written rather than retuned after seeing the results, and this
+paragraph is the correction.
+
+The wider lesson is the same one the whole investigation keeps producing: a single
+scalar criterion, applied to one dataset, picks the wrong model. That is true of AUC
+(which hid the growth defect) and it is true of the slope-ratio rule written to replace
+it (which picked a variant that fails elsewhere). The cross-dataset table is the
+evidence; neither single number is.
 
 ## What this changes
 
@@ -302,12 +431,14 @@ judge growth", not "approved on AUC".
   maximum opportunity 1. *(Done: the tab now says so.)*
 - **The published `assist2009` curve needed correcting, not deleting**, with the
   selection effect made visible rather than mentioned in prose. *(Done.)*
-- **`lambda_r = 0.1` should become the lab's default DKT configuration** if the
-  dose-response holds on the other datasets: against the Lab 3 baseline it improves both
-  the slope ratio (0.56 → 0.70) and AUC (0.8167 → 0.8202).
-- **The waviness penalties should not be used** to chase curve quality. They improve AUC
-  while reducing the model's response to evidence, which is the failure mode in
-  miniature.
+- **`lambda_r = 0.1` becomes the lab's default DKT configuration.** It improves growth
+  fidelity on two of three datasets (+0.14, +0.15) and is neutral on the third, at no
+  meaningful AUC cost. Stronger settings do not generalise and should not be used.
+- **No recommendation on the waviness penalties.** They help growth on the simulator and
+  hurt it on both real datasets.
+- **Even fixed, DKT tracks learning worse than per-skill BKT on every dataset tested.**
+  The gap narrows; it does not close. Whatever else the cutover gate requires, that is
+  the fact it has to confront.
 - **Synaptic's live BKT has a related weakness of its own.** It is classical absorbing
   BKT — `src/lib/bkt/index.ts` has no forgetting term — and on the simulator that model
   moves *down* after a wrong answer only 54% of the time. Whatever happens with DKT, a
