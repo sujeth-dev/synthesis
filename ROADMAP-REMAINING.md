@@ -24,7 +24,23 @@ have come apart in several places.
 
 ---
 
+> **Corrected in place, 2026-10-21 (Levels 6–13).** Everything below described
+> the tree before that run and is left as the record of what was found. Each
+> section now opens with what changed; `FEATURES-COMPLETED.md` is the
+> point-by-point account, and the two defects found while planning it — inert
+> placement and 38 unanswerable `order` questions, both worse than the bug this
+> document leads with — are recorded under "The one thing to fix first".
+
 ## The one thing to fix first
+
+> **Fixed in Level 7.** Three timestamps per question
+> (`src/lib/timing/answer-timing.ts`), read before the fetch instead of inside
+> the request-body literal. All four consumers below are live again, and
+> Level 8 measured what the dead signal had been costing. Two defects found
+> while planning that run were worse and were fixed first, in Level 6:
+> placement was entirely inert (nothing graded the diagnostic answers
+> server-side, so every learner started with every prerequisite-bearing skill
+> blocked), and 38 `order` questions were reachable but unanswerable.
 
 **`latency_ms` reaches the server as ~0 on every attempt.** `src/app/learn/page.tsx:300-305`:
 
@@ -71,7 +87,12 @@ Two smaller cases of the same shape, both confirmed by grep:
 
 ### 1. Explanation-based answers, to capture real understanding
 
-**Status: the pipe is built; nothing flows through it.**
+> **Done in Levels 9 and 10.** 120 explain questions (one per skill,
+> generated from each skill's own `explain_back_prompt`), the server's grade is
+> now the single verdict for free text, and migration 006 stores the
+> explanation with the grade's full provenance.
+
+**Status (before Level 9): the pipe is built; nothing flows through it.**
 
 The server grades free-text whenever `question_format === 'explain'`
 (`src/app/api/attempt/route.ts:97-105`), with the LLM grader primary and the rule-based
@@ -111,7 +132,11 @@ nothing to grade.
 
 ### 3. Correctness + reasoning + behaviour as BKT input
 
-**Status: wired, and running on two dead inputs out of three.**
+> **Done.** Both missing inputs now exist: reasoning quality from the 120
+> explain questions (Level 9) and the behaviour modifier from real response
+> times (Level 7). The combination logic was correct and is unchanged.
+
+**Status (before): wired, and running on two dead inputs out of three.**
 
 `src/lib/bkt/index.ts:26-33` shrinks both likelihoods toward 0.5 in proportion to the
 evidence:
@@ -131,7 +156,11 @@ it needs inputs.
 
 ### 4. Upgrade BKT to modern knowledge tracing (DKT)
 
-**Status: shipped in shadow mode; the gate says don't switch; and the gate is measuring
+> **Gate fixed in Level 12.** `cutoverDecision` takes a required growth
+> comparison and refuses with `growth_unmeasured` or `dkt_worse_growth`. Still
+> shadow-only, and a live cutover still needs human sign-off.
+
+**Status (before): shipped in shadow mode; the gate says don't switch; and the gate is measuring
 the wrong thing.**
 
 DKT runs as a TypeScript LSTM forward pass with no Python service
@@ -153,7 +182,12 @@ sign-off that `DEVELOPMENT_LOOP.md:113` requires for any live cutover.
 
 ### 5. Strengthen SM-2 with adaptive scheduling
 
-**Status: FSRS built and switchable; validated only on synthetic data; and its
+> **Advanced in Levels 7, 8 and 11.** The response-time input is alive, its
+> cost while dead is measured (`npm run sim:latency`), and a behaviour-aware
+> quality ships in shadow behind `ADAPTIVE_QUALITY=1`. Still open: real review
+> logs and the FSRS-6 refit, both gated on usage.
+
+**Status (before): FSRS built and switchable; validated only on synthetic data; and its
 response-time input is dead.**
 
 `activeScheduler()` (`src/lib/fsrs/scheduler.ts:9`) returns `'fsrs'` only on an exact
@@ -179,7 +213,11 @@ latency fix, without which both schedulers see every correct answer as "Easy".
 
 ### 6. Behaviour analytics (time, retries, hesitation)
 
-**Status: the storage layer is done; the signals are mostly zeros.**
+> **Done in Level 7**, except `error_type`: time, hesitation (as time to first
+> interaction) and revisions are all measured at the client now. Engine 5 for
+> `error_type` is still unbuilt.
+
+**Status (before): the storage layer is done; the signals are mostly zeros.**
 
 Migration 003 adds `motivation_state`, `consecutive_errors`, `slow_response_streak`,
 `behavior_modifier` and `hesitation_ms` to `attempt_events`, and they are written on
@@ -221,6 +259,11 @@ is more honest than leaving it open.
 ---
 
 ## Suggested order
+
+> Items 1–4 and 6 were done in Levels 6–13, in this order. What remains is
+> item 5's real review logs and FSRS-6 refit (gated on usage), item 7's
+> revisit now that explanations supply a per-question signal, and item 7 of
+> this list — the stale planning documents.
 
 1. **Fix `latency_ms`.** Smallest change, unblocks items 3, 5 and 6, and makes four
    existing subsystems start working. Nothing here should precede it.

@@ -290,6 +290,16 @@ export async function getLastFsrsShadowEntry(learnerId: string, skillId: string)
   return data
 }
 
+export async function getFsrsShadowEntries(learnerId: string, limit: number): Promise<FsrsShadowLogEntry[]> {
+  const { data } = await getDb()
+    .from('fsrs_shadow_log')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
 export async function insertFsrsShadowLog(entry: Omit<FsrsShadowLogEntry, 'id' | 'created_at'>): Promise<void> {
   const { error } = await getDb().from('fsrs_shadow_log').insert({
     ...entry,
@@ -312,6 +322,18 @@ export async function getAttemptHistory(learnerId: string, limit: number): Promi
     .order('attempted_at', { ascending: false })
     .limit(limit)
   return (data ?? []).reverse()
+}
+
+// Level 13: /engine reads the shadow logs back. They stay observational — this
+// is a display of what they recorded, never an input to the engine.
+export async function getDktShadowEntries(learnerId: string, limit: number): Promise<DktShadowLogEntry[]> {
+  const { data } = await getDb()
+    .from('dkt_shadow_log')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
 }
 
 export async function insertDktShadowLog(entry: Omit<DktShadowLogEntry, 'id' | 'created_at'>): Promise<void> {
