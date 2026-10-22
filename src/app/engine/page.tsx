@@ -4,8 +4,9 @@ import { verifyToken } from '@/lib/db/auth'
 import {
   getLearnerProfile, getRecentAttempts, getReviewSchedules,
   getExplanationGrades, getBehaviorQualityShadow,
-  getFsrsShadowEntries, getDktShadowEntries,
+  getFsrsShadowEntries, getDktShadowEntries, getBktParamShadow,
 } from '@/lib/db/queries'
+import { fittedParamsProvenance, isPerSkillBktEnabled } from '@/lib/bkt/params'
 import { Navbar } from '@/components/layout/Navbar'
 import { activeScheduler } from '@/lib/fsrs/scheduler'
 import { isAdaptiveQualityEnabled } from '@/lib/sm2/adaptive'
@@ -80,7 +81,7 @@ export default async function EnginePage() {
   const user = await verifyToken(token)
   if (!user) redirect('/login')
 
-  const [profile, attempts, schedules, grades, behaviorShadow, fsrsShadow, dktShadow] = await Promise.all([
+  const [profile, attempts, schedules, grades, behaviorShadow, fsrsShadow, dktShadow, paramShadow] = await Promise.all([
     getLearnerProfile(user.id),
     getRecentAttempts(user.id, SHADOW_ROWS),
     getReviewSchedules(user.id),
@@ -88,6 +89,7 @@ export default async function EnginePage() {
     getBehaviorQualityShadow(user.id, SHADOW_ROWS),
     getFsrsShadowEntries(user.id, SHADOW_ROWS),
     getDktShadowEntries(user.id, SHADOW_ROWS),
+    getBktParamShadow(user.id, SHADOW_ROWS),
   ])
 
   const scheduler = activeScheduler()
@@ -177,6 +179,30 @@ export default async function EnginePage() {
               ])}
             />
           </div>
+        </Section>
+
+        <Section
+          title="BKT parameters"
+          item="Item 3 — one global parameter set, or one per skill"
+          note="The live engine uses a single parameter set for all 120 skills. Each row is the same attempt scored again under this skill's EM-fitted parameters; the learner's state follows the live column. Fitted parameters are never applied while they come from simulated learners, whatever BKT_PER_SKILL says."
+        >
+          <Table
+            head={['Skill', 'Correct', 'p_know before', 'Live after', 'Fitted after', 'Fitted params?']}
+            empty="No parameter shadow rows yet (needs migration 008)."
+            rows={paramShadow.map(row => [
+              row.skill_id, row.correct ? 'yes' : 'no', row.p_know_before.toFixed(4),
+              row.live_p_know_after.toFixed(4), row.fitted_p_know_after.toFixed(4),
+              row.has_fitted_params ? 'yes' : 'global set',
+            ])}
+          />
+          <p className="mt-4 text-[12px] font-mono text-c-muted">
+            Parameters fitted from {fittedParamsProvenance().source} ({fittedParamsProvenance().rows} rows,
+            {' '}{fittedParamsProvenance().synthetic ? 'synthetic' : 'real learners'}); applied:
+            {' '}{isPerSkillBktEnabled() ? 'yes' : 'no'}.
+          </p>
+          <p className="mt-1 text-[11px] text-c-ghost">
+            Offline comparison on simulated learners: <code>npm run bkt:compare</code>.
+          </p>
         </Section>
 
         <Section

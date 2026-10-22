@@ -13,6 +13,7 @@ const tables = vi.hoisted(() => ({
   fsrs_shadow_log: [] as Row[],
   explanation_grades: [] as Row[],
   behavior_quality_shadow: [] as Row[],
+  bkt_param_shadow: [] as Row[],
 }))
 // Tables whose insert fails, so a missing migration can be simulated.
 const unmigrated = vi.hoisted(() => new Set<string>())
@@ -478,5 +479,52 @@ describe('behaviour-aware scheduling quality, in shadow (Level 11)', () => {
     expect(tables.behavior_quality_shadow[0]).toMatchObject({
       guided_reflection: true, live_quality: 3, adaptive_quality: 4,
     })
+  })
+})
+
+// ── Level 16: per-skill BKT parameters, in shadow ──────────────────────────
+describe('POST /api/attempt — per-skill BKT parameters (Level 16)', () => {
+  function correctAnswer() {
+    return POST(fakeRequest({
+      question_id: 'p1_bin_q1', skill_id: skillId, client_answer: 'b',
+      latency_ms: 2_000, hesitation_ms: 500, revision_count: 0,
+      difficulty_tier: 'review', question_format: 'mcq',
+    }))
+  }
+
+  it('logs both parameter sets and the p_know each would have produced', async () => {
+    const body = await (await correctAnswer()).json()
+
+    expect(tables.bkt_param_shadow).toHaveLength(1)
+    const shadow = tables.bkt_param_shadow[0]
+    expect(shadow).toMatchObject({
+      learner_id: learnerId, skill_id: skillId, attempt_id: body.attempt_id,
+      correct: true, has_fitted_params: true, applied: false,
+    })
+    // The fitted parameters differ from the global set, so the two estimates
+    // of the same attempt must differ — otherwise there is nothing to compare.
+    expect(shadow.fitted_p_know_after).not.toBe(shadow.live_p_know_after)
+  })
+
+  it('leaves the learner on the live global parameters while the flag is off', async () => {
+    await correctAnswer()
+    const shadow = tables.bkt_param_shadow[0]
+
+    // What the learner's state actually became is the live estimate, not the
+    // fitted one — this is the whole guarantee of shadow mode.
+    expect(tables.learner_skill_states[0].p_know).toBe(shadow.live_p_know_after)
+    expect(tables.attempt_events[0].p_know_after).toBe(shadow.live_p_know_after)
+    expect(shadow.live_p_slip).toBe(0.10)
+    expect(shadow.live_p_guess).toBe(0.20)
+  })
+
+  it('does not fail the attempt when migration 008 is missing', async () => {
+    unmigrated.add('bkt_param_shadow')
+    const res = await correctAnswer()
+
+    expect(res.status).toBe(200)
+    expect(tables.attempt_events).toHaveLength(1)
+    expect(tables.learner_skill_states).toHaveLength(1)
+    expect(tables.bkt_param_shadow).toHaveLength(0)
   })
 })

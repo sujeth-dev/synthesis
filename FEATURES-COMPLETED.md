@@ -167,6 +167,16 @@ Read honestly:
   every DKT arm, and above the app's live global-parameter BKT at **0.7168**.
   The strongest model measured here is a BKT the app does not run.
 
+> **Correction (Level 16).** That 0.7168 vs 0.7345 pair is confounded and
+> overstates the gap. `train_synaptic.py` scores the live arm from the
+> simulator's emitted `bkt_p_correct`, which carries the overdue `p_know` decay
+> `reconcileBktSm2OnLoad` applies, while the fitted arm's `predict_sequence`
+> has no decay at all — so it compares parameters *and* forgetting. Measured
+> fairly, with both arms traced inside one simulator run and decayed
+> identically, the gap is **0.7184 vs 0.7293**. The direction holds; the size
+> does not. The superseded numbers are left above rather than edited away, per
+> `PROGRESS.md`'s convention.
+
 ### The gate reports every condition (Level 15)
 
 `CutoverDecision` now carries `checks` — sample size, ranking and growth, each
@@ -183,6 +193,42 @@ never been shown. `npm run dkt:compare -- --sim` and `/engine` print all three:
 | Sample size | yes | 95,585 attempts, needs 5,000 |
 | Ranking | **NO** | AUC gain 0.0078, needs 0.02; log-loss no worse |
 | Growth | **NO** | DKT slope ratio 0.7273 vs BKT 0.8712, may lose at most 0.05 |
+
+### Per-skill BKT parameters, in shadow (Level 16)
+
+The live engine runs **one** parameter set for all 120 skills — `p_know 0.10,
+p_transit 0.15, p_slip 0.10, p_guess 0.20`. Every BKT this repository's
+research reports is per-skill EM-fitted, so the strongest knowledge model
+measured anywhere here was one the app does not run.
+`Research/dkt/fit_bkt_params.py` now fits that set (reusing
+`bkt_baseline.py`'s EM unchanged) and `src/lib/bkt/params.ts` loads it.
+
+Measured on 95,885 attempts by 300 simulated learners (`npm run bkt:compare`),
+with **both arms traced inside one simulator run** so they see the identical
+attempts in the identical order and take the identical overdue decay:
+
+| Model | AUC | Log-loss | Cohort slope ratio |
+|---|---|---|---|
+| Live BKT (one global set) | 0.7184 | 0.6094 | **0.8666** |
+| Per-skill fitted BKT | **0.7293** | **0.5898** | 0.8621 |
+
+- **Per-skill parameters buy ranking and calibration, not growth.** +0.0109 AUC
+  and a clearly better log-loss, while the slope ratio moves by −0.0045 — noise.
+  Whatever makes this engine track learning well, it is not the parameter set.
+- For scale: this beats the retrained DKT's 0.7253 AUC *and* keeps a slope ratio
+  of 0.86 against DKT's 0.73. On the app's own data the better knowledge model
+  is a better-parameterised BKT, not a neural one.
+- Only **62 of 120** skills have fitted parameters: the simulator's learners
+  never reach the rest in 90 days, and 5 more fall under the 5-sequence floor.
+  Those skills keep the global set, which `paramsFor` returns as the fallback.
+- **It cannot be switched on.** `isPerSkillBktEnabled` requires `BKT_PER_SKILL=1`
+  *and* a parameter file not fitted on simulator output. The committed file is
+  synthetic, so the flag is inert by construction — applying it would dress the
+  simulator's hand-written memory model as a measurement of learners. A real
+  switch needs a file fitted from real `attempt_events` rows.
+- Migration `008_bkt_param_shadow.sql` logs both parameter sets, both resulting
+  `p_know`, and whether the fitted one was applied. Fail-open: a deployment
+  without it cannot fail an attempt.
 
 ## 5. Scheduling (Levels 7, 8 and 11)
 

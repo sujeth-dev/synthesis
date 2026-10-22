@@ -18,6 +18,7 @@
     "sim:latency": "tsx scripts/sim-latency-bug.ts",
     "dkt:predict": "tsx scripts/dkt-predict.ts",
     "dkt:compare": "tsx scripts/dkt-compare.ts",
+    "bkt:compare": "tsx scripts/bkt-params-compare.ts",
     "seed:demo": "tsx scripts/seed-demo.ts"
   },
   "dependencies": {

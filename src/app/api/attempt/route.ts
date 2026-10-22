@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
+import { fittedParamsProvenance, hasFittedParams, isPerSkillBktEnabled, paramsFor } from '@/lib/bkt/params'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
 import { adaptiveFsrsRating, adaptiveQuality, isAdaptiveQualityEnabled, type AttemptBehaviorSignals } from '@/lib/sm2/adaptive'
 import { computeFsrsSchedule, fsrsRatingFromCorrectness, type FsrsSchedule } from '@/lib/fsrs'
@@ -17,7 +18,7 @@ import {
   getRecentAttemptsForSkill, getSessionBehaviorAttempts,
   getLastFsrsShadowEntry, insertFsrsShadowLog,
   getAttemptHistory, insertDktShadowLog, insertExplanationGrade,
-  insertBehaviorQualityShadow,
+  insertBehaviorQualityShadow, insertBktParamShadow,
 } from '@/lib/db/queries'
 import { DKT_HISTORY_LIMIT, getBundledDktModel, isDktShadowEnabled, predictForAttempt } from '@/lib/dkt/shadow'
 import { getAllNodes } from '@/lib/graph'
@@ -127,10 +128,29 @@ export async function POST(req: NextRequest) {
     correct = grade.category === 'meaning-included'
   }
   const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
-  const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {
-    reasoningQuality,
-    behavior: behaviorModifier,
-  })
+  const evidence = { reasoningQuality, behavior: behaviorModifier }
+  // Level 16, in shadow: the same attempt under this skill's EM-fitted
+  // parameters beside the live global set. bktUpdate reads p_slip, p_guess and
+  // p_transit off the state, so a parameter set enters by swapping those three
+  // fields and nothing inside the model changes. isPerSkillBktEnabled refuses
+  // a parameter file fitted on simulator output whatever the flag says.
+  const fittedParams = paramsFor(skill_id)
+  const applyFitted = isPerSkillBktEnabled()
+  const liveUpdated = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, evidence)
+  const fittedUpdated = hasFittedParams(skill_id)
+    ? bktUpdate({ ...skillState, p_transit: fittedParams.p_transit, p_slip: fittedParams.p_slip, p_guess: fittedParams.p_guess },
+        correct, schedule?.repetitions ?? 0, evidence)
+    : liveUpdated
+  const updatedState = applyFitted ? fittedUpdated : liveUpdated
+  const bktParamShadow = {
+    learner_id: user.id, skill_id, correct, p_know_before: skillState.p_know,
+    live_p_know_after: liveUpdated.p_know, live_p_transit: skillState.p_transit,
+    live_p_slip: skillState.p_slip, live_p_guess: skillState.p_guess,
+    fitted_p_know_after: fittedUpdated.p_know, fitted_p_transit: fittedParams.p_transit,
+    fitted_p_slip: fittedParams.p_slip, fitted_p_guess: fittedParams.p_guess,
+    has_fitted_params: hasFittedParams(skill_id), applied: applyFitted,
+    params_synthetic: fittedParamsProvenance().synthetic,
+  }
 
   // ── Update SM-2, with FSRS alongside (FSRS-3 shadow mode). FSRS is always
   // computed and logged from the same correctness/latency evidence; it only
@@ -246,6 +266,13 @@ export async function POST(req: NextRequest) {
     } catch {
       // Observational only — see the FSRS and DKT shadow writes below.
     }
+  }
+
+  try {
+    await insertBktParamShadow({ ...bktParamShadow, attempt_id })
+  } catch {
+    // Observational only; a deployment without migration 008 must not fail an
+    // attempt over a comparison row.
   }
 
   if (grade) {

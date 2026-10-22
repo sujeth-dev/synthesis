@@ -121,6 +121,18 @@ export interface BehaviorQualityShadowEntry {
   created_at: string
 }
 
+// One row per attempt (Level 16): the p_know the live global-parameter BKT
+// produced beside the one a per-skill fitted parameter set would have, with
+// both parameter sets, so the two can be compared on real outcomes.
+export interface BktParamShadowEntry {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  correct: boolean; p_know_before: number
+  live_p_know_after: number; live_p_transit: number; live_p_slip: number; live_p_guess: number
+  fitted_p_know_after: number; fitted_p_transit: number; fitted_p_slip: number; fitted_p_guess: number
+  has_fitted_params: boolean; applied: boolean; params_synthetic: boolean
+  created_at: string
+}
+
 // One row per free-text attempt (Level 10): the learner's explanation and the
 // grade the engine consumed for it, with the provenance a grade audit needs.
 export interface ExplanationGrade {

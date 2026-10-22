@@ -2,7 +2,7 @@ import { getDb, generateId } from '@/lib/db'
 import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
   AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
-  ExplanationGrade, BehaviorQualityShadowEntry,
+  ExplanationGrade, BehaviorQualityShadowEntry, BktParamShadowEntry,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -363,6 +363,29 @@ export async function insertBehaviorQualityShadow(entry: Omit<BehaviorQualitySha
 export async function getBehaviorQualityShadow(learnerId: string, limit: number): Promise<BehaviorQualityShadowEntry[]> {
   const { data } = await getDb()
     .from('behavior_quality_shadow')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+// ─────────────────────────────────────────────
+// PER-SKILL BKT PARAMETERS (Level 16 — requires migration 008)
+// ─────────────────────────────────────────────
+
+export async function insertBktParamShadow(entry: Omit<BktParamShadowEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('bkt_param_shadow').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`BKT parameter shadow insert failed: ${error.message}`)
+}
+
+export async function getBktParamShadow(learnerId: string, limit: number): Promise<BktParamShadowEntry[]> {
+  const { data } = await getDb()
+    .from('bkt_param_shadow')
     .select('*')
     .eq('learner_id', learnerId)
     .order('created_at', { ascending: false })

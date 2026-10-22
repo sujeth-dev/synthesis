@@ -30,6 +30,7 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 | 13 | `/engine`: every signal above, for one real learner, read from the database | `npm run seed:demo`, then open `/engine` |
 | 14 | The bundled DKT retrained with DKT+ reconstruction — better growth fidelity, and still not enough to clear the gate | `npm run dkt:compare -- --sim` |
 | 15 | The gate reports every failing condition, not only the first — "dkt not better" no longer hides the growth failure behind it | `npm run dkt:compare -- --sim`, then `/engine` |
+| 16 | Per-skill BKT parameters beside the one global set the engine actually uses — ships **off**, **requires migration `008`** | `npm run bkt:compare`, `npx vitest run src/lib/bkt` |
 
 ## Level details
 
@@ -114,3 +115,9 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 - Why: the simulator's verdict read `dkt_not_better` and said nothing about growth, which also fails by ~3× the tolerance. Closing the AUC gap would have revealed a second failure nobody had been shown — the same single-scalar mistake the lab diagnosed, one level up.
 - `npm run dkt:compare -- --sim` and `/engine` now print all three rows: sample size yes (95,585 ≥ 5,000), ranking **NO** (AUC gain 0.0078 < 0.02), growth **NO** (0.7273 vs BKT 0.8712, tolerance 0.05).
 - The existing tests keep their exact `toEqual` assertions on `reason` and `recommend` and gained an assertion about which conditions failed; nothing was relaxed.
+
+### Level 16 — the parameter set the engine never had
+- The live engine uses one parameter set for all 120 skills. `Research/dkt/fit_bkt_params.py` fits per-skill parameters by EM (reusing `bkt_baseline.py` unchanged), `src/lib/bkt/params.ts` loads them, and migration `008` logs both estimates of every attempt.
+- **Synthetic** (300 learners, 95,885 attempts, `npm run bkt:compare`): per-skill AUC **0.7293** vs live **0.7184**, log-loss 0.5898 vs 0.6094, slope ratio 0.8621 vs 0.8666. Per-skill parameters buy ranking and calibration and leave growth fidelity where it was.
+- Both arms are traced **inside one simulator run**, because the live engine decays `p_know` on an overdue load (`reconcileBktSm2OnLoad`). A first attempt replayed the events afterwards and drifted 0.44 from the simulator's own predictions — it was measuring parameters against forgetting. The confounded figure in `train_synaptic.py`'s own table (0.7168 vs 0.7345) is corrected in `FEATURES-COMPLETED.md` rather than deleted.
+- Ships **off**, and `BKT_PER_SKILL=1` is inert by construction: `isPerSkillBktEnabled` refuses a parameter file fitted on simulator output, because those parameters describe `src/lib/sim/learner.ts`, not learners.
