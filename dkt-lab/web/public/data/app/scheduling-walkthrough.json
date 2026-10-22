@@ -1,0 +1,575 @@
+{
+  "synthetic": true,
+  "illustration": true,
+  "note": "One hand-scripted learner, always returning exactly on the due date. The grades and intervals come from the app's real scheduling functions; the answers do not come from a population.",
+  "crushed_latency_ms": 100,
+  "answers": [
+    {
+      "correct": true,
+      "latency_ms": 12000,
+      "hesitation_ms": 2000,
+      "revision_count": 0,
+      "what": "Right, but it took a while"
+    },
+    {
+      "correct": true,
+      "latency_ms": 6000,
+      "hesitation_ms": 1000,
+      "revision_count": 0,
+      "what": "Right, at a normal pace"
+    },
+    {
+      "correct": true,
+      "latency_ms": 2000,
+      "hesitation_ms": 500,
+      "revision_count": 0,
+      "what": "Right and quick"
+    },
+    {
+      "correct": true,
+      "latency_ms": 7000,
+      "hesitation_ms": 14000,
+      "revision_count": 3,
+      "what": "Right, after a long stare and three changes of mind"
+    },
+    {
+      "correct": false,
+      "latency_ms": 15000,
+      "hesitation_ms": 4000,
+      "revision_count": 1,
+      "what": "Wrong"
+    },
+    {
+      "correct": true,
+      "latency_ms": 4000,
+      "hesitation_ms": 1000,
+      "revision_count": 0,
+      "what": "Right again"
+    },
+    {
+      "correct": true,
+      "latency_ms": 2500,
+      "hesitation_ms": 600,
+      "revision_count": 0,
+      "what": "Right and quick"
+    }
+  ],
+  "worlds": {
+    "sm2_measured": [
+      {
+        "day": 0,
+        "what": "Right, but it took a while",
+        "correct": true,
+        "latency_ms": 12000,
+        "hesitation_ms": 2000,
+        "revision_count": 0,
+        "grade": 3,
+        "gradeName": "quality 3",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 1,
+        "what": "Right, at a normal pace",
+        "correct": true,
+        "latency_ms": 6000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "quality 4",
+        "intervalDays": 6,
+        "recallBefore": null
+      },
+      {
+        "day": 7,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2000,
+        "hesitation_ms": 500,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 14,
+        "recallBefore": null
+      },
+      {
+        "day": 21,
+        "what": "Right, after a long stare and three changes of mind",
+        "correct": true,
+        "latency_ms": 7000,
+        "hesitation_ms": 14000,
+        "revision_count": 3,
+        "grade": 4,
+        "gradeName": "quality 4",
+        "intervalDays": 34,
+        "recallBefore": null
+      },
+      {
+        "day": 55,
+        "what": "Wrong",
+        "correct": false,
+        "latency_ms": 15000,
+        "hesitation_ms": 4000,
+        "revision_count": 1,
+        "grade": 1,
+        "gradeName": "quality 1",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 56,
+        "what": "Right again",
+        "correct": true,
+        "latency_ms": 4000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "quality 4",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 57,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2500,
+        "hesitation_ms": 600,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 6,
+        "recallBefore": null
+      }
+    ],
+    "sm2_speed_lost": [
+      {
+        "day": 0,
+        "what": "Right, but it took a while",
+        "correct": true,
+        "latency_ms": 12000,
+        "hesitation_ms": 2000,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 1,
+        "what": "Right, at a normal pace",
+        "correct": true,
+        "latency_ms": 6000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 6,
+        "recallBefore": null
+      },
+      {
+        "day": 7,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2000,
+        "hesitation_ms": 500,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 16,
+        "recallBefore": null
+      },
+      {
+        "day": 23,
+        "what": "Right, after a long stare and three changes of mind",
+        "correct": true,
+        "latency_ms": 7000,
+        "hesitation_ms": 14000,
+        "revision_count": 3,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 45,
+        "recallBefore": null
+      },
+      {
+        "day": 68,
+        "what": "Wrong",
+        "correct": false,
+        "latency_ms": 15000,
+        "hesitation_ms": 4000,
+        "revision_count": 1,
+        "grade": 1,
+        "gradeName": "quality 1",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 69,
+        "what": "Right again",
+        "correct": true,
+        "latency_ms": 4000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 70,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2500,
+        "hesitation_ms": 600,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 6,
+        "recallBefore": null
+      }
+    ],
+    "sm2_behaviour_aware": [
+      {
+        "day": 0,
+        "what": "Right, but it took a while",
+        "correct": true,
+        "latency_ms": 12000,
+        "hesitation_ms": 2000,
+        "revision_count": 0,
+        "grade": 3,
+        "gradeName": "quality 3",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 1,
+        "what": "Right, at a normal pace",
+        "correct": true,
+        "latency_ms": 6000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "quality 4",
+        "intervalDays": 6,
+        "recallBefore": null
+      },
+      {
+        "day": 7,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2000,
+        "hesitation_ms": 500,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 14,
+        "recallBefore": null
+      },
+      {
+        "day": 21,
+        "what": "Right, after a long stare and three changes of mind",
+        "correct": true,
+        "latency_ms": 7000,
+        "hesitation_ms": 14000,
+        "revision_count": 3,
+        "grade": 3,
+        "gradeName": "quality 3",
+        "intervalDays": 34,
+        "recallBefore": null
+      },
+      {
+        "day": 55,
+        "what": "Wrong",
+        "correct": false,
+        "latency_ms": 15000,
+        "hesitation_ms": 4000,
+        "revision_count": 1,
+        "grade": 1,
+        "gradeName": "quality 1",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 56,
+        "what": "Right again",
+        "correct": true,
+        "latency_ms": 4000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "quality 4",
+        "intervalDays": 1,
+        "recallBefore": null
+      },
+      {
+        "day": 57,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2500,
+        "hesitation_ms": 600,
+        "revision_count": 0,
+        "grade": 5,
+        "gradeName": "quality 5",
+        "intervalDays": 6,
+        "recallBefore": null
+      }
+    ],
+    "fsrs_measured": [
+      {
+        "day": 0,
+        "what": "Right, but it took a while",
+        "correct": true,
+        "latency_ms": 12000,
+        "hesitation_ms": 2000,
+        "revision_count": 0,
+        "grade": 2,
+        "gradeName": "Hard",
+        "intervalDays": 2,
+        "recallBefore": null
+      },
+      {
+        "day": 2,
+        "what": "Right, at a normal pace",
+        "correct": true,
+        "latency_ms": 6000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 3,
+        "gradeName": "Good",
+        "intervalDays": 7,
+        "recallBefore": 0.8673675
+      },
+      {
+        "day": 9,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2000,
+        "hesitation_ms": 500,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 36,
+        "recallBefore": 0.8956362
+      },
+      {
+        "day": 45,
+        "what": "Right, after a long stare and three changes of mind",
+        "correct": true,
+        "latency_ms": 7000,
+        "hesitation_ms": 14000,
+        "revision_count": 3,
+        "grade": 3,
+        "gradeName": "Good",
+        "intervalDays": 117,
+        "recallBefore": 0.90087916
+      },
+      {
+        "day": 162,
+        "what": "Wrong",
+        "correct": false,
+        "latency_ms": 15000,
+        "hesitation_ms": 4000,
+        "revision_count": 1,
+        "grade": 1,
+        "gradeName": "Again",
+        "intervalDays": 4,
+        "recallBefore": 0.90010729
+      },
+      {
+        "day": 166,
+        "what": "Right again",
+        "correct": true,
+        "latency_ms": 4000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 3,
+        "gradeName": "Good",
+        "intervalDays": 9,
+        "recallBefore": 0.90107816
+      },
+      {
+        "day": 175,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2500,
+        "hesitation_ms": 600,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 30,
+        "recallBefore": 0.90364581
+      }
+    ],
+    "fsrs_speed_lost": [
+      {
+        "day": 0,
+        "what": "Right, but it took a while",
+        "correct": true,
+        "latency_ms": 12000,
+        "hesitation_ms": 2000,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 8,
+        "recallBefore": null
+      },
+      {
+        "day": 8,
+        "what": "Right, at a normal pace",
+        "correct": true,
+        "latency_ms": 6000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 66,
+        "recallBefore": 0.9024733
+      },
+      {
+        "day": 74,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2000,
+        "hesitation_ms": 500,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 397,
+        "recallBefore": 0.89960725
+      },
+      {
+        "day": 471,
+        "what": "Right, after a long stare and three changes of mind",
+        "correct": true,
+        "latency_ms": 7000,
+        "hesitation_ms": 14000,
+        "revision_count": 3,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 1875,
+        "recallBefore": 0.89996105
+      },
+      {
+        "day": 2346,
+        "what": "Wrong",
+        "correct": false,
+        "latency_ms": 15000,
+        "hesitation_ms": 4000,
+        "revision_count": 1,
+        "grade": 1,
+        "gradeName": "Again",
+        "intervalDays": 11,
+        "recallBefore": 0.89999696
+      },
+      {
+        "day": 2357,
+        "what": "Right again",
+        "correct": true,
+        "latency_ms": 4000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 40,
+        "recallBefore": 0.89961705
+      },
+      {
+        "day": 2397,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2500,
+        "hesitation_ms": 600,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 149,
+        "recallBefore": 0.90084215
+      }
+    ],
+    "fsrs_behaviour_aware": [
+      {
+        "day": 0,
+        "what": "Right, but it took a while",
+        "correct": true,
+        "latency_ms": 12000,
+        "hesitation_ms": 2000,
+        "revision_count": 0,
+        "grade": 2,
+        "gradeName": "Hard",
+        "intervalDays": 2,
+        "recallBefore": null
+      },
+      {
+        "day": 2,
+        "what": "Right, at a normal pace",
+        "correct": true,
+        "latency_ms": 6000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 3,
+        "gradeName": "Good",
+        "intervalDays": 7,
+        "recallBefore": 0.8673675
+      },
+      {
+        "day": 9,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2000,
+        "hesitation_ms": 500,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 36,
+        "recallBefore": 0.8956362
+      },
+      {
+        "day": 45,
+        "what": "Right, after a long stare and three changes of mind",
+        "correct": true,
+        "latency_ms": 7000,
+        "hesitation_ms": 14000,
+        "revision_count": 3,
+        "grade": 2,
+        "gradeName": "Hard",
+        "intervalDays": 85,
+        "recallBefore": 0.90087916
+      },
+      {
+        "day": 130,
+        "what": "Wrong",
+        "correct": false,
+        "latency_ms": 15000,
+        "hesitation_ms": 4000,
+        "revision_count": 1,
+        "grade": 1,
+        "gradeName": "Again",
+        "intervalDays": 4,
+        "recallBefore": 0.90000706
+      },
+      {
+        "day": 134,
+        "what": "Right again",
+        "correct": true,
+        "latency_ms": 4000,
+        "hesitation_ms": 1000,
+        "revision_count": 0,
+        "grade": 3,
+        "gradeName": "Good",
+        "intervalDays": 8,
+        "recallBefore": 0.89058367
+      },
+      {
+        "day": 142,
+        "what": "Right and quick",
+        "correct": true,
+        "latency_ms": 2500,
+        "hesitation_ms": 600,
+        "revision_count": 0,
+        "grade": 4,
+        "gradeName": "Easy",
+        "intervalDays": 22,
+        "recallBefore": 0.89660064
+      }
+    ]
+  }
+}

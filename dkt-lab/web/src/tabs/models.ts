@@ -4,6 +4,7 @@ import { f4, int, signed } from '../ui/format'
 import { provenance } from '../ui/provenance'
 import { loadMetrics, loadSummary, loadJson, type Metrics } from '../data'
 import type { TabContext } from '../main'
+import { renderBeforeAfterScoreboard } from './before-after'
 
 const METRICS: { key: 'auc' | 'log_loss' | 'rmse' | 'accuracy'; label: string; higher: boolean }[] = [
   { key: 'auc', label: 'AUC', higher: true },
@@ -16,7 +17,11 @@ export async function renderModels(root: HTMLElement, ctx: TabContext): Promise<
   const d = ctx.dataset
   if (!d) return
   const [m, summary] = await Promise.all([loadMetrics(d.id), loadSummary()])
-  root.append(h('h1', 'Model comparison'), provenance(d),
+  root.append(h('h1', 'Model comparison'))
+  try { await renderBeforeAfterScoreboard(root) } catch (err) {
+    root.append(h('div.note', `Before/after scoreboard unavailable: ${(err as Error).message}`))
+  }
+  root.append(h('h2', 'BKT vs DKT on the public datasets'), provenance(d),
     h('p.lede', `Next-step prediction on ${int(m.bkt.n)} held-out answers. Both models see only a student’s earlier answers and are scored on identical rows.`))
 
   root.append(h('div.grid.cols-2',

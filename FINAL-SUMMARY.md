@@ -34,7 +34,7 @@ experimental is switched on; each such change waits for a human decision.
 
 | Ask | Where it stands |
 |---|---|
-| Reasoning evaluation, rule-based → LLM | **Built.** An LLM grader exists with a rule-based fallback. 120 explain questions now give it something to grade (there were none). The server's grade is the single verdict for free text, and the learner's words and the grade are stored (migration 006). **No real LLM call has run yet.** |
+| Reasoning evaluation, rule-based → LLM | **Built.** An LLM grader exists with a rule-based fallback. 120 explain questions now give it something to grade (there were none). The server's grade is the single verdict for free text, and the learner's words and the grade are stored (migration 006). The LLM grader itself was evaluated once before this work (2026-08-12, 106 hand-labelled explanations: 96.2% agreement against the rules' 67.0%, `src/lib/nlp/data/eval-results-v1.json`), but **none of the Level 9–10 work has run against a real model**, and the explain path has not been exercised end to end with a key. |
 | Correctness + reasoning + behaviour into BKT | **Done.** The combination existed but both extra inputs were constant. They are live now. |
 | BKT → DKT | **Built and measured, deliberately not switched.** DKT runs in shadow beside BKT and is judged by a gate. |
 | Stronger SM-2 | **Built, off.** A behaviour-aware quality is computed and logged beside the live one (migration 007). Switching it on is your call. |
@@ -60,8 +60,9 @@ Two defects were found and fixed first: placement never placed anyone, and 38
   (gain 0.0078, needs 0.02) and growth (loses 0.144, may lose 0.05). The gate
   reports both rather than stopping at the first.
 - Retraining DKT with the lab's recommended setting raised growth from 0.665 to
-  0.727, much less than the lab's own simulator predicted. Most of that expected
-  gain was just better training.
+  0.727 (+0.062), much less than the lab's own simulator predicted (+0.15). Of the
+  +0.062, +0.028 came from simply training longer with early stopping and +0.034
+  from the reconstruction term itself.
 - Per-skill BKT improved ranking and calibration but **not** growth. Only 62 of 120
   skills could be fitted from simulated data, and the app refuses to use
   simulator-fitted parameters live.

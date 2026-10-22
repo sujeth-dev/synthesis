@@ -3,6 +3,7 @@ import { chart, palette } from '../ui/charts'
 import { f3, pct } from '../ui/format'
 import { loadJson } from '../data'
 import { canvas } from './models'
+import { renderLoopStory } from './scheduling-story'
 
 interface Report {
   scheduler: 'sm2' | 'fsrs'
@@ -18,16 +19,27 @@ export async function renderScheduling(root: HTMLElement): Promise<void> {
   const sm2 = r.reports.find(x => x.scheduler === 'sm2')!
   const fsrs = r.reports.find(x => x.scheduler === 'fsrs')!
   root.append(
-    h('h1', 'Scheduling: SM-2 vs FSRS'),
+    h('h1', 'Scheduling: when should the app ask again?'),
+    h('p.lede', 'Knowledge tracing estimates what a learner knows; the scheduler decides when they should see it again. The app runs SM-2 today and logs FSRS beside it. This page starts with one learner and one skill, then the whole simulated population, then what happened when the timing signal was broken.'),
+    h('div.flow',
+      h('div.step', h('h3', h('span.step-n', '1'), 'Answer'), h('p.small', { style: { margin: 0 } }, 'Right or wrong, how long it took, how long the learner hesitated, how often they changed their mind.')),
+      h('div.step', h('h3', h('span.step-n', '2'), 'Grade'), h('p.small', { style: { margin: 0 } }, 'The scheduler turns that into one of four grades: Again, Hard, Good or Easy (SM-2 calls them 1, 3, 4 and 5).')),
+      h('div.step', h('h3', h('span.step-n', '3'), 'Come back'), h('p.small', { style: { margin: 0 } }, 'A better grade means a longer wait. A miss shortens the wait sharply.'))),
+  )
+  await renderLoopStory(root)
+  root.append(
+    h('h2', { style: { marginTop: '36px' } }, 'SM-2 vs FSRS across a whole population'),
     h('div.prov', h('span.badge.synthetic', 'synthetic (Synaptic simulator)'), h('strong', `${r.config.learners.toLocaleString('en-US')} simulated learners × ${r.config.days} days, ${r.config.skills} skills, seed ${r.config.seed}`),
       h('span.muted', 'Source: Research/sim/results/scheduler-comparison.json (copied unchanged)'), h('span.muted', r.note)),
-    h('p.lede', 'Knowledge tracing estimates what a learner knows; a scheduler decides when they should see it again. These are the repository’s existing simulator results: the same simulated population run under each scheduler, so only the review timing differs. Not evidence about real learners.'),
+    h('p.lede', 'The same simulated population run under each scheduler, so only the review timing differs. Not evidence about real learners.'),
   )
-  root.append(h('div.card', { style: { marginBottom: '16px' } },
-    h('h3', 'In plain terms'),
-    h('p.small', h('strong', 'SM-2 '), 'is a fixed recipe from 1987: each time you recall a card the gap before the next review is multiplied by an "ease" number, and a miss resets it. It never models forgetting itself.'),
-    h('p.small', h('strong', 'FSRS '), 'models memory directly: it tracks how stable a memory is and how hard the card is, and schedules the next review for when predicted recall falls to a target (about 90%). It reviews more often and forgets less, as the table below shows.'),
-    h('p.small.muted', 'Both take the same evidence from each answer: right or wrong, and how fast. The second half of this tab shows what happens to both when that speed signal is broken.')))
+  root.append(h('div.grid.cols-2', { style: { marginBottom: '16px' } },
+    h('div.card', h('h3', 'Why they behave differently'),
+      h('p.small', h('strong', 'SM-2 '), 'is a fixed recipe from 1987: each time you recall a card the gap before the next review is multiplied by an “ease” number, and a miss resets it to a day. It never models forgetting itself, so it cannot tell a shaky memory from a solid one except through that one number.'),
+      h('p.small', { style: { marginBottom: 0 } }, h('strong', 'FSRS '), 'models memory directly: it tracks how stable a memory is and how hard the card is, and schedules the next review for when predicted recall falls to about 90%. It asks for more reviews and forgets less.')),
+    h('div.card', h('h3', 'What both of them are fed'),
+      h('p.small', 'Exactly the same evidence from each answer: right or wrong, and how fast. That is why a broken speed signal hurts both, and why FSRS is hurt more: it trusts the grade to place the next review years out.'),
+      h('p.small.muted', { style: { marginBottom: 0 } }, 'The last section of this page shows that failure on the whole population.'))))
   const rows: [string, (x: Report) => string, boolean][] = [
     ['Reviews per learner', x => x.reviewsPerLearner.toFixed(1), false],
     ['Skills learned per learner', x => x.skillsLearnedPerLearner.toFixed(1), true],
@@ -86,6 +98,10 @@ async function renderLatencyImpact(root: HTMLElement): Promise<void> {
     h('div.prov', h('span.badge.synthetic', 'synthetic (Synaptic simulator)'),
       h('strong', `${r.config.learners} learners × ${r.config.days} days, ${r.config.skills} skills, seed ${r.config.seed}`),
       h('span.muted', 'Source: Research/sim/results/latency-signal-impact.json (copied unchanged)')),
+    h('div.flow',
+      h('div.step.before', h('h3', h('span.step-n', '1'), 'What was broken'), h('p.small', { style: { margin: 0 } }, `The timer was read while the request was still being built, so it measured packing the data, not thinking time: the server saw about ${r.config.crushed_latency_ms} ms for every answer. Hesitation was always 0 and answer changes were never sent.`)),
+      h('div.step.fix', h('h3', h('span.step-n', '2'), 'What we fixed'), h('p.small', { style: { margin: 0 } }, 'The browser now stamps when the question appears, when the learner first touches it, and when they submit. The server checks the numbers and stores all three measures.')),
+      h('div.step.after', h('h3', h('span.step-n', '3'), 'What it changes'), h('p.small', { style: { margin: 0 } }, `Top-grade answers (“fast”) fall from ${pct(r.evidence.sm2_crushed.quality['5'] ?? 0)} of all SM-2 answers to ${pct(r.evidence.sm2_measured.quality['5'] ?? 0)}, and the middle grades exist again. Below: what that does to reviews and forgetting.`))),
     h('p.lede', `Both schedulers grade each right answer by how fast it was. In the app a bug made every answer look like it took ${r.config.crushed_latency_ms} ms, so every right answer was graded “fast”. This is the same simulated population run with the real speed and with the broken one; the learners still take just as long, only what the scheduler is told changes.`),
     h('div.grid.cols-2',
       h('div.card', h('h3', 'What the scheduler is told'), h('div.table-wrap', h('table',

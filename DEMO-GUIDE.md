@@ -1,13 +1,17 @@
 # Demo guide: what you can show, what you cannot, and how
 
-Everything below is from **simulated learners** unless stated. Nothing has been
-run against a real database, a real LLM or a real student.
+Everything below is from **simulated learners** unless stated. Nothing in this
+work has been run against a real database, a real LLM or a real student (the LLM
+grader had one earlier evaluation on 106 hand-labelled explanations, recorded in
+`src/lib/nlp/data/eval-results-v1.json`).
 
 ## Works with no database, no keys, no login (use these)
 
 | What to show | Command | What to point at |
 |---|---|---|
-| The lab website | `cd dkt-lab/web && npm run build && npm run preview` | Tab **Learning curves** (why DKT wins ranking and loses growth), **Scheduling** (SM-2 vs FSRS, then what a broken timing signal cost), **Synaptic app** (what the app did with the findings) |
+| The lab website | `cd dkt-lab/web && npm run build && npm run preview` | **Learning curves** (before → after, and why DKT wins ranking but loses growth), **Scheduling** (the loop as a conversation, SM-2 vs FSRS, what a broken timing signal cost), **Synaptic app**, and **Real-app guide** (every ask: state, where, how to see it) |
+| One learner through the real schedulers | `npm run sim:walkthrough` | Same seven answers, three signals, SM-2 and FSRS gaps |
+| The before/after learning-curve data | `npm run curves:compare` (about 3 min) | Slope ratios 0.665 → 0.727 vs BKT 0.871; refuses to write if it disagrees with the gate |
 | What the dead timing signal cost | `npm run sim:latency` | Wrong/slow/medium/fast grades, reviews per learner, retention |
 | DKT vs BKT and the gate | `npm run dkt:compare -- --sim` | The three-condition table: ranking FAIL, growth FAIL |
 | Per-skill BKT vs one global set | `npm run bkt:compare` | AUC 0.7184 → 0.7293, growth unchanged |

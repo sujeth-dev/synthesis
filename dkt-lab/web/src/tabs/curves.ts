@@ -5,6 +5,7 @@ import { provenance } from '../ui/provenance'
 import { loadCurves, loadDiagnostics } from '../data'
 import type { CurveFidelity, CurvePoint, Diagnostics } from '../data'
 import { canvas } from './models'
+import { renderBeforeAfterCurves } from './before-after'
 import type { TabContext } from '../main'
 
 // Learning curves. Two measurements are shown deliberately, because they
@@ -49,7 +50,11 @@ export async function renderCurves(root: HTMLElement, ctx: TabContext): Promise<
     diag = null                         // a dataset exported before Lab 7
   }
 
-  root.append(h('h1', 'Learning curves'), provenance(d),
+  root.append(h('h1', 'Learning curves'))
+  try { await renderBeforeAfterCurves(root) } catch (err) {
+    root.append(h('div.note', `Before/after curves unavailable: ${(err as Error).message}`))
+  }
+  root.append(h('h2', { style: { marginTop: '36px' } }, 'The same question on the public datasets'), provenance(d),
     h('p.lede', 'Average P(correct) on a student’s n-th attempt at a skill, for held-out students: '
       + 'the observed rate, and the mean prediction each model made before seeing that answer. '
       + 'A model that represents learning follows the black line — and, more importantly, rises as fast as it does.'))

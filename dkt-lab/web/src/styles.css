@@ -261,3 +261,74 @@ ul.caveats li { margin-bottom: 8px; }
 /* Pass/fail marks in the Synaptic app tab: the word is always shown, colour is
    only reinforcement (DKT's rust, already the lab's "worse" hue). */
 strong.fail { color: var(--dkt); }
+
+/* Story pages (Learning curves before/after, Scheduling chat, Real-app guide).
+   Everything here uses the same tokens as the rest of the lab. */
+.flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin: 12px 0 20px; }
+.flow .step { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow); }
+.flow .step::after { content: '→'; position: absolute; right: -22px; top: 50%; transform: translateY(-50%); color: var(--ink-3); font-size: 20px; }
+.flow .step:last-child::after { display: none; }
+.flow .step h3 { margin: 0 0 6px; display: flex; align-items: center; gap: 8px; font-size: 15px; }
+.flow .step ul { margin: 6px 0 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-2); }
+.flow .step li { margin-bottom: 4px; }
+.flow .step.before { border-top: 3px solid var(--dkt); }
+.flow .step.fix { border-top: 3px solid var(--warn); }
+.flow .step.after { border-top: 3px solid var(--good); }
+.step-n { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 600 12px/1 var(--mono); flex: none; }
+.chip { display: inline-block; font: 600 12px/1.5 var(--mono); padding: 0 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); white-space: nowrap; }
+.chip.up { background: var(--real-soft); color: var(--good); }
+.chip.down { background: var(--dkt-soft); color: var(--dkt); }
+.chip.same { background: var(--surface-2); color: var(--ink-3); }
+.bigstat { font: 600 26px/1.1 var(--mono); font-variant-numeric: tabular-nums; }
+.bigstat small { font: 400 12px var(--sans); color: var(--ink-3); display: block; margin-top: 2px; }
+.vs { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.vs .arrow { color: var(--ink-3); }
+.panel-tag { font: 600 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px; background: var(--dkt-soft); color: var(--dkt); }
+.panel-tag.after { background: var(--real-soft); color: var(--good); }
+
+/* Chat-style walkthrough (Scheduling). */
+.chat { display: grid; gap: 6px; padding: 4px 0; }
+.bubble { max-width: 86%; padding: 7px 12px; border-radius: 14px; font-size: 13.5px; line-height: 1.45; }
+.bubble .who { display: block; font: 600 10px/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; margin-bottom: 1px; }
+.bubble.you { justify-self: end; background: var(--ink); color: var(--bg); border-bottom-right-radius: 4px; }
+.bubble.app { justify-self: start; background: var(--surface-2); border-bottom-left-radius: 4px; }
+.bubble.sys { justify-self: center; max-width: 100%; background: none; color: var(--ink-3); font: 12px var(--mono); padding: 4px 0; }
+.bubble.warn { background: var(--dkt-soft); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; flex-wrap: wrap; }
+.seg button { font: inherit; font-size: 13px; padding: 6px 12px; background: var(--surface); color: var(--ink-2); border: 0; border-right: 1px solid var(--line); cursor: pointer; }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed='true'] { background: var(--ink); color: var(--bg); }
+
+/* Real-app guide. */
+.feature { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 12px; box-shadow: var(--shadow); }
+.feature > summary { cursor: pointer; list-style: none; display: flex; gap: 10px; align-items: center; padding: 12px 16px; }
+.feature > summary::-webkit-details-marker { display: none; }
+.feature > summary::after { content: '+'; margin-left: auto; color: var(--ink-3); font: 600 18px var(--mono); }
+.feature[open] > summary::after { content: '−'; }
+.feature .fnum { font: 600 12px var(--mono); color: var(--ink-3); }
+.feature .ftitle { font-weight: 600; }
+.feature .fbody { padding: 0 16px 14px; border-top: 1px solid var(--line); }
+.feature dl { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 8px 14px; margin: 12px 0 0; font-size: 13.5px; }
+.feature dt { color: var(--ink-3); font: 600 11px/1.9 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; }
+.feature dd { margin: 0; color: var(--ink-2); }
+.feature dd ol, .feature dd ul { margin: 0; padding-left: 18px; }
+.badge.live { background: var(--real-soft); color: var(--real); }
+.badge.shadow { background: var(--synthetic-soft); color: var(--synthetic); }
+.badge.setup { background: rgba(154, 107, 18, 0.14); color: var(--warn); }
+.badge.not { background: var(--dkt-soft); color: var(--dkt); }
+.pipeline { display: flex; flex-wrap: wrap; gap: 6px 4px; align-items: stretch; margin: 10px 0; }
+.pipeline .node { background: var(--surface-2); border-radius: var(--radius); padding: 6px 10px; font-size: 12.5px; }
+.pipeline .node b { display: block; font: 600 11px var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); }
+.pipeline .node.now { outline: 2px solid var(--synthetic); }
+.pipeline .gap { align-self: center; color: var(--ink-3); }
+.cmd { font: 12.5px var(--mono); background: var(--surface-2); border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .flow { grid-template-columns: 1fr; gap: 26px; }
+  .flow .step::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -24px; transform: translateX(-50%); }
+}
+@media (max-width: 700px) {
+  .feature dl { grid-template-columns: 1fr; gap: 2px; }
+  .feature dt { margin-top: 8px; }
+  .bubble { max-width: 94%; }
+}

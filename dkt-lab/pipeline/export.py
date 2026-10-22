@@ -36,8 +36,11 @@ REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 APP_RESULTS = [
     "Research/dkt/results/dkt12_comparison.json",
     "Research/dkt/results/level14_arms.json",
+    "Research/dkt/results/learning-curves-before-after.json",
     "Research/dkt/results/synaptic_dkt_results.json",
     "Research/sim/results/latency-signal-impact.json",
+    "Research/sim/results/scheduling-walkthrough.json",
+    "src/lib/nlp/data/eval-results-v1.json",
     "Research/bkt/results/per-skill-params.json",
 ]
 INDEX_KEYS = ("id", "name", "kind", "kind_label", "source_url", "licence", "citation", "notes",
