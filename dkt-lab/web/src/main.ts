@@ -10,6 +10,7 @@ import { renderExplainer } from './tabs/explainer'
 import { renderScheduling } from './tabs/scheduling'
 import { renderApp } from './tabs/app'
 import { renderGuide } from './tabs/guide'
+import { renderBehaviours } from './tabs/behaviours'
 import { renderReport } from './tabs/report'
 import { renderMethod } from './tabs/method'
 import { loadIndex, type DatasetEntry, type LabIndex } from './data'
@@ -35,6 +36,7 @@ const TABS: TabDef[] = [
   { id: 'heatmap', label: 'Skill heatmap', render: renderHeatmap, usesDataset: true },
   { id: 'explainer', label: 'How BKT & DKT work', render: renderExplainer, usesDataset: true },
   { id: 'scheduling', label: 'Scheduling', render: renderScheduling, usesDataset: false },
+  { id: 'behaviours', label: 'Behaviours', render: renderBehaviours, usesDataset: false },
   { id: 'app', label: 'Synaptic app', render: renderApp, usesDataset: false },
   { id: 'guide', label: 'Real-app guide', render: renderGuide, usesDataset: false },
   { id: 'report', label: 'Report outputs', render: renderReport, usesDataset: true },

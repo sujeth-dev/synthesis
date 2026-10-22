@@ -32,17 +32,18 @@ dkt-lab/
 1. **Overview** – dataset picker, headline tiles, one-line verdict chosen from the numbers.
 2. **Datasets** – stats table, sequence-length distributions, full provenance, skipped datasets.
 3. **Model comparison** – opens with a before → after scoreboard for the app's own DKT (synthetic); then BKT vs DKT on AUC / log-loss / RMSE / accuracy, ROC curves, per-skill AUC, cross-dataset table (and, from Lab 6, the DKT tuning section).
-4. **Learning curves** – opens with a before → after story for the app (what changed, the curve before and after, growth reproduced) read from `app/learning-curves-before-after.json`; then P(correct) by practice opportunity: actual vs BKT vs DKT. From
+4. **Learning curves** – opens with the original aggregate curve (BKT close to the real rate, DKT far, out to ~30 attempts) and what it turned out to be, then a before → after story for the app (what changed, the curve before and after, growth reproduced) read from `app/learning-curves-before-after.json`; then P(correct) by practice opportunity: actual vs BKT vs DKT. From
    Lab 7–9: a cohort curve that holds the (student, skill) population fixed, a growth-fidelity
    table with no-learning baselines for comparison, the aggregate curve extended to each
    dataset's real maximum with the selection effect quantified, and the mechanism measures.
 5. **Skill heatmap** – predicted P(correct) per skill for 20 held-out students, BKT and DKT side by side.
 6. **How BKT & DKT work** – the live explainer: step through a held-out student or build a sequence; BKT's Bayes update per step vs the LSTM's hidden state, all-skill predictions and transfer; running AUC.
 7. **Scheduling** – the review loop as a conversation (one scripted learner through the app's real SM-2 and FSRS functions, `scheduling-walkthrough.json`), the interval chart, then SM-2 vs FSRS across a population (`scheduler-comparison.json`) and what the broken timing signal cost (`latency-signal-impact.json`). All copied unchanged; synthetic or illustration, labelled as such.
-8. **Synaptic app** – what was done with these findings in the application: the retrained DKT, the cutover gate's three conditions, and per-skill BKT. Read from `Research/dkt/results` and `Research/bkt/results`, copied unchanged into `web/public/data/app/` and checked by `check_web.py` (synthetic).
-9. **Real-app guide** – one page for the six asks: state, where in the code, how to see each in the running app, why anything is not live, where each behaviour signal is tracked, and how DKT and FSRS would be promoted.
-10. **Report outputs** – `[VALUE]`, `[TABLE]`, `[GRAPH]`, `[TEXT]` placeholders filled with this lab's numbers, copy buttons, graphs as PNG via `canvas.toDataURL`.
-11. **Method & limitations** – pipeline and caveats.
+8. **Behaviours** – one page on the behaviour signals: a timeline of one answer, how each is registered, what it changes in BKT, the review grade and the session, graphs computed by the app's own functions (`behaviour-effects.json`), and where each shows up in the running app (schematics, labelled as such).
+9. **Synaptic app** – what was done with these findings in the application: the retrained DKT, the cutover gate's three conditions, and per-skill BKT. Read from `Research/dkt/results` and `Research/bkt/results`, copied unchanged into `web/public/data/app/` and checked by `check_web.py` (synthetic).
+10. **Real-app guide** – one page for the six asks: state, where in the code, how to see each in the running app, why anything is not live, where each behaviour signal is tracked, and how DKT and FSRS would be promoted.
+11. **Report outputs** – `[VALUE]`, `[TABLE]`, `[GRAPH]`, `[TEXT]` placeholders filled with this lab's numbers, copy buttons, graphs as PNG via `canvas.toDataURL`.
+12. **Method & limitations** – pipeline and caveats.
 
 BKT is always blue and DKT always rust; light and dark themes; works at 400 px; `prefers-reduced-motion` disables animation.
 

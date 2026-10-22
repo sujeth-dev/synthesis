@@ -17,6 +17,7 @@
     "sim": "tsx scripts/sim-run.ts",
     "sim:latency": "tsx scripts/sim-latency-bug.ts",
     "sim:walkthrough": "tsx scripts/scheduling-walkthrough.ts",
+    "behaviour:effects": "tsx scripts/behaviour-effects.ts",
     "curves:compare": "tsx scripts/learning-curves-before-after.ts",
     "dkt:predict": "tsx scripts/dkt-predict.ts",
     "dkt:compare": "tsx scripts/dkt-compare.ts",

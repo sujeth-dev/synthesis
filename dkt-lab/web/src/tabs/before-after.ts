@@ -1,7 +1,7 @@
 import { h } from '../ui/dom'
 import { chart, palette } from '../ui/charts'
 import { f3, f4, pct, signed } from '../ui/format'
-import { loadJson } from '../data'
+import { loadJson, loadDiagnostics, type CurvePoint as DiagPoint, type Diagnostics } from '../data'
 import { canvas } from './models'
 
 // "Before -> after" for the app's own models. Every number and every plotted
@@ -157,4 +157,56 @@ export async function renderBeforeAfterCurves(root: HTMLElement): Promise<void> 
       options: { indexAxis: 'y', scales: { x: { min: 0, max: 1, ticks: { callback: (v: number) => `${Math.round(v * 100)}%` }, title: { display: true, text: 'share of real growth reproduced (100% = perfect)' } }, y: { grid: { display: false } } } },
     }
   })
+}
+
+// The curve the lab first published, and what it turned out to be. Read from
+// each dataset's diagnostics.json (raw_curve = everyone still answering, bucketed
+// by attempt number), cut at the bucket that contains attempt 30.
+const SHOW_UP_TO = 31
+const sub = (d: Diagnostics) => d.raw_curve.points.filter(p => p.to <= SHOW_UP_TO)
+const mae = (pts: DiagPoint[], k: 'bkt' | 'dkt') => pts.reduce((a, p) => a + Math.abs((p[k] as number) - p.actual), 0) / pts.length
+
+export async function renderWhereItStarted(root: HTMLElement): Promise<void> {
+  const [real, sim] = await Promise.all([loadDiagnostics('assist2009'), loadDiagnostics('synaptic_sim')])
+  const rp = sub(real), sp = sub(sim)
+  const below = (pts: DiagPoint[]) => pts.filter(p => (p.dkt as number) < p.actual - 0.01).length
+  const rawFid = real.raw_curve_fidelity, cohFid = real.cohort_curve_fidelity
+  const fmt = (v: number) => v.toFixed(3)
+
+  const cr = canvas('Aggregate learning curve on ASSISTments 2009, to attempt 30: real rate, BKT, DKT')
+  const cs = canvas('Aggregate learning curve on the simulator, to attempt 30: real rate, BKT, DKT')
+  const panel = (title: string, badge: HTMLElement, pts: DiagPoint[], cv: HTMLCanvasElement) => h('div.card',
+    h('h3', h('span', title), badge),
+    h('div.legend', h('span.key.actual', 'Real learners'), h('span.key.bkt', 'BKT'), h('span.key.dkt', 'DKT')),
+    h('div.chart', cv),
+    h('p.small.muted', `Average miss: BKT ${fmt(mae(pts, 'bkt'))}, DKT ${fmt(mae(pts, 'dkt'))} (${(mae(pts, 'dkt') / mae(pts, 'bkt')).toFixed(1)}× as far). DKT is below the real rate at ${below(pts)} of ${pts.length} points.`))
+  root.append(
+    h('h2', { style: { marginTop: '4px' } }, 'Where it started: the curve where BKT is close and DKT is far'),
+    h('p.lede', 'This is the learning curve the lab first published, out to about 30 attempts on a skill. The black line is how often learners were right on their n-th attempt. BKT stays close to it. On real students DKT sits below it at almost every point, so on this chart DKT looks like a model that cannot follow learning.'),
+    h('div.grid.cols-2',
+      panel('ASSISTments 2009', h('span.badge.real', 'real students'), rp, cr),
+      panel('Simulator (the app’s skills)', h('span.badge.synthetic', 'synthetic'), sp, cs)),
+    h('div.card.warn-card', { style: { marginTop: '16px' } },
+      h('h3', 'What that chart was really showing'),
+      h('ul.small', { style: { margin: 0, paddingLeft: '18px' } },
+        h('li', h('strong', 'Part of the gap is a constant offset, not a failure to follow. '), `Averaged over the full aggregate curve (out to attempt ${real.raw_curve.points[real.raw_curve.points.length - 1].to}) DKT’s bias against the real rate is ${signed(rawFid.models.dkt.bias)} (BKT ${signed(rawFid.models.bkt.bias)}). Against that full aggregate line DKT’s slope ratio is ${rawFid.models.dkt.slope_ratio.toFixed(2)}, BKT’s ${rawFid.models.bkt.slope_ratio.toFixed(2)}: DKT actually tracks the shape better.`),
+        h('li', h('strong', 'The black line is not one group of learners. '), `At each point it averages whoever is still answering, and the learners still going at attempt 30 are disproportionately the ones getting it wrong. Over the full aggregate curve its slope is ${signed(rawFid.actual_slope ?? 0, 4)} per attempt, and ${signed(cohFid.actual_slope ?? 0, 4)} when the same learners are followed throughout.`),
+        h('li', h('strong', 'On the first attempt the simulator panel is the starkest case: '), `real ${pct(sp[0].actual, 0)}, BKT ${pct(sp[0].bkt as number, 0)}, DKT ${pct(sp[0].dkt as number, 0)}. That is a cold-start miss, which the app’s retraining shrank (see the next section).`),
+        h('li', 'Both curves are valid measurements. Only the fixed-population one can say whether a model reproduces growth, and on that one DKT does rise, just more slowly than BKT. That is the chart in the next section.')),
+      h('p.small.muted', { style: { marginBottom: 0 } }, 'Source: public/data/assist2009/diagnostics.json and public/data/synaptic_sim/diagnostics.json, raw_curve (buckets up to attempt 31). Read, not recomputed.')))
+
+  const draw = (cv: HTMLCanvasElement, pts: DiagPoint[]) => chart(cv, () => {
+    const p = palette()
+    const line = (label: string, color: string, k: string, dash: number[] = [], width = 2) =>
+      ({ label, data: pts.map(pt => pt[k] as number), borderColor: color, backgroundColor: color, borderDash: dash, borderWidth: width, pointRadius: 2.5, tension: 0.15 })
+    return {
+      type: 'line',
+      data: { labels: pts.map(pt => pt.label), datasets: [line('Real learners', p.actual, 'actual', [], 3), line('BKT', p.bkt, 'bkt', [6, 3]), line('DKT', p.dkt, 'dkt', [], 2.5)] },
+      options: {
+        scales: { x: { title: { display: true, text: 'attempt number on the skill' }, ticks: { maxTicksLimit: 12 } }, y: { ticks: { callback: (v: number) => `${Math.round(v * 100)}%` }, title: { display: true, text: 'answered correctly' } } },
+        plugins: { tooltip: { callbacks: { label: (ctx: { dataset: { label: string }; parsed: { y: number } }) => `${ctx.dataset.label}: ${(ctx.parsed.y * 100).toFixed(1)}%` } } },
+      },
+    }
+  })
+  draw(cr, rp); draw(cs, sp)
 }

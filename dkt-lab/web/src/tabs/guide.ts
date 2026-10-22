@@ -127,7 +127,7 @@ export async function renderGuide(root: HTMLElement): Promise<void> {
       ask: 'Integrate behaviour analytics (time, retries, hesitation) for accuracy.',
       say: 'The browser now measures how long each answer took, how long the learner paused before touching it, and how often they changed their mind, and those numbers feed BKT and the schedulers.',
       what: [
-        'The table below follows each signal from the browser to where it is used.',
+        'The table below follows each signal from the browser to where it is used; the Behaviours tab has the diagrams and graphs.',
         'Before this, the client sent about 0 ms for every answer, never sent hesitation or retries, and the Feynman loop sent a hard-coded 5,000 ms.',
       ],
       where: ['src/lib/timing/answer-timing.ts', 'src/app/learn/page.tsx', 'src/app/learn/diagnostic/page.tsx', 'src/app/api/attempt/route.ts', 'src/lib/motivation/index.ts'],
@@ -180,7 +180,7 @@ export async function renderGuide(root: HTMLElement): Promise<void> {
           h('td', 'Picks the SM-2 quality and FSRS rating (under 3 s easy, under 8 s good, slower hard); feeds the slow-answer streak')),
         h('tr', h('td', h('strong', 'Hesitation')), h('td', 'Browser: first click or keystroke − question shown (the server cuts it to the latency)'), h('td', code('attempt_events.hesitation_ms')),
           h('td', 'Motivation state; in shadow, 10 s or more demotes the grade one step')),
-        h('tr', h('td', h('strong', 'Retries'), h('div.small.muted', 'answer changes')), h('td', 'Browser: edits after a 1.5 s pause count once, so typing is not a retry'), h('td', code('behavior_quality_shadow.revision_count')),
+        h('tr', h('td', h('strong', 'Retries'), h('div.small.muted', 'answer changes')), h('td', 'Browser: edits after a 1.5 s pause count once, so typing is not a retry'), h('td', code('attempt_events.revision_count')),
           h('td', 'In shadow only: two or more demote the grade one step')),
         h('tr', h('td', h('strong', 'Slow streak')), h('td', 'Server: consecutive answers over 15 s'), h('td', code('attempt_events.slow_response_streak')),
           h('td', 'Lowers the behaviour modifier; four in a row marks the learner “frustrated”')),

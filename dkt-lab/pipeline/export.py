@@ -40,6 +40,7 @@ APP_RESULTS = [
     "Research/dkt/results/synaptic_dkt_results.json",
     "Research/sim/results/latency-signal-impact.json",
     "Research/sim/results/scheduling-walkthrough.json",
+    "Research/sim/results/behaviour-effects.json",
     "src/lib/nlp/data/eval-results-v1.json",
     "Research/bkt/results/per-skill-params.json",
 ]

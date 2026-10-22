@@ -10,6 +10,7 @@ grader had one earlier evaluation on 106 hand-labelled explanations, recorded in
 | What to show | Command | What to point at |
 |---|---|---|
 | The lab website | `cd dkt-lab/web && npm run build && npm run preview` | **Learning curves** (before → after, and why DKT wins ranking but loses growth), **Scheduling** (the loop as a conversation, SM-2 vs FSRS, what a broken timing signal cost), **Synaptic app**, and **Real-app guide** (every ask: state, where, how to see it) |
+| What each behaviour signal does | `npm run behaviour:effects` | Grade bands, belief movement per evidence modifier, a scripted session with and without timing |
 | One learner through the real schedulers | `npm run sim:walkthrough` | Same seven answers, three signals, SM-2 and FSRS gaps |
 | The before/after learning-curve data | `npm run curves:compare` (about 3 min) | Slope ratios 0.665 → 0.727 vs BKT 0.871; refuses to write if it disagrees with the gate |
 | What the dead timing signal cost | `npm run sim:latency` | Wrong/slow/medium/fast grades, reviews per learner, retention |

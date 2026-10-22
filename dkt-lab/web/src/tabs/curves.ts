@@ -5,7 +5,7 @@ import { provenance } from '../ui/provenance'
 import { loadCurves, loadDiagnostics } from '../data'
 import type { CurveFidelity, CurvePoint, Diagnostics } from '../data'
 import { canvas } from './models'
-import { renderBeforeAfterCurves } from './before-after'
+import { renderBeforeAfterCurves, renderWhereItStarted } from './before-after'
 import type { TabContext } from '../main'
 
 // Learning curves. Two measurements are shown deliberately, because they
@@ -51,6 +51,10 @@ export async function renderCurves(root: HTMLElement, ctx: TabContext): Promise<
   }
 
   root.append(h('h1', 'Learning curves'))
+  try { await renderWhereItStarted(root) } catch (err) {
+    root.append(h('div.note', `Original curve unavailable: ${(err as Error).message}`))
+  }
+  root.append(h('div', { style: { height: '28px' } }))
   try { await renderBeforeAfterCurves(root) } catch (err) {
     root.append(h('div.note', `Before/after curves unavailable: ${(err as Error).message}`))
   }
