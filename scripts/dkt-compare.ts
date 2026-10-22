@@ -30,6 +30,8 @@ function arg(name: string, fallback: number): number {
 
 const ROOT = path.resolve(__dirname, '..')
 
+const mark = (pass: boolean) => (pass ? 'yes' : '**NO**')
+
 async function simRows(learners: number, seed: number) {
   const model = await getBundledDktModel()
   const { events } = simulate({ seed, learners, days: 90, scheduler: 'sm2', skills: curriculumSkills() })
@@ -126,6 +128,13 @@ async function main() {
     `Cohort pairs: ${growth.pairs} (growth needs >= ${MIN_COHORT_PAIRS}); curve points: ${growth.points}.`,
     '',
     `**Cutover gate:** ${decision.recommend ? 'DKT clears the bar -- recommend a human review of switching.' : `do not switch (${decision.reason.replace(/_/g, ' ')}).`}`,
+    '',
+    'Every condition, not only the one named above:',
+    '',
+    '| Condition | Pass | Measured against the bar |', '|---|---|---|',
+    `| Sample size | ${mark(decision.checks.sampleSize.pass)} | ${decision.checks.sampleSize.n} attempts, needs ${decision.checks.sampleSize.required} |`,
+    `| Ranking | ${mark(decision.checks.ranking.pass)} | AUC gain ${decision.checks.ranking.aucGain.toFixed(4)}, needs ${decision.checks.ranking.required}; log-loss ${decision.checks.ranking.logLossOk ? 'no worse' : 'worse'} |`,
+    `| Growth | ${mark(decision.checks.growth.pass)} | ${decision.checks.growth.measured ? `DKT slope ratio ${decision.checks.growth.dktSlopeRatio.toFixed(4)} vs BKT ${decision.checks.growth.bktSlopeRatio.toFixed(4)}, may lose at most ${decision.checks.growth.maxLoss}` : 'not measurable on these rows'} |`,
     synthetic ? '\nA live switch must only ever be decided on real-learner rows (run without `--sim`).' : '')
   const report = lines.join('\n') + '\n'
   console.log(report)

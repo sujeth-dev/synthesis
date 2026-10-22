@@ -31,13 +31,19 @@ describe('DKT-12 comparison and DKT-13 gate', () => {
   })
 
   it('never recommends a switch on too little data', () => {
-    expect(cutoverDecision(compareDktVsBkt(rows(100, true)), growthClears)).toEqual({ recommend: false, reason: 'insufficient_data' })
+    expect(cutoverDecision(compareDktVsBkt(rows(100, true)), growthClears)).toEqual({
+      recommend: false, reason: 'insufficient_data',
+      checks: expect.objectContaining({ sampleSize: { pass: false, n: 100, required: MIN_ATTEMPTS_FOR_DECISION } }),
+    })
   })
 
   it('recommends only when DKT is clearly better on enough data', () => {
     expect(cutoverDecision(compareDktVsBkt(rows(MIN_ATTEMPTS_FOR_DECISION, true)), growthClears).recommend).toBe(true)
     expect(cutoverDecision(compareDktVsBkt(rows(MIN_ATTEMPTS_FOR_DECISION, false)), growthClears))
-      .toEqual({ recommend: false, reason: 'dkt_not_better' })
+      .toEqual({
+        recommend: false, reason: 'dkt_not_better',
+        checks: expect.objectContaining({ ranking: expect.objectContaining({ pass: false }) }),
+      })
   })
 })
 
@@ -97,7 +103,10 @@ describe('cohort growth (Level 12)', () => {
     const thin = compareGrowth(cohortRows(MIN_COHORT_PAIRS - 1, 0.9, 0.9))
 
     expect(thin.pairs).toBeLessThan(MIN_COHORT_PAIRS)
-    expect(cutoverDecision(comparison, thin)).toEqual({ recommend: false, reason: 'growth_unmeasured' })
+    expect(cutoverDecision(comparison, thin)).toEqual({
+      recommend: false, reason: 'growth_unmeasured',
+      checks: expect.objectContaining({ growth: expect.objectContaining({ pass: false, measured: false }) }),
+    })
   })
 
   it('refuses a model that wins on AUC while reproducing less of the learning', () => {
@@ -107,7 +116,10 @@ describe('cohort growth (Level 12)', () => {
     const growth: GrowthComparison = {
       ...growthClears, dkt: { slope: 0.0112, slopeRatio: 0.560 }, bkt: { slope: 0.0164, slopeRatio: 0.822 },
     }
-    expect(cutoverDecision(comparison, growth)).toEqual({ recommend: false, reason: 'dkt_worse_growth' })
+    expect(cutoverDecision(comparison, growth)).toEqual({
+      recommend: false, reason: 'dkt_worse_growth',
+      checks: expect.objectContaining({ growth: expect.objectContaining({ pass: false, measured: true }) }),
+    })
   })
 
   it('allows a slope ratio within the tolerance of BKT\'s', () => {
@@ -123,5 +135,31 @@ describe('cohort growth (Level 12)', () => {
       dkt: { slope: 0.0164, slopeRatio: growthClears.bkt.slopeRatio - MAX_SLOPE_RATIO_LOSS - 0.001 },
     }
     expect(cutoverDecision(comparison, justBelow).reason).toBe('dkt_worse_growth')
+  })
+
+  // ── Level 15: the verdict names one reason, the checks name all of them ──
+  it('reports ranking AND growth as failing when both do', () => {
+    // Today's simulator case: the retrained DKT gains 0.0078 AUC against the
+    // 0.02 required and loses 0.144 slope ratio against the 0.05 tolerated.
+    // The old gate returned `dkt_not_better` and said nothing about growth, so
+    // closing the AUC gap would have surfaced a second failure nobody was told
+    // about.
+    const comparison = compareDktVsBkt(rows(MIN_ATTEMPTS_FOR_DECISION, false))
+    const worse: GrowthComparison = {
+      ...growthClears, dkt: { slope: 0.0145, slopeRatio: 0.7273 }, bkt: { slope: 0.0174, slopeRatio: 0.8712 },
+    }
+    const decision = cutoverDecision(comparison, worse)
+
+    expect(decision.reason).toBe('dkt_not_better')
+    expect(decision.checks.sampleSize.pass).toBe(true)
+    expect(decision.checks.ranking.pass).toBe(false)
+    expect(decision.checks.growth.measured).toBe(true)
+    expect(decision.checks.growth.pass).toBe(false)
+  })
+
+  it('recommends only when every check passes', () => {
+    const decision = cutoverDecision(compareDktVsBkt(rows(MIN_ATTEMPTS_FOR_DECISION, true)), growthClears)
+    expect(decision.recommend).toBe(true)
+    expect(Object.values(decision.checks).every(check => check.pass)).toBe(true)
   })
 })

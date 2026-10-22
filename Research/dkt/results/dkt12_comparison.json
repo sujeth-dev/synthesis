@@ -28,6 +28,26 @@
   },
   "decision": {
     "recommend": false,
-    "reason": "dkt_not_better"
+    "reason": "dkt_not_better",
+    "checks": {
+      "sampleSize": {
+        "pass": true,
+        "n": 95585,
+        "required": 5000
+      },
+      "ranking": {
+        "pass": false,
+        "aucGain": 0.007814763225024945,
+        "required": 0.02,
+        "logLossOk": true
+      },
+      "growth": {
+        "pass": false,
+        "measured": true,
+        "dktSlopeRatio": 0.7273308434144483,
+        "bktSlopeRatio": 0.8711869114801721,
+        "maxLoss": 0.05
+      }
+    }
   }
 }

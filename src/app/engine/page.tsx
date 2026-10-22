@@ -203,6 +203,22 @@ export default async function EnginePage() {
               ? 'DKT clears the bar — recommend a human review of switching.'
               : `do not switch (${decision.reason.replace(/_/g, ' ')}).`}
           </p>
+          <div className="mt-4">
+            <Table
+              head={['Condition', 'Pass', 'Measured against the bar']}
+              empty="No DKT shadow rows yet."
+              rows={dktShadow.length === 0 ? [] : [
+                ['Sample size', decision.checks.sampleSize.pass ? 'yes' : 'NO',
+                  `${decision.checks.sampleSize.n} attempts, needs ${decision.checks.sampleSize.required}`],
+                ['Ranking', decision.checks.ranking.pass ? 'yes' : 'NO',
+                  `AUC gain ${decision.checks.ranking.aucGain.toFixed(4)}, needs ${decision.checks.ranking.required}; log-loss ${decision.checks.ranking.logLossOk ? 'no worse' : 'worse'}`],
+                ['Growth', decision.checks.growth.pass ? 'yes' : 'NO',
+                  decision.checks.growth.measured
+                    ? `slope ratio ${decision.checks.growth.dktSlopeRatio.toFixed(4)} vs BKT ${decision.checks.growth.bktSlopeRatio.toFixed(4)}, may lose at most ${decision.checks.growth.maxLoss}`
+                    : 'not measurable on these rows'],
+              ]}
+            />
+          </div>
           <p className="mt-1 text-[11px] text-c-ghost">
             A recommendation only. Switching an experimental system live needs human sign-off.
           </p>

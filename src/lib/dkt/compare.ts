@@ -133,9 +133,22 @@ export function compareGrowth(rows: OpportunityRow[]): GrowthComparison {
   return { pairs: pairKeys.size, points: x.length, actualSlope, dkt: score(dkt), bkt: score(bkt) }
 }
 
+// Every condition's state, not only the one that decided. A gate that stops at
+// the first failure hides the rest: on the simulator the verdict reads
+// `dkt_not_better` and never mentions that growth fails too, so a reader who
+// closed the AUC gap would be surprised by a gap they were never shown. That is
+// the same single-scalar mistake FINDINGS-CURVES.md diagnosed, one level up.
+export interface CutoverChecks {
+  sampleSize: { pass: boolean; n: number; required: number }
+  ranking: { pass: boolean; aucGain: number; required: number; logLossOk: boolean }
+  growth: { pass: boolean; measured: boolean; dktSlopeRatio: number; bktSlopeRatio: number; maxLoss: number }
+}
+
+export type CutoverRefusal = 'insufficient_data' | 'dkt_not_better' | 'growth_unmeasured' | 'dkt_worse_growth'
+
 export type CutoverDecision =
-  | { recommend: false; reason: 'insufficient_data' | 'dkt_not_better' | 'growth_unmeasured' | 'dkt_worse_growth' }
-  | { recommend: true; reason: 'dkt_better' }
+  | { recommend: false; reason: CutoverRefusal; checks: CutoverChecks }
+  | { recommend: true; reason: 'dkt_better'; checks: CutoverChecks }
 
 // DKT-13's gate. A `true` here is a recommendation for a human to review —
 // it never switches anything by itself. Only real-learner data should ever
@@ -146,19 +159,27 @@ export type CutoverDecision =
 // approve a regression, and TS strict makes the compiler, not a reviewer, find
 // any caller that still tries.
 export function cutoverDecision(c: DktComparison, growth: GrowthComparison): CutoverDecision {
-  if (c.n < MIN_ATTEMPTS_FOR_DECISION) return { recommend: false, reason: 'insufficient_data' }
-  if (!(c.dkt.auc - c.bkt.auc >= MIN_AUC_GAIN && c.dkt.logLoss <= c.bkt.logLoss)) {
-    return { recommend: false, reason: 'dkt_not_better' }
+  const aucGain = c.dkt.auc - c.bkt.auc
+  const logLossOk = c.dkt.logLoss <= c.bkt.logLoss
+  const measured = growth.pairs >= MIN_COHORT_PAIRS && growth.points >= 2 &&
+    Number.isFinite(growth.dkt.slopeRatio) && Number.isFinite(growth.bkt.slopeRatio)
+  const checks: CutoverChecks = {
+    sampleSize: { pass: c.n >= MIN_ATTEMPTS_FOR_DECISION, n: c.n, required: MIN_ATTEMPTS_FOR_DECISION },
+    ranking: { pass: aucGain >= MIN_AUC_GAIN && logLossOk, aucGain, required: MIN_AUC_GAIN, logLossOk },
+    growth: {
+      pass: measured && growth.dkt.slopeRatio >= growth.bkt.slopeRatio - MAX_SLOPE_RATIO_LOSS,
+      measured, dktSlopeRatio: growth.dkt.slopeRatio, bktSlopeRatio: growth.bkt.slopeRatio,
+      maxLoss: MAX_SLOPE_RATIO_LOSS,
+    },
   }
-  // Checked after AUC because the case the lab warns about is precisely
-  // "AUC cleared, growth did not"; both outcomes are recommend: false, so
-  // nothing is hidden either way.
-  if (growth.pairs < MIN_COHORT_PAIRS || growth.points < 2 ||
-      !Number.isFinite(growth.dkt.slopeRatio) || !Number.isFinite(growth.bkt.slopeRatio)) {
-    return { recommend: false, reason: 'growth_unmeasured' }
-  }
-  if (growth.dkt.slopeRatio < growth.bkt.slopeRatio - MAX_SLOPE_RATIO_LOSS) {
-    return { recommend: false, reason: 'dkt_worse_growth' }
-  }
-  return { recommend: true, reason: 'dkt_better' }
+
+  // The refusal precedence is unchanged, so every caller reading `reason` sees
+  // what it saw before; `checks` is what makes the conditions it did not reach
+  // visible. Growth is still named after ranking because the case the lab warns
+  // about is precisely "AUC cleared, growth did not".
+  if (!checks.sampleSize.pass) return { recommend: false, reason: 'insufficient_data', checks }
+  if (!checks.ranking.pass) return { recommend: false, reason: 'dkt_not_better', checks }
+  if (!checks.growth.measured) return { recommend: false, reason: 'growth_unmeasured', checks }
+  if (!checks.growth.pass) return { recommend: false, reason: 'dkt_worse_growth', checks }
+  return { recommend: true, reason: 'dkt_better', checks }
 }

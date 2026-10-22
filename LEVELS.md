@@ -29,6 +29,7 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 | 12 | The DKT cutover gate can see learning growth, not only ranking | `npm run dkt:compare -- --sim` |
 | 13 | `/engine`: every signal above, for one real learner, read from the database | `npm run seed:demo`, then open `/engine` |
 | 14 | The bundled DKT retrained with DKT+ reconstruction — better growth fidelity, and still not enough to clear the gate | `npm run dkt:compare -- --sim` |
+| 15 | The gate reports every failing condition, not only the first — "dkt not better" no longer hides the growth failure behind it | `npm run dkt:compare -- --sim`, then `/engine` |
 
 ## Level details
 
@@ -107,3 +108,9 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 - The bundled model is retrained at `lambda_r = 0.1` (pinned in advance — the one setting that generalised across the lab's three datasets) and records its own configuration in `synaptic-dkt.json`, which the comparison report now names.
 - **Synthetic** (300 learners, seed 9001, 95,585 attempts): slope ratio 0.6654 → **0.7273**, AUC 0.7231 → 0.7253. The same-budget arm without `lambda_r` scored *higher* AUC (0.7290) and *lower* growth (0.6933) — selecting on AUC would have discarded the gain. The lab predicted +0.15 slope ratio and the app got +0.034; most of the lab's headroom was training, not regularisation.
 - The gate still refuses (`dkt_not_better`): +0.0078 AUC against 0.02 required, 0.144 growth loss against 0.05 tolerated. No constant was retuned after the measurement.
+
+### Level 15 — the gate names one reason and reports all of them
+- `CutoverDecision` gains `checks` (sample size, ranking, growth), each with its own `pass` and the numbers it was judged on. The refusal precedence and every `reason` string are unchanged, so nothing downstream reads differently.
+- Why: the simulator's verdict read `dkt_not_better` and said nothing about growth, which also fails by ~3× the tolerance. Closing the AUC gap would have revealed a second failure nobody had been shown — the same single-scalar mistake the lab diagnosed, one level up.
+- `npm run dkt:compare -- --sim` and `/engine` now print all three rows: sample size yes (95,585 ≥ 5,000), ranking **NO** (AUC gain 0.0078 < 0.02), growth **NO** (0.7273 vs BKT 0.8712, tolerance 0.05).
+- The existing tests keep their exact `toEqual` assertions on `reason` and `recommend` and gained an assertion about which conditions failed; nothing was relaxed.

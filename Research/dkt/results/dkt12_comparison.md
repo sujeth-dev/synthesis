@@ -26,4 +26,12 @@ Cohort pairs: 4532 (growth needs >= 200); curve points: 10.
 
 **Cutover gate:** do not switch (dkt not better).
 
+Every condition, not only the one named above:
+
+| Condition | Pass | Measured against the bar |
+|---|---|---|
+| Sample size | yes | 95585 attempts, needs 5000 |
+| Ranking | **NO** | AUC gain 0.0078, needs 0.02; log-loss no worse |
+| Growth | **NO** | DKT slope ratio 0.7273 vs BKT 0.8712, may lose at most 0.05 |
+
 A live switch must only ever be decided on real-learner rows (run without `--sim`).

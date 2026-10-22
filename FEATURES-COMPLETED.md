@@ -167,6 +167,23 @@ Read honestly:
   every DKT arm, and above the app's live global-parameter BKT at **0.7168**.
   The strongest model measured here is a BKT the app does not run.
 
+### The gate reports every condition (Level 15)
+
+`CutoverDecision` now carries `checks` — sample size, ranking and growth, each
+with its own `pass` and the numbers it was judged against. The refusal
+precedence and every `reason` string are unchanged.
+
+It matters because the verdict above reads `dkt_not_better` and said nothing
+about growth, which **also** fails, by roughly three times the tolerance.
+Anyone who closed the 0.0078 AUC gap would have hit a second refusal they had
+never been shown. `npm run dkt:compare -- --sim` and `/engine` print all three:
+
+| Condition | Pass | Measured against the bar |
+|---|---|---|
+| Sample size | yes | 95,585 attempts, needs 5,000 |
+| Ranking | **NO** | AUC gain 0.0078, needs 0.02; log-loss no worse |
+| Growth | **NO** | DKT slope ratio 0.7273 vs BKT 0.8712, may lose at most 0.05 |
+
 ## 5. Scheduling (Levels 7, 8 and 11)
 
 **The tier is alive.** `bktToQuality` and `fsrsRatingFromCorrectness` were
