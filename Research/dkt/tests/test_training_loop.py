@@ -10,7 +10,8 @@ run standalone via `pytest research/dkt/tests/`) to prove:
 import numpy as np
 import torch
 
-from train_dkt import DKTModel, encode_batch, masked_bce_loss
+import train_dkt
+from train_dkt import DKTModel, encode_batch, encode_current, masked_bce_loss, train
 
 NUM_SKILLS = 4
 
@@ -104,3 +105,78 @@ def test_loss_decreases_over_training_steps():
     assert losses[-1] < losses[0], f"loss did not decrease: {losses[0]:.4f} -> {losses[-1]:.4f}"
     # Not just noisy: the tail average should be clearly below the head average.
     assert np.mean(losses[-5:]) < np.mean(losses[:5])
+
+
+# ── DKT-14: the DKT+ reconstruction option ─────────────────────────────────
+def test_encode_current_is_the_interaction_the_model_consumed():
+    """encode_current's pair at step t must be the input at step t, which is
+    exactly encode_batch's target at step t-1 -- one step behind, never the
+    answer being predicted."""
+    sequences = make_synthetic_sequences()
+    _, target_skill, target_correct, mask = encode_batch(sequences, NUM_SKILLS)
+    current_skill, current_correct = encode_current(sequences, NUM_SKILLS)
+
+    assert current_skill.shape == target_skill.shape
+    for i, (skills, corrects) in enumerate(sequences):
+        L = len(skills) - 1
+        assert current_skill[i, :L].tolist() == skills[:L].tolist()
+        assert current_correct[i, :L].tolist() == corrects[:L].astype(float).tolist()
+        assert current_skill[i, 1:L].tolist() == target_skill[i, : L - 1].tolist()
+        assert (current_skill[i, L:] * mask[i, L:]).sum().item() == 0
+
+
+def _train_tiny(lambda_r: float, epochs: int = 6):
+    sequences = make_synthetic_sequences()
+    torch.manual_seed(0)
+    model = DKTModel(num_skills=NUM_SKILLS, hidden_size=16, num_layers=1)
+    original = train_dkt.NUM_EPOCHS
+    train_dkt.NUM_EPOCHS = epochs
+    try:
+        train(model, sequences, sequences, NUM_SKILLS, lambda_r=lambda_r)
+    finally:
+        train_dkt.NUM_EPOCHS = original
+    return model, sequences
+
+
+def test_lambda_r_zero_reproduces_the_pre_dkt14_loss_exactly():
+    """The reconstruction term is opt-in: at lambda_r = 0 training must take
+    the same steps the loop took before the option existed, so the published
+    ASSISTments and app models are unaffected by the port."""
+    ported, sequences = _train_tiny(0.0)
+
+    # The pre-DKT-14 loop, written out: plain masked BCE, same seeds and order.
+    torch.manual_seed(0)
+    reference = DKTModel(num_skills=NUM_SKILLS, hidden_size=16, num_layers=1)
+    optimizer = torch.optim.Adam(reference.parameters(), lr=train_dkt.LEARNING_RATE)
+    rng = np.random.default_rng(train_dkt.SEED)
+    for _ in range(6):
+        reference.train()
+        order = rng.permutation(len(sequences))
+        for start in range(0, len(order), train_dkt.BATCH_SIZE):
+            batch = [sequences[i] for i in order[start : start + train_dkt.BATCH_SIZE]]
+            x, target_skill, target_correct, mask = encode_batch(batch, NUM_SKILLS)
+            optimizer.zero_grad()
+            loss = masked_bce_loss(reference(x), target_skill, target_correct, mask)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(reference.parameters(), train_dkt.GRAD_CLIP)
+            optimizer.step()
+
+    for key, value in reference.state_dict().items():
+        assert torch.equal(ported.state_dict()[key], value), f"{key} diverged at lambda_r = 0"
+
+
+def test_lambda_r_improves_reconstruction_of_the_consumed_answer():
+    """What the term is for: the model should get better at reproducing the
+    answer it has just been told, which is the signal dkt-lab measured as too
+    faint (FINDINGS-CURVES.md, H2)."""
+    sequences = make_synthetic_sequences()
+    current_skill, current_correct = encode_current(sequences, NUM_SKILLS)
+    x, _, _, mask = encode_batch(sequences, NUM_SKILLS)
+
+    def reconstruction_loss(model):
+        with torch.no_grad():
+            return masked_bce_loss(model(x), current_skill, current_correct, mask).item()
+
+    plain, _ = _train_tiny(0.0)
+    regularised, _ = _train_tiny(1.0)
+    assert reconstruction_loss(regularised) < reconstruction_loss(plain)

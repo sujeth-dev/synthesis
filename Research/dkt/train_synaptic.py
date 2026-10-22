@@ -123,6 +123,10 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=DEFAULT_INPUT)
     parser.add_argument("--epochs", type=int, default=train_dkt.NUM_EPOCHS)
+    parser.add_argument("--lambda-r", type=float, default=0.0,
+                        help="DKT+ reconstruction weight; 0.1 is dkt-lab's growth-fidelity default")
+    parser.add_argument("--early-stopping", action="store_true",
+                        help=f"restore the best validation-AUC epoch (patience {train_dkt.PATIENCE})")
     args = parser.parse_args()
     if not os.path.exists(args.input):
         raise FileNotFoundError(f"{args.input} not found -- run `npm run sim` (or `npm run dkt:export`) first.")
@@ -143,12 +147,19 @@ def main() -> None:
     to_seq = lambda groups: [(g["skill_id"].map(skill_index).to_numpy(), g["correct"].to_numpy()) for g in groups]
     model = DKTModel(len(skill_index))
     t0 = time.time()
-    train(model, to_seq(train_groups), to_seq(val_groups), len(skill_index))
+    history = train(model, to_seq(train_groups), to_seq(val_groups), len(skill_index),
+                    lambda_r=args.lambda_r, early_stopping=args.early_stopping)
     train_seconds = time.time() - t0
+    # Carried into the exported weights so a shadow row can be traced back to
+    # the configuration that produced the model serving it.
+    training = {"lambda_r": args.lambda_r, "early_stopping": args.early_stopping,
+                "epochs_budget": args.epochs, "epochs_run": len(history),
+                "best_val_auc": max(h["val_auc"] for h in history)}
 
     os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
     torch.save({"state_dict": model.state_dict(), "skill_index": skill_index,
-                "num_skills": len(skill_index), "hidden_size": HIDDEN_SIZE, "num_layers": NUM_LAYERS}, MODEL_PATH)
+                "num_skills": len(skill_index), "hidden_size": HIDDEN_SIZE, "num_layers": NUM_LAYERS,
+                "training": training}, MODEL_PATH)
 
     # Score every model on exactly the same test rows: those DKT can predict
     # (every interaction after a student's first) that fitted BKT also covers.

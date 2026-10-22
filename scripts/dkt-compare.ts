@@ -51,7 +51,7 @@ async function simRows(learners: number, seed: number) {
     state = stepDkt(model, state, e)
     seen++
   }
-  return { rows, synthetic: true, modelSynthetic: model.synthetic }
+  return { rows, synthetic: true, modelSynthetic: model.synthetic, modelTraining: model.training }
 }
 
 async function dbRows() {
@@ -75,7 +75,9 @@ async function dbRows() {
     const { rows } = await client.query(
       'SELECT learner_id, skill_id, dkt_p_correct, bkt_p_correct, correct, model_synthetic' +
       ' FROM dkt_shadow_log ORDER BY learner_id, skill_id, created_at, id')
-    return { rows, synthetic: false, modelSynthetic: rows.some(r => r.model_synthetic) }
+    // The shadow log records predictions, not the model that made them, so a
+    // database run cannot name a training configuration.
+    return { rows, synthetic: false, modelSynthetic: rows.some(r => r.model_synthetic), modelTraining: undefined }
   } finally {
     await client.end()
   }
@@ -85,7 +87,7 @@ async function main() {
   const sim = process.argv.includes('--sim')
   const learners = arg('learners', 300)
   const seed = arg('seed', 9001)
-  const { rows, synthetic, modelSynthetic } = sim ? await simRows(learners, seed) : await dbRows()
+  const { rows, synthetic, modelSynthetic, modelTraining } = sim ? await simRows(learners, seed) : await dbRows()
   const comparison = compareDktVsBkt(rows)
   const growth = compareGrowth(rows)
   const decision = cutoverDecision(comparison, growth)
@@ -95,6 +97,12 @@ async function main() {
     synthetic
       ? `**SYNTHETIC** -- ${learners} fresh simulated learners (seed ${seed}, never seen in training), run through the app's own TypeScript DKT and BKT. Validates the evaluation pipeline; not evidence about real learners.\n`
       : `**Real learners** -- rows from \`dkt_shadow_log\`.${modelSynthetic ? ' Note: the DKT model producing them was trained on simulated learners.' : ''}\n`,
+    ...(modelTraining
+      ? [`Bundled model: reconstruction weight lambda_r ${modelTraining.lambda_r}, ` +
+         `early stopping ${modelTraining.early_stopping ? 'on' : 'off'}, ` +
+         `${modelTraining.epochs_run} of ${modelTraining.epochs_budget} epochs run, ` +
+         `best validation AUC ${modelTraining.best_val_auc.toFixed(4)}.\n`]
+      : []),
     '| Model | AUC | Log-loss |', '|---|---|---|',
     `| DKT (TypeScript, bundled model) | ${comparison.dkt.auc.toFixed(4)} | ${comparison.dkt.logLoss.toFixed(4)} |`,
     `| Live BKT | ${comparison.bkt.auc.toFixed(4)} | ${comparison.bkt.logLoss.toFixed(4)} |`,

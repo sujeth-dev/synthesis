@@ -27,13 +27,14 @@ def b64(tensor: torch.Tensor) -> str:
     return base64.b64encode(tensor.detach().cpu().numpy().astype("<f4").tobytes()).decode("ascii")
 
 
-def weights_json(model: DKTModel, skills: list, synthetic: bool) -> dict:
+def weights_json(model: DKTModel, skills: list, synthetic: bool, training: dict | None = None) -> dict:
     lstm = model.lstm
     return {
         "format": "synaptic-dkt-v1",
         "synthetic": synthetic,
         "skills": skills,
         "hidden_size": lstm.hidden_size,
+        **({"training": training} if training else {}),
         "weight_ih": b64(lstm.weight_ih_l0),
         "weight_hh": b64(lstm.weight_hh_l0),
         "bias_ih": b64(lstm.bias_ih_l0),
@@ -78,7 +79,8 @@ def export_model() -> None:
             synthetic = json.load(f).get("synthetic", True)
     os.makedirs(os.path.dirname(OUT_MODEL), exist_ok=True)
     with open(OUT_MODEL, "w") as f:
-        json.dump(weights_json(model, ordered_skills(skill_index), synthetic), f)
+        json.dump(weights_json(model, ordered_skills(skill_index), synthetic,
+                               checkpoint.get("training")), f)
     print(f"Wrote {OUT_MODEL} ({os.path.getsize(OUT_MODEL) / 1e6:.1f} MB)")
 
 
