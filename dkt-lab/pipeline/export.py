@@ -37,6 +37,7 @@ APP_RESULTS = [
     "Research/dkt/results/dkt12_comparison.json",
     "Research/dkt/results/level14_arms.json",
     "Research/dkt/results/synaptic_dkt_results.json",
+    "Research/sim/results/latency-signal-impact.json",
     "Research/bkt/results/per-skill-params.json",
 ]
 INDEX_KEYS = ("id", "name", "kind", "kind_label", "source_url", "licence", "citation", "notes",
