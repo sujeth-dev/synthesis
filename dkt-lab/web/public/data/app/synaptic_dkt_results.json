@@ -1,0 +1,35 @@
+{
+  "synthetic": true,
+  "input": "Research/sim/output/sm2_events.csv",
+  "skills": 120,
+  "interactions": 648609,
+  "students": {
+    "train": 1400,
+    "val": 300,
+    "test": 300
+  },
+  "epochs": 10,
+  "train_seconds": 154.4,
+  "models": {
+    "dkt": {
+      "auc": 0.7250481553199718,
+      "log_loss": 0.5949495724835245,
+      "n": 96918
+    },
+    "fitted_bkt": {
+      "auc": 0.7345000375043231,
+      "log_loss": 0.5854911905993261,
+      "n": 96918
+    },
+    "live_bkt": {
+      "auc": 0.7167907271142918,
+      "log_loss": 0.6089397991549441,
+      "n": 96918
+    },
+    "oracle_approx": {
+      "auc": 0.8385163698975436,
+      "log_loss": 0.46337351294780554,
+      "n": 96918
+    }
+  }
+}

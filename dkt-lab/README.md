@@ -5,7 +5,7 @@ A standalone research dashboard comparing **Bayesian Knowledge Tracing (BKT)** a
 interactive, in-browser explainer of how each model works.
 
 Everything lives in `dkt-lab/`. It does not import from, or change, the Synaptic
-app (`src/`, `content/`, `Research/`, `scripts/`, root `package.json`). The style
+app (`src/`, `content/`, `Research/`, `scripts/`, root `package.json`); the Scheduling and Synaptic app tabs only *read* results the app has already committed. The style
 and tab structure follow the *Adaptive Learning System Lab* reference, but with
 real datasets and a static-site architecture instead of a Flask server.
 
@@ -39,8 +39,9 @@ dkt-lab/
 5. **Skill heatmap** – predicted P(correct) per skill for 20 held-out students, BKT and DKT side by side.
 6. **How BKT & DKT work** – the live explainer: step through a held-out student or build a sequence; BKT's Bayes update per step vs the LSTM's hidden state, all-skill predictions and transfer; running AUC.
 7. **Scheduling** – SM-2 vs FSRS from `Research/sim/results/scheduler-comparison.json` (copied unchanged; synthetic).
-8. **Report outputs** – `[VALUE]`, `[TABLE]`, `[GRAPH]`, `[TEXT]` placeholders filled with this lab's numbers, copy buttons, graphs as PNG via `canvas.toDataURL`.
-9. **Method & limitations** – pipeline and caveats.
+8. **Synaptic app** – what was done with these findings in the application: the retrained DKT, the cutover gate's three conditions, and per-skill BKT. Read from `Research/dkt/results` and `Research/bkt/results`, copied unchanged into `web/public/data/app/` and checked by `check_web.py` (synthetic).
+9. **Report outputs** – `[VALUE]`, `[TABLE]`, `[GRAPH]`, `[TEXT]` placeholders filled with this lab's numbers, copy buttons, graphs as PNG via `canvas.toDataURL`.
+10. **Method & limitations** – pipeline and caveats.
 
 BKT is always blue and DKT always rust; light and dark themes; works at 400 px; `prefers-reduced-motion` disables animation.
 

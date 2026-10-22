@@ -32,6 +32,9 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 | 15 | The gate reports every failing condition, not only the first — "dkt not better" no longer hides the growth failure behind it | `npm run dkt:compare -- --sim`, then `/engine` |
 | 16 | Per-skill BKT parameters beside the one global set the engine actually uses — ships **off**, **requires migration `008`** | `npm run bkt:compare`, `npx vitest run src/lib/bkt` |
 
+*Not a level:* `FINAL-SUMMARY.md` explains Levels 6–16 in plain language, and the DKT lab website gained a **Synaptic app** tab that shows the app-side results (`cd dkt-lab/web && npm run build`).
+
+
 ## Level details
 
 ### Level 1 — simulator

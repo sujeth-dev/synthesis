@@ -7,7 +7,7 @@ import json
 import os
 import sys
 
-from export import RESULTS_DIR, WEB_DATA, available
+from export import APP_RESULTS, REPO, RESULTS_DIR, WEB_DATA, app_result_dest, available
 
 
 def load(path):
@@ -36,6 +36,11 @@ def main() -> int:
             w = os.path.join(WEB_DATA, extra)
             if not os.path.exists(w) or load(w) != load(r):
                 problems.append(f"{extra} differs")
+    for source in APP_RESULTS:
+        checked += 1
+        copy = app_result_dest(source)
+        if not os.path.exists(copy) or load(copy) != load(os.path.join(REPO, source)):
+            problems.append(f"app/{os.path.basename(source)} differs from {source}")
     for p in problems:
         print("MISMATCH:", p)
     print(f"checked {checked} files: {'OK' if not problems else f'{len(problems)} mismatches'}")

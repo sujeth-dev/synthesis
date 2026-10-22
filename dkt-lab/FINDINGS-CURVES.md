@@ -425,6 +425,32 @@ judge growth", not "approved on AUC".
 **This is a proposal, not a change.** No file under `src/` is modified by Labs 7–9, and
 `DEVELOPMENT_LOOP.md:113` requires human sign-off before any live cutover.
 
+> **Update (Synaptic Levels 12, 14 and 15).** Everything in this section was a
+> proposal when written; the app has since acted on it, and measured the result.
+>
+> - **The gate is built.** `cutoverDecision` now takes a required growth
+>   comparison with exactly the thresholds proposed above (200 cohort pairs, a
+>   0.05 relative tolerance), and since Level 15 returns every condition's state
+>   rather than only the first failure.
+> - **The app's DKT was retrained at `lambda_r = 0.1`**, this lab's
+>   recommendation. On the app's own simulated population the cohort slope ratio
+>   rose 0.665 → 0.727 (+0.062), against the +0.15 this lab measured on its own
+>   simulator. The lab's baseline there was an under-trained model; the app's
+>   was not, so most of that headroom was training rather than regularisation.
+> - **It still does not clear the gate**, on both conditions: AUC gain 0.0078
+>   against the 0.02 required, and a growth loss of 0.144 against the 0.05
+>   tolerated. The numbers are on the Synaptic app tab.
+> - **Per-skill BKT is the better upgrade on that data**: AUC 0.7184 → 0.7293
+>   with growth fidelity unchanged (0.8666 vs 0.8621).
+>
+> **Correction to a figure.** The app's own Python evaluation
+> (`Research/dkt/train_synaptic.py`) reports the live BKT at 0.7168 against
+> 0.7345 for a fitted one. That pair is confounded: the live arm carries the
+> overdue `p_know` decay and the fitted arm has none, so it compared parameters
+> and forgetting together. Traced inside one simulator run with identical decay
+> the gap is 0.7184 against 0.7293. The direction holds; the size does not. The
+> superseded figures are left in the committed results rather than edited away.
+
 ### 2. Other consequences
 
 - **`synthetic5` should stop being shown with a learning curve.** It cannot have one —

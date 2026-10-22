@@ -257,3 +257,7 @@ ul.caveats li { margin-bottom: 8px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
+
+/* Pass/fail marks in the Synaptic app tab: the word is always shown, colour is
+   only reinforcement (DKT's rust, already the lab's "worse" hue). */
+strong.fail { color: var(--dkt); }
