@@ -124,6 +124,49 @@ times the 0.05 tolerance on both runs. The verdict stays `dkt_not_better`
 because the AUC gain (0.006) never clears 0.02 and that condition is checked
 first. Nothing switches: the gate only recommends.
 
+### A better DKT, measured against the same gate (Level 14)
+
+The bundled model was trained by `Research/dkt/train_synaptic.py` with a fixed
+8-epoch budget and no regularisation. Level 14 ports two options from
+`dkt-lab/pipeline/dkt.py` (both default off) and retrains: early stopping on
+validation AUC, and the DKT+ reconstruction weight `lambda_r`, which asks the
+model to reproduce the answer it has just consumed. `lambda_r = 0.1` was pinned
+before any of these numbers existed, because it is the one setting that
+generalised across all three of the lab's datasets.
+
+Three arms, same seed, same 648,609-interaction training set, measured by
+`npm run dkt:compare -- --sim` (300 fresh learners, seed 9001, 95,585 attempts):
+
+| Arm | DKT AUC | Log-loss | Cohort slope ratio |
+|---|---|---|---|
+| A — 8 epochs, `lambda_r` 0 (the previously committed model) | 0.7231 | 0.5978 | 0.6654 |
+| B — 10 epochs + early stopping | **0.7290** | **0.5933** | 0.6933 |
+| C — B + `lambda_r` 0.1 (**now bundled**) | 0.7253 | 0.5960 | **0.7273** |
+| Live BKT, for reference | 0.7175 | 0.6096 | **0.8712** |
+
+Read honestly:
+
+- **The reconstruction term does improve growth fidelity, by much less than the
+  lab predicted.** +0.034 slope ratio over the same-budget arm B, +0.062 over
+  the old model, against the **+0.15** the lab measured on its own simulator.
+  The lab's baseline there was an under-trained 0.7062-AUC model; the app's was
+  not, and most of the lab's headroom appears to have been training, not
+  regularisation.
+- **Arm B wins AUC and arm C wins growth.** Anyone selecting on AUC would have
+  shipped B and thrown the growth gain away — the exact failure
+  `dkt-lab/FINDINGS-CURVES.md` documents. C ships because the pre-stated rule
+  said so, at a cost of 0.0037 AUC.
+- **Early stopping never fired** in either arm: validation AUC was still rising
+  at the last epoch (B 0.7294, C 0.7260). The +0.006 AUC from A to B is the
+  epoch budget, not early stopping.
+- **The gate still refuses, and both of its conditions still fail.** The AUC
+  gain over BKT is 0.0078 against the 0.02 required, and the growth loss is
+  0.144 against the 0.05 tolerated. The verdict reads `dkt_not_better` because
+  ranking is checked first. No constant was changed after seeing these numbers.
+- Per-skill EM-fitted BKT scores **0.7345** on the same held-out rows — above
+  every DKT arm, and above the app's live global-parameter BKT at **0.7168**.
+  The strongest model measured here is a BKT the app does not run.
+
 ## 5. Scheduling (Levels 7, 8 and 11)
 
 **The tier is alive.** `bktToQuality` and `fsrsRatingFromCorrectness` were

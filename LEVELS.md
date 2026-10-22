@@ -28,6 +28,7 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 | 11 | Hesitation- and retry-aware scheduling quality, logged beside the live one — ships **off**, **requires migration `007`** | `npx vitest run src/lib/sm2/adaptive` |
 | 12 | The DKT cutover gate can see learning growth, not only ranking | `npm run dkt:compare -- --sim` |
 | 13 | `/engine`: every signal above, for one real learner, read from the database | `npm run seed:demo`, then open `/engine` |
+| 14 | The bundled DKT retrained with DKT+ reconstruction — better growth fidelity, and still not enough to clear the gate | `npm run dkt:compare -- --sim` |
 
 ## Level details
 
@@ -100,3 +101,9 @@ Level 0 is the merge commit `b94b44e` (`git checkout b94b44e`).
 - A server component following `src/app/dashboard/page.tsx`: cookie → `verifyToken` → query helpers, no new API route and no client fetch. Four sections, each naming the feature item it closes.
 - `npm run seed:demo` writes one **synthetic** learner with a full history, reusing `src/lib/sim/learner.ts` rather than inventing a second learner model; `--dry-run` builds every row and writes nothing.
 - `/demo` is a hardcoded walkthrough and is untouched; `/engine` is deliberately its opposite — every number comes from the database.
+
+### Level 14 — a better DKT, judged by the same gate
+- `Research/dkt/train_dkt.py` gains `lambda_r` (DKT+ reconstruction) and early stopping, both **off by default**: a pytest reproduces the old loop step for step and asserts identical weights at `lambda_r = 0`, and a default retrain reproduced the committed weights bit-for-bit.
+- The bundled model is retrained at `lambda_r = 0.1` (pinned in advance — the one setting that generalised across the lab's three datasets) and records its own configuration in `synaptic-dkt.json`, which the comparison report now names.
+- **Synthetic** (300 learners, seed 9001, 95,585 attempts): slope ratio 0.6654 → **0.7273**, AUC 0.7231 → 0.7253. The same-budget arm without `lambda_r` scored *higher* AUC (0.7290) and *lower* growth (0.6933) — selecting on AUC would have discarded the gain. The lab predicted +0.15 slope ratio and the app got +0.034; most of the lab's headroom was training, not regularisation.
+- The gate still refuses (`dkt_not_better`): +0.0078 AUC against 0.02 required, 0.144 growth loss against 0.05 tolerated. No constant was retuned after the measurement.
