@@ -48,7 +48,8 @@ export interface GradeExplanationOptions {
   disableLogging?: boolean
 }
 
-const REQUEST_TIMEOUT_MS = 20_000
+// Overridable so offline evals can fail over faster; live traffic keeps 20s.
+const REQUEST_TIMEOUT_MS = Number(process.env.NLP_REQUEST_TIMEOUT_MS) || 20_000
 
 interface HttpError extends Error {
   status?: number
