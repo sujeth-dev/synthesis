@@ -1,506 +1,799 @@
 [
   {
     "id": "p4_eval_remember_1",
-    "skill_id": "p4_data_pipeline",
-    "format": "mcq",
-    "stem": "Data → Model → Prediction: Which statement gives the basic purpose?",
-    "options": [
-      {
-        "id": "a",
-        "text": "A pipeline makes the route from raw data to prediction visible."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "A pipeline makes the route from raw data to prediction visible.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "remember"
+    "skill_id": "p4_data_pipeline",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "In a machine learning pipeline, what must happen to the preprocessing steps used on the training data?",
+    "options": [
+      { "id": "a", "text": "They are applied to training data only; test data is used raw", "misconception": "Leaves the test data in a different space from the one the model learned in, so predictions are meaningless." },
+      { "id": "b", "text": "The same fitted transformations must be applied to any data the model later sees" },
+      { "id": "c", "text": "They should be re-fitted separately on each new batch", "misconception": "Re-fitting on new data shifts the scaling under the model and makes results inconsistent between batches." },
+      { "id": "d", "text": "They can be skipped once the model is trained", "misconception": "Treats preprocessing as a one-off cleanup rather than part of the model's input contract." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "The model learned on numbers in a particular form. Ask what it needs in order to be given more.",
+      "Note the word 'fitted': the transformation has parameters of its own, learned from the training data."
+    ],
+    "explanation_after": "A scaler or encoder learns parameters from training data, and those same parameters must transform everything afterwards. This is why pipelines bundle preprocessing with the model: so the two can never be separated by accident."
   },
   {
     "id": "p4_eval_remember_2",
-    "skill_id": "p4_supervised_learning",
-    "format": "mcq",
-    "stem": "Supervised Learning: Which statement gives the basic purpose?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Supervised examples pair inputs with known answers."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Supervised examples pair inputs with known answers.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "remember"
+    "skill_id": "p4_supervised_learning",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "What distinguishes a regression problem from a classification problem?",
+    "options": [
+      { "id": "a", "text": "Regression uses more data than classification", "misconception": "Reaches for a quantity difference where the difference is in what is predicted." },
+      { "id": "b", "text": "Regression is supervised and classification is unsupervised", "misconception": "Both are supervised; both need labelled examples." },
+      { "id": "c", "text": "Regression predicts a continuous number; classification predicts which category something belongs to" },
+      { "id": "d", "text": "Regression works on numbers and classification on text", "misconception": "Confuses the type of the inputs with the type of the output being predicted." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what shape of answer each one produces.",
+      "Predicting a house's price and predicting whether it will sell are two different tasks — say how."
+    ],
+    "explanation_after": "The distinction is in the target: a quantity versus a class. The same features can serve either, which is why the first modelling question is always what exactly is being predicted."
   },
   {
     "id": "p4_eval_remember_3",
+    "phase": "phase_4_machine_learning",
     "skill_id": "p4_unsupervised_learning",
+    "bloom_level": "remember",
     "format": "mcq",
-    "stem": "Unsupervised Learning: Which statement gives the basic purpose?",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "What does the k in k-means clustering specify?",
     "options": [
-      {
-        "id": "a",
-        "text": "Unsupervised learning works without known answer labels."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "The number of clusters the algorithm will produce" },
+      { "id": "b", "text": "The number of features used", "misconception": "Confuses the parameter with the dimensionality of the data." },
+      { "id": "c", "text": "The number of iterations before stopping", "misconception": "Confuses the cluster count with a convergence setting." },
+      { "id": "d", "text": "The number of nearest neighbours consulted", "misconception": "Imports the k from k-nearest-neighbours, a different algorithm with a different k." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Unsupervised learning works without known answer labels.",
-    "phase": "phase_4_machine_learning",
-    "bloom_level": "remember"
+    "hints": [
+      "The algorithm needs one thing decided before it starts. Ask what it cannot work out for itself.",
+      "Ask what you would get back if you set it to 3."
+    ],
+    "explanation_after": "k is the number of clusters, chosen in advance. The algorithm cannot discover how many groups exist, which is why methods like the elbow plot or silhouette scores exist to help choose it."
   },
   {
-    "id": "p4_eval_understand_1",
-    "skill_id": "p4_linear_regression",
+    "id": "p4_eval_sklearn_remember",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_sklearn_workflow",
+    "bloom_level": "remember",
     "format": "mcq",
-    "stem": "Linear Regression: Which statement describes the central idea?",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "In scikit-learn, what does calling `.fit()` on a model do?",
     "options": [
-      {
-        "id": "a",
-        "text": "Least squares gives larger misses extra influence by squaring them."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "Returns predictions for the data passed in", "misconception": "Describes `.predict()`; `.fit()` returns the estimator itself." },
+      { "id": "b", "text": "Checks how well the model performs", "misconception": "Describes `.score()` or a metric function, which run after fitting." },
+      { "id": "c", "text": "Learns the model's parameters from the data passed in" },
+      { "id": "d", "text": "Saves the model to disk", "misconception": "Persisting is a separate step with joblib or pickle." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "scikit-learn has three verbs that do different things: fit, predict and score.",
+      "Ask which one has to come first, and why."
+    ],
+    "explanation_after": "`.fit()` learns from data and stores what it learned on the estimator. The same verb works for a scaler, which learns the mean and spread — which is why the same pipeline API covers preprocessing and models alike."
+  },
+  {
+    "id": "p4_eval_metric_remember",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_evaluation_metrics",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "What does precision measure?",
+    "options": [
+      { "id": "a", "text": "The proportion of all predictions that were correct", "misconception": "Describes accuracy, which counts both classes rather than focusing on the positive predictions." },
+      { "id": "b", "text": "How close repeated predictions are to each other", "misconception": "Uses 'precision' in its measurement-science sense rather than its classification sense." },
+      { "id": "c", "text": "Of the real positive cases, the proportion the model found", "misconception": "Describes recall — the same fraction with the other denominator." },
+      { "id": "d", "text": "Of the cases predicted positive, the proportion that really were" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Both precision and recall count true positives on top. The difference is what goes underneath.",
+      "Ask which one answers 'when it says yes, can I believe it?'"
+    ],
+    "explanation_after": "Precision divides true positives by everything predicted positive: how trustworthy a positive prediction is. Recall divides by everything actually positive: how much was found. Keeping the denominators straight is most of the battle."
+  },
+  {
+    "id": "p4_eval_reg_remember",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_regularization",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "What is regularisation, in one sentence?",
+    "options": [
+      { "id": "a", "text": "A penalty added to the loss that discourages large or numerous parameters" },
+      { "id": "b", "text": "A step that scales features to a common range", "misconception": "Describes normalisation; the similar name causes the mix-up." },
+      { "id": "c", "text": "A method for filling in missing values", "misconception": "Describes imputation, a preprocessing step rather than a training constraint." },
+      { "id": "d", "text": "A technique for speeding up training", "misconception": "Regularisation changes what is optimised, not how fast the optimisation runs." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Least squares gives larger misses extra influence by squaring them.",
+    "hints": [
+      "The goal is to stop the model fitting its training data too closely. Ask how a penalty achieves that.",
+      "Something is added to the quantity being minimised."
+    ],
+    "explanation_after": "Regularisation adds a cost for complexity, so the model only grows a parameter when the data pays for it. It is the standard lever against overfitting, and the one that trades a little bias for a lot less variance."
+  },
+
+  {
+    "id": "p4_eval_understand_1",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "understand"
+    "skill_id": "p4_linear_regression",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Why does least-squares regression square the errors rather than just adding them up?",
+    "options": [
+      { "id": "a", "text": "Because squaring makes the arithmetic faster", "misconception": "Reaches for a performance reason for what is a modelling choice." },
+      { "id": "b", "text": "Because it guarantees the model will fit perfectly", "misconception": "No loss function guarantees a perfect fit; it only defines what counts as a good one." },
+      { "id": "c", "text": "Because squared values are easier for people to read", "misconception": "Squared units are in fact harder to interpret, which is why RMSE is often reported instead." },
+      { "id": "d", "text": "Because squaring keeps errors positive and gives large misses disproportionate weight" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Consider what happens if you simply add errors of +5 and -5.",
+      "Then ask how a miss of 10 should compare with two misses of 5."
+    ],
+    "explanation_after": "Raw errors cancel out, and squaring both fixes that and makes one large miss worse than several small ones. It is also why least squares is sensitive to outliers — and why absolute error is preferred when they are expected."
   },
   {
     "id": "p4_eval_understand_2",
-    "skill_id": "p4_logistic_regression",
-    "format": "mcq",
-    "stem": "Logistic Regression: Which statement describes the central idea?",
-    "options": [
-      {
-        "id": "a",
-        "text": "An S-shaped gate keeps the output between zero and one."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "An S-shaped gate keeps the output between zero and one.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "understand"
+    "skill_id": "p4_logistic_regression",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "Why does logistic regression pass its linear combination through a sigmoid function?",
+    "options": [
+      { "id": "a", "text": "To make training converge faster", "misconception": "Treats a modelling requirement as an optimisation trick." },
+      { "id": "b", "text": "To remove the need for a bias term", "misconception": "The bias is still present and still needed; the sigmoid shapes the output, not the inputs." },
+      { "id": "c", "text": "To squash an unbounded number into the 0–1 range so it can be read as a probability" },
+      { "id": "d", "text": "To make the model non-linear in its features", "misconception": "The decision boundary stays linear in the features; the sigmoid only transforms the output." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what range a weighted sum can produce, and what range a probability must lie in.",
+      "Think about what the model should output for an input it is extremely confident about."
+    ],
+    "explanation_after": "A weighted sum can be any number; a probability cannot. The sigmoid maps the whole real line into (0, 1) while keeping the ordering, so the boundary stays linear but the output is usable as a probability."
   },
   {
     "id": "p4_eval_understand_3",
+    "phase": "phase_4_machine_learning",
     "skill_id": "p4_decision_trees",
+    "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Decision Trees: Which statement describes the central idea?",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "How does a decision tree decide which feature to split on at a node?",
     "options": [
-      {
-        "id": "a",
-        "text": "A split is useful when it makes the resulting groups less mixed."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "It picks the split that makes the resulting groups least mixed in their labels" },
+      { "id": "b", "text": "It splits on features in the order they appear in the data", "misconception": "Would make the model depend on column order, which it does not." },
+      { "id": "c", "text": "It splits on whichever feature has the largest values", "misconception": "Confuses magnitude with informativeness; scale is irrelevant to a tree." },
+      { "id": "d", "text": "It tries every possible tree and keeps the best", "misconception": "That search is computationally infeasible; trees are built greedily, one split at a time." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "A split is useful when it makes the resulting groups less mixed.",
-    "phase": "phase_4_machine_learning",
-    "bloom_level": "understand"
+    "hints": [
+      "A good split should make the answer more obvious in each branch.",
+      "Terms like Gini impurity and entropy are measuring one particular thing — ask what."
+    ],
+    "explanation_after": "The tree scores each candidate split by how much purer the resulting groups are, and takes the best one available now. Being greedy means it can miss a better overall tree — one reason forests of varied trees do better."
   },
   {
-    "id": "p4_eval_apply_1",
-    "skill_id": "p4_random_forests",
+    "id": "p4_eval_bias_understand",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Random Forests: Which statement shows a sound use?",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "In the bias–variance decomposition, what does high variance mean?",
     "options": [
-      {
-        "id": "a",
-        "text": "Random feature choices make tree errors less alike."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "The features in the data have a wide spread of values", "misconception": "Uses variance in its descriptive-statistics sense rather than as a property of the model's error." },
+      { "id": "b", "text": "The model's predictions change a lot depending on which training sample it saw" },
+      { "id": "c", "text": "The model's predictions are consistently wrong in the same direction", "misconception": "Describes bias, the other half of the decomposition." },
+      { "id": "d", "text": "The target values are noisy", "misconception": "Describes irreducible error, which belongs to the data and cannot be fixed by any model." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Imagine training the same model on ten different samples and comparing the ten results.",
+      "One component is about being consistently off; the other about being inconsistent."
+    ],
+    "explanation_after": "Variance is sensitivity to the particular training sample: retrain on a different draw and you get a noticeably different model. Bias is the systematic error that persists however you resample — which is why the two have opposite remedies."
+  },
+  {
+    "id": "p4_eval_cv_understand",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_train_test_cross_validation",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "Why use k-fold cross-validation instead of a single train/test split?",
+    "options": [
+      { "id": "a", "text": "It lets the model train on the test data, improving accuracy", "misconception": "Describes leakage; each fold's test portion is still held out from the model trained on it." },
+      { "id": "b", "text": "It is faster than a single split", "misconception": "It is roughly k times slower, which is the cost paid for the extra reliability." },
+      { "id": "c", "text": "It removes the need for a separate test set entirely", "misconception": "Cross-validation guides model choice; a final untouched set is still wanted for an honest last estimate." },
+      { "id": "d", "text": "Every example is tested on once, so the estimate depends less on one lucky or unlucky split" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask how much you would trust a score from one 20% slice of a small dataset.",
+      "What does averaging several estimates do to the noise in them?"
+    ],
+    "explanation_after": "A single split can be lucky or unlucky, especially on small data. k folds give k estimates to average, and their spread tells you how stable the result is — information one split cannot provide."
+  },
+  {
+    "id": "p4_eval_knn_understand",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_knn_and_svm",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "What does a support vector machine's 'margin' refer to?",
+    "options": [
+      { "id": "a", "text": "The gap between the decision boundary and the nearest training points of each class" },
+      { "id": "b", "text": "The error rate the model is allowed to have", "misconception": "Confuses a geometric property of the boundary with a tolerance on performance." },
+      { "id": "c", "text": "The fraction of data held out for testing", "misconception": "Imports an evaluation concept into a description of the model's geometry." },
+      { "id": "d", "text": "The number of features the model ignores", "misconception": "SVMs do not drop features; the margin says nothing about dimensionality." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Random feature choices make tree errors less alike.",
+    "hints": [
+      "Picture the boundary as a street rather than a line, and ask what sets its width.",
+      "Which training points does the model actually depend on?"
+    ],
+    "explanation_after": "The margin is the empty corridor around the boundary, and the SVM maximises it. Only the closest points — the support vectors — determine where it sits, which is why the model is unaffected by distant examples."
+  },
+
+  {
+    "id": "p4_eval_apply_1",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "apply"
+    "skill_id": "p4_random_forests",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "A single decision tree overfits badly on your data. Why would a random forest usually do better?",
+    "options": [
+      { "id": "a", "text": "Because each tree in the forest is trained for fewer iterations", "misconception": "Trees are not trained iteratively; the benefit comes from averaging, not from stopping early." },
+      { "id": "b", "text": "Because forests ignore the noisiest features automatically", "misconception": "Feature randomness is about decorrelating trees, not about discarding noisy inputs." },
+      { "id": "c", "text": "Because the forest uses a single, much deeper tree", "misconception": "Describes the opposite of a forest, and a deeper tree would overfit more." },
+      { "id": "d", "text": "Because it averages many trees that were deliberately made to make different errors" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what happens to independent random errors when many estimates are averaged.",
+      "The forest deliberately varies two things between trees — the rows and the columns each sees."
+    ],
+    "explanation_after": "Each tree sees a bootstrap sample and a random subset of features, so their errors are not the same errors. Averaging cancels much of that variance while leaving the shared signal, which is why the forest generalises better than any one tree."
   },
   {
     "id": "p4_eval_apply_2",
-    "skill_id": "p4_boosting_methods",
-    "format": "mcq",
-    "stem": "Boosting Methods: Which statement shows a sound use?",
-    "options": [
-      {
-        "id": "a",
-        "text": "The learning rate controls how strongly each correction joins."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "The learning rate controls how strongly each correction joins.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "apply"
+    "skill_id": "p4_boosting_methods",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "You lower a gradient-boosting model's learning rate from 0.3 to 0.05. What else should usually change?",
+    "options": [
+      { "id": "a", "text": "Nothing; the learning rate is independent of the other settings", "misconception": "Misses that each tree now contributes less, so fewer total trees means an undertrained model." },
+      { "id": "b", "text": "The number of trees should be reduced to match", "misconception": "Moves both dials the same way, compounding the undertraining rather than compensating." },
+      { "id": "c", "text": "The number of boosting rounds should increase, since each tree now contributes less" },
+      { "id": "d", "text": "The training data should be made smaller", "misconception": "Links a model setting to dataset size, which the learning rate does not affect." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Boosting adds a correction at a time, scaled by the learning rate. Ask what a smaller scale means for total progress.",
+      "The two settings trade off against each other — ask which way."
+    ],
+    "explanation_after": "A smaller learning rate means smaller steps, so more rounds are needed to reach the same fit. Small rate plus many trees usually generalises better than the reverse, at the cost of training time — the classic boosting trade."
   },
   {
     "id": "p4_eval_apply_3",
-    "skill_id": "p4_knn_and_svm",
-    "format": "mcq",
-    "stem": "K-Nearest Neighbors & Support Vector Machines: Which statement shows a sound use?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Feature scaling matters because both methods rely on distance."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Feature scaling matters because both methods rely on distance.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "apply"
+    "skill_id": "p4_knn_and_svm",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "A k-NN model uses annual income (0–200,000) and years of education (0–25) and performs poorly. What is the most likely cause?",
+    "options": [
+      { "id": "a", "text": "k-NN cannot handle two features at once", "misconception": "k-NN handles many features; the issue is how they are scaled relative to each other." },
+      { "id": "b", "text": "Income dominates the distance calculation, so education barely affects which neighbours are found" },
+      { "id": "c", "text": "The features are correlated with each other", "misconception": "Correlation can matter, but it would not produce this failure in the way a 10,000-fold range difference does." },
+      { "id": "d", "text": "k must be set equal to the number of features", "misconception": "Invents a relationship between k and feature count; k is the number of neighbours consulted." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Work out roughly how much a difference of 5 years of education changes the distance, against a difference of 5,000 in income.",
+      "Ask what k-NN actually computes to decide who is nearby."
+    ],
+    "explanation_after": "Distance sums each feature's difference, so a feature on a much larger numeric scale swamps the others. Scaling both to a common range is not optional for any distance-based method — which is why it is bundled into the pipeline."
   },
   {
-    "id": "p4_eval_analyze_1",
-    "skill_id": "p4_train_test_cross_validation",
+    "id": "p4_eval_metric_apply",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_evaluation_metrics",
+    "bloom_level": "apply",
     "format": "mcq",
-    "stem": "Train/Test Splits & Cross-Validation: Which statement describes the mechanism correctly?",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "A classifier predicts 40 positives, of which 30 are correct. There were 50 real positives in total. What are its precision and recall?",
     "options": [
-      {
-        "id": "a",
-        "text": "Group splits keep related records from leaking across sides."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "Precision 60%, recall 75%", "misconception": "Swaps the two denominators." },
+      { "id": "b", "text": "Precision 75%, recall 60%" },
+      { "id": "c", "text": "Precision 75%, recall 75%", "misconception": "Uses the same denominator twice, missing that 40 predicted and 50 actual are different totals." },
+      { "id": "d", "text": "Precision 30%, recall 30%", "misconception": "Reports the raw count rather than a proportion." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Both have 30 on top. Write down what goes underneath for each.",
+      "One denominator is what the model claimed; the other is what was really there."
+    ],
+    "explanation_after": "Precision is 30/40 = 75%; recall is 30/50 = 60%. The model is fairly trustworthy when it says yes, but misses two in five real cases — a distinction accuracy alone would have hidden."
+  },
+  {
+    "id": "p4_eval_scale_apply",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_feature_scaling",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "You are fitting a random forest and a logistic regression on the same features, some of which have very different ranges. Which needs feature scaling?",
+    "options": [
+      { "id": "a", "text": "Both, since scaling is always required", "misconception": "Applies a blanket rule; tree splits are unaffected by monotonic rescaling." },
+      { "id": "b", "text": "Neither, since both are robust to scale", "misconception": "Half right: the forest is, but regularised coefficient models are not." },
+      { "id": "c", "text": "The forest only, since it compares features against each other", "misconception": "Inverts which model is sensitive; a tree splits one feature at a time, on its own scale." },
+      { "id": "d", "text": "The logistic regression, because its coefficients and regularisation penalty depend on feature scale" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what each model does with a feature: compare values within it, or combine values across features?",
+      "Think about what a penalty on coefficient size does when one feature is measured in thousands."
+    ],
+    "explanation_after": "A tree asks 'is this feature above x', which is unchanged by rescaling. A linear model multiplies features by coefficients and penalises their size, so unscaled features distort both the fit and the penalty. Scaling the forest does no harm — it just does nothing."
+  },
+  {
+    "id": "p4_eval_sklearn_apply",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_sklearn_workflow",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "Which sequence correctly scales features and fits a model without leaking information from the test set?",
+    "options": [
+      { "id": "a", "text": "Fit the scaler on all the data, then split, then fit the model on the training part", "misconception": "The scaler has already seen the test data's distribution, so test statistics leak into training." },
+      { "id": "b", "text": "Split, fit the scaler on the training part, transform both parts with it, then fit the model" },
+      { "id": "c", "text": "Split, then fit a separate scaler on each part", "misconception": "Puts the two parts into different spaces, so the model is evaluated on differently scaled inputs." },
+      { "id": "d", "text": "Fit the model first, then scale the features afterwards", "misconception": "Scales after the model has already learned from unscaled inputs, so the transformation never reaches training." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what the test set is standing in for, and whether anything about it may be known in advance.",
+      "The scaler learns parameters too. Ask which data it is allowed to learn them from."
+    ],
+    "explanation_after": "The scaler's mean and spread are learned parameters, so fitting them on all the data leaks test information into training. Split first, fit on training only, apply to both — exactly what `Pipeline` enforces automatically."
+  },
+
+  {
+    "id": "p4_eval_analyze_1",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_train_test_cross_validation",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "A model predicting patient outcomes scores 94% in cross-validation and 68% in the hospital. Each patient contributed several visits, randomly split across folds. What went wrong?",
+    "options": [
+      { "id": "a", "text": "Rows from the same patient appeared in both training and validation, so the model recognised patients rather than learning the condition" },
+      { "id": "b", "text": "The number of folds was too low", "misconception": "More folds would not stop the same patient appearing on both sides of a split." },
+      { "id": "c", "text": "Cross-validation always overestimates performance", "misconception": "It is usually a sound estimate; here a specific structural assumption was violated." },
+      { "id": "d", "text": "The hospital data was collected differently", "misconception": "Possible in general, but the stem points at how the splitting was done." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Group splits keep related records from leaking across sides.",
-    "phase": "phase_4_machine_learning",
-    "bloom_level": "analyze"
+    "hints": [
+      "Cross-validation assumes the rows are independent. Ask whether several visits from one patient are.",
+      "What could the model memorise that would help on validation and never help on a new patient?"
+    ],
+    "explanation_after": "Random splitting put the same patient on both sides, so the model could memorise individuals. Grouped splitting — all of a patient's rows in one fold — is what makes the estimate honest when rows are not independent."
   },
   {
     "id": "p4_eval_analyze_2",
-    "skill_id": "p4_evaluation_metrics",
-    "format": "mcq",
-    "stem": "Evaluation Metrics: Which statement describes the mechanism correctly?",
-    "options": [
-      {
-        "id": "a",
-        "text": "F1 becomes low when either precision or recall is weak."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "F1 becomes low when either precision or recall is weak.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "analyze"
+    "skill_id": "p4_evaluation_metrics",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "Model A has precision 0.95 and recall 0.10. Model B has precision 0.55 and recall 0.50. Why does F1 rank B far above A?",
+    "options": [
+      { "id": "a", "text": "Because F1 always prefers the model with higher recall", "misconception": "F1 is symmetric; it has no preference between the two." },
+      { "id": "b", "text": "Because F1 is the harmonic mean, which is dragged down hard by whichever of the two is weakest" },
+      { "id": "c", "text": "Because F1 ignores precision entirely", "misconception": "F1 uses both; ignoring one would make the measure pointless." },
+      { "id": "d", "text": "Because A's precision must have been measured incorrectly", "misconception": "Both figures are internally consistent; the ranking follows from how F1 combines them." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Compute the ordinary average of each pair, then the harmonic mean, and compare the orderings.",
+      "Ask what a harmonic mean does when one of its inputs is near zero."
+    ],
+    "explanation_after": "The arithmetic mean would rank A and B almost level at 0.525; the harmonic mean gives A 0.18 and B 0.52. F1 therefore refuses to reward a model that is excellent at one half and useless at the other — which is the whole point of using it."
   },
   {
     "id": "p4_eval_analyze_3",
-    "skill_id": "p4_bias_variance_tradeoff",
-    "format": "mcq",
-    "stem": "Bias–Variance Tradeoff: Which statement describes the mechanism correctly?",
-    "options": [
-      {
-        "id": "a",
-        "text": "A large train-validation gap suggests high variance."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "A large train-validation gap suggests high variance.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "analyze"
+    "skill_id": "p4_bias_variance_tradeoff",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "Training error is 24% and validation error is 26%, and both have stopped improving. What does this diagnose?",
+    "options": [
+      { "id": "a", "text": "High variance: the model is memorising its training data", "misconception": "Memorising would drive training error far below validation error; here they are level." },
+      { "id": "b", "text": "A data leak between the two sets", "misconception": "Leakage inflates validation performance; here both are equally poor." },
+      { "id": "c", "text": "The validation set is too small", "misconception": "A small set makes the estimate noisy, not systematically equal to a high training error." },
+      { "id": "d", "text": "High bias: the model is too simple to capture the pattern, so more data will not help" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "The gap between the two numbers is one signal; the level of both is another. Read both.",
+      "Ask whether more examples would help a model that cannot even fit the examples it has."
+    ],
+    "explanation_after": "A small gap with high error everywhere is underfitting. More data will not help a model that already fails on its training set; more capacity, better features or less regularisation will. Reading gap and level together is what makes the diagnosis."
   },
   {
-    "id": "p4_eval_evaluate_1",
-    "skill_id": "p4_regularization",
+    "id": "p4_eval_tree_analyze",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_decision_trees",
+    "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "Regularization: Which caution is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "An unrestricted decision tree reaches 100% training accuracy and 61% on validation. What does the 100% tell you?",
     "options": [
-      {
-        "id": "a",
-        "text": "Elastic net combines L1 and L2 behavior."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "The tree grew until each leaf held essentially one example, so it memorised rather than generalised" },
+      { "id": "b", "text": "The features perfectly determine the label", "misconception": "If they did, validation accuracy would also be high; the gap says otherwise." },
+      { "id": "c", "text": "The training data has no noise in it", "misconception": "A deep enough tree reaches 100% whether or not the data is noisy — it simply isolates the noise too." },
+      { "id": "d", "text": "The tree found the optimal split at every node", "misconception": "Greedy splitting is not optimal, and perfect training accuracy is evidence of depth rather than of quality." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Elastic net combines L1 and L2 behavior.",
+    "hints": [
+      "Ask what an unlimited tree can always achieve, regardless of the data.",
+      "A result that is always attainable cannot be evidence of anything."
+    ],
+    "explanation_after": "Any tree allowed to grow freely can isolate every training row, so 100% is uninformative. Depth limits, minimum leaf sizes and pruning exist to stop it — which is why an unrestricted tree is almost never the final model."
+  },
+  {
+    "id": "p4_eval_logreg_analyze",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "evaluate"
+    "skill_id": "p4_logistic_regression",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "A logistic regression trained on 1% fraud predicts probabilities that are almost all below 0.2, yet it ranks cases well. What does that indicate?",
+    "options": [
+      { "id": "a", "text": "The model has failed and must be retrained", "misconception": "Treats a calibration and threshold issue as a modelling failure, when the ranking is good." },
+      { "id": "b", "text": "Logistic regression cannot produce probabilities above 0.2", "misconception": "Invents an upper bound; the sigmoid spans the whole range." },
+      { "id": "c", "text": "The base rate is 1%, so low probabilities are appropriate; the default 0.5 threshold is what is wrong" },
+      { "id": "d", "text": "The features are uninformative", "misconception": "Uninformative features would destroy the ranking, which the stem says is good." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what probability a well-calibrated model should give a typical case when only 1% are positive.",
+      "Separate two questions: are the scores ordered correctly, and where should the cut sit?"
+    ],
+    "explanation_after": "With a 1% base rate, most cases genuinely are unlikely to be fraud, so low probabilities are correct. The default 0.5 threshold simply does not suit the problem — choose it from the precision-recall curve instead."
+  },
+  {
+    "id": "p4_eval_unsup_analyze",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_unsupervised_learning",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "Running k-means twice on identical data with the same k gives noticeably different clusters. Why?",
+    "options": [
+      { "id": "a", "text": "The data must have changed between runs", "misconception": "The stem rules this out; the difference comes from the algorithm, not the input." },
+      { "id": "b", "text": "k-means cannot handle more than two clusters reliably", "misconception": "Invents a limitation; the sensitivity is to initial centre placement, not to k." },
+      { "id": "c", "text": "Clustering results are inherently meaningless", "misconception": "Over-corrects: the instability is informative, and stable structure does reproduce." },
+      { "id": "d", "text": "It starts from randomly placed centres and converges to a local optimum that depends on where it started" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what the algorithm does before its first assignment step.",
+      "What does it mean that it stops when nothing moves, rather than when it has found the best possible answer?"
+    ],
+    "explanation_after": "k-means converges to a local optimum determined by its random start. Running it many times and keeping the best, or using k-means++ initialisation, is standard — and clusters that vary wildly between runs are telling you the structure is weak."
+  },
+
+  {
+    "id": "p4_eval_evaluate_1",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_regularization",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "You have 300 samples and 5,000 features, and want a model whose important features can be named. L1 or L2 regularisation?",
+    "options": [
+      { "id": "a", "text": "L2, because it generally gives slightly better predictive accuracy", "misconception": "Optimises accuracy while ignoring the stated requirement that features be identifiable." },
+      { "id": "b", "text": "L1, because it drives many coefficients to exactly zero, leaving a readable subset" },
+      { "id": "c", "text": "Neither; with more features than samples no regularisation helps", "misconception": "This is precisely the regime where regularisation is indispensable." },
+      { "id": "d", "text": "L2, because L1 cannot be used when features outnumber samples", "misconception": "Invents a restriction; L1 is especially suited to that case." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "The two penalties shrink coefficients differently. Ask which one can reach exactly zero.",
+      "Re-read what the stem asks for besides good predictions."
+    ],
+    "explanation_after": "L1 performs selection by zeroing coefficients outright; L2 shrinks everything but keeps all 5,000. With the requirement being a nameable subset, L1 wins even if L2 predicted marginally better — and elastic net is the compromise when correlated features need handling."
   },
   {
     "id": "p4_eval_evaluate_2",
-    "skill_id": "p4_hyperparameter_tuning",
-    "format": "mcq",
-    "stem": "Hyperparameter Tuning: Which caution is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Successive halving gives more resources to promising trials."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Successive halving gives more resources to promising trials.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "evaluate"
+    "skill_id": "p4_hyperparameter_tuning",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A colleague tuned hyperparameters by trying 200 combinations on the test set and reporting the best score. Assess that.",
+    "options": [
+      { "id": "a", "text": "Sound — trying more combinations finds a better model", "misconception": "Confuses finding a good model with honestly measuring one; the search itself is not the problem." },
+      { "id": "b", "text": "Unsound — hyperparameters should never be tuned at all", "misconception": "Over-corrects; tuning is normal and useful, on the right data." },
+      { "id": "c", "text": "Unsound: selecting on the test set makes the reported score optimistic, since the best of 200 is partly luck" },
+      { "id": "d", "text": "Sound, provided the test set is large enough", "misconception": "Size reduces the noise but does not remove the selection bias from choosing the maximum of 200 noisy estimates." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what the test set is supposed to estimate, and whether it can still do that after 200 looks.",
+      "Even with identical models, the best of 200 noisy scores is above the true mean. Ask what that does to the report."
+    ],
+    "explanation_after": "Choosing on the test set turns it into a validation set and the reported number into the maximum of 200 noisy draws. Tune on validation, then report once from an untouched test set — the search was fine, the measurement was not."
   },
   {
     "id": "p4_eval_evaluate_3",
-    "skill_id": "p4_feature_scaling",
-    "format": "mcq",
-    "stem": "Feature Scaling: Which caution is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Tree splits usually care less about scaling than distance-based models."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Tree splits usually care less about scaling than distance-based models.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "evaluate"
+    "skill_id": "p4_feature_scaling",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "A feature is strongly right-skewed with a few extreme values. Is min-max scaling to [0, 1] a good choice here?",
+    "options": [
+      { "id": "a", "text": "Yes — min-max is the standard choice for any numeric feature", "misconception": "Applies a default without asking what the extreme values do to the resulting range." },
+      { "id": "b", "text": "Yes, because it preserves the shape of the distribution exactly", "misconception": "True but beside the point: preserving a badly skewed shape while compressing most of it is the problem." },
+      { "id": "c", "text": "No, because scaling should never be applied to skewed data", "misconception": "Over-corrects; the data needs scaling, just not this scaling." },
+      { "id": "d", "text": "Poorly suited: the extremes set the range, so the bulk of the values are squashed into a narrow band" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Work out where the median lands after scaling when one value is a hundred times the rest.",
+      "Ask which two data points decide the whole transformation."
+    ],
+    "explanation_after": "Min-max is defined entirely by the two extremes, so outliers compress everything else into a sliver. Standardisation is more robust, and a log transform before scaling usually suits skewed data better still."
   },
   {
-    "id": "p4_eval_create_1",
-    "skill_id": "p4_data_pipeline",
+    "id": "p4_eval_model_evaluate",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_supervised_learning",
+    "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "Data → Model → Prediction: Which deeper statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "For a loan model that must be explained to regulators and to rejected applicants, logistic regression at 81% or gradient boosting at 86%?",
     "options": [
-      {
-        "id": "a",
-        "text": "A directed acyclic graph can represent branching pipeline dependencies without loops."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "Boosting, because accuracy is the only objective measure of a model's quality", "misconception": "Treats one criterion as the whole decision, when the stem names a second requirement." },
+      { "id": "b", "text": "Logistic regression, because its coefficients give a direct account of how each factor moved the decision" },
+      { "id": "c", "text": "Boosting, since post-hoc tools can explain any model fully", "misconception": "Overstates what SHAP and similar tools provide: an approximation of influence, not the rule that was applied." },
+      { "id": "d", "text": "Logistic regression, because boosted models are unreliable in production", "misconception": "Right answer, wrong reason; boosted models are widely deployed and perfectly reliable." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Two requirements are stated. Ask whether the 5-point gain can pay for failing the second.",
+      "Ask what you would actually say to a rejected applicant under each model."
+    ],
+    "explanation_after": "A coefficient gives a defensible per-factor account; an attribution over hundreds of trees approximates one. Where an explanation is a legal requirement, five points of accuracy is usually the cheaper thing to give up — and in a setting without that constraint, boosting would be the right call."
+  },
+  {
+    "id": "p4_eval_forest_evaluate",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_random_forests",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A colleague proposes raising a random forest from 100 trees to 5,000 to fix overfitting. Judge that.",
+    "options": [
+      { "id": "a", "text": "Sound — more trees always reduce overfitting further", "misconception": "Assumes the averaging benefit continues indefinitely; it plateaus well before 5,000." },
+      { "id": "b", "text": "Unsound — more trees will increase overfitting", "misconception": "Over-corrects in the other direction; adding trees does not make a forest overfit more." },
+      { "id": "c", "text": "Largely pointless here: the averaging benefit plateaus early, so the fix is per-tree depth, leaf size or feature sampling" },
+      { "id": "d", "text": "Sound, provided training time is acceptable", "misconception": "Accepts the cost of a change that will not measurably help." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what adding the 4,901st tree contributes to an average that has already stabilised.",
+      "If each individual tree is still memorising, ask what averaging them can and cannot repair."
+    ],
+    "explanation_after": "Variance from averaging falls quickly and then flattens; beyond a few hundred trees you buy time, not accuracy. If the forest still overfits, the trees themselves are too free — which is what depth and leaf-size limits control."
+  },
+  {
+    "id": "p4_eval_pipeline_evaluate",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_data_pipeline",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A team cleans data in a notebook by hand each time, then trains. Is converting that into a scripted pipeline worth the effort for a model that will be retrained monthly?",
+    "options": [
+      { "id": "a", "text": "No — manual cleaning lets a human catch issues an automated step would miss", "misconception": "Values human judgment, which stays available either way, over the reproducibility the monthly cadence requires." },
+      { "id": "b", "text": "No, since the model is retrained too rarely to justify the engineering", "misconception": "Counts the effort but not the accumulated risk of twelve unreproducible retrainings a year." },
+      { "id": "c", "text": "Yes, but only if the dataset is large", "misconception": "Ties the decision to size, when the issue is repeatability of the steps." },
+      { "id": "d", "text": "Yes: monthly repetition makes manual steps a reliability risk, and the pipeline makes each run reproducible and reviewable" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what happens when one month's cleaning differs slightly from the last, and nobody notices.",
+      "Weigh a one-off engineering cost against a risk paid every single month."
+    ],
+    "explanation_after": "Anything done by hand every month will eventually be done differently, and the resulting model difference is untraceable. A scripted pipeline costs once and makes each run reproducible, reviewable and comparable — which is also what makes a bad month diagnosable."
+  },
+
+  {
+    "id": "p4_eval_create_1",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_data_pipeline",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "Design the order of steps for a pipeline with missing values, categorical columns and a model needing scaled numeric input.",
+    "options": [
+      { "id": "a", "text": "Split → impute, encode and scale fitted on training only → apply to both → fit the model" },
+      { "id": "b", "text": "Impute, encode and scale on the full dataset → split → fit the model", "misconception": "Every transformation has seen the test data, so its statistics leak into training." },
+      { "id": "c", "text": "Split → fit the model → impute, encode and scale the predictions", "misconception": "Transforms outputs rather than inputs, and the model never receives usable features." },
+      { "id": "d", "text": "Encode → split → impute and scale on each part separately", "misconception": "Encoding before the split can leak category information, and per-part fitting puts the two in different spaces." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "A directed acyclic graph can represent branching pipeline dependencies without loops.",
-    "phase": "phase_4_machine_learning",
-    "bloom_level": "create"
+    "hints": [
+      "Every step that learns something from data has to learn it from the training portion only.",
+      "Ask which steps have parameters — an imputer's fill value, an encoder's categories, a scaler's mean."
+    ],
+    "explanation_after": "Split first, fit every transformation on training only, then apply the fitted versions to both. Imputers, encoders and scalers all carry learned parameters, which is why they belong inside the pipeline rather than in a preparatory cell."
   },
   {
     "id": "p4_eval_create_2",
-    "skill_id": "p4_supervised_learning",
-    "format": "mcq",
-    "stem": "Supervised Learning: Which deeper statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Distribution shift can change who arrives or how inputs relate to answers."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Distribution shift can change who arrives or how inputs relate to answers.",
     "phase": "phase_4_machine_learning",
-    "bloom_level": "create"
+    "skill_id": "p4_supervised_learning",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "You must predict which of 50,000 customers will cancel next month; about 3% do. Which setup is soundest?",
+    "options": [
+      { "id": "a", "text": "Binary classification, evaluated by accuracy, with a 0.5 threshold", "misconception": "Accuracy rewards predicting 'stays' for everyone, which scores 97% and is useless." },
+      { "id": "b", "text": "Clustering the customers and treating the smallest cluster as the churners", "misconception": "Discards labels that exist, and nothing guarantees a cluster corresponds to cancelling." },
+      { "id": "c", "text": "Binary classification scored on precision and recall, with the threshold chosen from the cost of each error" },
+      { "id": "d", "text": "Regression on months-until-cancellation, thresholded afterwards", "misconception": "Reasonable-sounding, but it needs a cancellation date for everyone, including those who never cancel." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Work out the accuracy of a model that predicts 'stays' for every customer.",
+      "Ask what a retention team would do with each prediction, and what a wrong one costs in each direction."
+    ],
+    "explanation_after": "With 3% positives, accuracy is dominated by the majority class. Precision and recall describe what matters — how many leavers are caught and how much outreach is wasted — and the threshold is where that trade is actually set."
   },
   {
     "id": "p4_eval_create_3",
+    "phase": "phase_4_machine_learning",
     "skill_id": "p4_unsupervised_learning",
+    "bloom_level": "create",
     "format": "mcq",
-    "stem": "Unsupervised Learning: Which deeper statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "You must cluster customers and have no idea how many groups exist. Which plan is soundest?",
     "options": [
-      {
-        "id": "a",
-        "text": "Stable and useful groups matter more than treating one clustering score as truth."
-      },
-      {
-        "id": "b",
-        "text": "It guarantees perfect predictions without representative data."
-      },
-      {
-        "id": "c",
-        "text": "It removes the need to test the finished workflow on unseen cases."
-      },
-      {
-        "id": "d",
-        "text": "It works only by renaming columns and does not change learning."
-      }
+      { "id": "a", "text": "Pick k = 5, since most businesses have about five segments", "misconception": "Imports an assumption instead of letting the data inform the choice." },
+      { "id": "b", "text": "Try a range of k, compare silhouette scores and stability across runs, and check the candidates make business sense" },
+      { "id": "c", "text": "Set k equal to the number of customers, so every customer is their own segment", "misconception": "Technically optimal on within-cluster distance and entirely useless — a reminder that the metric is not the goal." },
+      { "id": "d", "text": "Use the number of features as k", "misconception": "Connects two unrelated quantities; feature count says nothing about how many groups exist." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "There is no ground truth here, so ask what evidence could still support a choice.",
+      "A good answer combines a numeric criterion with something outside the data."
+    ],
+    "explanation_after": "Without labels, the evidence is internal measures across several k, whether the same structure reappears across runs, and whether the groups mean anything to the people who will act on them. Any one of the three alone can be gamed."
+  },
+  {
+    "id": "p4_eval_cv_create",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_train_test_cross_validation",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "You have 800 labelled examples, a rare class at 4%, and need both to tune hyperparameters and to report an honest final score. Design the evaluation.",
+    "options": [
+      { "id": "a", "text": "A single 80/20 split, tuning and reporting on the 20%", "misconception": "Tunes and reports on the same data, and 20% of 800 holds only about 6 rare-class rows." },
+      { "id": "b", "text": "Hold out a stratified test set, run stratified k-fold cross-validation on the rest for tuning, then score the test set once" },
+      { "id": "c", "text": "Cross-validate over all 800 and report the best fold's score", "misconception": "Reports a maximum rather than an average, and leaves no untouched data for a final estimate." },
+      { "id": "d", "text": "Train on all 800 and report cross-validated training accuracy", "misconception": "Offers no held-out estimate at all; the phrase describes a measurement that cannot be made." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Two jobs need separating: choosing settings, and measuring the chosen one.",
+      "With 4% positives, ask what a split has to guarantee about each portion's composition."
+    ],
+    "explanation_after": "Stratification keeps the rare class proportional in every fold, cross-validation makes the tuning estimate stable on small data, and a test set touched once keeps the final number honest. Each piece answers a different threat."
+  },
+  {
+    "id": "p4_eval_boost_create",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_boosting_methods",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "You are configuring gradient boosting on 10,000 rows and want to avoid overfitting without endless manual tuning. Which plan is soundest?",
+    "options": [
+      { "id": "a", "text": "Set the learning rate high and the tree count low, to finish training quickly", "misconception": "Large steps with few corrections tends to produce a coarse, underfitted model." },
+      { "id": "b", "text": "Use unlimited depth and rely on the number of trees to control complexity", "misconception": "Deep trees in boosting overfit fast; the round count cannot compensate for per-tree freedom." },
+      { "id": "c", "text": "Grid-search every parameter simultaneously over a wide range", "misconception": "Workable in principle but exactly the endless tuning the question rules out, and it risks selecting on noise." },
+      { "id": "d", "text": "Use a small learning rate with shallow trees, and let early stopping on a validation set choose the number of rounds" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "One of the settings does not have to be chosen in advance if you watch a validation curve.",
+      "Ask which combination of step size and tree depth keeps each individual correction modest."
+    ],
+    "explanation_after": "Small steps with shallow trees keep each correction modest, and early stopping determines the round count from the data rather than from a guess. That removes the hardest dial from the search and is the standard boosting recipe."
+  },
+  {
+    "id": "p4_eval_metric_create",
+    "phase": "phase_4_machine_learning",
+    "skill_id": "p4_evaluation_metrics",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "A model flags items for a manual review team that can handle 100 cases a day. Which evaluation design matches that reality?",
+    "options": [
+      { "id": "a", "text": "Precision within the top 100 ranked items, since that is all the team will ever see" },
+      { "id": "b", "text": "Overall accuracy across every item", "misconception": "Scores predictions nobody will act on, and is dominated by the majority class." },
+      { "id": "c", "text": "Recall across the whole dataset", "misconception": "Measures everything the model could catch, ignoring that only 100 can actually be reviewed." },
+      { "id": "d", "text": "F1 at the default 0.5 threshold", "misconception": "Uses a threshold unrelated to the capacity constraint, which is what really decides the cut-off." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Stable and useful groups matter more than treating one clustering score as truth.",
-    "phase": "phase_4_machine_learning",
-    "bloom_level": "create"
+    "hints": [
+      "The capacity limit is the key fact. Ask what it does to which predictions matter.",
+      "A fixed review budget turns the task from classification into ranking."
+    ],
+    "explanation_after": "A fixed capacity makes this a ranking problem: only the top 100 are acted on, so precision@100 measures what the team experiences. Recall over the whole set describes a workload nobody can do — which is why the operating constraint has to shape the metric."
   }
 ]
