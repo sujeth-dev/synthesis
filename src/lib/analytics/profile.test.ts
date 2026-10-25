@@ -115,7 +115,7 @@ describe('activity and forecast (OLM-2)', () => {
       '2026-10-25T18:00:00Z', '2026-10-27T09:00:00Z', '2026-12-30T00:00:00Z',
     ], NOW, 14)
     expect(f[0]).toMatchObject({ key: 'overdue', count: 2, emphasis: true })
-    expect(f[1]).toMatchObject({ label: 'today', count: 1 })
+    expect(f[1]).toMatchObject({ label: 'tdy', count: 1 })
     expect(f[3].count).toBe(1)
     expect(f.reduce((s, d) => s + d.count, 0)).toBe(4)
   })

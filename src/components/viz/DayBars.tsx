@@ -32,7 +32,8 @@ export function DayBars({ days, colour = 'var(--blue)', emphasisColour = 'var(--
                 background: d.count === 0 ? 'var(--bg3)' : d.emphasis ? emphasisColour : colour,
               }} />
           </div>
-          <span className="text-[9px] font-mono text-c-ghost truncate w-full text-center">{d.label}</span>
+          {/* Allowed to overhang a narrow bar rather than be cut to an ellipsis. */}
+          <span className="text-[9px] font-mono text-c-ghost whitespace-nowrap text-center">{d.label}</span>
         </div>
       ))}
     </div>

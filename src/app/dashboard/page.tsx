@@ -5,9 +5,17 @@ import { verifyToken } from '@/lib/db/auth'
 import {
   getLearnerProfile, getAllSkillStates, getReviewSchedules,
   getAttemptsBetween, getBehaviorQualityShadowBetween, getExamItemsBetween,
+  getMotivationState, getQuestionRatingsForSkills, getLearnerAbility, getExamRuns,
 } from '@/lib/db/queries'
-import { behaviourInsights } from '@/lib/analytics/profile'
+import { behaviourInsights, bloomProfile, reviewForecast } from '@/lib/analytics/profile'
+import { suggestNext } from '@/lib/session/suggest'
+import { ELO_START } from '@/lib/elo'
 import { BehaviourInsights } from '@/components/olm/BehaviourInsights'
+import { NextUp } from '@/components/olm/NextUp'
+import { DayBars } from '@/components/viz/DayBars'
+import { BloomProfile } from '@/components/viz/BloomProfile'
+import type { Debrief } from '@/lib/exam/debrief'
+import type { Phase } from '@/types'
 import { getAllNodes, getAllEdges } from '@/lib/graph'
 import { Navbar } from '@/components/layout/Navbar'
 import { PHASE_ORDER, findActivePhase, buildPhaseGroups, PHASE_EVALUATION_FILES } from '@/lib/phases'
@@ -94,18 +102,38 @@ export default async function Dashboard({
   const now          = new Date()
   const windowStart  = new Date(now.getTime() - BEHAVIOUR_WINDOW_DAYS * 86400000)
   const windowEnd    = new Date(now.getTime() + 60_000)
-  const [allStates, schedules, windowAttempts, qualityShadow, examItems] = await Promise.all([
+  const [allStates, schedules, windowAttempts, qualityShadow, examItems, motivation, examRuns] = await Promise.all([
     getAllSkillStates(user.id),
     getReviewSchedules(user.id),
     getAttemptsBetween(user.id, windowStart, windowEnd),
     getBehaviorQualityShadowBetween(user.id, windowStart, windowEnd),
     getExamItemsBetween(user.id, windowStart, windowEnd),
+    getMotivationState(user.id),
+    getExamRuns(user.id, 10),
   ])
   const allNodes  = getAllNodes()
   const allEdges  = getAllEdges()
   const insights  = behaviourInsights(windowAttempts, qualityShadow, examItems, now)
 
   const stateMap     = new Map(allStates.map(s => [s.skill_id, s]))
+
+  // ── Hero: next session, advisory score pick, review forecast, Bloom (OLM-5)
+  const heroPhase = findActivePhase(allNodes, stateMap)
+  const [ratings, ability] = await Promise.all([
+    getQuestionRatingsForSkills(allStates.filter(s => s.mastery_state !== 'blocked').map(s => s.skill_id)),
+    getLearnerAbility(user.id, heroPhase as Phase),
+  ])
+  const suggestion = motivation
+    ? suggestNext({
+        skillStates: allStates, schedules, motivation,
+        learnerRating: ability?.rating ?? ELO_START,
+        questionRatings: new Map(ratings.map(r => [r.question_id, r.rating])),
+        now,
+      })
+    : null
+  const forecast = reviewForecast(schedules.filter(s => s.repetitions > 0).map(s => s.due_at), now, 14)
+  const latestExam = examRuns.find(r => r.status === 'finished' && r.debrief)
+  const nodeLabel = (id: string) => allNodes.find(n => n.id === id)?.label ?? id
   const threeDays    = new Date(now.getTime() + 3 * 86400000)
 
   // ── Classify reviews ────────────────────────────────────────────────────────
@@ -247,6 +275,35 @@ export default async function Dashboard({
             </div>
           ))}
         </div>
+
+        {/* ── Hero (OLM-5) ─────────────────────────────────────────────────── */}
+        {!viewAll && (
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-4 mb-6">
+            {suggestion && <NextUp suggestion={suggestion} label={nodeLabel} />}
+            <div className="flex flex-col gap-4">
+              <div className="p-5 rounded-2xl border border-[var(--border)] bg-c-bg2" data-testid="review-forecast">
+                <p className="text-[12px] text-c-text font-medium mb-1">Reviews ahead</p>
+                <p className="text-[11px] text-c-faint mb-3">Due now, then each of the next 14 days.</p>
+                <DayBars days={forecast} unit="reviews" height={40} showCounts />
+              </div>
+              <div className="p-5 rounded-2xl border border-[var(--border)] bg-c-bg2" data-testid="dashboard-bloom">
+                <p className="text-[12px] text-c-text font-medium mb-1">By kind of thinking</p>
+                {latestExam ? (
+                  <>
+                    <p className="text-[11px] text-c-faint mb-3">
+                      Latest exam · {PHASE_SHORT[latestExam.phase] ?? latestExam.phase} · chance on a medium item
+                    </p>
+                    <BloomProfile levels={bloomProfile(latestExam.debrief as Debrief)} />
+                  </>
+                ) : (
+                  <p className="text-[11px] text-c-faint">
+                    Take a phase exam to see how you do at each level, from recall to creating something new.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ── Active Phase Card (Primary Action) ──────────────────────────── */}
         <div className="rounded-2xl border border-[var(--border)] border-t-4 border-t-c-purple bg-c-bg2 overflow-hidden mb-6 animate-slide-up shadow-[0_18px_50px_rgba(0,0,0,0.16)]">

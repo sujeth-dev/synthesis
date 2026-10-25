@@ -168,7 +168,7 @@ export function reviewForecast(dueDates: string[], now: Date, days: number): For
     const key = d.toISOString().slice(0, 10)
     return {
       key,
-      label: key === today ? 'today' : d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' }),
+      label: key === today ? 'tdy' : d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' }),
       count: counts.get(key) ?? 0,
     }
   })
