@@ -8,6 +8,7 @@ import { renderCurves } from './tabs/curves'
 import { renderHeatmap } from './tabs/heatmap'
 import { renderExplainer } from './tabs/explainer'
 import { renderScheduling } from './tabs/scheduling'
+import { renderSelection } from './tabs/selection'
 import { renderApp } from './tabs/app'
 import { renderGuide } from './tabs/guide'
 import { renderBehaviours } from './tabs/behaviours'
@@ -36,6 +37,7 @@ const TABS: TabDef[] = [
   { id: 'heatmap', label: 'Skill heatmap', render: renderHeatmap, usesDataset: true },
   { id: 'explainer', label: 'How BKT & DKT work', render: renderExplainer, usesDataset: true },
   { id: 'scheduling', label: 'Scheduling', render: renderScheduling, usesDataset: false },
+  { id: 'selection', label: 'Selection', render: renderSelection, usesDataset: false },
   { id: 'behaviours', label: 'Behaviours', render: renderBehaviours, usesDataset: false },
   { id: 'app', label: 'Synaptic app', render: renderApp, usesDataset: false },
   { id: 'guide', label: 'Real-app guide', render: renderGuide, usesDataset: false },
