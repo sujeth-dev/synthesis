@@ -121,6 +121,23 @@ export interface BehaviorQualityShadowEntry {
   created_at: string
 }
 
+// One row per question (SCORE-1): the difficulty every learner's answers imply,
+// which no authored field measures. Global on purpose — pooling the answers is
+// what makes it converge. See src/lib/elo.
+export interface QuestionRating {
+  question_id: string; skill_id: string; phase: Phase
+  rating: number; plays: number
+  updated_at: string
+}
+
+// One row per learner per phase (SCORE-1): ability on the same scale as the
+// question ratings, so expected success is a subtraction.
+export interface LearnerAbility {
+  learner_id: string; phase: Phase
+  rating: number; plays: number
+  updated_at: string
+}
+
 // One row per attempt (Level 16): the p_know the live global-parameter BKT
 // produced beside the one a per-skill fitted parameter set would have, with
 // both parameter sets, so the two can be compared on real outcomes.

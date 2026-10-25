@@ -3,6 +3,7 @@ import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
   AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
   ExplanationGrade, BehaviorQualityShadowEntry, BktParamShadowEntry,
+  QuestionRating, LearnerAbility, Phase,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -391,6 +392,46 @@ export async function getBktParamShadow(learnerId: string, limit: number): Promi
     .order('created_at', { ascending: false })
     .limit(limit)
   return data ?? []
+}
+
+// ─────────────────────────────────────────────
+// ELO RATINGS (SCORE-1 — requires migration 009)
+// ─────────────────────────────────────────────
+
+// These four throw on failure; /api/attempt swallows it, like every other
+// observational write — a rating is never worth losing an attempt over.
+
+export async function getQuestionRating(questionId: string): Promise<QuestionRating | null> {
+  const { data } = await getDb()
+    .from('question_ratings')
+    .select('*')
+    .eq('question_id', questionId)
+    .maybeSingle()
+  return data ?? null
+}
+
+export async function upsertQuestionRating(rating: Omit<QuestionRating, 'updated_at'>): Promise<void> {
+  const { error } = await getDb()
+    .from('question_ratings')
+    .upsert({ ...rating, updated_at: new Date().toISOString() }, { onConflict: 'question_id' })
+  if (error) throw new Error(`Question rating upsert failed: ${error.message}`)
+}
+
+export async function getLearnerAbility(learnerId: string, phase: Phase): Promise<LearnerAbility | null> {
+  const { data } = await getDb()
+    .from('learner_ability')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .eq('phase', phase)
+    .maybeSingle()
+  return data ?? null
+}
+
+export async function upsertLearnerAbility(ability: Omit<LearnerAbility, 'updated_at'>): Promise<void> {
+  const { error } = await getDb()
+    .from('learner_ability')
+    .upsert({ ...ability, updated_at: new Date().toISOString() }, { onConflict: 'learner_id,phase' })
+  if (error) throw new Error(`Learner ability upsert failed: ${error.message}`)
 }
 
 // ─────────────────────────────────────────────

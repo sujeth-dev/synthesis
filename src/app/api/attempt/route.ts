@@ -19,7 +19,9 @@ import {
   getLastFsrsShadowEntry, insertFsrsShadowLog,
   getAttemptHistory, insertDktShadowLog, insertExplanationGrade,
   insertBehaviorQualityShadow, insertBktParamShadow,
+  getQuestionRating, upsertQuestionRating, getLearnerAbility, upsertLearnerAbility,
 } from '@/lib/db/queries'
+import { ELO_START, coldStartQuestionRating, eloExchange } from '@/lib/elo'
 import { DKT_HISTORY_LIMIT, getBundledDktModel, isDktShadowEnabled, predictForAttempt } from '@/lib/dkt/shadow'
 import { getAllNodes } from '@/lib/graph'
 import type { Question, DifficultyTier, QuestionFormat, BehaviorQualityShadowEntry } from '@/types'
@@ -41,6 +43,9 @@ export async function POST(req: NextRequest) {
 
   // ── Server-side answer verification
   let correct = false
+  // Kept beyond the try so the Elo block below can tell an authored question
+  // (which has a rating) from a synthetic reflection id (which has none).
+  let gradedQuestion: Question | undefined
   const isGuidedReflection = question_format === 'explain' && (
     question_id.endsWith('_explain_back') || question_id.endsWith('_feynman_loop')
   )
@@ -48,6 +53,7 @@ export async function POST(req: NextRequest) {
     const questions: Question[] = require(`../../../../content/questions/by-skill/${skill_id}.json`)
     const q = questions.find(q => q.id === question_id)
     if (!q && !isGuidedReflection) return NextResponse.json({ error: 'Unknown question_id' }, { status: 400 })
+    gradedQuestion = q
 
     if (q?.format === 'mcq') correct = client_answer === q.correct_option_id
     else if (q?.format === 'fill') {
@@ -316,6 +322,44 @@ export async function POST(req: NextRequest) {
       }
     } catch {
       // Observational only — never affects the learner's attempt.
+    }
+  }
+
+  // ── Elo calibration (SCORE-1): this question's measured difficulty and the
+  // learner's ability in this phase, both moved by this one answer. Practice
+  // questions carry no time target, so the answer scores on correctness alone.
+  // Read only by the shadow scorer; fail-open like every write above.
+  if (gradedQuestion) {
+    try {
+      const node = getAllNodes().find(n => n.id === skill_id)
+      if (node) {
+        const [storedRating, storedAbility] = await Promise.all([
+          getQuestionRating(question_id),
+          getLearnerAbility(user.id, node.phase),
+        ])
+        const exchange = eloExchange(
+          storedAbility
+            ? { rating: storedAbility.rating, plays: storedAbility.plays }
+            : { rating: ELO_START, plays: 0 },
+          storedRating
+            ? { rating: storedRating.rating, plays: storedRating.plays }
+            : { rating: coldStartQuestionRating(node.difficulty_base, gradedQuestion.difficulty_tier), plays: 0 },
+          correct ? 1 : 0,
+        )
+        await Promise.all([
+          upsertQuestionRating({
+            question_id, skill_id, phase: node.phase,
+            rating: exchange.item.rating, plays: exchange.item.plays,
+          }),
+          upsertLearnerAbility({
+            learner_id: user.id, phase: node.phase,
+            rating: exchange.learner.rating, plays: exchange.learner.plays,
+          }),
+        ])
+      }
+    } catch {
+      // Observational only — a deployment without migration 009 loses the
+      // rating, never the attempt.
     }
   }
 

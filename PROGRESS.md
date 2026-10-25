@@ -6,7 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**P2-3 is complete; all six sets are committed locally on `nodes-track` and the full curriculum contains 120 nodes.** The approved five-node style checkpoint remains the binding content reference for future additions.
+**SCORE-1 is done. Next: SCORE-2.** A human directed work on audit items 8, 9 and 10 on 2026-10-25; the new `SCORE-*` / `LAB-*` / `BLOOM-7+` / `EXAM-*` / `OLM-*` / `LIVE-1` tracks in `MASTER_PLAN.md` carry the full task list and the five standing directions that bound them (no coding evaluation; the scorer ships shadow-first and the loop stops at LAB-3 for a human preview; Bloom stays phase-wise with a bigger bank rather than a per-question retrofit; no certainty prompt; exam results are measurement-only).
+
+SCORE-1 gave the repo its first *measured* question difficulty. Until now nothing knew how hard an individual question is — `difficulty_tier` is an author's label and `difficulty_base` an author's estimate of the whole concept, so no component could answer "which question gives this learner a 75% chance of being right", which the scorer's difficulty-match term and the exam's item choice both need. `src/lib/elo/index.ts` adds Elo over questions and over per-phase learner ability (Klinkenberg, Straatemeier & van der Maas 2011), with K shrinking as plays accumulate, cold starts derived from the authored fields, and ratings clamped to 600-2000. Migration `009_elo_ratings.sql` adds `question_ratings` (global per question — pooling every learner's answers is what makes it converge) and `learner_ability` (per learner per phase), both applied and verified against the live database. `/api/attempt` updates both fail-open after `insertAttempt`, as the sixth observational write in that route; a synthetic `_explain_back`/`_feynman_loop` id is deliberately not rated, since no authored question exists behind it. Nothing reads these numbers yet.
+
+Writing the inverse `ratingForTargetSuccess` surfaced a sign error that its own round-trip test caught before anything else used it.
+
+**P2-3 was complete before this pass; all six sets are committed locally on `nodes-track` and the full curriculum contains 120 nodes.** The approved five-node style checkpoint remains the binding content reference for future additions.
 
 The checkpoint required three passes and settled two hard authoring rules for all remaining P2-3 content:
 1. **Zero background at every depth.** Expert depth covers harder material but teaches it as plainly and cumulatively as beginner depth. It may name advanced ideas only after making them understandable through a concrete situation or analogy; it cannot assume outside topic fluency.
@@ -28,7 +34,9 @@ Set 6 completed Phase 8 at 10 nodes across Systems at Scale, Responsibility & Fr
 
 ## Next action
 
-P2-3 is complete. Await human direction before starting any Phase 3 roadmap work. Never push.
+**SCORE-2** — `src/lib/session/score.ts`, the six-term weighted score with a mandatory `reason` and its invariant tests. Shadow only; `selectNextTask()`'s live behaviour must not change until LIVE-1.
+
+Pushes go to `claude/elegant-albattani-m3htzn` only, never `main`, and no pull request — a standing human constraint for this pass that overrides `DEVELOPMENT_LOOP.md` Step 8's `git push origin main`.
 
 ---
 
@@ -56,9 +64,17 @@ P2-3 is complete. Await human direction before starting any Phase 3 roadmap work
 
 17. ~~**P2-3 Set 6 blocked by a final-count contradiction.**~~ **Resolved by human direction:** retain all 10 named Phase 8 nodes and correct the stale full-curriculum total from 119 to 120. The earlier total omitted the approved OOP prerequisite; the authoritative phase sum is 5 + 14 + 17 + 12 + 16 + 16 + 16 + 14 + 10 = 120.
 
+18. **Four `src/lib/session/engine.ts` findings, reported and deliberately not fixed (2026-10-25).** Found while reading the selector before building the multi-metric score. Each one changes what a learner is actually served, so fixing any of them inside a shadow sprint would both alter live behaviour without sign-off and confound the rules-vs-score comparison the human asked for. They are scheduled into **LIVE-1**, which needs human sign-off anyway.
+    1. `engine.ts:134-136` — `canSelectReview()` is `return mode === 'review'`, so the Tier 0 loop at `:250-270` is **always empty in learn mode**: a due review of an active-phase skill is never served inside a normal learn session. Reviews reach the learner only through explicit review mode or the start-of-session consent prompt. This may well be the intended reading of P0-4's consent-based review direction (item 6 above) rather than a bug — that is exactly the call a human should make, not the loop.
+    2. `engine.ts:296-306` — the Tier 4 fallback is commented "any learnable skill when active phase is exhausted" but still filters on `activePhaseIds.has(...)`, so it is **not** a cross-phase fallback. When the active phase has nothing learnable, selection returns `null` and the session ends.
+    3. `engine.ts:248` — `tiers[2]` and `tiers[3]` are allocated and never written to.
+    4. `engine.ts:339` — the engine can set `difficulty_tier: 'prerequisite'`, but **no question in the 963-question corpus carries that tier** (measured: `same` 446, `harder` 277, `review` 240), so that branch always degrades to a random fallback pick in `pickQuestion`.
+
 ---
 
 ## Completed work (chronological)
+
+- 2026-10-25 — **SCORE-1 done:** Elo calibration for questions and per-phase learner ability (`src/lib/elo/index.ts`, 29 unit tests), migration `009_elo_ratings.sql` applied and verified against the live database, and a fail-open update in `/api/attempt` with 6 route-level tests covering first rating, both answer directions, a second answer building on the stored row, a missing migration 009, and a synthetic reflection id going unrated. The repo's first measured per-question difficulty; nothing reads it yet. 26 test files / 217 tests, build, and validate all green (115 pre-existing warnings).
 
 - 2026-08-13 — **P2-3 Set 6 and full track complete:** completed all 10 Phase 8 nodes across three topics, with four plain-language three-slide depths, six tiered MCQs per node, hands-on ladders where useful, 190 valid acyclic graph edges, and an enforced 18-question Phase 8 Bloom evaluation. The final independent audit confirms 120 total nodes and the planned 72-node Phase 4-8 scope. All 58 tests, production build, and content validation pass (0 errors; 115 pre-existing warnings). Nothing was pushed.
 

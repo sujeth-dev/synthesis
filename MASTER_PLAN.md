@@ -196,6 +196,44 @@ Doc ref: `basic-guide.md` §"DKT / FSRS / NLP", section C. Built on the `nlp-tra
 
 ---
 
+### Adaptive scoring, Bloom exam & learner-facing analytics (human-directed 2026-10-25)
+
+Doc ref: the approved plan for audit items 8, 9 and 10 — `Research/lab/02-engines.md` (Engine 3's "rule-based now → weighted scoring", Engine 6's mandatory `reason`), `Research/lab/08-interfaces.md:32-118` (the filter-then-weight cascade), `Research/lab/09-library.md:147-168,281-291` (Exam Room × Gauntlet), `Research/lab/12-design-spec.md:101-122` (dashboard Screen 1).
+
+**Human directions that bound this work:**
+- **Coding evaluation is out of scope entirely.** The audit's item 9 ("coding + real-time assessment") keeps only the real-time half, delivered as the Bloom exam below. `QuestionFormat`'s declared-but-unused `'code'` stays unused.
+- **The scorer ships shadow-first:** compute it beside the live rule cascade, log both, surface the comparison in the DKT lab, hand a preview to the human, and only then discuss a cutover. The loop **stops** at LAB-3.
+- **Bloom's stays phase-wise** — no `bloom_level` retrofit onto the 963 practice questions, consistent with the BLOOM track's 2026-08-10 redefinition above. The bank grows instead, from 2-3 to **6 questions per Bloom level per phase**.
+- **No confidence/certainty prompt** in the exam. Learner-facing meters show *evidence strength* (how much the system has actually observed), never a fabricated confidence number.
+- **Exam results are measurement-only**: recorded to `attempt_events`, but they never move `p_know`, review schedules or motivation — the same contract `/api/phase-evaluation/attempt` already honours.
+
+| ID | Status | Task | Depends on |
+|---|---|---|---|
+| SCORE-1 | done | Elo calibration for questions and learners (`src/lib/elo`, migration 009) — the repo's first measured per-question difficulty, written fail-open from `/api/attempt` | none |
+| SCORE-2 | not_started | `src/lib/session/score.ts`: six-term weighted score (urgency, expected gain, difficulty match, behaviour, cognitive level, variety) + wheel-spin guard + ε exploration + a mandatory `reason`, with invariant tests | SCORE-1 |
+| SCORE-3 | not_started | Shadow wiring: migration 010 `selection_shadow`, log the live rule choice beside the score choice with term breakdown and top-5 runners-up, fail-open | SCORE-2 |
+| SCORE-4 | not_started | `npm run selector:compare` over the seeded simulator: agreement %, disagreement taxonomy, and the outcome metrics `02-engines.md:159-163` names | SCORE-3 |
+| LAB-1 | not_started | Export the comparison and add a **Selection** tab to `dkt-lab/web` | SCORE-4 |
+| LAB-2 | not_started | `/engine` section: this learner's recent decisions, rules vs score, term contributions, runners-up | SCORE-3 |
+| LAB-3 | not_started · **loop stops here** | Preview handoff to the human: screenshots, numbers, a written recommendation. No cutover without a reply | LAB-1, LAB-2 |
+| BLOOM-7 | not_started | Extend `PhaseEvaluationQuestion` with `difficulty`, two-step `hints`, `time_target_sec` and a per-distractor `misconception`; add `content/templates/phase_evaluation_file.json`; enforce ≥6 per level per phase and hint/misconception presence in `scripts/validate-content.js` | BLOOM-4 |
+| BLOOM-8 … BLOOM-16 | not_started | One task per phase (p1 +24, p1b +21, p2-p8 +18 each → **324 total**), each item human-checked against Anderson & Krathwohl's rule that analyze/evaluate/create cannot be answered from memory alone | BLOOM-7 |
+| EXAM-1 | not_started | `src/lib/exam`: countdown with injectable `now`, ability ± SE, Elo-based item choice within a Bloom level, stopping rule (min 12 / max 24 / SE < 0.35), Bloom coverage, hint penalty and help-abuse rules | SCORE-1, BLOOM-7 |
+| EXAM-2 | not_started | `/api/exam` (`start \| next \| hint \| submit \| finish`, `mode: practice \| checkpoint`) + migration 011 `exam_runs`/`exam_item_events`; fixes `MAX_LATENCY`'s 5-minute clamp and gives timed attempts their own quality rule | EXAM-1 |
+| EXAM-3 | not_started | Exam Room UI at `/learn/exam/[phase]` — timer, pace indicator, navigator, mark-for-review, pre-submit review; hints in Practice only. `/learn/evaluate/[phase]` left untouched | EXAM-2 |
+| EXAM-4 | not_started | Debrief: ability ± SE per Bloom level, time against target, hint reliance, misconceptions hit, what to revisit — plus a Playwright spec | EXAM-3 |
+| OLM-1 | not_started | SVG viz primitives (`Meter`, `Sparkline`, `LearningCurve`, `BloomProfile`), extracted `StatCard`/`ActivityStrip`, one canonical `MASTERY_COLOUR` | none |
+| OLM-2 | not_started | Date-ranged queries + `src/lib/analytics/profile.ts` (per-skill evidence, learning curve by opportunity, Bloom profile) — today every reader is `limit(n)`, silently truncating at 200 attempts | OLM-1 |
+| OLM-3 | not_started | `/profile` as an open learner model: belief beside evidence strength, the evidence behind it, the learning curve, gaps named | OLM-2 |
+| OLM-4 | not_started | Behavioural insights panel: pace, hesitation, revisions, motivation timeline, the engine's own `behavior_modifier`, hint reliance, and `behavior_quality_shadow`'s "would have changed this interval by N days" | OLM-2 |
+| OLM-5 | not_started | Dashboard hero: live reason line, 14-day review forecast, Bloom profile, advisory **Suggested next** from the shadow score with its per-term why | OLM-2, SCORE-3 |
+| OLM-6 | not_started | Verify and reconcile: e2e spec, real-data screenshots, and doc corrections for the three measured contradictions (fallback confidence 1 vs 0; p1 evaluation 12 vs 18; LLM 94.3%/κ0.915 vs 96.2%/0.943) | OLM-3, OLM-4, OLM-5 |
+| LIVE-1 | not_started · **human sign-off required** | `SELECTOR=score` as default with `SELECTOR=rules` fallback; fix the four `engine.ts` findings recorded in `PROGRESS.md`; Suggested-next stops being advisory. A live cutover per `DEVELOPMENT_LOOP.md:113` | LAB-3 approved by a human |
+
+**Acceptance per item:** matches its one-line "Do" above, plus the standing gates (`npm test`, `npm run build`, `npm run validate`). Shadow tasks additionally require that the live path is provably unchanged, and content tasks that `npm run validate` enforces the new rules rather than warning.
+
+---
+
 ## Phase 1 — Explanation & Reasoning Evaluation (Promises #1, #2; contributes #8)
 
 Scope decision (2026-08-09, see `basic-guide.md` Phase 1 header and `v2/doc/vision/discovery-model.md` §7): build against **existing** explanation-first content. Discovery-first authoring applies to new content starting at P2-3.

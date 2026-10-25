@@ -14,6 +14,8 @@ const tables = vi.hoisted(() => ({
   explanation_grades: [] as Row[],
   behavior_quality_shadow: [] as Row[],
   bkt_param_shadow: [] as Row[],
+  question_ratings: [] as Row[],
+  learner_ability: [] as Row[],
 }))
 // Tables whose insert fails, so a missing migration can be simulated.
 const unmigrated = vi.hoisted(() => new Set<string>())
@@ -60,6 +62,7 @@ vi.mock('@/lib/db', () => {
         return { data: null, error: null }
       },
       upsert: async (row: Row, opts: { onConflict: string }) => {
+        if (unmigrated.has(name)) return { data: null, error: { code: 'PGRST205', message: `Could not find the table 'public.${name}'` } }
         const keys = opts.onConflict.split(',')
         const idx = tables[name].findIndex(r => keys.every(k => r[k] === row[k]))
         if (idx >= 0) tables[name][idx] = { ...tables[name][idx], ...row }
@@ -93,6 +96,7 @@ vi.mock('@/lib/nlp/grader', () => ({
 }))
 
 import { POST } from './route'
+import { ELO_START, coldStartQuestionRating } from '@/lib/elo'
 
 function fakeRequest(body: Record<string, unknown>) {
   return { json: async () => body } as unknown as Parameters<typeof POST>[0]
@@ -242,6 +246,69 @@ describe('order questions in POST /api/attempt (Level 6)', () => {
       latency_ms: 2000, difficulty_tier: 'same', question_format: 'order',
     }))
     expect((await res.json()).correct).toBe(false)
+  })
+})
+
+describe('Elo calibration in POST /api/attempt (SCORE-1)', () => {
+  // p1_bin_q1 is a 'review'-tier MCQ on a difficulty_base 2 node, so its cold
+  // start sits below the learner's 1200 and the first correct answer is expected.
+  const submit = (correct: boolean) => POST(fakeRequest({
+    question_id: 'p1_bin_q1', skill_id: skillId, client_answer: correct ? 'b' : 'a',
+    latency_ms: 2000, difficulty_tier: 'review', question_format: 'mcq',
+  }))
+
+  it('creates a rating for the question and an ability for the phase on first answer', async () => {
+    await submit(true)
+    expect(tables.question_ratings).toHaveLength(1)
+    expect(tables.learner_ability).toHaveLength(1)
+    expect(tables.question_ratings[0]).toMatchObject({
+      question_id: 'p1_bin_q1', skill_id: skillId, phase: 'phase_1_computer_basics', plays: 1,
+    })
+    expect(tables.learner_ability[0]).toMatchObject({
+      learner_id: learnerId, phase: 'phase_1_computer_basics', plays: 1,
+    })
+  })
+
+  it('raises the learner and lowers the question when the answer is correct', async () => {
+    await submit(true)
+    expect(Number(tables.learner_ability[0].rating)).toBeGreaterThan(ELO_START)
+    expect(Number(tables.question_ratings[0].rating))
+      .toBeLessThan(coldStartQuestionRating(2, 'review'))
+  })
+
+  it('lowers the learner and raises the question when the answer is wrong', async () => {
+    await submit(false)
+    expect(Number(tables.learner_ability[0].rating)).toBeLessThan(ELO_START)
+    expect(Number(tables.question_ratings[0].rating))
+      .toBeGreaterThan(coldStartQuestionRating(2, 'review'))
+  })
+
+  it('builds on the stored rating on a second answer rather than cold-starting again', async () => {
+    await submit(true)
+    const afterFirst = Number(tables.question_ratings[0].rating)
+    await submit(true)
+    expect(tables.question_ratings).toHaveLength(1)
+    expect(tables.question_ratings[0].plays).toBe(2)
+    expect(Number(tables.question_ratings[0].rating)).toBeLessThan(afterFirst)
+  })
+
+  it('scores the attempt normally when migration 009 is missing', async () => {
+    unmigrated.add('question_ratings')
+    unmigrated.add('learner_ability')
+    const res = await submit(true)
+    expect(res.status).toBe(200)
+    expect((await res.json()).correct).toBe(true)
+    expect(tables.attempt_events).toHaveLength(1)
+    expect(tables.question_ratings).toHaveLength(0)
+  })
+
+  it('does not rate a synthetic reflection id, which is not an authored question', async () => {
+    await POST(fakeRequest({
+      question_id: `${skillId}_explain_back`, skill_id: skillId,
+      client_answer: 'because each bit doubles the places you can count to',
+      latency_ms: 40_000, difficulty_tier: 'same', question_format: 'explain',
+    }))
+    expect(tables.question_ratings).toHaveLength(0)
   })
 })
 
