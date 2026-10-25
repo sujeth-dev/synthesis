@@ -5,26 +5,20 @@
     "skill_id": "p1_what_is_computer",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
     "stem": "A computer is best described as a machine that:",
     "options": [
-      {
-        "id": "a",
-        "text": "Thinks for itself and makes its own decisions"
-      },
-      {
-        "id": "b",
-        "text": "Follows instructions to process information"
-      },
-      {
-        "id": "c",
-        "text": "Only performs arithmetic"
-      },
-      {
-        "id": "d",
-        "text": "Understands human language natively"
-      }
+      { "id": "a", "text": "Thinks for itself and makes its own decisions", "misconception": "Treats the outputs of AI systems as evidence of independent judgment, rather than instruction-following over data." },
+      { "id": "b", "text": "Follows instructions to process information" },
+      { "id": "c", "text": "Only performs arithmetic", "misconception": "Remembers that computers calculate, but misses that the same machine also stores, compares and moves information." },
+      { "id": "d", "text": "Understands human language natively", "misconception": "Confuses the interface — typing in English — with what the machine works on underneath, which is encoded data." }
     ],
     "correct_option_id": "b",
+    "hints": [
+      "Strip away the screen and the apps. What is left that every computer does, from a washing machine controller to a laptop?",
+      "Ask what a computer does with a program, and what a program is made of."
+    ],
     "explanation_after": "A computer follows instructions (a program) to process information — it has no independent judgment of its own. Every capability, including AI, is built on top of this basic instruction-following machine."
   },
   {
@@ -33,55 +27,132 @@
     "skill_id": "p1_binary_numbers",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
     "stem": "What is a 'bit'?",
     "options": [
-      {
-        "id": "a",
-        "text": "8 bytes of data"
-      },
-      {
-        "id": "b",
-        "text": "The smallest unit of data — either 0 or 1"
-      },
-      {
-        "id": "c",
-        "text": "A single character like 'A'"
-      },
-      {
-        "id": "d",
-        "text": "A type of programming error"
-      }
+      { "id": "a", "text": "8 bytes of data", "misconception": "Remembers that bits and bytes are related by 8, but inverts which is the larger unit." },
+      { "id": "b", "text": "The smallest unit of data — either 0 or 1" },
+      { "id": "c", "text": "A single character like 'A'", "misconception": "Confuses the smallest unit of storage with the smallest unit of text; a character takes several bits." },
+      { "id": "d", "text": "A type of programming error", "misconception": "Associates the word with 'glitch' rather than with binary digit." }
     ],
     "correct_option_id": "b",
+    "hints": [
+      "The word is a contraction of two others: binary and digit.",
+      "Ask how many different values the very smallest piece of storage can hold."
+    ],
     "explanation_after": "A bit (binary digit) is the smallest unit of data a computer stores — a single 0 or 1. Everything else (bytes, pixels, files) is built from bits."
   },
+  {
+    "id": "p1_eval_byte_remember",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_binary_numbers",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "How many different values can one byte (8 bits) represent?",
+    "options": [
+      { "id": "a", "text": "8", "misconception": "Reads the number of bits as the number of values, missing that each bit multiplies the possibilities." },
+      { "id": "b", "text": "16", "misconception": "Doubles the bit count once instead of doubling once per bit." },
+      { "id": "c", "text": "1024", "misconception": "Recalls a familiar power of two from kilobytes, but that is 2^10, not 2^8." },
+      { "id": "d", "text": "256" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Each extra bit does not add possibilities — it multiplies them.",
+      "Start with one bit (2 values) and double it once for every further bit, eight times in all."
+    ],
+    "explanation_after": "Each bit doubles the number of possibilities, so 8 bits give 2^8 = 256 distinct values — which is exactly why a single byte covers 0–255."
+  },
+  {
+    "id": "p1_eval_io_remember",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_input_output",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "Which of these is acting purely as an output device?",
+    "options": [
+      { "id": "a", "text": "A microphone", "misconception": "Associates sound with speakers, but a microphone turns the world into data going in." },
+      { "id": "b", "text": "A printer" },
+      { "id": "c", "text": "A touchscreen", "misconception": "Half right: a touchscreen displays, but it also senses touch, so it does both." },
+      { "id": "d", "text": "A keyboard", "misconception": "Treats any device you physically interact with as output, rather than asking which direction the information travels." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask which direction the information is travelling: into the machine, or out of it.",
+      "Check each device for whether it also senses something — one of them does both."
+    ],
+    "explanation_after": "A printer only takes data from the computer and turns it into something in the world. A microphone and keyboard send data in; a touchscreen does both at once."
+  },
+  {
+    "id": "p1_eval_mem_remember",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_memory_storage",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "Which statement about RAM is correct?",
+    "options": [
+      { "id": "a", "text": "It is volatile: its contents are lost when power is removed" },
+      { "id": "b", "text": "It is where files are permanently kept", "misconception": "Swaps the roles of memory and storage — the permanent copy lives on the drive." },
+      { "id": "c", "text": "It is slower than a hard drive", "misconception": "Associates 'memory' with filing cabinets rather than with the fast working area the CPU reads from." },
+      { "id": "d", "text": "It only holds the operating system", "misconception": "Thinks of RAM as reserved system space rather than the working area every running program uses." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Think about what is still there after you pull the plug and switch the machine back on.",
+      "Compare where an unsaved document lives with where a saved one lives."
+    ],
+    "explanation_after": "RAM is volatile working memory: fast, used by everything currently running, and emptied the moment power goes. That is why unsaved work disappears in a power cut."
+  },
+  {
+    "id": "p1_eval_cpu_remember",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_cpu_processing",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "What does a CPU core actually do?",
+    "options": [
+      { "id": "a", "text": "Stores files so they survive a restart", "misconception": "Assigns the drive's job to the processor." },
+      { "id": "b", "text": "Displays images on the screen", "misconception": "Confuses the processor with the display pipeline; drawing pixels is a separate job, often a GPU's." },
+      { "id": "c", "text": "Connects the computer to the internet", "misconception": "Attributes networking hardware's role to the processor." },
+      { "id": "d", "text": "Fetches instructions and carries them out, one after another, very fast" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "A program is a list of instructions. Something has to work through that list.",
+      "Ask what is doing the work in the 'process' part of input-process-output."
+    ],
+    "explanation_after": "A core fetches an instruction, carries it out, and moves to the next — billions of times a second. Everything a computer appears to do is that loop running fast enough to look instant."
+  },
+
   {
     "id": "p1_eval_io_understand",
     "phase": "phase_1_computer_basics",
     "skill_id": "p1_input_output",
     "bloom_level": "understand",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 50,
     "stem": "In your own understanding, why are 'input' and 'output' useful as a general way to describe what a computer program does?",
     "options": [
-      {
-        "id": "a",
-        "text": "Because every program, from a calculator to a chatbot, can be described as taking some data in and producing some data back out"
-      },
-      {
-        "id": "b",
-        "text": "Because input and output are the only two operations any CPU can perform"
-      },
-      {
-        "id": "c",
-        "text": "Because it's a legal requirement for all software"
-      },
-      {
-        "id": "d",
-        "text": "Because input always means keyboard and output always means screen"
-      }
+      { "id": "a", "text": "Because every program, from a calculator to a chatbot, can be described as taking some data in and producing some data back out" },
+      { "id": "b", "text": "Because input and output are the only two operations any CPU can perform", "misconception": "Promotes a description of programs into a claim about the instruction set, which also includes arithmetic, comparison and movement." },
+      { "id": "c", "text": "Because it is a legal requirement for all software", "misconception": "Treats a conceptual model as an external rule rather than a way of describing behaviour." },
+      { "id": "d", "text": "Because input always means keyboard and output always means screen", "misconception": "Ties a general idea to two specific devices, which is exactly the narrowing the model is meant to avoid." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Input/output is a useful mental model precisely because it's general: a calculator takes numbers in and a result out, a chatbot takes text in and text out, a self-driving car takes sensor data in and steering commands out. It's not tied to any specific device."
+    "hints": [
+      "Ask what the model buys you when you apply it to something with no keyboard and no screen at all.",
+      "Try describing three very different programs with it and see whether it still fits."
+    ],
+    "explanation_after": "Input/output is a useful mental model precisely because it is general: a calculator takes numbers in and a result out, a chatbot takes text in and text out, a self-driving car takes sensor data in and steering commands out. It is not tied to any specific device."
   },
   {
     "id": "p1_eval_mem_understand",
@@ -89,83 +160,132 @@
     "skill_id": "p1_memory_storage",
     "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Why does RAM lose its contents when a computer is powered off, while a hard drive/SSD does not?",
+    "difficulty": "medium",
+    "time_target_sec": 55,
+    "stem": "Why does RAM lose its contents when a computer is powered off, while a hard drive or SSD does not?",
     "options": [
-      {
-        "id": "a",
-        "text": "RAM is volatile — it needs continuous power to hold its state; storage is non-volatile and retains data without power"
-      },
-      {
-        "id": "b",
-        "text": "RAM is physically smaller than a hard drive"
-      },
-      {
-        "id": "c",
-        "text": "RAM only stores text, not numbers"
-      },
-      {
-        "id": "d",
-        "text": "There is no real difference — both lose data on power-off"
-      }
+      { "id": "a", "text": "RAM is volatile — it needs continuous power to hold its state; storage is non-volatile and retains data without power" },
+      { "id": "b", "text": "RAM is physically smaller than a hard drive", "misconception": "Reaches for a physical difference that is real but irrelevant; size does not determine whether state survives power loss." },
+      { "id": "c", "text": "RAM only stores text, not numbers", "misconception": "Invents a content restriction; both hold arbitrary bits." },
+      { "id": "d", "text": "There is no real difference — both lose data on power-off", "misconception": "Generalises from the experience of losing unsaved work to saved files too." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "RAM (volatile memory) stores data as electrical charge that requires continuous power to persist. Storage devices (non-volatile) use a physical mechanism — magnetic domains on a hard drive, trapped charge in flash memory — that holds its state without power."
+    "hints": [
+      "Ask what physically holds the information in each case, and whether that thing needs feeding.",
+      "Compare a state held as a charge that must be constantly refreshed against one held by a physical change in the material."
+    ],
+    "explanation_after": "RAM stores data as electrical charge that requires continuous power to persist. Storage devices use a physical mechanism — magnetic domains on a hard drive, trapped charge in flash memory — that holds its state without power."
   },
   {
-    "id": "p1_eval_cpu_evaluate",
+    "id": "p1_eval_program_understand",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_what_is_computer",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 50,
+    "stem": "Someone says 'my laptop can edit video, but my phone can't, so my laptop is a different kind of machine.' What is wrong with that reasoning?",
+    "options": [
+      { "id": "a", "text": "Phones cannot run programs at all, so the comparison does not apply", "misconception": "Treats a phone as an appliance rather than as a general-purpose computer with the same instruction-following design." },
+      { "id": "b", "text": "Nothing is wrong — editing video requires special hardware no phone has", "misconception": "Mistakes a difference in speed and capacity for a difference in kind." },
+      { "id": "c", "text": "Both are general-purpose machines running programs; the difference is how much work each can do in a given time, not what kind of machine it is" },
+      { "id": "d", "text": "The laptop is different because it has a keyboard", "misconception": "Picks an interface difference to explain a capability difference." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask whether the two machines differ in what they are, or in how much they can get through.",
+      "Consider that phones do edit video, just more slowly and on shorter clips."
+    ],
+    "explanation_after": "Both are the same kind of machine: instruction-followers. They differ in capacity — processor speed, memory, cooling — which changes what is practical, not what is possible in principle."
+  },
+  {
+    "id": "p1_eval_cpu_understand",
     "phase": "phase_1_computer_basics",
     "skill_id": "p1_cpu_processing",
-    "bloom_level": "evaluate",
+    "bloom_level": "understand",
     "format": "mcq",
-    "stem": "You need to resize 10,000 independent images as fast as possible. One approach processes them one-by-one on a single CPU core; another splits the work across many parallel cores (like a GPU). Which approach is better suited, and why?",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Two laptops have the same clock speed, but one has 4 cores and the other 8. What does the extra core count actually buy you?",
     "options": [
-      {
-        "id": "a",
-        "text": "The single-core approach, because image resizing must happen in a strict order"
-      },
-      {
-        "id": "b",
-        "text": "The parallel approach, because each image's resize is independent of the others, so splitting the work across many cores finishes far faster than one core working through them sequentially"
-      },
-      {
-        "id": "c",
-        "text": "Neither matters — CPU core count has no effect on how long this takes"
-      },
-      {
-        "id": "d",
-        "text": "The single-core approach, because parallel processing only works for text data"
-      }
+      { "id": "a", "text": "Every single program runs twice as fast", "misconception": "Assumes work divides perfectly; a task written as one sequence cannot use a second core at all." },
+      { "id": "b", "text": "More separate pieces of work can be in progress at the same time" },
+      { "id": "c", "text": "Each instruction is carried out in half the time", "misconception": "Confuses how many instructions can run at once with how fast one instruction completes, which is what clock speed governs." },
+      { "id": "d", "text": "Files are read from storage twice as quickly", "misconception": "Attributes a drive-speed improvement to the processor." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Since each image's resize doesn't depend on any other image's result, the work is 'embarrassingly parallel' — splitting 10,000 independent jobs across many cores (as GPUs do) gives a near-linear speedup, which is exactly why GPUs are used for image/video processing and neural network training."
+    "hints": [
+      "Think about a kitchen with two cooks rather than one cook working twice as fast.",
+      "Ask what happens to a job that must be done strictly in order, one step after the previous one."
+    ],
+    "explanation_after": "More cores means more work in parallel, not faster individual steps. A task that must happen strictly in sequence gains nothing from extra cores — which is why core counts help with many jobs at once more than with one stubborn job."
   },
+  {
+    "id": "p1_eval_binary_understand",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_binary_numbers",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 55,
+    "stem": "Which statement best explains why computers use binary rather than our usual ten digits?",
+    "options": [
+      { "id": "a", "text": "Binary numbers are smaller than decimal numbers", "misconception": "Thinks of binary as a compression; it takes more digits to write the same value, not fewer." },
+      { "id": "b", "text": "Binary is the only system that can represent fractions", "misconception": "Invents a capability difference; any base can represent fractions." },
+      { "id": "c", "text": "Humans invented binary first, and computers kept the convention", "misconception": "Explains a technical choice as historical accident; decimal long predates binary notation." },
+      { "id": "d", "text": "Hardware can hold two clearly distinguishable states far more reliably than ten" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "This is a question about physics and noise, not about mathematics.",
+      "Picture a voltage that drifts slightly, and ask how many levels you could still tell apart with confidence."
+    ],
+    "explanation_after": "Any base can represent any number. The reason for binary is physical: a circuit can hold 'clearly on' and 'clearly off' reliably despite noise, but telling ten voltage levels apart is error-prone."
+  },
+  {
+    "id": "p1_eval_io_file_understand",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_input_output",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 50,
+    "stem": "A program reads a saved spreadsheet from the drive and writes a summary to a new file. In input/output terms, what is happening?",
+    "options": [
+      { "id": "a", "text": "Neither — input and output only involve a person", "misconception": "Ties the idea to human interaction, when the model is about the direction data travels across the program's boundary." },
+      { "id": "b", "text": "The spreadsheet is input and the summary file is output" },
+      { "id": "c", "text": "Both files are input, because they are both on the drive", "misconception": "Classifies by where the data lives rather than which way it is moving." },
+      { "id": "d", "text": "Both are output, because the program touched the drive in each case", "misconception": "Classifies by the action being a disk operation rather than by direction." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Draw a boundary around the program itself and watch which way each arrow points.",
+      "Forget keyboards and screens — ask what the program consumed and what it produced."
+    ],
+    "explanation_after": "Input and output are about direction across the program's boundary, not about people or devices. Data coming in is input whatever its source; data going out is output wherever it lands."
+  },
+
   {
     "id": "p1_eval_cpu_apply",
     "phase": "phase_1_computer_basics",
     "skill_id": "p1_cpu_processing",
     "bloom_level": "apply",
     "format": "mcq",
-    "stem": "A job has thousands of tiny independent calculations. Which processor style fits best?",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "A job has thousands of tiny calculations, and none of them needs the result of any other. Which processor style fits best?",
     "options": [
-      {
-        "id": "a",
-        "text": "A GPU with many simple workers"
-      },
-      {
-        "id": "b",
-        "text": "One slow storage drive"
-      },
-      {
-        "id": "c",
-        "text": "A keyboard"
-      },
-      {
-        "id": "d",
-        "text": "A file name"
-      }
+      { "id": "a", "text": "A GPU with many simple workers running at once" },
+      { "id": "b", "text": "A single very fast core, since each calculation finishes sooner", "misconception": "Optimises the time of one step instead of noticing that thousands of steps could run side by side." },
+      { "id": "c", "text": "A faster drive, so the calculations load quicker", "misconception": "Treats a compute-bound job as if it were limited by reading data." },
+      { "id": "d", "text": "More RAM, so more calculations fit in memory at once", "misconception": "Assumes capacity is the limit when the limit is how many can be worked on simultaneously." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Independent calculations can be shared across many GPU workers at once."
+    "hints": [
+      "The phrase that matters in the stem is 'none of them needs the result of any other'.",
+      "Ask whether you would rather have one fast worker or hundreds of ordinary ones for this shape of job."
+    ],
+    "explanation_after": "Independent calculations can be shared across many GPU workers at once, giving a near-linear speedup. This is exactly why GPUs suit image processing and neural network training."
   },
   {
     "id": "p1_eval_mem_apply",
@@ -173,55 +293,132 @@
     "skill_id": "p1_memory_storage",
     "bloom_level": "apply",
     "format": "mcq",
-    "stem": "You are actively editing a large image. Where is the working copy mainly kept?",
+    "difficulty": "easy",
+    "time_target_sec": 50,
+    "stem": "You are actively editing a large image. Where is the working copy mainly kept while you work?",
     "options": [
-      {
-        "id": "a",
-        "text": "RAM, the fast work desk"
-      },
-      {
-        "id": "b",
-        "text": "Long-term storage only"
-      },
-      {
-        "id": "c",
-        "text": "The monitor glass"
-      },
-      {
-        "id": "d",
-        "text": "The keyboard"
-      }
+      { "id": "a", "text": "On the drive, with every brush stroke written to the file", "misconception": "Imagines edits saved continuously; that would be far too slow for interactive work." },
+      { "id": "b", "text": "In RAM, the fast working area" },
+      { "id": "c", "text": "In the screen's own memory, since that is where you see it", "misconception": "Confuses the displayed picture with the full-resolution data being edited." },
+      { "id": "d", "text": "Nowhere in particular until you press save", "misconception": "Treats unsaved work as having no physical location, rather than living in volatile memory." }
     ],
-    "correct_option_id": "a",
-    "explanation_after": "RAM holds information the computer is actively using, while storage keeps files for later."
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what has to be fast enough to keep up with you dragging a brush.",
+      "Think about what you lose in a power cut, and where that thing must have been."
+    ],
+    "explanation_after": "RAM holds what the computer is actively using, because it is fast enough for interactive work. Storage keeps the saved file for later — which is why a crash costs you everything since the last save."
   },
+  {
+    "id": "p1_eval_binary_apply",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_binary_numbers",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "A sensor reports a whole number from 0 to 1000. What is the smallest number of bits that can hold any of its readings?",
+    "options": [
+      { "id": "a", "text": "8 bits", "misconception": "Reaches for the familiar byte without checking that it only covers 0–255." },
+      { "id": "b", "text": "10 bits" },
+      { "id": "c", "text": "16 bits", "misconception": "Jumps to the next convenient size rather than the smallest sufficient one — workable, but not what was asked." },
+      { "id": "d", "text": "1000 bits", "misconception": "Assigns one bit per possible value, missing that bits combine to cover many values." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Count how many distinct readings there are, remembering that zero is one of them.",
+      "Keep doubling 2 and stop at the first total that covers them all."
+    ],
+    "explanation_after": "There are 1001 possible readings. 9 bits cover 512 values and 10 bits cover 1024, so 10 is the smallest that fits — the same reasoning that decides the width of any sensor field."
+  },
+  {
+    "id": "p1_eval_pattern_apply",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_what_is_computer",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "A supermarket self-checkout weighs an item, looks up its price, and prints a receipt. Which part is the processing step?",
+    "options": [
+      { "id": "a", "text": "The scale measuring the weight", "misconception": "Picks the step that gathers data from the world, which is the input." },
+      { "id": "b", "text": "The receipt being printed", "misconception": "Picks the step that puts something back into the world, which is the output." },
+      { "id": "c", "text": "Looking up the price and working out the total" },
+      { "id": "d", "text": "The customer putting the item down", "misconception": "Identifies an event outside the system altogether, before any data exists." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Label each step as data coming in, data being worked on, or data going back out.",
+      "The processing step is the one that turns one piece of data into a different one."
+    ],
+    "explanation_after": "Weight in is input, receipt out is output, and turning a weight into a price and a total is the processing between them. Almost any device yields to this three-way split."
+  },
+  {
+    "id": "p1_eval_io_apply",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_input_output",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "You are writing a program that must work both with a keyboard and with a file of pre-recorded commands. What does the input/output model suggest about the design?",
+    "options": [
+      { "id": "a", "text": "Write two completely separate programs, one per source", "misconception": "Treats the source of the data as part of the program's logic rather than something that can be swapped." },
+      { "id": "b", "text": "The program's core logic can stay the same if it just reads 'commands coming in', whatever the source" },
+      { "id": "c", "text": "Convert the file into keystrokes so the keyboard code still works", "misconception": "Keeps the device-specific assumption and forces the world to match it, rather than relaxing the assumption." },
+      { "id": "d", "text": "Store the file in RAM first, which makes it an input device", "misconception": "Confuses where the data is held with how the program consumes it." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask which parts of the program actually care where the characters came from.",
+      "Think about what you could swap out without touching the logic in the middle."
+    ],
+    "explanation_after": "Because input is a direction and not a device, the middle of the program can be written against 'a stream of commands'. That is why the same tool can be driven by a person or a script."
+  },
+  {
+    "id": "p1_eval_capacity_apply",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_memory_storage",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "A machine has 8 GB of RAM and a 512 GB drive. You want to work on a 20 GB video file. What will actually happen?",
+    "options": [
+      { "id": "a", "text": "The file cannot be opened at all, because it exceeds RAM", "misconception": "Assumes a file must fit entirely in memory to be usable, which would make large media impossible to edit." },
+      { "id": "b", "text": "The whole file is copied into RAM, and the extra 12 GB is lost", "misconception": "Imagines silent truncation rather than the program working in pieces." },
+      { "id": "c", "text": "RAM automatically grows to 20 GB while the file is open", "misconception": "Treats physical memory as elastic; the operating system can page to disk, but the chips do not change size." },
+      { "id": "d", "text": "It works, with the program holding a portion in RAM at a time and reading more from the drive as needed" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "The file lives on the drive. Ask how much of it has to be in the fast area at any one moment.",
+      "Think about how you read a long book without holding every page open at once."
+    ],
+    "explanation_after": "Programs work on large files in pieces, keeping a window in RAM and fetching more from storage. That is why editing big video on modest RAM is slow rather than impossible."
+  },
+
   {
     "id": "p1_eval_binary_analyze",
     "phase": "phase_1_computer_basics",
     "skill_id": "p1_binary_numbers",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "A wire can reliably be high or low. Why is binary a useful way to represent information on it?",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "A wire can reliably be held high or low. Why does that make binary a good way to represent information on it?",
     "options": [
-      {
-        "id": "a",
-        "text": "Two clearly separated states are easier to distinguish reliably"
-      },
-      {
-        "id": "b",
-        "text": "It makes every number equal"
-      },
-      {
-        "id": "c",
-        "text": "It removes electricity"
-      },
-      {
-        "id": "d",
-        "text": "It stores only text"
-      }
+      { "id": "a", "text": "Two clearly separated states are easier to distinguish reliably" },
+      { "id": "b", "text": "It makes every stored number take the same amount of space", "misconception": "Notices a real property of fixed-width fields, but that is a choice about format, not a consequence of two states." },
+      { "id": "c", "text": "It uses less electricity than holding ten states", "misconception": "Reaches for power consumption; the decisive issue is whether a reading can be told apart from noise." },
+      { "id": "d", "text": "It allows the wire to carry text as well as numbers", "misconception": "Confuses what the encoding permits with why two states are physically preferable." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Two separated states tolerate small electrical noise better than many nearly identical levels."
+    "hints": [
+      "Imagine the voltage drifting by a few percent, and ask what that does to your reading.",
+      "Compare the margin for error with two levels against the margin with ten."
+    ],
+    "explanation_after": "Two widely separated states tolerate electrical noise: a reading halfway between is still obviously nearer one than the other. Ten levels would leave almost no margin before a reading became ambiguous."
   },
   {
     "id": "p1_eval_io_analyze",
@@ -229,27 +426,132 @@
     "skill_id": "p1_input_output",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "A voice assistant hears speech but never answers. Which boundary should you inspect first?",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "A voice assistant's light comes on when you speak, but it never answers. Which boundary should you inspect first?",
     "options": [
-      {
-        "id": "a",
-        "text": "Whether sound reached the input and whether the answer reached an output"
-      },
-      {
-        "id": "b",
-        "text": "Only the screen color"
-      },
-      {
-        "id": "c",
-        "text": "Only long-term storage size"
-      },
-      {
-        "id": "d",
-        "text": "The file extension of every program"
-      }
+      { "id": "a", "text": "Whether the speaker works, since that is the only part that can fail silently", "misconception": "Jumps to the final stage without using the evidence that something earlier already succeeded." },
+      { "id": "b", "text": "Whether sound reached the input and whether a reply reached an output" },
+      { "id": "c", "text": "Whether the device has enough storage for the recording", "misconception": "Picks a resource that could in principle matter but which the symptom gives no evidence for." },
+      { "id": "d", "text": "Whether the room is too bright for the light sensor", "misconception": "Follows the most visible clue — the light — instead of asking what the light tells you about the data path." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "The light coming on is itself evidence. What has it already told you?",
+      "Split the path into stages and find the last stage you know succeeded."
+    ],
+    "explanation_after": "Tracing input, processing and output separately locates where the information stopped. The light proves input arrived, so the fault lies in processing or on the way back out — which rules out half the system before you touch anything."
+  },
+  {
+    "id": "p1_eval_slow_analyze",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_memory_storage",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "A laptop is fine with five browser tabs but crawls at forty, and the drive light stays on constantly while it struggles. What does that pattern point to?",
+    "options": [
+      { "id": "a", "text": "The CPU has overheated and slowed itself down", "misconception": "A real phenomenon, but it would not tie the slowdown to tab count or light up the drive." },
+      { "id": "b", "text": "The drive is failing, since its light is on", "misconception": "Reads the busy light as a fault signal rather than as evidence of heavy, legitimate traffic." },
+      { "id": "c", "text": "RAM has run out, so the system is shuttling data to and from the much slower drive" },
+      { "id": "d", "text": "The network is saturated by forty tabs loading at once", "misconception": "Plausible for loading, but would not explain constant drive activity on already-loaded pages." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Two clues have to be explained together: it depends on how many tabs, and the drive is busy.",
+      "Ask what the system does when the fast working area is full but the work still has to go somewhere."
+    ],
+    "explanation_after": "When RAM fills, the operating system moves less-used pages to disk and fetches them back on demand. The drive light is the symptom of that swapping, and it is slow because storage is orders of magnitude slower than memory."
+  },
+  {
+    "id": "p1_eval_core_analyze",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_cpu_processing",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 90,
+    "stem": "A monitoring tool shows one core pinned at 100% while the other seven sit near zero, and the program is slow. What does that tell you?",
+    "options": [
+      { "id": "a", "text": "The other seven cores are broken", "misconception": "Reads idleness as failure, when idle cores usually mean nothing was given to them." },
+      { "id": "b", "text": "The machine needs more RAM", "misconception": "Reaches for a different resource that the evidence says nothing about." },
+      { "id": "c", "text": "The work is being done as a single sequence, so extra cores cannot help it" },
+      { "id": "d", "text": "The program is waiting for the drive", "misconception": "Disk waiting would show a core idle or in wait, not pinned at full usage." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Idle cores are not a hardware symptom. Ask who decides what runs on them.",
+      "What would the picture look like if the work had been split into independent pieces?"
+    ],
+    "explanation_after": "Cores only help if the work is divided into independent pieces. One core at 100% beside seven idle ones is the signature of a single-threaded job — more cores would change nothing, and buying a machine with more would waste money."
+  },
+  {
+    "id": "p1_eval_claim_analyze",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_what_is_computer",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 90,
+    "stem": "An article says 'the computer decided the loan application was too risky.' Which part of that sentence most misleads a reader about how the machine works?",
+    "options": [
+      { "id": "a", "text": "'Loan application' — computers cannot handle documents", "misconception": "Denies a capability computers plainly have; the problem is with agency, not with the subject matter." },
+      { "id": "b", "text": "'Too risky' — a computer cannot represent risk as a number", "misconception": "Rejects the quantity rather than the attribution; scoring risk numerically is exactly what such systems do." },
+      { "id": "c", "text": "'Decided' — it suggests judgment, when the machine applied rules and thresholds someone chose" },
+      { "id": "d", "text": "'The computer' — it should say 'the server'", "misconception": "Treats the issue as naming the hardware precisely, missing the claim about agency." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Read the sentence again and ask which single word implies something the machine does not have.",
+      "Ask who is accountable if the outcome was unfair, and whether the sentence makes that visible."
+    ],
+    "explanation_after": "The machine followed instructions and thresholds that people wrote and chose. Saying it 'decided' hides the human choices behind the outcome — which matters when someone wants to appeal it."
+  },
+  {
+    "id": "p1_eval_filesize_analyze",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_binary_numbers",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "An audio file saved at 16 bits per sample is twice the size of the same recording at 8 bits, but its quality is far more than twice as good at representing quiet detail. Why the mismatch?",
+    "options": [
+      { "id": "a", "text": "Doubling the bits doubles the file but squares the number of distinguishable levels, from 256 to 65,536" },
+      { "id": "b", "text": "The 16-bit file is compressed more efficiently", "misconception": "Introduces compression, which is not what changed; the bit depth did." },
+      { "id": "c", "text": "16-bit files are stored on a faster part of the drive", "misconception": "Explains a quality difference with a storage-location difference that has no bearing on it." },
+      { "id": "d", "text": "The recording was simply made with a better microphone", "misconception": "Changes the premise; the stem states it is the same recording." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Tracing input, processing, and output separately helps locate where the information stopped."
+    "hints": [
+      "The size grows with the number of bits. What grows with the number of bits differently?",
+      "Work out the number of levels in each case and compare the two ratios."
+    ],
+    "explanation_after": "Size grows linearly with bit depth, but the number of representable levels doubles per bit. Quiet passages get 256 times finer gradation for twice the bytes — the same reason extra bits pay off disproportionately in images and sensors."
+  },
+
+  {
+    "id": "p1_eval_cpu_evaluate",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_cpu_processing",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "You need to resize 10,000 independent images as fast as possible. One approach processes them one by one on a single CPU core; another splits the work across many parallel cores. Which is better suited, and why?",
+    "options": [
+      { "id": "a", "text": "The single-core approach, because image resizing must happen in a strict order", "misconception": "Invents a dependency between images that the stem explicitly rules out." },
+      { "id": "b", "text": "The parallel approach, because each image's resize is independent, so splitting the work across many cores finishes far faster" },
+      { "id": "c", "text": "Neither matters — core count has no effect on how long this takes", "misconception": "Denies the effect of parallelism on work that is genuinely divisible." },
+      { "id": "d", "text": "The single-core approach, because parallel processing only works for numerical data", "misconception": "Imposes a data-type restriction on parallelism that does not exist; images are numbers." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Judge against one criterion: can the pieces be done at the same time without waiting for each other?",
+      "Check the stem for the word that settles whether the work divides."
+    ],
+    "explanation_after": "Because no image's resize depends on another's result, the work is embarrassingly parallel and splitting it gives a near-linear speedup. This is exactly why GPUs are used for image processing and for training neural networks."
   },
   {
     "id": "p1_eval_mem_evaluate",
@@ -257,55 +559,132 @@
     "skill_id": "p1_memory_storage",
     "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "A program repeatedly reloads a large file from slow storage while working. Which change is most sensible?",
+    "difficulty": "medium",
+    "time_target_sec": 95,
+    "stem": "A program repeatedly reloads the same large reference table from the drive every time it needs a value. Which change is most sensible, and why?",
     "options": [
-      {
-        "id": "a",
-        "text": "Keep the active data in RAM if it fits"
-      },
-      {
-        "id": "b",
-        "text": "Delete the CPU"
-      },
-      {
-        "id": "c",
-        "text": "Convert the file name to binary"
-      },
-      {
-        "id": "d",
-        "text": "Turn off all output"
-      }
+      { "id": "a", "text": "Load the table once into RAM and reuse it, if it fits" },
+      { "id": "b", "text": "Split the table into many smaller files so each read is quicker", "misconception": "Reduces the size of each read but keeps the repeated slow trips, which are the actual cost." },
+      { "id": "c", "text": "Buy a larger drive, so there is more room for the table", "misconception": "Addresses capacity when the problem is access speed." },
+      { "id": "d", "text": "Compress the table, so there is less to read each time", "misconception": "Helps marginally but still pays the per-read cost, and adds decompression work every time." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "RAM is the faster work area. Reusing active data there avoids repeated slow storage reads."
+    "hints": [
+      "The criterion is total time. Ask which cost is being paid over and over.",
+      "Compare paying a large cost once against paying a smaller one thousands of times."
+    ],
+    "explanation_after": "The repeated trips to storage are the cost, not the size of each one. Reading once into the fast working area turns thousands of slow reads into one — the core idea behind caching everywhere in computing."
   },
+  {
+    "id": "p1_eval_upgrade_evaluate",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_memory_storage",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A user has a fixed budget and one complaint: their machine is fine until they open their photo editor alongside everything else, at which point everything crawls. Which upgrade best fits the evidence?",
+    "options": [
+      { "id": "a", "text": "A faster CPU, since the machine is slow", "misconception": "Treats 'slow' as one undifferentiated symptom instead of asking which resource runs out, and when." },
+      { "id": "b", "text": "A larger drive, since photo editors use large files", "misconception": "Addresses capacity, which the complaint never mentions, rather than the contention when apps are combined." },
+      { "id": "c", "text": "A better graphics card, since the work is visual", "misconception": "Matches on the subject matter being images rather than on which resource the symptom implicates." },
+      { "id": "d", "text": "More RAM, because the slowdown appears only when several demanding programs are open at once" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "The decisive clue is when it is slow, not that it is slow.",
+      "Ask which resource gets exhausted specifically by running several things at once."
+    ],
+    "explanation_after": "A slowdown that appears only under combined load points to a resource being exhausted by concurrency, and that is memory. A faster processor would not help a machine that is busy shuttling pages to disk."
+  },
+  {
+    "id": "p1_eval_bitwidth_evaluate",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_binary_numbers",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "A team stores a simple yes/no flag for each of 2 billion records, and a colleague proposes using a whole byte per flag rather than a single bit, for simplicity. Judged on engineering merit, is that defensible?",
+    "options": [
+      { "id": "a", "text": "No — wasting any space is never acceptable at this scale", "misconception": "Applies an absolute rule instead of weighing the actual cost against the actual benefit." },
+      { "id": "b", "text": "Yes — a byte and a bit cost the same, since a byte is the smallest unit hardware can address", "misconception": "Correctly recalls that memory is byte-addressable, but concludes that bit-packing is therefore impossible, which it is not." },
+      { "id": "c", "text": "Often yes: it costs about 1.75 GB extra, which may be a fair price for code that is simpler and faster to read" },
+      { "id": "d", "text": "Yes — bits cannot represent yes and no anyway", "misconception": "Denies the very thing a bit is for." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Work out the actual difference in bytes before judging whether it matters.",
+      "A good evaluation names the price and then asks what is bought with it."
+    ],
+    "explanation_after": "2 billion bits is about 250 MB; 2 billion bytes is about 2 GB. The extra 1.75 GB is real but often worth paying for simpler, faster code — and the right answer depends on the budget, which is why this is a judgment rather than a rule."
+  },
+  {
+    "id": "p1_eval_logger_evaluate",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_input_output",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "Two designs for a field sensor logger: (A) write every reading to the drive immediately; (B) collect readings in memory and write once a minute. The device may lose power without warning. Which is better, and on what grounds?",
+    "options": [
+      { "id": "a", "text": "B always, because fewer writes make the hardware last longer", "misconception": "Optimises one real criterion — write wear — while ignoring the stated risk of losing data." },
+      { "id": "b", "text": "A always, because immediate writes are simpler to program", "misconception": "Decides on implementation convenience rather than on the trade-off the scenario sets up." },
+      { "id": "c", "text": "A, if losing a minute of readings is unacceptable; B, if it is tolerable and battery life matters more" },
+      { "id": "d", "text": "Neither — the readings should be kept in memory permanently", "misconception": "Ignores that memory is volatile, which is precisely what the power-loss risk exploits." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Name what each design loses when the power cuts, then name what each design saves.",
+      "A sound judgment here ends in 'it depends on', followed by something specific."
+    ],
+    "explanation_after": "Immediate writes risk nothing but cost power and write cycles; buffering risks up to a minute of data. Neither wins outright — the answer turns on how costly a lost minute is, which is what makes this an evaluation rather than a fact."
+  },
+  {
+    "id": "p1_eval_aiclaim_evaluate",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_what_is_computer",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "A vendor claims their AI product 'works on a fundamentally different kind of computer that reasons rather than calculates.' How should you assess that claim?",
+    "options": [
+      { "id": "a", "text": "Accept it — AI chips genuinely use a different kind of logic from ordinary processors", "misconception": "Mistakes specialised hardware for a different computational basis; AI accelerators still execute instructions over bits." },
+      { "id": "b", "text": "Reject it — AI hardware is specialised for doing enormous numbers of calculations in parallel, but it is still instruction-following over bits" },
+      { "id": "c", "text": "Accept it — reasoning and calculating are genuinely different operations in hardware", "misconception": "Takes a description of behaviour at the top and reads it as a property of the circuits underneath." },
+      { "id": "d", "text": "Reject it — no computer can be used for AI at all", "misconception": "Over-corrects into a claim that is plainly false." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what would have to be true at the hardware level for the claim to hold.",
+      "Separate what the system appears to do from what the machine underneath is physically doing."
+    ],
+    "explanation_after": "AI accelerators are specialised — many simple units doing matrix arithmetic in parallel — but they are still instruction-following machines operating on bits. 'Reasons rather than calculates' describes an impression of the output, not a change in the machine."
+  },
+
   {
     "id": "p1_eval_system_create",
     "phase": "phase_1_computer_basics",
     "skill_id": "p1_what_is_computer",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "You are designing a simple temperature alarm. Which complete plan follows the computer input-process-output pattern?",
+    "difficulty": "medium",
+    "time_target_sec": 110,
+    "stem": "You are designing a simple temperature alarm. Which complete plan follows the input-process-output pattern?",
     "options": [
-      {
-        "id": "a",
-        "text": "Read a sensor, compare with a limit, sound an alarm"
-      },
-      {
-        "id": "b",
-        "text": "Sound an alarm with no sensor or rule"
-      },
-      {
-        "id": "c",
-        "text": "Store a number and never use it"
-      },
-      {
-        "id": "d",
-        "text": "Read a sensor but produce no result"
-      }
+      { "id": "a", "text": "Read a sensor, compare the reading with a limit, sound an alarm when it is exceeded" },
+      { "id": "b", "text": "Sound the alarm on a fixed timer, so it is never missed", "misconception": "Produces output with no input and no decision — it is not responding to anything." },
+      { "id": "c", "text": "Read the sensor and store every reading in a file for later", "misconception": "Has input and storage but no decision and no alarm, so it never actually warns anyone." },
+      { "id": "d", "text": "Let the user type the current temperature, then display it back", "misconception": "Has input and output but no processing — and makes the person do the sensing the device was meant to do." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "The sensor supplies input, comparison performs processing, and the alarm is the output."
+    "hints": [
+      "Check each plan for all three stages, and reject any that is missing one.",
+      "Ask of each option: does anything actually get decided in the middle?"
+    ],
+    "explanation_after": "The sensor supplies input, the comparison is the processing, and the alarm is the output. A plan missing any stage either never notices the problem or never tells anyone about it."
   },
   {
     "id": "p1_eval_storage_create",
@@ -313,26 +692,108 @@
     "skill_id": "p1_memory_storage",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "Which design best protects an unfinished drawing and keeps it available after restart?",
+    "difficulty": "medium",
+    "time_target_sec": 110,
+    "stem": "Which design best protects an unfinished drawing and keeps it available after a restart?",
     "options": [
-      {
-        "id": "a",
-        "text": "Work on it in RAM and save copies to storage"
-      },
-      {
-        "id": "b",
-        "text": "Keep it only in RAM forever"
-      },
-      {
-        "id": "c",
-        "text": "Show it on screen without saving"
-      },
-      {
-        "id": "d",
-        "text": "Store it only in the keyboard"
-      }
+      { "id": "a", "text": "Keep it only in memory, and warn the user before closing", "misconception": "Relies on a graceful exit, which a crash or power cut does not give you." },
+      { "id": "b", "text": "Work on it in RAM and write periodic copies to storage" },
+      { "id": "c", "text": "Write every brush stroke straight to the file, with nothing held in memory", "misconception": "Safe but unusable: interactive editing cannot wait for a disk write per stroke." },
+      { "id": "d", "text": "Display it continuously so the user can redraw it from the screen if needed", "misconception": "Shifts recovery onto the person, and the screen contents vanish with the power too." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Two things are wanted at once: fast while working, and surviving a restart.",
+      "Ask which plan uses each of the two places for what it is good at."
+    ],
+    "explanation_after": "RAM gives the speed interactive work needs; periodic writes to storage bound how much can be lost. Autosave is exactly this compromise, and the save interval is the dial between speed and risk."
+  },
+  {
+    "id": "p1_eval_steps_create",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_input_output",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "You are planning a step counter for a wristband with a motion sensor, a small screen and a tiny battery. Which plan is soundest?",
+    "options": [
+      { "id": "a", "text": "Sample motion continuously, count steps on the device, and update the screen once a second" },
+      { "id": "b", "text": "Sample motion continuously and send every raw reading to a phone to be counted there", "misconception": "Moves the cheap work off-device and pays for it in radio traffic, which is usually the largest power cost in a wearable." },
+      { "id": "c", "text": "Sample the sensor once a minute to save power, and estimate the steps between samples", "misconception": "Saves power by discarding exactly the signal the device exists to measure; steps cannot be inferred from a minute-apart snapshot." },
+      { "id": "d", "text": "Store every reading and count the steps only when the user opens the screen", "misconception": "Defers the work but keeps all the raw data, which needs far more storage than the counts do." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "RAM supports active work, while storage preserves a saved copy after power or restart."
+    "hints": [
+      "Three constraints are in tension: catch the motion, stay within the battery, keep the display useful.",
+      "Ask where each piece of work is cheapest to do, and how much data has to travel or be kept."
+    ],
+    "explanation_after": "Counting on the device turns a continuous stream into a small number, so neither storage nor radio has to carry the raw signal. The display only needs refreshing at human speed, which is where most of the remaining power is saved."
+  },
+  {
+    "id": "p1_eval_backup_create",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_memory_storage",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "A photographer wants their day's shoot protected against both a drive failure and a mistaken deletion. Which plan actually meets both?",
+    "options": [
+      { "id": "a", "text": "Keep the photos on two partitions of the same drive", "misconception": "Protects against neither: one failure takes both partitions, and a deletion can target either." },
+      { "id": "b", "text": "Copy them to a second drive, kept in sync automatically in real time", "misconception": "Survives a drive failure, but a mistaken deletion propagates to the copy within seconds." },
+      { "id": "c", "text": "Copy them to a second drive, and keep dated copies that are not overwritten" },
+      { "id": "d", "text": "Keep one copy and open the files regularly to check they still work", "misconception": "Detects damage but never prevents loss; verification is not redundancy." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The two risks are different in kind. Check each plan against each risk separately.",
+      "Ask what happens to the second copy, a minute after someone deletes the first by accident."
+    ],
+    "explanation_after": "A second device covers hardware failure; versions that are not overwritten cover human error. A mirror alone fails the second test, which is why backup and sync are not the same thing."
+  },
+  {
+    "id": "p1_eval_till_create",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_cpu_processing",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "A shop till must scan a barcode and show the price before the cashier's hand leaves the item — about a fifth of a second. Which design is most appropriate?",
+    "options": [
+      { "id": "a", "text": "Send each scan to a central server and wait for the price to come back", "misconception": "Puts a network round trip inside a hard timing budget, and leaves the till useless whenever the link is down." },
+      { "id": "b", "text": "Keep the price list on the till and look it up locally, syncing changes in the background" },
+      { "id": "c", "text": "Load the entire price list fresh from the server at every scan", "misconception": "Combines the network cost with a far larger transfer, for data that changes rarely." },
+      { "id": "d", "text": "Have the cashier type prices manually, avoiding the lookup entirely", "misconception": "Removes the timing problem by removing the feature, and replaces it with a slower, error-prone step." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Start from the deadline and work backwards through what each step would cost.",
+      "Ask how often the data actually changes, compared with how often it is read."
+    ],
+    "explanation_after": "The deadline rules out anything on the critical path that can be slow or unavailable. Data read constantly but changed rarely belongs near where it is used, with updates arriving out of band — the same reasoning behind caching in general."
+  },
+  {
+    "id": "p1_eval_powerloss_create",
+    "phase": "phase_1_computer_basics",
+    "skill_id": "p1_binary_numbers",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 130,
+    "stem": "A device records a counter that must never be read back as a nonsense value, even if power fails midway through writing it. Which scheme best achieves that?",
+    "options": [
+      { "id": "a", "text": "Write the new value over the old one, and check it after writing", "misconception": "Checks after the fact, but a power cut during the overwrite has already destroyed the only copy." },
+      { "id": "b", "text": "Write the value twice in a row to the same place, so the second write fixes the first", "misconception": "Both writes target the same bytes, so a cut during either leaves the same corruption." },
+      { "id": "c", "text": "Keep the counter in memory and write it only at shutdown", "misconception": "Works only for an orderly shutdown, which is exactly the case the requirement excludes." },
+      { "id": "d", "text": "Write the new value to a second slot with a marker, and only then mark it as the current one" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Assume the power can fail between any two steps, and ask what a reader would find at each point.",
+      "Look for a plan where the old value stays intact and valid until the new one is complete."
+    ],
+    "explanation_after": "If the old value is never destroyed until the new one is fully written, every possible interruption leaves a complete value behind — old or new, never half of each. Journalling filesystems and databases are built on exactly this ordering."
   }
 ]
