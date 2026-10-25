@@ -11,10 +11,10 @@
     "options": [
       { "id": "a", "text": "How much computing power the request uses", "misconception": "Confuses a sampling setting with a resource allocation." },
       { "id": "b", "text": "How long the model is allowed to take", "misconception": "Describes a timeout; temperature does not affect latency." },
-      { "id": "c", "text": "How randomly the next token is sampled — lower is more deterministic, higher more varied" },
-      { "id": "d", "text": "How many tokens the response may contain", "misconception": "Describes max_tokens, a separate parameter." }
+      { "id": "c", "text": "How many tokens the response may contain", "misconception": "Describes max_tokens, a separate parameter." },
+      { "id": "d", "text": "How randomly the next token is sampled — lower is more deterministic, higher more varied" }
     ],
-    "correct_option_id": "c",
+    "correct_option_id": "d",
     "hints": [
       "The model produces a probability for each possible next token. Ask what this setting does to those probabilities.",
       "Ask which setting you would change to get the same answer twice."
@@ -254,10 +254,10 @@
     "options": [
       { "id": "a", "text": "Serverless platforms cannot make outbound network calls", "misconception": "Outbound calls are routine; the constraint is elsewhere." },
       { "id": "b", "text": "Self-hosted models need more disk space than serverless provides", "misconception": "Disk is a factor but secondary to the GPU and cold-start problem." },
-      { "id": "c", "text": "A wrapper is mostly waiting on the network, while self-hosted inference needs a GPU with the weights already resident" },
-      { "id": "d", "text": "Serverless functions cannot run for more than a second", "misconception": "Limits are typically minutes, not seconds." }
+      { "id": "c", "text": "Serverless functions cannot run for more than a second", "misconception": "Limits are typically minutes, not seconds." },
+      { "id": "d", "text": "A wrapper is mostly waiting on the network, while self-hosted inference needs a GPU with the weights already resident" }
     ],
-    "correct_option_id": "c",
+    "correct_option_id": "d",
     "hints": [
       "Ask what each workload actually needs while it runs.",
       "Think about what has to happen on a cold start if the model weighs 14 GB."
@@ -277,10 +277,10 @@
     "options": [
       { "id": "a", "text": "Add 'never reveal the system prompt' to the system prompt", "misconception": "Adds another instruction to the same contested channel the attack is already exploiting." },
       { "id": "b", "text": "Raise the temperature so the output is less predictable", "misconception": "Randomness is not a security property; the attack can still succeed." },
-      { "id": "c", "text": "Mark the page as untrusted data, keep privileges minimal, and check the output before returning it" },
-      { "id": "d", "text": "Strip the words 'ignore previous instructions' from fetched pages", "misconception": "Blocklists a phrasing, and injection has unlimited phrasings." }
+      { "id": "c", "text": "Strip the words 'ignore previous instructions' from fetched pages", "misconception": "Blocklists a phrasing, and injection has unlimited phrasings." },
+      { "id": "d", "text": "Mark the page as untrusted data, keep privileges minimal, and check the output before returning it" }
     ],
-    "correct_option_id": "c",
+    "correct_option_id": "d",
     "hints": [
       "Assume the injection will sometimes work. Ask what limits the damage when it does.",
       "Ask what the summariser is allowed to do, and whether it needs to be allowed to do it."
@@ -387,10 +387,10 @@
     "options": [
       { "id": "a", "text": "Delete the failing tests, since LLM output cannot be tested", "misconception": "Abandons the gate entirely when the problem is only the assertion style." },
       { "id": "b", "text": "Re-run failed tests until they pass", "misconception": "Hides real regressions behind retries and makes the suite meaningless." },
-      { "id": "c", "text": "Pin the model version and seed, and assert on properties — valid schema, required facts present, no forbidden content" },
-      { "id": "d", "text": "Record the first output as the expected value and update it whenever it changes", "misconception": "Automatically blesses every change, so the test can never fail for the right reason." }
+      { "id": "c", "text": "Record the first output as the expected value and update it whenever it changes", "misconception": "Automatically blesses every change, so the test can never fail for the right reason." },
+      { "id": "d", "text": "Pin the model version and seed, and assert on properties — valid schema, required facts present, no forbidden content" }
     ],
-    "correct_option_id": "c",
+    "correct_option_id": "d",
     "hints": [
       "Ask what you actually require of the output, and whether exact wording is part of it.",
       "A test should fail when something is wrong, not when something is merely different."
@@ -454,10 +454,10 @@
     "options": [
       { "id": "a", "text": "Those requests have much longer prompts", "misconception": "Would produce a consistent relationship with prompt length rather than bursts of slowness." },
       { "id": "b", "text": "The network is intermittently slow", "misconception": "Network variance is usually milliseconds and would not cluster into 8-second bursts." },
-      { "id": "c", "text": "Requests are queuing behind each other when concurrent load exceeds what the GPU can serve at once" },
-      { "id": "d", "text": "The model occasionally reloads its weights", "misconception": "A reload would stall everything rather than a steady fraction, and would show as a flat outage." }
+      { "id": "c", "text": "The model occasionally reloads its weights", "misconception": "A reload would stall everything rather than a steady fraction, and would show as a flat outage." },
+      { "id": "d", "text": "Requests are queuing behind each other when concurrent load exceeds what the GPU can serve at once" }
     ],
-    "correct_option_id": "c",
+    "correct_option_id": "d",
     "hints": [
       "The word 'bursts' is the clue. Ask what varies over time that could affect only some requests.",
       "Ask what happens to request 9 when the GPU can run 8 at a time."
@@ -476,10 +476,10 @@
     "options": [
       { "id": "a", "text": "The monitoring system is broken", "misconception": "It is reporting correctly on what it measures; the gap is in what it measures." },
       { "id": "b", "text": "Two months is too short a window to detect anything", "misconception": "Ample time; the issue is the absence of a quality signal, not the duration." },
-      { "id": "c", "text": "The monitoring watches whether the system responds, not whether the responses are any good" },
-      { "id": "d", "text": "Users are mistaken, since the metrics show no change", "misconception": "Trusts the instrument over the outcome it was never built to measure." }
+      { "id": "c", "text": "Users are mistaken, since the metrics show no change", "misconception": "Trusts the instrument over the outcome it was never built to measure." },
+      { "id": "d", "text": "The monitoring watches whether the system responds, not whether the responses are any good" }
     ],
-    "correct_option_id": "c",
+    "correct_option_id": "d",
     "hints": [
       "List what the dashboards actually measure, then ask which of them would move if answers became subtly wrong.",
       "A wrong answer returns with status 200 in 300 milliseconds."
