@@ -1,9 +1,52 @@
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/db/auth'
-import { getLearnerProfile, getAllSkillStates, getRecentSessions, getRecentAttempts } from '@/lib/db/queries'
+import {
+  getLearnerProfile, getAllSkillStates, getRecentSessions, getAttemptsBetween, getExamRuns,
+} from '@/lib/db/queries'
 import { getAllNodes } from '@/lib/graph'
+import { getMasteryTier } from '@/lib/bkt'
 import { Navbar } from '@/components/layout/Navbar'
+import { Meter } from '@/components/viz/Meter'
+import { Sparkline } from '@/components/viz/Sparkline'
+import { StatCard } from '@/components/viz/StatCard'
+import { DayBars } from '@/components/viz/DayBars'
+import { LearningCurve } from '@/components/viz/LearningCurve'
+import { BloomProfile } from '@/components/viz/BloomProfile'
+import { MASTERY_COLOUR } from '@/lib/ui/mastery-colour'
+import {
+  activityByDay, bloomProfile, isEvaluationAttempt, learningCurve, skillEvidence, type Agreement,
+} from '@/lib/analytics/profile'
+import type { Debrief } from '@/lib/exam/debrief'
+
+// The skill profile (OLM-3): an open learner model. For every skill the
+// learner has met it shows what the system believes, how much it has actually
+// seen, and whether recent answers bear the belief out — beside each other, so
+// a confident-looking meter on two attempts reads as what it is.
+
+const AGREEMENT_TEXT: Record<Agreement, { text: string; tone: string }> = {
+  agrees:        { text: 'recent answers agree',            tone: 'text-c-faint' },
+  belief_ahead:  { text: 'belief is ahead of recent answers', tone: 'text-c-yellow' },
+  belief_behind: { text: 'doing better than the belief',      tone: 'text-c-green' },
+  thin:          { text: 'too little evidence to judge',      tone: 'text-c-ghost' },
+}
+
+const PHASE_SHORT: Record<string, string> = {
+  phase_1_computer_basics: 'Phase 1', phase_1b_programming_basics: 'Phase 1B', phase_2_cs_data: 'Phase 2',
+  phase_3_intro_ai: 'Phase 3', phase_4_machine_learning: 'Phase 4', phase_5_deep_learning: 'Phase 5',
+  phase_6_modern_ai: 'Phase 6', phase_7_real_world: 'Phase 7', phase_8_mastery: 'Phase 8',
+}
+
+function Section({ title, note, children, testId }: { title: string; note?: string; children: React.ReactNode; testId?: string }) {
+  return (
+    <section className="p-5 rounded-xl border border-[var(--border)] bg-c-bg2 mb-5" data-testid={testId}>
+      <p className="font-mono text-[10px] text-c-faint uppercase tracking-[0.14em] mb-1">{title}</p>
+      {note && <p className="text-[11px] text-c-ghost mb-4">{note}</p>}
+      {children}
+    </section>
+  )
+}
 
 export default async function ProfilePage() {
   const cookieStore = cookies()
@@ -15,30 +58,36 @@ export default async function ProfilePage() {
   const profile = await getLearnerProfile(user.id)
   if (!profile) redirect('/login')
 
-  const [skillStates, sessions, attempts] = await Promise.all([
+  const now = new Date()
+  const since = new Date(profile.created_at)
+  const [skillStates, sessions, attempts, examRuns] = await Promise.all([
     getAllSkillStates(user.id),
     getRecentSessions(user.id, 10),
-    getRecentAttempts(user.id, 200),
+    getAttemptsBetween(user.id, since, new Date(now.getTime() + 60_000)),
+    getExamRuns(user.id, 30).catch(() => []),
   ])
-  const allNodes    = getAllNodes()
+  const nodes = new Map(getAllNodes().map(n => [n.id, n]))
+  const label = (id: string) => nodes.get(id)?.label ?? id
 
-  const mastered      = skillStates.filter(s => s.mastery_state === 'mastered').length
-  const learning      = skillStates.filter(s => ['learning','fragile'].includes(s.mastery_state)).length
-  const totalAttempts = attempts.length
-  const accuracy      = totalAttempts > 0
-    ? Math.round(attempts.filter(a => a.correct).length / totalAttempts * 100) : 0
+  const practice = attempts.filter(a => !isEvaluationAttempt(a.question_id))
+  const mastered = skillStates.filter(s => s.mastery_state === 'mastered').length
+  const learning = skillStates.filter(s => ['learning', 'fragile'].includes(s.mastery_state)).length
+  const accuracy = practice.length > 0 ? Math.round(practice.filter(a => a.correct).length / practice.length * 100) : null
+  const sinceLabel = since.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
-  const skillCount: Record<string, number> = {}
-  for (const a of attempts) skillCount[a.skill_id] = (skillCount[a.skill_id] ?? 0) + 1
-  const topSkills = Object.entries(skillCount).sort(([,a],[,b]) => b-a).slice(0,5)
-    .map(([id, count]) => ({ id, count, label: allNodes.find(n => n.id === id)?.label ?? id }))
+  const evidence = skillEvidence(skillStates, attempts)
+    .filter(e => e.attempts > 0 || e.mastery_state !== 'blocked')
+    .sort((a, b) => (b.last_attempted_at ?? '').localeCompare(a.last_attempted_at ?? '') || b.p_know - a.p_know)
+  const gaps = evidence.filter(e => e.agreement === 'belief_ahead' || (e.p_know >= 0.7 && e.attempts < 3))
 
-  const days = Array.from({ length: 7 }, (_, i) => {
-    const d   = new Date(Date.now() - (6 - i) * 86_400_000)
-    const str = d.toISOString().slice(0, 10)
-    const count = attempts.filter(a => a.attempted_at?.slice(0, 10) === str).length
-    return { str, count, label: d.toLocaleDateString('en-US', { weekday: 'short' })[0] }
-  })
+  const curve = learningCurve(attempts)
+  const activity = activityByDay(practice, now, 30)
+
+  const latestByPhase = new Map<string, { phase: string; debrief: Debrief; at: string; mode: string }>()
+  for (const run of examRuns) {
+    if (run.status !== 'finished' || !run.debrief || latestByPhase.has(run.phase)) continue
+    latestByPhase.set(run.phase, { phase: run.phase, debrief: run.debrief as Debrief, at: run.finished_at ?? run.created_at, mode: run.mode })
+  }
 
   const completedSessions = sessions.filter(s => s.ended_at)
 
@@ -47,115 +96,117 @@ export default async function ProfilePage() {
       <Navbar />
       <div className="max-w-3xl mx-auto px-8 py-10">
 
-        {/* ── Header ─────────────────────────────────────────────────── */}
-        <div className="flex items-start gap-5 mb-10 animate-slide-up">
-          <div className="w-14 h-14 rounded-2xl bg-c-purple/15 border border-c-purple/30 flex items-center justify-center flex-shrink-0">
-            <span className="font-serif text-2xl text-c-purple">
-              {(profile.display_name ?? 'L')[0].toUpperCase()}
-            </span>
+        <div className="flex items-start gap-5 mb-8 animate-slide-up">
+          <div className="w-14 h-14 rounded-2xl bg-c-bg3 border border-[var(--border-hi)] flex items-center justify-center flex-shrink-0">
+            <span className="font-serif text-2xl text-c-purple">{(profile.display_name ?? 'L')[0].toUpperCase()}</span>
           </div>
           <div>
-            <h1 className="font-serif italic text-[26px] text-c-text mb-1">
-              {profile.display_name ?? 'Learner'}
-            </h1>
+            <h1 className="font-serif italic text-[26px] text-c-text mb-1">{profile.display_name ?? 'Learner'}</h1>
             <p className="text-[12px] text-c-faint font-mono">{profile.email}</p>
-            <div className="flex gap-2 mt-2">
-              <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-c-yellow/10 border border-c-yellow/25 text-c-yellow">
-                🔥 {profile.streak_days} day streak
-              </span>
-            </div>
+            <p className="font-mono text-[11px] text-c-yellow mt-2">🔥 {profile.streak_days} day streak</p>
           </div>
         </div>
 
-        {/* ── Stats ──────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-4 gap-3 mb-8">
-          {[
-            { val: mastered,        lbl: 'Mastered',  col: 'var(--green)' },
-            { val: learning,        lbl: 'Learning',  col: 'var(--yellow)' },
-            { val: totalAttempts,   lbl: 'Attempts',  col: 'var(--purple)' },
-            { val: `${accuracy}%`,  lbl: 'Accuracy',  col: 'var(--blue)' },
-          ].map((s, i) => (
-            <div key={i} className="p-4 rounded-xl border border-[var(--border)] bg-c-bg2">
-              <p className="font-serif text-[26px] leading-none mb-1.5" style={{ color: s.col }}>
-                {s.val}
-              </p>
-              <p className="font-mono text-[10px] text-c-muted uppercase tracking-[0.1em]">{s.lbl}</p>
-            </div>
-          ))}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+          <StatCard value={mastered} label="Mastered" accent={MASTERY_COLOUR.mastered} testId="stat-mastered" />
+          <StatCard value={learning} label="Learning" accent={MASTERY_COLOUR.learning} />
+          <StatCard value={practice.length} label="Attempts" note={`since ${sinceLabel}`} testId="stat-attempts" />
+          <StatCard value={accuracy === null ? '—' : `${accuracy}%`} label="Accuracy" note={`over all ${practice.length} practice answers`} testId="stat-accuracy" />
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-5">
-          {/* Top skills */}
-          <div className="p-5 rounded-xl border border-[var(--border)] bg-c-bg2">
-            <p className="font-mono text-[10px] text-c-faint uppercase tracking-[0.14em] mb-4">
-              Most practiced
-            </p>
-            {topSkills.length > 0 ? topSkills.map((s, i) => (
-              <div key={s.id} className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-mono text-[10px] text-c-ghost flex-shrink-0">{i + 1}</span>
-                  <span className="text-[12px] text-c-muted truncate">{s.label}</span>
+        <Section title="What Synaptic believes about you"
+          note="Belief: the model's estimate you know the skill. Evidence: how much it has seen — half-full at 5 attempts. The line is the belief after each attempt."
+          testId="skill-profile">
+          {evidence.length === 0 && <p className="text-[12px] text-c-ghost">Nothing yet — start a session and this fills in.</p>}
+          <div className="divide-y divide-[var(--border)]">
+            {evidence.map(e => {
+              const tier = e.mastery_state === 'blocked' ? 'Locked' : getMasteryTier(e.p_know)
+              const agree = AGREEMENT_TEXT[e.agreement]
+              return (
+                <div key={e.skill_id} className="py-3" data-testid={`skill-row-${e.skill_id}`}>
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <Link href={`/learn/skill/${e.skill_id}`} className="text-[13px] text-c-text hover:underline truncate">{label(e.skill_id)}</Link>
+                    <span className="font-mono text-[11px] flex-shrink-0" style={{ color: MASTERY_COLOUR[e.mastery_state] }}>{tier}</span>
+                  </div>
+                  <div className="grid grid-cols-[56px_1fr_40px] sm:grid-cols-[56px_1fr_40px_104px] items-center gap-x-3 gap-y-1.5">
+                    <span className="text-[10px] font-mono text-c-faint">belief</span>
+                    <Meter value={e.p_know} colour={MASTERY_COLOUR[e.mastery_state]} title={`Belief ${Math.round(e.p_know * 100)}%`} testId={`belief-${e.skill_id}`} />
+                    <span className="font-mono text-[11px] text-c-muted text-right">{Math.round(e.p_know * 100)}%</span>
+                    <div className="hidden sm:block row-span-2">
+                      <Sparkline values={e.trajectory} title={`Belief after each of ${e.trajectory.length} attempts`} />
+                    </div>
+                    <span className="text-[10px] font-mono text-c-faint">evidence</span>
+                    <Meter value={e.evidence_strength} title={`${e.attempts} attempts seen`} testId={`evidence-${e.skill_id}`} />
+                    <span className="font-mono text-[11px] text-c-muted text-right">{e.attempts}</span>
+                  </div>
+                  <p className="text-[11px] text-c-faint mt-1.5">
+                    {e.correct}/{e.attempts} right
+                    {e.recent.length > 0 && <> · last {e.recent.length}: <span className="font-mono tracking-wider">{e.recent.map(r => r ? '●' : '○').join('')}</span></>}
+                    {' · '}<span className={agree.tone}>{agree.text}</span>
+                    {e.attempts > 0 && <span className="text-c-ghost"> · {e.sources.correctness} scored, {e.sources.reasoning} explained{e.sources.discounted > 0 ? `, ${e.sources.discounted} discounted for behaviour` : ''}</span>}
+                  </p>
                 </div>
-                <span className="font-mono text-[11px] text-c-faint flex-shrink-0 ml-2">{s.count}×</span>
-              </div>
-            )) : (
-              <p className="text-[12px] text-c-ghost">No attempts yet</p>
-            )}
+              )
+            })}
           </div>
+        </Section>
 
-          {/* Recent sessions */}
-          <div className="p-5 rounded-xl border border-[var(--border)] bg-c-bg2">
-            <p className="font-mono text-[10px] text-c-faint uppercase tracking-[0.14em] mb-4">
-              Recent sessions
-            </p>
+        {gaps.length > 0 && (
+          <Section title="Gaps, named" note="Where the belief outruns what the evidence shows." testId="gaps">
+            <ul className="space-y-2">
+              {gaps.map(g => (
+                <li key={g.skill_id} className="text-[12px] text-c-muted">
+                  <Link href={`/learn/skill/${g.skill_id}`} className="text-c-text hover:underline">{label(g.skill_id)}</Link>
+                  {' — '}
+                  {g.agreement === 'belief_ahead'
+                    ? `believed at ${Math.round(g.p_know * 100)}%, but ${g.recent.filter(Boolean).length} of the last ${g.recent.length} were right`
+                    : `believed at ${Math.round(g.p_know * 100)}% on only ${g.attempts} attempt${g.attempts === 1 ? '' : 's'}`}
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
+        <Section title="Is practice landing?"
+          note="Share of first, second, third… attempts at a skill that were wrong, averaged over the skills that got that far. Falling means learning."
+          testId="learning-curve">
+          <LearningCurve points={curve} />
+        </Section>
+
+        {latestByPhase.size > 0 && (
+          <Section title="By kind of thinking" note="From your latest exam in each phase. Exams are a measurement only." testId="bloom-profile">
+            <div className="grid sm:grid-cols-2 gap-5">
+              {[...latestByPhase.values()].map(r => (
+                <div key={r.phase}>
+                  <p className="text-[12px] text-c-muted mb-2">
+                    {PHASE_SHORT[r.phase] ?? r.phase} · {r.mode} · {new Date(r.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </p>
+                  <BloomProfile levels={bloomProfile(r.debrief)} />
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <Section title="Last 30 days" note="Practice answers per day." testId="activity">
+            <DayBars days={activity} unit="answers" height={48} />
+          </Section>
+          <Section title="Recent sessions">
             {completedSessions.slice(0, 5).map(s => {
               const acc = s.tasks_count > 0 ? Math.round(s.correct_count / s.tasks_count * 100) : 0
               return (
                 <div key={s.id} className="flex items-center justify-between mb-3">
                   <div>
-                    <p className="text-[12px] text-c-muted">
-                      {new Date(s.started_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                    </p>
+                    <p className="text-[12px] text-c-muted">{new Date(s.started_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
                     <p className="font-mono text-[10px] text-c-faint">{s.tasks_count} questions</p>
                   </div>
-                  <span
-                    className="font-mono text-[12px]"
-                    style={{ color: acc >= 70 ? 'var(--green)' : acc >= 40 ? 'var(--yellow)' : 'var(--red)' }}
-                  >
-                    {acc}%
-                  </span>
+                  <span className="font-mono text-[12px] text-c-muted">{acc}%</span>
                 </div>
               )
             })}
-            {completedSessions.length === 0 && (
-              <p className="text-[12px] text-c-ghost">No sessions yet</p>
-            )}
-          </div>
-        </div>
-
-        {/* 7-day activity */}
-        <div className="p-5 rounded-xl border border-[var(--border)] bg-c-bg2">
-          <p className="font-mono text-[10px] text-c-faint uppercase tracking-[0.14em] mb-4">
-            Last 7 days
-          </p>
-          <div className="flex gap-2">
-            {days.map((d, i) => {
-              const intensity = d.count === 0 ? 0 : d.count < 5 ? 1 : d.count < 15 ? 2 : 3
-              const alpha     = ['0', '22', '55', 'cc'][intensity]
-              return (
-                <div key={i} className="flex-1 flex flex-col items-center gap-1.5">
-                  <div
-                    className="w-full h-8 rounded-md bg-c-bg3 transition-all"
-                    style={{
-                      background: intensity === 0 ? 'var(--bg3)' : `#7c6eff${alpha}`,
-                    }}
-                    title={`${d.count} attempts`}
-                  />
-                  <span className="text-[10px] font-mono text-c-ghost">{d.label}</span>
-                </div>
-              )
-            })}
-          </div>
+            {completedSessions.length === 0 && <p className="text-[12px] text-c-ghost">No sessions yet</p>}
+          </Section>
         </div>
 
       </div>
