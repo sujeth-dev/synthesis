@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-10-25T07:58:16.178Z",
+  "config": {
+    "learners": 120,
+    "days": 60,
+    "seed": 4242
+  },
+  "agreement": {
+    "decisions": 21905,
+    "agreed": 7228,
+    "tied": 1905,
+    "disagreed": 12772,
+    "agreement_excluding_ties": 0.3614,
+    "by_term": [
+      {
+        "term": "variety",
+        "count": 9060,
+        "mean_gap": 0.045854580573957485
+      },
+      {
+        "term": "cognitive",
+        "count": 2124,
+        "mean_gap": 0.05160028248587481
+      },
+      {
+        "term": "gain",
+        "count": 969,
+        "mean_gap": 0.03238129110721542
+      },
+      {
+        "term": "behaviour",
+        "count": 463,
+        "mean_gap": 0.03691804991168327
+      },
+      {
+        "term": "urgency",
+        "count": 156,
+        "mean_gap": 0.04201096652651521
+      }
+    ]
+  },
+  "outcomes": [
+    {
+      "metric": "attempts",
+      "rules": 40890,
+      "score": 40890,
+      "delta": 0
+    },
+    {
+      "metric": "review attempts",
+      "rules": 19228,
+      "score": 19051,
+      "delta": -177
+    },
+    {
+      "metric": "skills learned / learner",
+      "rules": 5.158333333333333,
+      "score": 5.358333333333333,
+      "delta": 0.20000000000000018
+    },
+    {
+      "metric": "end retention",
+      "rules": 0.91074031971199,
+      "score": 0.8937127377897003,
+      "delta": -0.017027581922289703
+    },
+    {
+      "metric": "forgotten fraction",
+      "rules": 0.10016155088852989,
+      "score": 0.1290824261275272,
+      "delta": 0.02892087523899732
+    },
+    {
+      "metric": "mean end p_know",
+      "rules": 0.8956270756021122,
+      "score": 0.8928922137701156,
+      "delta": -0.00273486183199656
+    },
+    {
+      "metric": "p_know gain / attempt",
+      "rules": 0.013604572885238956,
+      "score": 0.013778338399126365,
+      "delta": 0.0001737655138874094
+    },
+    {
+      "metric": "overdue at end / learner",
+      "rules": 2.125,
+      "score": 2.7,
+      "delta": 0.5750000000000002
+    }
+  ],
+  "caveat": "Simulated learners under this repository's own memory model. Evidence for a human decision at LAB-3, not a cutover."
+}

@@ -212,7 +212,7 @@ Doc ref: the approved plan for audit items 8, 9 and 10 — `Research/lab/02-engi
 | SCORE-1 | done | Elo calibration for questions and learners (`src/lib/elo`, migration 009) — the repo's first measured per-question difficulty, written fail-open from `/api/attempt` | none |
 | SCORE-2 | done | `src/lib/session/score.ts`: six-term weighted score (urgency, expected gain, difficulty match, behaviour, cognitive level, variety) + wheel-spin guard + ε exploration + a mandatory `reason`, with invariant tests | SCORE-1 |
 | SCORE-3 | done | Shadow wiring: migration 010 `selection_shadow`, log the live rule choice beside the score choice with term breakdown and top-5 runners-up, fail-open | SCORE-2 |
-| SCORE-4 | not_started | `npm run selector:compare` over the seeded simulator: agreement %, disagreement taxonomy, and the outcome metrics `02-engines.md:159-163` names | SCORE-3 |
+| SCORE-4 | done | `npm run selector:compare` over the seeded simulator: agreement %, disagreement taxonomy, and the outcome metrics `02-engines.md:159-163` names. **Measuring it corrected the score twice** — see `PROGRESS.md` items 20 and 21 — and left a genuine trade-off for LAB-3 to judge | SCORE-3 |
 | LAB-1 | not_started | Export the comparison and add a **Selection** tab to `dkt-lab/web` | SCORE-4 |
 | LAB-2 | not_started | `/engine` section: this learner's recent decisions, rules vs score, term contributions, runners-up | SCORE-3 |
 | LAB-3 | not_started · **loop stops here** | Preview handoff to the human: screenshots, numbers, a written recommendation. No cutover without a reply | LAB-1, LAB-2 |

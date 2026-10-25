@@ -5,7 +5,7 @@ import { ELO_START } from '@/lib/elo'
 import {
   SCORE_WEIGHTS, TARGET_SUCCESS, MAX_EXPECTED_MOVEMENT, URGENCY_SATURATION_INTERVALS,
   WHEEL_SPIN_WRONG, WHEEL_SPIN_PENALTY, VARIETY_WINDOW, EXPLORATION_RATE,
-  urgencyTerm, expectedBktMovement, gainTerm, difficultyMatchTerm, behaviourTerm,
+  urgencyTerm, expectedBktMovement, masteryHeadroom, gainTerm, bestQuestionByRating, behaviourTerm,
   cognitiveTerm, varietyTerm, scoreCandidate, rankCandidates,
   type ScoreCandidateInput, type ScoreContext, type ScoreTermName,
 } from './score'
@@ -57,8 +57,14 @@ describe('score weights (SCORE-2)', () => {
     expect(total).toBeCloseTo(1, 10)
   })
 
-  it('weight retention above every other single signal', () => {
-    const others = (Object.keys(SCORE_WEIGHTS) as ScoreTermName[]).filter(n => n !== 'urgency')
+  // Retention and progress are the two things a selector is actually for:
+  // not forgetting what was learned, and not stalling. They are weighted
+  // equally and above everything else, which is the shape left after SCORE-4
+  // removed the difficulty-match term and redistributed its 0.20.
+  it('weight retention and progress equally, and above every other signal', () => {
+    expect(SCORE_WEIGHTS.urgency).toBe(SCORE_WEIGHTS.gain)
+    const others = (Object.keys(SCORE_WEIGHTS) as ScoreTermName[])
+      .filter(name => name !== 'urgency' && name !== 'gain')
     for (const name of others) {
       expect(SCORE_WEIGHTS.urgency, name).toBeGreaterThan(SCORE_WEIGHTS[name])
     }
@@ -130,34 +136,82 @@ describe('expected learning gain (SCORE-2)', () => {
     expect(gainTerm(skillState({ p_know: 0.99 })))
       .toBeLessThan(gainTerm(skillState({ p_know: 0.60 })))
   })
+
+  // The correction SCORE-4's measurement forced. Scoring by expected movement
+  // alone preferred half-known skills over unlearned ones, which parked
+  // simulated learners and taught them fewer skills than the rule cascade.
+  it('prefers an unlearned skill over a half-known one, not the reverse', () => {
+    expect(gainTerm(skillState({ p_know: 0.10 })))
+      .toBeGreaterThan(gainTerm(skillState({ p_know: 0.50 })))
+  })
+
+  it('is worth nothing once a skill is past the mastery threshold', () => {
+    expect(masteryHeadroom(MASTERY_THRESHOLD)).toBe(0)
+    expect(gainTerm(skillState({ p_know: MASTERY_THRESHOLD }))).toBe(0)
+    expect(gainTerm(skillState({ p_know: 0.95 }))).toBe(0)
+  })
+
+  // Not monotone, and deliberately asserted as it actually is rather than as it
+  // would be tidier: headroom falls fastest where movement rises fastest, so the
+  // curve dips around p_know 0.2 and recovers near 0.3 before collapsing into
+  // mastery. What matters is that its maximum is at the unlearned end and that
+  // it reaches zero at mastery — a strictly monotone version is not required and
+  // valuing a nearly-there skill a little above a barely-started one is sound.
+  it('has its maximum at the unlearned end of the scale', () => {
+    let peak = { p: 0, value: -1 }
+    for (let p = 0.01; p < 1; p += 0.01) {
+      const value = gainTerm(skillState({ p_know: p }))
+      if (value > peak.value) peak = { p, value }
+    }
+    expect(peak.p).toBeLessThan(0.1)
+  })
+
+  it('values every unmastered skill above every mastered one', () => {
+    const unmastered = [0.05, 0.2, 0.35, 0.5, 0.6].map(p => gainTerm(skillState({ p_know: p })))
+    const mastered = [0.65, 0.8, 0.99].map(p => gainTerm(skillState({ p_know: p })))
+    for (const below of unmastered) {
+      for (const above of mastered) expect(below).toBeGreaterThan(above)
+    }
+  })
+
+  it('keeps the measured mid-range property in the movement it is built from', () => {
+    expect(masteryHeadroom(0)).toBe(1)
+    expect(expectedBktMovement(skillState({ p_know: 0.5 })))
+      .toBeGreaterThan(expectedBktMovement(skillState({ p_know: 0.1 })))
+  })
 })
 
-describe('difficulty match (SCORE-2)', () => {
-  it('is perfect when the measured pairing lands exactly on the target', () => {
-    // The item rating at which a 1200-rated learner succeeds TARGET_SUCCESS of the time.
-    const atTarget = ELO_START + 400 * Math.log10(1 / TARGET_SUCCESS - 1)
-    expect(difficultyMatchTerm(skillState(), atTarget, ELO_START)).toBeCloseTo(1, 6)
+// Removed from the candidate score after SCORE-4 measured it: a target success
+// rate compares like with like only within one skill. These cover its coherent
+// form — choosing between the questions of a single skill.
+describe('matching a question to the target success rate (SCORE-2)', () => {
+  const atTarget = ELO_START + 400 * Math.log10(1 / TARGET_SUCCESS - 1)
+  const questions = [
+    { id: 'far_too_hard' }, { id: 'on_target' }, { id: 'far_too_easy' },
+  ]
+  const ratings = new Map([
+    ['far_too_hard', ELO_START + 600],
+    ['on_target', atTarget],
+    ['far_too_easy', ELO_START - 900],
+  ])
+
+  it('picks the question closest to the target', () => {
+    expect(bestQuestionByRating(questions, ELO_START, ratings)?.id).toBe('on_target')
   })
 
-  it('falls off in both directions from the target', () => {
-    const tooEasy = difficultyMatchTerm(skillState(), ELO_START - 800, ELO_START)
-    const tooHard = difficultyMatchTerm(skillState(), ELO_START + 800, ELO_START)
-    const atTarget = difficultyMatchTerm(skillState(), ELO_START + 400 * Math.log10(1 / TARGET_SUCCESS - 1), ELO_START)
-    expect(tooEasy).toBeLessThan(atTarget)
-    expect(tooHard).toBeLessThan(atTarget)
+  it('ignores questions nobody has answered yet rather than guessing their difficulty', () => {
+    const partial = new Map([['far_too_hard', ELO_START + 600]])
+    expect(bestQuestionByRating(questions, ELO_START, partial)?.id).toBe('far_too_hard')
   })
 
-  it('falls back to BKT’s own P(correct) for a question nobody has answered yet', () => {
-    const state = skillState({ p_know: 0.8 })
-    const pCorrect = state.p_know * (1 - state.p_slip) + (1 - state.p_know) * state.p_guess
-    const expected = 1 - Math.abs(pCorrect - TARGET_SUCCESS) / Math.max(TARGET_SUCCESS, 1 - TARGET_SUCCESS)
-    expect(difficultyMatchTerm(state, null, ELO_START)).toBeCloseTo(expected, 10)
+  it('returns null when none of them is calibrated, leaving the caller as it was', () => {
+    expect(bestQuestionByRating(questions, ELO_START, new Map())).toBeNull()
+    expect(bestQuestionByRating([], ELO_START, ratings)).toBeNull()
   })
 
-  it('prefers a question the learner will probably get over one they almost certainly will not', () => {
-    const winnable = difficultyMatchTerm(skillState(), ELO_START - 200, ELO_START)
-    const hopeless = difficultyMatchTerm(skillState(), ELO_START + 600, ELO_START)
-    expect(winnable).toBeGreaterThan(hopeless)
+  it('follows the target it is given, not only the default', () => {
+    // A much lower target should prefer the hardest question on the list.
+    expect(bestQuestionByRating(questions, ELO_START, ratings, 0.1)?.id).toBe('far_too_hard')
   })
 })
 

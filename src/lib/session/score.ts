@@ -22,26 +22,45 @@ import type {
 import { bktUpdate, LEARNING_THRESHOLD, MASTERY_THRESHOLD } from '@/lib/bkt'
 import { expectedScore } from '@/lib/elo'
 
-export type ScoreTermName = 'urgency' | 'gain' | 'difficulty_match' | 'behaviour' | 'cognitive' | 'variety'
+export type ScoreTermName = 'urgency' | 'gain' | 'behaviour' | 'cognitive' | 'variety'
 
 // Weights sum to 1, so a score reads as a fraction of the best any candidate
 // could be. Retention carries the most weight because a forgotten skill is the
 // one loss that practising something else cannot recover.
+//
+// **Corrected 2026-10-25, see TARGET_SUCCESS:** a sixth term, `difficulty_match`
+// at 0.20, was removed after SCORE-4 measured it, and its weight went to the two
+// terms that are coherent across candidates.
 export const SCORE_WEIGHTS: Record<ScoreTermName, number> = {
-  urgency: 0.30,
-  gain: 0.25,
-  difficulty_match: 0.20,
+  urgency: 0.35,
+  gain: 0.35,
   behaviour: 0.10,
-  cognitive: 0.10,
+  cognitive: 0.15,
   variety: 0.05,
 }
 
 /**
- * The success probability to aim a question at. Math Garden samples at .75
+ * The success probability to aim a *question* at. Math Garden samples at .75
  * (Klinkenberg, Straatemeier & van der Maas 2011); Wilson et al. 2019 derive
- * ~.85 for a class of gradient learners. Neither transfers exactly to tiered
- * MCQs on a 120-node graph, so this sits between them and is a constant to be
- * re-fitted once SCORE-4 can measure outcomes against it.
+ * ~.85 for a class of gradient learners.
+ *
+ * **It is deliberately not a term in the candidate score.** It was, at weight
+ * 0.20, and SCORE-4 showed why that was wrong: an unlearned skill predicts
+ * ~27% success and a nearly-mastered one ~80%, so scoring candidates by
+ * distance from the target systematically prefers skills the learner already
+ * knows. Simulated learners under that version ended with better retention and
+ * higher p_know while learning **half as many skills** (2.25 vs 4.50 per
+ * learner) — the engine polished a handful of skills instead of letting anyone
+ * advance, and the term drove 45 of 102 disagreements.
+ *
+ * The error was conceptual, not numeric. A target success rate is a
+ * within-skill idea: it answers "which question of this skill", given that the
+ * learner is practising it. Wilson et al. say as much about their own result —
+ * it is derived for binary classification and they caution it will not transfer
+ * directly to students. Applied across skills at different mastery levels the
+ * question it answers is incoherent, and no weight makes it coherent.
+ *
+ * `bestQuestionByRating()` below is where it belongs, and where EXAM-1 uses it.
  */
 export const TARGET_SUCCESS = 0.80
 
@@ -148,27 +167,64 @@ export function expectedBktMovement(state: LearnerSkillState): number {
   return pCorrect * ifCorrect + (1 - pCorrect) * ifWrong
 }
 
-export function gainTerm(state: LearnerSkillState): number {
-  return clamp01(expectedBktMovement(state) / MAX_EXPECTED_MOVEMENT)
+/** How much of the distance to mastery is still unclaimed. 1 unlearned, 0 at mastery. */
+export function masteryHeadroom(pKnow: number): number {
+  return clamp01((MASTERY_THRESHOLD - pKnow) / MASTERY_THRESHOLD)
 }
 
 /**
- * How close the question's predicted success probability sits to the target.
+ * Expected progress toward mastery: how far one answer can be expected to move
+ * the belief, times how much of the journey is left.
  *
- * Uses the measured Elo pairing when the question has been answered before, and
- * falls back to BKT's own P(correct) when it has not — the same expression
- * /api/attempt already logs as `bkt_p_correct`.
+ * **Corrected 2026-10-25 after SCORE-4 measured it.** The first version was
+ * `expectedBktMovement / MAX_EXPECTED_MOVEMENT` alone, on the reasoning that
+ * BKT is most informative mid-range. Measured over simulated learners that
+ * policy learned *fewer* skills than the rule cascade (3.75 vs 4.75 per
+ * learner) and ended with lower retention, and the disagreement breakdown
+ * showed this term driving 68 of 96 disagreements. The error: expected movement
+ * measures information gained *about* the learner, which is not the same
+ * objective as the learner's progress, and maximising it parks a learner on
+ * half-known skills instead of letting them advance. Corbett & Anderson's model
+ * is a measurement model; treating its movement as pedagogic value was the
+ * mistake.
+ *
+ * Multiplying by headroom restores the repo's own stated priority — new
+ * concepts before reinforcement (Research/lab/02-engines.md:167-176) — while
+ * keeping the measured property that a mid-range answer moves the belief more
+ * than an extreme one.
  */
-export function difficultyMatchTerm(
-  state: LearnerSkillState,
-  questionRating: number | null,
+export function gainTerm(state: LearnerSkillState): number {
+  const movement = clamp01(expectedBktMovement(state) / MAX_EXPECTED_MOVEMENT)
+  return clamp01(movement * masteryHeadroom(state.p_know))
+}
+
+/**
+ * Which of a skill's questions sits closest to the target success rate, by the
+ * Elo pairing SCORE-1 measures.
+ *
+ * This is the coherent home for TARGET_SUCCESS: every question here belongs to
+ * the same skill, so comparing their predicted success rates compares
+ * like with like. Returns null when none of the candidates has ever been
+ * answered, leaving the caller on whatever it already did.
+ *
+ * Not wired into live question selection — `pickQuestion()` in engine.ts still
+ * picks at random within a tier, and changing that is LIVE-1's business, not a
+ * shadow sprint's. EXAM-1 is the first planned caller.
+ */
+export function bestQuestionByRating<T extends { id: string }>(
+  questions: T[],
   learnerRating: number,
-): number {
-  const pCorrect = questionRating === null
-    ? state.p_know * (1 - state.p_slip) + (1 - state.p_know) * state.p_guess
-    : expectedScore(learnerRating, questionRating)
-  const worstDeviation = Math.max(TARGET_SUCCESS, 1 - TARGET_SUCCESS)
-  return clamp01(1 - Math.abs(pCorrect - TARGET_SUCCESS) / worstDeviation)
+  questionRatings: Map<string, number>,
+  target = TARGET_SUCCESS,
+): T | null {
+  let best: { question: T; deviation: number } | null = null
+  for (const question of questions) {
+    const rating = questionRatings.get(question.id)
+    if (rating === undefined) continue
+    const deviation = Math.abs(expectedScore(learnerRating, rating) - target)
+    if (!best || deviation < best.deviation) best = { question, deviation }
+  }
+  return best?.question ?? null
 }
 
 /**
@@ -217,8 +273,7 @@ function buildReason(terms: ScoreTerm[], input: ScoreCandidateInput, guards: str
     const pct = Math.round(term.raw * 100)
     switch (term.name) {
       case 'urgency': return `it is drifting past its review date (${pct}% of the way to a full interval overdue)`
-      case 'gain': return `one answer moves what we believe about it more than almost anything else right now (${pct}%)`
-      case 'difficulty_match': return `the question sits close to the ${Math.round(TARGET_SUCCESS * 100)}% success rate we aim for (${pct}%)`
+      case 'gain': return `there is more ground still to cover here than almost anywhere else (${pct}%)`
       case 'behaviour': return `it fits how the session is going (${pct}%)`
       case 'cognitive': return `the ${input.difficulty_tier} tier matches how well this is already known (${pct}%)`
       case 'variety': return `it has not come up recently (${pct}%)`
@@ -239,7 +294,6 @@ export function scoreCandidate(input: ScoreCandidateInput, context: ScoreContext
   const raw: Record<ScoreTermName, number> = {
     urgency: urgencyTerm(input.schedule, context.now),
     gain: gainTerm(state),
-    difficulty_match: difficultyMatchTerm(state, input.question_rating, context.learner_rating),
     behaviour: behaviourTerm(state, context.motivation_state),
     cognitive: cognitiveTerm(state, input.difficulty_tier),
     variety: varietyTerm(input.skill_id, context.recent_skill_ids),
