@@ -45,11 +45,39 @@ export interface Question {
 // tracking, distinct from per-skill BKT tracking). Always MCQ, always tied
 // to one skill_id so it flows through the existing insertAttempt()/BKT path
 // unchanged. See MASTER_PLAN.md's BLOOM-2..6.
+export type QuestionDifficulty = 'easy' | 'medium' | 'hard'
+
+export interface PhaseEvaluationOption {
+  id: string; text: string
+  /**
+   * Why a learner who knows something would still pick this one. Present on
+   * every distractor and absent on the correct option, so the debrief can name
+   * what went wrong instead of only saying "incorrect" (Narciss's Knowledge
+   * about Mistakes, as opposed to Knowledge of Result).
+   */
+  misconception?: string
+}
+
 export interface PhaseEvaluationQuestion {
   id: string; phase: Phase; skill_id: string; bloom_level: BloomLevel
   format: 'mcq'; stem: string
-  options: { id: string; text: string }[]; correct_option_id: string
+  options: PhaseEvaluationOption[]; correct_option_id: string
   explanation_after: string
+  /** Cold-start band for the Elo rating and for the exam's item choice. */
+  difficulty: QuestionDifficulty
+  /**
+   * Exactly two, in order: a nudge, then how to proceed. Never the answer —
+   * a bottom-out hint turns into a worked example a learner can click straight
+   * through to (Baker et al. 2004; Shih, Koedinger & Scheines 2008), which is
+   * why the validator rejects a hint containing the correct option's text.
+   * Shown in Practice mode only.
+   */
+  hints: [string, string]
+  /**
+   * What a prepared learner should need, in seconds. Drives the pace
+   * indicator and the debrief, never a per-item cut-off.
+   */
+  time_target_sec: number
 }
 
 export interface BuildTask {

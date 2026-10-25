@@ -112,6 +112,21 @@ if (fs.existsSync(diagFile)) {
 console.log('\nPhase Evaluations')
 const BLOOM_LEVELS = ['remember', 'understand', 'apply', 'analyze', 'evaluate', 'create']
 const MIN_PER_BLOOM_LEVEL = 2
+// The Bloom exam target: 6 per level per phase, 36 per phase, 324 in all.
+// Held as a warning while the nine phase files are migrated one commit at a
+// time, and raised to an error by the last of them (BLOOM-10) so the gate
+// means something again. Until then a phase short of the target is reported,
+// not tolerated silently.
+const TARGET_PER_BLOOM_LEVEL = 6
+const DIFFICULTY_BANDS = ['easy', 'medium', 'hard']
+const MIN_TIME_TARGET_SEC = 20
+const MAX_TIME_TARGET_SEC = 300
+
+// Hints must not hand over the answer. Compared on letters and digits only, so
+// punctuation, case and spacing cannot smuggle the correct option through.
+function normaliseForLeakCheck(text) {
+  return String(text).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
+}
 const skillsByPhase = new Map()
 for (const node of nodes) {
   if (!skillsByPhase.has(node.phase)) { skillsByPhase.set(node.phase, new Set()) }
@@ -133,6 +148,8 @@ const phaseFileNames = {
   phase_8_mastery:         'p8_evaluation.json',
 }
 let peChecked = 0
+let peTotal = 0
+let examReady = 0
 for (const phase of authoredPhases) {
   const peFile = path.join(CONTENT, 'questions/phase-evaluation', phaseFileNames[phase])
   if (!fs.existsSync(peFile)) { warn(`Missing phase evaluation: ${phaseFileNames[phase]}`); continue }
@@ -151,14 +168,50 @@ for (const phase of authoredPhases) {
     if (q.format !== 'mcq') { err(`${phaseFileNames[phase]}: question "${q.id}" must be format "mcq"`) }
     if (!Array.isArray(q.options) || q.options.length < 2) { err(`${phaseFileNames[phase]}: question "${q.id}" needs at least 2 options`) }
     else if (!q.options.some(o => o.id === q.correct_option_id)) { err(`${phaseFileNames[phase]}: question "${q.id}" correct_option_id doesn't match any option`) }
+
+    // Exam-layer fields (BLOOM-1). Checked on any question that declares
+    // `difficulty`, so a phase migrated to the exam schema is fully checked
+    // while the phases still waiting their turn are only counted below.
+    if (q.difficulty !== undefined) {
+      if (!DIFFICULTY_BANDS.includes(q.difficulty)) { err(`${phaseFileNames[phase]}: question "${q.id}" has invalid difficulty "${q.difficulty}"`) }
+      if (!Number.isInteger(q.time_target_sec) || q.time_target_sec < MIN_TIME_TARGET_SEC || q.time_target_sec > MAX_TIME_TARGET_SEC) {
+        err(`${phaseFileNames[phase]}: question "${q.id}" needs an integer time_target_sec between ${MIN_TIME_TARGET_SEC} and ${MAX_TIME_TARGET_SEC}`)
+      }
+      if (!Array.isArray(q.hints) || q.hints.length !== 2 || q.hints.some(hint => typeof hint !== 'string' || hint.trim() === '')) {
+        err(`${phaseFileNames[phase]}: question "${q.id}" needs exactly 2 non-empty hints (a nudge, then how to proceed)`)
+      } else if (Array.isArray(q.options)) {
+        const correct = q.options.find(o => o.id === q.correct_option_id)
+        const answer = correct ? normaliseForLeakCheck(correct.text) : ''
+        // Short answers like "True" would false-positive on ordinary wording,
+        // so only answers long enough to be a giveaway are leak-checked.
+        if (answer.length >= 12) {
+          for (const [i, hint] of q.hints.entries()) {
+            if (normaliseForLeakCheck(hint).includes(answer)) {
+              err(`${phaseFileNames[phase]}: question "${q.id}" hint ${i + 1} contains the correct option's text — no bottom-out hints`)
+            }
+          }
+        }
+      }
+      if (Array.isArray(q.options)) {
+        for (const o of q.options) {
+          const isCorrect = o.id === q.correct_option_id
+          const hasMisconception = typeof o.misconception === 'string' && o.misconception.trim() !== ''
+          if (!isCorrect && !hasMisconception) { err(`${phaseFileNames[phase]}: question "${q.id}" distractor "${o.id}" needs a misconception tag`) }
+          if (isCorrect && o.misconception !== undefined) { err(`${phaseFileNames[phase]}: question "${q.id}" correct option "${o.id}" must not carry a misconception`) }
+        }
+      }
+      examReady++
+    }
   }
   for (const level of BLOOM_LEVELS) {
     const count = countByLevel.get(level)
     if (count < MIN_PER_BLOOM_LEVEL) { err(`${phaseFileNames[phase]}: only ${count} "${level}" question(s), needs at least ${MIN_PER_BLOOM_LEVEL}`) }
+    else if (count < TARGET_PER_BLOOM_LEVEL) { warn(`${phaseFileNames[phase]}: ${count} "${level}" question(s), exam target is ${TARGET_PER_BLOOM_LEVEL}`) }
   }
+  peTotal += qs.length
   peChecked++
 }
-ok(`${peChecked} phase evaluation set(s) validated`)
+ok(`${peChecked} phase evaluation set(s) validated — ${peTotal} questions, ${examReady} on the exam schema`)
 console.log('\n' + '─'.repeat(50) + '\n')
 if (errors === 0 && warnings === 0) {
   console.log('✅ All checks passed — 0 errors, 0 warnings\n')
