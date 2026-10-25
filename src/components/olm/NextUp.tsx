@@ -22,7 +22,7 @@ const TERM_LABEL: Record<ScoreTermName, string> = {
 export function NextUp({ suggestion, label }: { suggestion: Suggestion; label: (id: string) => string }) {
   const { rule, score, agreed, tied, runnersUp } = suggestion
   return (
-    <div className="p-6 rounded-2xl border border-[var(--border)] bg-c-bg2 h-full" data-testid="next-up">
+    <div className="p-6 rounded-2xl border border-[var(--border)] bg-c-bg2 self-start" data-testid="next-up">
       <p className="font-mono text-[11px] text-c-purple uppercase tracking-[0.16em] mb-2">Your next session</p>
       {rule ? (
         <p className="text-[15px] text-c-text leading-[1.6] mb-4" data-testid="reason-line">

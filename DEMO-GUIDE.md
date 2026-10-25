@@ -20,7 +20,8 @@ grader had one earlier evaluation on 106 hand-labelled explanations, recorded in
 | 963 questions, 120 explain | `npm run validate` | "by format" line |
 | The behaviour timing logic | `npx vitest run src/lib/timing src/app/api/attempt` | Tests named for slow answers, hesitation, revisions |
 | What `/engine` will contain | `npm run seed:demo -- --dry-run` | Row counts per table, nothing written |
-| Everything passes | `npx vitest run` | 25 files, 182 tests |
+| Everything passes | `npx vitest run` | 32 files, 351 tests |
+| The exam's rules (adaptive length, hint credit, debrief) | `npx vitest run src/lib/exam src/app/api/exam` | 44 tests |
 
 ## Needs your machine (do not promise these live without setup)
 
@@ -31,11 +32,15 @@ grader had one earlier evaluation on 106 hand-labelled explanations, recorded in
 | Placement test, `order` questions, Feynman loop in a browser | Supabase (login) |
 | Real timing, hesitation and retries in the rows | The same, plus a person answering |
 | DKT on real learners | `DKT_SHADOW=1` running until 5,000 attempts exist |
+| The Exam Room (`/learn/exam/<phase>`, or **Exam** on the dashboard) | Supabase + migration 011. Checkpoint is timed with no hints; Practice gives two hints. Stops at 12–24 questions, then debriefs by Bloom level |
+| `/profile` and the dashboard's reasoning line, forecast and "How you work" | Supabase and a learner with some answers; `npx playwright test tests/e2e/learner-model.spec.ts` builds one from real answers |
 
 ## Built but deliberately off
 
 `SCHEDULER=fsrs`, `ADAPTIVE_QUALITY=1`, `BKT_PER_SKILL=1` (inert until parameters
-come from real learners) and any DKT cutover. Show them as *logged next to the live
+come from real learners), any DKT cutover, and the multi-metric selector — the
+dashboard's **Suggested next** is labelled *advisory* because sessions still follow
+the rule order until LIVE-1. Show them as *logged next to the live
 value*, never as switched on.
 
 ## How behaviour is tracked

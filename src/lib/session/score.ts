@@ -247,10 +247,11 @@ export function behaviourTerm(state: LearnerSkillState, motivation: MotivationSt
  * the material to recall it, and one who can to do something with it.
  *
  * `difficulty_tier` is a proxy and is labelled as one. Real Bloom levels exist
- * only on the 153 phase-evaluation questions, by deliberate design (Bloom is
+ * only on the 324 phase-evaluation questions, by deliberate design (Bloom is
  * the macro layer here, not a per-question label), so the honest version of this
- * term needs the per-level ability the exam produces — EXAM-4's job, not this
- * one's.
+ * term needs the per-level ability the exam produces. EXAM-4 now produces it, in
+ * exam_runs.debrief; wiring it in here changes what the score prefers, so it
+ * waits for LIVE-1 rather than shifting a shadow comparison mid-measurement.
  */
 export function cognitiveTerm(state: LearnerSkillState, tier: DifficultyTier): number {
   const rank = TIER_COGNITIVE_RANK[tier]
