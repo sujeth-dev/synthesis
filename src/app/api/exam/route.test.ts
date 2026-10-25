@@ -165,6 +165,17 @@ describe('an adaptive run (EXAM-2)', () => {
     expect(tables.exam_item_events[0]).toMatchObject({ selected_option_id: first.correct_option_id, correct: true })
   })
 
+  it('cannot be restarted by revising an answer after the rule has stopped it', async () => {
+    const start = await post({ action: 'start', phase: PHASE, mode: 'checkpoint' })
+    await runToEnd(start.body.run.id, start.body.item.question_id, () => true)
+    const served = tables.exam_item_events.length
+    const last = byId.get(tables.exam_item_events[served - 1].question_id as string)!
+    const wrong = last.options.find(o => o.id !== last.correct_option_id)!.id
+    const res = await post({ action: 'answer', run_id: start.body.run.id, question_id: last.id, selected_option_id: wrong })
+    expect(res.body.done).toBe(true)
+    expect(tables.exam_item_events).toHaveLength(served)
+  })
+
   it('rejects an option the item does not have', async () => {
     const start = await post({ action: 'start', phase: PHASE, mode: 'practice' })
     const res = await post({ action: 'answer', run_id: start.body.run.id, question_id: start.body.item.question_id, selected_option_id: 'z' })

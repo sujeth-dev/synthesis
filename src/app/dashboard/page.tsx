@@ -540,6 +540,14 @@ export default async function Dashboard({
                         Evaluate
                       </Link>
                     )}
+                    {PHASE_EVALUATION_FILES[phaseKey] && stats.mastered > 0 && (
+                      <Link
+                        href={`/learn/exam/${phaseKey}`}
+                        className="px-3 py-1.5 rounded-lg text-[12px] font-mono bg-c-bg3 text-c-muted hover:text-c-text hover:bg-c-bg2 transition-all border border-[var(--border)]"
+                      >
+                        Exam
+                      </Link>
+                    )}
                   </div>
                 </div>
 

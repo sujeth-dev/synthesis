@@ -180,17 +180,14 @@ export async function POST(req: NextRequest) {
 
     // One attempt_events row per answered item, written once at the end so a
     // revised answer is recorded as its final value rather than twice.
-    for (const e of items) {
-      if (e.selected_option_id === null) continue
-      await insertAttempt({
-        learner_id: user.id, skill_id: e.skill_id, question_id: e.question_id, session_id: null,
-        correct: e.correct === true, latency_ms: e.latency_ms ?? 0, revision_count: 0, error_type: null,
-        difficulty_tier: 'same', question_format: 'mcq',
-        p_know_before: null, p_know_after: null,
-        motivation_state: null, consecutive_errors: null,
-        slow_response_streak: null, behavior_modifier: null, hesitation_ms: null,
-      })
-    }
+    await Promise.all(items.filter(e => e.selected_option_id !== null).map(e => insertAttempt({
+      learner_id: user.id, skill_id: e.skill_id, question_id: e.question_id, session_id: null,
+      correct: e.correct === true, latency_ms: e.latency_ms ?? 0, revision_count: 0, error_type: null,
+      difficulty_tier: 'same', question_format: 'mcq',
+      p_know_before: null, p_know_after: null,
+      motivation_state: null, consecutive_errors: null,
+      slow_response_streak: null, behavior_modifier: null, hesitation_ms: null,
+    })))
 
     await updateExamRun(run.id, {
       status: 'finished', finished_at: new Date(now).toISOString(), stop_reason: stop,
@@ -245,8 +242,10 @@ export async function POST(req: NextRequest) {
     await updateExamItem(event.id, patch)
     const updated = items.map(i => i.id === event.id ? { ...i, ...patch } : i)
 
-    // Revisiting an earlier item changes the estimate but serves nothing new.
+    // Revisiting an earlier item changes the estimate but serves nothing new, and
+    // once the rule has stopped the run a revised answer cannot restart it.
     const isLatest = event.position === items.length - 1
+    if (run.stop_reason) return NextResponse.json({ done: true, stop_reason: run.stop_reason })
     if (!isLatest) return NextResponse.json({ ok: true })
 
     const ability = examAbility(responsesOf(updated))
