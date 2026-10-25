@@ -33,6 +33,7 @@ grader had one earlier evaluation on 106 hand-labelled explanations, recorded in
 | Real timing, hesitation and retries in the rows | The same, plus a person answering |
 | DKT on real learners | `DKT_SHADOW=1` running until 5,000 attempts exist |
 | The Exam Room (`/learn/exam/<phase>`, or **Exam** on the dashboard) | Supabase + migration 011. Checkpoint is timed with no hints; Practice gives two hints. Stops at 12–24 questions, then debriefs by Bloom level |
+| Four demo learners for the full experience | `npm run seed:learners`, then sign in. `alex@demo.com` is a fast learner in Phase 2 whose next step is chosen by the score. `sam@demo.com` is struggling and frustrated, gets an "easier win", and has rapid-hint flags in the Practice debrief. `jordan@demo.com` forgets fast and has reviews coming due. `demo@synaptic.local` is an average learner. The first three use `demo1234`; Demo uses `demo-synthetic`. **All their data is synthetic**: the app's real engine run against a simulated learner, with a history that ends yesterday |
 | `/profile` and the dashboard's reasoning line, forecast and "How you work" | Supabase and a learner with some answers; `npx playwright test tests/e2e/learner-model.spec.ts` builds one from real answers |
 
 ## Built but deliberately off

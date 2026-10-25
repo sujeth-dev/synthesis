@@ -23,6 +23,7 @@
     "dkt:compare": "tsx scripts/dkt-compare.ts",
     "bkt:compare": "tsx scripts/bkt-params-compare.ts",
     "seed:demo": "tsx scripts/seed-demo.ts",
+    "seed:learners": "tsx scripts/seed-demo-learners.ts",
     "selector:compare": "tsx scripts/selector-compare.ts"
   },
   "dependencies": {
