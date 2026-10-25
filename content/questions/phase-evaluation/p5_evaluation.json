@@ -1,506 +1,799 @@
 [
   {
     "id": "p5_eval_remember_1",
+    "phase": "phase_5_deep_learning",
     "skill_id": "p5_neural_network_basics",
+    "bloom_level": "remember",
     "format": "mcq",
-    "stem": "Neural Networks: which statement is correct?",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "What does a single neuron in a neural network compute?",
     "options": [
-      {
-        "id": "a",
-        "text": "A neural network passes numbers through connected layers."
-      },
-      {
-        "id": "b",
-        "text": "Every layer stores only words and never numbers."
-      },
-      {
-        "id": "c",
-        "text": "Training keeps all weights fixed forever."
-      },
-      {
-        "id": "d",
-        "text": "Adding layers guarantees a correct answer without data."
-      }
+      { "id": "a", "text": "A weighted sum of its inputs plus a bias, passed through an activation function" },
+      { "id": "b", "text": "The average of its inputs", "misconception": "Misses that each input has its own learned weight; averaging would fix them all equal." },
+      { "id": "c", "text": "The largest of its inputs", "misconception": "Describes a max-pooling operation, not a neuron." },
+      { "id": "d", "text": "A probability for each possible output class", "misconception": "Describes the final softmax layer's job rather than what one unit does." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "A neural network passes numbers through connected layers.",
-    "phase": "phase_5_deep_learning",
-    "bloom_level": "remember"
+    "hints": [
+      "Two things are learned per neuron, and one more step is applied after them.",
+      "It is the same shape as a linear model, with one extra operation at the end."
+    ],
+    "explanation_after": "A neuron is a linear model — weights, inputs, bias — followed by an activation. Stacking them only produces something more than a linear model because of that activation."
   },
   {
     "id": "p5_eval_remember_2",
-    "skill_id": "p5_activation_functions",
-    "format": "mcq",
-    "stem": "Activation Functions: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Activation functions let networks learn non-linear rules."
-      },
-      {
-        "id": "b",
-        "text": "Activations permanently remove the need for weights."
-      },
-      {
-        "id": "c",
-        "text": "Every activation produces text labels directly."
-      },
-      {
-        "id": "d",
-        "text": "The same output gate is correct for every possible task."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Activation functions let networks learn non-linear rules.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "remember"
+    "skill_id": "p5_activation_functions",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "What does the ReLU activation do to its input?",
+    "options": [
+      { "id": "a", "text": "Squashes it into the range 0 to 1", "misconception": "Describes the sigmoid; ReLU has no upper bound." },
+      { "id": "b", "text": "Normalises it to have mean 0 and variance 1", "misconception": "Describes batch normalisation, a different layer entirely." },
+      { "id": "c", "text": "Passes positive values through unchanged and turns negative values into 0" },
+      { "id": "d", "text": "Scales it so all the outputs in a layer sum to 1", "misconception": "Describes softmax, which is applied across a layer rather than elementwise." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The name is short for 'rectified linear unit'. Ask what rectifying means.",
+      "Sketch it: one half is a straight line through the origin, the other half is flat."
+    ],
+    "explanation_after": "ReLU is max(0, x): linear above zero, flat below. Its simplicity and non-saturating positive half are why it largely replaced sigmoid and tanh in hidden layers."
   },
   {
     "id": "p5_eval_remember_3",
-    "skill_id": "p5_forward_propagation",
-    "format": "mcq",
-    "stem": "Forward Propagation: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Forward propagation carries inputs through layers to a prediction."
-      },
-      {
-        "id": "b",
-        "text": "A forward pass updates every weight before producing output."
-      },
-      {
-        "id": "c",
-        "text": "Batches must contain exactly one example."
-      },
-      {
-        "id": "d",
-        "text": "Evaluation mode randomly removes more units than training mode."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Forward propagation carries inputs through layers to a prediction.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "remember"
-  },
-  {
-    "id": "p5_eval_understand_1",
-    "skill_id": "p5_loss_functions",
+    "skill_id": "p5_forward_propagation",
+    "bloom_level": "remember",
     "format": "mcq",
-    "stem": "Loss Functions: which statement is correct?",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "What happens during a forward pass?",
     "options": [
-      {
-        "id": "a",
-        "text": "Loss is only a chart and never affects training."
-      },
-      {
-        "id": "b",
-        "text": "Mean squared error fits numeric targets."
-      },
-      {
-        "id": "c",
-        "text": "The largest possible loss always means the best model."
-      },
-      {
-        "id": "d",
-        "text": "One loss has the correct meaning for every output type."
-      }
+      { "id": "a", "text": "Weights are updated layer by layer", "misconception": "Updating happens after the backward pass; nothing changes going forward." },
+      { "id": "b", "text": "Inputs are carried through the layers in order to produce a prediction" },
+      { "id": "c", "text": "Gradients are computed for every parameter", "misconception": "Describes the backward pass." },
+      { "id": "d", "text": "The loss function is chosen for the task", "misconception": "A design decision made before training, not a step within it." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Mean squared error fits numeric targets.",
+    "hints": [
+      "The name gives the direction. Ask what travels that way.",
+      "This is also the only step that happens at inference time."
+    ],
+    "explanation_after": "The forward pass moves data from input to output and produces a prediction. Inference is a forward pass alone; training adds a backward pass and an update."
+  },
+  {
+    "id": "p5_eval_loss_remember",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "understand"
+    "skill_id": "p5_loss_functions",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "Which loss function suits multi-class classification?",
+    "options": [
+      { "id": "a", "text": "Mean squared error", "misconception": "Suits regression; on class probabilities it gives weak gradients when the model is confidently wrong." },
+      { "id": "b", "text": "Mean absolute error", "misconception": "Also a regression loss, measuring distance rather than probabilistic disagreement." },
+      { "id": "c", "text": "Cross-entropy loss" },
+      { "id": "d", "text": "Cosine similarity", "misconception": "Measures alignment between vectors; it is a similarity measure, not a classification objective." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask which loss is built to compare two probability distributions.",
+      "Two of these are standard regression losses — rule them out first."
+    ],
+    "explanation_after": "Cross-entropy measures disagreement between predicted and true distributions, and penalises confident wrong answers heavily. Squared error on class probabilities produces much weaker gradients exactly where learning is most needed."
+  },
+  {
+    "id": "p5_eval_epoch_remember",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "What is one epoch?",
+    "options": [
+      { "id": "a", "text": "One weight update", "misconception": "Describes a single step, of which an epoch contains many." },
+      { "id": "b", "text": "One complete pass through the entire training set" },
+      { "id": "c", "text": "One forward pass for a single example", "misconception": "Describes one sample's journey, far smaller than an epoch." },
+      { "id": "d", "text": "The time until the loss stops improving", "misconception": "Describes convergence or early stopping, not a fixed unit of work." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Three units stack: example, batch, epoch. Ask which is largest.",
+      "With 1,000 examples and a batch size of 100, how many updates happen per epoch?"
+    ],
+    "explanation_after": "An epoch is one full sweep through the training data. With 1,000 examples and batches of 100, it contains 10 updates — which is why epoch count alone does not tell you how much learning happened."
+  },
+  {
+    "id": "p5_eval_pytorch_remember",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_pytorch_intro",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "In a PyTorch training loop, what does `optimizer.zero_grad()` do?",
+    "options": [
+      { "id": "a", "text": "Resets the model's weights to zero", "misconception": "Would destroy all learning; it clears gradients, not parameters." },
+      { "id": "b", "text": "Sets the learning rate to zero", "misconception": "Confuses the gradient buffer with the step size." },
+      { "id": "c", "text": "Disables gradient computation for inference", "misconception": "Describes `torch.no_grad()`, a different mechanism." },
+      { "id": "d", "text": "Clears the gradients left over from the previous step, which otherwise accumulate" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "PyTorch adds new gradients to what is already stored. Ask what that means if you never clear them.",
+      "The usual loop is: clear, forward, loss, backward, step. Ask why the first comes first."
+    ],
+    "explanation_after": "`.backward()` accumulates into `.grad` rather than overwriting, so without clearing you step on the sum of every batch so far. Accumulation is deliberate — it lets you simulate large batches — which is why clearing is explicit."
+  },
+
+  {
+    "id": "p5_eval_understand_1",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_loss_functions",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "What role does the loss function play in training?",
+    "options": [
+      { "id": "a", "text": "It turns the model's error into a single number whose gradient tells every parameter which way to move" },
+      { "id": "b", "text": "It is a chart for humans and does not affect training", "misconception": "The loss is what is optimised; nothing else determines the direction of learning." },
+      { "id": "c", "text": "It decides how many layers the network needs", "misconception": "Architecture is chosen separately; the loss says what counts as good, not how big the model is." },
+      { "id": "d", "text": "It removes bad examples from the training set", "misconception": "The loss scores examples; it never filters them." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Gradient descent needs one quantity to differentiate. Ask which one.",
+      "Ask what would happen if you changed the loss and nothing else."
+    ],
+    "explanation_after": "The loss defines what 'better' means, and its gradient supplies the direction for every parameter. Change the loss and you change what the model learns, even with the same data and architecture."
   },
   {
     "id": "p5_eval_understand_2",
+    "phase": "phase_5_deep_learning",
     "skill_id": "p5_gradient_descent_and_optimizers",
+    "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Gradient Descent & Optimizers: which statement is correct?",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "What does momentum add to plain gradient descent?",
     "options": [
-      {
-        "id": "a",
-        "text": "An optimizer creates training labels from nothing."
-      },
-      {
-        "id": "b",
-        "text": "Training repeats prediction, loss, gradient, and update steps."
-      },
-      {
-        "id": "c",
-        "text": "Weights should move in the direction that raises loss."
-      },
-      {
-        "id": "d",
-        "text": "Momentum deletes all information from earlier steps."
-      }
+      { "id": "a", "text": "It increases the learning rate automatically each epoch", "misconception": "Describes a schedule; momentum changes the direction, not the base step size." },
+      { "id": "b", "text": "It carries a running average of past gradients, smoothing oscillation and pushing through flat regions" },
+      { "id": "c", "text": "It guarantees finding the global minimum", "misconception": "No first-order method guarantees that on a non-convex surface." },
+      { "id": "d", "text": "It computes gradients more accurately", "misconception": "The gradients are unchanged; what differs is how they are combined over steps." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Training repeats prediction, loss, gradient, and update steps.",
-    "phase": "phase_5_deep_learning",
-    "bloom_level": "understand"
+    "hints": [
+      "The name is physical. Ask what a rolling ball does that a stepping walker does not.",
+      "Think about a narrow valley where the gradient points across rather than along."
+    ],
+    "explanation_after": "Momentum accumulates past gradients, so consistent directions build speed and oscillating ones cancel. That is why it crosses ravines and flat stretches that stall plain descent — and why Adam combines it with per-parameter scaling."
   },
   {
     "id": "p5_eval_understand_3",
-    "skill_id": "p5_training_loops_epochs_batches",
-    "format": "mcq",
-    "stem": "Training Loops, Epochs & Batches: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "An epoch is one single number inside a feature."
-      },
-      {
-        "id": "b",
-        "text": "An epoch is one full pass through the training set."
-      },
-      {
-        "id": "c",
-        "text": "Validation should secretly train the model."
-      },
-      {
-        "id": "d",
-        "text": "Larger batches always fit in memory and always improve accuracy."
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "An epoch is one full pass through the training set.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "understand"
-  },
-  {
-    "id": "p5_eval_apply_1",
-    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Learning Rate & Hyperparameters: which statement is correct?",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "Why train on mini-batches rather than the whole dataset at once or one example at a time?",
     "options": [
-      {
-        "id": "a",
-        "text": "The learning rate is the model’s final accuracy."
-      },
-      {
-        "id": "b",
-        "text": "Hyperparameters are always discovered perfectly without experiments."
-      },
-      {
-        "id": "c",
-        "text": "Schedules can use warmup and later decay."
-      },
-      {
-        "id": "d",
-        "text": "Warmup begins with the largest possible update."
-      }
+      { "id": "a", "text": "Because batches remove the need for a validation set", "misconception": "Unrelated; batching is about gradient estimation and hardware, not evaluation." },
+      { "id": "b", "text": "Because a batch guarantees a lower loss than a single example", "misconception": "No such guarantee; a batch gives a less noisy estimate, not a better outcome per step." },
+      { "id": "c", "text": "Because batches fit in memory, use hardware parallelism, and give a gradient estimate that is stable but still usefully noisy" },
+      { "id": "d", "text": "Because each batch trains a separate copy of the model", "misconception": "One model is updated repeatedly; nothing is copied per batch." }
     ],
     "correct_option_id": "c",
-    "explanation_after": "Schedules can use warmup and later decay.",
+    "hints": [
+      "Three pressures push toward the middle: memory, hardware and the quality of the gradient estimate.",
+      "Ask what is wrong with each extreme — the whole dataset, and a single example."
+    ],
+    "explanation_after": "The full dataset rarely fits and gives one slow step per pass; a single example gives a very noisy gradient and poor hardware use. Mini-batches sit between, and their residual noise even helps escape sharp minima."
+  },
+  {
+    "id": "p5_eval_bn_understand",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "apply"
+    "skill_id": "p5_batch_normalization",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "Why does batch normalisation behave differently in training and evaluation mode?",
+    "options": [
+      { "id": "a", "text": "Training normalises using the current batch's statistics, while evaluation uses running averages so a prediction does not depend on its batch-mates" },
+      { "id": "b", "text": "It is disabled entirely during evaluation", "misconception": "It still normalises; what changes is which statistics it uses." },
+      { "id": "c", "text": "Evaluation uses a larger batch to be more accurate", "misconception": "Invents a batch-size rule; the difference is in the source of the statistics." },
+      { "id": "d", "text": "The learned scale and shift are discarded at evaluation", "misconception": "Those parameters are learned and always applied; only the mean and variance source changes." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what would happen at inference if a single example were normalised using its own batch of one.",
+      "A prediction should not change depending on what happened to be sent alongside it."
+    ],
+    "explanation_after": "Using batch statistics at inference would make one input's prediction depend on the others beside it. Running averages fix that — and forgetting `model.eval()` is a classic bug that makes evaluation results jump around."
+  },
+  {
+    "id": "p5_eval_vanish_understand",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "Why do gradients vanish in deep networks using sigmoid activations?",
+    "options": [
+      { "id": "a", "text": "Because sigmoid outputs are always positive", "misconception": "True, and it causes a different problem, but it is not why the gradient shrinks through depth." },
+      { "id": "b", "text": "Because deep networks have too many parameters to update at once", "misconception": "Parameter count does not shrink a gradient; the chain of multiplications does." },
+      { "id": "c", "text": "Because backpropagation multiplies many derivatives together, and the sigmoid's is at most 0.25, so the product shrinks toward zero with depth" },
+      { "id": "d", "text": "Because the loss becomes too small to measure", "misconception": "The loss can be large while gradients at early layers are tiny — that is exactly the symptom." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The chain rule multiplies. Ask what repeated multiplication by a number below 1 does.",
+      "Look up the largest value the sigmoid's derivative can take, and raise it to the tenth power."
+    ],
+    "explanation_after": "0.25 to the tenth power is about one in a million, so early layers receive almost no signal. ReLU's derivative is 1 on the positive side, which is the main reason it unblocked deep training."
+  },
+  {
+    "id": "p5_eval_transformer_understand",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "What is the main architectural reason transformers train faster than RNNs on long sequences?",
+    "options": [
+      { "id": "a", "text": "Transformers have far fewer parameters", "misconception": "They usually have many more; the advantage is in how the work parallelises." },
+      { "id": "b", "text": "Transformers process every position in parallel, whereas an RNN must finish step t before starting t+1" },
+      { "id": "c", "text": "Transformers do not need gradients", "misconception": "They are trained by backpropagation exactly like any other network." },
+      { "id": "d", "text": "Transformers use a simpler loss function", "misconception": "Both commonly use cross-entropy; the loss is not where the difference lies." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what an RNN's hidden state at step t depends on, and what that forbids.",
+      "Think about which design can use a thousand GPU cores at once on one sequence."
+    ],
+    "explanation_after": "Recurrence is inherently sequential: each step waits for the last. Attention sees all positions at once, so a whole sequence occupies the GPU simultaneously — which is what made training on internet-scale text practical."
+  },
+
+  {
+    "id": "p5_eval_apply_1",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "Your training loss oscillates wildly and sometimes jumps to a huge value. What is the most likely cause?",
+    "options": [
+      { "id": "a", "text": "The learning rate is too high, so each step overshoots the minimum" },
+      { "id": "b", "text": "The learning rate is too low, so progress is unstable", "misconception": "A low rate produces slow, smooth progress — the opposite symptom." },
+      { "id": "c", "text": "The model has too few parameters", "misconception": "An undersized model underfits smoothly; it does not make the loss explode." },
+      { "id": "d", "text": "The dataset is too small", "misconception": "Small data causes overfitting, visible as a train/validation gap rather than as oscillation." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Picture a ball bouncing from one side of a valley to the other instead of settling.",
+      "Ask which single setting controls how far each step moves."
+    ],
+    "explanation_after": "Too large a step overshoots repeatedly and can diverge. Loss shape is diagnostic: oscillating or exploding means lower the rate; smooth but glacial means raise it."
   },
   {
     "id": "p5_eval_apply_2",
+    "phase": "phase_5_deep_learning",
     "skill_id": "p5_overfitting_in_deep_nets",
+    "bloom_level": "apply",
     "format": "mcq",
-    "stem": "Overfitting in Deep Networks: which statement is correct?",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "What does dropout do during training?",
     "options": [
-      {
-        "id": "a",
-        "text": "Overfitting means both training and validation are always perfect."
-      },
-      {
-        "id": "b",
-        "text": "Dropout permanently deletes the same units at deployment."
-      },
-      {
-        "id": "c",
-        "text": "Weight decay discourages large weights."
-      },
-      {
-        "id": "d",
-        "text": "The test set should guide every training decision."
-      }
+      { "id": "a", "text": "Removes training examples that the model finds too easy", "misconception": "Dropout acts on units inside the network, not on data." },
+      { "id": "b", "text": "Deletes network layers permanently once they stop improving", "misconception": "Nothing is removed permanently; the dropping is temporary and random per step." },
+      { "id": "c", "text": "Randomly zeroes a fraction of unit outputs on each step, so no single unit can be relied upon" },
+      { "id": "d", "text": "Reduces the learning rate when validation loss stops falling", "misconception": "Describes a learning-rate scheduler." }
     ],
     "correct_option_id": "c",
-    "explanation_after": "Weight decay discourages large weights.",
-    "phase": "phase_5_deep_learning",
-    "bloom_level": "apply"
+    "hints": [
+      "Ask what a network would do if it could never depend on one particular unit being present.",
+      "Something is switched off temporarily, and it changes every step."
+    ],
+    "explanation_after": "Randomly silencing units forces redundant, distributed representations rather than brittle single-unit detectors. It is active only in training — at inference every unit participates, which is another reason `model.eval()` matters."
   },
   {
     "id": "p5_eval_apply_3",
-    "skill_id": "p5_batch_normalization",
-    "format": "mcq",
-    "stem": "Batch Normalization: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Batch normalization removes every learned parameter."
-      },
-      {
-        "id": "b",
-        "text": "Evaluation should always use random batch measurements."
-      },
-      {
-        "id": "c",
-        "text": "Training uses batch statistics."
-      },
-      {
-        "id": "d",
-        "text": "Normalization guarantees that overfitting cannot occur."
-      }
-    ],
-    "correct_option_id": "c",
-    "explanation_after": "Training uses batch statistics.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "apply"
+    "skill_id": "p5_batch_normalization",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "A model with batch norm performs well in training but erratically in production on single requests. What is the most likely cause?",
+    "options": [
+      { "id": "a", "text": "The model was never switched to evaluation mode, so it normalises using a batch of one" },
+      { "id": "b", "text": "Batch norm cannot be used in production at all", "misconception": "It is used in production constantly; it just has to be in the right mode." },
+      { "id": "c", "text": "The production hardware is slower", "misconception": "Speed would affect latency, not the correctness of outputs." },
+      { "id": "d", "text": "The model needs retraining on production data", "misconception": "Possible for drift, but drift degrades gradually rather than making single requests erratic." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what the mean and variance of a batch containing one example are.",
+      "Something that was fine with batches of 64 breaks with batches of 1. What differs?"
+    ],
+    "explanation_after": "A batch of one normalises to zero and the output collapses to the learned shift. `model.eval()` switches to running averages — the single most common deployment bug with batch norm."
   },
   {
-    "id": "p5_eval_analyze_1",
-    "skill_id": "p5_vanishing_exploding_gradients",
+    "id": "p5_eval_cnn_apply",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_cnn_basics",
+    "bloom_level": "apply",
     "format": "mcq",
-    "stem": "Vanishing & Exploding Gradients: which statement is correct?",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "A 32×32 image goes through a 3×3 convolution with stride 1 and no padding. What is the output's spatial size?",
     "options": [
-      {
-        "id": "a",
-        "text": "Vanishing gradients make every update infinitely large."
-      },
-      {
-        "id": "b",
-        "text": "Gradient clipping creates new labels for the dataset."
-      },
-      {
-        "id": "c",
-        "text": "Depth can never affect backward signal scale."
-      },
-      {
-        "id": "d",
-        "text": "Initialization helps keep signals in a workable range."
-      }
+      { "id": "a", "text": "32×32", "misconception": "Assumes the size is preserved, which is what padding of 1 would have achieved." },
+      { "id": "b", "text": "16×16", "misconception": "Halving is what a stride of 2 or a pooling layer does, not a 3×3 stride-1 convolution." },
+      { "id": "c", "text": "29×29", "misconception": "Subtracts the full kernel size instead of kernel size minus one." },
+      { "id": "d", "text": "30×30" }
     ],
     "correct_option_id": "d",
-    "explanation_after": "Initialization helps keep signals in a workable range.",
+    "hints": [
+      "Count how many positions a 3-wide window can occupy along a row of 32 without hanging off the edge.",
+      "The formula is (size − kernel)/stride + 1."
+    ],
+    "explanation_after": "(32 − 3)/1 + 1 = 30 per side. Each unpadded 3×3 layer shaves two pixels, which is why deep stacks use padding — otherwise the feature map disappears."
+  },
+  {
+    "id": "p5_eval_rnn_apply",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "analyze"
+    "skill_id": "p5_rnn_basics",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "You batch sentences of different lengths by padding the short ones. What must the model also receive?",
+    "options": [
+      { "id": "a", "text": "A mask marking which positions are padding, so they are excluded from attention and loss" },
+      { "id": "b", "text": "The original length of each sentence in the loss function only", "misconception": "Half the fix: the loss stops counting padding, but the padded positions still influence the hidden states." },
+      { "id": "c", "text": "Nothing; the model learns to ignore padding by itself", "misconception": "It may partly learn to, but padding tokens still contribute to the computation and corrupt the representation." },
+      { "id": "d", "text": "A separate model for each sentence length", "misconception": "Defeats the purpose of batching and is unnecessary once masking exists." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what the model currently believes about a padding token: is it a word, or nothing?",
+      "The fix has to reach both the forward computation and the loss."
+    ],
+    "explanation_after": "Without a mask, padding is treated as real content: it shifts hidden states and contributes loss. The mask tells the model which positions do not exist — one of the most common silent bugs in sequence code."
+  },
+  {
+    "id": "p5_eval_build_apply",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_build_your_first_network",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "Your classifier's loss will not fall below chance level. Which check is the most informative first step?",
+    "options": [
+      { "id": "a", "text": "Train for many more epochs and see whether it eventually moves", "misconception": "Spends time before gathering information; a model that cannot learn at all will not start later." },
+      { "id": "b", "text": "Increase the model size so it has more capacity", "misconception": "Adds capacity before establishing whether the existing pipeline can learn anything." },
+      { "id": "c", "text": "Collect more training data", "misconception": "Expensive, and useless if the fault is in the code rather than the quantity of data." },
+      { "id": "d", "text": "Try to overfit a handful of examples deliberately; if it cannot, the bug is in the pipeline, not the model" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Find a test whose failure points at code and whose success rules it out.",
+      "Ask what should be trivially easy for any correctly wired network."
+    ],
+    "explanation_after": "Any correctly wired network can memorise ten examples. Failing that points at labels, shapes, a missing optimiser step or a detached graph — and it takes seconds, unlike more data or more epochs."
+  },
+
+  {
+    "id": "p5_eval_analyze_1",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "In a 20-layer network, the last layers' weights change steadily while the first layers' barely move. What does that pattern indicate?",
+    "options": [
+      { "id": "a", "text": "The early layers have already converged to their best values", "misconception": "Convergence and never-moving look alike in a weight plot; the depth pattern distinguishes them." },
+      { "id": "b", "text": "The gradient shrinks as it is multiplied backwards, so little signal reaches the early layers" },
+      { "id": "c", "text": "The learning rate is too high", "misconception": "A high rate would move all layers erratically, not leave the early ones still." },
+      { "id": "d", "text": "The early layers have fewer parameters", "misconception": "Parameter count does not determine how much gradient arrives." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "The pattern is ordered by depth. Ask what travels through depth and gets modified on the way.",
+      "If it were convergence, would it line up so neatly with distance from the loss?"
+    ],
+    "explanation_after": "Gradients are products of per-layer terms, so they attenuate with distance from the loss. Residual connections, careful initialisation and normalisation all exist to give the signal a shorter path back."
   },
   {
     "id": "p5_eval_analyze_2",
-    "skill_id": "p5_cnn_basics",
-    "format": "mcq",
-    "stem": "CNN Basics: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "A CNN requires a separate full model for every pixel."
-      },
-      {
-        "id": "b",
-        "text": "Stride means the number of class labels."
-      },
-      {
-        "id": "c",
-        "text": "Padding always deletes the image border."
-      },
-      {
-        "id": "d",
-        "text": "Padding controls border handling and output size."
-      }
-    ],
-    "correct_option_id": "d",
-    "explanation_after": "Padding controls border handling and output size.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "analyze"
+    "skill_id": "p5_cnn_basics",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "A CNN classifies centred objects well but fails when the object moves to a corner, despite pooling layers. What does that suggest about the training data?",
+    "options": [
+      { "id": "a", "text": "Convolution cannot detect objects away from the centre", "misconception": "Convolution is translation-equivariant by construction; the filters apply everywhere." },
+      { "id": "b", "text": "Pooling layers must be broken", "misconception": "Pooling gives some local tolerance but was never going to supply position diversity the data lacks." },
+      { "id": "c", "text": "The training images almost always had the object centred, so the later dense layers learned a position-specific mapping" },
+      { "id": "d", "text": "The model is too small", "misconception": "Capacity is not the issue when the failure is specific to unseen positions." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The convolution itself slides everywhere. Ask which part of the network does not.",
+      "Ask what the model would have had to see in order to handle a corner."
+    ],
+    "explanation_after": "Convolution shares filters across positions, but the flattened dense layers can still learn where things usually are. If every training object was centred, nothing taught the model otherwise — which is what random crops and shifts in augmentation are for."
   },
   {
     "id": "p5_eval_analyze_3",
-    "skill_id": "p5_rnn_basics",
-    "format": "mcq",
-    "stem": "RNN Basics: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "An RNN treats every sequence position as unrelated."
-      },
-      {
-        "id": "b",
-        "text": "Hidden state is always a human-readable sentence."
-      },
-      {
-        "id": "c",
-        "text": "Padding should contribute to the training loss as real data."
-      },
-      {
-        "id": "d",
-        "text": "Masks prevent padded positions from acting like real data."
-      }
-    ],
-    "correct_option_id": "d",
-    "explanation_after": "Masks prevent padded positions from acting like real data.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "analyze"
+    "skill_id": "p5_rnn_basics",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "An RNN handles 20-word sentences well but loses the subject of 200-word paragraphs. What explains the difference?",
+    "options": [
+      { "id": "a", "text": "The vocabulary is too small for long texts", "misconception": "Vocabulary affects which words are representable, not how long information survives." },
+      { "id": "b", "text": "Information must pass through one state at every step, so early content is progressively overwritten and its gradient attenuates over 200 steps" },
+      { "id": "c", "text": "Long paragraphs contain more grammatical errors", "misconception": "Invents a data-quality explanation for a structural limitation." },
+      { "id": "d", "text": "The model needs a larger batch size", "misconception": "Batch size affects gradient noise, not how far information travels within a sequence." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask how information from word 3 reaches word 200 — what route does it take?",
+      "Count how many multiplications sit between those two positions."
+    ],
+    "explanation_after": "Everything travels through a fixed-size state updated at each step, so distant information is both overwritten and attenuated in the gradient. LSTMs mitigate it; attention removes the bottleneck by letting any position read any other directly."
   },
   {
-    "id": "p5_eval_evaluate_1",
-    "skill_id": "p5_why_transformers_replaced_rnns",
+    "id": "p5_eval_overfit_analyze",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_overfitting_in_deep_nets",
+    "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "Why Transformers Replaced RNNs: which statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "Validation loss rises while validation accuracy keeps improving slightly. What is happening?",
     "options": [
-      {
-        "id": "a",
-        "text": "RNNs can remain useful for streaming or constrained devices."
-      },
-      {
-        "id": "b",
-        "text": "Transformers read only the immediately previous token."
-      },
-      {
-        "id": "c",
-        "text": "Parallel training means token order no longer matters."
-      },
-      {
-        "id": "d",
-        "text": "Attention has zero memory cost at every sequence length."
-      }
+      { "id": "a", "text": "The metrics were computed on different data", "misconception": "Reaches for a bug; the pattern has a well-understood cause on the same data." },
+      { "id": "b", "text": "The model is becoming more confident on the cases it gets wrong, which costs more loss than the few newly correct cases gain" },
+      { "id": "c", "text": "Accuracy must have been computed incorrectly", "misconception": "Both numbers can be right; they measure different things." },
+      { "id": "d", "text": "The validation set is too small to trust", "misconception": "Possible in general, but this specific divergence is explained by confidence rather than noise." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Accuracy only asks which side of the threshold a prediction falls. Cross-entropy also asks how confidently.",
+      "Ask what happens to the loss when a wrong prediction moves from 0.6 to 0.95."
+    ],
+    "explanation_after": "Accuracy counts decisions; cross-entropy weighs confidence. Growing certainty on errors raises loss even as a few borderline cases flip to correct — which is why early stopping on loss and on accuracy can pick different epochs."
+  },
+  {
+    "id": "p5_eval_backprop_analyze",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_backpropagation",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "Why is backpropagation far cheaper than computing each parameter's gradient separately by nudging it?",
+    "options": [
+      { "id": "a", "text": "It only computes gradients for the parameters that matter most", "misconception": "Every parameter gets a gradient; the saving is in how they are computed together." },
+      { "id": "b", "text": "It approximates the gradients rather than computing them exactly", "misconception": "Backpropagation is exact; finite differences are the approximation." },
+      { "id": "c", "text": "It uses the GPU and the alternative does not", "misconception": "Both could use a GPU; the asymptotic difference is in the number of passes required." },
+      { "id": "d", "text": "One backward pass yields every parameter's gradient, while nudging needs a separate forward pass per parameter" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Count the full network evaluations each approach needs for a model with a million parameters.",
+      "The structure that helps is many parameters feeding one loss — ask which direction is cheap to traverse."
+    ],
+    "explanation_after": "Reverse-mode differentiation gets all gradients in roughly one extra pass, where finite differences need a pass per parameter — a million versus one. That asymptotic gap is why training deep networks is feasible at all."
+  },
+  {
+    "id": "p5_eval_act_analyze",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_activation_functions",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "A large fraction of a network's ReLU units output zero for every input in the dataset and never recover. What has happened?",
+    "options": [
+      { "id": "a", "text": "Those units have been pushed into the flat negative region, where the gradient is zero, so nothing can move them back" },
+      { "id": "b", "text": "ReLU randomly disables units like dropout does", "misconception": "Confuses a deterministic function with a stochastic regulariser." },
+      { "id": "c", "text": "The units have finished learning and are correctly inactive", "misconception": "Reads a permanent failure as convergence; a unit that can never activate contributes nothing." },
+      { "id": "d", "text": "The weights have overflowed to infinity", "misconception": "That would produce NaNs rather than a stable zero output." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "RNNs can remain useful for streaming or constrained devices.",
+    "hints": [
+      "Ask what ReLU's gradient is for a negative input, and what that means for updating the weights that produced it.",
+      "Once a unit cannot activate on any input, what could ever change it?"
+    ],
+    "explanation_after": "ReLU's derivative is zero for negative inputs, so a unit pushed there receives no gradient and is stuck — the 'dying ReLU' problem, often caused by too high a learning rate. Leaky ReLU and GELU keep a small slope precisely to leave a way back."
+  },
+
+  {
+    "id": "p5_eval_evaluate_1",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "evaluate"
+    "skill_id": "p5_why_transformers_replaced_rnns",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "Given transformers' dominance, is there still a defensible case for an RNN?",
+    "options": [
+      { "id": "a", "text": "No — transformers are better on every axis", "misconception": "Ignores that attention costs grow quadratically with context and that streaming has different requirements." },
+      { "id": "b", "text": "Yes, but only for historical or teaching purposes", "misconception": "Concedes the architecture has no live engineering case, which the streaming and embedded settings contradict." },
+      { "id": "c", "text": "Yes: for streaming input or tight memory budgets, constant per-step state and cost can beat attention over a growing context" },
+      { "id": "d", "text": "Yes, because RNNs are more accurate on long sequences", "misconception": "Right conclusion, wrong reason — long-range accuracy is exactly where RNNs are weakest." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what attention costs as the context grows, and what recurrence costs per step.",
+      "Think about a device that must respond to a continuous stream with a fixed memory budget."
+    ],
+    "explanation_after": "Attention is quadratic in context length and needs the sequence available; recurrence keeps a fixed-size state and constant per-step cost. On an embedded device processing an endless stream, that is the better shape — which is why state-space models have revived the idea."
   },
   {
     "id": "p5_eval_evaluate_2",
-    "skill_id": "p5_pytorch_intro",
-    "format": "mcq",
-    "stem": "PyTorch Introduction: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Gradients accumulate unless they are cleared."
-      },
-      {
-        "id": "b",
-        "text": "A tensor can contain only one number."
-      },
-      {
-        "id": "c",
-        "text": "An nn.Module prevents parameters from being trained."
-      },
-      {
-        "id": "d",
-        "text": "Autograd requires every derivative to be entered by hand."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Gradients accumulate unless they are cleared.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "evaluate"
+    "skill_id": "p5_pytorch_intro",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A colleague's training loop calls `loss.backward()` and `optimizer.step()` but never `optimizer.zero_grad()`. They say results look fine. Assess that.",
+    "options": [
+      { "id": "a", "text": "Fine — PyTorch clears gradients automatically after a step", "misconception": "It does not; accumulation is the documented default behaviour." },
+      { "id": "b", "text": "A real bug: gradients accumulate across batches, so each step moves along a sum of history, even if the loss still happens to fall" },
+      { "id": "c", "text": "Fine, as long as the batch size is constant", "misconception": "Constant batches do not stop accumulation; they just make the growing sum more uniform." },
+      { "id": "d", "text": "A bug, but only when using Adam", "misconception": "Accumulation happens in the parameter's `.grad` buffer, before any optimiser sees it." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what is in `.grad` at the second step if nothing cleared it after the first.",
+      "A loss that goes down is weak evidence. Ask what the update is actually a gradient of."
+    ],
+    "explanation_after": "`.backward()` adds to `.grad`, so step n moves along the sum of batches 1..n — an effectively growing, stale gradient. It can still reduce the loss, which is what makes this bug survive review; the fix is one line."
   },
   {
     "id": "p5_eval_evaluate_3",
-    "skill_id": "p5_build_your_first_network",
-    "format": "mcq",
-    "stem": "Build Your First Network: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "A fresh-process load test verifies the saved artifact."
-      },
-      {
-        "id": "b",
-        "text": "A model learns merely because its script exits successfully."
-      },
-      {
-        "id": "c",
-        "text": "Only the final accuracy number is needed to reproduce a run."
-      },
-      {
-        "id": "d",
-        "text": "Validation rows should be used for every weight update."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "A fresh-process load test verifies the saved artifact.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "evaluate"
+    "skill_id": "p5_build_your_first_network",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A model scores well in the training notebook. What is the best evidence that the saved artifact will actually work in production?",
+    "options": [
+      { "id": "a", "text": "The validation accuracy recorded at the end of training", "misconception": "Measures the model in memory, not the artifact that was written to disk." },
+      { "id": "b", "text": "Re-running the notebook end to end and getting the same number", "misconception": "Tests reproducibility of training, still without exercising the saved file independently." },
+      { "id": "c", "text": "Loading the saved file in a fresh process and reproducing known predictions for known inputs" },
+      { "id": "d", "text": "Checking that the saved file has a plausible size", "misconception": "A file can be the right size and still be missing preprocessing or the right weights." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what sits between the trained model in memory and the one production will load.",
+      "The notebook holds state. Ask what a fresh process does not have."
+    ],
+    "explanation_after": "The artifact is what ships, and saving can lose preprocessing, vocabulary or configuration that the notebook still had in memory. A fresh-process load test exercises exactly the path production will take."
   },
   {
-    "id": "p5_eval_create_1",
-    "skill_id": "p5_backpropagation",
+    "id": "p5_eval_lr_evaluate",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "Backpropagation: which statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A team wants a constant learning rate for simplicity rather than warmup plus decay. For training a large model from scratch, judge that.",
     "options": [
-      {
-        "id": "a",
-        "text": "Backpropagation changes labels before training."
-      },
-      {
-        "id": "b",
-        "text": "Reverse-mode differentiation is efficient when many parameters lead to one loss."
-      },
-      {
-        "id": "c",
-        "text": "The backward pass never uses the forward computation."
-      },
-      {
-        "id": "d",
-        "text": "Every weight receives the same correction."
-      }
+      { "id": "a", "text": "Fine — schedules are a refinement with little practical effect", "misconception": "Understates it: early instability and late overshoot are both common and costly on large models." },
+      { "id": "b", "text": "Wrong — a constant rate cannot reduce the loss at all", "misconception": "It plainly can; the argument is about stability and final quality, not possibility." },
+      { "id": "c", "text": "Risky at both ends: early steps on untrained weights can destabilise, and a rate that never decays stops the model settling" },
+      { "id": "d", "text": "Fine, provided the rate is set very low", "misconception": "Buys early stability by making the whole run impractically slow — which is the trade-off warmup exists to avoid." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The right step size early in training and late in training are not the same size. Ask why.",
+      "Consider what a freshly initialised model's gradients look like, and what a nearly converged one needs."
+    ],
+    "explanation_after": "Warmup protects the first steps, when gradients are large and the weights are random; decay lets the model settle rather than bouncing around the minimum. A single constant rate has to be a compromise between two incompatible requirements."
+  },
+  {
+    "id": "p5_eval_norm_evaluate",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_batch_normalization",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "Memory limits force a batch size of 2. A colleague wants to keep batch normalisation. Assess that.",
+    "options": [
+      { "id": "a", "text": "Fine — batch norm works identically at any batch size", "misconception": "Its statistics are estimated from the batch, so two samples give a very noisy estimate." },
+      { "id": "b", "text": "Fine, provided the learning rate is lowered", "misconception": "Addresses step size, not the noise in the normalisation statistics themselves." },
+      { "id": "c", "text": "Poor: statistics from two samples are too noisy, so layer norm or group norm, which do not depend on batch size, suit better" },
+      { "id": "d", "text": "Poor, because normalisation should be dropped entirely at small batch sizes", "misconception": "Removes a useful mechanism rather than choosing a variant that does not depend on the batch." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask where batch norm gets its mean and variance, and how reliable those are from two numbers.",
+      "Some normalisation schemes compute their statistics along a different axis. Ask which axis."
+    ],
+    "explanation_after": "Batch norm's estimates come from the batch, so tiny batches make them erratic and training unstable. Layer and group norm normalise within each sample, which is why transformers — often trained with small per-device batches — use layer norm."
+  },
+  {
+    "id": "p5_eval_loss_evaluate",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_loss_functions",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A colleague trains a binary classifier with mean squared error on the predicted probability, noting it still trains. Assess the choice.",
+    "options": [
+      { "id": "a", "text": "Equivalent to cross-entropy, so it does not matter", "misconception": "They produce different gradients and different optima; the equivalence does not hold." },
+      { "id": "b", "text": "Better, because squared error is more stable numerically", "misconception": "Prefers a stability claim over the gradient behaviour that actually governs learning." },
+      { "id": "c", "text": "Wrong, because squared error cannot be used on values between 0 and 1", "misconception": "Right conclusion, wrong reason; it computes perfectly well, it just learns poorly." },
+      { "id": "d", "text": "Workable but worse: with a sigmoid output, squared error gives tiny gradients exactly where the model is confidently wrong" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what the gradient looks like when the true label is 1 and the model says 0.01, under each loss.",
+      "The sigmoid's derivative is near zero at the extremes. Ask which loss cancels that and which compounds it."
+    ],
+    "explanation_after": "Squared error multiplies the error by the sigmoid's derivative, which is near zero exactly when the model is most wrong, so learning stalls there. Cross-entropy's gradient cancels that term and stays proportional to the error — the reason it is the default."
+  },
+
+  {
+    "id": "p5_eval_create_1",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_backpropagation",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "You need gradient checks for a small custom layer you wrote. Which plan is soundest?",
+    "options": [
+      { "id": "a", "text": "Trust the framework, since autograd is well tested", "misconception": "Autograd is reliable for the operations it knows; a custom backward is exactly what it cannot verify for you." },
+      { "id": "b", "text": "Compare the analytic gradient against a finite-difference estimate on a few random inputs" },
+      { "id": "c", "text": "Train the full model and see whether the loss falls", "misconception": "A subtly wrong gradient often still reduces the loss, so this test rarely fails when it should." },
+      { "id": "d", "text": "Check that the gradient values are not NaN or infinite", "misconception": "Catches catastrophic breakage only; a gradient can be finite and still wrong." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Reverse-mode differentiation is efficient when many parameters lead to one loss.",
-    "phase": "phase_5_deep_learning",
-    "bloom_level": "create"
+    "hints": [
+      "You need a second, independent way to compute the same quantity.",
+      "The slow method is impractical for training but perfectly usable on a tiny test."
+    ],
+    "explanation_after": "Finite differences are far too slow for training but ideal as an independent check on a small input. Comparing the two is the standard way to catch a custom backward pass that is wrong but not obviously broken."
   },
   {
     "id": "p5_eval_create_2",
-    "skill_id": "p5_neural_network_basics",
-    "format": "mcq",
-    "stem": "Neural Networks: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Every layer stores only words and never numbers."
-      },
-      {
-        "id": "b",
-        "text": "Initialization scale affects whether signals remain usable through deep networks."
-      },
-      {
-        "id": "c",
-        "text": "Training keeps all weights fixed forever."
-      },
-      {
-        "id": "d",
-        "text": "Adding layers guarantees a correct answer without data."
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "Initialization scale affects whether signals remain usable through deep networks.",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "create"
+    "skill_id": "p5_neural_network_basics",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "You are initialising a deep network's weights. Which scheme is soundest, and why?",
+    "options": [
+      { "id": "a", "text": "All zeros, so training starts from a neutral position", "misconception": "Every unit in a layer then computes the same thing and receives the same gradient, so they never differentiate." },
+      { "id": "b", "text": "All ones, so no signal is lost at the start", "misconception": "Breaks symmetry no better than zeros and makes activations grow with depth." },
+      { "id": "c", "text": "Large random values, so the network explores more of the space", "misconception": "Large weights saturate activations and produce exploding signals through depth." },
+      { "id": "d", "text": "Small random values scaled to the layer's width, so units differ and activation magnitudes stay stable through depth" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Two things must be true at once: units must not all be identical, and the signal must survive many layers.",
+      "Ask what happens to every unit in a layer that starts with exactly the same weights."
+    ],
+    "explanation_after": "Identical initial weights make a layer's units permanently identical, and the scale controls whether activations shrink or explode with depth. Width-aware schemes like He and Xavier address both at once — which is why initialisation is not an arbitrary detail."
   },
   {
     "id": "p5_eval_create_3",
+    "phase": "phase_5_deep_learning",
     "skill_id": "p5_activation_functions",
+    "bloom_level": "create",
     "format": "mcq",
-    "stem": "Activation Functions: which statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "You are choosing output activations for three heads: a price, a spam flag, and one of ten categories. Which set is right?",
     "options": [
-      {
-        "id": "a",
-        "text": "Activations permanently remove the need for weights."
-      },
-      {
-        "id": "b",
-        "text": "An activation’s slope affects how gradients travel backward."
-      },
-      {
-        "id": "c",
-        "text": "Every activation produces text labels directly."
-      },
-      {
-        "id": "d",
-        "text": "The same output gate is correct for every possible task."
-      }
+      { "id": "a", "text": "No activation for the price, sigmoid for the flag, softmax for the categories" },
+      { "id": "b", "text": "ReLU for all three, for consistency", "misconception": "Constrains the price to be non-negative by accident and gives neither probabilities nor a distribution for the other heads." },
+      { "id": "c", "text": "Softmax for all three, so every output is a probability", "misconception": "Forces a single number to equal 1 and turns the binary flag into a needlessly two-headed distribution." },
+      { "id": "d", "text": "Sigmoid for all three, since it bounds the outputs", "misconception": "Caps the price at 1 and lets ten independent category scores fail to sum to one." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what range and what constraint each of the three outputs needs.",
+      "One output must be unbounded, one must be a single probability, one must be a distribution over options."
+    ],
+    "explanation_after": "An unbounded quantity needs no activation; one probability needs a sigmoid; a choice among mutually exclusive options needs softmax so the scores sum to 1. The output activation is determined by the shape of the answer."
+  },
+  {
+    "id": "p5_eval_overfit_create",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_overfitting_in_deep_nets",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "You have 2,000 images and a network designed for a million. Which plan best manages the mismatch?",
+    "options": [
+      { "id": "a", "text": "Train the full network from scratch for many more epochs", "misconception": "More passes over 2,000 images is the fastest route to memorising all of them." },
+      { "id": "b", "text": "Start from a pretrained backbone, fine-tune a small head, and use augmentation and early stopping" },
+      { "id": "c", "text": "Use the full network but disable all regularisation so it can fit the data", "misconception": "Removes the only defences against the overfitting the mismatch guarantees." },
+      { "id": "d", "text": "Reduce the images to a handful of features and use the network on those", "misconception": "Discards the spatial structure that a convolutional network exists to exploit." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "An activation’s slope affects how gradients travel backward.",
+    "hints": [
+      "The mismatch is capacity against evidence. Ask what can raise the effective evidence without new photographs.",
+      "Ask whether all those parameters really have to be learned from your 2,000 images."
+    ],
+    "explanation_after": "Pretraining supplies most of the parameters from other data, augmentation multiplies the effective sample, and early stopping limits memorisation. Together they close a gap that no amount of training on 2,000 images could."
+  },
+  {
+    "id": "p5_eval_cnn_create",
     "phase": "phase_5_deep_learning",
-    "bloom_level": "create"
+    "skill_id": "p5_cnn_basics",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "Design augmentation for classifying handwritten digits. Which set is appropriate?",
+    "options": [
+      { "id": "a", "text": "Small rotations, shifts and slight scaling" },
+      { "id": "b", "text": "Horizontal flips, rotations and shifts", "misconception": "A flipped 2 is not a 2, so flipping teaches the model that a mirrored digit shares the label." },
+      { "id": "c", "text": "Vertical flips and 180-degree rotations", "misconception": "Turns 6 into 9 and destroys the distinction the task depends on." },
+      { "id": "d", "text": "Colour jitter and saturation changes", "misconception": "Varies a property grayscale digits do not have, so it adds nothing." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "A valid augmentation must leave the correct label unchanged. Test each one against a 6 and a 2.",
+      "Ask which transformations a real handwritten digit could plausibly undergo."
+    ],
+    "explanation_after": "Augmentation must preserve the label: handwriting varies in slant, position and size, but a flipped or inverted digit is a different digit or none. This is why the right set is domain-specific — flips are standard for photographs of cats and wrong here."
+  },
+  {
+    "id": "p5_eval_debug_create",
+    "phase": "phase_5_deep_learning",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "Write the correct order of operations inside one training step.",
+    "options": [
+      { "id": "a", "text": "Forward → loss → backward → optimiser step → clear gradients, with the clear at the end of each step", "misconception": "Works only if nothing else touches `.grad`, and leaves stale gradients live between steps — fragile rather than wrong." },
+      { "id": "b", "text": "Clear gradients → forward → loss → backward → optimiser step" },
+      { "id": "c", "text": "Forward → backward → loss → optimiser step → clear gradients", "misconception": "Calls backward before the loss exists, so there is nothing to differentiate." },
+      { "id": "d", "text": "Clear gradients → forward → optimiser step → loss → backward", "misconception": "Steps the optimiser before any gradient has been computed for this batch." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Each step needs something the previous one produced. Put them in dependency order.",
+      "Ask what must be true about the gradient buffer at the moment `.backward()` is called."
+    ],
+    "explanation_after": "Each operation consumes the previous one's output, and clearing first guarantees `.backward()` starts from empty. Putting the clear at the end happens to work but leaves stale gradients live between steps, which breaks as soon as anything else inspects them."
   }
 ]
