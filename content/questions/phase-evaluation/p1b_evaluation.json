@@ -5,363 +5,21 @@
     "skill_id": "p1_operators",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
     "stem": "What does the `%` operator do in Python?",
     "options": [
-      {
-        "id": "a",
-        "text": "Multiplies two numbers"
-      },
-      {
-        "id": "b",
-        "text": "Returns the remainder after division"
-      },
-      {
-        "id": "c",
-        "text": "Converts a number to a percentage"
-      },
-      {
-        "id": "d",
-        "text": "Rounds a number down"
-      }
+      { "id": "a", "text": "Multiplies two numbers", "misconception": "Associates the symbol with an arithmetic operation but picks the wrong one." },
+      { "id": "b", "text": "Returns the remainder after division" },
+      { "id": "c", "text": "Converts a number to a percentage", "misconception": "Reads the symbol as it appears in everyday writing rather than as Python defines it." },
+      { "id": "d", "text": "Rounds a number down", "misconception": "Confuses it with floor division, `//`, which is a different operator." }
     ],
     "correct_option_id": "b",
+    "hints": [
+      "Work out `10 % 3` by hand and see which answer matches.",
+      "Ask what division leaves behind when it does not come out exactly."
+    ],
     "explanation_after": "`%` is the modulo operator — it returns the remainder of a division. `10 % 3` is 1, because 10 divided by 3 leaves a remainder of 1."
-  },
-  {
-    "id": "p1_eval_dt_understand",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_data_types",
-    "bloom_level": "understand",
-    "format": "mcq",
-    "stem": "Why does Python treat `\"5\"` (a string) and `5` (an integer) as different things, even though they 'look' related?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Because a string is text made of characters, while an integer is a number you can do arithmetic on — they're stored and processed completely differently"
-      },
-      {
-        "id": "b",
-        "text": "Because Python has a bug that hasn't been fixed"
-      },
-      {
-        "id": "c",
-        "text": "There is no real difference; they're interchangeable"
-      },
-      {
-        "id": "d",
-        "text": "Because strings are always faster to compute with"
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "`\"5\"` is a sequence of characters (just like `\"hello\"`), while `5` is a number the CPU can add, subtract, or compare mathematically. `\"5\" + \"5\"` concatenates to `\"55\"`, while `5 + 5` computes `10` — same-looking symbols, different underlying operations."
-  },
-  {
-    "id": "p1_eval_var_apply",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_variables",
-    "bloom_level": "apply",
-    "format": "mcq",
-    "stem": "What does this code print?\n\na = 4\nb = 9\na = b\nb = a\nprint(a, b)",
-    "options": [
-      {
-        "id": "a",
-        "text": "4 9"
-      },
-      {
-        "id": "b",
-        "text": "9 9"
-      },
-      {
-        "id": "c",
-        "text": "9 4"
-      },
-      {
-        "id": "d",
-        "text": "4 4"
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "a = b sets a to 9 (a is now 9, b is still 9). Then b = a sets b to a's current value, which is 9. So both end up 9 — this is why swapping needs a temporary variable or tuple unpacking (a, b = b, a), not two sequential assignments."
-  },
-  {
-    "id": "p1_eval_cond_apply",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_conditionals",
-    "bloom_level": "apply",
-    "format": "mcq",
-    "stem": "What does this code print?\n\ntemp = 30\nif temp > 35:\n    print('Hot')\nelif temp > 25:\n    print('Warm')\nelif temp > 15:\n    print('Cool')\nelse:\n    print('Cold')",
-    "options": [
-      {
-        "id": "a",
-        "text": "Hot"
-      },
-      {
-        "id": "b",
-        "text": "Warm"
-      },
-      {
-        "id": "c",
-        "text": "Cool"
-      },
-      {
-        "id": "d",
-        "text": "Cold"
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "temp = 30. Is 30 > 35? No. Is 30 > 25? Yes — print 'Warm' and stop checking the rest. Python evaluates conditions top to bottom and runs only the first true branch."
-  },
-  {
-    "id": "p1_eval_str_apply",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_strings",
-    "bloom_level": "apply",
-    "format": "mcq",
-    "stem": "Given `word = \"python\"`, what does `word[1:4]` return?",
-    "options": [
-      {
-        "id": "a",
-        "text": "\"pyt\""
-      },
-      {
-        "id": "b",
-        "text": "\"yth\""
-      },
-      {
-        "id": "c",
-        "text": "\"ytho\""
-      },
-      {
-        "id": "d",
-        "text": "\"ython\""
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "Slicing `[1:4]` starts at index 1 (the second character, 'y') and goes up to but not including index 4. Indices: p=0, y=1, t=2, h=3, o=4. So `word[1:4]` = 'y','t','h' = \"yth\"."
-  },
-  {
-    "id": "p1_eval_loop_analyze",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_loops",
-    "bloom_level": "analyze",
-    "format": "mcq",
-    "stem": "How many times does 'here' print?\n\nfor i in range(2, 10, 3):\n    print('here')",
-    "options": [
-      {
-        "id": "a",
-        "text": "2 times"
-      },
-      {
-        "id": "b",
-        "text": "3 times"
-      },
-      {
-        "id": "c",
-        "text": "4 times"
-      },
-      {
-        "id": "d",
-        "text": "8 times"
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "range(2, 10, 3) generates 2, 5, 8 — starting at 2, stepping by 3, stopping before 10 (11 would be next, which is >= 10, so it stops at 8). That's 3 values, so the loop body runs 3 times."
-  },
-  {
-    "id": "p1_eval_fn_analyze",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_functions",
-    "bloom_level": "analyze",
-    "format": "mcq",
-    "stem": "Why does this function always return 0, regardless of what's passed in?\n\ndef add_five(n):\n    n = n + 5\n    return 0",
-    "options": [
-      {
-        "id": "a",
-        "text": "Because Python functions can only return one fixed value"
-      },
-      {
-        "id": "b",
-        "text": "Because the function computes n + 5 but never uses that result — it explicitly returns the literal value 0 instead"
-      },
-      {
-        "id": "c",
-        "text": "Because `n = n + 5` causes an error that gets silently caught"
-      },
-      {
-        "id": "d",
-        "text": "It doesn't always return 0 — this is a trick question"
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "The line `n = n + 5` computes a new value and stores it in the local variable n, but that computation is thrown away the moment `return 0` runs — the return statement is what actually determines the function's output, and here it's hardcoded to 0 regardless of any prior computation. This is a common bug: computing something and forgetting to return it."
-  },
-  {
-    "id": "p1_eval_dbg_analyze",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_debugging",
-    "bloom_level": "analyze",
-    "format": "mcq",
-    "stem": "This code should print the average of the list, but crashes. What's the bug?\n\nscores = []\ntotal = sum(scores)\naverage = total / len(scores)\nprint(average)",
-    "options": [
-      {
-        "id": "a",
-        "text": "sum() doesn't work on empty lists"
-      },
-      {
-        "id": "b",
-        "text": "len(scores) is 0 for an empty list, causing a division-by-zero error"
-      },
-      {
-        "id": "c",
-        "text": "average should be spelled avg"
-      },
-      {
-        "id": "d",
-        "text": "Python lists cannot be empty"
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "sum([]) is perfectly valid and returns 0 — the actual crash is total / len(scores), where len(scores) is 0 for an empty list, causing ZeroDivisionError. Tracing which line actually executes vs. which line looks suspicious is the key debugging skill here."
-  },
-  {
-    "id": "p1_eval_code_evaluate",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_how_code_works",
-    "bloom_level": "evaluate",
-    "format": "mcq",
-    "stem": "A team is choosing a language to write a quick one-off data-cleaning script they'll run once and never touch again. Which tradeoff matters most for this decision, and which kind of language fits better?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Raw execution speed matters most — a compiled language is better"
-      },
-      {
-        "id": "b",
-        "text": "Development speed matters most here (write it once, run it once) over raw execution speed — an interpreted language like Python, which skips the separate compile step, fits better"
-      },
-      {
-        "id": "c",
-        "text": "It makes no difference which type of language is used for any task"
-      },
-      {
-        "id": "d",
-        "text": "Compiled languages are always strictly better for every use case"
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "Compiled languages trade slower development (you must compile before running) for faster execution — valuable when a program runs millions of times. For a script run once, that upfront compile cost isn't worth paying; an interpreted language's faster write-and-run cycle wins. Neither type of language is universally 'better' — it depends on how the tradeoff plays out for the specific task."
-  },
-  {
-    "id": "p1_eval_scope_evaluate",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_scope",
-    "bloom_level": "evaluate",
-    "format": "mcq",
-    "stem": "A function needs to keep a running total across many calls. One option is a global variable the function modifies each time; another is passing the current total in and returning the new total out. Which is generally the better design, and why?",
-    "options": [
-      {
-        "id": "a",
-        "text": "The global variable, because it's less code to type"
-      },
-      {
-        "id": "b",
-        "text": "Passing the total in/out, because it makes the function's behavior fully visible from its inputs and outputs, rather than depending on hidden external state that's easy to lose track of or accidentally modify elsewhere"
-      },
-      {
-        "id": "c",
-        "text": "Both are exactly equivalent in every way"
-      },
-      {
-        "id": "d",
-        "text": "The global variable, because global variables are always faster"
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "A function that depends on and mutates a global variable is harder to reason about, test, and reuse — its behavior isn't fully determined by its arguments. Passing state explicitly in and out keeps the function self-contained and predictable, which is why relying on globals is generally considered poor practice once code grows beyond a quick script."
-  },
-  {
-    "id": "p1_eval_py_create",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_python_intro",
-    "bloom_level": "create",
-    "format": "mcq",
-    "stem": "You want to write a Python program that asks the user for their name and greets them by name. Which sequence of code correctly accomplishes this?",
-    "options": [
-      {
-        "id": "a",
-        "text": "name = input(\"What's your name? \")\nprint(\"Hello, \" + name + \"!\")"
-      },
-      {
-        "id": "b",
-        "text": "name = print(\"What's your name? \")\ninput(\"Hello, \" + name + \"!\")"
-      },
-      {
-        "id": "c",
-        "text": "input(name = \"What's your name?\")\nname.print(\"Hello!\")"
-      },
-      {
-        "id": "d",
-        "text": "name == input(\"What's your name? \")\nprint == \"Hello, \" + name"
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "input() displays a prompt and returns what the user types, so it must be captured into a variable (name = input(...)). Then print() outputs a greeting built from that variable. Option (a) is the only one that correctly sequences 'ask, store, then use' — the others swap input/print's roles or misuse == for assignment."
-  },
-  {
-    "id": "p1_eval_list_create",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_lists_intro",
-    "bloom_level": "create",
-    "format": "mcq",
-    "stem": "You have a list of temperatures in Celsius and need to build a new list containing only the ones above freezing (0). Which code correctly builds that new list?",
-    "options": [
-      {
-        "id": "a",
-        "text": "above_freezing = []\nfor t in temps:\n    if t > 0:\n        above_freezing.append(t)"
-      },
-      {
-        "id": "b",
-        "text": "above_freezing = temps\nabove_freezing.remove(t > 0)"
-      },
-      {
-        "id": "c",
-        "text": "above_freezing = temps[0]"
-      },
-      {
-        "id": "d",
-        "text": "for t in temps:\n    above_freezing = t if t > 0"
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Building a filtered list from scratch requires: start with an empty list, loop through the source list, test each item, and append the ones that pass the test. Option (a) does exactly this. The others either misuse .remove(), grab a single element (temps[0]), or write invalid syntax."
-  },
-  {
-    "id": "p1_eval_mod_create",
-    "phase": "phase_1b_programming_basics",
-    "skill_id": "p1_modules_imports",
-    "bloom_level": "create",
-    "format": "mcq",
-    "stem": "You're writing a script that needs to generate a random number and also work with dates. Which import setup correctly sets you up to use both?",
-    "options": [
-      {
-        "id": "a",
-        "text": "import random\nimport datetime"
-      },
-      {
-        "id": "b",
-        "text": "include random, datetime"
-      },
-      {
-        "id": "c",
-        "text": "from python import random, datetime"
-      },
-      {
-        "id": "d",
-        "text": "random.import()\ndatetime.import()"
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Python's import statement brings in a whole module by name — `import random` then lets you call `random.randint(...)`, and `import datetime` lets you use `datetime.date.today()`, etc. `include` isn't Python syntax, and modules don't call `.import()` on themselves."
   },
   {
     "id": "p1b_eval_py_remember",
@@ -369,27 +27,132 @@
     "skill_id": "p1_python_intro",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 25,
     "stem": "Which word asks Python to display a value?",
     "options": [
-      {
-        "id": "a",
-        "text": "print"
-      },
-      {
-        "id": "b",
-        "text": "while"
-      },
-      {
-        "id": "c",
-        "text": "class"
-      },
-      {
-        "id": "d",
-        "text": "return"
-      }
+      { "id": "a", "text": "print" },
+      { "id": "b", "text": "while", "misconception": "Recognises it as a Python keyword but associates it with repetition rather than output." },
+      { "id": "c", "text": "class", "misconception": "Recognises it as a Python keyword but associates it with defining a type, not displaying anything." },
+      { "id": "d", "text": "return", "misconception": "Confuses sending a value back to the caller with showing it to a person." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "`print` sends a value to the program output so a person can see it."
+    "hints": [
+      "Three of these change what the program does next; one makes something appear.",
+      "Which one would you use to check a value while you are still writing the program?"
+    ],
+    "explanation_after": "`print` sends a value to the program output so a person can see it. `return` hands a value back to the calling code, which is a different thing entirely — a common early confusion."
+  },
+  {
+    "id": "p1b_eval_var_remember",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_variables",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "In Python, what does the single `=` sign do?",
+    "options": [
+      { "id": "a", "text": "Tests whether two values are equal", "misconception": "Reads `=` as it is used in mathematics; Python spells that test `==`." },
+      { "id": "b", "text": "Declares the type of a variable", "misconception": "Imports a habit from languages where a type is written out; Python infers it from the value." },
+      { "id": "c", "text": "Assigns the value on the right to the name on the left" },
+      { "id": "d", "text": "Prints the value on the right", "misconception": "Assumes assignment produces visible output, which it does not." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Python spells the equality test differently from the mathematical one.",
+      "Read `x = 5` aloud as an instruction rather than as a statement of fact."
+    ],
+    "explanation_after": "A single `=` assigns: it puts the value on the right into the name on the left. The equality test is `==`, and mixing them up is one of the most common beginner errors."
+  },
+  {
+    "id": "p1b_eval_dt_remember",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_data_types",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "Which of these is a Python boolean value?",
+    "options": [
+      { "id": "a", "text": "\"yes\"", "misconception": "Picks a natural-language answer; this is a string, which is truthy but not a boolean." },
+      { "id": "b", "text": "\"True\"", "misconception": "Misses that the quotes make it text; the string \"False\" is itself truthy, which catches people out." },
+      { "id": "c", "text": "1", "misconception": "Close: integers behave like booleans in a condition, but `1` is an int, not a bool." },
+      { "id": "d", "text": "True" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Watch for quotation marks — they change what a value is.",
+      "There are exactly two boolean values in Python, and both are capitalised."
+    ],
+    "explanation_after": "`True` and `False` are the two booleans. `\"True\"` is a string, and because any non-empty string is truthy, `if \"False\":` runs its body — a bug that is hard to spot."
+  },
+  {
+    "id": "p1b_eval_loop_remember",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_loops",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "What does `range(5)` produce?",
+    "options": [
+      { "id": "a", "text": "The numbers 1 through 5", "misconception": "Starts counting at one, as people do; Python's range starts at zero." },
+      { "id": "b", "text": "The numbers 0 through 5", "misconception": "Gets the start right but includes the endpoint, which range excludes." },
+      { "id": "c", "text": "The single number 5", "misconception": "Reads the argument as the value rather than as a count." },
+      { "id": "d", "text": "The numbers 0, 1, 2, 3, 4" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Count how many numbers each answer contains, then compare with the 5 in the call.",
+      "Python ranges include the start and stop before the end value."
+    ],
+    "explanation_after": "`range(5)` gives five numbers starting at 0 and stopping before 5. The count matches the argument exactly, which is why `range(len(items))` lines up with the valid indices."
+  },
+  {
+    "id": "p1b_eval_fn_remember",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_functions",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "What does a Python function return if it has no `return` statement?",
+    "options": [
+      { "id": "a", "text": "`None`" },
+      { "id": "b", "text": "0", "misconception": "Assumes a numeric default; Python's absent value is not a number." },
+      { "id": "c", "text": "An empty string", "misconception": "Assumes a text default, which would make `print(f())` show a blank line rather than the value it does show." },
+      { "id": "d", "text": "It raises an error", "misconception": "Treats a function with no return as invalid, when it is perfectly legal and common." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Try it: assign the call to a variable and print it.",
+      "Python has one specific object meaning 'no value at all'."
+    ],
+    "explanation_after": "Every function returns something; with no `return`, it returns `None`. This is why forgetting a return gives `None` downstream rather than an error at the point of the mistake."
+  },
+
+  {
+    "id": "p1_eval_dt_understand",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_data_types",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 55,
+    "stem": "Why does Python treat `\"5\"` (a string) and `5` (an integer) as different things, even though they look related?",
+    "options": [
+      { "id": "a", "text": "Because a string is text made of characters, while an integer is a number you can do arithmetic on — they are stored and processed completely differently" },
+      { "id": "b", "text": "Because Python has a bug that has not been fixed", "misconception": "Treats a deliberate design decision as a defect." },
+      { "id": "c", "text": "There is no real difference; they are interchangeable", "misconception": "Would predict that `\"5\" + 5` works, which it does not." },
+      { "id": "d", "text": "Because strings are always faster to compute with", "misconception": "Invents a performance reason for what is a semantic distinction." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Predict what `\"5\" + \"5\"` gives, then predict `5 + 5`.",
+      "Ask what operation the `+` symbol means for each kind of value."
+    ],
+    "explanation_after": "`\"5\"` is a sequence of characters, like `\"hello\"`; `5` is a number the CPU can add and compare. `\"5\" + \"5\"` concatenates to `\"55\"`, while `5 + 5` computes `10` — same-looking symbols, different underlying operations."
   },
   {
     "id": "p1b_eval_code_understand",
@@ -397,26 +160,640 @@
     "skill_id": "p1_how_code_works",
     "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Why must code state steps precisely?",
+    "difficulty": "easy",
+    "time_target_sec": 45,
+    "stem": "Why must code state its steps precisely?",
     "options": [
-      {
-        "id": "a",
-        "text": "The computer follows the written instructions rather than guessing the intended goal"
-      },
-      {
-        "id": "b",
-        "text": "The computer already knows every goal"
-      },
-      {
-        "id": "c",
-        "text": "Precise code always runs without hardware"
-      },
-      {
-        "id": "d",
-        "text": "Code is only decoration"
-      }
+      { "id": "a", "text": "Because the computer already knows every goal and just needs confirming", "misconception": "Attributes intent to the machine, which only follows what is written." },
+      { "id": "b", "text": "Because precise code can run without any hardware", "misconception": "Confuses clarity of instructions with independence from a machine." },
+      { "id": "c", "text": "The computer follows the written instructions rather than guessing the intended goal" },
+      { "id": "d", "text": "Because imprecise code runs more slowly", "misconception": "Frames a correctness problem as a speed problem; the real risk is doing the wrong thing confidently." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what the machine does when your instructions and your intention disagree.",
+      "Think about who notices a missing step: you, or the computer?"
+    ],
+    "explanation_after": "A computer is literal: it performs the supplied instructions, including mistakes and missing steps. It cannot notice that you meant something else, which is why bugs run happily rather than announcing themselves."
+  },
+  {
+    "id": "p1b_eval_loop_understand",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_loops",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 55,
+    "stem": "When is a `while` loop a better fit than a `for` loop?",
+    "options": [
+      { "id": "a", "text": "When you do not know in advance how many repetitions are needed, only the condition for stopping" },
+      { "id": "b", "text": "When you need the loop to run faster", "misconception": "Picks a performance reason; the two forms compile to broadly similar work." },
+      { "id": "c", "text": "When you are working with numbers rather than text", "misconception": "Invents a data-type rule; both loops work with any values." },
+      { "id": "d", "text": "When the loop body is longer than a few lines", "misconception": "Chooses on body size rather than on whether the number of repetitions is known." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "A computer is literal: it performs the supplied instructions, including mistakes or missing steps."
+    "hints": [
+      "Compare 'do this for each item in a list' with 'keep going until the user types quit'.",
+      "Ask which form needs to know the number of repetitions before it starts."
+    ],
+    "explanation_after": "`for` walks a known collection; `while` repeats until a condition changes. Reading user input until they stop, or retrying until a request succeeds, has no count known in advance — which is exactly where `while` fits."
+  },
+  {
+    "id": "p1b_eval_scope_understand",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_scope",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 55,
+    "stem": "What does it mean to say a variable created inside a function is 'local' to it?",
+    "options": [
+      { "id": "a", "text": "It can only hold small values", "misconception": "Reads 'local' as a size limit rather than a visibility rule." },
+      { "id": "b", "text": "The name exists only while that function runs, and cannot be seen from outside it" },
+      { "id": "c", "text": "It is stored on the drive rather than in memory", "misconception": "Invents a storage-location meaning for a naming rule." },
+      { "id": "d", "text": "It cannot be changed once set", "misconception": "Confuses scope, which is about where a name is visible, with immutability." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Try printing the name after the function has finished and predict what happens.",
+      "Ask which part of the program is allowed to see the name at all."
+    ],
+    "explanation_after": "A local name lives only for the duration of the call and is invisible outside. That is what lets two functions both use `i` or `total` without interfering — and why a value you want afterwards has to be returned."
+  },
+  {
+    "id": "p1b_eval_list_understand",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_lists_intro",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "After `b = a` where `a` is a list, why does appending to `b` also change `a`?",
+    "options": [
+      { "id": "a", "text": "Because Python copies lists lazily and the copy has not happened yet", "misconception": "Invents a deferred copy; no copy was ever requested." },
+      { "id": "b", "text": "Because lists are always stored globally", "misconception": "Reaches for scope to explain an identity question." },
+      { "id": "c", "text": "Because `append` is a special method that edits every list", "misconception": "Blames the method rather than the fact that both names refer to one object." },
+      { "id": "d", "text": "Because both names refer to the same list object; assignment copied the reference, not the contents" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what exactly was copied by the assignment.",
+      "Check whether the same question arises with `b = a` where `a` is a number, and why that differs."
+    ],
+    "explanation_after": "Assignment binds another name to the same object. For a list — which can be changed in place — that means edits through either name are visible through both. `b = a[:]` or `list(a)` makes an actual copy."
+  },
+  {
+    "id": "p1b_eval_oop_understand",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1b_oop_classes",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "What is the relationship between a class and an object?",
+    "options": [
+      { "id": "a", "text": "A class is the template; an object is one actual thing built from it, with its own values" },
+      { "id": "b", "text": "They are two words for the same thing", "misconception": "Misses that one is a definition and the other an instance of it." },
+      { "id": "c", "text": "A class is a file; an object is a line inside it", "misconception": "Confuses code organisation with the template/instance relationship." },
+      { "id": "d", "text": "An object is the template; a class is one thing built from it", "misconception": "Has the relationship exactly inverted." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Compare a cookie cutter with the cookies, and ask which one you eat.",
+      "Ask which one you can have many of at the same time, each with different values."
+    ],
+    "explanation_after": "The class says what attributes and methods something has; each object is a separate instance with its own values. One `Dog` class, many dogs, each with its own name."
+  },
+
+  {
+    "id": "p1_eval_var_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_variables",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "What does this code print?\n\na = 4\nb = 9\na = b\nb = a\nprint(a, b)",
+    "options": [
+      { "id": "a", "text": "4 9", "misconception": "Assumes the two assignments cancel out, as if `=` stated a relationship rather than performing a step." },
+      { "id": "b", "text": "9 9" },
+      { "id": "c", "text": "9 4", "misconception": "Reads the pair of assignments as a swap, which is what the code looks like it intends but not what it does." },
+      { "id": "d", "text": "4 4", "misconception": "Applies the assignments in the wrong direction." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Write down the value of each name after every single line, in order.",
+      "After the third line, ask whether the original value of `a` still exists anywhere."
+    ],
+    "explanation_after": "`a = b` sets a to 9; the old 4 is gone. Then `b = a` sets b to a's current value, 9. This is why swapping needs a temporary variable or `a, b = b, a`, not two sequential assignments."
+  },
+  {
+    "id": "p1_eval_cond_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_conditionals",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "What does this code print?\n\ntemp = 30\nif temp > 35:\n    print('Hot')\nelif temp > 25:\n    print('Warm')\nelif temp > 15:\n    print('Cool')\nelse:\n    print('Cold')",
+    "options": [
+      { "id": "a", "text": "Hot", "misconception": "Picks the first branch without testing its condition against the value." },
+      { "id": "b", "text": "Warm" },
+      { "id": "c", "text": "Cool", "misconception": "Finds a true condition but not the first true one; `elif` stops at the first match." },
+      { "id": "d", "text": "Warm and Cool", "misconception": "Treats the branches as independent `if` statements, which would indeed print both." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Test the conditions in written order and stop the moment one is true.",
+      "Ask what difference `elif` makes compared with writing a second plain `if`."
+    ],
+    "explanation_after": "30 > 35 is false; 30 > 25 is true, so 'Warm' prints and the rest are skipped. With four separate `if` statements instead, both 'Warm' and 'Cool' would print — which is the bug `elif` prevents."
+  },
+  {
+    "id": "p1_eval_str_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_strings",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Given `word = \"python\"`, what does `word[1:4]` return?",
+    "options": [
+      { "id": "a", "text": "\"pyt\"", "misconception": "Counts from 1 as the first character instead of from 0." },
+      { "id": "b", "text": "\"yth\"" },
+      { "id": "c", "text": "\"ytho\"", "misconception": "Gets the start right but includes the stop index, which slicing excludes." },
+      { "id": "d", "text": "\"ython\"", "misconception": "Treats the second number as a length or ignores it entirely." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Write the indices under the letters before reading the slice.",
+      "Check whether the character at the stop index is included."
+    ],
+    "explanation_after": "Indices are p=0, y=1, t=2, h=3, o=4. `[1:4]` starts at 1 and stops before 4, giving 'y','t','h'. The half-open convention means `word[:4] + word[4:]` reconstructs the whole string."
+  },
+  {
+    "id": "p1b_eval_op_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_operators",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "You need to check whether a number `n` is even. Which expression does that?",
+    "options": [
+      { "id": "a", "text": "`n / 2 == 0`", "misconception": "Tests whether the number is zero, since only 0 divided by 2 equals 0." },
+      { "id": "b", "text": "`n % 2 == 1`", "misconception": "Tests for odd rather than even, and also fails for negative numbers in Python." },
+      { "id": "c", "text": "`n // 2 == 0`", "misconception": "Uses floor division, which is true only for n of 0 or 1, not for evenness." },
+      { "id": "d", "text": "`n % 2 == 0`" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Try each expression with n = 4 and then with n = 0 and see which survives both.",
+      "Evenness is a statement about what is left over after dividing by two."
+    ],
+    "explanation_after": "A number is even exactly when dividing by 2 leaves nothing over. `n / 2` gives 2.0 for n=4, not 0, which is why the division test fails."
+  },
+  {
+    "id": "p1b_eval_dbg_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_debugging",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "You run a script and get `TypeError: can only concatenate str (not \"int\") to str` on the line `print(\"Total: \" + count)`. What is the fix?",
+    "options": [
+      { "id": "a", "text": "Rename `count` to something else", "misconception": "Treats the error as a naming problem; the message is about types, not names." },
+      { "id": "b", "text": "Remove the quotes around \"Total: \"", "misconception": "Would turn the text into an undefined name and produce a different error." },
+      { "id": "c", "text": "Convert the number to text: `print(\"Total: \" + str(count))`" },
+      { "id": "d", "text": "Change `+` to `-`", "misconception": "Changes the operator without addressing the mismatch of types either side of it." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The message names two types. Ask what operation was attempted between them.",
+      "Either make both sides the same kind of value, or use a form of printing that does not need `+`."
+    ],
+    "explanation_after": "`+` means concatenation for strings and addition for numbers, and Python refuses to guess which you meant across types. Converting with `str()`, or using an f-string, resolves it."
+  },
+  {
+    "id": "p1b_eval_fn_apply",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_functions",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "What does this print?\n\ndef shout(text, times=2):\n    return (text + '! ') * times\n\nprint(shout('go'))",
+    "options": [
+      { "id": "a", "text": "go!", "misconception": "Ignores the default argument, as if the parameter were absent when not supplied." },
+      { "id": "b", "text": "go! go!" },
+      { "id": "c", "text": "An error, because `times` was not supplied", "misconception": "Misses that a default value makes the argument optional." },
+      { "id": "d", "text": "gogo!", "misconception": "Applies the repetition to the text before the exclamation is appended." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what value `times` has when the caller does not pass one.",
+      "Work out what the parentheses group together before the multiplication happens."
+    ],
+    "explanation_after": "The default makes `times` 2 when omitted, and the parentheses mean the whole `'go! '` is repeated. Defaults let one function serve the common case and the custom one."
+  },
+
+  {
+    "id": "p1_eval_loop_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_loops",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "How many times does 'here' print?\n\nfor i in range(2, 10, 3):\n    print('here')",
+    "options": [
+      { "id": "a", "text": "2 times", "misconception": "Reads the first argument as the count rather than the starting value." },
+      { "id": "b", "text": "3 times" },
+      { "id": "c", "text": "4 times", "misconception": "Includes a value at or past the stop, usually by counting 11 as valid." },
+      { "id": "d", "text": "8 times", "misconception": "Ignores the step and counts every integer from 2 up to 10." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "List the actual values the range produces before counting anything.",
+      "Check each candidate value against the stop before accepting it."
+    ],
+    "explanation_after": "`range(2, 10, 3)` gives 2, 5, 8 — the next would be 11, which is past the stop. Writing out the sequence is almost always faster than reasoning about the arithmetic."
+  },
+  {
+    "id": "p1_eval_fn_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_functions",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "Why does this function always return 0, regardless of what is passed in?\n\ndef add_five(n):\n    n = n + 5\n    return 0",
+    "options": [
+      { "id": "a", "text": "Because Python functions can only return one fixed value", "misconception": "Generalises this function's behaviour into a rule about all functions." },
+      { "id": "b", "text": "Because `n = n + 5` causes an error that is silently caught", "misconception": "Invents hidden error handling; the line runs perfectly well, its result is just unused." },
+      { "id": "c", "text": "Because the function computes `n + 5` but never uses that result — it returns the literal 0 instead" },
+      { "id": "d", "text": "Because `n` is local, so the addition has no effect anywhere", "misconception": "Correctly identifies that `n` is local, but that is not why the output is 0; it is 0 because that is what is returned." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask which single line decides what the caller receives.",
+      "Cover up every line except the last one and ask what could possibly come back."
+    ],
+    "explanation_after": "The addition stores a new value in the local `n`, and `return 0` throws it away. Computing something and forgetting to return it is one of the most common bugs — and it fails silently rather than loudly."
+  },
+  {
+    "id": "p1_eval_dbg_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_debugging",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "This code should print the average of the list, but crashes. What is the bug?\n\nscores = []\ntotal = sum(scores)\naverage = total / len(scores)\nprint(average)",
+    "options": [
+      { "id": "a", "text": "`sum()` does not work on empty lists", "misconception": "Blames the most unfamiliar-looking line; `sum([])` is valid and returns 0." },
+      { "id": "b", "text": "`len(scores)` is 0 for an empty list, causing a division-by-zero error" },
+      { "id": "c", "text": "`average` should be spelled `avg`", "misconception": "Looks for a naming problem when the traceback points at arithmetic." },
+      { "id": "d", "text": "Python lists cannot be empty", "misconception": "Invents a language restriction; an empty list is ordinary and common." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Evaluate each line with the actual empty list and see which one cannot complete.",
+      "An average needs something to divide by. Ask what that something is here."
+    ],
+    "explanation_after": "`sum([])` is 0, so the crash is the division by `len(scores)`, which is 0. Checking that the collection is non-empty before averaging is the standard guard."
+  },
+  {
+    "id": "p1b_eval_mutate_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_lists_intro",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "This should remove every negative number but leaves some behind. Why?\n\nnums = [1, -2, -3, 4]\nfor n in nums:\n    if n < 0:\n        nums.remove(n)",
+    "options": [
+      { "id": "a", "text": "`remove` deletes only the first match in the whole list", "misconception": "True of `remove` in general, but here each call does remove the intended item; the problem is what happens to the loop." },
+      { "id": "b", "text": "Negative numbers compare differently and `n < 0` misses some", "misconception": "Doubts the comparison, which is correct for every element." },
+      { "id": "c", "text": "The list shrinks while being walked, so positions shift and an element gets skipped" },
+      { "id": "d", "text": "`nums` is immutable inside the loop", "misconception": "Lists are mutable, and the code demonstrably changes the list." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Track the loop's position index and the list contents together, step by step.",
+      "After an element is removed, ask what has moved into the position the loop just visited."
+    ],
+    "explanation_after": "The loop advances by position. Removing -2 at index 1 shifts -3 into index 1, and the loop moves on to index 2, stepping over it. Build a new list, or iterate over a copy, rather than editing what you are walking."
+  },
+  {
+    "id": "p1b_eval_scope_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_scope",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 90,
+    "stem": "This raises `UnboundLocalError: local variable 'count' referenced before assignment`. Why?\n\ncount = 0\n\ndef bump():\n    count = count + 1\n\nbump()",
+    "options": [
+      { "id": "a", "text": "The assignment inside the function makes `count` local everywhere in it, so the right-hand side has nothing to read" },
+      { "id": "b", "text": "The global `count` was never given a value", "misconception": "The global is plainly set to 0; the error is about the local name, not the global one." },
+      { "id": "c", "text": "Functions cannot read variables defined outside them", "misconception": "They can read outer names freely — it is assigning to them that changes the rules." },
+      { "id": "d", "text": "`count + 1` is not valid for an integer", "misconception": "Doubts the arithmetic rather than the name resolution the error message points at." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Note that the error is about a local variable, even though you may have expected the global.",
+      "Ask what Python decides about a name when it sees an assignment to it anywhere in the function."
+    ],
+    "explanation_after": "Assigning to a name anywhere in a function marks it local for the whole function, so the read on the right has no value yet. Reading an outer variable is fine; assigning to one needs `global` — or, better, passing it in and returning it out."
+  },
+  {
+    "id": "p1b_eval_str_analyze",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_strings",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 90,
+    "stem": "A script calls `name.strip()` but the stored name still has spaces around it. What explains that?",
+    "options": [
+      { "id": "a", "text": "`strip` only removes tabs, not spaces", "misconception": "Invents a restriction; `strip` removes whitespace including spaces." },
+      { "id": "b", "text": "Strings longer than a few characters cannot be stripped", "misconception": "Invents a length limit that does not exist." },
+      { "id": "c", "text": "`strip` needs the characters to remove passed in explicitly", "misconception": "The argument is optional; without it whitespace is removed." },
+      { "id": "d", "text": "`strip` returns a new string and the result was never assigned anywhere" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask whether strings can be changed in place at all.",
+      "Compare this with `list.sort()`, which does change the thing it is called on, and ask why the two differ."
+    ],
+    "explanation_after": "Strings are immutable, so every string method returns a new string and leaves the original untouched. `name = name.strip()` is needed — a trap because the call looks like it did something."
+  },
+
+  {
+    "id": "p1_eval_code_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_how_code_works",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "A team is choosing a language for a one-off data-cleaning script they will run once and never touch again. Which trade-off matters most, and which kind of language fits?",
+    "options": [
+      { "id": "a", "text": "Raw execution speed matters most — a compiled language is better", "misconception": "Optimises the cost that is paid once and briefly, rather than the one that dominates here." },
+      { "id": "b", "text": "It makes no difference which type of language is used for any task", "misconception": "Collapses a real trade-off into indifference." },
+      { "id": "c", "text": "Development speed matters most here, so an interpreted language that skips the compile step fits better" },
+      { "id": "d", "text": "Compiled languages are strictly better for every use case", "misconception": "Turns a context-dependent trade-off into a universal rule." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Work out which cost is paid once and which is paid every run, then look at how many runs there are.",
+      "Ask what you would answer differently if the script ran a million times a day."
+    ],
+    "explanation_after": "Compilation trades slower development for faster execution, which pays off when a program runs constantly. For a script run once, that cost is not worth paying. Neither kind is better in general — the ratio of runs to edits decides it."
+  },
+  {
+    "id": "p1_eval_scope_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_scope",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "A function must keep a running total across many calls. One option is a global the function modifies; another is passing the current total in and returning the new one. Which is generally better, and why?",
+    "options": [
+      { "id": "a", "text": "The global, because it is less code to type", "misconception": "Judges on keystrokes rather than on what the code costs to understand and test later." },
+      { "id": "b", "text": "Both are exactly equivalent in every way", "misconception": "Denies a difference that shows up the moment two callers share the function." },
+      { "id": "c", "text": "The global, because globals are faster to access", "misconception": "Reaches for a performance argument that is both marginal and beside the point." },
+      { "id": "d", "text": "Passing in and out, because the function's behaviour is then fully determined by its arguments rather than hidden external state" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what you would need to know to predict the output of a single call, under each design.",
+      "Imagine two parts of the program calling it for unrelated purposes at the same time."
+    ],
+    "explanation_after": "A function reading and mutating a global is hard to reason about, test or reuse: its result depends on history you cannot see at the call site. Explicit state in and out keeps it self-contained — the reason globals are discouraged once code outgrows a script."
+  },
+  {
+    "id": "p1b_eval_dt_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_data_types",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "A colleague stores money amounts as floats and dismisses concerns, saying the errors are tiny. For an accounting system, how should you judge that?",
+    "options": [
+      { "id": "a", "text": "Fine — floating-point error is far too small to matter for money", "misconception": "Judges per-operation error without asking what accumulates across millions of them, or what a one-penny mismatch costs in an audit." },
+      { "id": "b", "text": "Not fine — repeated rounding accumulates and totals must reconcile exactly, so a decimal or integer-pence representation is the right call" },
+      { "id": "c", "text": "Not fine — floats cannot represent numbers with decimal points at all", "misconception": "Reaches the right conclusion from a false premise; floats represent decimals, just not all of them exactly." },
+      { "id": "d", "text": "Fine — the database will round everything correctly on the way in", "misconception": "Delegates correctness to a layer that was never told what precision is required." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what the acceptance criterion actually is for an accounting total, and whether 'very close' passes it.",
+      "Consider what happens to a tiny error repeated across a million transactions and then summed."
+    ],
+    "explanation_after": "0.1 has no exact binary representation, so sums drift. In accounting the requirement is exact reconciliation, not small error, which is why money is held in decimal types or as whole pence."
+  },
+  {
+    "id": "p1b_eval_loop_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_loops",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "Two ways to find whether any name in a list starts with 'A': (A) loop and return True on the first match; (B) build a list of all matches and check whether it is non-empty. Which is better here, and why?",
+    "options": [
+      { "id": "a", "text": "B, because having the full list of matches is always more useful", "misconception": "Optimises for information nobody asked for, and pays for it on every call." },
+      { "id": "b", "text": "A, because it can stop at the first match, and the question only asked whether one exists" },
+      { "id": "c", "text": "They are identical, because both must look at every name", "misconception": "Misses that A can stop early; only B is forced to finish." },
+      { "id": "d", "text": "B, because loops with an early return are considered bad practice", "misconception": "Invokes a style rule in place of reasoning about the requirement." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what each version does when the very first name matches and the list has a million entries.",
+      "Match the work done against the question actually asked."
+    ],
+    "explanation_after": "The requirement is existence, not enumeration, so stopping at the first match is both faster and a better statement of intent. B would be right if the caller needed the matches themselves — the criterion decides, not the style."
+  },
+  {
+    "id": "p1b_eval_fn_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_functions",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A 200-line function does everything for a report. A reviewer asks for it to be split into smaller functions. On what grounds is that worth doing — or not?",
+    "options": [
+      { "id": "a", "text": "Always split: functions longer than 20 lines are objectively wrong", "misconception": "Applies a line-count rule as if it were the underlying goal." },
+      { "id": "b", "text": "Never split: more functions means more call overhead and slower code", "misconception": "Trades a large maintainability gain for a negligible and usually unmeasurable cost." },
+      { "id": "c", "text": "Worth it if the parts can be named and tested independently; not worth it if the split produces pieces that only make sense in one order" },
+      { "id": "d", "text": "Worth it only if the code is going to be reused elsewhere", "misconception": "Treats reuse as the only benefit, ignoring readability and testability for code used once." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what you gain from a split, and then check whether this particular code would actually give you that.",
+      "Try naming the proposed pieces. A piece you cannot name honestly is a clue."
+    ],
+    "explanation_after": "The point of splitting is units you can name, understand and test on their own. If the fragments are only meaningful in sequence and share a tangle of state, the split adds indirection without the benefit — so the judgment is about cohesion, not length."
+  },
+  {
+    "id": "p1b_eval_oop_evaluate",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1b_oop_classes",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A script needs to hold three related values and do nothing else with them. A colleague proposes a class. Is that the right call?",
+    "options": [
+      { "id": "a", "text": "Yes, always — classes are the correct way to group any data in Python", "misconception": "Applies a paradigm as a default rather than asking what it buys here." },
+      { "id": "b", "text": "No, never — classes should only be used in large applications", "misconception": "Replaces one blanket rule with another, equally unexamined." },
+      { "id": "c", "text": "Probably not: with no behaviour attached, a tuple, dict or simple record type carries the data with less ceremony" },
+      { "id": "d", "text": "Yes, because classes are faster than dictionaries", "misconception": "Decides a design question on a performance claim that is neither established nor relevant at this scale." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "A class bundles data with behaviour. Ask which half this case actually has.",
+      "Ask what the class would contain besides the three values."
+    ],
+    "explanation_after": "Classes earn their keep when data and the operations on it belong together, or when you need several instances with their own behaviour. For three inert values a lighter structure says the same thing with less to read."
+  },
+
+  {
+    "id": "p1_eval_py_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_python_intro",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "You want a program that asks the user for their name and greets them by it. Which sequence does that correctly?",
+    "options": [
+      { "id": "a", "text": "name = input(\"What's your name? \")\nprint(\"Hello, \" + name + \"!\")" },
+      { "id": "b", "text": "name = print(\"What's your name? \")\ninput(\"Hello, \" + name + \"!\")", "misconception": "Swaps the roles of the two functions; `print` returns nothing, so `name` would be None." },
+      { "id": "c", "text": "input(name = \"What's your name?\")\nname.print(\"Hello!\")", "misconception": "Treats the prompt as a named argument and `print` as a method on the value." },
+      { "id": "d", "text": "name == input(\"What's your name? \")\nprint(\"Hello, \" + name)", "misconception": "Uses the equality test where an assignment is needed, so `name` is never bound." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Three things must happen in order: ask, keep the answer, then use it.",
+      "Check which function hands a value back, and make sure that value is captured."
+    ],
+    "explanation_after": "`input()` shows a prompt and returns what was typed, so its result must be assigned. Then `print()` builds the greeting from that variable. Only (a) sequences ask-store-use correctly."
+  },
+  {
+    "id": "p1_eval_list_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_lists_intro",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 105,
+    "stem": "You have a list of Celsius temperatures and need a new list of only those above 0. Which code builds it correctly?",
+    "options": [
+      { "id": "a", "text": "above = temps\nabove.remove(t > 0)", "misconception": "Aliases the original list and passes a boolean to `remove`, which expects a value to delete." },
+      { "id": "b", "text": "above = []\nfor t in temps:\n    if t > 0:\n        above.append(t)" },
+      { "id": "c", "text": "above = temps[0]", "misconception": "Takes a single element rather than filtering the collection." },
+      { "id": "d", "text": "for t in temps:\n    above = t if t > 0", "misconception": "Overwrites rather than accumulates, and the conditional expression is incomplete syntax." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Filtering needs somewhere to put the survivors. Check each option for that.",
+      "Ask whether the result still exists after the loop finishes, and whether it holds more than one value."
+    ],
+    "explanation_after": "Build-and-filter is: start empty, walk the source, test each item, append the ones that pass. The others alias the original, take one element, or overwrite the result each time round."
+  },
+  {
+    "id": "p1_eval_mod_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_modules_imports",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 70,
+    "stem": "Your script needs to generate a random number and also work with dates. Which import setup is correct?",
+    "options": [
+      { "id": "a", "text": "include random, datetime", "misconception": "Borrows a keyword from another language; Python has no `include`." },
+      { "id": "b", "text": "from python import random, datetime", "misconception": "Treats the standard library as a package named `python`, which does not exist." },
+      { "id": "c", "text": "import random\nimport datetime" },
+      { "id": "d", "text": "random.import()\ndatetime.import()", "misconception": "Calls a method on a name that does not exist yet — importing is what would create it." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The module has to exist as a name before you can use anything from it.",
+      "Recall the single keyword Python uses, and that each module can be named on its own line."
+    ],
+    "explanation_after": "`import random` makes `random.randint(...)` available, and `import datetime` makes `datetime.date.today()` available. The module name becomes a variable you then reach through."
+  },
+  {
+    "id": "p1b_eval_cond_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_conditionals",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "Design the check for a password rule: at least 8 characters, and containing at least one digit. Which structure expresses it correctly and reads clearly?",
+    "options": [
+      { "id": "a", "text": "if len(pw) >= 8:\n    if any(c.isdigit() for c in pw):\n        return True\nreturn False" },
+      { "id": "b", "text": "if len(pw) >= 8 or any(c.isdigit() for c in pw):\n    return True\nreturn False", "misconception": "Uses `or`, which accepts a long password with no digit — the rule requires both." },
+      { "id": "c", "text": "if len(pw) >= 8:\n    return True\nif any(c.isdigit() for c in pw):\n    return True\nreturn False", "misconception": "Returns early on the first condition, so the second is never required." },
+      { "id": "d", "text": "if pw.isdigit() and len(pw) >= 8:\n    return True\nreturn False", "misconception": "`isdigit()` demands that every character is a digit, not that one is." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Test each candidate against a password that satisfies only one of the two requirements.",
+      "Write down which logical connective matches 'and also'."
+    ],
+    "explanation_after": "Both conditions must hold, so they combine with `and` — or nest, as here. Checking against a case that passes one rule and fails the other exposes every wrong variant immediately."
+  },
+  {
+    "id": "p1b_eval_dbg_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1_debugging",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "A long script produces the wrong total and you have no debugger. Which plan finds the fault fastest?",
+    "options": [
+      { "id": "a", "text": "Reread the whole script carefully from the top until the error becomes obvious", "misconception": "Relies on noticing by eye the thing already overlooked once, and scales badly with length." },
+      { "id": "b", "text": "Rewrite the script from scratch more carefully", "misconception": "Discards working code and the evidence, and may well reproduce the same mistake." },
+      { "id": "c", "text": "Print the running total at a point halfway through, decide which half is wrong, and repeat inside that half" },
+      { "id": "d", "text": "Add a print on every line so nothing is missed", "misconception": "Collects everything and so distinguishes nothing; the volume of output hides the moment it goes wrong." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "You are looking for the first point where the value stops being right. Think about how you would search a sorted list.",
+      "Ask how many checks you need if each one halves the region still in question."
+    ],
+    "explanation_after": "Halving the search region turns a hundred suspect lines into about seven checks. The skill is picking a point where you know what the value ought to be — which is also why checking intermediate values beats staring at code."
+  },
+  {
+    "id": "p1b_eval_oop_create",
+    "phase": "phase_1b_programming_basics",
+    "skill_id": "p1b_oop_classes",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "You are modelling library books, each with a title and a borrowed-or-not state, and you need to borrow and return them. Which design fits best?",
+    "options": [
+      { "id": "a", "text": "A `Book` class holding title and status, with `borrow()` and `return_book()` methods that change that book's own status" },
+      { "id": "b", "text": "One global list of titles and a separate global list of statuses, kept in the same order", "misconception": "Splits a single thing across parallel collections, which drift apart the moment one is edited without the other." },
+      { "id": "c", "text": "A single `Library` class with one `title` and one `status` attribute", "misconception": "Models the collection as if it were one item, leaving nowhere to put the second book." },
+      { "id": "d", "text": "A function `borrow(title)` that reassigns a global `status` variable", "misconception": "Holds the state of every book in one shared variable, so borrowing any book overwrites the last." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what there are many of, and what each one needs to remember for itself.",
+      "Check each design by adding a second book and borrowing only one of them."
+    ],
+    "explanation_after": "Each book has its own state and the operations act on that state, which is exactly what a class is for. The parallel-lists and shared-variable designs both fail the two-book test — the quickest way to check any model."
   }
 ]
