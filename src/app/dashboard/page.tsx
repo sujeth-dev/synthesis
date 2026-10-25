@@ -2,7 +2,12 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/db/auth'
-import { getLearnerProfile, getAllSkillStates, getReviewSchedules } from '@/lib/db/queries'
+import {
+  getLearnerProfile, getAllSkillStates, getReviewSchedules,
+  getAttemptsBetween, getBehaviorQualityShadowBetween, getExamItemsBetween,
+} from '@/lib/db/queries'
+import { behaviourInsights } from '@/lib/analytics/profile'
+import { BehaviourInsights } from '@/components/olm/BehaviourInsights'
 import { getAllNodes, getAllEdges } from '@/lib/graph'
 import { Navbar } from '@/components/layout/Navbar'
 import { PHASE_ORDER, findActivePhase, buildPhaseGroups, PHASE_EVALUATION_FILES } from '@/lib/phases'
@@ -45,6 +50,10 @@ const MASTERY_RING: Record<string, string> = {
   blocked:  'ring-1 ring-[#a8a49c]/30',
 }
 
+// The behaviour panel's window: long enough for a weekly pace trend, short
+// enough that how you worked in spring does not describe you now.
+const BEHAVIOUR_WINDOW_DAYS = 90
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function phaseStats(nodes: SkillNode[], stateMap: Map<string, LearnerSkillState>) {
@@ -82,15 +91,21 @@ export default async function Dashboard({
   if (!profile) redirect('/login')
   if (!profile.diagnostic_done) redirect('/learn/diagnostic')
 
-  const [allStates, schedules] = await Promise.all([
+  const now          = new Date()
+  const windowStart  = new Date(now.getTime() - BEHAVIOUR_WINDOW_DAYS * 86400000)
+  const windowEnd    = new Date(now.getTime() + 60_000)
+  const [allStates, schedules, windowAttempts, qualityShadow, examItems] = await Promise.all([
     getAllSkillStates(user.id),
     getReviewSchedules(user.id),
+    getAttemptsBetween(user.id, windowStart, windowEnd),
+    getBehaviorQualityShadowBetween(user.id, windowStart, windowEnd),
+    getExamItemsBetween(user.id, windowStart, windowEnd),
   ])
   const allNodes  = getAllNodes()
   const allEdges  = getAllEdges()
+  const insights  = behaviourInsights(windowAttempts, qualityShadow, examItems, now)
 
   const stateMap     = new Map(allStates.map(s => [s.skill_id, s]))
-  const now          = new Date()
   const threeDays    = new Date(now.getTime() + 3 * 86400000)
 
   // ── Classify reviews ────────────────────────────────────────────────────────
@@ -447,6 +462,17 @@ export default async function Dashboard({
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* ── Behavioural insights (OLM-4) ─────────────────────────────────── */}
+        {!viewAll && (
+          <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 p-6 mb-6">
+            <div className="flex items-baseline justify-between mb-4">
+              <p className="text-[14px] font-semibold text-c-text">How you work</p>
+              <Link href="/profile" className="text-[12px] font-mono text-c-faint hover:text-c-text">What the model believes →</Link>
+            </div>
+            <BehaviourInsights insights={insights} windowDays={BEHAVIOUR_WINDOW_DAYS} />
           </div>
         )}
 
