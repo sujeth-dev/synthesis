@@ -84,6 +84,8 @@ export function buildSelectionShadowRow(
   ranked: CandidateScore[],
   explored: boolean,
   sessionId: string | null,
+  /** True when the score's pick is what the learner was served (LIVE-1, SELECTOR=score). */
+  applied = false,
 ): SelectionShadowRow {
   const runnersUp: RunnerUp[] = ranked
     .filter(candidate => candidate.skill_id !== chosen?.skill_id)
@@ -112,7 +114,7 @@ export function buildSelectionShadowRow(
     candidate_count: trace.candidates.length,
     terms: chosen?.terms ?? null,
     runners_up: runnersUp,
-    applied: false,
+    applied,
   }
 }
 

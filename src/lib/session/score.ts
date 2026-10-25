@@ -8,8 +8,9 @@
  * Research/lab/02-engines.md:334, where the `reason` field is called "not
  * optional" — every score carries the sentence that explains it.
  *
- * Shadow only. Nothing here changes what a learner is served; the rule cascade
- * still decides until LIVE-1 passes human sign-off.
+ * Live since LIVE-1 (human sign-off 2026-10-25): under SELECTOR=score, the
+ * default, this picks from the pool the cascade makes eligible — see
+ * selector.ts. SELECTOR=rules returns it to shadow.
  *
  * Pure and synchronous, like the selector it shadows: no I/O, no clock of its
  * own, no Math.random. Hard constraints stay filters in the cascade — this

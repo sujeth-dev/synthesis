@@ -291,8 +291,13 @@ function LearnPageInner() {
     setPhase('question')
   }, [arcAttemptCount, arcSkillId, lessonComplete, seenSkills, seenQuestions, sessionMode, taskLimit, track])
 
-  // Start session
+  // Start session — once. React's development double-invoke ran this twice,
+  // opening two sessions and racing two `next` calls, so the question on
+  // screen could come from either one.
+  const started = useRef(false)
   useEffect(() => {
+    if (started.current) return
+    started.current = true
     async function start() {
       const r = await fetch('/api/session', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },

@@ -136,8 +136,23 @@ export interface SelectTaskParams {
    * overdue and review ordering drifts between runs.
    */
   now?:                       Date
+  /**
+   * Picks from a pool the cascade has already made eligible (LIVE-1). Called
+   * only when there is a real choice — two or more candidates — and only in the
+   * review-mode and tier branches; the pinned arc and the confidence boost have
+   * one candidate by construction. An answer outside the pool, or null, leaves
+   * the cascade's own pick in place.
+   */
+  rank?:                      (pool: Candidate[]) => string | null
 }
 
+/**
+ * Reviews are served only after the learner consents to a review batch
+ * (`getSessionGate`), so a learn session never takes one. Recorded in
+ * PROGRESS.md item 18 as a suspected bug; at LIVE-1 it was confirmed as the
+ * deliberate consent design, pinned by tests in engine.test.ts and
+ * decay.test.ts, and left as it is.
+ */
 export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
   return mode === 'review'
 }
@@ -153,6 +168,9 @@ export function difficultyTierFor(state: LearnerSkillState, motivation: Motivati
   if (motivation === 'bored')             diffTier = 'harder'
   if (state.consecutive_correct >= 3)     diffTier = 'harder'
   if (state.consecutive_wrong >= 2)       diffTier = 'review'
+  // Unreachable for anything served: every branch filters blocked skills out
+  // before this runs, and no question in the bank carries this tier. Only the
+  // score reads it, for a blocked candidate it already scores at zero.
   if (state.mastery_state === 'blocked')  diffTier = 'prerequisite'
   return diffTier
 }
@@ -170,12 +188,21 @@ export interface SelectionTrace {
   branch: SelectionBranch
   /** Every candidate this arm of the cascade considered. */
   candidates: Candidate[]
+  /** The cascade's own pick — what the rules alone would serve. */
   chosen: Candidate | null
+  /** What was actually served: `chosen`, unless `rank` picked another. */
+  served: Candidate | null
   difficulty_tier: DifficultyTier | null
 }
 
 function noSelection(branch: SelectionBranch, candidates: Candidate[] = []): SelectionTrace {
-  return { task: null, branch, candidates, chosen: null, difficulty_tier: null }
+  return { task: null, branch, candidates, chosen: null, served: null, difficulty_tier: null }
+}
+
+function applyRank(pool: Candidate[], cascadePick: Candidate, rank?: SelectTaskParams['rank']): Candidate {
+  if (!rank || pool.length < 2) return cascadePick
+  const id = rank(pool)
+  return pool.find(candidate => candidate.skill_id === id) ?? cascadePick
 }
 
 // ─── Main selector ─────────────────────────────────────────────────────────────
@@ -189,7 +216,7 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
   const {
     skillStates, reviewSchedules, motivationState,
     seenSkillsThisSession, seenQuestionIdsThisSession, questionsCache, mode, currentSkillId,
-    arcHistory = [], lastQuestionId, now = new Date(),
+    arcHistory = [], lastQuestionId, now = new Date(), rank,
   } = p
 
   // ── Determine active phase ────────────────────────────────────────────────
@@ -219,15 +246,16 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
     }
     if (reviewCandidates.length === 0) return noSelection('review_mode')
     reviewCandidates.sort((a, b) => a.days_until_due - b.days_until_due) // most overdue first
-    const best  = reviewCandidates[0]
-    const state = skillStates.get(best.skill_id)
+    const best   = reviewCandidates[0]
+    const served = applyRank(reviewCandidates, best, rank)
+    const state  = skillStates.get(served.skill_id)
     if (!state) return noSelection('review_mode', reviewCandidates)
     const diffTier: DifficultyTier = state.consecutive_wrong >= 2 ? 'review' : 'same'
-    const q = pickQuestion(best.skill_id, diffTier, seenQuestionIdsThisSession, questionsCache)
+    const q = pickQuestion(served.skill_id, diffTier, seenQuestionIdsThisSession, questionsCache)
     if (!q) return noSelection('review_mode', reviewCandidates)
     return {
-      task: buildTask(best.skill_id, q, diffTier, best, state),
-      branch: 'review_mode', candidates: reviewCandidates, chosen: best, difficulty_tier: diffTier,
+      task: buildTask(served.skill_id, q, diffTier, served, state),
+      branch: 'review_mode', candidates: reviewCandidates, chosen: best, served, difficulty_tier: diffTier,
     }
   }
 
@@ -254,7 +282,7 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
       if (q) {
         return {
           task: buildTask(currentSkillId, q, diffTier, pinned, state),
-          branch: 'pinned_arc', candidates: [pinned], chosen: pinned, difficulty_tier: diffTier,
+          branch: 'pinned_arc', candidates: [pinned], chosen: pinned, served: pinned, difficulty_tier: diffTier,
         }
       }
     }
@@ -278,7 +306,7 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
           }
           return {
             task: buildTask(easyWin, q, 'review', boost, state),
-            branch: 'confidence_boost', candidates: [boost], chosen: boost, difficulty_tier: 'review',
+            branch: 'confidence_boost', candidates: [boost], chosen: boost, served: boost, difficulty_tier: 'review',
           }
         }
       }
@@ -297,12 +325,16 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
       .map(([id]) => id)
   )
 
-  // ── Build 5-tier candidate pools ──────────────────────────────────────────
-  // Tier 0: urgent overdue reviews in active phase
+  // ── Build the candidate pools, in priority order ──────────────────────────
+  // Tier 0: urgent overdue reviews in active phase (consent-gated, see canSelectReview)
   // Tier 1: weak/new learnable skills in active phase
   // Past-phase reviews are offered only when the learner chooses review mode.
   // Tier 4: fallback — any learnable skill when active phase is exhausted
-  const tiers: Candidate[][] = [[], [], [], [], []]
+  // Tiers 2 and 3 were allocated here and never filled; the numbering is kept
+  // because `Candidate.tier` carries it.
+  const reviewPool:   Candidate[] = []
+  const learnPool:    Candidate[] = []
+  const fallbackPool: Candidate[] = []
 
   for (const [skillId, schedule] of Array.from(reviewSchedules)) {
     const state = skillStates.get(skillId)
@@ -317,7 +349,7 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
 
     if (inActive) {
       // Tier 0: active phase overdue review
-      tiers[0].push({
+      reviewPool.push({
         skill_id: skillId, tier: 0,
         reason: 'active_phase_review',
         days_until_due, review_repetition: schedule.repetitions,
@@ -327,7 +359,7 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
   }
 
   // Tier 1: active-phase learnable skills not already in Tier 0
-  const tier0Ids = new Set(tiers[0].map(c => c.skill_id))
+  const tier0Ids = new Set(reviewPool.map(c => c.skill_id))
   const learnableActive = Array.from(skillStates.values())
     .filter(s =>
       activePhaseIds.has(s.skill_id) &&
@@ -341,7 +373,7 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
     .slice(0, 5)
 
   for (const s of learnableActive) {
-    tiers[1].push({
+    learnPool.push({
       skill_id: s.skill_id, tier: 1,
       reason: 'active_phase_new',
       days_until_due: 0,
@@ -349,20 +381,25 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
     })
   }
 
-  // Tier 4 fallback: active-phase pool exhausted → any learnable skill
-  if (tiers[0].length === 0 && tiers[1].length === 0) {
+  // Tier 4 fallback: active-phase pool exhausted → any learnable skill.
+  // Active-phase skills come first (relaxing only the interleaving filter);
+  // other phases only when the active phase has nothing learnable at all. It
+  // used to filter on the active phase too, so a phase whose remaining skills
+  // were all blocked ended the session instead of falling back (LIVE-1).
+  if (reviewPool.length === 0 && learnPool.length === 0) {
     const learnableAll = Array.from(skillStates.values())
       .filter(s =>
-        activePhaseIds.has(s.skill_id) &&
         ['ready', 'learning', 'fragile'].includes(s.mastery_state) &&
         questionsCache.has(s.skill_id) &&
         getNodeById(s.skill_id)
       )
       .sort((a, b) => a.p_know - b.p_know)
-    const learnableFiltered = learnableAll.filter(s => !overRep.has(s.skill_id))
-    const learnable = (learnableFiltered.length > 0 ? learnableFiltered : learnableAll).slice(0, 5)
+    const inActive = learnableAll.filter(s => activePhaseIds.has(s.skill_id))
+    const pool = inActive.length > 0 ? inActive : learnableAll
+    const learnableFiltered = pool.filter(s => !overRep.has(s.skill_id))
+    const learnable = (learnableFiltered.length > 0 ? learnableFiltered : pool).slice(0, 5)
     for (const s of learnable) {
-      tiers[4].push({
+      fallbackPool.push({
         skill_id: s.skill_id, tier: 4,
         reason: recentWindow.includes(s.skill_id) ? 'varied_practice' : 'active_phase_new',
         days_until_due: 0,
@@ -372,34 +409,36 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
   }
 
   // ── Select best candidate ─────────────────────────────────────────────────
+  const pools = [reviewPool, learnPool, fallbackPool]
   let best: Candidate | null = null
-  for (const tier of tiers) {
-    if (tier.length > 0) {
+  for (const pool of pools) {
+    if (pool.length > 0) {
       // Reviews: most overdue first; learnable: weakest first (already sorted by p_know)
-      if (tier[0].days_until_due < 0) {
-        tier.sort((a, b) => a.days_until_due - b.days_until_due)
+      if (pool[0].days_until_due < 0) {
+        pool.sort((a, b) => a.days_until_due - b.days_until_due)
       }
-      best = tier[0]
+      best = pool[0]
       break
     }
   }
 
   // Flattened after the sort above, so the logged pool is in the order the
   // cascade actually ranked it.
-  const considered = tiers.flat()
+  const considered = pools.flat()
 
   if (!best) return noSelection('tiers', considered)
 
-  const state = skillStates.get(best.skill_id)
+  const served = applyRank(considered, best, rank)
+  const state = skillStates.get(served.skill_id)
   if (!state) return noSelection('tiers', considered)
 
   const diffTier = difficultyTierFor(state, motivationState.state)
 
-  const q = pickQuestion(best.skill_id, diffTier, seenQuestionIdsThisSession, questionsCache)
+  const q = pickQuestion(served.skill_id, diffTier, seenQuestionIdsThisSession, questionsCache)
   if (!q) return noSelection('tiers', considered)
   return {
-    task: buildTask(best.skill_id, q, diffTier, best, state),
-    branch: 'tiers', candidates: considered, chosen: best, difficulty_tier: diffTier,
+    task: buildTask(served.skill_id, q, diffTier, served, state),
+    branch: 'tiers', candidates: considered, chosen: best, served, difficulty_tier: diffTier,
   }
 }
 

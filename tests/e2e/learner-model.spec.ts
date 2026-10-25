@@ -42,6 +42,7 @@ test('the dashboard and profile show the learner model, its evidence and how the
     let sessionId: string | null = null
     let seenSkills: string[] = []
     let seenQuestions: string[] = []
+    const servedSkills: string[] = []
     let answered = 0
     let guard = 0
     while (answered < ANSWERS && guard < ANSWERS * 3) {
@@ -82,11 +83,24 @@ test('the dashboard and profile show the learner model, its evidence and how the
       })
       expect(attempt.ok(), await attempt.text()).toBe(true)
       seenSkills = [...seenSkills, body.task.skill_id]
+      servedSkills.push(body.task.skill_id)
       seenQuestions = [...seenQuestions, q.id]
       answered += 1
     }
     if (sessionId) await page.request.post('/api/session', { data: { action: 'end', session_id: sessionId } })
     expect(answered).toBe(ANSWERS)
+
+    // LIVE-1: with SELECTOR unset the score serves. Every decision with a real
+    // choice is logged as applied, in order, and its pick is what was served.
+    const { data: selections, error: selectionError } = await db.from('selection_shadow')
+      .select('score_skill_id,applied,candidate_count').eq('learner_id', learnerId).order('created_at')
+    expect(selectionError).toBeNull()
+    expect((selections ?? []).length).toBeGreaterThan(0)
+    for (const row of selections ?? []) {
+      expect(row.applied).toBe(true)
+      expect(row.candidate_count).toBeGreaterThanOrEqual(2)
+      expect(servedSkills).toContain(row.score_skill_id)
+    }
 
     // A short Practice exam with a hint, so the Bloom profile and hint reliance have data.
     const bank = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'content', 'questions', 'phase-evaluation', 'p1_evaluation.json'), 'utf8'))
@@ -110,6 +124,7 @@ test('the dashboard and profile show the learner model, its evidence and how the
     await page.goto('/dashboard')
     await expect(page.getByTestId('reason-line')).toBeVisible({ timeout: 30_000 })
     await expect(page.getByTestId('reason-line')).toContainText('Starts with')
+    await expect(page.getByTestId('next-up')).not.toContainText('advisory')
     await expect(page.getByTestId('review-forecast')).toBeVisible()
     await expect(page.getByTestId('dashboard-bloom')).toContainText('Latest exam')
     await expect(page.getByTestId('behaviour-insights')).toBeVisible()

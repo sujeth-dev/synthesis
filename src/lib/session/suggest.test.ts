@@ -37,7 +37,7 @@ const states = nodes.map(n => {
 })
 const args = {
   skillStates: states, schedules: nodes.map(n => fresh(n.id)), motivation,
-  learnerRating: ELO_START, questionRatings: new Map<string, number>(), now: NOW,
+  learnerRating: ELO_START, now: NOW,
 }
 
 describe('the dashboard suggestion (OLM-5)', () => {
@@ -55,6 +55,18 @@ describe('the dashboard suggestion (OLM-5)', () => {
     expect(s.score!.terms.length).toBeGreaterThan(0)
     const locked = new Set(states.filter(x => x.mastery_state === 'blocked').map(x => x.skill_id))
     expect(locked.has(s.score!.skill_id)).toBe(false)
+  })
+
+  it('under the score, the session starts with the score\'s pick (LIVE-1)', () => {
+    const s = suggestNext({ ...args, selector: 'score' })
+    expect(s.selector).toBe('score')
+    expect(s.served?.skill_id).toBe(s.score!.skill_id)
+  })
+
+  it('under the rules, the session starts with the cascade\'s pick and the score stays advisory', () => {
+    const s = suggestNext({ ...args, selector: 'rules' })
+    expect(s.served).toEqual(s.rule)
+    expect(s.score).not.toBeNull()
   })
 
   it('is the same suggestion every time for the same state, since it never explores', () => {

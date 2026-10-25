@@ -1,14 +1,15 @@
 /**
- * What the dashboard says comes next (OLM-5): the rule cascade's pick, which is
- * what a session will actually serve, beside the multi-metric score's pick on
- * the same pool with its per-term reasons.
+ * What the dashboard says comes next (OLM-5, LIVE-1): the pick a session will
+ * actually serve, with the score's per-term reasons, beside the pick the other
+ * selector would have made on the same pool.
  *
- * Advisory by construction. The score is still shadow-only until LIVE-1, so the
- * dashboard must never present its pick as the plan — it is "what the score
- * would choose", next to "what your session will start with".
+ * It runs the same selection the session route does, through the same
+ * `scoreRanker`, so under SELECTOR=score the dashboard's "starts with" is the
+ * score's pick and under SELECTOR=rules it is the cascade's, with the score
+ * shown as advisory.
  *
- * Read-only: no state is written, and exploration is off (the default `next`
- * never explores), so the same state always gives the same suggestion.
+ * Read-only: no state is written, and exploration is off, so the same state
+ * always gives the same suggestion.
  */
 import fs from 'fs'
 import path from 'path'
@@ -16,8 +17,9 @@ import type {
   LearnerSkillState, MotivationState, Question, ReviewSchedule, TaskReason,
 } from '@/types'
 import { selectNextTaskDetailed } from './engine'
-import { rankCandidates, type CandidateScore } from './score'
-import { SCORE_TIE_EPSILON, toScoreInputs } from './shadow'
+import type { CandidateScore } from './score'
+import { SCORE_TIE_EPSILON } from './shadow'
+import { activeSelector, scoreRanker, type SelectorMode } from './selector'
 
 const QUESTIONS_DIR = path.join(process.cwd(), 'content', 'questions', 'by-skill')
 
@@ -48,8 +50,16 @@ export const REASON_TEXT: Record<TaskReason, string> = {
   varied_practice:          'something different, for variety',
 }
 
+type Pick = { skill_id: string; reason: TaskReason }
+
 export interface Suggestion {
-  rule: { skill_id: string; reason: TaskReason } | null
+  /** Which selector the session follows. */
+  selector: SelectorMode
+  /** What the session will start with. */
+  served: Pick | null
+  /** The rule cascade's own pick on the same pool. */
+  rule: Pick | null
+  /** The score's pick, with its terms and reason. */
   score: CandidateScore | null
   runnersUp: CandidateScore[]
   agreed: boolean
@@ -62,9 +72,10 @@ export function suggestNext(args: {
   schedules: ReviewSchedule[]
   motivation: MotivationState
   learnerRating: number
-  questionRatings: Map<string, number>
   now: Date
+  selector?: SelectorMode
 }): Suggestion {
+  const selector = args.selector ?? activeSelector()
   const skillStates = new Map(args.skillStates.map(s => [s.skill_id, s]))
   const reviewSchedules = new Map(args.schedules.map(s => [s.skill_id, s]))
   const questionsCache = new Map<string, Question[]>()
@@ -73,28 +84,37 @@ export function suggestNext(args: {
     if (qs.length > 0) questionsCache.set(id, qs)
   }
 
+  // The score ranks the pool whichever selector is live; only whether its pick
+  // is served differs.
+  const ranker = scoreRanker({
+    skillStates, reviewSchedules, motivation: args.motivation.state, questionsCache,
+    recentSkillIds: [], now: args.now, learnerRating: args.learnerRating,
+  })
   const trace = selectNextTaskDetailed({
     skillStates, reviewSchedules, motivationState: args.motivation,
     seenSkillsThisSession: [], seenQuestionIdsThisSession: new Set(),
     questionsCache, mode: 'learn', now: args.now,
+    rank: selector === 'score' ? ranker.rank : undefined,
   })
-  const rule = trace.chosen ? { skill_id: trace.chosen.skill_id, reason: trace.chosen.reason } : null
+  const pick = (c: typeof trace.chosen): Pick | null => c ? { skill_id: c.skill_id, reason: c.reason } : null
+  const rule = pick(trace.chosen)
 
-  const inputs = toScoreInputs(trace.candidates, skillStates, reviewSchedules, args.motivation.state, questionsCache, args.questionRatings)
-  if (inputs.length < 2) return { rule, score: null, runnersUp: [], agreed: false, tied: false }
+  // Under the rules the score never ran inside the selection; rank the pool
+  // here, beside it, exactly as the shadow log does.
+  if (selector === 'rules' && trace.candidates.length >= 2) ranker.rank(trace.candidates)
+  const ranking = ranker.last()
+  const served = trace.task ? pick(trace.served) : null
+  if (!ranking?.chosen) return { selector, served, rule, score: null, runnersUp: [], agreed: false, tied: false }
 
-  const { chosen, ranked } = rankCandidates(inputs, {
-    now: args.now,
-    learner_rating: args.learnerRating,
-    motivation_state: args.motivation.state,
-    recent_skill_ids: [],
-  })
+  const { chosen, ranked } = ranking
   const ruleScore = rule ? ranked.find(c => c.skill_id === rule.skill_id) ?? null : null
   return {
+    selector,
+    served,
     rule,
     score: chosen,
-    runnersUp: ranked.filter(c => c.skill_id !== chosen?.skill_id).slice(0, 2),
-    agreed: chosen !== null && chosen.skill_id === rule?.skill_id,
-    tied: chosen !== null && ruleScore !== null && Math.abs(chosen.score - ruleScore.score) < SCORE_TIE_EPSILON,
+    runnersUp: ranked.filter(c => c.skill_id !== chosen.skill_id).slice(0, 2),
+    agreed: chosen.skill_id === rule?.skill_id,
+    tied: ruleScore !== null && Math.abs(chosen.score - ruleScore.score) < SCORE_TIE_EPSILON,
   }
 }

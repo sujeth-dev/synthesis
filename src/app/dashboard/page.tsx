@@ -5,7 +5,7 @@ import { verifyToken } from '@/lib/db/auth'
 import {
   getLearnerProfile, getAllSkillStates, getReviewSchedules,
   getAttemptsBetween, getBehaviorQualityShadowBetween, getExamItemsBetween,
-  getMotivationState, getQuestionRatingsForSkills, getLearnerAbility, getExamRuns,
+  getMotivationState, getLearnerAbility, getExamRuns,
 } from '@/lib/db/queries'
 import { behaviourInsights, bloomProfile, reviewForecast } from '@/lib/analytics/profile'
 import { suggestNext } from '@/lib/session/suggest'
@@ -117,17 +117,13 @@ export default async function Dashboard({
 
   const stateMap     = new Map(allStates.map(s => [s.skill_id, s]))
 
-  // ── Hero: next session, advisory score pick, review forecast, Bloom (OLM-5)
+  // ── Hero: next session and why, review forecast, Bloom (OLM-5, LIVE-1)
   const heroPhase = findActivePhase(allNodes, stateMap)
-  const [ratings, ability] = await Promise.all([
-    getQuestionRatingsForSkills(allStates.filter(s => s.mastery_state !== 'blocked').map(s => s.skill_id)),
-    getLearnerAbility(user.id, heroPhase as Phase),
-  ])
+  const ability = await getLearnerAbility(user.id, heroPhase as Phase)
   const suggestion = motivation
     ? suggestNext({
         skillStates: allStates, schedules, motivation,
         learnerRating: ability?.rating ?? ELO_START,
-        questionRatings: new Map(ratings.map(r => [r.question_id, r.rating])),
         now,
       })
     : null

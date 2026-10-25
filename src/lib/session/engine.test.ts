@@ -14,6 +14,12 @@ vi.mock('@/lib/graph', () => {
       explanation_ids: { beginner: '', mid: '', advanced: '' }, tags: [],
       intuition: '', analogy: '', why_it_matters: '',
     },
+    {
+      id: 'p1b_variables', label: 'Variables', phase: 'phase_1b_programming_basics',
+      difficulty_base: 1, question_ids: ['p1b_variables-question'],
+      explanation_ids: { beginner: '', mid: '', advanced: '' }, tags: [],
+      intuition: '', analogy: '', why_it_matters: '',
+    },
   ]
   return {
     getAllNodes: () => nodes,
@@ -37,6 +43,7 @@ import {
   planReviewDebt,
   selectArcDifficulty,
   selectNextTask,
+  selectNextTaskDetailed,
 } from '@/lib/session/engine'
 import type { LearnerSkillState, MotivationState, Question } from '@/types'
 
@@ -308,5 +315,110 @@ describe('selection clock', () => {
   it('reads the same clock for urgency as for the due check', () => {
     const task = selectReviewAt(new Date('2026-01-18T00:00:00Z'), '2026-01-08T00:00:00Z')
     expect(task?.days_until_due).toBe(-10)
+  })
+})
+
+// LIVE-1: the cascade still builds the pool; `rank` only chooses within it.
+describe('choosing from the pool (LIVE-1)', () => {
+  const weak = 'p1_what_is_computer'
+  const stronger = 'p1_input_output'
+
+  function selectWith(rank?: (pool: { skill_id: string }[]) => string | null) {
+    return selectNextTaskDetailed({
+      skillStates: new Map([
+        [weak, skillState(weak, 0.1)],
+        [stronger, skillState(stronger, 0.2)],
+      ]),
+      reviewSchedules: new Map(),
+      motivationState,
+      seenSkillsThisSession: [],
+      seenQuestionIdsThisSession: new Set(),
+      questionsCache: new Map([
+        [weak, [question(weak)]],
+        [stronger, [question(stronger)]],
+      ]),
+      rank,
+    })
+  }
+
+  it('serves the ranked pick and keeps the cascade pick on the trace', () => {
+    const trace = selectWith(() => stronger)
+    expect(trace.task?.skill_id).toBe(stronger)
+    expect(trace.served?.skill_id).toBe(stronger)
+    expect(trace.chosen?.skill_id).toBe(weak)
+  })
+
+  it('keeps the cascade pick when the ranker answers outside the pool or not at all', () => {
+    expect(selectWith(() => 'not_in_pool').task?.skill_id).toBe(weak)
+    expect(selectWith(() => null).task?.skill_id).toBe(weak)
+  })
+
+  it('serves the cascade pick when no ranker is given', () => {
+    const trace = selectWith()
+    expect(trace.task?.skill_id).toBe(weak)
+    expect(trace.served).toEqual(trace.chosen)
+  })
+
+  it('is not asked when there is only one candidate', () => {
+    let asked = false
+    const task = selectNextTask({
+      skillStates: new Map([[weak, skillState(weak, 0.1)]]),
+      reviewSchedules: new Map(),
+      motivationState,
+      seenSkillsThisSession: [],
+      seenQuestionIdsThisSession: new Set(),
+      questionsCache: new Map([[weak, [question(weak)]]]),
+      rank: () => { asked = true; return null },
+    })
+    expect(task?.skill_id).toBe(weak)
+    expect(asked).toBe(false)
+  })
+})
+
+// LIVE-1, PROGRESS.md item 18 finding 2: the fallback filtered on the active
+// phase like the tier above it, so it could never fall back.
+describe('the exhausted-phase fallback (LIVE-1)', () => {
+  const mastered = 'p1_what_is_computer'
+  const locked = 'p1_input_output'
+  const nextPhase = 'p1b_variables'
+
+  it('serves a learnable skill from another phase when the active phase has none', () => {
+    const task = selectNextTask({
+      skillStates: new Map([
+        [mastered, { ...skillState(mastered, 0.95), mastery_state: 'mastered' }],
+        [locked, { ...skillState(locked, 0.1), mastery_state: 'blocked' }],
+        [nextPhase, skillState(nextPhase, 0.1)],
+      ]),
+      reviewSchedules: new Map(),
+      motivationState,
+      seenSkillsThisSession: [],
+      seenQuestionIdsThisSession: new Set(),
+      questionsCache: new Map([
+        [mastered, [question(mastered)]],
+        [locked, [question(locked)]],
+        [nextPhase, [question(nextPhase)]],
+      ]),
+    })
+    expect(task?.skill_id).toBe(nextPhase)
+  })
+
+  it('still prefers the active phase, relaxing only interleaving, while it has anything learnable', () => {
+    const active = 'p1_input_output'
+    const task = selectNextTask({
+      skillStates: new Map([
+        [mastered, { ...skillState(mastered, 0.95), mastery_state: 'mastered' }],
+        [active, skillState(active, 0.4)],
+        [nextPhase, skillState(nextPhase, 0.1)],
+      ]),
+      reviewSchedules: new Map(),
+      motivationState,
+      seenSkillsThisSession: [active, active],
+      seenQuestionIdsThisSession: new Set(),
+      questionsCache: new Map([
+        [active, [question(active)]],
+        [nextPhase, [question(nextPhase)]],
+      ]),
+    })
+    expect(task?.skill_id).toBe(active)
   })
 })

@@ -20,7 +20,7 @@ grader had one earlier evaluation on 106 hand-labelled explanations, recorded in
 | 963 questions, 120 explain | `npm run validate` | "by format" line |
 | The behaviour timing logic | `npx vitest run src/lib/timing src/app/api/attempt` | Tests named for slow answers, hesitation, revisions |
 | What `/engine` will contain | `npm run seed:demo -- --dry-run` | Row counts per table, nothing written |
-| Everything passes | `npx vitest run` | 32 files, 351 tests |
+| Everything passes | `npx vitest run` | 32 files, 360 tests |
 | The exam's rules (adaptive length, hint credit, debrief) | `npx vitest run src/lib/exam src/app/api/exam` | 44 tests |
 
 ## Needs your machine (do not promise these live without setup)
@@ -38,10 +38,12 @@ grader had one earlier evaluation on 106 hand-labelled explanations, recorded in
 ## Built but deliberately off
 
 `SCHEDULER=fsrs`, `ADAPTIVE_QUALITY=1`, `BKT_PER_SKILL=1` (inert until parameters
-come from real learners), any DKT cutover, and the multi-metric selector — the
-dashboard's **Suggested next** is labelled *advisory* because sessions still follow
-the rule order until LIVE-1. Show them as *logged next to the live
+come from real learners) and any DKT cutover. Show them as *logged next to the live
 value*, never as switched on.
+
+**Switched on (LIVE-1):** the multi-metric selector. The dashboard's "Your next
+session" card shows the score's pick and its five terms. `/engine` shows each
+decision, with the old rule pick beside it. `SELECTOR=rules` turns it back off.
 
 ## How behaviour is tracked
 

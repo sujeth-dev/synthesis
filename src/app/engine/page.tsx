@@ -12,6 +12,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { activeScheduler } from '@/lib/fsrs/scheduler'
 import { isAdaptiveQualityEnabled } from '@/lib/sm2/adaptive'
 import { isDktShadowEnabled } from '@/lib/dkt/shadow'
+import { activeSelector } from '@/lib/session/selector'
 import {
   compareDktVsBkt, compareGrowth, cutoverDecision,
   MIN_ATTEMPTS_FOR_DECISION, MIN_COHORT_PAIRS,
@@ -111,6 +112,7 @@ export default async function EnginePage() {
   ])
 
   const scheduler = activeScheduler()
+  const selector = activeSelector()
   const shadowByAttempt = new Map(behaviorShadow.map(row => [row.attempt_id, row]))
   const fsrsBySkill = new Map(fsrsShadow.map(row => [row.skill_id, row]))
   const scheduleRows = [...schedules].sort((a, b) => a.due_at.localeCompare(b.due_at)).slice(0, ATTEMPT_ROWS)
@@ -143,6 +145,7 @@ export default async function EnginePage() {
           read straight from the database. Live scheduler: <span className="font-mono">{scheduler.toUpperCase()}</span>.
           Behaviour-aware quality: <span className="font-mono">{isAdaptiveQualityEnabled() ? 'ON' : 'shadow only'}</span>.
           DKT shadow logging: <span className="font-mono">{isDktShadowEnabled() ? 'ON' : 'OFF'}</span>.
+          Next-skill selector: <span className="font-mono">{selector.toUpperCase()}</span>.
         </p>
 
         <Section
@@ -283,16 +286,19 @@ export default async function EnginePage() {
         <Section
           title="Selection"
           item="Item 8 — the rule cascade vs the weighted score"
-          note="Which skill to serve next. The rule cascade decides and is what you were actually given; the weighted score is computed beside it and logged, never applied. A row is only written when the cascade had at least two candidates — a pinned guided arc has exactly one by construction, so most tasks in a normal session write nothing here."
+          note={`Which skill to serve next. The rule cascade makes skills eligible; ${selector === 'score'
+            ? 'since LIVE-1 the weighted score picks among them and its pick is what you were given (SELECTOR=score). Rows marked applied are live decisions.'
+            : 'SELECTOR=rules is set, so the cascade’s own pick is served and the score is logged beside it.'} A row is only written when there were at least two candidates — a pinned guided arc has exactly one by construction, so most tasks in a normal session write nothing here.`}
         >
           <Table
-            head={['When', 'Branch', 'Candidates', 'Served (rules)', 'Score of it', 'Score would serve', 'Its score', 'Verdict']}
-            empty="No selection shadow rows yet (needs migration 010, and a session with a real choice)."
+            head={['When', 'Branch', 'Candidates', 'Rules pick', 'Score of it', 'Score pick', 'Its score', 'Verdict', 'Served']}
+            empty="No selection rows yet (needs migration 010, and a session with a real choice)."
             rows={decisions.slice(0, ATTEMPT_ROWS).map(row => [
               when(row.created_at), row.branch, row.candidate_count,
               row.rule_skill_id, row.rule_score_value === null ? '—' : row.rule_score_value.toFixed(4),
               row.score_skill_id, row.score_value === null ? '—' : row.score_value.toFixed(4),
               row.agreed ? 'same pick' : row.tied ? 'tie' : 'disagreed',
+              row.applied ? 'score' : 'rules',
             ])}
           />
           {decisions.length > 0 && (
@@ -334,7 +340,7 @@ export default async function EnginePage() {
           <p className="mt-4 text-[11px] text-c-ghost">
             Broad comparison over simulated learners: <code>npm run selector:compare</code>, rendered on the
             lab site&rsquo;s Selection tab. Measured there, the score forgets less and carries less review debt
-            than the cascade, and covers fewer new skills — a trade-off needing human sign-off, not a win.
+            than the cascade, and covers fewer new skills — a trade-off, signed off by a human for LIVE-1.
           </p>
         </Section>
       </main>

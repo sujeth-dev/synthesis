@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { getGuidedArcProgress, getSessionGate, MAX_REVIEW_ITEMS, planReviewDebt, selectNextTaskDetailed, SESSION_TASK_CAP } from '@/lib/session/engine'
-import { shadowSelection } from '@/lib/session/shadow'
+import { buildSelectionShadowRow, shadowSelection } from '@/lib/session/shadow'
+import { activeSelector, scoreRanker } from '@/lib/session/selector'
 import { ELO_START } from '@/lib/elo'
 import { getAllNodes, getHardPrereqs } from '@/lib/graph'
 import { findActivePhase } from '@/lib/phases'
@@ -155,6 +156,16 @@ export async function POST(req: NextRequest) {
         ...persistedQuestionIds,
       ])
 
+      // LIVE-1: under SELECTOR=score (the default) the weighted score picks
+      // from the pool the cascade builds; SELECTOR=rules keeps the cascade's pick.
+      const now = new Date()
+      const ranker = activeSelector() === 'score'
+        ? scoreRanker({
+            skillStates, reviewSchedules, motivation: motivation.state, questionsCache,
+            recentSkillIds: [...seen_skills].reverse(), now, learnerRating: ELO_START,
+          })
+        : null
+
       const trace = selectNextTaskDetailed({
         skillStates, reviewSchedules, motivationState: motivation,
         seenSkillsThisSession:      seen_skills,
@@ -165,16 +176,23 @@ export async function POST(req: NextRequest) {
         arcHistory,
         lastQuestionId: persistedQuestionIds[persistedQuestionIds.length - 1]
           ?? seen_question_ids[seen_question_ids.length - 1],
+        now,
+        rank: ranker?.rank,
       })
       const task = trace.task
 
-      // ── Selection shadow (SCORE-3): score the pool the cascade just ranked
-      // and log both choices. The cascade's `task` above is already decided and
-      // is not touched; this only observes. Fail-open, like the five shadow
-      // writes in /api/attempt.
+      // ── Selection log (SCORE-3, LIVE-1): both choices on the same pool. Under
+      // the score the row records the pick that was served (`applied`); under
+      // the rules it records what the score would have done. Fail-open, like
+      // the five shadow writes in /api/attempt.
       try {
+        const liveRanking = ranker?.last() ?? null
         const candidateSkillIds = trace.candidates.map(candidate => candidate.skill_id)
-        if (candidateSkillIds.length >= 2) {
+        if (liveRanking) {
+          const row = buildSelectionShadowRow(
+            trace, liveRanking.chosen, liveRanking.ranked, liveRanking.explored, session_id ?? null, true)
+          await insertSelectionShadow({ learner_id: user.id, ...row })
+        } else if (!ranker && candidateSkillIds.length >= 2) {
           const activePhase = findActivePhase(getAllNodes().filter(node => !node.deprecated), skillStates)
           const [ratings, ability] = await Promise.all([
             getQuestionRatingsForSkills(candidateSkillIds),
@@ -188,7 +206,7 @@ export async function POST(req: NextRequest) {
             learnerRating: ability?.rating ?? ELO_START,
             recentSkillIds: [...seen_skills].reverse(),
             sessionId: session_id ?? null,
-            now: new Date(),
+            now,
             next: Math.random,
           })
           if (row) await insertSelectionShadow({ learner_id: user.id, ...row })

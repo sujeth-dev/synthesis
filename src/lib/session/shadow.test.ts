@@ -43,7 +43,7 @@ function trace(over: Partial<SelectionTrace> = {}): SelectionTrace {
   const candidates = [candidate('alpha'), candidate('beta')]
   return {
     task: null, branch: 'tiers', candidates,
-    chosen: candidates[0], difficulty_tier: 'same', ...over,
+    chosen: candidates[0], served: candidates[0], difficulty_tier: 'same', ...over,
   }
 }
 
@@ -183,6 +183,13 @@ describe('the comparison row (SCORE-3)', () => {
   it('is never marked applied — nothing here has changed a learner’s session', () => {
     const row = buildSelectionShadowRow(trace(), score('alpha', 0.7), [], false, null)
     expect(row.applied).toBe(false)
+  })
+
+  it('is marked applied when the score’s pick was the one served (LIVE-1)', () => {
+    const row = buildSelectionShadowRow(trace(), score('beta', 0.8), [score('beta', 0.8)], false, null, true)
+    expect(row.applied).toBe(true)
+    expect(row.rule_skill_id).toBe('alpha')
+    expect(row.score_skill_id).toBe('beta')
   })
 })
 
