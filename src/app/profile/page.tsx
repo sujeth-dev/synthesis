@@ -6,7 +6,6 @@ import {
   getLearnerProfile, getAllSkillStates, getRecentSessions, getAttemptsBetween, getExamRuns,
 } from '@/lib/db/queries'
 import { getAllNodes } from '@/lib/graph'
-import { getMasteryTier } from '@/lib/bkt'
 import { Navbar } from '@/components/layout/Navbar'
 import { Meter } from '@/components/viz/Meter'
 import { Sparkline } from '@/components/viz/Sparkline'
@@ -19,6 +18,7 @@ import {
   activityByDay, bloomProfile, isEvaluationAttempt, learningCurve, skillEvidence, type Agreement,
 } from '@/lib/analytics/profile'
 import type { Debrief } from '@/lib/exam/debrief'
+import type { MasteryState } from '@/types'
 
 // The skill profile (OLM-3): an open learner model. For every skill the
 // learner has met it shows what the system believes, how much it has actually
@@ -30,6 +30,14 @@ const AGREEMENT_TEXT: Record<Agreement, { text: string; tone: string }> = {
   belief_ahead:  { text: 'belief is ahead of recent answers', tone: 'text-c-yellow' },
   belief_behind: { text: 'doing better than the belief',      tone: 'text-c-green' },
   thin:          { text: 'too little evidence to judge',      tone: 'text-c-ghost' },
+}
+
+// The state, not getMasteryTier(p_know): a skill at p_know >= 0.65 reads
+// "Mastered" by tier but stays `fragile` until it survives a first review, and
+// the profile's job is to show what the model actually holds.
+const STATE_LABEL: Record<MasteryState, string> = {
+  mastered: 'Mastered', fragile: 'Fragile · awaiting first review', learning: 'Learning',
+  ready: 'Ready', blocked: 'Locked',
 }
 
 const PHASE_SHORT: Record<string, string> = {
@@ -75,9 +83,12 @@ export default async function ProfilePage() {
   const accuracy = practice.length > 0 ? Math.round(practice.filter(a => a.correct).length / practice.length * 100) : null
   const sinceLabel = since.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
-  const evidence = skillEvidence(skillStates, attempts)
-    .filter(e => e.attempts > 0 || e.mastery_state !== 'blocked')
+  const all = skillEvidence(skillStates, attempts)
+  const evidence = all
+    .filter(e => e.attempts > 0)
     .sort((a, b) => (b.last_attempted_at ?? '').localeCompare(a.last_attempted_at ?? '') || b.p_know - a.p_know)
+  // Open but never practised: no evidence to show, so one line, not a row each.
+  const untouched = all.filter(e => e.attempts === 0 && e.mastery_state !== 'blocked')
   const gaps = evidence.filter(e => e.agreement === 'belief_ahead' || (e.p_know >= 0.7 && e.attempts < 3))
 
   const curve = learningCurve(attempts)
@@ -120,7 +131,7 @@ export default async function ProfilePage() {
           {evidence.length === 0 && <p className="text-[12px] text-c-ghost">Nothing yet — start a session and this fills in.</p>}
           <div className="divide-y divide-[var(--border)]">
             {evidence.map(e => {
-              const tier = e.mastery_state === 'blocked' ? 'Locked' : getMasteryTier(e.p_know)
+              const tier = STATE_LABEL[e.mastery_state]
               const agree = AGREEMENT_TEXT[e.agreement]
               return (
                 <div key={e.skill_id} className="py-3" data-testid={`skill-row-${e.skill_id}`}>
@@ -149,6 +160,17 @@ export default async function ProfilePage() {
               )
             })}
           </div>
+          {untouched.length > 0 && (
+            <p className="text-[11px] text-c-faint pt-3 border-t border-[var(--border)]" data-testid="untouched-skills">
+              Open but not practised yet ({untouched.length}), so no evidence either way:{' '}
+              {untouched.map((e, i) => (
+                <span key={e.skill_id}>
+                  {i > 0 && ', '}
+                  <Link href={`/learn/skill/${e.skill_id}`} className="text-c-muted hover:underline">{label(e.skill_id)}</Link>
+                </span>
+              ))}.
+            </p>
+          )}
         </Section>
 
         {gaps.length > 0 && (
