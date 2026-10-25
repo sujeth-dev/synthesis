@@ -121,6 +121,23 @@ export interface BehaviorQualityShadowEntry {
   created_at: string
 }
 
+// One row per served task (SCORE-3): what the rule cascade chose beside what
+// the multi-metric score would have chosen, for the same pool. `applied` stays
+// false until LIVE-1. See src/lib/session/shadow.ts.
+export interface SelectionShadowEntry {
+  id: string; learner_id: string; session_id: string | null
+  branch: string
+  rule_skill_id: string | null; rule_reason: string | null; rule_tier: string | null
+  score_skill_id: string | null; score_value: number | null; score_reason: string | null
+  /** What the score made of the cascade's own pick — the readable half of a disagreement. */
+  rule_score_value: number | null
+  tied: boolean
+  agreed: boolean; explored: boolean; candidate_count: number
+  terms: unknown; runners_up: unknown
+  applied: boolean
+  created_at: string
+}
+
 // One row per question (SCORE-1): the difficulty every learner's answers imply,
 // which no authored field measures. Global on purpose — pooling the answers is
 // what makes it converge. See src/lib/elo.

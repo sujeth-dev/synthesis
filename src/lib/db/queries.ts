@@ -3,7 +3,7 @@ import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
   AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
   ExplanationGrade, BehaviorQualityShadowEntry, BktParamShadowEntry,
-  QuestionRating, LearnerAbility, Phase,
+  QuestionRating, LearnerAbility, Phase, SelectionShadowEntry,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -417,6 +417,15 @@ export async function upsertQuestionRating(rating: Omit<QuestionRating, 'updated
   if (error) throw new Error(`Question rating upsert failed: ${error.message}`)
 }
 
+export async function getQuestionRatingsForSkills(skillIds: string[]): Promise<QuestionRating[]> {
+  if (skillIds.length === 0) return []
+  const { data } = await getDb()
+    .from('question_ratings')
+    .select('*')
+    .in('skill_id', skillIds)
+  return data ?? []
+}
+
 export async function getLearnerAbility(learnerId: string, phase: Phase): Promise<LearnerAbility | null> {
   const { data } = await getDb()
     .from('learner_ability')
@@ -432,6 +441,31 @@ export async function upsertLearnerAbility(ability: Omit<LearnerAbility, 'update
     .from('learner_ability')
     .upsert({ ...ability, updated_at: new Date().toISOString() }, { onConflict: 'learner_id,phase' })
   if (error) throw new Error(`Learner ability upsert failed: ${error.message}`)
+}
+
+// ─────────────────────────────────────────────
+// SELECTION SHADOW (SCORE-3 — requires migration 010)
+// ─────────────────────────────────────────────
+
+// Throws on failure; /api/session swallows it — a comparison row can never
+// cost a learner their next task.
+export async function insertSelectionShadow(entry: Omit<SelectionShadowEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('selection_shadow').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`Selection shadow insert failed: ${error.message}`)
+}
+
+export async function getSelectionShadow(learnerId: string, limit: number): Promise<SelectionShadowEntry[]> {
+  const { data } = await getDb()
+    .from('selection_shadow')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
 }
 
 // ─────────────────────────────────────────────

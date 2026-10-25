@@ -1,5 +1,5 @@
 import type {
-  LearnerSkillState, ReviewSchedule, MotivationState,
+  LearnerSkillState, ReviewSchedule, MotivationState, MotivationStateValue,
   Question, SessionTask, DifficultyTier, TaskReason, SessionMode, ReviewUrgency,
   GuidedArcProgress, GuidedArcStage,
 } from '@/types'
@@ -108,7 +108,7 @@ export function getSessionGate(
 
 // ─── Internal types ────────────────────────────────────────────────────────────
 
-interface Candidate {
+export interface Candidate {
   skill_id:          string
   tier:              0 | 1 | 2 | 3 | 4
   reason:            TaskReason
@@ -118,7 +118,7 @@ interface Candidate {
   review_urgency?:   ReviewUrgency
 }
 
-interface SelectTaskParams {
+export interface SelectTaskParams {
   skillStates:                Map<string, LearnerSkillState>
   reviewSchedules:            Map<string, ReviewSchedule>
   motivationState:            MotivationState
@@ -135,9 +135,50 @@ export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?
   return mode === 'review'
 }
 
+/**
+ * The difficulty tier the cascade serves, as a cascade of overwriting rules
+ * where the last match wins. Extracted unchanged from the selector so the
+ * shadow score can read the same tier for every candidate, not just the one
+ * that was chosen.
+ */
+export function difficultyTierFor(state: LearnerSkillState, motivation: MotivationStateValue): DifficultyTier {
+  let diffTier: DifficultyTier = 'same'
+  if (motivation === 'bored')             diffTier = 'harder'
+  if (state.consecutive_correct >= 3)     diffTier = 'harder'
+  if (state.consecutive_wrong >= 2)       diffTier = 'review'
+  if (state.mastery_state === 'blocked')  diffTier = 'prerequisite'
+  return diffTier
+}
+
+/** Which arm of the cascade produced the task — the first thing to know when a pick looks wrong. */
+export type SelectionBranch = 'review_mode' | 'pinned_arc' | 'confidence_boost' | 'tiers' | 'none'
+
+/**
+ * What `selectNextTask()` decided *and how*. The task is identical to what the
+ * selector has always returned; the rest is the trace SCORE-3 logs so the
+ * shadow score can be compared against the same pool, on the same inputs.
+ */
+export interface SelectionTrace {
+  task: SessionTask | null
+  branch: SelectionBranch
+  /** Every candidate this arm of the cascade considered. */
+  candidates: Candidate[]
+  chosen: Candidate | null
+  difficulty_tier: DifficultyTier | null
+}
+
+function noSelection(branch: SelectionBranch, candidates: Candidate[] = []): SelectionTrace {
+  return { task: null, branch, candidates, chosen: null, difficulty_tier: null }
+}
+
 // ─── Main selector ─────────────────────────────────────────────────────────────
 
+/** Unchanged contract: the task alone. Everything else reads the trace. */
 export function selectNextTask(p: SelectTaskParams): SessionTask | null {
+  return selectNextTaskDetailed(p).task
+}
+
+export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
   const {
     skillStates, reviewSchedules, motivationState,
     seenSkillsThisSession, seenQuestionIdsThisSession, questionsCache, mode, currentSkillId,
@@ -171,21 +212,31 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
         review_urgency:   urgency,
       })
     }
-    if (reviewCandidates.length === 0) return null
+    if (reviewCandidates.length === 0) return noSelection('review_mode')
     reviewCandidates.sort((a, b) => a.days_until_due - b.days_until_due) // most overdue first
     const best  = reviewCandidates[0]
     const state = skillStates.get(best.skill_id)
-    if (!state) return null
+    if (!state) return noSelection('review_mode', reviewCandidates)
     const diffTier: DifficultyTier = state.consecutive_wrong >= 2 ? 'review' : 'same'
     const q = pickQuestion(best.skill_id, diffTier, seenQuestionIdsThisSession, questionsCache)
-    if (!q) return null
-    return buildTask(best.skill_id, q, diffTier, best, state)
+    if (!q) return noSelection('review_mode', reviewCandidates)
+    return {
+      task: buildTask(best.skill_id, q, diffTier, best, state),
+      branch: 'review_mode', candidates: reviewCandidates, chosen: best, difficulty_tier: diffTier,
+    }
   }
 
   // A selected arc always outranks interleaving and motivation-based rerouting.
   if (currentSkillId) {
     const state = skillStates.get(currentSkillId)
     const node = getNodeById(currentSkillId)
+    const pinned: Candidate = {
+      skill_id: currentSkillId,
+      tier: 1,
+      reason: activePhaseIds.has(currentSkillId) ? 'active_phase_new' : 'varied_practice',
+      days_until_due: 0,
+      phase_context: activePhaseIds.has(currentSkillId) ? 'active_phase' : 'past_phase',
+    }
     if (state && state.mastery_state !== 'blocked' && node && questionsCache.has(currentSkillId)) {
       const diffTier = selectArcDifficulty(arcHistory)
       const q = pickGuidedQuestion(
@@ -196,16 +247,13 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
         lastQuestionId,
       )
       if (q) {
-        return buildTask(currentSkillId, q, diffTier, {
-          skill_id: currentSkillId,
-          tier: 1,
-          reason: activePhaseIds.has(currentSkillId) ? 'active_phase_new' : 'varied_practice',
-          days_until_due: 0,
-          phase_context: activePhaseIds.has(currentSkillId) ? 'active_phase' : 'past_phase',
-        }, state)
+        return {
+          task: buildTask(currentSkillId, q, diffTier, pinned, state),
+          branch: 'pinned_arc', candidates: [pinned], chosen: pinned, difficulty_tier: diffTier,
+        }
       }
     }
-    return null
+    return noSelection('pinned_arc', [pinned])
   }
 
   // ── Frustrated → confidence boost (intercept before tiering) ─────────────
@@ -216,13 +264,17 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
       if (q) {
         const state = skillStates.get(easyWin)
         if (state) {
-          return buildTask(easyWin, q, 'review', {
+          const boost: Candidate = {
             skill_id:      easyWin,
             tier:          4,
             reason:        'confidence_boost',
             days_until_due: 0,
             phase_context: activePhaseIds.has(easyWin) ? 'active_phase' : 'past_phase',
-          }, state)
+          }
+          return {
+            task: buildTask(easyWin, q, 'review', boost, state),
+            branch: 'confidence_boost', candidates: [boost], chosen: boost, difficulty_tier: 'review',
+          }
         }
       }
     }
@@ -327,20 +379,23 @@ export function selectNextTask(p: SelectTaskParams): SessionTask | null {
     }
   }
 
-  if (!best) return null
+  // Flattened after the sort above, so the logged pool is in the order the
+  // cascade actually ranked it.
+  const considered = tiers.flat()
+
+  if (!best) return noSelection('tiers', considered)
 
   const state = skillStates.get(best.skill_id)
-  if (!state) return null
+  if (!state) return noSelection('tiers', considered)
 
-  let diffTier: DifficultyTier = 'same'
-  if (motivationState.state === 'bored')  diffTier = 'harder'
-  if (state.consecutive_correct >= 3)      diffTier = 'harder'
-  if (state.consecutive_wrong >= 2)        diffTier = 'review'
-  if (state.mastery_state === 'blocked')   diffTier = 'prerequisite'
+  const diffTier = difficultyTierFor(state, motivationState.state)
 
   const q = pickQuestion(best.skill_id, diffTier, seenQuestionIdsThisSession, questionsCache)
-  if (!q) return null
-  return buildTask(best.skill_id, q, diffTier, best, state)
+  if (!q) return noSelection('tiers', considered)
+  return {
+    task: buildTask(best.skill_id, q, diffTier, best, state),
+    branch: 'tiers', candidates: considered, chosen: best, difficulty_tier: diffTier,
+  }
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
