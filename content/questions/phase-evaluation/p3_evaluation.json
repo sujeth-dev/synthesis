@@ -5,15 +5,21 @@
     "skill_id": "p3_what_is_ai",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
     "stem": "What is Artificial Intelligence, at the broadest definition?",
     "options": [
       { "id": "a", "text": "Any system designed to perform tasks that would normally require human intelligence" },
-      { "id": "b", "text": "Only robots with human-like bodies" },
-      { "id": "c", "text": "A synonym for the internet" },
-      { "id": "d", "text": "Software that never makes mistakes" }
+      { "id": "b", "text": "Only robots with human-like bodies", "misconception": "Takes the popular image of AI for the definition, excluding the software that makes up almost all of it." },
+      { "id": "c", "text": "A synonym for very large amounts of data", "misconception": "Confuses an ingredient with the field itself." },
+      { "id": "d", "text": "Software that never makes mistakes", "misconception": "Treats reliability as the defining property, when AI systems are often probabilistic and wrong." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "AI is the broadest category — any system exhibiting behavior we'd call 'intelligent' if a human did it, from a chess engine to a spam filter to a language model."
+    "hints": [
+      "Ask whether the definition should cover a chess program from 1997 as well as a chatbot.",
+      "The broad definition is about the kind of task, not the kind of hardware."
+    ],
+    "explanation_after": "The broad definition covers any system doing work that would otherwise need human intelligence — planning, recognising, translating. It is deliberately wide, which is why 'AI' has meant different things in different decades."
   },
   {
     "id": "p3_eval_hist_remember",
@@ -21,15 +27,21 @@
     "skill_id": "p3_history_of_ai",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
     "stem": "What is an 'AI winter'?",
     "options": [
-      { "id": "a", "text": "A season when AI research conferences are held" },
-      { "id": "b", "text": "A period of reduced funding and interest in AI research after earlier hype failed to deliver" },
-      { "id": "c", "text": "A type of cooling system for data centers" },
-      { "id": "d", "text": "The training phase of a neural network" }
+      { "id": "a", "text": "A cooling system for the data centres that train large models", "misconception": "Reads the term literally as hardware infrastructure." },
+      { "id": "b", "text": "The season when the major AI research conferences take place", "misconception": "Reads it as calendar jargon rather than as a description of the field's funding cycles." },
+      { "id": "c", "text": "The phase of training where a model's loss stops improving", "misconception": "Borrows a plausible training-dynamics meaning for what is a historical term." },
+      { "id": "d", "text": "A period of reduced funding and interest after earlier hype failed to deliver" }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "AI winters happened when early promises (e.g. in the 1970s and again in the late 1980s) outpaced what the technology of the time could actually deliver, causing funding and interest to collapse until the next breakthrough."
+    "correct_option_id": "d",
+    "hints": [
+      "The term describes what happened to the field, not to a machine.",
+      "Ask what follows a period of promises that were not met."
+    ],
+    "explanation_after": "An AI winter is a funding and interest collapse following unmet expectations; there were two major ones. The pattern is worth knowing because the hype-and-correction cycle has recurred."
   },
   {
     "id": "p3_eval_amd_remember",
@@ -37,31 +49,110 @@
     "skill_id": "p3_ai_vs_ml_vs_dl",
     "bloom_level": "remember",
     "format": "mcq",
-    "stem": "How do AI, Machine Learning, and Deep Learning relate to each other?",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "How do AI, Machine Learning and Deep Learning relate to each other?",
     "options": [
-      { "id": "a", "text": "They're three unrelated, separate fields" },
-      { "id": "b", "text": "Nested categories: Deep Learning is a subset of Machine Learning, which is a subset of AI" },
-      { "id": "c", "text": "Deep Learning is the broadest, containing AI and ML" },
-      { "id": "d", "text": "They're all exactly the same thing, just different names" }
+      { "id": "a", "text": "They are three unrelated fields", "misconception": "Misses that each is contained in the one before." },
+      { "id": "b", "text": "Deep Learning is the broadest, containing AI and ML", "misconception": "Has the nesting inverted, usually from meeting deep learning first." },
+      { "id": "c", "text": "Nested: Deep Learning sits inside Machine Learning, which sits inside AI" },
+      { "id": "d", "text": "They are the same thing under three names", "misconception": "Collapses a hierarchy; a rule-based expert system is AI but not ML." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask whether every AI system learns from data, and whether every learning system uses neural networks.",
+      "Try to think of something in the outer category that is not in the inner one."
+    ],
+    "explanation_after": "AI is the widest; ML is the part that learns from data; deep learning is the part of ML using many-layered networks. A hand-written rules engine is AI but not ML, which is what the nesting captures."
+  },
+  {
+    "id": "p3_eval_tol_remember",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_types_of_learning",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "In reinforcement learning, what does the model learn from?",
+    "options": [
+      { "id": "a", "text": "A labelled answer for every input", "misconception": "Describes supervised learning, where the correct output is given directly." },
+      { "id": "b", "text": "Clusters discovered in unlabelled data", "misconception": "Describes unsupervised learning, which has no feedback signal at all." },
+      { "id": "c", "text": "A copy of an expert's exact actions", "misconception": "Describes imitation learning; reinforcement learning can discover behaviour nobody demonstrated." },
+      { "id": "d", "text": "Rewards or penalties received after taking actions" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Think about training a dog rather than marking an exam.",
+      "Ask what tells the system it did well, when nobody says what the right move was."
+    ],
+    "explanation_after": "Reinforcement learning receives a reward signal after acting, rather than being told the correct action. That is why it can find strategies no human demonstrated — and why shaping the reward is so delicate."
+  },
+  {
+    "id": "p3_eval_me_remember",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_model_evaluation",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "What is a test set?",
+    "options": [
+      { "id": "a", "text": "Data held back from training, used once to estimate performance on unseen data" },
+      { "id": "b", "text": "The portion of data the model trains on most carefully", "misconception": "Inverts the purpose; the test set is precisely what the model never trains on." },
+      { "id": "c", "text": "Data used to tune settings like the learning rate", "misconception": "Describes the validation set, which is a third split with a different job." },
+      { "id": "d", "text": "A set of unit tests for the training code", "misconception": "Reads 'test' in the software-engineering sense rather than the statistical one." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what question the set exists to answer, and why the model must not have seen it.",
+      "There are usually three splits; this is the one touched last."
+    ],
+    "explanation_after": "The test set stands in for data the model will meet in the wild, so it must stay unseen. Tuning against it repeatedly turns it into a validation set and quietly inflates the reported score."
+  },
+  {
+    "id": "p3_eval_fe_remember",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_feature_engineering",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "In machine learning, what is a 'feature'?",
+    "options": [
+      { "id": "a", "text": "A capability of the software product", "misconception": "Reads the word in its product-management sense rather than its modelling sense." },
+      { "id": "b", "text": "An individual measurable input the model uses to make its prediction" },
+      { "id": "c", "text": "The output the model predicts", "misconception": "Confuses feature with label or target — the thing being predicted, not predicted from." },
+      { "id": "d", "text": "A layer inside a neural network", "misconception": "Confuses the data going in with the architecture processing it." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "AI is the broadest umbrella. ML is a specific approach to AI (learning from data rather than hand-coded rules). Deep Learning is a specific approach to ML using multi-layer neural networks."
+    "hints": [
+      "In a spreadsheet of training data, ask what the columns are.",
+      "One column is special because it is the answer; the rest are this."
+    ],
+    "explanation_after": "A feature is one input column — square footage, word count, hour of day. The target is what you predict; everything else you predict from is a feature."
   },
+
   {
     "id": "p3_eval_hml_understand",
     "phase": "phase_3_intro_ai",
     "skill_id": "p3_how_machines_learn",
     "bloom_level": "understand",
     "format": "mcq",
-    "stem": "In your own understanding, why is 'training' a machine learning model fundamentally different from writing traditional if/else rules?",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Why is training a machine learning model fundamentally different from writing if/else rules?",
     "options": [
-      { "id": "a", "text": "Because training adjusts internal numeric parameters based on data until predictions improve, rather than a human explicitly writing out every decision rule by hand" },
-      { "id": "b", "text": "Training is exactly the same as writing if/else rules, just with different syntax" },
-      { "id": "c", "text": "Traditional rules are always more accurate than trained models" },
-      { "id": "d", "text": "Training only works for image data" }
+      { "id": "a", "text": "Training is the same thing with different syntax", "misconception": "Misses that nobody writes the decision boundary in the learned case." },
+      { "id": "b", "text": "Hand-written rules are always more accurate than trained models", "misconception": "Makes an accuracy claim where the difference is about who determines the rules." },
+      { "id": "c", "text": "Training adjusts internal numeric parameters from data until predictions improve, instead of a human writing out every rule" },
+      { "id": "d", "text": "Training only works on image data", "misconception": "Invents a domain restriction unrelated to the distinction." }
     ],
-    "correct_option_id": "a",
-    "explanation_after": "Rule-based systems require a human to anticipate and encode every case. Trained ML models instead adjust their own parameters based on patterns found in data — the 'rules' end up implicit in millions of learned numbers, not explicitly written by a person."
+    "correct_option_id": "c",
+    "hints": [
+      "Ask who decides the exact threshold at which a decision flips, in each case.",
+      "Consider a task where you could not write the rules down even if you wanted to — recognising a face, say."
+    ],
+    "explanation_after": "With rules, a human states every condition. With training, the conditions are numeric parameters fitted from examples. That is why ML suits tasks we can demonstrate but cannot articulate — and why the resulting rules are hard to read back."
   },
   {
     "id": "p3_eval_tol_understand",
@@ -69,15 +160,21 @@
     "skill_id": "p3_types_of_learning",
     "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Why does supervised learning need labeled data, while unsupervised learning doesn't?",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Why does supervised learning need labelled data when unsupervised learning does not?",
     "options": [
-      { "id": "a", "text": "Supervised learning learns to predict a known answer by comparing its guess to the true label, which requires that label to exist; unsupervised learning instead looks for structure/patterns with no 'right answer' to check against" },
-      { "id": "b", "text": "Unsupervised learning is simply an easier version of supervised learning" },
-      { "id": "c", "text": "Labels are only needed for image data, not text" },
-      { "id": "d", "text": "There's no real difference between the two approaches" }
+      { "id": "a", "text": "Unsupervised learning is simply an easier version of supervised learning", "misconception": "Treats them as the same task at different difficulty, rather than different tasks." },
+      { "id": "b", "text": "There is no real difference between the two approaches", "misconception": "Denies a distinction that determines what data you must collect." },
+      { "id": "c", "text": "Labels are only needed for images, not text", "misconception": "Invents a modality rule; labels follow from the task, not the data type." },
+      { "id": "d", "text": "Supervised learning compares its guess against a known answer, which must therefore exist; unsupervised learning looks for structure with no answer to check against" }
     ],
-    "correct_option_id": "a",
-    "explanation_after": "Supervised learning's whole mechanism depends on measuring 'how wrong was the guess vs. the true label' to improve — without a label, there's nothing to compare against. Unsupervised learning instead finds patterns (like clusters) using only the data's own structure."
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what the training process actually computes in order to improve.",
+      "If there is no correct answer recorded, what could an error be measured against?"
+    ],
+    "explanation_after": "Supervised training needs an error, and an error needs a truth to compare with. Unsupervised methods look for structure — clusters, components — where no single answer is defined, which is why they are judged so differently."
   },
   {
     "id": "p3_eval_dal_understand",
@@ -85,31 +182,110 @@
     "skill_id": "p3_data_and_labels",
     "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Why does the saying 'garbage in, garbage out' apply especially strongly to machine learning?",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Why does 'garbage in, garbage out' apply especially strongly to machine learning?",
     "options": [
-      { "id": "a", "text": "Because a model learns whatever pattern actually exists in its training data — if the data is biased, mislabeled, or unrepresentative, the model faithfully learns that flawed pattern too, with no way to know better" },
-      { "id": "b", "text": "Because computers physically slow down when given bad data" },
-      { "id": "c", "text": "It doesn't apply to ML — models automatically correct for bad data" },
-      { "id": "d", "text": "It only applies to unsupervised learning" }
+      { "id": "a", "text": "Because computers physically slow down when given bad data", "misconception": "Reads a correctness problem as a performance one." },
+      { "id": "b", "text": "It does not apply — models correct for bad data automatically", "misconception": "Attributes a judgment to the model that nothing in training provides." },
+      { "id": "c", "text": "It only applies to unsupervised learning", "misconception": "Restricts the principle arbitrarily; mislabelled supervised data is the clearest case of all." },
+      { "id": "d", "text": "Because the model learns whatever pattern is actually in the data, including bias and mislabelling, with no way to know better" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what the model would have to possess in order to notice the data was wrong.",
+      "Consider what a model learns from a thousand examples labelled by a careless annotator."
+    ],
+    "explanation_after": "A model has no outside knowledge to check its data against; it fits whatever is there, faithfully. Flawed data produces a confidently wrong model, and the flaw is usually invisible in the metrics."
+  },
+  {
+    "id": "p3_eval_dl_understand",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_ai_vs_ml_vs_dl",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "Why does deep learning usually need far more data than classical machine learning?",
+    "options": [
+      { "id": "a", "text": "Because it has many more parameters to fit, and it learns the features itself rather than being given them" },
+      { "id": "b", "text": "Because neural networks read each example more slowly", "misconception": "Frames a statistical requirement as a speed issue." },
+      { "id": "c", "text": "Because deep learning cannot use numeric data", "misconception": "Invents a data-type restriction that does not exist." },
+      { "id": "d", "text": "Because its data has to be labelled twice for accuracy", "misconception": "Invents a labelling requirement; the labels are the same either way." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "A model has no independent sense of 'truth' beyond what its training data shows it — if the labels are wrong or the data reflects a biased sample, the model learns that bias as if it were the real pattern, since it has nothing else to learn from."
+    "hints": [
+      "Count roughly how many numbers each kind of model has to determine from the data.",
+      "Ask who supplies the features in each case — the engineer, or the model?"
+    ],
+    "explanation_after": "Classical models fit a handful of parameters over features a person designed. A deep network fits millions and discovers the features too, so it needs far more examples to pin them down — which is why small datasets often favour the classical approach."
   },
+  {
+    "id": "p3_eval_under_understand",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_overfitting",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "How does underfitting differ from overfitting?",
+    "options": [
+      { "id": "a", "text": "Underfitting means the model is too slow; overfitting means it is too fast", "misconception": "Reads both terms as being about speed rather than about fit." },
+      { "id": "b", "text": "Underfitting performs poorly on training and new data alike; overfitting does well on training data and poorly on new data" },
+      { "id": "c", "text": "Underfitting only happens with too much data; overfitting with too little", "misconception": "Half-right about overfitting, but underfitting comes from too simple a model, not from abundance." },
+      { "id": "d", "text": "They are two names for the same failure", "misconception": "Collapses two opposite problems that call for opposite fixes." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Compare the training score and the unseen score in each case.",
+      "One model has not learned enough; the other has learned too much of the wrong thing."
+    ],
+    "explanation_after": "Underfitting is bad everywhere: the model is too simple to capture the pattern. Overfitting is good on seen data and bad on unseen. The fixes are opposite — more capacity versus more regularisation — so naming it right matters."
+  },
+  {
+    "id": "p3_eval_tvi_understand",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_training_vs_inference",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "Why is training typically far more expensive than inference?",
+    "options": [
+      { "id": "a", "text": "Because inference skips most of the model's layers", "misconception": "Inference runs the whole network; what it skips is the backward pass." },
+      { "id": "b", "text": "Because training requires an internet connection", "misconception": "Confuses a deployment detail with where the computational cost lies." },
+      { "id": "c", "text": "Because training passes over the data many times and computes updates for every parameter each time, while inference is a single forward pass" },
+      { "id": "d", "text": "Because training uses more precise arithmetic", "misconception": "Precision does differ in practice, but it is a minor factor beside the number of passes." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Count the passes: how many times does each process see an example?",
+      "Ask what extra work has to happen after a prediction during training, that never happens in production."
+    ],
+    "explanation_after": "Inference is one forward pass. Training repeats that pass over millions of examples for many epochs and adds a backward pass computing gradients for every parameter — hence weeks on a cluster to train, milliseconds to serve."
+  },
+
   {
     "id": "p3_eval_tvi_apply",
     "phase": "phase_3_intro_ai",
     "skill_id": "p3_training_vs_inference",
     "bloom_level": "apply",
     "format": "mcq",
-    "stem": "A chatbot app generating a live response to a user's message right now is an example of:",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "A chatbot generating a live reply to a user's message right now is an example of:",
     "options": [
-      { "id": "a", "text": "Training" },
+      { "id": "a", "text": "Training", "misconception": "Assumes the model learns from each conversation as it happens, which a deployed model generally does not." },
       { "id": "b", "text": "Inference" },
-      { "id": "c", "text": "Labeling" },
-      { "id": "d", "text": "Overfitting" }
+      { "id": "c", "text": "Labelling", "misconception": "Confuses producing an output with annotating data for later training." },
+      { "id": "d", "text": "Overfitting", "misconception": "Names a training failure mode rather than an activity." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Inference is using an already-trained model to produce an output for new input — exactly what happens when a chatbot generates a response. Training (adjusting the model's weights) already happened earlier, separately, on a large dataset."
+    "hints": [
+      "Ask whether the model's parameters change while it answers.",
+      "One of these is what happens before deployment; the other is what happens after."
+    ],
+    "explanation_after": "Using a trained model to produce an output is inference. The weights are fixed; nothing is learned from this conversation unless that data is later collected for a training run."
   },
   {
     "id": "p3_eval_me_apply",
@@ -117,15 +293,21 @@
     "skill_id": "p3_model_evaluation",
     "bloom_level": "apply",
     "format": "mcq",
-    "stem": "A model correctly classifies 85 out of 100 test examples. What is its accuracy?",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "A model correctly classifies 85 of 100 test examples. What is its accuracy?",
     "options": [
-      { "id": "a", "text": "8.5%" },
-      { "id": "b", "text": "85%" },
-      { "id": "c", "text": "15%" },
-      { "id": "d", "text": "It cannot be determined from this information" }
+      { "id": "a", "text": "8.5%", "misconception": "Misplaces the decimal when converting a proportion to a percentage." },
+      { "id": "b", "text": "15%", "misconception": "Reports the error rate rather than the accuracy." },
+      { "id": "c", "text": "85%" },
+      { "id": "d", "text": "It cannot be determined from this information", "misconception": "Accuracy needs only correct over total, both of which are given." }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "Accuracy = correct predictions / total predictions = 85/100 = 85%. (Whether 85% is actually 'good' depends on the task and class balance — accuracy alone doesn't tell the whole story on imbalanced data.)"
+    "correct_option_id": "c",
+    "hints": [
+      "Accuracy is correct predictions divided by total predictions.",
+      "Check whether your answer describes what went right or what went wrong."
+    ],
+    "explanation_after": "85/100 = 85%. Worth remembering that accuracy alone says nothing about which 15 were wrong — on an imbalanced problem, that omission matters enormously."
   },
   {
     "id": "p3_eval_ovf_apply",
@@ -133,31 +315,110 @@
     "skill_id": "p3_overfitting",
     "bloom_level": "apply",
     "format": "mcq",
-    "stem": "A model scores 99% on the data it was trained on, but only 55% on new, unseen data. This pattern is called:",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "A model scores 99% on its training data but 55% on new data. This pattern is called:",
     "options": [
-      { "id": "a", "text": "Underfitting" },
-      { "id": "b", "text": "Overfitting" },
-      { "id": "c", "text": "Perfect generalization" },
-      { "id": "d", "text": "Inference" }
+      { "id": "a", "text": "Underfitting", "misconception": "Underfitting would score poorly on the training data too." },
+      { "id": "b", "text": "Perfect generalisation", "misconception": "Generalisation is exactly what the 55% shows is absent." },
+      { "id": "c", "text": "Inference", "misconception": "Names an activity rather than a diagnosis." },
+      { "id": "d", "text": "Overfitting" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "The gap between the two scores is the diagnostic signal.",
+      "Ask whether the model learned the pattern or the examples."
+    ],
+    "explanation_after": "A large gap between training and unseen performance is the definition of overfitting: the model memorised its examples rather than learning what generalises."
+  },
+  {
+    "id": "p3_eval_tol_apply",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_types_of_learning",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "A shop has purchase histories for 50,000 customers and no categories defined. They want to discover natural customer groupings. Which kind of learning fits?",
+    "options": [
+      { "id": "a", "text": "Supervised classification", "misconception": "Requires categories to predict, and the stem says none are defined." },
+      { "id": "b", "text": "Unsupervised clustering" },
+      { "id": "c", "text": "Supervised regression", "misconception": "Predicts a number from labelled examples; there is no target here either." },
+      { "id": "d", "text": "Reinforcement learning", "misconception": "Needs actions and a reward signal; nothing here is acting or being rewarded." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "A large gap between training performance and new-data performance is the signature of overfitting — the model memorized the training examples rather than learning a pattern that generalizes."
+    "hints": [
+      "Ask whether there is a correct answer recorded anywhere in the data.",
+      "The goal is to discover groups, not to predict a known one."
+    ],
+    "explanation_after": "No labels and a goal of finding structure points squarely at clustering. If the shop later defines segments by hand and wants to assign new customers to them, that becomes a supervised problem."
   },
+  {
+    "id": "p3_eval_split_apply",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_data_and_labels",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "You have 10,000 labelled examples and plan an 80/10/10 split. How many examples does the model actually learn from?",
+    "options": [
+      { "id": "a", "text": "10,000 — all data is used for learning eventually", "misconception": "Misses that the held-out portions must never be learned from, or they stop measuring anything." },
+      { "id": "b", "text": "9,000 — training plus validation", "misconception": "Counts validation as learning; it steers choices but no weights are fitted on it." },
+      { "id": "c", "text": "8,000" },
+      { "id": "d", "text": "1,000 — only the test set gives real evidence", "misconception": "Confuses the set used for measuring with the set used for fitting." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Name what each of the three portions is for before counting any of them.",
+      "Only one of the three updates the model's parameters."
+    ],
+    "explanation_after": "80% trains, 10% validates tuning choices, 10% is the final untouched test. Validation influences decisions without fitting weights, which is why it is not training data and still not a fair final score."
+  },
+  {
+    "id": "p3_eval_ai_apply",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_what_is_ai",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "A thermostat switches the heating on below 18°C and off above 21°C. Is it AI, machine learning, both, or neither?",
+    "options": [
+      { "id": "a", "text": "Both, because it makes decisions automatically", "misconception": "Treats any automatic decision as learned; nothing here was fitted from data." },
+      { "id": "b", "text": "Machine learning, because it responds to its environment", "misconception": "Responding to input is not learning; the thresholds were set by a person." },
+      { "id": "c", "text": "Neither in the modern sense: it follows fixed rules a person wrote, and learns nothing" },
+      { "id": "d", "text": "AI but not ML, because any automated control counts as AI", "misconception": "Stretches the broad definition until it covers all automation, which empties it of content." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask whether anything about the device changes with experience.",
+      "Ask who chose the numbers 18 and 21."
+    ],
+    "explanation_after": "The thresholds were written by a person and never change, so there is no learning. A thermostat that observed your habits and adjusted its own schedule would be machine learning — the dividing line is whether data changes the behaviour."
+  },
+
   {
     "id": "p3_eval_fe_analyze",
     "phase": "phase_3_intro_ai",
     "skill_id": "p3_feature_engineering",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "A house-price model performs poorly using only 'square footage' as a feature. Adding 'square footage per bedroom' as a new engineered feature significantly improves it. Why might this derived feature help where the raw one didn't?",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "A house-price model does poorly with only 'square footage'. Adding 'square footage per bedroom' improves it markedly. Why would a derived feature help where the raw one did not?",
     "options": [
-      { "id": "a", "text": "It doesn't actually help — this is a coincidence" },
-      { "id": "b", "text": "The derived feature captures a relationship (spaciousness relative to room count) that's meaningfully correlated with price in a way neither raw number alone expresses, giving the model a more directly useful signal" },
-      { "id": "c", "text": "Adding any new feature always improves a model, regardless of what it represents" },
-      { "id": "d", "text": "Square footage should never be used as a feature at all" }
+      { "id": "a", "text": "It does not really help; this is coincidence", "misconception": "Dismisses a measured improvement rather than explaining it." },
+      { "id": "b", "text": "Square footage should never be used as a feature", "misconception": "Rejects a useful raw feature instead of explaining what the ratio adds to it." },
+      { "id": "c", "text": "Adding any new feature always improves a model", "misconception": "Irrelevant features add noise and can make a model worse, especially on small data." },
+      { "id": "d", "text": "It expresses a relationship — space relative to room count — that neither raw number states on its own" }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "Raw features don't always align with the pattern that actually matters — a model has to indirectly infer 'spaciousness per room' from square footage and bedroom count separately, whereas handing it that ratio directly makes an already-real relationship easier for the model to use."
+    "correct_option_id": "d",
+    "hints": [
+      "Compare two houses with the same floor area but two and six bedrooms, and ask what differs.",
+      "Ask what a linear model can and cannot construct from the raw columns by itself."
+    ],
+    "explanation_after": "A ratio encodes a relationship a linear model cannot form from the raw columns alone. Feature engineering is largely about making an existing relationship explicit enough for the model to use."
   },
   {
     "id": "p3_eval_adc_analyze",
@@ -165,15 +426,21 @@
     "skill_id": "p3_ai_dev_cycle",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "A model performs well in testing but its accuracy quietly degrades over the months after deployment, even though the model itself was never changed. What does this pattern most likely indicate?",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "A model tested well but its accuracy quietly degrades over months in production, although the model was never changed. What does that indicate?",
     "options": [
-      { "id": "a", "text": "The original test results were fabricated" },
-      { "id": "b", "text": "Data/concept drift — the real-world data the model now sees has gradually shifted away from the distribution it was trained and tested on" },
-      { "id": "c", "text": "Models always get worse over time regardless of the data" },
-      { "id": "d", "text": "The model needs more RAM" }
+      { "id": "a", "text": "The original test results must have been fabricated", "misconception": "Reaches for misconduct when an ordinary and well-documented mechanism explains it." },
+      { "id": "b", "text": "Models always get worse over time regardless of data", "misconception": "Treats decay as inevitable rather than as a consequence of the world changing." },
+      { "id": "c", "text": "Data or concept drift: the live data has moved away from the distribution the model was trained on" },
+      { "id": "d", "text": "The server needs more memory", "misconception": "Resource limits would affect latency or availability, not gradual accuracy decline." }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "A trained model's parameters are frozen at deployment, but the real world keeps changing — user behavior shifts, new patterns emerge. When live data drifts away from what the model was trained on, its performance quietly erodes even though nothing about the model itself changed, which is why production ML systems need ongoing monitoring."
+    "correct_option_id": "c",
+    "hints": [
+      "The model is fixed, so ask what else could have changed.",
+      "Consider what a model trained on last year's customers faces this year."
+    ],
+    "explanation_after": "Frozen weights meeting a shifting world is drift. It is why production models need monitoring and periodic retraining — the launch score is a snapshot, not a guarantee."
   },
   {
     "id": "p3_eval_ovf_analyze",
@@ -181,31 +448,110 @@
     "skill_id": "p3_overfitting",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "On a plotted training curve, the training loss keeps steadily decreasing across every epoch, but the validation loss decreases at first, then starts climbing back up partway through. What does this specific pattern reveal about when overfitting began?",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "Training loss falls steadily every epoch, while validation loss falls at first and then climbs. What does the shape reveal about when overfitting began?",
     "options": [
-      { "id": "a", "text": "Overfitting was present from the very first epoch" },
-      { "id": "b", "text": "Overfitting began at the exact point the validation loss stopped decreasing and started rising, even though training loss kept falling — that divergence point is the moment the model started memorizing rather than generalizing" },
-      { "id": "c", "text": "This pattern means the model never overfits" },
-      { "id": "d", "text": "The training loss curve is irrelevant to detecting overfitting" }
+      { "id": "a", "text": "It began at the first epoch", "misconception": "Ignores the early phase where both losses improved together, which is genuine learning." },
+      { "id": "b", "text": "At the point validation loss stopped falling and began to rise, even as training loss kept falling" },
+      { "id": "c", "text": "This pattern means the model never overfits", "misconception": "Describes the textbook overfitting signature as its opposite." },
+      { "id": "d", "text": "The training curve is irrelevant to detecting overfitting", "misconception": "The divergence between the two curves is the signal; one curve alone cannot show it." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "The divergence point — where training loss keeps improving but validation loss reverses — is the precise, checkable signal of overfitting's onset. It's exactly what early stopping watches for: stop training once validation loss stops improving, before it gets worse."
+    "hints": [
+      "Overfitting is about a gap, so look for where the two curves start to part.",
+      "Ask which epoch's weights you would actually want to keep."
+    ],
+    "explanation_after": "The divergence point is where the model stops learning the pattern and starts memorising examples. Early stopping is exactly the practice of keeping the weights from that point."
   },
+  {
+    "id": "p3_eval_cm_analyze",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_model_evaluation",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "A fraud detector reports 99.2% accuracy. Fraud is 0.8% of transactions, and the confusion matrix shows zero transactions predicted as fraud. What has the model learned?",
+    "options": [
+      { "id": "a", "text": "A genuinely strong rule for separating fraud from normal transactions", "misconception": "Reads the headline number without checking that one class is never predicted at all." },
+      { "id": "b", "text": "Nothing useful: it predicts 'not fraud' every time, which is right 99.2% of the time and catches no fraud" },
+      { "id": "c", "text": "That the fraud examples were mislabelled", "misconception": "Possible in general, but the matrix here is explained entirely by the class imbalance." },
+      { "id": "d", "text": "That accuracy was computed incorrectly", "misconception": "The accuracy is arithmetically correct — that is precisely what makes it misleading." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Work out what accuracy a model would get by always answering the majority class.",
+      "The matrix says one column is empty. Ask what prediction rule produces that."
+    ],
+    "explanation_after": "Always answering the majority class scores 99.2% here and catches nothing. On imbalanced problems accuracy is close to useless, which is why precision, recall and the matrix itself are reported instead."
+  },
+  {
+    "id": "p3_eval_shortcut_analyze",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_how_machines_learn",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "A model separating photos of wolves from huskies does well in testing but fails in the field. Inspection shows it keys on snow in the background. How did that happen?",
+    "options": [
+      { "id": "a", "text": "The model was too small to learn about animals", "misconception": "Capacity was sufficient to fit the data; the issue is which pattern was easiest, not whether one could be learned." },
+      { "id": "b", "text": "Snow is genuinely part of what makes an animal a wolf", "misconception": "Accepts the shortcut as the concept, which is exactly the error the field failure exposes." },
+      { "id": "c", "text": "The training wolf photos mostly had snow, so background predicted the label as well as the animal and was easier to learn" },
+      { "id": "d", "text": "The labels were randomly assigned", "misconception": "Random labels would prevent learning anything that tested well in the first place." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The model minimises error on the data it is given. Ask what the cheapest way to do that was.",
+      "Ask what the training photos had in common besides the animal."
+    ],
+    "explanation_after": "Training rewards whatever predicts the label, and a correlated background can be easier to detect than anatomy. Shortcut learning is why held-out data drawn from the same biased collection does not catch the problem."
+  },
+  {
+    "id": "p3_eval_hist_analyze",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_history_of_ai",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "Neural networks were described in the 1950s but only became dominant after about 2012. Which combination best explains the delay?",
+    "options": [
+      { "id": "a", "text": "The mathematics of backpropagation was not discovered until 2012", "misconception": "Backpropagation was in use in the 1980s; theory was not the missing piece." },
+      { "id": "b", "text": "Earlier researchers were not interested in the approach", "misconception": "Attributes to disinterest what was a practical ceiling on data and compute." },
+      { "id": "c", "text": "Large labelled datasets and parallel GPU compute arrived together, making deep networks trainable at last" },
+      { "id": "d", "text": "Programming languages before 2012 could not express a neural network", "misconception": "Invents a tooling barrier; networks were implemented decades earlier." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what a deep network needs in quantity, beyond a correct algorithm.",
+      "Think about what became available around then — both in data and in hardware."
+    ],
+    "explanation_after": "The ideas largely existed; what arrived was ImageNet-scale labelled data and GPUs capable of the arithmetic. It is a useful case of a method waiting for its inputs rather than for its theory."
+  },
+
   {
     "id": "p3_eval_me_evaluate",
     "phase": "phase_3_intro_ai",
     "skill_id": "p3_model_evaluation",
     "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "For a rare-disease screening model where missing a real case is far more costly than a false alarm, is 'accuracy' or 'recall' the better primary metric to optimize for, and why?",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "For a rare-disease screening model where missing a real case is far costlier than a false alarm, is accuracy or recall the better primary metric, and why?",
     "options": [
-      { "id": "a", "text": "Accuracy, because it's the simplest metric to explain to stakeholders" },
-      { "id": "b", "text": "Recall, because on a rare-disease dataset accuracy can look deceptively high while still missing most real cases, whereas recall directly measures how many actual positive cases were correctly caught" },
-      { "id": "c", "text": "Neither matters — any metric works equally well" },
-      { "id": "d", "text": "Accuracy, because rare-disease data is always perfectly balanced" }
+      { "id": "a", "text": "Accuracy, because it is simplest to explain to stakeholders", "misconception": "Optimises for communication over the thing the system exists to do." },
+      { "id": "b", "text": "Accuracy, because rare-disease datasets are naturally balanced", "misconception": "Rare means imbalanced by definition, which is what breaks accuracy here." },
+      { "id": "c", "text": "Neither matters — any metric works equally well", "misconception": "Denies that the choice of metric determines which errors the model is tuned to avoid." },
+      { "id": "d", "text": "Recall, because accuracy can look high on rare-disease data while missing most real cases, whereas recall measures how many were caught" }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "On rare-disease data, a model that predicts 'healthy' for almost everyone can still score very high accuracy while catching almost no real cases — recall exposes that failure directly, which is why it's the right metric when missing a positive case is the costly error."
+    "correct_option_id": "d",
+    "hints": [
+      "Work out what accuracy a model would get by declaring everyone healthy.",
+      "Match the metric to the error the stem says is expensive."
+    ],
+    "explanation_after": "Declaring everyone healthy scores extremely well on accuracy and catches nothing. Recall counts the real cases found, which is the quantity the cost structure actually cares about — at the price of more false alarms."
   },
   {
     "id": "p3_eval_app_evaluate",
@@ -213,15 +559,21 @@
     "skill_id": "p3_ai_applications",
     "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "A company wants to deploy an AI system to make final hiring decisions with no human review. Given what's known about model limitations (bias from training data, lack of true understanding, no accountability for mistakes), is this a sound use of current AI, and why?",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A company wants an AI system to make final hiring decisions with no human review. Judged against what is known about model limitations, is that sound?",
     "options": [
-      { "id": "a", "text": "Yes, because AI systems are always more objective than humans" },
-      { "id": "b", "text": "No — high-stakes decisions affecting people's lives are exactly where a model's potential to encode biased patterns from its training data, combined with no human accountability, poses real risk; human review matters most in exactly these high-stakes cases" },
-      { "id": "c", "text": "Yes, because AI models never make mistakes once deployed" },
-      { "id": "d", "text": "It doesn't matter either way since AI decisions can always be reversed later" }
+      { "id": "a", "text": "Yes — AI systems are more objective than humans", "misconception": "Mistakes the absence of a human for the absence of bias; the bias arrives through the training data." },
+      { "id": "b", "text": "Yes — a deployed model does not make mistakes", "misconception": "Attributes a reliability no model has." },
+      { "id": "c", "text": "No: high-stakes decisions about people are exactly where learned bias plus no accountable decision-maker causes real harm" },
+      { "id": "d", "text": "It does not matter, since decisions can be reversed later", "misconception": "Assumes harm is undone by reversal, and that rejected candidates would ever know to appeal." }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "AI applications aren't equally appropriate everywhere — the higher the stakes and the more a decision could encode historical bias unfairly, the more human oversight matters, not less. This is a real, active debate in AI ethics/deployment, not a hypothetical."
+    "correct_option_id": "c",
+    "hints": [
+      "Ask where the model's idea of a good hire came from, and whose past decisions that reflects.",
+      "Ask who a rejected candidate would appeal to, and what that person could examine."
+    ],
+    "explanation_after": "A model trained on past hiring learns past preferences, including discriminatory ones, and removing the human removes the accountable party. The stakes are what make review essential — the same model as a shortlisting aid is a different proposition."
   },
   {
     "id": "p3_eval_tvi_evaluate",
@@ -229,31 +581,110 @@
     "skill_id": "p3_training_vs_inference",
     "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "A company is deciding whether to run inference for their product's AI feature on a powerful cloud GPU server or on the user's own phone. For a feature that must work instantly with no internet connection, which is the better choice, and why?",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "A feature must work instantly and with no internet connection. Should inference run on a cloud GPU or on the user's phone, and why?",
     "options": [
-      { "id": "a", "text": "Cloud GPU, because cloud servers are always faster no matter what" },
-      { "id": "b", "text": "On-device (phone), because it eliminates network round-trip time and the offline requirement rules out any approach depending on a server connection — even though the phone's hardware is less powerful, it directly satisfies the actual constraint" },
-      { "id": "c", "text": "It makes no difference for offline functionality" },
-      { "id": "d", "text": "Cloud GPU, because training and inference always have to happen in the same place" }
+      { "id": "a", "text": "Cloud GPU, because cloud servers are always faster", "misconception": "Compares raw hardware while ignoring the network hop and the offline requirement." },
+      { "id": "b", "text": "It makes no difference to offline operation", "misconception": "Denies the constraint the question is built on." },
+      { "id": "c", "text": "Cloud GPU, because training and inference must happen in the same place", "misconception": "Invents a coupling; models are routinely trained centrally and run on devices." },
+      { "id": "d", "text": "On-device, because the offline requirement rules out a server, and it removes the network round trip too" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "One of the two requirements eliminates an option outright before any speed comparison.",
+      "Ask what a faster server is worth when there is no connection to reach it."
+    ],
+    "explanation_after": "'No internet' is a hard constraint, not a preference, so the server is out regardless of its speed. The cost is a smaller model on weaker hardware — which is why on-device models are quantised and distilled."
+  },
+  {
+    "id": "p3_eval_leak_evaluate",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_feature_engineering",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A loan-default model jumps from 71% to 99% accuracy after adding the feature 'debt sent to collections'. A colleague wants to ship it. Assess that.",
+    "options": [
+      { "id": "a", "text": "Ship it — a 28-point gain is strong evidence the feature is valuable", "misconception": "Treats a suspiciously large jump as a success rather than as a signal to look harder." },
+      { "id": "b", "text": "Do not ship: collections happen after a default, so the feature leaks the answer and will not exist at prediction time" },
+      { "id": "c", "text": "Ship it, but retrain monthly to keep the gain", "misconception": "Accepts the leak and schedules it to recur; retraining cannot fix a feature unavailable at decision time." },
+      { "id": "d", "text": "Do not ship — 99% accuracy is impossible, so the data must be corrupted", "misconception": "Right conclusion from a wrong premise; the number is real, it just measures the wrong thing." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Inference location is a real engineering tradeoff: cloud servers offer more compute power but require a network connection and add latency; on-device inference is offline-capable and instant but constrained by the device's hardware. The 'must work offline' requirement here directly decides the answer, regardless of which option is generally more powerful."
+    "hints": [
+      "Ask when each feature's value becomes known, relative to the moment the prediction is needed.",
+      "A sudden large jump is usually worth distrusting. Ask what the new column is really recording."
+    ],
+    "explanation_after": "Collections follow a default, so the feature encodes the outcome. The model scores brilliantly offline and is useless at decision time, when the column is empty. Target leakage looks exactly like success, which is what makes it dangerous."
   },
+  {
+    "id": "p3_eval_retrain_evaluate",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_ai_dev_cycle",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A team proposes retraining their production model nightly on the newest data, automatically, with no review. Judge that policy.",
+    "options": [
+      { "id": "a", "text": "Sound — fresher data always means a better model", "misconception": "Assumes new data is always good data, with nothing to catch a bad night." },
+      { "id": "b", "text": "Unsound — models should be trained once and left alone", "misconception": "Over-corrects into a policy that guarantees drift goes unaddressed." },
+      { "id": "c", "text": "Reasonable only with a gate: each candidate must beat the current model on a held-out set before replacing it" },
+      { "id": "d", "text": "Unsound, because nightly training is too expensive to justify", "misconception": "Raises cost, which is a real factor but not the governing risk of unreviewed automatic replacement." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what happens the night the incoming data is corrupted or unrepresentative.",
+      "The question is not whether to retrain but what must be true before the new model is allowed to serve."
+    ],
+    "explanation_after": "Frequent retraining counters drift, but automatic promotion lets one bad day reach production. An evaluation gate plus the ability to roll back is what makes the automation safe — the same shape as the deployment gate for any risky change."
+  },
+  {
+    "id": "p3_eval_tol_evaluate",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_types_of_learning",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A team has a million unlabelled support tickets and budget to label 2,000. They want automatic routing to one of eight teams. What is the best use of that budget?",
+    "options": [
+      { "id": "a", "text": "Skip labelling and cluster all million tickets, using the clusters as the routing categories", "misconception": "Uses all the data but discovers its own groups, which need not line up with the eight teams the tickets must actually reach." },
+      { "id": "b", "text": "Label 2,000 tickets with the eight real team names and train a supervised classifier" },
+      { "id": "c", "text": "Label 2,000 at random with no scheme, to keep the sample unbiased", "misconception": "Keeps the sampling honest but produces labels that do not name the eight destinations, so nothing can be routed." },
+      { "id": "d", "text": "Spend the budget on a larger model instead of labels", "misconception": "Capacity cannot substitute for a target; without labels there is nothing to learn to predict." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "The destination categories already exist and are fixed. Ask whether discovery is what is needed.",
+      "Ask what clusters would be named, and whether those names would match the eight teams."
+    ],
+    "explanation_after": "The eight teams are given, so this is classification, not discovery. Clusters might split by topic in ways that cross team boundaries, leaving a mapping problem. 2,000 labels across eight classes is a workable start — and clustering is still useful for choosing which 2,000 to label."
+  },
+
   {
     "id": "p3_eval_adc_create",
     "phase": "phase_3_intro_ai",
     "skill_id": "p3_ai_dev_cycle",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "You're designing the development cycle for a new spam-detection model. Which sequence of steps is in the correct order?",
+    "difficulty": "easy",
+    "time_target_sec": 70,
+    "stem": "You are planning the development cycle for a spam-detection model. Which sequence is correct?",
     "options": [
-      { "id": "a", "text": "Collect & label data → train the model → evaluate on held-out data → deploy → monitor for drift" },
-      { "id": "b", "text": "Deploy → collect data → train the model → evaluate" },
-      { "id": "c", "text": "Train the model → collect data → deploy → label data" },
-      { "id": "d", "text": "Monitor for drift → deploy → train the model → collect data" }
+      { "id": "a", "text": "Collect and label data → train → evaluate on held-out data → deploy → monitor for drift" },
+      { "id": "b", "text": "Deploy → collect data → train → evaluate", "misconception": "Ships before there is a model, inverting the order entirely." },
+      { "id": "c", "text": "Train → collect data → deploy → label data", "misconception": "Trains before data exists and labels after deployment, when the labels were needed first." },
+      { "id": "d", "text": "Monitor for drift → deploy → train → collect data", "misconception": "Reverses the pipeline; monitoring is what follows a deployment, not what precedes a model." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "The AI development cycle has to gather and label data before training (the model needs something to learn from), evaluate before deploying (to know it's actually good), and monitor after deployment (since real-world performance can drift) — deploying first or training before data exists both break the dependency order."
+    "hints": [
+      "Ask which step produces something the next step needs.",
+      "The cycle ends with something that sends you back to the beginning."
+    ],
+    "explanation_after": "Each stage feeds the next, and monitoring closes the loop by revealing when retraining is due. The cycle is iterative, not a line — which is why drift detection points back at data collection."
   },
   {
     "id": "p3_eval_fe_create",
@@ -261,15 +692,21 @@
     "skill_id": "p3_feature_engineering",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "You're building a model to predict whether an email is spam, and you have the raw email text plus its send timestamp. Which of these is a genuinely useful engineered feature to construct from that raw data?",
+    "difficulty": "medium",
+    "time_target_sec": 95,
+    "stem": "Building a spam classifier from raw email text and a send timestamp, which engineered feature is genuinely useful?",
     "options": [
-      { "id": "a", "text": "The number of exclamation marks in the email text — spam often uses exaggerated punctuation" },
-      { "id": "b", "text": "The exact millisecond of the timestamp, since more precision always helps" },
-      { "id": "c", "text": "The email's file size in bytes rounded to the nearest gigabyte" },
-      { "id": "d", "text": "A random number unrelated to the email's content" }
+      { "id": "a", "text": "The exact millisecond of the timestamp, since precision helps", "misconception": "Adds resolution with no relationship to spamminess, giving the model noise to overfit." },
+      { "id": "b", "text": "The number of exclamation marks in the text, since spam often over-punctuates" },
+      { "id": "c", "text": "The email's size rounded to the nearest gigabyte", "misconception": "Rounds away all variation, so the column is constant and carries no information." },
+      { "id": "d", "text": "A random number attached to each email", "misconception": "Pure noise, which can only encourage spurious fitting." }
     ],
-    "correct_option_id": "a",
-    "explanation_after": "Good feature engineering derives a signal that's actually correlated with the target — exclamation-mark count is a real, historically useful spam signal. Millisecond-level timestamp precision adds noise rather than signal, byte size rounded to gigabytes destroys almost all information (most emails round to 0), and a random feature carries no information at all."
+    "correct_option_id": "b",
+    "hints": [
+      "A good feature has to vary across examples and relate to the thing being predicted.",
+      "Check each candidate against both tests — some vary but mean nothing, one does not vary at all."
+    ],
+    "explanation_after": "Exclamation count varies and plausibly relates to spam. Millisecond precision varies but means nothing; gigabyte rounding means something but no longer varies. Useful features need both."
   },
   {
     "id": "p3_eval_dal_create",
@@ -277,14 +714,86 @@
     "skill_id": "p3_data_and_labels",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "You're building a training set to teach a model to recognize cats vs. dogs in photos. Which labeling approach correctly sets up supervised learning for this task?",
+    "difficulty": "easy",
+    "time_target_sec": 70,
+    "stem": "You are building a training set to tell cats from dogs in photos. Which labelling approach sets up supervised learning correctly?",
     "options": [
-      { "id": "a", "text": "For each photo, attach a label saying whether it's a cat or a dog, so the model has a ground-truth answer to learn from and be checked against" },
-      { "id": "b", "text": "Collect photos with no labels at all, and let the model guess the labels itself with no ground truth" },
-      { "id": "c", "text": "Label only the cat photos and leave the dog photos completely unlabeled" },
-      { "id": "d", "text": "Use the photo's file size as its label" }
+      { "id": "a", "text": "Attach a cat-or-dog label to every photo, giving a ground truth to learn from and be checked against" },
+      { "id": "b", "text": "Collect photos with no labels and let the model infer them", "misconception": "Describes unsupervised learning, which cannot produce the named categories the task requires." },
+      { "id": "c", "text": "Label only the cat photos and leave the dog photos unlabelled", "misconception": "Leaves the model unable to tell a dog from an unlabelled cat, since absence of a label means nothing." },
+      { "id": "d", "text": "Use each photo's file size as its label", "misconception": "Supplies a target unrelated to the question being asked." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Supervised learning needs a true label to compare each prediction against during training. Labeling only one class, using no labels, or using an unrelated value like file size all break the core mechanism supervised learning depends on — the model would have nothing meaningful to learn from."
+    "hints": [
+      "Supervised learning needs a known answer for every example it learns from.",
+      "Ask what the model would conclude from a photo carrying no label at all."
+    ],
+    "explanation_after": "Every training photo needs its true class, so the model can measure error and be scored honestly later. Partial labelling leaves ambiguity the model cannot resolve."
+  },
+  {
+    "id": "p3_eval_eval_create",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_model_evaluation",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "You have two years of daily sales and want to predict next month's. How should the data be split for evaluation?",
+    "options": [
+      { "id": "a", "text": "Shuffle all days and take a random 20% as the test set", "misconception": "Lets the model train on days after those it is tested on, so it predicts the past from the future." },
+      { "id": "b", "text": "Train on the earliest 18 months and test on the most recent 6, preserving time order" },
+      { "id": "c", "text": "Train and test on all the data, then compare against the training score", "misconception": "Leaves no unseen data at all, so the score measures memorisation." },
+      { "id": "d", "text": "Split by day of the week, training on weekdays and testing on weekends", "misconception": "Creates a systematic difference between the splits, so the test measures weekday-to-weekend transfer rather than forecasting." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what information the model will genuinely have when it makes a real prediction.",
+      "Make the evaluation imitate the real situation as closely as you can."
+    ],
+    "explanation_after": "Forecasting means predicting forward, so the split must respect time. A shuffled split leaks future information — the model learns from Wednesday to predict Tuesday, and scores far better offline than it ever will in use."
+  },
+  {
+    "id": "p3_eval_ovf_create",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_overfitting",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "Your model shows clear overfitting: training accuracy 98%, validation 61%. Which plan is the soundest first response?",
+    "options": [
+      { "id": "a", "text": "Train for more epochs so validation accuracy catches up", "misconception": "Continues the process that caused the gap; the validation score will usually fall further." },
+      { "id": "b", "text": "Report the 98% figure, since it is the model's best measured performance", "misconception": "Reports the number that is known not to generalise, which is the one measurement that cannot be trusted." },
+      { "id": "c", "text": "Add more training data if possible, and otherwise simplify the model or add regularisation and early stopping" },
+      { "id": "d", "text": "Switch to a larger model with more parameters", "misconception": "Adds capacity to a model that is already memorising, which typically widens the gap." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The model has more capacity than the data supports. Ask which side of that you can change.",
+      "Two directions are available: more evidence, or less freedom to memorise."
+    ],
+    "explanation_after": "Overfitting is capacity exceeding evidence, so either raise the evidence or lower the capacity. More data is usually best; where it is unavailable, regularisation, a smaller model and early stopping all cut the freedom to memorise."
+  },
+  {
+    "id": "p3_eval_scope_create",
+    "phase": "phase_3_intro_ai",
+    "skill_id": "p3_ai_applications",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "A clinic wants AI help with diagnosis. Which scope is both useful and defensible given what current models can do?",
+    "options": [
+      { "id": "a", "text": "The model issues the final diagnosis, and clinicians review only disputed cases", "misconception": "Makes the model the decision-maker and relies on someone disputing a result they may never see." },
+      { "id": "b", "text": "The model diagnoses routine cases and refers only unusual ones to a clinician", "misconception": "Sounds moderate but still makes the model the decider for the majority, and 'routine' is exactly what it may misjudge." },
+      { "id": "c", "text": "The model is used only for research and never informs any clinical work", "misconception": "Safe but forfeits the benefit entirely; the question asks for something useful as well as defensible." },
+      { "id": "d", "text": "The model flags findings for a clinician to confirm, and its confidence and reasoning are shown" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask who holds the decision and the accountability in each design.",
+      "A useful scope changes what the clinician sees without replacing their judgment."
+    ],
+    "explanation_after": "Assisting keeps a qualified human accountable while still surfacing findings they might miss, and showing confidence lets them weigh it. The designs that hand over routine cases sound cautious but move the decision anyway."
   }
 ]
