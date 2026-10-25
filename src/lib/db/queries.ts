@@ -4,6 +4,7 @@ import type {
   AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
   ExplanationGrade, BehaviorQualityShadowEntry, BktParamShadowEntry,
   QuestionRating, LearnerAbility, Phase, SelectionShadowEntry,
+  ExamRun, ExamItemEvent,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -466,6 +467,76 @@ export async function getSelectionShadow(learnerId: string, limit: number): Prom
     .order('created_at', { ascending: false })
     .limit(limit)
   return data ?? []
+}
+
+// ─────────────────────────────────────────────
+// EXAM RUNS (EXAM-2 — requires migration 011)
+// ─────────────────────────────────────────────
+
+// These throw: unlike the shadow logs, the exam *is* these rows, so a missing
+// migration has to surface as an error rather than an exam that forgets.
+
+export async function createExamRun(run: Omit<ExamRun, 'id' | 'created_at'>): Promise<ExamRun> {
+  const row = { ...run, id: generateId(), created_at: new Date().toISOString() }
+  const { error } = await getDb().from('exam_runs').insert(row)
+  if (error) throw new Error(`Exam run insert failed: ${error.message}`)
+  return row
+}
+
+export async function getExamRun(runId: string, learnerId: string): Promise<ExamRun | null> {
+  const { data } = await getDb()
+    .from('exam_runs')
+    .select('*')
+    .eq('id', runId)
+    .eq('learner_id', learnerId)
+    .maybeSingle()
+  return data ?? null
+}
+
+export async function updateExamRun(runId: string, patch: Partial<Omit<ExamRun, 'id' | 'learner_id'>>): Promise<void> {
+  const { error } = await getDb().from('exam_runs').update(patch).eq('id', runId)
+  if (error) throw new Error(`Exam run update failed: ${error.message}`)
+}
+
+export async function getExamRuns(learnerId: string, limit: number): Promise<ExamRun[]> {
+  const { data } = await getDb()
+    .from('exam_runs')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+export async function getExamItems(runId: string): Promise<ExamItemEvent[]> {
+  const { data } = await getDb()
+    .from('exam_item_events')
+    .select('*')
+    .eq('run_id', runId)
+    .order('position', { ascending: true })
+  return data ?? []
+}
+
+export async function getLearnerExamItems(learnerId: string, limit: number): Promise<ExamItemEvent[]> {
+  const { data } = await getDb()
+    .from('exam_item_events')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+export async function insertExamItem(item: Omit<ExamItemEvent, 'id' | 'created_at'>): Promise<ExamItemEvent> {
+  const row = { ...item, id: generateId(), created_at: new Date().toISOString() }
+  const { error } = await getDb().from('exam_item_events').insert(row)
+  if (error) throw new Error(`Exam item insert failed: ${error.message}`)
+  return row
+}
+
+export async function updateExamItem(itemId: string, patch: Partial<Omit<ExamItemEvent, 'id' | 'run_id' | 'learner_id'>>): Promise<void> {
+  const { error } = await getDb().from('exam_item_events').update(patch).eq('id', itemId)
+  if (error) throw new Error(`Exam item update failed: ${error.message}`)
 }
 
 // ─────────────────────────────────────────────

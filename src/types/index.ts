@@ -183,6 +183,32 @@ export interface LearnerAbility {
   updated_at: string
 }
 
+// One row per exam run (EXAM-2). Measurement-only: nothing here feeds BKT,
+// SM-2 or motivation. See src/lib/exam and migration 011.
+export interface ExamRun {
+  id: string; learner_id: string; phase: Phase
+  mode: 'practice' | 'checkpoint'
+  status: 'active' | 'finished'
+  started_at: string; deadline_at: string | null; finished_at: string | null
+  stop_reason: string | null
+  theta: number | null; se: number | null; n_items: number | null
+  debrief: unknown
+  created_at: string
+}
+
+// One row per item served in a run (EXAM-2), holding the final answer.
+export interface ExamItemEvent {
+  id: string; run_id: string; learner_id: string
+  question_id: string; skill_id: string; bloom_level: BloomLevel
+  position: number; rating: number; time_target_sec: number
+  served_at: string
+  selected_option_id: string | null; correct: boolean | null
+  latency_ms: number | null; answered_at: string | null
+  hint_level: number; last_hint_at: string | null; hint_abuse: boolean
+  marked: boolean
+  created_at: string
+}
+
 // One row per attempt (Level 16): the p_know the live global-parameter BKT
 // produced beside the one a per-skill fitted parameter set would have, with
 // both parameter sets, so the two can be compared on real outcomes.
