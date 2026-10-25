@@ -210,7 +210,7 @@ Doc ref: the approved plan for audit items 8, 9 and 10 — `Research/lab/02-engi
 | ID | Status | Task | Depends on |
 |---|---|---|---|
 | SCORE-1 | done | Elo calibration for questions and learners (`src/lib/elo`, migration 009) — the repo's first measured per-question difficulty, written fail-open from `/api/attempt` | none |
-| SCORE-2 | not_started | `src/lib/session/score.ts`: six-term weighted score (urgency, expected gain, difficulty match, behaviour, cognitive level, variety) + wheel-spin guard + ε exploration + a mandatory `reason`, with invariant tests | SCORE-1 |
+| SCORE-2 | done | `src/lib/session/score.ts`: six-term weighted score (urgency, expected gain, difficulty match, behaviour, cognitive level, variety) + wheel-spin guard + ε exploration + a mandatory `reason`, with invariant tests | SCORE-1 |
 | SCORE-3 | not_started | Shadow wiring: migration 010 `selection_shadow`, log the live rule choice beside the score choice with term breakdown and top-5 runners-up, fail-open | SCORE-2 |
 | SCORE-4 | not_started | `npm run selector:compare` over the seeded simulator: agreement %, disagreement taxonomy, and the outcome metrics `02-engines.md:159-163` names | SCORE-3 |
 | LAB-1 | not_started | Export the comparison and add a **Selection** tab to `dkt-lab/web` | SCORE-4 |

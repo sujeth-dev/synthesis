@@ -6,11 +6,13 @@ Read this first, then `MASTER_PLAN.md`, then follow `DEVELOPMENT_LOOP.md`. This 
 
 ## Current task
 
-**SCORE-1 is done. Next: SCORE-2.** A human directed work on audit items 8, 9 and 10 on 2026-10-25; the new `SCORE-*` / `LAB-*` / `BLOOM-7+` / `EXAM-*` / `OLM-*` / `LIVE-1` tracks in `MASTER_PLAN.md` carry the full task list and the five standing directions that bound them (no coding evaluation; the scorer ships shadow-first and the loop stops at LAB-3 for a human preview; Bloom stays phase-wise with a bigger bank rather than a per-question retrofit; no certainty prompt; exam results are measurement-only).
+**SCORE-1 and SCORE-2 are done. Next: SCORE-3.** A human directed work on audit items 8, 9 and 10 on 2026-10-25; the new `SCORE-*` / `LAB-*` / `BLOOM-7+` / `EXAM-*` / `OLM-*` / `LIVE-1` tracks in `MASTER_PLAN.md` carry the full task list and the five standing directions that bound them (no coding evaluation; the scorer ships shadow-first and the loop stops at LAB-3 for a human preview; Bloom stays phase-wise with a bigger bank rather than a per-question retrofit; no certainty prompt; exam results are measurement-only).
 
 SCORE-1 gave the repo its first *measured* question difficulty. Until now nothing knew how hard an individual question is — `difficulty_tier` is an author's label and `difficulty_base` an author's estimate of the whole concept, so no component could answer "which question gives this learner a 75% chance of being right", which the scorer's difficulty-match term and the exam's item choice both need. `src/lib/elo/index.ts` adds Elo over questions and over per-phase learner ability (Klinkenberg, Straatemeier & van der Maas 2011), with K shrinking as plays accumulate, cold starts derived from the authored fields, and ratings clamped to 600-2000. Migration `009_elo_ratings.sql` adds `question_ratings` (global per question — pooling every learner's answers is what makes it converge) and `learner_ability` (per learner per phase), both applied and verified against the live database. `/api/attempt` updates both fail-open after `insertAttempt`, as the sixth observational write in that route; a synthetic `_explain_back`/`_feynman_loop` id is deliberately not rated, since no authored question exists behind it. Nothing reads these numbers yet.
 
 Writing the inverse `ratingForTargetSuccess` surfaced a sign error that its own round-trip test caught before anything else used it.
+
+SCORE-2 added `src/lib/session/score.ts`: six weighted terms whose weights sum to 1 — urgency 0.30, expected gain 0.25, difficulty match 0.20, behaviour 0.10, cognitive 0.10, variety 0.05 — plus the wheel-spin guard, ε=0.12 exploration over an injected `next()`, and a mandatory `reason` sentence per `Research/lab/02-engines.md:334`. Two constants are measured rather than chosen: `MAX_EXPECTED_MOVEMENT` 0.31 is the largest expected |Δ p_know| from one answer under the live global parameters (at p_know 0.53), and the gain term is computed by running the real `bktUpdate()` both ways rather than approximating it, so it inherits the live parameters and decays to nothing as a skill approaches certainty. Urgency is expressed against the item's *own* interval — half the score at the due date, full one interval past it — so a 1-day and a 60-day schedule are comparable. The cognitive term uses `difficulty_tier` as an explicitly labelled proxy; the honest per-level version needs the Bloom ability the exam produces, which is EXAM-4's job, and that limitation is recorded in the module rather than papered over. The behaviour term deliberately does *not* reuse `behavior_modifier`, because `bktUpdate()` already spends that on discounting the same hesitation. 43 unit tests, including the invariants that must hold before LIVE-1 can be considered: a blocked skill scores zero and can never be returned as the choice, the more overdue of two identical skills ranks first, an unmastered skill outranks a mastered one on the same schedule, and the wheel-spin penalty is exact. Nothing imports this module yet — `git diff` for SCORE-2 is empty apart from the two new files.
 
 **P2-3 was complete before this pass; all six sets are committed locally on `nodes-track` and the full curriculum contains 120 nodes.** The approved five-node style checkpoint remains the binding content reference for future additions.
 
@@ -34,7 +36,7 @@ Set 6 completed Phase 8 at 10 nodes across Systems at Scale, Responsibility & Fr
 
 ## Next action
 
-**SCORE-2** — `src/lib/session/score.ts`, the six-term weighted score with a mandatory `reason` and its invariant tests. Shadow only; `selectNextTask()`'s live behaviour must not change until LIVE-1.
+**SCORE-3** — migration 010 `selection_shadow`, and log the live rule choice beside the score choice (term breakdown + top-5 runners-up) from `/api/session`'s `next` action, fail-open. `selectNextTask()`'s live behaviour must not change until LIVE-1.
 
 Pushes go to `claude/elegant-albattani-m3htzn` only, never `main`, and no pull request — a standing human constraint for this pass that overrides `DEVELOPMENT_LOOP.md` Step 8's `git push origin main`.
 
@@ -73,6 +75,8 @@ Pushes go to `claude/elegant-albattani-m3htzn` only, never `main`, and no pull r
 ---
 
 ## Completed work (chronological)
+
+- 2026-10-25 — **SCORE-2 done:** `src/lib/session/score.ts`, six weighted terms summing to 1, with the gain term computed through the real `bktUpdate()` and its normalisation constant measured (0.31, the live parameters' largest expected one-answer movement) rather than guessed. Wheel-spin guard, ε=0.12 exploration over an injected `next()`, a mandatory `reason` sentence, and 43 unit tests including the four pre-cutover invariants. Imported by nothing yet. 27 test files / 260 tests, build, and validate all green.
 
 - 2026-10-25 — **SCORE-1 done:** Elo calibration for questions and per-phase learner ability (`src/lib/elo/index.ts`, 29 unit tests), migration `009_elo_ratings.sql` applied and verified against the live database, and a fail-open update in `/api/attempt` with 6 route-level tests covering first rating, both answer directions, a second answer building on the stored row, a missing migration 009, and a synthetic reflection id going unrated. The repo's first measured per-question difficulty; nothing reads it yet. 26 test files / 217 tests, build, and validate all green (115 pre-existing warnings).
 
