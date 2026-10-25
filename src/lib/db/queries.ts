@@ -470,6 +470,50 @@ export async function getSelectionShadow(learnerId: string, limit: number): Prom
 }
 
 // ─────────────────────────────────────────────
+// DATE-RANGED READS (OLM-2)
+// ─────────────────────────────────────────────
+
+// Every other reader here is `order(desc).limit(n)`, which is right for "what
+// happened lately" and wrong for "how am I doing": /profile's accuracy and
+// activity strip used to be computed over only the last 200 attempts, whatever
+// the learner's history. These read a whole window, a page at a time, because
+// PostgREST caps a single response.
+
+const PAGE_SIZE = 1000
+// A hard stop so a runaway history cannot turn one page view into a scan.
+const MAX_ROWS = 20_000
+
+async function readWindow<T>(table: string, learnerId: string, timeField: string, since: Date, until: Date): Promise<T[]> {
+  const rows: T[] = []
+  for (let from = 0; from < MAX_ROWS; from += PAGE_SIZE) {
+    const { data, error } = await getDb()
+      .from(table)
+      .select('*')
+      .eq('learner_id', learnerId)
+      .gte(timeField, since.toISOString())
+      .lt(timeField, until.toISOString())
+      .order(timeField, { ascending: true })
+      .range(from, from + PAGE_SIZE - 1)
+    if (error || !data) break
+    rows.push(...(data as T[]))
+    if (data.length < PAGE_SIZE) break
+  }
+  return rows
+}
+
+export function getAttemptsBetween(learnerId: string, since: Date, until: Date): Promise<AttemptEvent[]> {
+  return readWindow<AttemptEvent>('attempt_events', learnerId, 'attempted_at', since, until)
+}
+
+export function getBehaviorQualityShadowBetween(learnerId: string, since: Date, until: Date): Promise<BehaviorQualityShadowEntry[]> {
+  return readWindow<BehaviorQualityShadowEntry>('behavior_quality_shadow', learnerId, 'created_at', since, until)
+}
+
+export function getExamItemsBetween(learnerId: string, since: Date, until: Date): Promise<ExamItemEvent[]> {
+  return readWindow<ExamItemEvent>('exam_item_events', learnerId, 'created_at', since, until)
+}
+
+// ─────────────────────────────────────────────
 // EXAM RUNS (EXAM-2 — requires migration 011)
 // ─────────────────────────────────────────────
 
