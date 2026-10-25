@@ -111,13 +111,11 @@ if (fs.existsSync(diagFile)) {
 }
 console.log('\nPhase Evaluations')
 const BLOOM_LEVELS = ['remember', 'understand', 'apply', 'analyze', 'evaluate', 'create']
-const MIN_PER_BLOOM_LEVEL = 2
-// The Bloom exam target: 6 per level per phase, 36 per phase, 324 in all.
-// Held as a warning while the nine phase files are migrated one commit at a
-// time, and raised to an error by the last of them (BLOOM-10) so the gate
-// means something again. Until then a phase short of the target is reported,
-// not tolerated silently.
-const TARGET_PER_BLOOM_LEVEL = 6
+// The Bloom exam requirement: 6 per level per phase, 36 per phase, 324 in all.
+// This was a warning while the nine phase files were migrated one commit at a
+// time (BLOOM-2..9) and became an error once the last of them met it, so the
+// gate means something again. Dropping below it now fails the build.
+const MIN_PER_BLOOM_LEVEL = 6
 const DIFFICULTY_BANDS = ['easy', 'medium', 'hard']
 const MIN_TIME_TARGET_SEC = 20
 const MAX_TIME_TARGET_SEC = 300
@@ -206,7 +204,6 @@ for (const phase of authoredPhases) {
   for (const level of BLOOM_LEVELS) {
     const count = countByLevel.get(level)
     if (count < MIN_PER_BLOOM_LEVEL) { err(`${phaseFileNames[phase]}: only ${count} "${level}" question(s), needs at least ${MIN_PER_BLOOM_LEVEL}`) }
-    else if (count < TARGET_PER_BLOOM_LEVEL) { warn(`${phaseFileNames[phase]}: ${count} "${level}" question(s), exam target is ${TARGET_PER_BLOOM_LEVEL}`) }
   }
   peTotal += qs.length
   peChecked++
