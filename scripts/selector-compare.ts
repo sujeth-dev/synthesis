@@ -29,7 +29,9 @@ import { initMotivationState, updateMotivationState } from '../src/lib/motivatio
 import {
   DEFAULT_REVIEW_OFFER_SIZE, SESSION_TASK_CAP, selectNextTaskDetailed, type SelectionTrace,
 } from '../src/lib/session/engine'
-import { rankCandidates, type ScoreTermName } from '../src/lib/session/score'
+import {
+  rankCandidates, SCORE_WEIGHTS, type CandidateScore, type ScoreTermName,
+} from '../src/lib/session/score'
 import { SCORE_TIE_EPSILON, toScoreInputs } from '../src/lib/session/shadow'
 import { ELO_START } from '../src/lib/elo'
 import { createRng } from '../src/lib/sim/rng'
@@ -70,6 +72,32 @@ interface Disagreement {
   gap: number
 }
 
+/** One candidate as the lab site shows it, from the real scorer's own output. */
+interface ExampleSide {
+  skill_id: string
+  label: string
+  score: number
+  p_know: number
+  terms: { name: ScoreTermName; raw: number; weight: number; contribution: number }[]
+  reason: string
+}
+
+/**
+ * A single disagreement kept whole, so the lab site can show a decision rather
+ * than only counts. Capped per dominant term, so one common term cannot crowd
+ * the rarer ones out of the sample.
+ */
+interface Example {
+  dominant_term: ScoreTermName
+  branch: string
+  day: number
+  candidate_count: number
+  rules: ExampleSide
+  score: ExampleSide
+}
+
+const EXAMPLES_PER_TERM = 2
+
 interface RunResult {
   attempts: number
   reviewAttempts: number
@@ -84,13 +112,15 @@ interface RunResult {
   agreed: number
   tied: number
   disagreements: Disagreement[]
+  /** Only populated on the rules-following run. */
+  examples: Example[]
 }
 
 function emptyResult(): RunResult {
   return {
     attempts: 0, reviewAttempts: 0, skillsLearnedPerLearner: 0, endRetention: 0,
     forgottenFraction: 0, meanEndPKnow: 0, pKnowGainPerAttempt: 0, overdueAtEndPerLearner: 0,
-    decisions: 0, agreed: 0, tied: 0, disagreements: [],
+    decisions: 0, agreed: 0, tied: 0, disagreements: [], examples: [],
   }
 }
 
@@ -105,6 +135,7 @@ function run(
   const skillIds = nodes.map(node => node.id)
   const questionsCache = loadQuestionsCache(skillIds)
   const prereqs = new Map(skillIds.map(id => [id, getHardPrereqs(id)]))
+  const labels = new Map(nodes.map(node => [node.id, node.label]))
 
   const result = emptyResult()
   const endRecalls: number[] = []
@@ -216,6 +247,29 @@ function run(
               if (mine - theirs > gap) { gap = mine - theirs; dominantTerm = term.name }
             }
             result.disagreements.push({ dominantTerm, gap })
+
+            // Keep a handful of decisions whole. Counts say how often the two
+            // selectors differ; only a kept decision says what the difference
+            // looked like.
+            const kept = result.examples.filter(e => e.dominant_term === dominantTerm).length
+            if (kept < EXAMPLES_PER_TERM) {
+              const side = (c: CandidateScore): ExampleSide => ({
+                skill_id: c.skill_id,
+                label: labels.get(c.skill_id) ?? c.skill_id,
+                score: c.score,
+                p_know: skillStates.get(c.skill_id)?.p_know ?? 0,
+                terms: c.terms.map(t => ({ name: t.name, raw: t.raw, weight: t.weight, contribution: t.contribution })),
+                reason: c.reason,
+              })
+              result.examples.push({
+                dominant_term: dominantTerm,
+                branch: trace.branch,
+                day,
+                candidate_count: trace.candidates.length,
+                rules: side(ruleScored),
+                score: side(top),
+              })
+            }
           }
         }
 
@@ -230,6 +284,12 @@ function run(
         // only on the skill.
         seenQuestionIdsThisSession: new Set<string>(),
         questionsCache, mode,
+        // The simulated calendar, not the wall clock. Without this every
+        // simulated due date sits in the real past, so the cascade sees every
+        // schedule as overdue while the score's urgency term -- which was
+        // always given this clock -- sees almost nothing due. The two policies
+        // were being compared on different clocks.
+        now: new Date(clock),
       })
 
       // Reviews are consent-based in the live app; a simulated learner always
@@ -344,6 +404,10 @@ function main() {
   fs.writeFileSync(OUT_PATH, JSON.stringify({
     generated_at: new Date().toISOString(),
     config: { learners, days, seed },
+    // The live constants, not a copy: the lab site reads the weights it shows
+    // from the module the scorer itself uses.
+    weights: SCORE_WEIGHTS,
+    tie_epsilon: SCORE_TIE_EPSILON,
     agreement: {
       decisions: rules.decisions,
       agreed: rules.agreed,
@@ -352,6 +416,7 @@ function main() {
       agreement_excluding_ties: agreementExcludingTies,
       by_term: sortedTerms.map(([term, entry]) => ({ term, count: entry.count, mean_gap: mean(entry.gaps) })),
     },
+    examples: rules.examples,
     outcomes: rows.map(([metric, rulesValue, scoreValue]) => ({ metric, rules: rulesValue, score: scoreValue, delta: scoreValue - rulesValue })),
     caveat: 'Simulated learners under this repository\'s own memory model. Evidence for a human decision at LAB-3, not a cutover.',
   }, null, 2) + '\n')

@@ -272,3 +272,41 @@ describe('session topic arc memory', () => {
     expect(regressed.stage_correct_streak).toBe(0)
   })
 })
+
+// `now` exists so an offline harness can select over a simulated calendar.
+// Without it `selectNextTaskDetailed` read the wall clock, which made every
+// simulated due date read as overdue and the same inputs give different picks
+// from one run to the next (PROGRESS.md item 23).
+describe('selection clock', () => {
+  const skillId = 'p1_what_is_computer'
+
+  function selectReviewAt(now: Date, dueAt: string) {
+    return selectNextTask({
+      skillStates: new Map([[skillId, skillState(skillId, 0.6)]]),
+      reviewSchedules: new Map([[skillId, {
+        learner_id: learnerId, skill_id: skillId, interval_days: 3,
+        ease_factor: 2.5, repetitions: 2, due_at: dueAt, last_reviewed_at: null,
+      }]]),
+      motivationState,
+      seenSkillsThisSession: [],
+      seenQuestionIdsThisSession: new Set(),
+      questionsCache: new Map([[skillId, [question(skillId)]]]),
+      mode: 'review',
+      now,
+    })
+  }
+
+  it('serves a review that is due at the injected time', () => {
+    const task = selectReviewAt(new Date('2026-01-10T00:00:00Z'), '2026-01-08T00:00:00Z')
+    expect(task?.skill_id).toBe(skillId)
+  })
+
+  it('withholds the same review when the injected time is before it is due', () => {
+    expect(selectReviewAt(new Date('2026-01-06T00:00:00Z'), '2026-01-08T00:00:00Z')).toBeNull()
+  })
+
+  it('reads the same clock for urgency as for the due check', () => {
+    const task = selectReviewAt(new Date('2026-01-18T00:00:00Z'), '2026-01-08T00:00:00Z')
+    expect(task?.days_until_due).toBe(-10)
+  })
+})

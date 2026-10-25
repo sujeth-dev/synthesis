@@ -129,6 +129,13 @@ export interface SelectTaskParams {
   currentSkillId?:            string
   arcHistory?:                ArcAttemptEvidence[]
   lastQuestionId?:            string
+  /**
+   * The moment selection is being made for. Defaults to the wall clock, which
+   * is what every request wants; an offline harness over a simulated calendar
+   * must pass its own clock, or every simulated `due_at` in the past reads as
+   * overdue and review ordering drifts between runs.
+   */
+  now?:                       Date
 }
 
 export function canSelectReview(_phaseContext: Candidate['phase_context'], mode?: SessionMode): boolean {
@@ -182,10 +189,8 @@ export function selectNextTaskDetailed(p: SelectTaskParams): SelectionTrace {
   const {
     skillStates, reviewSchedules, motivationState,
     seenSkillsThisSession, seenQuestionIdsThisSession, questionsCache, mode, currentSkillId,
-    arcHistory = [], lastQuestionId,
+    arcHistory = [], lastQuestionId, now = new Date(),
   } = p
-
-  const now = new Date()
 
   // ── Determine active phase ────────────────────────────────────────────────
   const allNodes        = getAllNodes().filter(n => !n.deprecated)

@@ -1,44 +1,894 @@
 {
-  "generated_at": "2026-10-25T07:58:16.178Z",
+  "generated_at": "2026-10-25T11:45:00.294Z",
   "config": {
     "learners": 120,
     "days": 60,
     "seed": 4242
   },
+  "weights": {
+    "urgency": 0.35,
+    "gain": 0.35,
+    "behaviour": 0.1,
+    "cognitive": 0.15,
+    "variety": 0.05
+  },
+  "tie_epsilon": 0.005,
   "agreement": {
-    "decisions": 21905,
-    "agreed": 7228,
-    "tied": 1905,
-    "disagreed": 12772,
-    "agreement_excluding_ties": 0.3614,
+    "decisions": 4286,
+    "agreed": 1174,
+    "tied": 686,
+    "disagreed": 2426,
+    "agreement_excluding_ties": 0.32611111111111113,
     "by_term": [
       {
-        "term": "variety",
-        "count": 9060,
-        "mean_gap": 0.045854580573957485
+        "term": "gain",
+        "count": 649,
+        "mean_gap": 0.035772860057006764
       },
       {
         "term": "cognitive",
-        "count": 2124,
-        "mean_gap": 0.05160028248587481
-      },
-      {
-        "term": "gain",
-        "count": 969,
-        "mean_gap": 0.03238129110721542
-      },
-      {
-        "term": "behaviour",
-        "count": 463,
-        "mean_gap": 0.03691804991168327
+        "count": 643,
+        "mean_gap": 0.05099766718506931
       },
       {
         "term": "urgency",
-        "count": 156,
-        "mean_gap": 0.04201096652651521
+        "count": 428,
+        "mean_gap": 0.1359967901340483
+      },
+      {
+        "term": "variety",
+        "count": 364,
+        "mean_gap": 0.03886675824175816
+      },
+      {
+        "term": "behaviour",
+        "count": 342,
+        "mean_gap": 0.036463024610618344
       }
     ]
   },
+  "examples": [
+    {
+      "dominant_term": "cognitive",
+      "branch": "tiers",
+      "day": 2,
+      "candidate_count": 5,
+      "rules": {
+        "skill_id": "p1_cpu_processing",
+        "label": "CPU & Processing",
+        "score": 0.23847022332506201,
+        "p_know": 0.1,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.36848635235732013,
+            "weight": 0.35,
+            "contribution": 0.12897022332506203
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.1,
+            "weight": 0.1,
+            "contribution": 0.010000000000000002
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.32999999999999996,
+            "weight": 0.15,
+            "contribution": 0.049499999999999995
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (37%), and it has not come up recently (100%)."
+      },
+      "score": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.25407434635416665,
+        "p_know": 0.43333333333333335,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.00015950810185183517,
+            "weight": 0.35,
+            "contribution": 0.0000558278356481423
+          },
+          {
+            "name": "gain",
+            "raw": 0.31481481481481477,
+            "weight": 0.35,
+            "contribution": 0.11018518518518516
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.43333333333333335,
+            "weight": 0.1,
+            "contribution": 0.043333333333333335
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 0,
+            "weight": 0.05,
+            "contribution": 0
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (31%), and the same tier matches how well this is already known (67%)."
+      }
+    },
+    {
+      "dominant_term": "cognitive",
+      "branch": "tiers",
+      "day": 2,
+      "candidate_count": 5,
+      "rules": {
+        "skill_id": "p1_what_is_computer",
+        "label": "What is a Computer?",
+        "score": 0.21233615052614865,
+        "p_know": 0.16164383561643836,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.30477647704144234,
+            "weight": 0.35,
+            "contribution": 0.10667176696450481
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.16164383561643836,
+            "weight": 0.1,
+            "contribution": 0.016164383561643837
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.32999999999999996,
+            "weight": 0.15,
+            "contribution": 0.049499999999999995
+          },
+          {
+            "name": "variety",
+            "raw": 0.8,
+            "weight": 0.05,
+            "contribution": 0.04000000000000001
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (30%), and the same tier matches how well this is already known (33%)."
+      },
+      "score": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.26412037297453705,
+        "p_know": 0.43333333333333335,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.0002910127314814659,
+            "weight": 0.35,
+            "contribution": 0.00010185445601851306
+          },
+          {
+            "name": "gain",
+            "raw": 0.31481481481481477,
+            "weight": 0.35,
+            "contribution": 0.11018518518518516
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.43333333333333335,
+            "weight": 0.1,
+            "contribution": 0.043333333333333335
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 0.2,
+            "weight": 0.05,
+            "contribution": 0.010000000000000002
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (31%), and the same tier matches how well this is already known (67%)."
+      }
+    },
+    {
+      "dominant_term": "behaviour",
+      "branch": "tiers",
+      "day": 2,
+      "candidate_count": 4,
+      "rules": {
+        "skill_id": "p1_what_is_computer",
+        "label": "What is a Computer?",
+        "score": 0.2513005262725294,
+        "p_know": 0.17000398883127243,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.2965717925411492,
+            "weight": 0.35,
+            "contribution": 0.10380012738940221
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.17000398883127243,
+            "weight": 0.1,
+            "contribution": 0.017000398883127245
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.6699999999999999,
+            "weight": 0.15,
+            "contribution": 0.10049999999999999
+          },
+          {
+            "name": "variety",
+            "raw": 0.6,
+            "weight": 0.05,
+            "contribution": 0.03
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (30%), and the review tier matches how well this is already known (67%)."
+      },
+      "score": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.30431732291666663,
+        "p_know": 0.43333333333333335,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.0008537268518518659,
+            "weight": 0.35,
+            "contribution": 0.00029880439814815307
+          },
+          {
+            "name": "gain",
+            "raw": 0.31481481481481477,
+            "weight": 0.35,
+            "contribution": 0.11018518518518516
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.43333333333333335,
+            "weight": 0.1,
+            "contribution": 0.043333333333333335
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (31%), and the same tier matches how well this is already known (67%)."
+      }
+    },
+    {
+      "dominant_term": "gain",
+      "branch": "review_mode",
+      "day": 3,
+      "candidate_count": 2,
+      "rules": {
+        "skill_id": "p1_input_output",
+        "label": "Input & Output",
+        "score": 0.4395148104715692,
+        "p_know": 0.5448818897637795,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.5103282349537037,
+            "weight": 0.35,
+            "contribution": 0.1786148822337963
+          },
+          {
+            "name": "gain",
+            "raw": 0.1597478264611285,
+            "weight": 0.35,
+            "contribution": 0.05591173926139497
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.5448818897637795,
+            "weight": 0.1,
+            "contribution": 0.05448818897637795
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because it is drifting past its review date (51% of the way to a full interval overdue), and the same tier matches how well this is already known (67%)."
+      },
+      "score": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.4827744296875,
+        "p_know": 0.43333333333333335,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.5107311747685185,
+            "weight": 0.35,
+            "contribution": 0.17875591116898146
+          },
+          {
+            "name": "gain",
+            "raw": 0.31481481481481477,
+            "weight": 0.35,
+            "contribution": 0.11018518518518516
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.43333333333333335,
+            "weight": 0.1,
+            "contribution": 0.043333333333333335
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because it is drifting past its review date (51% of the way to a full interval overdue), and there is more ground still to cover here than almost anywhere else (31%)."
+      }
+    },
+    {
+      "dominant_term": "gain",
+      "branch": "tiers",
+      "day": 3,
+      "candidate_count": 4,
+      "rules": {
+        "skill_id": "p1_what_is_computer",
+        "label": "What is a Computer?",
+        "score": 0.06775190530041673,
+        "p_know": 0.17121938076215687,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.2953876660727178,
+            "weight": 0.35,
+            "contribution": 0.10338568312545124
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.17121938076215687,
+            "weight": 0.1,
+            "contribution": 0.017121938076215686
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.6699999999999999,
+            "weight": 0.15,
+            "contribution": 0.10049999999999999
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (30%), and the review tier matches how well this is already known (67%). Held back because this skill has gone wrong 3 times in a row — grinding it further is unlikely to help."
+      },
+      "score": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.2303617829865982,
+        "p_know": 0.22416107382550335,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.36698764458299393,
+            "weight": 0.35,
+            "contribution": 0.12844567560404788
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.22416107382550335,
+            "weight": 0.1,
+            "contribution": 0.022416107382550336
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.32999999999999996,
+            "weight": 0.15,
+            "contribution": 0.049499999999999995
+          },
+          {
+            "name": "variety",
+            "raw": 0.6,
+            "weight": 0.05,
+            "contribution": 0.03
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (37%), and the same tier matches how well this is already known (33%)."
+      }
+    },
+    {
+      "dominant_term": "variety",
+      "branch": "tiers",
+      "day": 3,
+      "candidate_count": 4,
+      "rules": {
+        "skill_id": "p1_binary_numbers",
+        "label": "Binary Numbers",
+        "score": 0.057741171015292705,
+        "p_know": 0.17139781471852764,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.29521400739805165,
+            "weight": 0.35,
+            "contribution": 0.10332490258931808
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.17139781471852764,
+            "weight": 0.1,
+            "contribution": 0.017139781471852765
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.6699999999999999,
+            "weight": 0.15,
+            "contribution": 0.10049999999999999
+          },
+          {
+            "name": "variety",
+            "raw": 0.2,
+            "weight": 0.05,
+            "contribution": 0.010000000000000002
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (30%), and the review tier matches how well this is already known (67%). Held back because this skill has gone wrong 4 times in a row — grinding it further is unlikely to help."
+      },
+      "score": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.2503617829865982,
+        "p_know": 0.22416107382550335,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.36698764458299393,
+            "weight": 0.35,
+            "contribution": 0.12844567560404788
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.22416107382550335,
+            "weight": 0.1,
+            "contribution": 0.022416107382550336
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.32999999999999996,
+            "weight": 0.15,
+            "contribution": 0.049499999999999995
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (37%), and it has not come up recently (100%)."
+      }
+    },
+    {
+      "dominant_term": "urgency",
+      "branch": "tiers",
+      "day": 4,
+      "candidate_count": 5,
+      "rules": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.2766966605024735,
+        "p_know": 0.1796284700480067,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.3092394671362081,
+            "weight": 0.35,
+            "contribution": 0.10823381349767283
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.1796284700480067,
+            "weight": 0.1,
+            "contribution": 0.01796284700480067
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.6699999999999999,
+            "weight": 0.15,
+            "contribution": 0.10049999999999999
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (31%), and the review tier matches how well this is already known (67%)."
+      },
+      "score": {
+        "skill_id": "p1_what_is_computer",
+        "label": "What is a Computer?",
+        "score": 0.3855238486199218,
+        "p_know": 0.5595087252038737,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.3744864409722222,
+            "weight": 0.35,
+            "contribution": 0.13107025434027778
+          },
+          {
+            "name": "gain",
+            "raw": 0.13715063359787613,
+            "weight": 0.35,
+            "contribution": 0.04800272175925664
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.5595087252038737,
+            "weight": 0.1,
+            "contribution": 0.05595087252038738
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because it is drifting past its review date (37% of the way to a full interval overdue), and the same tier matches how well this is already known (67%)."
+      }
+    },
+    {
+      "dominant_term": "urgency",
+      "branch": "tiers",
+      "day": 4,
+      "candidate_count": 5,
+      "rules": {
+        "skill_id": "p1_input_output",
+        "label": "Input & Output",
+        "score": 0.26672127042703375,
+        "p_know": 0.5315112675463813,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.18020041049255886,
+            "weight": 0.35,
+            "contribution": 0.06307014367239559
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.5315112675463813,
+            "weight": 0.1,
+            "contribution": 0.05315112675463814
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because the same tier matches how well this is already known (67%), and there is more ground still to cover here than almost anywhere else (18%)."
+      },
+      "score": {
+        "skill_id": "p1_what_is_computer",
+        "label": "What is a Computer?",
+        "score": 0.3855688382032551,
+        "p_know": 0.5595087252038737,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.3746149826388889,
+            "weight": 0.35,
+            "contribution": 0.13111524392361112
+          },
+          {
+            "name": "gain",
+            "raw": 0.13715063359787613,
+            "weight": 0.35,
+            "contribution": 0.04800272175925664
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.5595087252038737,
+            "weight": 0.1,
+            "contribution": 0.05595087252038738
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because it is drifting past its review date (37% of the way to a full interval overdue), and the same tier matches how well this is already known (67%)."
+      }
+    },
+    {
+      "dominant_term": "behaviour",
+      "branch": "tiers",
+      "day": 34,
+      "candidate_count": 4,
+      "rules": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.06773959318351161,
+        "p_know": 0.1714240485261778,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.2951884796612248,
+            "weight": 0.35,
+            "contribution": 0.10331596788142867
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.1714240485261778,
+            "weight": 0.1,
+            "contribution": 0.01714240485261778
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.6699999999999999,
+            "weight": 0.15,
+            "contribution": 0.10049999999999999
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (30%), and the review tier matches how well this is already known (67%). Held back because this skill has gone wrong 5 times in a row — grinding it further is unlikely to help."
+      },
+      "score": {
+        "skill_id": "p1_binary_numbers",
+        "label": "Binary Numbers",
+        "score": 0.1992724132132204,
+        "p_know": 0.9873716408127594,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.00010071180555554227,
+            "weight": 0.35,
+            "contribution": 0.00003524913194443979
+          },
+          {
+            "name": "gain",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.9873716408127594,
+            "weight": 0.1,
+            "contribution": 0.09873716408127595
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 0,
+            "weight": 0.05,
+            "contribution": 0
+          }
+        ],
+        "reason": "Chosen because the same tier matches how well this is already known (67%), and it fits how the session is going (99%)."
+      }
+    },
+    {
+      "dominant_term": "variety",
+      "branch": "tiers",
+      "day": 4,
+      "candidate_count": 4,
+      "rules": {
+        "skill_id": "p1_memory_storage",
+        "label": "Memory & Storage",
+        "score": 0.23130052627252945,
+        "p_know": 0.17000398883127243,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0,
+            "weight": 0.35,
+            "contribution": 0
+          },
+          {
+            "name": "gain",
+            "raw": 0.2965717925411492,
+            "weight": 0.35,
+            "contribution": 0.10380012738940221
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.17000398883127243,
+            "weight": 0.1,
+            "contribution": 0.017000398883127245
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.6699999999999999,
+            "weight": 0.15,
+            "contribution": 0.10049999999999999
+          },
+          {
+            "name": "variety",
+            "raw": 0.2,
+            "weight": 0.05,
+            "contribution": 0.010000000000000002
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (30%), and the review tier matches how well this is already known (67%)."
+      },
+      "score": {
+        "skill_id": "p1_what_is_computer",
+        "label": "What is a Computer?",
+        "score": 0.304435261574074,
+        "p_know": 0.43333333333333335,
+        "terms": [
+          {
+            "name": "urgency",
+            "raw": 0.0011906944444444179,
+            "weight": 0.35,
+            "contribution": 0.00041674305555554624
+          },
+          {
+            "name": "gain",
+            "raw": 0.31481481481481477,
+            "weight": 0.35,
+            "contribution": 0.11018518518518516
+          },
+          {
+            "name": "behaviour",
+            "raw": 0.43333333333333335,
+            "weight": 0.1,
+            "contribution": 0.043333333333333335
+          },
+          {
+            "name": "cognitive",
+            "raw": 0.67,
+            "weight": 0.15,
+            "contribution": 0.1005
+          },
+          {
+            "name": "variety",
+            "raw": 1,
+            "weight": 0.05,
+            "contribution": 0.05
+          }
+        ],
+        "reason": "Chosen because there is more ground still to cover here than almost anywhere else (31%), and the same tier matches how well this is already known (67%)."
+      }
+    }
+  ],
   "outcomes": [
     {
       "metric": "attempts",
@@ -48,45 +898,45 @@
     },
     {
       "metric": "review attempts",
-      "rules": 19228,
-      "score": 19051,
-      "delta": -177
+      "rules": 1762,
+      "score": 1220,
+      "delta": -542
     },
     {
       "metric": "skills learned / learner",
-      "rules": 5.158333333333333,
-      "score": 5.358333333333333,
-      "delta": 0.20000000000000018
+      "rules": 4.883333333333334,
+      "score": 4.558333333333334,
+      "delta": -0.3250000000000002
     },
     {
       "metric": "end retention",
-      "rules": 0.91074031971199,
-      "score": 0.8937127377897003,
-      "delta": -0.017027581922289703
+      "rules": 0.9352521392542131,
+      "score": 0.940261149644268,
+      "delta": 0.005009010390054858
     },
     {
       "metric": "forgotten fraction",
-      "rules": 0.10016155088852989,
-      "score": 0.1290824261275272,
-      "delta": 0.02892087523899732
+      "rules": 0.07337883959044368,
+      "score": 0.0603290676416819,
+      "delta": -0.01304977194876178
     },
     {
       "metric": "mean end p_know",
-      "rules": 0.8956270756021122,
-      "score": 0.8928922137701156,
-      "delta": -0.00273486183199656
+      "rules": 0.896547055701995,
+      "score": 0.8966482471896863,
+      "delta": 0.00010119148769127673
     },
     {
       "metric": "p_know gain / attempt",
-      "rules": 0.013604572885238956,
-      "score": 0.013778338399126365,
-      "delta": 0.0001737655138874094
+      "rules": 0.012532793029678328,
+      "score": 0.01139802387981925,
+      "delta": -0.0011347691498590773
     },
     {
       "metric": "overdue at end / learner",
-      "rules": 2.125,
-      "score": 2.7,
-      "delta": 0.5750000000000002
+      "rules": 1.8916666666666666,
+      "score": 1.4583333333333333,
+      "delta": -0.43333333333333335
     }
   ],
   "caveat": "Simulated learners under this repository's own memory model. Evidence for a human decision at LAB-3, not a cutover."
