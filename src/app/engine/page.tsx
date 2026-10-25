@@ -5,6 +5,7 @@ import {
   getLearnerProfile, getRecentAttempts, getReviewSchedules,
   getExplanationGrades, getBehaviorQualityShadow,
   getFsrsShadowEntries, getDktShadowEntries, getBktParamShadow,
+  getSelectionShadow,
 } from '@/lib/db/queries'
 import { fittedParamsProvenance, isPerSkillBktEnabled } from '@/lib/bkt/params'
 import { Navbar } from '@/components/layout/Navbar'
@@ -35,6 +36,22 @@ function pct(value: number | null): string {
 
 function when(iso: string | null): string {
   return iso ? new Date(iso).toISOString().slice(0, 16).replace('T', ' ') : '—'
+}
+
+// `terms` and `runners_up` are JSONB, so they arrive as `unknown`. Reading them
+// defensively keeps a malformed or older row from taking the whole page down.
+type ShadowTerm = { name: string; raw: number; weight: number; contribution: number }
+
+function readTerms(value: unknown): ShadowTerm[] {
+  if (!Array.isArray(value)) return []
+  return value.filter((t): t is ShadowTerm =>
+    typeof t === 'object' && t !== null && 'name' in t && 'contribution' in t)
+}
+
+function readRunnersUp(value: unknown): { skill_id: string; score: number }[] {
+  if (!Array.isArray(value)) return []
+  return value.filter((r): r is { skill_id: string; score: number } =>
+    typeof r === 'object' && r !== null && 'skill_id' in r && 'score' in r)
 }
 
 function Section({ title, item, note, children }: {
@@ -81,7 +98,7 @@ export default async function EnginePage() {
   const user = await verifyToken(token)
   if (!user) redirect('/login')
 
-  const [profile, attempts, schedules, grades, behaviorShadow, fsrsShadow, dktShadow, paramShadow] = await Promise.all([
+  const [profile, attempts, schedules, grades, behaviorShadow, fsrsShadow, dktShadow, paramShadow, selectionShadow] = await Promise.all([
     getLearnerProfile(user.id),
     getRecentAttempts(user.id, SHADOW_ROWS),
     getReviewSchedules(user.id),
@@ -90,6 +107,7 @@ export default async function EnginePage() {
     getFsrsShadowEntries(user.id, SHADOW_ROWS),
     getDktShadowEntries(user.id, SHADOW_ROWS),
     getBktParamShadow(user.id, SHADOW_ROWS),
+    getSelectionShadow(user.id, SHADOW_ROWS),
   ])
 
   const scheduler = activeScheduler()
@@ -102,6 +120,18 @@ export default async function EnginePage() {
   const comparison = compareDktVsBkt(dktShadow)
   const growth = compareGrowth([...dktShadow].reverse())
   const decision = cutoverDecision(comparison, growth)
+
+  // A row only means something when both selectors chose from a real pool; a
+  // pinned arc offers one candidate, so `agreed` there says nothing.
+  const decisions = selectionShadow.filter(
+    row => row.rule_skill_id && row.score_skill_id && row.candidate_count >= 2)
+  const agreedRows = decisions.filter(row => row.agreed).length
+  const tiedRows = decisions.filter(row => !row.agreed && row.tied).length
+  const disagreedRows = decisions.length - agreedRows - tiedRows
+  // The most recent real difference of opinion is the one worth unpacking.
+  const spotlight = decisions.find(row => !row.agreed && !row.tied) ?? decisions[0] ?? null
+  const spotlightTerms = readTerms(spotlight?.terms)
+  const spotlightRunnersUp = readRunnersUp(spotlight?.runners_up)
 
   return (
     <div className="min-h-screen bg-c-bg">
@@ -247,6 +277,64 @@ export default async function EnginePage() {
           </div>
           <p className="mt-1 text-[11px] text-c-ghost">
             A recommendation only. Switching an experimental system live needs human sign-off.
+          </p>
+        </Section>
+
+        <Section
+          title="Selection"
+          item="Item 8 — the rule cascade vs the weighted score"
+          note="Which skill to serve next. The rule cascade decides and is what you were actually given; the weighted score is computed beside it and logged, never applied. A row is only written when the cascade had at least two candidates — a pinned guided arc has exactly one by construction, so most tasks in a normal session write nothing here."
+        >
+          <Table
+            head={['When', 'Branch', 'Candidates', 'Served (rules)', 'Score of it', 'Score would serve', 'Its score', 'Verdict']}
+            empty="No selection shadow rows yet (needs migration 010, and a session with a real choice)."
+            rows={decisions.slice(0, ATTEMPT_ROWS).map(row => [
+              when(row.created_at), row.branch, row.candidate_count,
+              row.rule_skill_id, row.rule_score_value === null ? '—' : row.rule_score_value.toFixed(4),
+              row.score_skill_id, row.score_value === null ? '—' : row.score_value.toFixed(4),
+              row.agreed ? 'same pick' : row.tied ? 'tie' : 'disagreed',
+            ])}
+          />
+          {decisions.length > 0 && (
+            <p className="mt-4 text-[12px] font-mono text-c-muted">
+              {decisions.length} decisions with a real choice: {agreedRows} same pick, {tiedRows} tied,
+              {' '}{disagreedRows} disagreed
+              {decisions.length > tiedRows &&
+                ` (${((agreedRows / (decisions.length - tiedRows)) * 100).toFixed(1)}% agreement excluding ties)`}.
+            </p>
+          )}
+          {spotlight && (
+            <div className="mt-6">
+              <p className="text-[12px] text-c-faint mb-3 max-w-3xl">
+                The most recent decision where the two differed, unpacked. The score reached its number
+                by summing these five weighted terms — this is the &ldquo;what it almost picked instead&rdquo; view.
+              </p>
+              <Table
+                head={['Term', 'Reading', 'Weight', 'Contribution']}
+                empty="No term breakdown on this row."
+                rows={spotlightTerms.map(t => [
+                  t.name, `${(t.raw * 100).toFixed(0)}%`, t.weight.toFixed(2), t.contribution.toFixed(4),
+                ])}
+              />
+              <div className="mt-6">
+                <Table
+                  head={['Runner-up the score ranked below its pick', 'Score']}
+                  empty="No runners-up logged on this row."
+                  rows={spotlightRunnersUp.map(r => [r.skill_id, r.score.toFixed(4)])}
+                />
+              </div>
+              <p className="mt-4 text-[12px] text-c-muted max-w-3xl">
+                <span className="font-mono text-c-ghost">rules: </span>{spotlight.rule_reason ?? '—'}
+              </p>
+              <p className="mt-1 text-[12px] text-c-muted max-w-3xl">
+                <span className="font-mono text-c-ghost">score: </span>{spotlight.score_reason ?? '—'}
+              </p>
+            </div>
+          )}
+          <p className="mt-4 text-[11px] text-c-ghost">
+            Broad comparison over simulated learners: <code>npm run selector:compare</code>, rendered on the
+            lab site&rsquo;s Selection tab. Measured there, the score forgets less and carries less review debt
+            than the cascade, and covers fewer new skills — a trade-off needing human sign-off, not a win.
           </p>
         </Section>
       </main>
