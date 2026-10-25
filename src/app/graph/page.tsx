@@ -5,15 +5,7 @@ import { GraphView }        from '@/components/graph/GraphView'
 import { SkillDetailPanel } from '@/components/graph/SkillDetailPanel'
 import type { GraphNodeWithState } from '@/components/graph/GraphView'
 import type { SkillEdge } from '@/types'
-
-// ─── Legend config ────────────────────────────────────────────────────────────
-
-const LEGEND = [
-  { color: '#2f5d3a', label: 'Mastered' },
-  { color: '#e8a84a', label: 'Intermediate' },
-  { color: '#d96e34', label: 'Beginner' },
-  { color: '#a8a49c', label: 'Locked'   },
-]
+import { MASTERY_LEGEND as LEGEND } from '@/lib/ui/mastery-colour'
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 

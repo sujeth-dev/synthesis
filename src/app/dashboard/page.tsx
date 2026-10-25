@@ -8,6 +8,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { PHASE_ORDER, findActivePhase, buildPhaseGroups, PHASE_EVALUATION_FILES } from '@/lib/phases'
 import { deriveUrgency } from '@/lib/sm2/urgency'
 import { getMasteryTier } from '@/lib/bkt'
+import { MASTERY_COLOUR } from '@/lib/ui/mastery-colour'
 import type { LearnerSkillState, SkillNode } from '@/types'
 
 // ─── Display constants ────────────────────────────────────────────────────────
@@ -34,14 +35,6 @@ const PHASE_SHORT: Record<string, string> = {
   phase_6_modern_ai:        'Phase 6',
   phase_7_real_world:       'Phase 7',
   phase_8_mastery:          'Phase 8',
-}
-
-const MASTERY_COLOUR: Record<string, string> = {
-  mastered: '#2f5d3a',
-  fragile:  '#e8a84a',
-  learning: '#e8a84a',
-  ready:    '#d96e34',
-  blocked:  '#a8a49c',
 }
 
 const MASTERY_RING: Record<string, string> = {
