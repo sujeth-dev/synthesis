@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { Spinner } from '@/components/ui/Spinner'
 import { Debrief, BLOOM_LABEL } from '@/components/exam/Debrief'
-import { paceFor, remainingMs, MIN_ITEMS, MAX_ITEMS, type ExamMode } from '@/lib/exam/policy'
+import { paceFor, remainingMs, MIN_ITEMS, MAX_ITEMS, BLOOM_ORDER, type ExamMode } from '@/lib/exam/policy'
 import type { Debrief as DebriefData } from '@/lib/exam/debrief'
 import type { BloomLevel } from '@/types'
 
@@ -25,7 +25,9 @@ interface LocalItem extends Item {
   spentMs: number
 }
 
-interface Run { id: string; mode: ExamMode; status: string; deadline_at: string | null; stop_reason: string | null }
+interface Run { id: string; mode: ExamMode; status: string; started_at: string; deadline_at: string | null; stop_reason: string | null }
+
+const LETTERS = ['a', 'b', 'c', 'd', 'e', 'f']
 
 const PHASE_LABEL: Record<string, string> = {
   phase_1_computer_basics: 'Phase 1', phase_1b_programming_basics: 'Phase 1B', phase_2_cs_data: 'Phase 2',
@@ -37,6 +39,19 @@ const PACE_TEXT = { on_pace: 'On pace', slow: 'Taking a while', over: 'Well over
 
 function local(item: Item): LocalItem {
   return { ...item, choice: item.selected_option_id, spentMs: 0 }
+}
+
+/** Time spent against the item's target as a ring; past the target it stays full. */
+function PaceRing({ fraction }: { fraction: number }) {
+  const r = 7, c = 2 * Math.PI * r
+  const f = Math.max(0, Math.min(1, fraction))
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden className="-rotate-90">
+      <circle cx="9" cy="9" r={r} fill="none" stroke="var(--bg3)" strokeWidth="2.5" />
+      <circle cx="9" cy="9" r={r} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+        strokeDasharray={c} strokeDashoffset={c * (1 - f)} />
+    </svg>
+  )
 }
 
 function clock(ms: number): string {
@@ -199,37 +214,78 @@ export default function ExamRoomPage() {
     setItems(list => list.map((it, i) => i === cur ? { ...it, hint_level: body.hint_level, hints: body.hints } : it))
   }
 
+  // Keys answer the question on screen: a letter (or 1–6) chooses, Enter saves.
+  // Re-bound every render so it always sees the current item and busy state.
+  useEffect(() => {
+    if (view !== 'running') return
+    const item = items[cur]
+    if (!item) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      const k = e.key.toLowerCase()
+      const idx = LETTERS.indexOf(k) >= 0 ? LETTERS.indexOf(k) : /^[1-6]$/.test(k) ? Number(k) - 1 : -1
+      if (idx >= 0 && idx < item.options.length && !busy) { e.preventDefault(); choose(item.options[idx].id); return }
+      if (e.key === 'Enter' && item.choice && !busy && (cur === items.length - 1 || item.choice !== item.selected_option_id)) {
+        e.preventDefault(); void save()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  })
+
   if (view === 'loading') return <Spinner label="Loading exam…" />
 
   if (view === 'debrief' && debrief && run) {
     return (
-      <div className="min-h-screen bg-c-bg p-8">
-        <Debrief debrief={debrief} skillLabels={skillLabels} phaseLabel={phaseLabel} mode={run.mode} />
+      <div className="min-h-screen bg-c-bg px-4 py-8 sm:p-8">
+        <Debrief debrief={debrief} skillLabels={skillLabels} phaseLabel={phaseLabel} mode={run.mode} phase={phase} />
       </div>
     )
   }
 
   if (view === 'intro') return (
-    <div className="min-h-screen bg-c-bg flex items-center justify-center p-8">
+    <div className="min-h-screen bg-c-bg flex items-center justify-center px-4 py-10 sm:p-8">
       <div className="max-w-2xl w-full animate-slide-up">
-        <p className="font-mono text-[11px] text-c-faint uppercase tracking-[0.14em] mb-4 text-center">{phaseLabel} Exam Room</p>
-        <h1 className="font-serif italic text-[32px] text-c-text mb-3 text-center">Every level of thinking, adaptively</h1>
-        <p className="text-[14px] text-c-muted mb-8 leading-[1.7] text-center">
+        <p className="font-mono text-[11px] text-c-purple uppercase tracking-[0.16em] mb-4 text-center">{phaseLabel} · Exam Room</p>
+        <h1 className="font-serif italic text-[32px] sm:text-[38px] leading-[1.1] text-c-text mb-3 text-center">Every level of thinking, adaptively</h1>
+        <p className="text-[14px] text-c-muted mb-6 leading-[1.7] text-center">
           Questions adjust to you and rotate through Remember, Understand, Apply, Analyze, Evaluate and Create.
-          The exam stops once it is confident in your result — between {MIN_ITEMS} and {MAX_ITEMS} questions.
-          You can revisit, change and mark any answer before you submit. Results are a measurement only:
-          they never change your mastery or your schedule.
+          You can revisit, change and mark any answer before you submit.
         </p>
+        <div className="grid grid-cols-3 gap-2 mb-6">
+          {[
+            [`${MIN_ITEMS}–${MAX_ITEMS}`, 'questions — stops once it is sure'],
+            ['6', 'levels of thinking'],
+            ['0', 'effect on your mastery or reviews'],
+          ].map(([v, l]) => (
+            <div key={l} className="p-3 rounded-xl bg-c-bg2 border border-[var(--border)] text-center">
+              <p className="font-serif text-[24px] text-c-text leading-none mb-1">{v}</p>
+              <p className="text-[11px] text-c-faint leading-snug">{l}</p>
+            </div>
+          ))}
+        </div>
         <div className="grid sm:grid-cols-2 gap-3 mb-6">
           <button onClick={() => start('practice')} disabled={busy} data-testid="start-practice"
-            className="text-left p-5 rounded-2xl bg-c-bg2 border border-[var(--border)] hover:border-[var(--border-hi)] transition-all disabled:opacity-50">
-            <p className="text-[15px] text-c-text font-medium mb-1">Practice</p>
-            <p className="text-[12px] text-c-muted leading-[1.6]">Untimed. Two hints per question — a nudge, then how to proceed. A hinted answer earns less credit.</p>
+            className="group text-left p-5 rounded-2xl bg-c-bg2 border border-[var(--border)] hover:border-c-blue/60 transition-all disabled:opacity-50">
+            <p className="font-mono text-[10px] text-c-blue uppercase tracking-[0.14em] mb-2">Learn as you go</p>
+            <p className="text-[17px] text-c-text font-medium mb-3">Practice</p>
+            <ul className="text-[12px] text-c-muted leading-[1.7] space-y-0.5 mb-4">
+              <li>· Untimed</li>
+              <li>· Two hints a question: a nudge, then how to proceed</li>
+              <li>· A hinted answer earns less credit</li>
+            </ul>
+            <span className="text-[13px] text-c-blue group-hover:underline">Start practice →</span>
           </button>
           <button onClick={() => start('checkpoint')} disabled={busy} data-testid="start-checkpoint"
-            className="text-left p-5 rounded-2xl bg-c-bg2 border border-[var(--border)] hover:border-[var(--border-hi)] transition-all disabled:opacity-50">
-            <p className="text-[15px] text-c-text font-medium mb-1">Checkpoint</p>
-            <p className="text-[12px] text-c-muted leading-[1.6]">One overall time limit, no hints. Each question shows a target pace, never a cut-off.</p>
+            className="group text-left p-5 rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple hover:border-c-purple/60 transition-all disabled:opacity-50">
+            <p className="font-mono text-[10px] text-c-purple uppercase tracking-[0.14em] mb-2">The real thing</p>
+            <p className="text-[17px] text-c-text font-medium mb-3">Checkpoint</p>
+            <ul className="text-[12px] text-c-muted leading-[1.7] space-y-0.5 mb-4">
+              <li>· One overall time limit</li>
+              <li>· No hints</li>
+              <li>· A target pace per question, never a cut-off</li>
+            </ul>
+            <span className="text-[13px] text-c-purple group-hover:underline">Start checkpoint →</span>
           </button>
         </div>
         {error && <p className="text-[12px] text-c-red text-center mb-4">{error}</p>}
@@ -242,29 +298,69 @@ export default function ExamRoomPage() {
   const elapsed = item ? item.spentMs + (now - viewStart.current) : 0
   const pace = item ? paceFor(elapsed, item.time_target_sec) : 'on_pace'
   const lowTime = remaining !== null && remaining < 60_000
+  const checkpoint = run?.mode === 'checkpoint'
+  const totalMs = run?.deadline_at ? Date.parse(run.deadline_at) - Date.parse(run.started_at) : null
+  const timeLeft = remaining !== null && totalMs ? Math.max(0, Math.min(1, remaining / totalMs)) : null
+  const answeredCount = items.filter(it => it.selected_option_id !== null).length
 
   const topBar = (
     <div className="sticky top-0 z-10 bg-c-bg/95 backdrop-blur border-b border-[var(--border)]">
-      <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
-        <span className="font-mono text-[11px] text-c-faint uppercase tracking-[0.12em]">
-          {phaseLabel} · {run?.mode === 'checkpoint' ? 'Checkpoint' : 'Practice'}
-        </span>
-        <span data-testid="exam-timer" className={`font-mono text-[15px] ${lowTime ? 'text-c-red' : 'text-c-text'}`}>
-          {remaining !== null ? `${clock(remaining)} left` : `${items.filter(it => it.selected_option_id !== null).length} answered so far`}
-        </span>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className={`font-mono text-[10px] uppercase tracking-[0.14em] px-2 py-1 rounded-md border ${
+            checkpoint ? 'border-c-purple/40 text-c-purple' : 'border-c-blue/40 text-c-blue'}`}>
+            {checkpoint ? 'Checkpoint' : 'Practice'}
+          </span>
+          <span className="font-mono text-[11px] text-c-faint truncate hidden sm:inline">
+            {phaseLabel} · {answeredCount} answered · stops between {MIN_ITEMS} and {MAX_ITEMS}
+          </span>
+        </div>
+        <div className="flex items-center gap-4 flex-shrink-0">
+          <span data-testid="exam-timer" className={`font-mono text-[16px] tabular-nums ${lowTime ? 'text-c-red animate-pulse' : 'text-c-text'}`}>
+            {remaining !== null ? `${clock(remaining)} left` : `${answeredCount} answered so far`}
+          </span>
+          <button onClick={() => { if (window.confirm('Leave the exam? Answers you saved stay recorded, but this run will not be debriefed.')) router.push('/dashboard') }}
+            className="text-[12px] text-c-faint hover:text-c-text">Leave</button>
+        </div>
       </div>
-      <div className="max-w-3xl mx-auto px-6 pb-3 flex flex-wrap gap-1.5" aria-label="Question navigator">
-        {items.map((it, i) => {
+      {timeLeft !== null && (
+        <div className="h-[3px] bg-c-bg3" aria-hidden>
+          <div className={`h-full transition-[width] duration-1000 ease-linear ${lowTime ? 'bg-c-red' : timeLeft < 0.25 ? 'bg-c-yellow' : 'bg-c-purple'}`}
+            style={{ width: `${timeLeft * 100}%` }} />
+        </div>
+      )}
+      {/* Every slot the run could use. Items are chosen one at a time, so slots
+          past the newest are placeholders; the marker shows where the exam may
+          stop. Once it has stopped, only the questions it served remain. */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-1" aria-label="Question navigator">
+        {Array.from({ length: done ? items.length : Math.max(MAX_ITEMS, items.length) }, (_, i) => {
+          const it = items[i]
+          const stopMarker = !done && i === MIN_ITEMS && (
+            <span key="stop" className="flex items-center gap-1 mx-1 font-mono text-[9px] text-c-faint" title={`The exam may stop after ${MIN_ITEMS} questions, once it is sure of your result`}>
+              <span className="w-px h-6 bg-[var(--border-hi)]" />may stop
+            </span>
+          )
+          if (!it) return (
+            <span key={`slot-${i}`} className="contents">
+              {stopMarker}
+              <span className="w-7 h-7 rounded-md border border-dashed border-[var(--border)] font-mono text-[10px] text-c-ghost/60 flex items-center justify-center" aria-hidden>
+                {i + 1}
+              </span>
+            </span>
+          )
           const answered = it.selected_option_id !== null
           return (
-            <button key={it.question_id} data-testid={`nav-${i}`} onClick={() => goTo(i)}
-              title={`${i + 1}: ${BLOOM_LABEL[it.bloom_level]}${answered ? ', answered' : ''}${it.marked ? ', marked' : ''}`}
-              className={`relative w-8 h-8 rounded-lg font-mono text-[11px] border transition-all ${
-                i === cur && view === 'running' ? 'border-c-purple text-c-purple bg-c-purple/10'
-                  : answered ? 'border-[var(--border-hi)] text-c-text bg-c-bg3' : 'border-[var(--border)] text-c-faint'}`}>
-              {i + 1}
-              {it.marked && <span className="absolute -top-1 -right-1 text-[9px] text-c-yellow">⚑</span>}
-            </button>
+            <span key={it.question_id} className="contents">
+              {stopMarker}
+              <button data-testid={`nav-${i}`} onClick={() => goTo(i)}
+                title={`${i + 1}: ${BLOOM_LABEL[it.bloom_level]}${answered ? ', answered' : ''}${it.marked ? ', marked' : ''}`}
+                className={`relative w-7 h-7 rounded-md font-mono text-[11px] border transition-all ${
+                  i === cur && view === 'running' ? 'border-c-purple text-white bg-c-purple'
+                    : answered ? 'border-c-blue/40 text-c-text bg-c-blue/20' : 'border-[var(--border-hi)] text-c-muted'}`}>
+                {i + 1}
+                {it.marked && <span className="absolute -top-1.5 -right-1 text-[9px] text-c-yellow">⚑</span>}
+              </button>
+            </span>
           )
         })}
       </div>
@@ -322,28 +418,42 @@ export default function ExamRoomPage() {
   return (
     <div className="min-h-screen bg-c-bg">
       {topBar}
-      <div className="max-w-2xl mx-auto p-8 animate-slide-up">
-        <div className="flex items-center justify-between mb-4">
-          <span className="font-mono text-[11px] text-c-faint">
-            Question {cur + 1} · {BLOOM_LABEL[item.bloom_level]}
-          </span>
-          <span data-testid="pace" className={`font-mono text-[11px] ${pace === 'on_pace' ? 'text-c-faint' : pace === 'slow' ? 'text-c-yellow' : 'text-c-red'}`}>
-            {pace === 'on_pace' ? '◷' : '◔'} {PACE_TEXT[pace]} · target {item.time_target_sec}s
+      <div className="max-w-2xl mx-auto px-4 py-6 sm:p-8 animate-slide-up">
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="font-serif italic text-[22px] text-c-text leading-none">Q{cur + 1}</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] px-2 py-1 rounded-md bg-c-bg3 text-c-muted">
+              {BLOOM_LABEL[item.bloom_level]} · level {BLOOM_ORDER.indexOf(item.bloom_level) + 1} of 6
+            </span>
+          </div>
+          <span data-testid="pace" className={`flex items-center gap-2 font-mono text-[11px] ${pace === 'on_pace' ? 'text-c-faint' : pace === 'slow' ? 'text-c-yellow' : 'text-c-red'}`}>
+            <PaceRing fraction={elapsed / (item.time_target_sec * 1000)} />
+            {PACE_TEXT[pace]} · target {item.time_target_sec}s
           </span>
         </div>
 
-        <div className="p-6 rounded-2xl bg-c-bg2 border border-[var(--border)] mb-4">
-          <p data-testid={`exam-question-${item.question_id}`} className="text-[15px] text-c-text leading-[1.65] mb-5 whitespace-pre-wrap">{item.stem}</p>
+        <div className="p-5 sm:p-7 rounded-2xl bg-c-bg2 border border-[var(--border)] mb-4">
+          <p data-testid={`exam-question-${item.question_id}`} className="text-[16px] text-c-text leading-[1.7] mb-6 whitespace-pre-wrap">{item.stem}</p>
           <div className="space-y-2.5">
-            {item.options.map(opt => (
-              <button key={opt.id} data-testid={`exam-option-${opt.id}`} onClick={() => choose(opt.id)} disabled={busy}
-                className={`w-full text-left px-5 py-3.5 rounded-xl border transition-all text-[13px] ${
-                  item.choice === opt.id ? 'border-c-purple/50 bg-c-purple/10 text-c-text'
-                    : 'border-[var(--border)] bg-c-bg3 text-c-muted hover:border-[var(--border-hi)] hover:text-c-text'}`}>
-                <span className="font-mono text-[11px] mr-3 opacity-60">{opt.id.toUpperCase()}</span>{opt.text}
-              </button>
-            ))}
+            {item.options.map((opt, i) => {
+              const chosen = item.choice === opt.id
+              return (
+                <button key={opt.id} data-testid={`exam-option-${opt.id}`} onClick={() => choose(opt.id)} disabled={busy}
+                  className={`w-full flex items-start gap-4 text-left px-4 py-3.5 rounded-xl border transition-all text-[14px] leading-[1.55] ${
+                    chosen ? 'border-c-purple/60 bg-c-purple/10 text-c-text'
+                      : 'border-[var(--border)] bg-c-bg3 text-c-muted hover:border-[var(--border-hi)] hover:text-c-text'}`}>
+                  <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center font-mono text-[12px] border ${
+                    chosen ? 'bg-c-purple border-c-purple text-white' : 'border-[var(--border-hi)] text-c-faint'}`}>
+                    {(LETTERS[i] ?? opt.id).toUpperCase()}
+                  </span>
+                  <span className="pt-0.5">{opt.text}</span>
+                </button>
+              )
+            })}
           </div>
+          <p className="hidden sm:block font-mono text-[10px] text-c-ghost mt-4">
+            Keys: {LETTERS.slice(0, item.options.length).join(' ').toUpperCase()} to choose · Enter to save
+          </p>
         </div>
 
         {run?.mode === 'practice' && (

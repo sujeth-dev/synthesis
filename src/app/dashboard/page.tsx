@@ -13,6 +13,7 @@ import { ELO_START } from '@/lib/elo'
 import { BehaviourInsights } from '@/components/olm/BehaviourInsights'
 import { NextUp } from '@/components/olm/NextUp'
 import { DayBars } from '@/components/viz/DayBars'
+import { StatCard } from '@/components/viz/StatCard'
 import { BloomProfile } from '@/components/viz/BloomProfile'
 import type { Debrief } from '@/lib/exam/debrief'
 import type { Phase } from '@/types'
@@ -51,7 +52,7 @@ const PHASE_SHORT: Record<string, string> = {
 }
 
 const MASTERY_RING: Record<string, string> = {
-  mastered: 'ring-2 ring-[#2f5d3a]/50',
+  mastered: 'ring-2 ring-[#4f8a5b]/50',
   fragile:  'ring-2 ring-[#e8a84a]/50',
   learning: 'ring-2 ring-[#e8a84a]/50',
   ready:    'ring-1 ring-[#d96e34]/40',
@@ -199,313 +200,88 @@ export default async function Dashboard({
     }
   }
 
+  // ── Hero actions: start the session, and clear urgent reviews if any ───────
+  const heroActions = (
+    <>
+      <Link
+        href="/learn"
+        className="px-6 py-3 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[15px] font-medium transition-all hover:scale-[1.02] shadow-sm"
+      >
+        {studyCtaText}
+      </Link>
+      {urgentCount > 0 && (
+        <Link
+          href="/learn?mode=review"
+          className="px-5 py-3 rounded-xl border border-c-yellow/40 text-c-yellow hover:bg-c-yellow/10 text-[14px] font-medium transition-all"
+        >
+          Review {urgentCount} due now →
+        </Link>
+      )}
+      {PHASE_EVALUATION_FILES[activePhase as Phase] && activeStats.mastered > 0 && (
+        <Link
+          href={`/learn/exam/${activePhase}`}
+          className="px-4 py-3 rounded-xl text-c-muted hover:text-c-text text-[14px] transition-all"
+        >
+          Take the {PHASE_SHORT[activePhase]} exam
+        </Link>
+      )}
+    </>
+  )
+  const heroContext = (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <span>{PHASE_LABELS[activePhase]}</span>
+      <span className="inline-block w-24 h-1.5 rounded-full bg-c-bg3 overflow-hidden align-middle">
+        <span className="block h-full rounded-full bg-c-purple" style={{ width: `${activeStats.pct}%` }} />
+      </span>
+      <span>{activeStats.mastered}/{activeStats.total} mastered</span>
+      {skillsRemaining > 0 && nextPhaseLabel && <span>· {skillsRemaining} to unlock {nextPhaseLabel}</span>}
+    </div>
+  )
+
+  const subtitle = [
+    urgentCount > 0 ? `${urgentCount} review${urgentCount !== 1 ? 's' : ''} due now` : 'Nothing overdue',
+    upcomingCount > 0 ? `${upcomingCount} in the next 3 days` : null,
+    `${profile.streak_days} day streak`,
+  ].filter(Boolean).join(' · ')
+
   return (
     <div className="min-h-screen bg-c-bg">
       <Navbar />
-      <div className="max-w-4xl mx-auto px-8 py-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
-        <div className="flex items-start justify-between mb-8 animate-slide-up">
-          <div>
-            <h1 className="font-serif italic text-[32px] text-c-text leading-none mb-2">
-              {profile.display_name ? `Hi, ${profile.display_name}` : 'Your Journey'}
-            </h1>
-            <p className="text-[14px] text-c-faint font-mono">
-              {urgentCount > 0
-                ? `${urgentCount} urgent${upcomingCount > 0 ? ` · ${upcomingCount} upcoming` : ''}`
-                : upcomingCount > 0
-                ? `${upcomingCount} review${upcomingCount !== 1 ? 's' : ''} coming up`
-                : 'No reviews due'}{' '}
-              · {profile.streak_days} day streak
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            {/* All dues toggle */}
-            {learnedSchedules.length > 0 && (
-              <Link
-                href={viewAll ? '/dashboard' : '/dashboard?view=all'}
-                className="px-4 py-2.5 rounded-xl border border-[var(--border)] text-c-faint hover:text-c-muted text-[13px] font-mono transition-all"
-              >
-                {viewAll ? '← Back' : `All dues (${learnedSchedules.length})`}
-              </Link>
-            )}
-            {/* Review slot — amber if urgent, muted badge if upcoming, hidden if neither */}
-            {urgentCount > 0 ? (
-              <Link
-                href="/learn?mode=review"
-                className="px-5 py-2.5 rounded-xl border border-[#fbbf24]/40 text-[#fbbf24] hover:bg-[#fbbf24]/10 text-[14px] font-medium transition-all"
-              >
-                Review {urgentCount} →
-              </Link>
-            ) : upcomingCount > 0 ? (
-              <span className="px-4 py-2.5 rounded-xl border border-[var(--border)] text-c-faint text-[13px] font-mono">
-                {upcomingCount} due soon
-              </span>
-            ) : null}
-            {/* Study slot — always study, never review */}
-            <Link
-              href="/learn"
-              className="px-5 py-2.5 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[14px] font-medium transition-all hover:scale-[1.02] shadow-sm"
-            >
-              {studyCtaText}
-            </Link>
-          </div>
+        <div className="mb-6 animate-slide-up">
+          <h1 className="font-serif italic text-[30px] sm:text-[34px] text-c-text leading-none mb-2">
+            {profile.display_name ? `Hi, ${profile.display_name}` : 'Your Journey'}
+          </h1>
+          <p className="text-[13px] text-c-faint font-mono">{subtitle}</p>
         </div>
 
-        {/* ── Stats row ───────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          {[
-            { val: totalMastered, lbl: 'Skills mastered',  col: '#2f5d3a' },
-            { val: totalLearning, lbl: 'Actively learning', col: '#e8a84a' },
-            { val: urgentCount,   lbl: 'Urgent reviews',   col: urgentCount > 0 ? '#fbbf24' : 'var(--text-faint)' },
-          ].map((s, i) => (
-            <div
-              key={i}
-              className="p-6 rounded-xl border border-[var(--border)] bg-c-bg2"
-              style={{ borderLeft: `3px solid ${s.col}` }}
-            >
-              <p className="font-serif text-[36px] leading-none mb-2" style={{ color: s.col }}>
-                {s.val}
-              </p>
-              <p className="text-[12px] text-c-muted uppercase tracking-[0.1em] font-mono">{s.lbl}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* ── Hero (OLM-5) ─────────────────────────────────────────────────── */}
-        {!viewAll && (
-          <div className="grid lg:grid-cols-[3fr_2fr] gap-4 mb-6">
-            {suggestion && <NextUp suggestion={suggestion} label={nodeLabel} />}
-            <div className="flex flex-col gap-4">
-              <div className="p-5 rounded-2xl border border-[var(--border)] bg-c-bg2" data-testid="review-forecast">
-                <p className="text-[12px] text-c-text font-medium mb-1">Reviews ahead</p>
-                <p className="text-[11px] text-c-faint mb-3">Due now, then each of the next 14 days.</p>
-                <DayBars days={forecast} unit="reviews" height={40} showCounts />
-              </div>
-              <div className="p-5 rounded-2xl border border-[var(--border)] bg-c-bg2" data-testid="dashboard-bloom">
-                <p className="text-[12px] text-c-text font-medium mb-1">By kind of thinking</p>
-                {latestExam ? (
-                  <>
-                    <p className="text-[11px] text-c-faint mb-3">
-                      Latest exam · {PHASE_SHORT[latestExam.phase] ?? latestExam.phase} · chance on a medium item
-                    </p>
-                    <BloomProfile levels={bloomProfile(latestExam.debrief as Debrief)} />
-                  </>
-                ) : (
-                  <p className="text-[11px] text-c-faint">
-                    Take a phase exam to see how you do at each level, from recall to creating something new.
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ── Active Phase Card (Primary Action) ──────────────────────────── */}
-        <div className="rounded-2xl border border-[var(--border)] border-t-4 border-t-c-purple bg-c-bg2 overflow-hidden mb-6 animate-slide-up shadow-[0_18px_50px_rgba(0,0,0,0.16)]">
-
-          <div className="px-6 pt-6 pb-4">
-            <div className="flex items-center justify-between mb-1">
-              <p className="font-mono text-[12px] text-c-purple uppercase tracking-[0.16em]">
-                Active phase
-              </p>
-              <span className="font-mono text-[12px] text-c-muted">
-                {activeStats.mastered}/{activeStats.total} mastered
-              </span>
-            </div>
-            <h2 className="text-[18px] font-semibold text-c-text mb-3">
-              {PHASE_LABELS[activePhase]}
-            </h2>
-
-            <div className="h-2 rounded-full bg-c-bg3 overflow-hidden mb-3">
-              <div
-                className="h-full rounded-full bg-c-purple transition-all duration-700"
-                style={{ width: `${activeStats.pct}%` }}
-              />
-            </div>
-
-            {skillsRemaining > 0 && nextPhaseLabel && (
-              <p className="text-[12px] text-c-faint font-mono">
-                {skillsRemaining} skill{skillsRemaining !== 1 ? 's' : ''} left to unlock{' '}
-                <span className="text-c-muted">{nextPhaseLabel}</span>
-              </p>
-            )}
-            {skillsRemaining === 0 && nextPhaseLabel && (
-              <p className="text-[12px] text-c-green font-mono">
-                Phase complete — {nextPhaseLabel} is unlocked! →
-              </p>
-            )}
-          </div>
-
-          {/* Skill path row */}
-          <div className="relative px-4 pb-6">
-            <div
-              className="pointer-events-none absolute left-4 top-0 bottom-6 w-8 z-10"
-              style={{ background: 'linear-gradient(to right, var(--bg2), transparent)' }}
-            />
-            <div
-              className="pointer-events-none absolute right-4 top-0 bottom-6 w-8 z-10"
-              style={{ background: 'linear-gradient(to left, var(--bg2), transparent)' }}
-            />
-            <div className="overflow-x-auto pb-2">
-              <div className="flex items-start gap-0 min-w-max px-2">
-                {activeNodes.map((node, idx) => {
-                  const state    = stateMap.get(node.id)
-                  const mastery  = state?.mastery_state ?? 'blocked'
-                  const pKnow    = state?.p_know ?? 0
-                  const masteryTier = mastery === 'blocked' ? 'Locked' : getMasteryTier(pKnow)
-                  const colour   = MASTERY_COLOUR[mastery] ?? '#a8a49c'
-                  const ring     = MASTERY_RING[mastery] ?? ''
-                  const isLast   = idx === activeNodes.length - 1
-                  const isStudiable = ['ready','learning','fragile','mastered'].includes(mastery) && node.question_ids.length > 0
-
-                  return (
-                    <div key={node.id} className="flex items-center">
-                      <div className="flex flex-col items-center w-[96px]">
-                        <Link
-                          href={isStudiable ? `/learn/skill/${node.id}` : '#'}
-                          className={`relative w-16 h-16 rounded-full flex items-center justify-center mb-2.5 transition-all ${ring} ${
-                            isStudiable ? 'hover:scale-110 cursor-pointer' : 'opacity-50 cursor-default'
-                          }`}
-                          style={{ background: colour + '22', border: `2.5px solid ${colour}` }}
-                          title={isStudiable ? `Study: ${node.label}` : 'Prerequisites needed'}
-                        >
-                          {mastery === 'mastered' ? (
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={colour} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                              <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                          ) : (
-                            <span className="w-2.5 h-2.5 rounded-full" style={{ background: colour }} />
-                          )}
-                        </Link>
-                        <p
-                          className="text-[12px] text-center leading-tight font-mono px-1 max-w-[88px]"
-                          style={{ color: mastery === 'blocked' ? 'var(--text-ghost)' : 'var(--text-muted)' }}
-                        >
-                          {node.label}
-                        </p>
-                        <p className="text-[10px] font-mono mt-1" style={{ color: colour }}>
-                          {masteryTier}
-                        </p>
-                      </div>
-                      {!isLast && (
-                        <div className="w-5 flex-shrink-0 mt-[-36px]" style={{ height: 2, background: 'var(--border-hi)' }} />
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-
-          <div className="px-6 py-3 border-t border-[var(--border)] bg-c-bg3 flex items-center justify-between">
-            <p className="text-[13px] text-c-faint font-mono">
-              Click any skill to dive in, or let the engine choose
-            </p>
-            <Link
-              href="/learn"
-              className="px-4 py-2 rounded-lg bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[13px] font-medium transition-all"
-            >
-              {studyCtaText}
-            </Link>
-          </div>
-        </div>
-
-        {/* ── Urgent Reviews ───────────────────────────────────────────────── */}
-        {urgentCount > 0 && !viewAll && (
-          <div className="rounded-2xl border border-[#fbbf24]/30 bg-c-bg2 overflow-hidden mb-4 animate-slide-up">
+        {viewAll ? (
+          /* ── All dues view ─────────────────────────────────────────────── */
+          <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden mb-8 animate-slide-up">
             <div className="px-6 pt-4 pb-3 flex items-center justify-between border-b border-[var(--border)]">
               <div className="flex items-center gap-2">
-                <p className="text-[14px] font-semibold text-c-text">Urgent reviews</p>
-                <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-[#fbbf24]/15 text-[#fbbf24] border border-[#fbbf24]/25">
-                  {urgentCount}
-                </span>
-              </div>
-              <Link
-                href="/learn?mode=review"
-                className="text-[13px] font-mono text-[#fbbf24] hover:underline transition-colors"
-              >
-                Review all →
-              </Link>
-            </div>
-            <div className="divide-y divide-[var(--border)]">
-              {top5Urgent.map(skill => (
-                <div key={skill.id} className="px-6 py-3 flex items-center justify-between">
-                  <span className="text-[14px] text-c-text truncate mr-4">{skill.nodeLabel}</span>
-                  <div className="flex items-center gap-4 flex-shrink-0">
-                    <span className={`text-[12px] font-mono ${skill.urgency === 'overdue' ? 'text-[#f87171]' : 'text-[#fbbf24]'}`}>
-                      {skill.urgencyLabel}
-                    </span>
-                    <Link
-                      href={`/learn/skill/${skill.id}`}
-                      className="px-3 py-1 rounded-lg text-[12px] font-mono text-[#fbbf24] bg-[#fbbf24]/10 hover:bg-[#fbbf24]/20 border border-[#fbbf24]/20 transition-all"
-                    >
-                      Study →
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── Upcoming Reviews ─────────────────────────────────────────────── */}
-        {upcomingCount > 0 && !viewAll && (
-          <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden mb-6 animate-slide-up">
-            <div className="px-6 pt-4 pb-3 flex items-center justify-between border-b border-[var(--border)]">
-              <div className="flex items-center gap-2">
-                <p className="text-[14px] font-semibold text-c-text">Coming up</p>
-                <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-[var(--bg3)] text-c-muted border border-[var(--border)]">
-                  {upcomingCount}
-                </span>
-              </div>
-              <p className="text-[12px] font-mono text-c-ghost">Next 3 days</p>
-            </div>
-            <div className="divide-y divide-[var(--border)]">
-              {top4Upcoming.map(skill => (
-                <div key={skill.id} className="px-6 py-3 flex items-center justify-between">
-                  <span className="text-[14px] text-c-muted truncate mr-4">{skill.nodeLabel}</span>
-                  <div className="flex items-center gap-3 flex-shrink-0">
-                    <span className="text-[12px] font-mono text-c-faint">{skill.urgencyLabel}</span>
-                    {skill.soonEnough && (
-                      <Link
-                        href={`/learn/skill/${skill.id}`}
-                        className="px-3 py-1 rounded-lg text-[12px] font-mono text-[#fbbf24] bg-[#fbbf24]/10 hover:bg-[#fbbf24]/20 border border-[#fbbf24]/20 transition-all"
-                      >
-                        Review now →
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── All dues view ─────────────────────────────────────────────────── */}
-        {viewAll && (
-          <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden mb-6 animate-slide-up">
-            <div className="px-6 pt-4 pb-3 flex items-center justify-between border-b border-[var(--border)]">
-              <div className="flex items-center gap-2">
-                <p className="text-[14px] font-semibold text-c-text">All dues</p>
+                <p className="text-[14px] font-semibold text-c-text">Everything scheduled</p>
                 <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-[var(--bg3)] text-c-muted border border-[var(--border)]">
                   {allDuesItems.length}
                 </span>
               </div>
+              <Link href="/dashboard" className="text-[13px] font-mono text-c-faint hover:text-c-text">← Back</Link>
             </div>
             <div className="divide-y divide-[var(--border)]">
               {allDuesItems.map(skill => (
                 <div key={skill.id} className="px-6 py-3 flex items-center justify-between">
                   <span className="text-[14px] text-c-text truncate mr-4">{skill.nodeLabel}</span>
                   <div className="flex items-center gap-4 flex-shrink-0">
-                    <span className={`text-[12px] font-mono ${skill.urgency === 'overdue' ? 'text-[#f87171]' : skill.urgency === 'due_today' ? 'text-[#fbbf24]' : 'text-c-faint'}`}>
+                    <span className={`text-[12px] font-mono ${skill.urgency === 'overdue' ? 'text-c-red' : skill.urgency === 'due_today' ? 'text-c-yellow' : 'text-c-faint'}`}>
                       {skill.urgencyLabel}
                     </span>
                     <Link
                       href={`/learn/skill/${skill.id}`}
                       className={`px-3 py-1 rounded-lg text-[12px] font-mono border transition-all ${
                         skill.urgency === 'overdue' || skill.urgency === 'due_today'
-                          ? 'text-[#fbbf24] bg-[#fbbf24]/10 hover:bg-[#fbbf24]/20 border-[#fbbf24]/20'
+                          ? 'text-c-yellow bg-c-yellow/10 hover:bg-c-yellow/20 border-c-yellow/20'
                           : 'text-c-purple bg-c-purple/10 hover:bg-c-purple/20 border-c-purple/20'
                       }`}
                     >
@@ -516,17 +292,197 @@ export default async function Dashboard({
               ))}
             </div>
           </div>
-        )}
-
-        {/* ── Behavioural insights (OLM-4) ─────────────────────────────────── */}
-        {!viewAll && (
-          <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 p-6 mb-6">
-            <div className="flex items-baseline justify-between mb-4">
-              <p className="text-[14px] font-semibold text-c-text">How you work</p>
-              <Link href="/profile" className="text-[12px] font-mono text-c-faint hover:text-c-text">What the model believes →</Link>
+        ) : (
+          <>
+            {/* ── Hero: the next session, why, and the button (OLM-5, LIVE-1) */}
+            <div className="mb-4 animate-slide-up">
+              {suggestion ? (
+                <NextUp suggestion={suggestion} label={nodeLabel} context={heroContext} actions={heroActions} />
+              ) : (
+                <div className="rounded-2xl border border-[var(--border)] border-t-4 border-t-c-purple bg-c-bg2 p-7">
+                  <p className="font-mono text-[11px] text-c-purple uppercase tracking-[0.16em] mb-3">Your next session</p>
+                  <h2 className="font-serif italic text-[30px] leading-[1.1] text-c-text mb-4">{PHASE_LABELS[activePhase]}</h2>
+                  <div className="text-[12px] font-mono text-c-faint">{heroContext}</div>
+                  <div className="mt-6 flex flex-wrap items-center gap-2">{heroActions}</div>
+                </div>
+              )}
             </div>
-            <BehaviourInsights insights={insights} windowDays={BEHAVIOUR_WINDOW_DAYS} />
-          </div>
+
+            {/* ── Stats row ─────────────────────────────────────────────────── */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+              <StatCard value={totalMastered} label="Skills mastered" accent="var(--green)" />
+              <StatCard value={totalLearning} label="Actively learning" accent="var(--yellow)" />
+              <StatCard value={urgentCount} label="Due now" accent={urgentCount > 0 ? 'var(--red)' : undefined} />
+              <StatCard value={upcomingCount} label="Due in 3 days" accent={upcomingCount > 0 ? 'var(--blue)' : undefined} />
+            </div>
+
+            <div className="grid lg:grid-cols-[3fr_2fr] gap-4 mb-8 items-start">
+              <div className="flex flex-col gap-4 min-w-0">
+                {/* ── Active phase path ─────────────────────────────────────── */}
+                <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden">
+                  <div className="px-6 pt-5 pb-3 flex items-baseline justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="font-mono text-[11px] text-c-faint uppercase tracking-[0.16em] mb-1">Active phase</p>
+                      <h2 className="text-[16px] font-semibold text-c-text truncate">{PHASE_LABELS[activePhase]}</h2>
+                    </div>
+                    <span className="font-mono text-[12px] text-c-muted flex-shrink-0">
+                      {activeStats.mastered}/{activeStats.total} mastered
+                    </span>
+                  </div>
+
+                  {/* Skill path row */}
+                  <div className="relative px-4 pb-4">
+                    <div
+                      className="pointer-events-none absolute left-4 top-0 bottom-4 w-8 z-10"
+                      style={{ background: 'linear-gradient(to right, var(--bg2), transparent)' }}
+                    />
+                    <div
+                      className="pointer-events-none absolute right-4 top-0 bottom-4 w-8 z-10"
+                      style={{ background: 'linear-gradient(to left, var(--bg2), transparent)' }}
+                    />
+                    <div className="overflow-x-auto pb-2">
+                      <div className="flex items-start gap-0 min-w-max px-2">
+                        {activeNodes.map((node, idx) => {
+                          const state    = stateMap.get(node.id)
+                          const mastery  = state?.mastery_state ?? 'blocked'
+                          const pKnow    = state?.p_know ?? 0
+                          const masteryTier = mastery === 'blocked' ? 'Locked' : getMasteryTier(pKnow)
+                          const colour   = MASTERY_COLOUR[mastery] ?? '#a8a49c'
+                          const ring     = MASTERY_RING[mastery] ?? ''
+                          const isLast   = idx === activeNodes.length - 1
+                          const isStudiable = ['ready','learning','fragile','mastered'].includes(mastery) && node.question_ids.length > 0
+                          const isNext   = suggestion?.served?.skill_id === node.id
+
+                          return (
+                            <div key={node.id} className="flex items-center">
+                              <div className="flex flex-col items-center w-[88px]">
+                                <Link
+                                  href={isStudiable ? `/learn/skill/${node.id}` : '#'}
+                                  className={`relative w-14 h-14 rounded-full flex items-center justify-center mb-2 transition-all ${isNext ? 'ring-4 ring-c-purple/60' : ring} ${
+                                    isStudiable ? 'hover:scale-110 cursor-pointer' : 'opacity-50 cursor-default'
+                                  }`}
+                                  style={{ background: colour + '22', border: `2.5px solid ${colour}` }}
+                                  title={isStudiable ? `Study: ${node.label}` : 'Prerequisites needed'}
+                                >
+                                  {mastery === 'mastered' ? (
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={colour} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                      <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                  ) : (
+                                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: colour }} />
+                                  )}
+                                </Link>
+                                <p
+                                  className="text-[11px] text-center leading-tight font-mono px-1 max-w-[84px]"
+                                  style={{ color: mastery === 'blocked' ? 'var(--text-ghost)' : 'var(--text-muted)' }}
+                                >
+                                  {node.label}
+                                </p>
+                                <p className="text-[10px] font-mono mt-1" style={{ color: isNext ? 'var(--purple)' : colour }}>
+                                  {isNext ? 'Next up' : masteryTier}
+                                </p>
+                              </div>
+                              {!isLast && (
+                                <div className="w-4 flex-shrink-0 mt-[-34px]" style={{ height: 2, background: 'var(--border-hi)' }} />
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="px-6 py-3 border-t border-[var(--border)] bg-c-bg4/60 text-[12px] text-c-faint">
+                    Tap any open skill to study it directly, or start the session above and let the engine choose.
+                  </p>
+                </div>
+
+                {/* ── Bloom profile from the latest exam ────────────────────── */}
+                <div className="p-6 rounded-2xl border border-[var(--border)] bg-c-bg2" data-testid="dashboard-bloom">
+                  <div className="flex items-baseline justify-between gap-3 mb-1">
+                    <p className="text-[14px] text-c-text font-semibold">By kind of thinking</p>
+                    {latestExam && <Link href={`/learn/exam/${latestExam.phase}`} className="text-[12px] font-mono text-c-faint hover:text-c-text flex-shrink-0">Retake →</Link>}
+                  </div>
+                  {latestExam ? (
+                    <>
+                      <p className="text-[12px] text-c-faint mb-4">
+                        Latest exam · {PHASE_SHORT[latestExam.phase] ?? latestExam.phase} · your chance on a medium question at each level
+                      </p>
+                      <BloomProfile levels={bloomProfile(latestExam.debrief as Debrief)} />
+                    </>
+                  ) : (
+                    <p className="text-[12px] text-c-faint">
+                      Take a phase exam to see how you do at each level, from recall to creating something new.
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* ── Reviews: forecast, then what is due ────────────────────── */}
+              <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 overflow-hidden" data-testid="review-forecast">
+                <div className="px-6 pt-5 pb-4">
+                  <div className="flex items-baseline justify-between gap-3 mb-1">
+                    <p className="text-[14px] text-c-text font-semibold">Reviews</p>
+                    {learnedSchedules.length > 0 && (
+                      <Link href="/dashboard?view=all" className="text-[12px] font-mono text-c-faint hover:text-c-text">
+                        All {learnedSchedules.length} scheduled →
+                      </Link>
+                    )}
+                  </div>
+                  <p className="text-[12px] text-c-faint mb-4">Due now, then each of the next 14 days.</p>
+                  <DayBars days={forecast} unit="reviews" height={48} showCounts />
+                </div>
+
+                {(urgentCount > 0 || upcomingCount > 0) ? (
+                  <div className="border-t border-[var(--border)] divide-y divide-[var(--border)]">
+                    {top5Urgent.map(skill => (
+                      <Link key={skill.id} href={`/learn/skill/${skill.id}`}
+                        className="px-6 py-3 flex items-center justify-between gap-3 hover:bg-c-bg3 transition-colors">
+                        <span className="flex items-center gap-2.5 min-w-0">
+                          <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: skill.urgency === 'overdue' ? 'var(--red)' : 'var(--yellow)' }} />
+                          <span className="text-[14px] text-c-text truncate">{skill.nodeLabel}</span>
+                        </span>
+                        <span className={`text-[12px] font-mono flex-shrink-0 ${skill.urgency === 'overdue' ? 'text-c-red' : 'text-c-yellow'}`}>
+                          {skill.urgencyLabel}
+                        </span>
+                      </Link>
+                    ))}
+                    {top4Upcoming.map(skill => (
+                      <Link key={skill.id} href={`/learn/skill/${skill.id}`}
+                        className="px-6 py-3 flex items-center justify-between gap-3 hover:bg-c-bg3 transition-colors">
+                        <span className="flex items-center gap-2.5 min-w-0">
+                          <span className="w-2 h-2 rounded-full flex-shrink-0 bg-c-bg3 border border-[var(--border-hi)]" />
+                          <span className="text-[14px] text-c-muted truncate">{skill.nodeLabel}</span>
+                        </span>
+                        <span className="text-[12px] font-mono text-c-faint flex-shrink-0">{skill.urgencyLabel}</span>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="px-6 py-4 border-t border-[var(--border)] text-[12px] text-c-faint">Nothing due in the next three days.</p>
+                )}
+
+                {urgentCount > 0 && (
+                  <div className="px-6 py-3 border-t border-[var(--border)] bg-c-bg4/60">
+                    <Link href="/learn?mode=review" className="text-[13px] font-mono text-c-yellow hover:underline">
+                      Review all {urgentCount} due now →
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* ── Behavioural insights (OLM-4) ─────────────────────────────── */}
+            <div className="rounded-2xl border border-[var(--border)] bg-c-bg2 p-6 mb-8">
+              <div className="flex items-baseline justify-between gap-3 mb-4">
+                <div>
+                  <p className="text-[14px] font-semibold text-c-text">How you work</p>
+                  <p className="text-[12px] text-c-faint">Not what you know: how you answer, read from every attempt.</p>
+                </div>
+                <Link href="/profile" className="text-[12px] font-mono text-c-faint hover:text-c-text flex-shrink-0">What the model believes →</Link>
+              </div>
+              <BehaviourInsights insights={insights} windowDays={BEHAVIOUR_WINDOW_DAYS} />
+            </div>
+          </>
         )}
 
         {/* ── Full Curriculum ──────────────────────────────────────────────── */}
@@ -549,7 +505,7 @@ export default async function Dashboard({
                 </svg>
               )
               if (isDone) return (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0" style={{ color: '#2f5d3a' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0" style={{ color: MASTERY_COLOUR.mastered }}>
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               )
@@ -576,19 +532,19 @@ export default async function Dashboard({
                     : 'border-[var(--border)] bg-c-bg4'
                 }`}
               >
-                <div className="px-5 py-3.5 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
+                <div className="px-5 py-3.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+                  <div className="flex items-center gap-3 min-w-0 flex-1 basis-[180px]">
                     <PhaseIcon />
                     <p className={`text-[14px] font-medium truncate ${isActive ? 'text-c-text' : 'text-c-muted'}`}>
                       {PHASE_LABELS[phaseKey]}
                     </p>
                   </div>
-                  <div className="flex items-center gap-4 flex-shrink-0">
+                  <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
                     {stats.hasContent && (
-                      <div className="w-28 h-1.5 rounded-full bg-c-bg3 overflow-hidden">
+                      <div className="hidden sm:block w-28 h-1.5 rounded-full bg-c-bg3 overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all"
-                          style={{ width: `${stats.pct}%`, background: isDone ? '#2f5d3a' : isActive ? '#e8a84a' : '#d96e34' }}
+                          style={{ width: `${stats.pct}%`, background: isDone ? MASTERY_COLOUR.mastered : isActive ? '#e8a84a' : '#d96e34' }}
                         />
                       </div>
                     )}
@@ -625,6 +581,10 @@ export default async function Dashboard({
 
                 {/* Expanded skill list for active phase */}
                 {isActive && (
+                  <details className="border-t border-[var(--border)] group">
+                  <summary className="px-5 py-2.5 cursor-pointer list-none text-[12px] font-mono text-c-faint hover:text-c-text bg-c-bg4">
+                    <span className="group-open:hidden">Show all {nodes.length} skills ↓</span><span className="hidden group-open:inline">Hide skills ↑</span>
+                  </summary>
                   <div className="border-t border-[var(--border)] divide-y divide-[var(--border)]">
                     {nodes.map(node => {
                       const state    = stateMap.get(node.id)
@@ -660,6 +620,7 @@ export default async function Dashboard({
                       )
                     })}
                   </div>
+                  </details>
                 )}
               </div>
             )

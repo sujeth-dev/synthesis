@@ -5,7 +5,7 @@ import type { MasteryState } from '@/types'
 // three copies is how they stop agreeing. Hex rather than CSS variables because
 // callers append an alpha suffix (`colour + '22'`).
 export const MASTERY_COLOUR: Record<MasteryState, string> = {
-  mastered: '#2f5d3a',
+  mastered: '#4f8a5b',   // was #2f5d3a: 2.2:1 on the dark card; now 4.1:1 dark, 3.8:1 light
   fragile:  '#e8a84a',
   learning: '#e8a84a',
   ready:    '#d96e34',

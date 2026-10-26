@@ -26,6 +26,9 @@ const PACE_LABEL = { on_pace: 'On pace', slow: 'Slow', over: 'Well over' } as co
 
 const pct = (theta: number) => pCorrect(theta, ELO_START) * 100
 
+// At or below this many items a level's estimate is flagged as thin.
+const FEW = 2
+
 function LevelRow({ level }: { level: LevelResult }) {
   if (level.theta === null || level.se === null) {
     return (
@@ -52,40 +55,93 @@ function LevelRow({ level }: { level: LevelResult }) {
         <div className="absolute top-1/2 w-2.5 h-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-c-blue ring-2 ring-[var(--bg2)]"
           style={{ left: `${mid}%` }} />
       </div>
-      <span className="font-mono text-[12px] text-c-muted text-right" data-testid={`level-score-${level.level}`}>
-        {level.correct}/{level.n}
+      <span className="font-mono text-[12px] text-c-muted text-right" title={level.n <= FEW ? 'Few questions at this level, so the band is wide' : undefined}>
+        <span data-testid={`level-score-${level.level}`}>{level.correct}/{level.n}</span>
+        {level.n <= FEW && <span className="block font-sans text-[10px] text-c-faint">few questions</span>}
       </span>
     </div>
   )
 }
 
-export function Debrief({ debrief, skillLabels, phaseLabel, mode }: {
+export function Debrief({ debrief, skillLabels, phaseLabel, mode, phase }: {
   debrief: DebriefData
   skillLabels: Record<string, string>
   phaseLabel: string
   mode: string
+  /** The phase key, for the retake link. */
+  phase?: string
 }) {
   const label = (id: string) => skillLabels[id] ?? id
   const overall = pct(debrief.theta)
   const answered = debrief.items.filter(i => i.answered).length
+  // Strongest and weakest sampled level, so the learner does not have to read
+  // them off the dot chart. Ties keep Bloom order.
+  const sampled = debrief.levels.filter(l => l.theta !== null && l.n > 0)
+  const strongest = sampled.reduce<LevelResult | null>((b, l) => !b || (l.theta as number) > (b.theta as number) ? l : b, null)
+  const weakest = sampled.reduce<LevelResult | null>((b, l) => !b || (l.theta as number) < (b.theta as number) ? l : b, null)
+  const firstRevisit = debrief.revisit[0]
 
   return (
     <div className="max-w-2xl w-full mx-auto animate-slide-up" data-testid="exam-debrief">
       <p className="font-mono text-[11px] text-c-faint uppercase tracking-[0.14em] mb-3 text-center">
         {phaseLabel} · {mode === 'checkpoint' ? 'Checkpoint' : 'Practice'} debrief
       </p>
-      <h1 className="font-serif italic text-[30px] text-c-text mb-2 text-center">
-        {debrief.correct} of {debrief.n} right · {Math.round(overall)}% on a medium item
+      <h1 className="font-serif italic text-[36px] sm:text-[42px] leading-[1.1] text-c-text mb-3 text-center">
+        {debrief.correct} of {debrief.n} right
       </h1>
-      <p className="text-[13px] text-c-muted mb-8 text-center">
-        {debrief.stop_reason ? STOP_SENTENCE[debrief.stop_reason] : 'You submitted before the exam needed to stop.'}
-        {' '}Overall ±1 SE: {Math.round(pct(debrief.theta - debrief.se))}–{Math.round(pct(debrief.theta + debrief.se))}%.
+      <p className="text-[15px] text-c-muted mb-1 text-center">
+        About <span className="text-c-text font-medium">{Math.round(overall)}%</span> chance on a typical question in this phase
+        <span className="text-c-faint"> (likely {Math.round(pct(debrief.theta - debrief.se))}–{Math.round(pct(debrief.theta + debrief.se))}%)</span>
       </p>
+      <p className="text-[12px] text-c-faint mb-8 text-center">
+        {debrief.stop_reason ? STOP_SENTENCE[debrief.stop_reason] : 'You submitted before the exam needed to stop.'}
+      </p>
+
+      {(strongest || firstRevisit) && (
+        <section className="p-5 sm:p-6 rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple mb-4" data-testid="debrief-next">
+          <p className="font-mono text-[11px] text-c-purple uppercase tracking-[0.16em] mb-4">What to do next</p>
+          <div className="grid sm:grid-cols-3 gap-4 mb-5">
+            {strongest && (
+              <div>
+                <p className="text-[11px] text-c-faint mb-1">Strongest</p>
+                <p className="text-[16px] text-c-text">{BLOOM_LABEL[strongest.level]}</p>
+                <p className="font-mono text-[11px] text-c-muted">{strongest.correct}/{strongest.n} right</p>
+              </div>
+            )}
+            {weakest && weakest !== strongest && (
+              <div>
+                <p className="text-[11px] text-c-faint mb-1">Weakest</p>
+                <p className="text-[16px] text-c-text">{BLOOM_LABEL[weakest.level]}</p>
+                <p className="font-mono text-[11px] text-c-muted">{weakest.correct}/{weakest.n} right</p>
+              </div>
+            )}
+            {firstRevisit && (
+              <div>
+                <p className="text-[11px] text-c-faint mb-1">Revisit first</p>
+                <p className="text-[16px] text-c-text">{label(firstRevisit.skill_id)}</p>
+                <p className="font-mono text-[11px] text-c-muted">missed {firstRevisit.missed}</p>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {firstRevisit && (
+              <Link href={`/learn/skill/${firstRevisit.skill_id}`} className="px-5 py-2.5 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[14px] font-medium">
+                Study {label(firstRevisit.skill_id)} →
+              </Link>
+            )}
+            {phase && (
+              <Link href={`/learn/exam/${phase}`} className="px-5 py-2.5 rounded-xl border border-[var(--border-hi)] text-c-muted hover:text-c-text text-[14px]">
+                Retake later
+              </Link>
+            )}
+          </div>
+        </section>
+      )}
 
       <section className="p-5 rounded-2xl bg-c-bg2 border border-[var(--border)] mb-4">
         <h2 className="text-[14px] text-c-text font-medium mb-1">By kind of thinking</h2>
         <p className="text-[12px] text-c-faint mb-3">
-          Dot: your chance on a medium item at that level. Band: ±1 standard error. Dashed line: 50%.
+          Dot: your chance on a typical question at that level. Band: ±1 standard error. Dashed line: 50%.
         </p>
         {debrief.levels.map(l => <LevelRow key={l.level} level={l} />)}
         <div className="grid grid-cols-[96px_1fr_64px] gap-3 mt-1">
@@ -113,7 +169,12 @@ export function Debrief({ debrief, skillLabels, phaseLabel, mode }: {
             four seconds — before the question could have been read. Hints help most after a real attempt.
           </p>
         )}
-        <table className="w-full text-[12px]">
+        <details className="group">
+        <summary className="cursor-pointer list-none text-[12px] font-mono text-c-faint hover:text-c-text mb-2">
+          <span className="group-open:hidden">Every question ({debrief.items.length}) ↓</span><span className="hidden group-open:inline">Hide questions ↑</span>
+        </summary>
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[520px] text-[12px]">
           <thead>
             <tr className="text-c-faint text-left">
               <th className="font-normal py-1">#</th><th className="font-normal">Level</th><th className="font-normal">Skill</th>
@@ -137,6 +198,8 @@ export function Debrief({ debrief, skillLabels, phaseLabel, mode }: {
             ))}
           </tbody>
         </table>
+        </div>
+        </details>
       </section>
 
       {debrief.misconceptions.length > 0 && (

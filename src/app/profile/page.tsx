@@ -15,7 +15,7 @@ import { LearningCurve } from '@/components/viz/LearningCurve'
 import { BloomProfile } from '@/components/viz/BloomProfile'
 import { MASTERY_COLOUR } from '@/lib/ui/mastery-colour'
 import {
-  activityByDay, bloomProfile, isEvaluationAttempt, learningCurve, skillEvidence, type Agreement,
+  activityByDay, bloomProfile, isEvaluationAttempt, learningCurve, skillEvidence, type Agreement, type SkillEvidence,
 } from '@/lib/analytics/profile'
 import type { Debrief } from '@/lib/exam/debrief'
 import type { MasteryState } from '@/types'
@@ -36,7 +36,7 @@ const AGREEMENT_TEXT: Record<Agreement, { text: string; tone: string }> = {
 // "Mastered" by tier but stays `fragile` until it survives a first review, and
 // the profile's job is to show what the model actually holds.
 const STATE_LABEL: Record<MasteryState, string> = {
-  mastered: 'Mastered', fragile: 'Fragile · awaiting first review', learning: 'Learning',
+  mastered: 'Mastered', fragile: 'Fragile', learning: 'Learning',
   ready: 'Ready', blocked: 'Locked',
 }
 
@@ -89,7 +89,6 @@ export default async function ProfilePage() {
     .sort((a, b) => (b.last_attempted_at ?? '').localeCompare(a.last_attempted_at ?? '') || b.p_know - a.p_know)
   // Open but never practised: no evidence to show, so one line, not a row each.
   const untouched = all.filter(e => e.attempts === 0 && e.mastery_state !== 'blocked')
-  const gaps = evidence.filter(e => e.agreement === 'belief_ahead' || (e.p_know >= 0.7 && e.attempts < 3))
 
   const curve = learningCurve(attempts)
   const activity = activityByDay(practice, now, 30)
@@ -102,19 +101,40 @@ export default async function ProfilePage() {
 
   const completedSessions = sessions.filter(s => s.ended_at)
 
+  // Group so what needs attention comes first. Every row stays visible: the
+  // grouping orders the evidence, it never hides any.
+  const groups: { key: string; title: string; note: string; rows: SkillEvidence[] }[] = [
+    { key: 'attention', title: 'Needs attention', note: 'Belief outruns the evidence, or a skill has not yet survived its first review.', rows: [] },
+    { key: 'learning', title: 'Still learning', note: 'Belief and answers roughly agree; not mastered yet.', rows: [] },
+    { key: 'solid', title: 'Solid', note: 'Mastered, and recent answers bear it out.', rows: [] },
+  ]
+  for (const e of evidence) {
+    const g = attentionReason(e) ? 0 : e.mastery_state === 'mastered' ? 2 : 1
+    groups[g].rows.push(e)
+  }
+  const attentionCount = groups[0].rows.length
+
   return (
     <div className="min-h-screen bg-c-bg">
       <Navbar />
-      <div className="max-w-3xl mx-auto px-8 py-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
 
-        <div className="flex items-start gap-5 mb-8 animate-slide-up">
+        <div className="flex items-start gap-5 mb-6 animate-slide-up">
           <div className="w-14 h-14 rounded-2xl bg-c-bg3 border border-[var(--border-hi)] flex items-center justify-center flex-shrink-0">
             <span className="font-serif text-2xl text-c-purple">{(profile.display_name ?? 'L')[0].toUpperCase()}</span>
           </div>
-          <div>
-            <h1 className="font-serif italic text-[26px] text-c-text mb-1">{profile.display_name ?? 'Learner'}</h1>
-            <p className="text-[12px] text-c-faint font-mono">{profile.email}</p>
-            <p className="font-mono text-[11px] text-c-yellow mt-2">🔥 {profile.streak_days} day streak</p>
+          <div className="min-w-0">
+            <h1 className="font-serif italic text-[30px] text-c-text leading-none mb-2">{profile.display_name ?? 'Learner'}</h1>
+            <p className="text-[12px] text-c-faint font-mono truncate">
+              {profile.email} · <span className="text-c-yellow">{profile.streak_days} day streak</span>
+            </p>
+            <p className="text-[13px] text-c-muted mt-2">
+              {evidence.length === 0
+                ? 'Nothing practised yet.'
+                : attentionCount > 0
+                  ? <>{evidence.length} skills practised · <span className="text-c-yellow">{attentionCount} need{attentionCount === 1 ? 's' : ''} attention</span></>
+                  : <>{evidence.length} skills practised · nothing needs attention</>}
+            </p>
           </div>
         </div>
 
@@ -125,113 +145,136 @@ export default async function ProfilePage() {
           <StatCard value={accuracy === null ? '—' : `${accuracy}%`} label="Accuracy" note={`over all ${practice.length} practice answers`} testId="stat-accuracy" />
         </div>
 
-        <Section title="What Synaptic believes about you"
-          note="Belief: the model's estimate you know the skill. Evidence: how much it has seen — half-full at 5 attempts. The line is the belief after each attempt."
-          testId="skill-profile">
-          {evidence.length === 0 && <p className="text-[12px] text-c-ghost">Nothing yet — start a session and this fills in.</p>}
-          <div className="divide-y divide-[var(--border)]">
-            {evidence.map(e => {
-              const tier = STATE_LABEL[e.mastery_state]
-              const agree = AGREEMENT_TEXT[e.agreement]
-              return (
-                <div key={e.skill_id} className="py-3" data-testid={`skill-row-${e.skill_id}`}>
-                  <div className="flex items-center justify-between gap-3 mb-2">
-                    <Link href={`/learn/skill/${e.skill_id}`} className="text-[13px] text-c-text hover:underline truncate">{label(e.skill_id)}</Link>
-                    <span className="font-mono text-[11px] flex-shrink-0" style={{ color: MASTERY_COLOUR[e.mastery_state] }}>{tier}</span>
-                  </div>
-                  <div className="grid grid-cols-[56px_1fr_40px] sm:grid-cols-[56px_1fr_40px_104px] items-center gap-x-3 gap-y-1.5">
-                    <span className="text-[10px] font-mono text-c-faint">belief</span>
-                    <Meter value={e.p_know} colour={MASTERY_COLOUR[e.mastery_state]} title={`Belief ${Math.round(e.p_know * 100)}%`} testId={`belief-${e.skill_id}`} />
-                    <span className="font-mono text-[11px] text-c-muted text-right">{Math.round(e.p_know * 100)}%</span>
-                    <div className="hidden sm:block row-span-2">
-                      <Sparkline values={e.trajectory} title={`Belief after each of ${e.trajectory.length} attempts`} />
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_360px] gap-5 items-start">
+          <Section title="What Synaptic believes about you"
+            note="Belief: the model's estimate you know the skill (striped until it survives a first review). Evidence: how much it has seen — half-full at 5 attempts. The line is the belief after each attempt."
+            testId="skill-profile">
+            {evidence.length === 0 && <p className="text-[12px] text-c-ghost">Nothing yet — start a session and this fills in.</p>}
+            {groups.filter(g => g.rows.length > 0).map(g => (
+              <div key={g.key} className="mb-5 last:mb-0" data-testid={`group-${g.key}`}>
+                <div className="flex items-baseline gap-2 pb-2 border-b border-[var(--border)]">
+                  <p className={`text-[14px] font-semibold ${g.key === 'attention' ? 'text-c-yellow' : 'text-c-text'}`}>{g.title}</p>
+                  <span className="font-mono text-[11px] text-c-faint">{g.rows.length}</span>
+                  <p className="text-[11px] text-c-faint ml-auto hidden sm:block">{g.note}</p>
+                </div>
+                <div className="divide-y divide-[var(--border)]">
+                  {g.rows.map(e => <SkillRow key={e.skill_id} e={e} label={label(e.skill_id)} />)}
+                </div>
+              </div>
+            ))}
+            {untouched.length > 0 && (
+              <p className="text-[11px] text-c-faint pt-3 border-t border-[var(--border)]" data-testid="untouched-skills">
+                Open but not practised yet ({untouched.length}), so no evidence either way:{' '}
+                {untouched.map((e, i) => (
+                  <span key={e.skill_id}>
+                    {i > 0 && ', '}
+                    <Link href={`/learn/skill/${e.skill_id}`} className="text-c-muted hover:underline">{label(e.skill_id)}</Link>
+                  </span>
+                ))}.
+              </p>
+            )}
+          </Section>
+
+          <div className="lg:sticky lg:top-6 flex flex-col">
+            <Section title="Is practice landing?"
+              note="Share of first, second, third… attempts at a skill that were wrong, averaged over the skills that got that far. Falling means learning."
+              testId="learning-curve">
+              <LearningCurve points={curve} />
+            </Section>
+
+            {latestByPhase.size > 0 && (
+              <Section title="By kind of thinking" note="From your latest exam in each phase. Exams are a measurement only." testId="bloom-profile">
+                <div className="space-y-5">
+                  {[...latestByPhase.values()].map(r => (
+                    <div key={r.phase}>
+                      <p className="text-[12px] text-c-muted mb-2">
+                        {PHASE_SHORT[r.phase] ?? r.phase} · {r.mode} · {new Date(r.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </p>
+                      <BloomProfile levels={bloomProfile(r.debrief)} />
                     </div>
-                    <span className="text-[10px] font-mono text-c-faint">evidence</span>
-                    <Meter value={e.evidence_strength} title={`${e.attempts} attempts seen`} testId={`evidence-${e.skill_id}`} />
-                    <span className="font-mono text-[11px] text-c-muted text-right">{e.attempts}</span>
-                  </div>
-                  <p className="text-[11px] text-c-faint mt-1.5">
-                    {e.correct}/{e.attempts} right
-                    {e.recent.length > 0 && <> · last {e.recent.length}: <span className="font-mono tracking-wider">{e.recent.map(r => r ? '●' : '○').join('')}</span></>}
-                    {' · '}<span className={agree.tone}>{agree.text}</span>
-                    {e.attempts > 0 && <span className="text-c-ghost"> · {e.sources.correctness} scored, {e.sources.reasoning} explained{e.sources.discounted > 0 ? `, ${e.sources.discounted} discounted for behaviour` : ''}</span>}
-                  </p>
+                  ))}
                 </div>
-              )
-            })}
+              </Section>
+            )}
+
+            <Section title="Last 30 days" note="Practice answers per day." testId="activity">
+              <DayBars days={activity} unit="answers" height={48} />
+            </Section>
+            <Section title="Recent sessions">
+              {completedSessions.slice(0, 5).map(s => {
+                const acc = s.tasks_count > 0 ? Math.round(s.correct_count / s.tasks_count * 100) : 0
+                return (
+                  <div key={s.id} className="flex items-center justify-between mb-3 last:mb-0">
+                    <div>
+                      <p className="text-[12px] text-c-muted">{new Date(s.started_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+                      <p className="font-mono text-[10px] text-c-faint">{s.tasks_count} questions</p>
+                    </div>
+                    <span className="font-mono text-[12px] text-c-muted">{acc}%</span>
+                  </div>
+                )
+              })}
+              {completedSessions.length === 0 && <p className="text-[12px] text-c-ghost">No sessions yet</p>}
+            </Section>
           </div>
-          {untouched.length > 0 && (
-            <p className="text-[11px] text-c-faint pt-3 border-t border-[var(--border)]" data-testid="untouched-skills">
-              Open but not practised yet ({untouched.length}), so no evidence either way:{' '}
-              {untouched.map((e, i) => (
-                <span key={e.skill_id}>
-                  {i > 0 && ', '}
-                  <Link href={`/learn/skill/${e.skill_id}`} className="text-c-muted hover:underline">{label(e.skill_id)}</Link>
-                </span>
-              ))}.
-            </p>
-          )}
-        </Section>
-
-        {gaps.length > 0 && (
-          <Section title="Gaps, named" note="Where the belief outruns what the evidence shows." testId="gaps">
-            <ul className="space-y-2">
-              {gaps.map(g => (
-                <li key={g.skill_id} className="text-[12px] text-c-muted">
-                  <Link href={`/learn/skill/${g.skill_id}`} className="text-c-text hover:underline">{label(g.skill_id)}</Link>
-                  {' — '}
-                  {g.agreement === 'belief_ahead'
-                    ? `believed at ${Math.round(g.p_know * 100)}%, but ${g.recent.filter(Boolean).length} of the last ${g.recent.length} were right`
-                    : `believed at ${Math.round(g.p_know * 100)}% on only ${g.attempts} attempt${g.attempts === 1 ? '' : 's'}`}
-                </li>
-              ))}
-            </ul>
-          </Section>
-        )}
-
-        <Section title="Is practice landing?"
-          note="Share of first, second, third… attempts at a skill that were wrong, averaged over the skills that got that far. Falling means learning."
-          testId="learning-curve">
-          <LearningCurve points={curve} />
-        </Section>
-
-        {latestByPhase.size > 0 && (
-          <Section title="By kind of thinking" note="From your latest exam in each phase. Exams are a measurement only." testId="bloom-profile">
-            <div className="grid sm:grid-cols-2 gap-5">
-              {[...latestByPhase.values()].map(r => (
-                <div key={r.phase}>
-                  <p className="text-[12px] text-c-muted mb-2">
-                    {PHASE_SHORT[r.phase] ?? r.phase} · {r.mode} · {new Date(r.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                  </p>
-                  <BloomProfile levels={bloomProfile(r.debrief)} />
-                </div>
-              ))}
-            </div>
-          </Section>
-        )}
-
-        <div className="grid sm:grid-cols-2 gap-5">
-          <Section title="Last 30 days" note="Practice answers per day." testId="activity">
-            <DayBars days={activity} unit="answers" height={48} />
-          </Section>
-          <Section title="Recent sessions">
-            {completedSessions.slice(0, 5).map(s => {
-              const acc = s.tasks_count > 0 ? Math.round(s.correct_count / s.tasks_count * 100) : 0
-              return (
-                <div key={s.id} className="flex items-center justify-between mb-3">
-                  <div>
-                    <p className="text-[12px] text-c-muted">{new Date(s.started_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
-                    <p className="font-mono text-[10px] text-c-faint">{s.tasks_count} questions</p>
-                  </div>
-                  <span className="font-mono text-[12px] text-c-muted">{acc}%</span>
-                </div>
-              )
-            })}
-            {completedSessions.length === 0 && <p className="text-[12px] text-c-ghost">No sessions yet</p>}
-          </Section>
         </div>
 
       </div>
+    </div>
+  )
+}
+
+/** Why a skill belongs in "Needs attention", or null. Belief ahead first, as it is the sharpest. */
+function attentionReason(e: SkillEvidence): string | null {
+  if (e.agreement === 'belief_ahead') return `Belief ahead: ${e.recent.filter(Boolean).length} of last ${e.recent.length} right`
+  if (e.p_know >= 0.7 && e.attempts < 3) return `High belief on ${e.attempts} attempt${e.attempts === 1 ? '' : 's'}`
+  if (e.mastery_state === 'fragile') return 'Awaiting first review'
+  return null
+}
+
+function SkillRow({ e, label }: { e: SkillEvidence; label: string }) {
+  const agree = AGREEMENT_TEXT[e.agreement]
+  const reason = attentionReason(e)
+  const colour = MASTERY_COLOUR[e.mastery_state]
+  // Fragile belief is drawn striped: the number is high, but it is not yet earned.
+  const fill = e.mastery_state === 'fragile'
+    ? `repeating-linear-gradient(135deg, ${colour}cc 0 4px, ${colour}40 4px 8px)`
+    : colour
+  return (
+    <div className="py-3" data-testid={`skill-row-${e.skill_id}`}>
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 mb-2">
+        <Link href={`/learn/skill/${e.skill_id}`} className="text-[14px] text-c-text hover:underline truncate">{label}</Link>
+        <span className="flex items-center gap-2 flex-shrink-0">
+          {reason && (
+            <span className="font-mono text-[10px] px-2 py-0.5 rounded-full bg-c-yellow/15 text-c-yellow border border-c-yellow/30">{reason}</span>
+          )}
+          <span className="font-mono text-[11px]" style={{ color: colour }}>{STATE_LABEL[e.mastery_state]}</span>
+        </span>
+      </div>
+      <div className="grid grid-cols-[56px_1fr_40px] sm:grid-cols-[56px_1fr_40px_104px] items-center gap-x-3 gap-y-1.5">
+        <span className="text-[10px] font-mono text-c-faint">belief</span>
+        <Meter value={e.p_know} colour={fill} title={`Belief ${Math.round(e.p_know * 100)}%`} testId={`belief-${e.skill_id}`} />
+        <span className="font-mono text-[11px] text-c-muted text-right">{Math.round(e.p_know * 100)}%</span>
+        <div className="hidden sm:block row-span-2">
+          <Sparkline values={e.trajectory} title={`Belief after each of ${e.trajectory.length} attempts`} />
+        </div>
+        <span className="text-[10px] font-mono text-c-faint">evidence</span>
+        <Meter value={e.evidence_strength} title={`${e.attempts} attempts seen`} testId={`evidence-${e.skill_id}`} />
+        <span className="font-mono text-[11px] text-c-muted text-right">{e.attempts}</span>
+      </div>
+      <p className="text-[11px] text-c-faint mt-1.5">
+        {e.correct}/{e.attempts} right
+        {e.recent.length > 0 && <> · last {e.recent.length}: <span className="font-mono tracking-wider">{e.recent.map(r => r ? '●' : '○').join('')}</span></>}
+        {!reason && <>{' · '}<span className={agree.tone}>{agree.text}</span></>}
+        {e.attempts > 0 && (
+          <span className="text-c-ghost"> · {e.sources.correctness} scored, {e.sources.reasoning} explained
+            {e.sources.discounted > 0 && (
+              <>, <span className="underline decoration-dotted cursor-help"
+                title="Answers given after two misses in a row count 20% less, and answers slower than 15 seconds 15% less: a struggling or distracted answer says less about what you know.">
+                {e.sources.discounted} counted less</span></>
+            )}
+          </span>
+        )}
+      </p>
     </div>
   )
 }

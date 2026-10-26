@@ -96,7 +96,7 @@ export default function GraphPage() {
             {!loading && !error && (
               <div className="flex items-center gap-6">
                 {[
-                  { val: stats.mastered, label: 'Mastered',    color: '#2f5d3a' },
+                  { val: stats.mastered, label: 'Mastered',    color: '#4f8a5b' },
                   { val: stats.learning, label: 'In progress', color: '#e8a84a' },
                   { val: stats.ready,    label: 'Beginner',    color: '#d96e34' },
                   { val: stats.total,    label: 'Total',       color: 'var(--text-faint)' },
