@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "recall_score",
     "explanation_after": "The correct choice is recall_score."
+  },
+  {
+    "id": "p4_evaluation_metrics_explain1",
+    "skill_id": "p4_evaluation_metrics",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “The Scoreboard Rewards the Wrong Team” story, explain Evaluation Metrics without assuming the listener knows machine learning.",
+    "explanation_after": "Accuracy counts all correct answers equally. When one class is rare, precision and recall describe the positive predictions more honestly."
   }
 ]

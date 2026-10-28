@@ -6,14 +6,28 @@
     "difficulty_tier": "review",
     "stem": "What does the CPU (Central Processing Unit) do?",
     "options": [
-      { "id": "a", "text": "Stores files permanently on your computer" },
-      { "id": "b", "text": "Connects your computer to the internet" },
-      { "id": "c", "text": "Executes program instructions one at a time, very quickly" },
-      { "id": "d", "text": "Displays images on the screen" }
+      {
+        "id": "a",
+        "text": "Stores files permanently on your computer"
+      },
+      {
+        "id": "b",
+        "text": "Connects your computer to the internet"
+      },
+      {
+        "id": "c",
+        "text": "Executes program instructions one at a time, very quickly"
+      },
+      {
+        "id": "d",
+        "text": "Displays images on the screen"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "The CPU is the brain — it fetches instructions, decodes them, and executes them. Modern CPUs do this billions of times per second (measured in GHz). It handles sequential logic: step 1, step 2, step 3. The key word is 'sequentially' — which is why CPUs are powerful for general tasks but not optimal for AI training.",
-    "graph_placement_weight": { "p1_cpu_processing": 1.0 }
+    "graph_placement_weight": {
+      "p1_cpu_processing": 1
+    }
   },
   {
     "id": "p1_cpu_q2",
@@ -22,14 +36,29 @@
     "difficulty_tier": "harder",
     "stem": "Why are GPUs used for training neural networks instead of CPUs?",
     "options": [
-      { "id": "a", "text": "GPUs have faster clock speeds than CPUs" },
-      { "id": "b", "text": "GPUs can run thousands of simple operations simultaneously (parallel processing)" },
-      { "id": "c", "text": "GPUs use less electricity" },
-      { "id": "d", "text": "CPUs cannot do floating-point math" }
+      {
+        "id": "a",
+        "text": "GPUs have faster clock speeds than CPUs"
+      },
+      {
+        "id": "b",
+        "text": "GPUs can run thousands of simple operations simultaneously (parallel processing)"
+      },
+      {
+        "id": "c",
+        "text": "GPUs use less electricity"
+      },
+      {
+        "id": "d",
+        "text": "CPUs cannot do floating-point math"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Training a neural network means doing the same matrix multiply operation on thousands of values simultaneously — these operations are completely independent of each other. A CPU has 8-32 cores (fast, sequential). A GPU has 10,000+ simpler cores that all work in parallel. For independent batch operations, 10,000 slow cores beat 32 fast ones every time.",
-    "graph_placement_weight": { "p1_cpu_processing": 1.0, "p5_neural_network_basics": 0.3 }
+    "graph_placement_weight": {
+      "p1_cpu_processing": 1,
+      "p5_neural_network_basics": 0.3
+    }
   },
   {
     "id": "p1_cpu_q3",
@@ -38,14 +67,28 @@
     "difficulty_tier": "review",
     "stem": "Which pairing correctly describes what CPUs and GPUs are optimised for?",
     "options": [
-      { "id": "a", "text": "CPU: parallel tasks; GPU: sequential tasks" },
-      { "id": "b", "text": "CPU: storage tasks; GPU: network tasks" },
-      { "id": "c", "text": "CPU: sequential tasks; GPU: parallel tasks" },
-      { "id": "d", "text": "CPU: input tasks; GPU: output tasks" }
+      {
+        "id": "a",
+        "text": "CPU: parallel tasks; GPU: sequential tasks"
+      },
+      {
+        "id": "b",
+        "text": "CPU: storage tasks; GPU: network tasks"
+      },
+      {
+        "id": "c",
+        "text": "CPU: sequential tasks; GPU: parallel tasks"
+      },
+      {
+        "id": "d",
+        "text": "CPU: input tasks; GPU: output tasks"
+      }
     ],
     "correct_option_id": "c",
     "explanation_after": "Sequential = one thing at a time, very fast. Parallel = many things at once, each slower but combined much faster for suitable workloads. Neural network training is a parallel workload — millions of independent multiplications.",
-    "graph_placement_weight": { "p1_cpu_processing": 0.9 }
+    "graph_placement_weight": {
+      "p1_cpu_processing": 0.9
+    }
   },
   {
     "id": "p1_cpu_q4",
@@ -54,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "A CPU's clock speed is often advertised as something like '3.5 GHz'. What is this a measure of?",
     "options": [
-      { "id": "a", "text": "How much storage the CPU has" },
-      { "id": "b", "text": "How many instruction cycles the CPU can perform per second" },
-      { "id": "c", "text": "How many programs can be installed at once" },
-      { "id": "d", "text": "The physical size of the CPU chip" }
+      {
+        "id": "a",
+        "text": "How much storage the CPU has"
+      },
+      {
+        "id": "b",
+        "text": "How many instruction cycles the CPU can perform per second"
+      },
+      {
+        "id": "c",
+        "text": "How many programs can be installed at once"
+      },
+      {
+        "id": "d",
+        "text": "The physical size of the CPU chip"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "GHz (gigahertz) measures cycles per second — 3.5 GHz means 3.5 billion cycles per second. Each cycle, the CPU can carry out a step of an instruction. Higher clock speed generally means faster sequential execution, though it isn't the only factor in overall performance.",
-    "graph_placement_weight": { "p1_cpu_processing": 1.0 }
+    "graph_placement_weight": {
+      "p1_cpu_processing": 1
+    }
   },
   {
     "id": "p1_cpu_q5",
@@ -70,14 +127,28 @@
     "difficulty_tier": "same",
     "stem": "What can a CPU with 8 cores do that a CPU with a single core cannot?",
     "options": [
-      { "id": "a", "text": "Store 8 times more files" },
-      { "id": "b", "text": "Execute multiple independent instruction streams at the same time, enabling true multitasking across cores" },
-      { "id": "c", "text": "Run 8 times more RAM" },
-      { "id": "d", "text": "Nothing — core count has no effect on performance" }
+      {
+        "id": "a",
+        "text": "Store 8 times more files"
+      },
+      {
+        "id": "b",
+        "text": "Execute multiple independent instruction streams at the same time, enabling true multitasking across cores"
+      },
+      {
+        "id": "c",
+        "text": "Run 8 times more RAM"
+      },
+      {
+        "id": "d",
+        "text": "Nothing — core count has no effect on performance"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Each CPU core can independently fetch and execute its own stream of instructions. An 8-core CPU can genuinely run 8 separate sequences of instructions at once, which is why multi-core CPUs handle multitasking (and moderately parallel workloads) better than single-core ones — though still far fewer parallel streams than a GPU's thousands of cores.",
-    "graph_placement_weight": { "p1_cpu_processing": 0.9 }
+    "graph_placement_weight": {
+      "p1_cpu_processing": 0.9
+    }
   },
   {
     "id": "p1_cpu_q6",
@@ -86,13 +157,36 @@
     "difficulty_tier": "harder",
     "stem": "A chatbot is deployed to run only on a CPU instead of a GPU. Users notice replies take much longer to generate than competitors hosted on GPUs. Why?",
     "options": [
-      { "id": "a", "text": "CPUs are physically incapable of running Python code" },
-      { "id": "b", "text": "Generating each response involves many matrix multiplications that can run simultaneously; CPUs execute far fewer operations in parallel than GPUs, so the same workload takes much longer" },
-      { "id": "c", "text": "CPUs use more electricity, which directly slows down computation" },
-      { "id": "d", "text": "The CPU doesn't have enough storage to hold the conversation" }
+      {
+        "id": "a",
+        "text": "CPUs are physically incapable of running Python code"
+      },
+      {
+        "id": "b",
+        "text": "Generating each response involves many matrix multiplications that can run simultaneously; CPUs execute far fewer operations in parallel than GPUs, so the same workload takes much longer"
+      },
+      {
+        "id": "c",
+        "text": "CPUs use more electricity, which directly slows down computation"
+      },
+      {
+        "id": "d",
+        "text": "The CPU doesn't have enough storage to hold the conversation"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "This is the same sequential-vs-parallel tradeoff that makes GPUs preferred for training, but it applies to inference (using a trained model) too. A language model's forward pass is dominated by matrix multiplications — operations that are naturally parallel. A CPU's small number of fast cores processes these mostly one-at-a-time, while a GPU's thousands of cores handle them simultaneously, which is why GPU-hosted models typically respond faster.",
-    "graph_placement_weight": { "p1_cpu_processing": 1.0, "p5_neural_network_basics": 0.3 }
+    "graph_placement_weight": {
+      "p1_cpu_processing": 1,
+      "p5_neural_network_basics": 0.3
+    }
+  },
+  {
+    "id": "p1_cpu_processing_explain1",
+    "skill_id": "p1_cpu_processing",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "In your own words, explain CPU & Processing — what it is and why it matters. Use an example if it helps.",
+    "explanation_after": "The CPU is one super-smart worker. The GPU is thousands of simple workers. AI needs the thousands."
   }
 ]

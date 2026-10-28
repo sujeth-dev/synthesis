@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "define one user job",
     "explanation_after": "Start with define one user job."
+  },
+  {
+    "id": "p7_building_ai_app_explain1",
+    "skill_id": "p7_building_ai_app",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Start with the User’s Stuck Moment” to explain Building an AI App plainly.",
+    "explanation_after": "Describe who is stuck, what input they have, and what successful output lets them do next. Then choose the smallest AI step that helps."
   }
 ]

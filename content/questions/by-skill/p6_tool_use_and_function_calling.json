@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "required",
     "explanation_after": "The correct choice is required."
+  },
+  {
+    "id": "p6_tool_use_and_function_calling_explain1",
+    "skill_id": "p6_tool_use_and_function_calling",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Ask for an Action, Do Not Pretend It Happened,” explain Tool Use & Function Calling without assuming the listener knows modern AI.",
+    "explanation_after": "A tool gives the model a named capability with described inputs. The model proposes a call, application code runs it, and the result returns to the conversation."
   }
 ]

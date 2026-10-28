@@ -1,7 +1,11 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Spinner } from '@/components/ui/Spinner'
+import {
+  answerTimingPayload, recordSelection, recordTextEdit, startAnswerTiming,
+  type AnswerTiming,
+} from '@/lib/timing/answer-timing'
 
 interface DiagQuestion {
   id: string; skill_id: string; format: string
@@ -20,7 +24,11 @@ export default function DiagnosticPage() {
   const [results,   setResults]   = useState<any[]>([])
   const [started,   setStarted]   = useState(false)
   const [done,      setDone]      = useState(false)
-  const startTime = useState(() => Date.now())[0]
+  // Per question, not per session: a single stamp taken at mount made every
+  // latency cumulative-since-start. These fields are recorded for the placement
+  // payload; /api/diagnostic writes no attempt_events row, so nothing consumes
+  // them yet.
+  const timing = useRef<AnswerTiming>(startAnswerTiming())
 
   useEffect(() => {
     fetch('/api/diagnostic/questions')
@@ -33,11 +41,12 @@ export default function DiagnosticPage() {
     const answer = q.format === 'mcq' ? selected : fillAns
     const newResults = [...results, {
       question_id: q.id, skill_id: q.skill_id, answer,
-      latency_ms: Date.now() - startTime,
+      ...answerTimingPayload(timing.current),
       graph_placement_weight: q.graph_placement_weight,
     }]
     setResults(newResults)
     setSelected(null); setFillAns('')
+    timing.current = startAnswerTiming()
     if (idx + 1 >= questions.length) finishDiagnostic(newResults)
     else setIdx(i => i + 1)
   }
@@ -69,7 +78,7 @@ export default function DiagnosticPage() {
           No pressure — just answer honestly.
         </p>
         <button
-          onClick={() => setStarted(true)}
+          onClick={() => { timing.current = startAnswerTiming(); setStarted(true) }}
           className="px-8 py-3 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[14px] font-medium transition-all hover:scale-[1.02]"
         >
           Begin →
@@ -116,7 +125,7 @@ export default function DiagnosticPage() {
               {q.options.map(opt => (
                 <button
                   key={opt.id}
-                  onClick={() => setSelected(opt.id)}
+                  onClick={() => { timing.current = recordSelection(timing.current, opt.id); setSelected(opt.id) }}
                   className={`w-full text-left px-5 py-3.5 rounded-xl border transition-all text-[13px] ${
                     selected === opt.id
                       ? 'border-c-purple/50 bg-c-purple/10 text-c-purple'
@@ -136,7 +145,7 @@ export default function DiagnosticPage() {
             <input
               type="text"
               value={fillAns}
-              onChange={e => setFillAns(e.target.value)}
+              onChange={e => { timing.current = recordTextEdit(timing.current, e.target.value); setFillAns(e.target.value) }}
               placeholder="Your answer…"
               autoFocus
               className="w-full px-4 py-3 rounded-xl bg-c-bg3 border border-[var(--border)] text-c-text placeholder:text-c-ghost text-[14px] focus:border-c-purple/50 focus:outline-none transition-colors"

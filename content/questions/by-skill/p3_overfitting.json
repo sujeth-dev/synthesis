@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "Regularisation techniques like dropout and L2 make memorisation harder, but they don't change the underlying problem: too little data to characterise the true pattern. More diverse training data directly reduces how much the model can memorise, since there's more genuine signal and less of a small fixed sample to overfit to — it's often the single most effective fix, though it isn't always feasible, which is why regularisation is used as a practical alternative."
+  },
+  {
+    "id": "p3_overfitting_explain1",
+    "skill_id": "p3_overfitting",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain overfitting and underfitting using different analogies than the exam example. How do you detect each from the training curves? What are two concrete fixes for each?",
+    "explanation_after": "Overfitting: model memorised the training data but can't generalise. Underfitting: model too simple to learn the pattern at all. You need to find the sweet spot."
   }
 ]

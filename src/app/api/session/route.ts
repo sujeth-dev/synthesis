@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
-import { getGuidedArcProgress, getSessionGate, MAX_REVIEW_ITEMS, planReviewDebt, selectNextTask, SESSION_TASK_CAP } from '@/lib/session/engine'
+import { getGuidedArcProgress, getSessionGate, MAX_REVIEW_ITEMS, planReviewDebt, selectNextTaskDetailed, SESSION_TASK_CAP } from '@/lib/session/engine'
+import { buildSelectionShadowRow, shadowSelection } from '@/lib/session/shadow'
+import { activeSelector, scoreRanker } from '@/lib/session/selector'
+import { ELO_START } from '@/lib/elo'
 import { getAllNodes, getHardPrereqs } from '@/lib/graph'
+import { findActivePhase } from '@/lib/phases'
 import { initSkillState } from '@/lib/bkt'
 import { initSM2, reconcileBktSm2OnLoad } from '@/lib/sm2'
 import { getMotivationState, getAllSkillStates, getReviewSchedules,
          createSession, getSession, endSession,
-         bulkUpsertSkillStates, bulkUpsertReviewSchedules, getSessionBehaviorAttempts } from '@/lib/db/queries'
-import type { DifficultyTier, LearnerSkillState, Question, ReviewSchedule, SessionMode } from '@/types'
+         bulkUpsertSkillStates, bulkUpsertReviewSchedules, getSessionBehaviorAttempts,
+         getQuestionRatingsForSkills, getLearnerAbility, insertSelectionShadow } from '@/lib/db/queries'
+import type { DifficultyTier, LearnerSkillState, Phase, Question, ReviewSchedule, SessionMode } from '@/types'
 import fs from 'fs'
 import path from 'path'
 
@@ -151,7 +156,17 @@ export async function POST(req: NextRequest) {
         ...persistedQuestionIds,
       ])
 
-      const task = selectNextTask({
+      // LIVE-1: under SELECTOR=score (the default) the weighted score picks
+      // from the pool the cascade builds; SELECTOR=rules keeps the cascade's pick.
+      const now = new Date()
+      const ranker = activeSelector() === 'score'
+        ? scoreRanker({
+            skillStates, reviewSchedules, motivation: motivation.state, questionsCache,
+            recentSkillIds: [...seen_skills].reverse(), now, learnerRating: ELO_START,
+          })
+        : null
+
+      const trace = selectNextTaskDetailed({
         skillStates, reviewSchedules, motivationState: motivation,
         seenSkillsThisSession:      seen_skills,
         seenQuestionIdsThisSession: selectionSeenQuestionIds,
@@ -161,7 +176,45 @@ export async function POST(req: NextRequest) {
         arcHistory,
         lastQuestionId: persistedQuestionIds[persistedQuestionIds.length - 1]
           ?? seen_question_ids[seen_question_ids.length - 1],
+        now,
+        rank: ranker?.rank,
       })
+      const task = trace.task
+
+      // ── Selection log (SCORE-3, LIVE-1): both choices on the same pool. Under
+      // the score the row records the pick that was served (`applied`); under
+      // the rules it records what the score would have done. Fail-open, like
+      // the five shadow writes in /api/attempt.
+      try {
+        const liveRanking = ranker?.last() ?? null
+        const candidateSkillIds = trace.candidates.map(candidate => candidate.skill_id)
+        if (liveRanking) {
+          const row = buildSelectionShadowRow(
+            trace, liveRanking.chosen, liveRanking.ranked, liveRanking.explored, session_id ?? null, true)
+          await insertSelectionShadow({ learner_id: user.id, ...row })
+        } else if (!ranker && candidateSkillIds.length >= 2) {
+          const activePhase = findActivePhase(getAllNodes().filter(node => !node.deprecated), skillStates)
+          const [ratings, ability] = await Promise.all([
+            getQuestionRatingsForSkills(candidateSkillIds),
+            getLearnerAbility(user.id, activePhase as Phase),
+          ])
+          const row = shadowSelection({
+            trace, skillStates, reviewSchedules,
+            motivation: motivation.state,
+            questionsCache,
+            questionRatings: new Map(ratings.map(rating => [rating.question_id, rating.rating])),
+            learnerRating: ability?.rating ?? ELO_START,
+            recentSkillIds: [...seen_skills].reverse(),
+            sessionId: session_id ?? null,
+            now,
+            next: Math.random,
+          })
+          if (row) await insertSelectionShadow({ learner_id: user.id, ...row })
+        }
+      } catch {
+        // Observational only — a deployment without migration 010 loses the
+        // comparison row, never the learner's next task.
+      }
 
       if (!task) return NextResponse.json({ task: null, done: true })
       return NextResponse.json({

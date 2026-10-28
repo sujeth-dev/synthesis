@@ -5,15 +5,21 @@
     "skill_id": "p2_lists_arrays",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 25,
     "stem": "What is the index of the first element in a Python list?",
     "options": [
-      { "id": "a", "text": "1" },
+      { "id": "a", "text": "1", "misconception": "Counts from one as people do; most languages start at zero." },
       { "id": "b", "text": "0" },
-      { "id": "c", "text": "-1" },
-      { "id": "d", "text": "It depends on the list" }
+      { "id": "c", "text": "-1", "misconception": "Recalls that negative indices exist but places the first element where the last one is." },
+      { "id": "d", "text": "It depends on the list", "misconception": "Treats a fixed language rule as configurable." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Python lists (like most programming languages) are zero-indexed — the first element is at index 0, the second at index 1, and so on."
+    "hints": [
+      "Think about what `len(items)` would have to be for the last valid index to work out.",
+      "Recall what an index really measures: distance from the start."
+    ],
+    "explanation_after": "Python lists are zero-indexed: the first element sits at 0. An index is an offset from the beginning, which is why the last valid index is `len - 1`."
   },
   {
     "id": "p2_eval_sets_remember",
@@ -21,15 +27,21 @@
     "skill_id": "p2_sets_tuples",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
     "stem": "What is the key property that distinguishes a Python set from a list?",
     "options": [
-      { "id": "a", "text": "A set can only hold strings" },
-      { "id": "b", "text": "A set holds only unique elements and has no defined order" },
-      { "id": "c", "text": "A set is always sorted automatically" },
-      { "id": "d", "text": "A set cannot be modified after creation" }
+      { "id": "a", "text": "A set can only hold strings", "misconception": "Invents a type restriction; sets hold any hashable value." },
+      { "id": "b", "text": "A set cannot be modified after creation", "misconception": "Describes a frozenset or a tuple, not an ordinary set." },
+      { "id": "c", "text": "A set is always sorted automatically", "misconception": "Mistakes unordered for ordered; iteration order is not sorted order." },
+      { "id": "d", "text": "A set holds only unique elements and has no defined order" }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "A set automatically removes duplicates and doesn't preserve insertion order (unlike a list). Adding an element already present in the set has no effect."
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what happens when you add a value the set already contains.",
+      "Two properties change at once compared with a list — one about duplicates, one about order."
+    ],
+    "explanation_after": "A set drops duplicates and does not preserve insertion order. Adding something already present has no effect, which is what makes sets the natural tool for membership and de-duplication."
   },
   {
     "id": "p2_eval_bigo_remember",
@@ -37,31 +49,110 @@
     "skill_id": "p2_big_o_basics",
     "bloom_level": "remember",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
     "stem": "What does Big-O notation describe?",
     "options": [
-      { "id": "a", "text": "The exact number of seconds an algorithm takes to run" },
+      { "id": "a", "text": "The exact number of seconds an algorithm takes to run", "misconception": "Reads a growth-rate statement as a stopwatch measurement, which would depend on hardware." },
       { "id": "b", "text": "How an algorithm's running time or memory use grows as input size grows" },
-      { "id": "c", "text": "The number of bugs in a program" },
-      { "id": "d", "text": "The programming language used" }
+      { "id": "c", "text": "The number of bugs in a program", "misconception": "Associates the notation with quality rather than with scaling." },
+      { "id": "d", "text": "The amount of memory a program uses at startup", "misconception": "Picks a fixed quantity; Big-O is about how a quantity changes with input size." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Big-O describes growth rate, not a literal stopwatch time — O(n) means running time scales roughly linearly with input size n, regardless of the exact hardware or language."
+    "hints": [
+      "Ask what the n in O(n) refers to.",
+      "Would the answer change if you ran the same code on a faster machine?"
+    ],
+    "explanation_after": "Big-O describes growth, not a literal time. O(n) means the work scales roughly in proportion to the input size, whatever the hardware or language — which is why it survives a machine upgrade."
   },
+  {
+    "id": "p2_eval_calc_remember",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_calculus_basics",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "What does the derivative of a function at a point tell you?",
+    "options": [
+      { "id": "a", "text": "The value of the function at that point", "misconception": "Confuses the height of the curve with how steeply it is changing." },
+      { "id": "b", "text": "The area under the curve up to that point", "misconception": "Describes the integral, the derivative's counterpart." },
+      { "id": "c", "text": "The rate at which the function is changing there — the slope" },
+      { "id": "d", "text": "The largest value the function can reach", "misconception": "Confuses a local property with a global one; derivatives help find maxima but are not maxima." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Picture zooming in on a curve until it looks like a straight line. What do you read off it?",
+      "Ask which quantity would be zero at the very bottom of a valley."
+    ],
+    "explanation_after": "The derivative is the slope: how fast the output changes for a small change in input. Training a model is mostly reading that slope and stepping against it, which is why the derivative underpins gradient descent."
+  },
+  {
+    "id": "p2_eval_clean_remember",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 35,
+    "stem": "In data cleaning, what does 'imputation' mean?",
+    "options": [
+      { "id": "a", "text": "Deleting every row that has a missing value", "misconception": "Names the main alternative to imputation rather than imputation itself." },
+      { "id": "b", "text": "Filling in a missing value with an estimate, such as the column's mean or median" },
+      { "id": "c", "text": "Converting text columns into numbers", "misconception": "Describes encoding, a different preprocessing step." },
+      { "id": "d", "text": "Removing rows that are exact duplicates", "misconception": "Describes de-duplication, which addresses repetition rather than absence." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "The word shares a root with 'impute', meaning to attribute something to a source.",
+      "Ask what you would do with a gap if throwing the whole row away were too costly."
+    ],
+    "explanation_after": "Imputation fills gaps with an estimate rather than discarding the row. It keeps data you would otherwise lose, at the cost of inventing values — which is why what you fill with has to be recorded."
+  },
+  {
+    "id": "p2_eval_mat_remember",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_math_matrices",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 30,
+    "stem": "A matrix is described as having shape (4, 7). What does that mean?",
+    "options": [
+      { "id": "a", "text": "4 rows and 7 columns" },
+      { "id": "b", "text": "7 rows and 4 columns", "misconception": "Reads the dimensions in the wrong order; rows come first by convention." },
+      { "id": "c", "text": "28 values arranged in no particular layout", "misconception": "Keeps the total but discards the structure, which is what the shape exists to state." },
+      { "id": "d", "text": "Values ranging from 4 to 7", "misconception": "Reads the shape as a range of contents rather than a description of layout." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "The convention is the same one used for NumPy arrays and dataset tables.",
+      "In a dataset of samples and features, which one is usually counted first?"
+    ],
+    "explanation_after": "Shape is (rows, columns). In machine learning that is usually (samples, features), which is why a shape mismatch error is often really a transposed-data error."
+  },
+
   {
     "id": "p2_eval_dict_understand",
     "phase": "phase_2_cs_data",
     "skill_id": "p2_dictionaries",
     "bloom_level": "understand",
     "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 55,
     "stem": "Why is looking up a value by key in a dictionary so much faster than searching for a value in a list?",
     "options": [
-      { "id": "a", "text": "Dictionaries use a hash table internally, computing where a key lives directly instead of checking every entry one by one" },
-      { "id": "b", "text": "Dictionaries are always smaller than lists" },
-      { "id": "c", "text": "Dictionaries only store numbers, which are faster to compare" },
-      { "id": "d", "text": "There's no real speed difference between the two" }
+      { "id": "a", "text": "Dictionaries are always smaller than lists", "misconception": "Attributes a structural advantage to size, which is not what changes the cost." },
+      { "id": "b", "text": "There is no real speed difference between the two", "misconception": "Denies a gap that grows with size — the whole reason dictionaries exist." },
+      { "id": "c", "text": "Dictionaries only store numbers, which are faster to compare", "misconception": "Invents a type restriction; keys can be strings, tuples and more." },
+      { "id": "d", "text": "Dictionaries use a hash table, computing where a key lives directly instead of checking every entry" }
     ],
-    "correct_option_id": "a",
-    "explanation_after": "A dictionary hashes each key to compute roughly where its value is stored, so lookup is close to O(1) regardless of size. A list lookup by value has to check entries one at a time — O(n) in the worst case."
+    "correct_option_id": "d",
+    "hints": [
+      "Ask how many entries each structure has to examine before it can answer.",
+      "Does the dictionary's answer time change much when it holds a million entries instead of ten?"
+    ],
+    "explanation_after": "Hashing computes roughly where a key's value sits, so lookup is close to constant time regardless of size. Searching a list by value checks entries one at a time — O(n) in the worst case."
   },
   {
     "id": "p2_eval_de_understand",
@@ -69,15 +160,21 @@
     "skill_id": "p2_data_exploration",
     "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Why do data scientists look at a dataset (distributions, missing values, outliers) before building a model on it?",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Why do data scientists examine distributions, missing values and outliers before building a model?",
     "options": [
-      { "id": "a", "text": "It's a formality with no real effect on the resulting model" },
-      { "id": "b", "text": "Because a model trained on data with unnoticed issues (missing values, outliers, skew) can silently learn the wrong pattern, so understanding the data first catches problems before they become invisible model errors" },
-      { "id": "c", "text": "Because models can only be trained on perfectly clean data, with no exceptions" },
-      { "id": "d", "text": "Because exploration automatically fixes any data quality issues" }
+      { "id": "a", "text": "It is a formality with no real effect on the resulting model", "misconception": "Treats exploration as process rather than as something that changes what the model learns." },
+      { "id": "b", "text": "Because models can only be trained on perfectly clean data, without exception", "misconception": "Overstates the requirement; models train happily on flawed data, which is exactly the danger." },
+      { "id": "c", "text": "Because a model trained on data with unnoticed issues learns the wrong pattern silently, and exploration catches that before it becomes an invisible error" },
+      { "id": "d", "text": "Because exploration automatically fixes data quality issues", "misconception": "Confuses looking with repairing; exploration reveals problems, it does not resolve them." }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "Exploration surfaces issues — missing values, extreme outliers, class imbalance — that would otherwise silently bias what the model learns, since the model has no way to know the data was flawed; it just learns whatever pattern is actually there, good or bad."
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what the model does when the data is wrong — does it complain, or does it learn?",
+      "Think about where the error would first become visible if nobody looked at the data."
+    ],
+    "explanation_after": "A model has no way to know its data was flawed; it learns whatever pattern is actually there. Exploration surfaces missing values, outliers and imbalance before they turn into a confidently wrong model."
   },
   {
     "id": "p2_eval_stat_understand",
@@ -85,31 +182,110 @@
     "skill_id": "p2_statistics_basics",
     "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Why can the mean (average) of a dataset be misleading if the data has extreme outliers?",
+    "difficulty": "medium",
+    "time_target_sec": 55,
+    "stem": "Why can the mean of a dataset be misleading when the data has extreme outliers?",
     "options": [
-      { "id": "a", "text": "Because the mean is pulled toward extreme values, so it can end up far from where most of the data actually sits" },
-      { "id": "b", "text": "The mean is never affected by outliers" },
-      { "id": "c", "text": "Outliers make the mean impossible to calculate" },
-      { "id": "d", "text": "The mean only works on integers" }
+      { "id": "a", "text": "Because the mean is pulled toward extreme values, so it can sit far from where most of the data is" },
+      { "id": "b", "text": "The mean is never affected by outliers", "misconception": "Confuses the mean with the median, which is the robust one." },
+      { "id": "c", "text": "Outliers make the mean impossible to calculate", "misconception": "The calculation always succeeds — that is precisely why the problem goes unnoticed." },
+      { "id": "d", "text": "The mean only works on integers", "misconception": "Invents a type restriction unrelated to the question of robustness." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "A single very large or very small value shifts the mean because every value contributes to the sum. The median (the middle value) is far less sensitive to outliers, which is why it's often reported alongside or instead of the mean for skewed data."
+    "hints": [
+      "Add one enormous value to a small dataset and recompute both the mean and the median.",
+      "Ask how much each individual value contributes to each statistic."
+    ],
+    "explanation_after": "Every value feeds the sum, so one extreme figure shifts the mean. The median depends only on position, which is why it is reported for skewed data like incomes and response times."
   },
+  {
+    "id": "p2_eval_calc_understand",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_calculus_basics",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "Gradient descent takes steps in the direction opposite the gradient. Why the opposite direction?",
+    "options": [
+      { "id": "a", "text": "Because the gradient points toward the steepest increase, and the goal is to reduce the loss" },
+      { "id": "b", "text": "Because gradients are always negative numbers", "misconception": "Treats a sign convention as a property of the quantity; gradients can be either sign." },
+      { "id": "c", "text": "Because moving along the gradient would take too long", "misconception": "Frames a direction error as a speed problem." },
+      { "id": "d", "text": "Because the opposite direction is numerically more stable", "misconception": "Reaches for a numerical reason for what is a definitional one." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask which way is uphill on the loss surface, and which way you want to go.",
+      "Picture standing on a hillside in fog, feeling for the steepest slope."
+    ],
+    "explanation_after": "The gradient points uphill on the loss surface. Since the aim is to lower the loss, the step goes the other way — and the learning rate decides how far."
+  },
+  {
+    "id": "p2_eval_tuple_understand",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_sets_tuples",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "Why can a tuple be used as a dictionary key when a list cannot?",
+    "options": [
+      { "id": "a", "text": "Tuples are shorter than lists", "misconception": "Reaches for size; length has nothing to do with it." },
+      { "id": "b", "text": "Tuples can only hold numbers", "misconception": "Invents a type restriction; tuples hold anything." },
+      { "id": "c", "text": "Tuples cannot change, so their hash stays stable; a list could be edited and lost in the table" },
+      { "id": "d", "text": "Tuples are stored in a different part of memory", "misconception": "Attributes the rule to storage location rather than to mutability." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "A dictionary finds a key by computing a number from its contents. Ask what happens if the contents change afterwards.",
+      "What would it mean for a key to move without the dictionary being told?"
+    ],
+    "explanation_after": "The dictionary stores a key by a hash of its contents. If the contents could change, the key would belong in a different slot and become unfindable — so only immutable values are allowed as keys."
+  },
+  {
+    "id": "p2_eval_vec_understand",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_math_vectors",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 65,
+    "stem": "Two vectors have a dot product of 0. What does that say about them?",
+    "options": [
+      { "id": "a", "text": "They are at right angles to each other" },
+      { "id": "b", "text": "They are identical", "misconception": "Identical non-zero vectors give the largest positive dot product, not zero." },
+      { "id": "c", "text": "They both have length 0", "misconception": "One way to get zero, but far from the only way — and not what a zero dot product generally indicates." },
+      { "id": "d", "text": "They point in exactly opposite directions", "misconception": "Opposite directions give the most negative dot product, not zero." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "The dot product grows with how much two vectors point the same way. Ask what makes that zero.",
+      "Try [1, 0] and [0, 1] and see what you get."
+    ],
+    "explanation_after": "The dot product measures alignment: largest when vectors point the same way, most negative when opposite, zero when perpendicular. Embeddings use exactly this as a similarity score."
+  },
+
   {
     "id": "p2_eval_vec_apply",
     "phase": "phase_2_cs_data",
     "skill_id": "p2_math_vectors",
     "bloom_level": "apply",
     "format": "mcq",
-    "stem": "What is the dot product of vectors [2, 3] and [4, 1]?",
+    "difficulty": "easy",
+    "time_target_sec": 50,
+    "stem": "What is the dot product of the vectors [2, 3] and [4, 1]?",
     "options": [
-      { "id": "a", "text": "6" },
+      { "id": "a", "text": "6", "misconception": "Multiplies only one pair of components, or adds the wrong pair." },
       { "id": "b", "text": "11" },
-      { "id": "c", "text": "8" },
-      { "id": "d", "text": "[8, 3]" }
+      { "id": "c", "text": "8", "misconception": "Stops after the first product and never adds the second." },
+      { "id": "d", "text": "[8, 3]", "misconception": "Multiplies elementwise but never sums, so the result is still a vector." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Dot product multiplies corresponding elements and sums the results: (2×4) + (3×1) = 8 + 3 = 11. The dot product of two vectors is always a single number, not another vector."
+    "hints": [
+      "Pair up the components by position first.",
+      "The result of a dot product is a single number, not a vector."
+    ],
+    "explanation_after": "Multiply corresponding elements and sum: (2×4) + (3×1) = 11. The elementwise product [8, 3] is a different operation, and keeping the two apart matters once shapes get larger."
   },
   {
     "id": "p2_eval_mat_apply",
@@ -117,15 +293,21 @@
     "skill_id": "p2_math_matrices",
     "bloom_level": "apply",
     "format": "mcq",
-    "stem": "What is the shape of the result when multiplying a (2×3) matrix by a (3×1) matrix?",
+    "difficulty": "medium",
+    "time_target_sec": 60,
+    "stem": "What is the shape of the result when a (2×3) matrix is multiplied by a (3×1) matrix?",
     "options": [
       { "id": "a", "text": "(2×1)" },
-      { "id": "b", "text": "(3×3)" },
-      { "id": "c", "text": "(2×3)" },
-      { "id": "d", "text": "Undefined — the shapes don't match" }
+      { "id": "b", "text": "(3×3)", "misconception": "Combines the inner dimensions, which are the ones that cancel." },
+      { "id": "c", "text": "(2×3)", "misconception": "Assumes the result keeps the shape of the first operand." },
+      { "id": "d", "text": "Undefined — the shapes do not match", "misconception": "Checks the outer dimensions for agreement instead of the inner ones." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Matrix multiply rule: (m×n) × (n×p) = (m×p). The inner dimensions (3 and 3) match and cancel, leaving the outer dimensions: (2×1)."
+    "hints": [
+      "Write the shapes side by side and look at the two numbers that meet in the middle.",
+      "The rule is (m×n) × (n×p); work out what survives."
+    ],
+    "explanation_after": "Inner dimensions must match and then cancel, leaving the outer ones: (2×3) × (3×1) = (2×1). This is the check to run first whenever a model throws a shape error."
   },
   {
     "id": "p2_eval_lf_apply",
@@ -133,31 +315,110 @@
     "skill_id": "p2_linear_functions",
     "bloom_level": "apply",
     "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 40,
     "stem": "For the linear function y = 3x + 2, what is y when x = 4?",
     "options": [
-      { "id": "a", "text": "9" },
-      { "id": "b", "text": "12" },
+      { "id": "a", "text": "9", "misconception": "Adds instead of multiplying, or applies the offset before the slope." },
+      { "id": "b", "text": "12", "misconception": "Applies the slope but forgets the offset." },
       { "id": "c", "text": "14" },
-      { "id": "d", "text": "20" }
+      { "id": "d", "text": "20", "misconception": "Adds the offset to x before multiplying, giving 3 × (4 + 2)." }
     ],
     "correct_option_id": "c",
-    "explanation_after": "y = 3(4) + 2 = 12 + 2 = 14. In machine learning, this exact form (a slope times an input, plus an offset) is the basic shape of a single-feature linear model's prediction."
+    "hints": [
+      "Do the multiplication before the addition.",
+      "Substitute the value for x and read the expression strictly left to right by precedence."
+    ],
+    "explanation_after": "3(4) + 2 = 14. This exact shape — a weight times an input plus a bias — is a single-feature linear model's prediction, and every neuron in a network computes it."
   },
+  {
+    "id": "p2_eval_stat_apply",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_statistics_basics",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "Salaries on a team are 30k, 32k, 35k, 36k and 400k. Which summary best describes a typical salary here?",
+    "options": [
+      { "id": "a", "text": "The mean, about 106k", "misconception": "Reports a figure that no one on the team earns, and that four of five are far below." },
+      { "id": "b", "text": "The median, 35k" },
+      { "id": "c", "text": "The maximum, 400k", "misconception": "Describes the extreme rather than the typical case." },
+      { "id": "d", "text": "The range, 370k", "misconception": "Describes the spread, which is useful but answers a different question." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Compute both the mean and the median, then ask which one most people are near.",
+      "Ask how many team members earn anything close to each candidate figure."
+    ],
+    "explanation_after": "The mean of 106k describes nobody: four of five earn under 36k. The median sits in the middle regardless of how extreme the top value is — which is why pay and house prices are reported as medians."
+  },
+  {
+    "id": "p2_eval_bigo_apply",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_big_o_basics",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "A function loops over a list of n names, and for each name loops over the same list again to compare. What is its time complexity?",
+    "options": [
+      { "id": "a", "text": "O(n)", "misconception": "Counts one loop and misses that it runs once per element of the outer loop." },
+      { "id": "b", "text": "O(2n)", "misconception": "Adds the loops rather than multiplying them; nesting multiplies." },
+      { "id": "c", "text": "O(log n)", "misconception": "Associates with the pattern of halving, which nothing here does." },
+      { "id": "d", "text": "O(n²)" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Count how many comparisons happen in total for a list of 10, then for 20.",
+      "Ask whether the loops sit side by side or one inside the other."
+    ],
+    "explanation_after": "The inner loop runs n times for each of n outer steps, so the work is n × n. Doubling the input quadruples the time — which is why a nested scan over a million records is hopeless and a set or dictionary is not."
+  },
+  {
+    "id": "p2_eval_clean_apply",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 80,
+    "stem": "A column of patient ages has 3% of values missing, apparently at random, and the dataset is small. What is the most reasonable first handling?",
+    "options": [
+      { "id": "a", "text": "Drop the whole age column", "misconception": "Discards a mostly complete and probably useful feature because of a small gap." },
+      { "id": "b", "text": "Fill the gaps with the median age, and record that it was done" },
+      { "id": "c", "text": "Fill the gaps with 0", "misconception": "Inserts a value that is not merely unknown but actively wrong, and that drags any average down." },
+      { "id": "d", "text": "Leave them blank and let the model decide", "misconception": "Most models cannot consume missing values at all, so this defers a decision that must still be made." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Weigh what each option loses: data, accuracy, or honesty about what was invented.",
+      "Ask what a filled value should do to the column's overall distribution."
+    ],
+    "explanation_after": "With 3% missing at random and little data to spare, median imputation keeps the rows and barely disturbs the distribution. Filling with 0 invents implausible ages; recording the imputation keeps the step auditable."
+  },
+
   {
     "id": "p2_eval_alg_analyze",
     "phase": "phase_2_cs_data",
     "skill_id": "p2_algorithms_intro",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "An algorithm to find the maximum value in an unsorted list checks every element exactly once and keeps track of the largest seen so far. Why can't this be done any faster than checking every element?",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "Finding the maximum of an unsorted list checks every element once. Why can that not be done faster?",
     "options": [
-      { "id": "a", "text": "It could be done faster, but nobody has found a way yet" },
-      { "id": "b", "text": "Because the maximum could be anywhere in an unsorted list — skipping any single element risks skipping the actual maximum, so every element must be examined at least once" },
-      { "id": "c", "text": "Computers process lists in a fixed, unavoidable amount of time regardless of size" },
-      { "id": "d", "text": "This algorithm is actually slower than necessary" }
+      { "id": "a", "text": "It could be, but nobody has found a way yet", "misconception": "Treats a provable lower bound as an open problem." },
+      { "id": "b", "text": "Because comparisons are slow operations", "misconception": "Blames the cost of each step instead of the number of steps that are unavoidable." },
+      { "id": "c", "text": "Because computers process lists in a fixed time regardless of size", "misconception": "Denies that input size affects work at all." },
+      { "id": "d", "text": "Because the maximum could be anywhere, so skipping any element risks skipping the answer" }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "With no prior structure (unsorted), there's no way to rule out any element as a possible maximum without checking it — this is why finding the max in an unsorted list is fundamentally O(n): you must look at every element at least once, no shortcut exists."
+    "correct_option_id": "d",
+    "hints": [
+      "Suppose you skipped one element. What would an adversary put there?",
+      "Ask what structure in the data would let you rule something out without looking at it."
+    ],
+    "explanation_after": "With no ordering to exploit, nothing can be ruled out unexamined, so O(n) is a floor rather than an implementation detail. On a sorted list the answer is at a known end — the structure is what buys the shortcut."
   },
   {
     "id": "p2_eval_rec_analyze",
@@ -165,15 +426,21 @@
     "skill_id": "p2_recursion",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "This recursive function to sum a list never terminates and eventually crashes. What's wrong?\n\ndef total(nums):\n    return nums[0] + total(nums[1:])",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "This recursive sum never terminates and eventually crashes. What is wrong?\n\ndef total(nums):\n    return nums[0] + total(nums[1:])",
     "options": [
-      { "id": "a", "text": "Python cannot sum lists recursively" },
-      { "id": "b", "text": "There is no base case — it never checks for an empty list, so it keeps recursing on shorter and shorter lists past the point where nums[0] is valid" },
-      { "id": "c", "text": "The + operator doesn't work inside recursive functions" },
-      { "id": "d", "text": "nums[1:] is invalid syntax" }
+      { "id": "a", "text": "Python cannot sum lists recursively", "misconception": "Blames the approach rather than the missing stopping condition." },
+      { "id": "b", "text": "The `+` operator does not work inside recursive functions", "misconception": "Invents a restriction on operators in recursion." },
+      { "id": "c", "text": "There is no base case, so it keeps recursing past the point where `nums[0]` is valid" },
+      { "id": "d", "text": "`nums[1:]` is invalid syntax", "misconception": "Doubts the slice, which is correct and does shrink the list each call." }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "Every recursive function needs a base case to stop. This one always tries nums[0], but eventually nums becomes empty and nums[0] raises an IndexError — the fix is `if not nums: return 0` before the recursive line."
+    "correct_option_id": "c",
+    "hints": [
+      "Follow the calls down with a two-element list and say what the list looks like at each step.",
+      "Ask what should happen when there is nothing left to sum."
+    ],
+    "explanation_after": "The list does shrink, but nothing stops the recursion when it empties, so `nums[0]` eventually raises IndexError. `if not nums: return 0` first is the base case — every recursion needs one."
   },
   {
     "id": "p2_eval_ss_analyze",
@@ -181,31 +448,110 @@
     "skill_id": "p2_sorting_searching",
     "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "Binary search requires the list to already be sorted. Why does binary search fail (give wrong results) on an unsorted list, even though it runs without crashing?",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "Binary search runs without crashing on an unsorted list but gives wrong answers. Why?",
     "options": [
-      { "id": "a", "text": "Binary search actually works fine on unsorted lists too" },
-      { "id": "b", "text": "Binary search decides which half to discard by comparing to the middle element — that logic only correctly eliminates half the possibilities if the list is ordered, so on unsorted data it can discard the half that actually contains the target" },
-      { "id": "c", "text": "Binary search only works on numbers, not other data types" },
-      { "id": "d", "text": "Binary search always returns the first element regardless of input" }
+      { "id": "a", "text": "It works fine on unsorted lists too", "misconception": "Denies the precondition the algorithm depends on." },
+      { "id": "b", "text": "It only works on numbers, not other types", "misconception": "Invents a type restriction; any ordered type works, provided it is ordered." },
+      { "id": "c", "text": "It discards half the list based on a comparison with the middle, which only eliminates the right half when the data is ordered" },
+      { "id": "d", "text": "It always returns the first element regardless of input", "misconception": "Describes behaviour the algorithm does not have." }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "Binary search's speed comes from safely discarding half the remaining elements each step, which is only valid because sortedness guarantees everything on one side of the middle is smaller/larger. Without that guarantee, the discarded half might silently contain the answer, producing a wrong 'not found' result."
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what justifies throwing away half the remaining elements without looking at them.",
+      "Construct a small unsorted list where the target ends up in the discarded half."
+    ],
+    "explanation_after": "The speed comes from safely discarding half each step, and sortedness is what makes that safe. Without it the discarded half may hold the target, so the result is a confident 'not found' — wrong answers rather than errors."
   },
+  {
+    "id": "p2_eval_de_analyze",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_data_exploration",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 95,
+    "stem": "A histogram of response times shows two distinct peaks rather than one. What does that most likely indicate?",
+    "options": [
+      { "id": "a", "text": "The data contains two different populations or conditions mixed together" },
+      { "id": "b", "text": "There are too few data points to see the real shape", "misconception": "Sparse data makes a histogram noisy, but it rarely produces two clean, separated peaks." },
+      { "id": "c", "text": "The measurements are simply wrong", "misconception": "Treats structure in the data as error, when it is usually information." },
+      { "id": "d", "text": "The mean and median must be identical", "misconception": "States an unrelated property, and one that two peaks do not imply." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what single process would have to look like to produce two separated humps.",
+      "Think about what might differ between the cases in each peak — a cache hit and a miss, say."
+    ],
+    "explanation_after": "Two peaks usually mean two regimes mixed in one column: cached versus uncached, mobile versus desktop, two machine types. The useful next step is finding the column that splits them, because an average across both describes neither."
+  },
+  {
+    "id": "p2_eval_prob_analyze",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_probability_basics",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A test for a condition affecting 1 in 1,000 people is 99% accurate in both directions. Someone tests positive. Roughly what is the chance they have it?",
+    "options": [
+      { "id": "a", "text": "About 99%", "misconception": "Reads the test's accuracy as the probability of disease, ignoring how rare the condition is." },
+      { "id": "b", "text": "About 50%", "misconception": "Senses that the answer is lower than 99% but does not work through the counts." },
+      { "id": "c", "text": "About 9%" },
+      { "id": "d", "text": "About 1%", "misconception": "Reports the false-positive rate rather than the probability given a positive result." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Imagine 100,000 people. Work out how many truly have it and how many test positive in total.",
+      "Compare the number of true positives with the number of false positives, not with the accuracy."
+    ],
+    "explanation_after": "In 100,000 people, 100 have it and about 99 test positive; of the 99,900 without it, about 999 also test positive. So roughly 99 of 1,098 positives are real — about 9%. When a condition is rare, false positives outnumber true ones even for an accurate test."
+  },
+  {
+    "id": "p2_eval_calc_analyze",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_calculus_basics",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "During training the loss stops falling and the gradients are all close to zero, but the loss is still high. What does that pattern indicate?",
+    "options": [
+      { "id": "a", "text": "Training has converged to the best possible model", "misconception": "Reads a flat region as success without checking whether the loss is actually low." },
+      { "id": "b", "text": "The learning rate must be too high", "misconception": "A high rate usually shows as a loss that oscillates or diverges, not one that flattens with vanishing gradients." },
+      { "id": "c", "text": "The data must contain missing values", "misconception": "Reaches for a data problem that would more likely produce errors or erratic loss." },
+      { "id": "d", "text": "The model is stuck somewhere flat — a plateau or a poor local region — where there is no slope to follow" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Two facts have to be explained together: no slope, and still a bad loss.",
+      "Ask what gradient descent can do when the surface under it is level."
+    ],
+    "explanation_after": "No gradient means no direction to step, so learning stalls wherever it is. A low loss would mean success; a high loss with no gradient means a flat region — which is why momentum, better initialisation and non-saturating activations exist."
+  },
+
   {
     "id": "p2_eval_prob_evaluate",
     "phase": "phase_2_cs_data",
     "skill_id": "p2_probability_basics",
     "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "A spam classifier outputs a probability that an email is spam. For a high-stakes work inbox where missing an important email is costly, is it better to set the 'spam' decision threshold at 0.5 (default) or higher (e.g. 0.9), and why?",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "A spam classifier outputs a probability. For a work inbox where missing an important email is costly, is a threshold of 0.5 or 0.9 better, and why?",
     "options": [
-      { "id": "a", "text": "0.5, because that's always the mathematically correct threshold" },
-      { "id": "b", "text": "Higher (e.g. 0.9), because it makes the classifier only flag emails it's very confident about as spam, reducing the risk of an important email being wrongly hidden — at the cost of letting more borderline spam through" },
-      { "id": "c", "text": "It makes no difference what threshold is chosen" },
-      { "id": "d", "text": "Lower than 0.5, to catch as much spam as possible regardless of consequences" }
+      { "id": "a", "text": "0.5, because it is the mathematically correct threshold", "misconception": "Treats a default as a derived optimum; 0.5 only follows if both mistakes cost the same." },
+      { "id": "b", "text": "Higher, around 0.9, so only confident cases are hidden — fewer real emails lost, at the price of more spam getting through" },
+      { "id": "c", "text": "It makes no difference what threshold is chosen", "misconception": "Denies the trade-off the threshold exists to set." },
+      { "id": "d", "text": "Lower than 0.5, to catch as much spam as possible", "misconception": "Optimises the cheaper error while making the expensive one more likely." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "The threshold is a real design choice, not a fixed constant — raising it trades some spam-catching ability for fewer false positives (real emails wrongly flagged), which is the right tradeoff when missing a real email is more costly than seeing an extra spam message."
+    "hints": [
+      "Name the two kinds of mistake and ask which one the stem says is costly.",
+      "Ask which way the threshold has to move to make the expensive mistake rarer."
+    ],
+    "explanation_after": "The threshold is a design choice about which error you prefer. Raising it means the classifier hides only what it is sure about — right when a lost email costs more than a nuisance one."
   },
   {
     "id": "p2_eval_ps_evaluate",
@@ -213,15 +559,21 @@
     "skill_id": "p2_problem_solving",
     "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "Faced with a large, confusing bug, one developer immediately starts randomly changing code to see what happens; another first writes down exactly what they expect vs. what's actually happening, then narrows down where the two diverge. Which approach is generally more effective, and why?",
+    "difficulty": "medium",
+    "time_target_sec": 95,
+    "stem": "One developer changes code at random to see what happens; another writes down expected versus actual behaviour and narrows where they diverge. Which is more effective, and why?",
     "options": [
-      { "id": "a", "text": "Randomly changing code, because it's faster to just try things" },
-      { "id": "b", "text": "Narrowing down where expected and actual behavior diverge, because it systematically eliminates possibilities rather than relying on luck, and scales to bugs random changes would never stumble onto" },
-      { "id": "c", "text": "Both approaches are equally effective in every situation" },
-      { "id": "d", "text": "Neither approach works; only rewriting the code from scratch works" }
+      { "id": "a", "text": "Random changes, because trying things is faster", "misconception": "Counts the cost of each attempt but not how many attempts are needed, or what a lucky fix leaves behind." },
+      { "id": "b", "text": "Both are equally effective in every situation", "misconception": "Ignores how each approach scales as the search space grows." },
+      { "id": "c", "text": "Narrowing the divergence, because it eliminates possibilities systematically and scales to bugs guessing would never reach" },
+      { "id": "d", "text": "Neither; rewriting from scratch is the only reliable approach", "misconception": "Discards the evidence a reproducible bug provides, and often reproduces the fault." }
     ],
-    "correct_option_id": "b",
-    "explanation_after": "Systematic problem decomposition — defining expected vs. actual, then narrowing the gap — scales to complex problems in a way random trial-and-error doesn't; it's the same divide-and-conquer thinking used in binary search or debugging by bisection."
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what each approach has learned after ten unsuccessful attempts.",
+      "Consider which one still works when the bug sits in one of ten thousand lines."
+    ],
+    "explanation_after": "Narrowing halves the search space with each check and leaves you understanding the fault. Random changes can stumble onto a fix that hides the cause — and the same bug returns later, in a different shape."
   },
   {
     "id": "p2_eval_np_evaluate",
@@ -229,31 +581,110 @@
     "skill_id": "p2_numpy_basics",
     "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "For adding two lists of one million numbers element-by-element, is a Python for-loop or a NumPy vectorized operation (arr1 + arr2) the better choice, and why?",
+    "difficulty": "medium",
+    "time_target_sec": 95,
+    "stem": "For adding two lists of a million numbers elementwise, is a Python for-loop or a NumPy vectorised operation better, and why?",
     "options": [
-      { "id": "a", "text": "The for-loop, because it gives more precise control over each element" },
-      { "id": "b", "text": "NumPy, because it pushes the loop down into pre-compiled C code operating on contiguous memory, avoiding Python's per-iteration interpreter overhead — dramatically faster at this scale" },
-      { "id": "c", "text": "Both perform identically at any scale" },
-      { "id": "d", "text": "The for-loop, because NumPy cannot handle a million elements" }
+      { "id": "a", "text": "The loop, because it gives more precise control over each element", "misconception": "Values control that the task does not need, and pays for it per element." },
+      { "id": "b", "text": "Both perform identically at any scale", "misconception": "Denies the interpreter overhead that dominates at this size." },
+      { "id": "c", "text": "The loop, because NumPy cannot handle a million elements", "misconception": "Invents a capacity limit; million-element arrays are routine." },
+      { "id": "d", "text": "NumPy, because the loop runs in compiled code over contiguous memory, avoiding Python's per-iteration overhead" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what Python does on every single iteration beyond the arithmetic itself.",
+      "Would your answer change for a list of five numbers? Say why."
+    ],
+    "explanation_after": "A Python loop pays interpreter overhead a million times; NumPy runs the loop in compiled C over packed memory, often tens to hundreds of times faster. For five elements the difference is irrelevant — scale is what makes this a real decision."
+  },
+  {
+    "id": "p2_eval_sort_evaluate",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_sorting_searching",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "You must find one value in an unsorted million-element list, exactly once. A colleague suggests sorting first so binary search can be used. Judge that.",
+    "options": [
+      { "id": "a", "text": "Good idea — binary search is faster than a linear scan, so it always wins", "misconception": "Compares the searches while ignoring the cost of the sort that makes one of them possible." },
+      { "id": "b", "text": "Bad idea for a single lookup: sorting costs more than the scan it saves. It pays off only across many lookups" },
+      { "id": "c", "text": "Bad idea — binary search is not reliable on large lists", "misconception": "Right conclusion, wrong reason; binary search is perfectly reliable on sorted data of any size." },
+      { "id": "d", "text": "Good idea — sorted data uses less memory", "misconception": "Invents a memory benefit; ordering does not change the space the values occupy." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "A Python for-loop pays interpreter overhead on every single iteration. NumPy's vectorized operations run the loop in optimized, compiled C code instead — for a million elements this can be tens to hundreds of times faster, which is exactly why real ML code is built on NumPy/PyTorch rather than raw Python loops."
+    "hints": [
+      "Add up the total work for each plan, including the preparation step.",
+      "Ask how many lookups it would take before the preparation pays for itself."
+    ],
+    "explanation_after": "Sorting is about n log n and a scan is n, so for one lookup sorting costs more than it saves. Across thousands of lookups the sort is amortised and wins easily — which is why databases build indexes once and query many times."
   },
+  {
+    "id": "p2_eval_clean_evaluate",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_data_cleaning_preprocessing",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "40% of rows lack an income value, and the gaps are concentrated among the highest earners. A colleague proposes mean imputation. Assess that.",
+    "options": [
+      { "id": "a", "text": "Fine — mean imputation is the standard approach for missing numbers", "misconception": "Applies a default without checking the assumption it rests on, that values are missing at random." },
+      { "id": "b", "text": "Fine, provided the mean is computed only from the rows that have values", "misconception": "Fixes a detail of the calculation while leaving the systematic bias untouched." },
+      { "id": "c", "text": "Poor: the gaps are not random, so filling with the mean of the rest pulls high earners down and biases the result" },
+      { "id": "d", "text": "Poor — any imputation is invalid, so the rows must be dropped", "misconception": "Over-corrects into a rule; dropping 40% of rows, concentrated at the top, biases the data just as badly." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Imputation assumes something about why the values are missing. Ask whether that holds here.",
+      "Work out what happens to the distribution's top end after the fill."
+    ],
+    "explanation_after": "Mean imputation assumes the gaps are unrelated to the values. Here they are exactly related, so filling with the mean systematically understates high incomes — and dropping the rows loses the same group. The missingness itself is information, and often becomes its own feature."
+  },
+  {
+    "id": "p2_eval_set_evaluate",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_sets_tuples",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "Code checks `if user_id in allowed:` inside a loop over a million events, where `allowed` is a list of 50,000 ids. A colleague suggests making `allowed` a set. Worth it?",
+    "options": [
+      { "id": "a", "text": "No — `in` works the same on both, so nothing changes", "misconception": "Treats identical syntax as identical cost; the two do very different work." },
+      { "id": "b", "text": "Yes: list membership scans, set membership hashes, turning 50,000 comparisons per event into roughly one" },
+      { "id": "c", "text": "No — converting to a set loses data because of de-duplication", "misconception": "Raises a real property of sets that is harmless here, since duplicate allowed ids carry no meaning." },
+      { "id": "d", "text": "Yes, because sets use less memory than lists", "misconception": "Right answer, wrong reason: sets typically use more memory, and buy speed with it." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what each structure has to do to answer the membership question.",
+      "Multiply the per-check cost by a million and compare the two totals."
+    ],
+    "explanation_after": "List membership is a linear scan, set membership is a hash lookup — up to 50,000 comparisons replaced by about one, a million times over. It costs extra memory, which is the trade being made."
+  },
+
   {
     "id": "p2_eval_dict_create",
     "phase": "phase_2_cs_data",
     "skill_id": "p2_dictionaries",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "You need to count how many times each word appears in a list of words. Which code correctly builds that word-count dictionary?",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "You need to count how many times each word appears in a list. Which code builds that correctly?",
     "options": [
       { "id": "a", "text": "counts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1" },
-      { "id": "b", "text": "counts = []\nfor word in words:\n    counts.append(word, 1)" },
-      { "id": "c", "text": "counts = {}\nfor word in words:\n    counts[word] = 1" },
-      { "id": "d", "text": "counts = words.count()" }
+      { "id": "b", "text": "counts = []\nfor word in words:\n    counts.append(word, 1)", "misconception": "Uses a list for keyed data and passes two arguments to `append`, which takes one." },
+      { "id": "c", "text": "counts = {}\nfor word in words:\n    counts[word] = 1", "misconception": "Looks almost right but resets rather than increments, so every count ends at 1." },
+      { "id": "d", "text": "counts = words.count()", "misconception": "`count` needs a value and returns a single number, not a per-word tally." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "counts.get(word, 0) returns the word's current count (or 0 if it's new), and adding 1 correctly increments it each time the word appears. Option (c) looks similar but always resets the count to 1 instead of incrementing — a classic off-by-logic bug."
+    "hints": [
+      "Trace each option with the list ['a', 'a'] and see which gives a count of 2.",
+      "The tricky part is the first time a word appears — ask what the running count should be then."
+    ],
+    "explanation_after": "`counts.get(word, 0)` supplies 0 for a word not yet seen, so `+ 1` works on the first and every later occurrence. Option (c) is the classic near-miss: it assigns where it should accumulate."
   },
   {
     "id": "p2_eval_alg_create",
@@ -261,15 +692,21 @@
     "skill_id": "p2_algorithms_intro",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "You need an algorithm that checks whether a given list of numbers contains any duplicate values. Which approach correctly and efficiently solves this?",
+    "difficulty": "medium",
+    "time_target_sec": 100,
+    "stem": "You need to check whether a list of numbers contains any duplicates. Which approach is both correct and efficient?",
     "options": [
-      { "id": "a", "text": "Convert the list to a set and compare its length to the original list's length — if they differ, duplicates exist" },
-      { "id": "b", "text": "Sort the list and check if it's still in the same order" },
-      { "id": "c", "text": "Add 1 to every number and check if any are equal" },
-      { "id": "d", "text": "It's impossible to check for duplicates without comparing every pair manually" }
+      { "id": "a", "text": "Sort the list and check whether it is still in the original order", "misconception": "Detects whether the input was already sorted, which has nothing to do with duplicates." },
+      { "id": "b", "text": "Add 1 to every number and check whether any are equal", "misconception": "Shifts every value by the same amount, which changes nothing about equality." },
+      { "id": "c", "text": "Convert to a set and compare its length with the original list's length" },
+      { "id": "d", "text": "It is impossible without comparing every pair", "misconception": "Rules out the structural shortcut that makes this linear instead of quadratic." }
     ],
-    "correct_option_id": "a",
-    "explanation_after": "A set automatically drops duplicate values, so if converting to a set shrinks the length, the original list had duplicates. This runs in roughly O(n) time — far better than comparing every pair of elements (O(n²))."
+    "correct_option_id": "c",
+    "hints": [
+      "Ask which built-in structure already refuses to hold the same value twice.",
+      "If some values vanished during a conversion, what would that tell you?"
+    ],
+    "explanation_after": "A set drops duplicates, so a drop in length proves there were some. This is roughly O(n) against the O(n²) of comparing every pair — and sorting first would be an acceptable O(n log n) middle ground."
   },
   {
     "id": "p2_eval_np_create",
@@ -277,14 +714,86 @@
     "skill_id": "p2_numpy_basics",
     "bloom_level": "create",
     "format": "mcq",
-    "stem": "You have a NumPy array of exam scores and need a new array containing only the scores of 60 or above. Which code correctly builds that?",
+    "difficulty": "medium",
+    "time_target_sec": 95,
+    "stem": "You have a NumPy array of exam scores and need a new array of only the scores of 60 or above. Which code builds it?",
     "options": [
-      { "id": "a", "text": "passing = scores[scores >= 60]" },
-      { "id": "b", "text": "passing = scores.remove(scores < 60)" },
-      { "id": "c", "text": "passing = scores >= 60" },
-      { "id": "d", "text": "passing = scores[0:60]" }
+      { "id": "a", "text": "passing = scores.remove(scores < 60)", "misconception": "NumPy arrays have no `remove`, and passing a boolean array to one would not filter in place." },
+      { "id": "b", "text": "passing = scores >= 60", "misconception": "Produces the boolean mask itself rather than the values it selects — the most common near-miss." },
+      { "id": "c", "text": "passing = scores[0:60]", "misconception": "Slices by position rather than selecting by value." },
+      { "id": "d", "text": "passing = scores[scores >= 60]" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Work out what `scores >= 60` evaluates to on its own, then ask what you can do with that.",
+      "The answer uses the result of the comparison as an index."
+    ],
+    "explanation_after": "`scores >= 60` gives a boolean array, and indexing with it returns the elements where it is True. Boolean masking is the NumPy idiom that replaces the filtering loop entirely."
+  },
+  {
+    "id": "p2_eval_rec_create",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_recursion",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "Design a recursive function that counts files in a folder tree, where a folder contains files and other folders. Which structure is right?",
+    "options": [
+      { "id": "a", "text": "Count the files directly in this folder, then add the result of calling the function on each subfolder" },
+      { "id": "b", "text": "Call the function on each subfolder first, and stop as soon as one returns a non-zero count", "misconception": "Stops early, so every folder after the first non-empty one is never counted." },
+      { "id": "c", "text": "Call the function on the folder itself until it returns the same value twice", "misconception": "Recurses on the unchanged input, so it never reaches a smaller problem and never terminates." },
+      { "id": "d", "text": "Count the files in this folder and return, ignoring subfolders", "misconception": "Has a base case but no recursion, so it only ever sees the top level." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "scores >= 60 produces a boolean array (True/False per element), and using that boolean array to index scores[...] returns only the elements where the condition was True — this is NumPy's boolean-mask filtering pattern. Option (c) alone just gives the True/False mask, not the filtered values."
+    "hints": [
+      "A recursion needs two things: a smaller version of the same problem, and a case that stops.",
+      "Ask what naturally happens with this structure when a folder contains no subfolders at all."
+    ],
+    "explanation_after": "Each call handles its own level and delegates the rest to smaller calls. A folder with no subfolders simply adds nothing, which is the base case arriving for free — a sign the shape is right."
+  },
+  {
+    "id": "p2_eval_lf_create",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_linear_functions",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "You need to rescale a column of values so the smallest becomes 0 and the largest becomes 1. Which formula does that?",
+    "options": [
+      { "id": "a", "text": "(x - mean) / standard deviation", "misconception": "Standardises to mean 0 and spread 1 — useful, but it does not put the extremes at 0 and 1." },
+      { "id": "b", "text": "x / max", "misconception": "Puts the largest at 1 but leaves the smallest wherever it was, unless it happened to be 0." },
+      { "id": "c", "text": "(x - min) / (max - min)" },
+      { "id": "d", "text": "(x - max) / (max - min)", "misconception": "Shifts by the wrong end, producing a range from -1 to 0." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Substitute the minimum value for x and check you get 0, then do the same with the maximum and 1.",
+      "Two steps are needed: move the bottom to zero, then shrink the span to one."
+    ],
+    "explanation_after": "Subtracting the minimum puts the bottom at 0; dividing by the span puts the top at 1. Testing a formula at its endpoints is the quickest way to tell min-max scaling from standardisation."
+  },
+  {
+    "id": "p2_eval_mat_create",
+    "phase": "phase_2_cs_data",
+    "skill_id": "p2_math_matrices",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "A layer turns 10 input features into 4 outputs, and you want to process 32 samples at once. How should the data and weights be shaped?",
+    "options": [
+      { "id": "a", "text": "Data (10, 32), weights (10, 4), giving (10, 4)", "misconception": "Puts features before samples, so the multiplication no longer lines features up with weights." },
+      { "id": "b", "text": "Data (32, 10) times weights (10, 4), giving (32, 4)" },
+      { "id": "c", "text": "Data (32, 10), weights (4, 10), giving (32, 4)", "misconception": "Gets the output shape right by guesswork, but these shapes cannot legally multiply in this order." },
+      { "id": "d", "text": "Loop over the 32 samples, multiplying each (1, 10) by (10, 4)", "misconception": "Correct arithmetic, but it discards the batching the question asks for and runs far slower." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Write the shapes you want at each end first, then work out what must sit between them.",
+      "The inner dimensions must match — check which number the features have to meet."
+    ],
+    "explanation_after": "Samples first, features second: (32, 10) × (10, 4) = (32, 4), one row of outputs per sample. This is why the whole batch goes through in one operation instead of a loop — the same reason GPUs suit the work."
   }
 ]

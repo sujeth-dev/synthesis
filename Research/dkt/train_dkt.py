@@ -43,6 +43,10 @@ NUM_EPOCHS = 8
 GRAD_CLIP = 5.0
 PAD_VALUE = 0
 SEED = 42
+# Epochs without a validation-AUC improvement before early stopping gives up.
+# 3, matching dkt-lab/pipeline/dkt.py, whose experiments this file's options
+# are ported from.
+PATIENCE = 3
 
 
 class DKTModel(nn.Module):
@@ -123,6 +127,25 @@ def encode_batch(batch: list, num_skills: int):
     )
 
 
+def encode_current(batch: list, num_skills: int):
+    """The (skill, answer) of the interaction fed *in* at each step, in the
+    same padded shape encode_batch's targets use.
+
+    encode_batch's target at step t is interaction t+1 -- what DKT predicts.
+    DKT+'s reconstruction term instead scores the model on the answer it has
+    just consumed at step t, so it needs the current pair as well.
+    """
+    lengths = [len(skills) - 1 for skills, _ in batch]
+    max_len = max(lengths)
+    current_skill = np.full((len(batch), max_len), PAD_VALUE, dtype=np.int64)
+    current_correct = np.zeros((len(batch), max_len), dtype=np.float32)
+    for i, (skills, corrects) in enumerate(batch):
+        L = lengths[i]
+        current_skill[i, :L] = skills[:L]
+        current_correct[i, :L] = corrects[:L]
+    return torch.from_numpy(current_skill), torch.from_numpy(current_correct)
+
+
 def masked_bce_loss(predictions: torch.Tensor, target_skill: torch.Tensor, target_correct: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
     """predictions: (batch, T, num_skills). Gathers the predicted probability
     for the actually-practiced next skill at each timestep, then computes
@@ -154,9 +177,28 @@ def predict_and_collect(model: DKTModel, sequences: list, num_skills: int):
     return all_actual, all_predicted
 
 
-def train(model: DKTModel, train_sequences: list, val_sequences: list, num_skills: int) -> None:
+def train(
+    model: DKTModel,
+    train_sequences: list,
+    val_sequences: list,
+    num_skills: int,
+    lambda_r: float = 0.0,
+    early_stopping: bool = False,
+) -> list:
+    """Trains in place and returns the per-epoch history.
+
+    Both options default off, so the ASSISTments run in main() is unchanged.
+      lambda_r       DKT+ reconstruction weight (Yeung & Yeung, 2018): BCE on
+                     the answer the model has just consumed, added to the
+                     next-step BCE. dkt-lab/FINDINGS-CURVES.md measured 0.1 as
+                     the one setting that improves cohort-curve growth fidelity
+                     across datasets without costing AUC.
+      early_stopping restores the epoch with the best validation AUC instead of
+                     keeping the last one.
+    """
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
     rng = np.random.default_rng(SEED)
+    history, best_auc, best_state, bad_epochs = [], -1.0, None, 0
 
     for epoch in range(NUM_EPOCHS):
         model.train()
@@ -171,6 +213,9 @@ def train(model: DKTModel, train_sequences: list, val_sequences: list, num_skill
             optimizer.zero_grad()
             preds = model(x)
             loss = masked_bce_loss(preds, target_skill, target_correct, mask)
+            if lambda_r:
+                current_skill, current_correct = encode_current(batch, num_skills)
+                loss = loss + lambda_r * masked_bce_loss(preds, current_skill, current_correct, mask)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), GRAD_CLIP)
             optimizer.step()
@@ -180,9 +225,22 @@ def train(model: DKTModel, train_sequences: list, val_sequences: list, num_skill
 
         val_actual, val_predicted = predict_and_collect(model, val_sequences, num_skills)
         val_auc = roc_auc_score(val_actual, val_predicted) if len(set(val_actual)) > 1 else float("nan")
-        print(
-            f"epoch {epoch + 1}/{NUM_EPOCHS}  train_loss={total_loss / max(n_batches, 1):.4f}  val_auc={val_auc:.4f}"
-        )
+        train_loss = total_loss / max(n_batches, 1)
+        history.append({"epoch": epoch + 1, "train_loss": train_loss, "val_auc": float(val_auc)})
+        print(f"epoch {epoch + 1}/{NUM_EPOCHS}  train_loss={train_loss:.4f}  val_auc={val_auc:.4f}")
+
+        if val_auc > best_auc + 1e-5:
+            best_auc, bad_epochs = val_auc, 0
+            best_state = {k: v.clone() for k, v in model.state_dict().items()}
+        else:
+            bad_epochs += 1
+            if early_stopping and bad_epochs >= PATIENCE:
+                print(f"early stopping after epoch {epoch + 1}; best val_auc={best_auc:.4f}")
+                break
+
+    if early_stopping and best_state is not None:
+        model.load_state_dict(best_state)
+    return history
 
 
 def main() -> None:

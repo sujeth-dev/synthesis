@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "predict_proba",
     "explanation_after": "The correct choice is predict_proba."
+  },
+  {
+    "id": "p4_logistic_regression_explain1",
+    "skill_id": "p4_logistic_regression",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “A Score That Must Become a Chance” story, explain Logistic Regression without assuming the listener knows machine learning.",
+    "explanation_after": "Logistic regression bends the score through an S-shaped gate. The result can be read as the model’s estimated probability of the positive class."
   }
 ]

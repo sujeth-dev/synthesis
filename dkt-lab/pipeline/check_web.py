@@ -7,7 +7,7 @@ import json
 import os
 import sys
 
-from export import RESULTS_DIR, WEB_DATA, available
+from export import APP_RESULTS, REPO, RESULTS_DIR, WEB_DATA, app_result_dest, available
 
 
 def load(path):
@@ -21,7 +21,7 @@ def main() -> int:
         res = load(os.path.join(RESULTS_DIR, f"{name}.json"))
         web_stats = load(os.path.join(WEB_DATA, name, "stats.json"))
         pairs = [("stats", web_stats["stats"])]
-        for part in ("metrics", "curves", "heatmap", "samples", "bkt_params"):
+        for part in ("metrics", "curves", "heatmap", "samples", "bkt_params", "diagnostics"):
             p = os.path.join(WEB_DATA, name, f"{part}.json")
             if part in res:
                 pairs.append((part, load(p) if os.path.exists(p) else None))
@@ -36,6 +36,11 @@ def main() -> int:
             w = os.path.join(WEB_DATA, extra)
             if not os.path.exists(w) or load(w) != load(r):
                 problems.append(f"{extra} differs")
+    for source in APP_RESULTS:
+        checked += 1
+        copy = app_result_dest(source)
+        if not os.path.exists(copy) or load(copy) != load(os.path.join(REPO, source)):
+            problems.append(f"app/{os.path.basename(source)} differs from {source}")
     for p in problems:
         print("MISMATCH:", p)
     print(f"checked {checked} files: {'OK' if not problems else f'{len(problems)} mismatches'}")

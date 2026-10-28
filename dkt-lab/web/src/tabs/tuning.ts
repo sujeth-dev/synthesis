@@ -82,4 +82,5 @@ export function renderTuning(root: HTMLElement, t: Tuning): void {
     root.append(h('div.card', { style: { marginTop: '14px' } }, h('h3', 'Next steps, ranked by expected gain'), h('ol', t.next_steps.map(s => h('li', h('strong', s.step), ` — expected gain: ${s.expected_gain}. `, h('span.muted', `Evidence: ${s.evidence}`))))))
   }
   if (t.app_export) root.append(h('p.note', t.app_export.note))
+  if (t.app_export) root.append(h('p.note', 'Update: the note above is the tuning run’s own and is generated, so it is left as written. Since then the app’s bundled DKT was retrained with the lab’s recommended reconstruction setting (lambda_r 0.1); it still does not meet the gate. See the Synaptic app tab.'))
 }

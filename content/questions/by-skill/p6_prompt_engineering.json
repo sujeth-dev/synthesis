@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "examples",
     "explanation_after": "The correct choice is examples."
+  },
+  {
+    "id": "p6_prompt_engineering_explain1",
+    "skill_id": "p6_prompt_engineering",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Turn a Vague Request into a Work Order,” explain Prompt Engineering without assuming the listener knows modern AI.",
+    "explanation_after": "A good prompt states the task, supplies relevant context, names constraints, and describes the expected output."
   }
 ]

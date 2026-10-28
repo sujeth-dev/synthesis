@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "form the server request",
     "explanation_after": "Start with form the server request."
+  },
+  {
+    "id": "p7_ai_apis_explain1",
+    "skill_id": "p7_ai_apis",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Call a Model Without Hosting It” to explain AI APIs & Production plainly.",
+    "explanation_after": "An API is a documented way for programs to exchange requests and responses. Your server sends input and receives model output."
   }
 ]

@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p5_activation_functions": 1
     }
+  },
+  {
+    "id": "p5_activation_functions_explain1",
+    "skill_id": "p5_activation_functions",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “A Gate Between Layers” situation, explain Activation Functions without assuming the listener knows deep learning.",
+    "explanation_after": "An activation function bends each layer’s numbers before passing them on. That bend lets later layers combine signals into curved and detailed rules."
   }
 ]

@@ -1,0 +1,30 @@
+{
+  "synthetic": true,
+  "learners": 300,
+  "seed": 9001,
+  "attempts": 95885,
+  "provenance": {
+    "fitted_at": "2026-10-22T11:34:25Z",
+    "learners": 2000,
+    "min_sequences": 5,
+    "rows": 648609,
+    "source": "Research/sim/output/sm2_events.csv",
+    "synthetic": true
+  },
+  "fittedSkills": 62,
+  "live": {
+    "auc": 0.7183775898753112,
+    "logLoss": 0.6093706447052311,
+    "slope": 0.04731184486545331,
+    "slopeRatio": 0.8665570764600697
+  },
+  "fitted": {
+    "auc": 0.7292531418352974,
+    "logLoss": 0.5898293724132452,
+    "slope": 0.04706783458668362,
+    "slopeRatio": 0.8620878186156928
+  },
+  "observedSlope": 0.054597494095512594,
+  "cohortPairs": 4542,
+  "curvePoints": 10
+}

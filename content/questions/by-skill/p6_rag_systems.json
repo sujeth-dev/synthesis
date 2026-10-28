@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "retrieve",
     "explanation_after": "The correct choice is retrieve."
+  },
+  {
+    "id": "p6_rag_systems_explain1",
+    "skill_id": "p6_rag_systems",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Let the Model Open the Right Book,” explain RAG Systems without assuming the listener knows modern AI.",
+    "explanation_after": "RAG first retrieves relevant source passages, then includes them as context for generation. The answer can be grounded in material the application controls."
   }
 ]

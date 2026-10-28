@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p6_self_attention_and_multihead": 1
     }
+  },
+  {
+    "id": "p6_self_attention_and_multihead_explain1",
+    "skill_id": "p6_self_attention_and_multihead",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Several Readers, Different Highlighters,” explain Self-Attention & Multiple Heads without assuming the listener knows modern AI.",
+    "explanation_after": "Self-attention lets positions in a sequence consult that same sequence. Multiple heads repeat the process with different learned projections."
   }
 ]

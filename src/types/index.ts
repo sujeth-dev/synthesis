@@ -1,3 +1,7 @@
+// ExplanationCategory is owned by the classifier that produces it; this file
+// re-uses it rather than restating the union.
+import type { ExplanationCategory } from '@/lib/feynman/classifier'
+
 export type MasteryState = 'blocked' | 'ready' | 'learning' | 'fragile' | 'mastered'
 export type DifficultyTier = 'prerequisite' | 'review' | 'same' | 'harder'
 export type QuestionFormat = 'mcq' | 'fill' | 'explain' | 'code' | 'order'
@@ -41,11 +45,39 @@ export interface Question {
 // tracking, distinct from per-skill BKT tracking). Always MCQ, always tied
 // to one skill_id so it flows through the existing insertAttempt()/BKT path
 // unchanged. See MASTER_PLAN.md's BLOOM-2..6.
+export type QuestionDifficulty = 'easy' | 'medium' | 'hard'
+
+export interface PhaseEvaluationOption {
+  id: string; text: string
+  /**
+   * Why a learner who knows something would still pick this one. Present on
+   * every distractor and absent on the correct option, so the debrief can name
+   * what went wrong instead of only saying "incorrect" (Narciss's Knowledge
+   * about Mistakes, as opposed to Knowledge of Result).
+   */
+  misconception?: string
+}
+
 export interface PhaseEvaluationQuestion {
   id: string; phase: Phase; skill_id: string; bloom_level: BloomLevel
   format: 'mcq'; stem: string
-  options: { id: string; text: string }[]; correct_option_id: string
+  options: PhaseEvaluationOption[]; correct_option_id: string
   explanation_after: string
+  /** Cold-start band for the Elo rating and for the exam's item choice. */
+  difficulty: QuestionDifficulty
+  /**
+   * Exactly two, in order: a nudge, then how to proceed. Never the answer —
+   * a bottom-out hint turns into a worked example a learner can click straight
+   * through to (Baker et al. 2004; Shih, Koedinger & Scheines 2008), which is
+   * why the validator rejects a hint containing the correct option's text.
+   * Shown in Practice mode only.
+   */
+  hints: [string, string]
+  /**
+   * What a prepared learner should need, in seconds. Drives the pace
+   * indicator and the debrief, never a per-item cut-off.
+   */
+  time_target_sec: number
 }
 
 export interface BuildTask {
@@ -100,6 +132,103 @@ export interface DktShadowLogEntry {
   id: string; learner_id: string; skill_id: string; attempt_id: string
   dkt_p_correct: number; bkt_p_correct: number; correct: boolean
   history_length: number; model_synthetic: boolean
+  created_at: string
+}
+
+// One row per attempt (Level 11): the live scheduling quality beside the
+// behaviour-aware one, with the signals that produced both. Observational
+// unless ADAPTIVE_QUALITY=1 — see src/lib/sm2/adaptive.ts.
+export interface BehaviorQualityShadowEntry {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  correct: boolean; latency_ms: number; hesitation_ms: number
+  revision_count: number; guided_reflection: boolean
+  live_quality: number; adaptive_quality: number
+  live_fsrs_rating: number; adaptive_fsrs_rating: number
+  live_interval_days: number; adaptive_interval_days: number
+  applied: boolean
+  created_at: string
+}
+
+// One row per served task (SCORE-3): what the rule cascade chose beside what
+// the multi-metric score would have chosen, for the same pool. `applied` stays
+// false until LIVE-1. See src/lib/session/shadow.ts.
+export interface SelectionShadowEntry {
+  id: string; learner_id: string; session_id: string | null
+  branch: string
+  rule_skill_id: string | null; rule_reason: string | null; rule_tier: string | null
+  score_skill_id: string | null; score_value: number | null; score_reason: string | null
+  /** What the score made of the cascade's own pick — the readable half of a disagreement. */
+  rule_score_value: number | null
+  tied: boolean
+  agreed: boolean; explored: boolean; candidate_count: number
+  terms: unknown; runners_up: unknown
+  applied: boolean
+  created_at: string
+}
+
+// One row per question (SCORE-1): the difficulty every learner's answers imply,
+// which no authored field measures. Global on purpose — pooling the answers is
+// what makes it converge. See src/lib/elo.
+export interface QuestionRating {
+  question_id: string; skill_id: string; phase: Phase
+  rating: number; plays: number
+  updated_at: string
+}
+
+// One row per learner per phase (SCORE-1): ability on the same scale as the
+// question ratings, so expected success is a subtraction.
+export interface LearnerAbility {
+  learner_id: string; phase: Phase
+  rating: number; plays: number
+  updated_at: string
+}
+
+// One row per exam run (EXAM-2). Measurement-only: nothing here feeds BKT,
+// SM-2 or motivation. See src/lib/exam and migration 011.
+export interface ExamRun {
+  id: string; learner_id: string; phase: Phase
+  mode: 'practice' | 'checkpoint'
+  status: 'active' | 'finished'
+  started_at: string; deadline_at: string | null; finished_at: string | null
+  stop_reason: string | null
+  theta: number | null; se: number | null; n_items: number | null
+  debrief: unknown
+  created_at: string
+}
+
+// One row per item served in a run (EXAM-2), holding the final answer.
+export interface ExamItemEvent {
+  id: string; run_id: string; learner_id: string
+  question_id: string; skill_id: string; bloom_level: BloomLevel
+  position: number; rating: number; time_target_sec: number
+  served_at: string
+  selected_option_id: string | null; correct: boolean | null
+  latency_ms: number | null; answered_at: string | null
+  hint_level: number; last_hint_at: string | null; hint_abuse: boolean
+  marked: boolean
+  created_at: string
+}
+
+// One row per attempt (Level 16): the p_know the live global-parameter BKT
+// produced beside the one a per-skill fitted parameter set would have, with
+// both parameter sets, so the two can be compared on real outcomes.
+export interface BktParamShadowEntry {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  correct: boolean; p_know_before: number
+  live_p_know_after: number; live_p_transit: number; live_p_slip: number; live_p_guess: number
+  fitted_p_know_after: number; fitted_p_transit: number; fitted_p_slip: number; fitted_p_guess: number
+  has_fitted_params: boolean; applied: boolean; params_synthetic: boolean
+  created_at: string
+}
+
+// One row per free-text attempt (Level 10): the learner's explanation and the
+// grade the engine consumed for it, with the provenance a grade audit needs.
+export interface ExplanationGrade {
+  id: string; learner_id: string; skill_id: string; attempt_id: string
+  explanation_text: string; prior_explanation_text: string | null
+  category: ExplanationCategory; confidence: number; reasoning_quality: number
+  rationale: string | null; prompt_version: string; served_by: string
+  from_cache: boolean; grader_latency_ms: number
   created_at: string
 }
 

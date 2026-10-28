@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "create a request trace id",
     "explanation_after": "Start with create a request trace id."
+  },
+  {
+    "id": "p7_monitoring_observability_explain1",
+    "skill_id": "p7_monitoring_observability",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Know Which Station Failed” to explain Monitoring & Observability plainly.",
+    "explanation_after": "Logs record events, metrics summarize trends, and traces connect the steps of one request. Together they make the route inspectable."
   }
 ]

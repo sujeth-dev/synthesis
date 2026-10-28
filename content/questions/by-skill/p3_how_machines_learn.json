@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "With small batch sizes, especially true SGD with batch size 1, each step's gradient is only a noisy estimate of the gradient over the full dataset, so per-step fluctuation is normal and even helpful for escaping shallow minima. The real warning sign of too high a learning rate is the loss oscillating wildly or trending upward over time — not simple step-to-step noise on an overall downward trend."
+  },
+  {
+    "id": "p3_how_machines_learn_explain1",
+    "skill_id": "p3_how_machines_learn",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain machine learning to someone with zero technical background. Use the cat example. What are the 'weights'? What does 'training' mean? What happens to the weights when the machine gets an answer wrong?",
+    "explanation_after": "A machine 'learns' by making guesses, checking if they're right, then adjusting its internal numbers to do better next time — over and over, millions of times."
   }
 ]

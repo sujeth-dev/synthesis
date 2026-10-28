@@ -1,506 +1,799 @@
 [
   {
     "id": "p8_eval_remember_1",
+    "phase": "phase_8_mastery",
     "skill_id": "p8_system_design_ai",
+    "bloom_level": "remember",
     "format": "mcq",
-    "stem": "AI System Design: which statement is correct?",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "In an AI system design, what is the inference path?",
     "options": [
-      {
-        "id": "a",
-        "text": "AI system design covers the complete route around a model."
-      },
-      {
-        "id": "b",
-        "text": "Choosing the largest model completes the entire system design."
-      },
-      {
-        "id": "c",
-        "text": "A successful demo proves every dependency is reliable."
-      },
-      {
-        "id": "d",
-        "text": "Production results need no record of their configuration version."
-      }
+      { "id": "a", "text": "The sequence a live request travels: input, preprocessing, model, post-processing, response" },
+      { "id": "b", "text": "The pipeline that trains and retrains the model", "misconception": "Describes the training path, which runs offline on a different schedule." },
+      { "id": "c", "text": "The route data takes from source systems into the warehouse", "misconception": "Describes data ingestion, upstream of both training and serving." },
+      { "id": "d", "text": "The process of labelling data for supervised learning", "misconception": "Describes annotation, which produces training data rather than serving requests." }
     ],
     "correct_option_id": "a",
-    "explanation_after": "AI system design covers the complete route around a model.",
-    "phase": "phase_8_mastery",
-    "bloom_level": "remember"
+    "hints": [
+      "Ask which path has a user waiting at the end of it.",
+      "One path runs per request; the others run on a schedule."
+    ],
+    "explanation_after": "The inference path is everything a live request passes through, and its latency is what users feel. Keeping it separate from the training path is the first structural decision in most AI system designs."
   },
   {
     "id": "p8_eval_remember_2",
-    "skill_id": "p8_scaling_ai_systems",
-    "format": "mcq",
-    "stem": "Scaling AI Systems: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Scaling starts by locating the real bottleneck."
-      },
-      {
-        "id": "b",
-        "text": "Adding random servers always removes the bottleneck."
-      },
-      {
-        "id": "c",
-        "text": "Every AI request consumes equal compute."
-      },
-      {
-        "id": "d",
-        "text": "Average traffic alone proves burst capacity."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Scaling starts by locating the real bottleneck.",
     "phase": "phase_8_mastery",
-    "bloom_level": "remember"
+    "skill_id": "p8_scaling_ai_systems",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "What is throughput, as distinct from latency?",
+    "options": [
+      { "id": "a", "text": "The time a single request takes end to end", "misconception": "That is latency; throughput counts requests rather than timing one." },
+      { "id": "b", "text": "How many requests the system completes per unit of time" },
+      { "id": "c", "text": "The proportion of requests that succeed", "misconception": "Describes a success or availability rate." },
+      { "id": "d", "text": "The maximum size of a single request", "misconception": "Describes a payload limit, unrelated to rate." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "One measures a single request; the other measures the system as a whole.",
+      "Ask which one batching improves and which one it can make worse."
+    ],
+    "explanation_after": "Latency times one request; throughput counts them per second. Batching raises throughput while often raising latency too, which is why serving systems have to state which they are optimising."
   },
   {
     "id": "p8_eval_remember_3",
-    "skill_id": "p8_mlops",
-    "format": "mcq",
-    "stem": "MLOps: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "MLOps covers the model lifecycle beyond code deployment."
-      },
-      {
-        "id": "b",
-        "text": "MLOps means copying the newest model file into production."
-      },
-      {
-        "id": "c",
-        "text": "Scheduled retraining makes data validation unnecessary."
-      },
-      {
-        "id": "d",
-        "text": "A model name alone proves which data produced it."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "MLOps covers the model lifecycle beyond code deployment.",
     "phase": "phase_8_mastery",
-    "bloom_level": "remember"
+    "skill_id": "p8_mlops",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "What does a model registry hold?",
+    "options": [
+      { "id": "a", "text": "The raw training data for each experiment", "misconception": "Describes a data store or lake; the registry tracks models, not datasets." },
+      { "id": "b", "text": "Live metrics from the serving fleet", "misconception": "Describes monitoring infrastructure." },
+      { "id": "c", "text": "The source code of the training pipeline", "misconception": "Describes version control, which tracks code rather than trained artifacts." },
+      { "id": "d", "text": "Versioned model artifacts with their metadata, lineage and deployment stage" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what you need in order to answer 'which model is in production, and what produced it?'",
+      "It is to trained models what a package registry is to libraries."
+    ],
+    "explanation_after": "The registry records which artifact exists, what data and code produced it, and which stage it is in. Without it, 'which model served that prediction last March' has no answer."
   },
   {
-    "id": "p8_eval_understand_1",
+    "id": "p8_eval_agent_remember",
+    "phase": "phase_8_mastery",
     "skill_id": "p8_multi_agent_systems",
+    "bloom_level": "remember",
     "format": "mcq",
-    "stem": "Multi-Agent Systems: which statement is correct?",
+    "difficulty": "easy",
+    "time_target_sec": 40,
+    "stem": "In a multi-agent system, what is an orchestrator?",
     "options": [
-      {
-        "id": "a",
-        "text": "Adding more agents always improves every task."
-      },
-      {
-        "id": "b",
-        "text": "Roles need explicit inputs, outputs, tools, and stopping rules."
-      },
-      {
-        "id": "c",
-        "text": "Conversational memory replaces structured workflow state."
-      },
-      {
-        "id": "d",
-        "text": "Every agent should receive all available permissions."
-      }
+      { "id": "a", "text": "The component that routes work between agents and decides what runs next" },
+      { "id": "b", "text": "The largest model in the system", "misconception": "Confuses a structural role with model size; an orchestrator can be small or rule-based." },
+      { "id": "c", "text": "The database shared between agents", "misconception": "Describes shared state, not the component directing control flow." },
+      { "id": "d", "text": "The user interface the agents present", "misconception": "Describes the presentation layer rather than coordination." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask which part decides the order of work rather than doing the work.",
+      "Think about a conductor rather than a player."
+    ],
+    "explanation_after": "The orchestrator holds control flow: which agent runs, with what input, and when the work is done. Making that explicit is what separates a designed system from a set of models calling each other."
+  },
+  {
+    "id": "p8_eval_bias_remember",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_ai_ethics_bias",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 45,
+    "stem": "What does demographic parity require of a model?",
+    "options": [
+      { "id": "a", "text": "Equal accuracy across groups", "misconception": "Describes a different fairness criterion; parity is about selection rates, not correctness." },
+      { "id": "b", "text": "That the model never uses demographic attributes as features", "misconception": "Describes fairness through unawareness, which proxies defeat and which parity does not require." },
+      { "id": "c", "text": "Equal false-negative rates across groups", "misconception": "Describes equal opportunity, another distinct criterion." },
+      { "id": "d", "text": "That the proportion receiving a positive outcome is the same across groups" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "The word parity points at a rate being equal. Ask which rate.",
+      "This definition says nothing about whether the predictions are correct."
+    ],
+    "explanation_after": "Demographic parity equalises the rate of positive outcomes, regardless of accuracy. Several fairness definitions are mutually incompatible when base rates differ, so naming which one you mean is unavoidable."
+  },
+  {
+    "id": "p8_eval_align_remember",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "bloom_level": "remember",
+    "format": "mcq",
+    "difficulty": "easy",
+    "time_target_sec": 45,
+    "stem": "What does RLHF stand for, and what is it used for?",
+    "options": [
+      { "id": "a", "text": "Recursive Learning for Hierarchical Features — building layered representations", "misconception": "Invented expansion; the term is about feedback, not architecture." },
+      { "id": "b", "text": "Reinforcement Learning from Human Feedback — training a model toward outputs people prefer" },
+      { "id": "c", "text": "Regularised Linear Hyperparameter Fitting — tuning model settings", "misconception": "Invented expansion unrelated to the term." },
+      { "id": "d", "text": "Rapid Learning with Frozen weights — efficient fine-tuning", "misconception": "Describes something closer to parameter-efficient tuning, under the wrong name." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Roles need explicit inputs, outputs, tools, and stopping rules.",
+    "hints": [
+      "The middle two letters are the familiar branch of machine learning that uses rewards.",
+      "The last two words say where the reward signal comes from."
+    ],
+    "explanation_after": "RLHF trains a reward model from human preference comparisons, then optimises the model against it. It is the main reason a pretrained model becomes a usable assistant rather than a text continuation engine."
+  },
+
+  {
+    "id": "p8_eval_understand_1",
     "phase": "phase_8_mastery",
-    "bloom_level": "understand"
+    "skill_id": "p8_multi_agent_systems",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "Why can a multi-agent system be less reliable than a single well-prompted model?",
+    "options": [
+      { "id": "a", "text": "Because agents cannot share information with each other", "misconception": "They can and do; the problem is what happens to information as it passes along." },
+      { "id": "b", "text": "Because each handoff can lose or distort context, and per-step error rates compound along the chain" },
+      { "id": "c", "text": "Because multiple agents always cost more than one", "misconception": "Cost is a real concern but is not a reliability argument." },
+      { "id": "d", "text": "Because agents must all use the same model", "misconception": "They need not, and heterogeneity is often the point." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "If each step is 95% reliable, work out the reliability of five steps in sequence.",
+      "Ask what happens to a detail that step 2 omits from its summary for step 3."
+    ],
+    "explanation_after": "Five steps at 95% each give about 77% end to end, and every handoff is a chance to drop context. More agents is not more capability by default, which is why the simplest structure that works is usually the right one."
   },
   {
     "id": "p8_eval_understand_2",
-    "skill_id": "p8_ai_ethics_bias",
-    "format": "mcq",
-    "stem": "AI Ethics & Bias: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "High average accuracy proves equal treatment."
-      },
-      {
-        "id": "b",
-        "text": "Overall accuracy can hide unequal group harm."
-      },
-      {
-        "id": "c",
-        "text": "Historical labels are always neutral truth."
-      },
-      {
-        "id": "d",
-        "text": "Writing a broad value statement completes governance."
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "Overall accuracy can hide unequal group harm.",
     "phase": "phase_8_mastery",
-    "bloom_level": "understand"
+    "skill_id": "p8_ai_ethics_bias",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "Why does removing a protected attribute from the features often fail to remove bias?",
+    "options": [
+      { "id": "a", "text": "Because the model memorises the attribute from training even after removal", "misconception": "Nothing is retained after removal; the information arrives through other columns." },
+      { "id": "b", "text": "Because bias comes only from the algorithm, not the data", "misconception": "Inverts the usual case, where the data carries the historical pattern." },
+      { "id": "c", "text": "Because the attribute is still present in the test set", "misconception": "Confuses evaluation data with what the model learns from." },
+      { "id": "d", "text": "Because other features correlate with it, so the model reconstructs it from proxies like postcode or purchase history" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Ask what else in the data might predict the removed attribute.",
+      "Consider how much a postcode can say about who someone is."
+    ],
+    "explanation_after": "Rich data is full of proxies, so a model can reconstruct a removed attribute and act on it. This is why fairness through unawareness is not a defence, and why outcomes must be measured per group rather than assumed."
   },
   {
     "id": "p8_eval_understand_3",
+    "phase": "phase_8_mastery",
     "skill_id": "p8_ai_safety_alignment_intro",
+    "bloom_level": "understand",
     "format": "mcq",
-    "stem": "AI Safety & Alignment: which statement is correct?",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "What is reward hacking?",
     "options": [
-      {
-        "id": "a",
-        "text": "A high benchmark score proves complete alignment."
-      },
-      {
-        "id": "b",
-        "text": "A reward can permit harmful shortcuts."
-      },
-      {
-        "id": "c",
-        "text": "One safety prompt removes every misuse path."
-      },
-      {
-        "id": "d",
-        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
-      }
+      { "id": "a", "text": "An attacker modifying the reward function during training", "misconception": "Reads it as a security breach; it is the system's own behaviour." },
+      { "id": "b", "text": "A model finding a way to score highly on the stated objective without achieving what was intended" },
+      { "id": "c", "text": "A model refusing to optimise the reward it was given", "misconception": "Describes a failure to optimise; reward hacking is over-successful optimisation." },
+      { "id": "d", "text": "Training with a reward that is too small to learn from", "misconception": "Describes a weak signal, a different problem entirely." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "A reward can permit harmful shortcuts.",
-    "phase": "phase_8_mastery",
-    "bloom_level": "understand"
+    "hints": [
+      "The optimiser does exactly what you asked. Ask what that means if the measure is imperfect.",
+      "Think about a cleaning robot rewarded for mess it cannot see."
+    ],
+    "explanation_after": "The system optimises the measure, not the intention behind it, so any gap between the two gets exploited. It is Goodhart's law in training form, and the reason reward design is where much alignment work actually happens."
   },
   {
-    "id": "p8_eval_apply_1",
-    "skill_id": "p8_staying_current_with_research",
+    "id": "p8_eval_scale_understand",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_scaling_ai_systems",
+    "bloom_level": "understand",
     "format": "mcq",
-    "stem": "Staying Current with AI Research: which statement is correct?",
+    "difficulty": "medium",
+    "time_target_sec": 70,
+    "stem": "Why does batching improve GPU throughput but often worsen individual latency?",
     "options": [
-      {
-        "id": "a",
-        "text": "The newest paper is automatically the most reliable."
-      },
-      {
-        "id": "b",
-        "text": "A title provides enough evidence for an engineering decision."
-      },
-      {
-        "id": "c",
-        "text": "Fair comparison requires matching data, metrics, and budgets."
-      },
-      {
-        "id": "d",
-        "text": "Bookmark count measures research understanding."
-      }
+      { "id": "a", "text": "Because the GPU processes many inputs in parallel efficiently, but early arrivals wait for the batch to fill" },
+      { "id": "b", "text": "Because batched requests are processed in a random order", "misconception": "Ordering is not the issue; waiting for the batch to form is." },
+      { "id": "c", "text": "Because batching requires extra network round trips", "misconception": "Batching happens server-side and adds no round trips." },
+      { "id": "d", "text": "Because larger batches need a larger model", "misconception": "Model size is unrelated to batch size." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what the first request in a batch is doing while the batch fills up.",
+      "The hardware prefers wide work. Ask what forming wide work costs."
+    ],
+    "explanation_after": "GPUs are far more efficient on wide work, so batching raises total throughput — but the first arrival waits for the rest. The batch window is the explicit dial between the two, which is why continuous batching exists to shrink the wait."
+  },
+  {
+    "id": "p8_eval_mlops_understand",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_mlops",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "Why is reproducibility harder for ML systems than for ordinary software?",
+    "options": [
+      { "id": "a", "text": "Because ML code is written in different languages", "misconception": "Language choice has nothing to do with it." },
+      { "id": "b", "text": "Because models are too large to store", "misconception": "Storage is a cost, not an obstacle to reproducing a result." },
+      { "id": "c", "text": "Because the output depends on data, random seeds, library versions and hardware as well as on the code" },
+      { "id": "d", "text": "Because training is non-deterministic by design", "misconception": "Much of it can be made deterministic; the breadth of inputs is the deeper issue." }
     ],
     "correct_option_id": "c",
-    "explanation_after": "Fair comparison requires matching data, metrics, and budgets.",
+    "hints": [
+      "List everything that would have to be identical for a training run to give the same model twice.",
+      "Pinning the code is not enough. Ask what else varies."
+    ],
+    "explanation_after": "A result depends on the data snapshot, seeds, library and driver versions and sometimes the GPU itself. Reproducing it means versioning all of them, which is why data and model versioning sit at the centre of MLOps."
+  },
+  {
+    "id": "p8_eval_strategy_understand",
     "phase": "phase_8_mastery",
-    "bloom_level": "apply"
+    "skill_id": "p8_ai_product_strategy",
+    "bloom_level": "understand",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 75,
+    "stem": "Why do many AI features work in a demo and fail as products?",
+    "options": [
+      { "id": "a", "text": "Because demo hardware is faster than production hardware", "misconception": "A real but minor factor beside the difference in inputs and expectations." },
+      { "id": "b", "text": "Because a demo shows chosen cases, while a product meets the full distribution including the awkward tail" },
+      { "id": "c", "text": "Because models degrade as soon as they are deployed", "misconception": "Drift is gradual; demo-to-product failure is usually immediate and about coverage." },
+      { "id": "d", "text": "Because users do not understand how to use AI features", "misconception": "Blames the user for a gap between demonstrated and actual conditions." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask who chose the inputs in each setting.",
+      "Think about what fraction of real usage the five demo examples represented."
+    ],
+    "explanation_after": "Demos are curated; products face everything, including the ambiguous and adversarial inputs nobody would demo. That is why an evaluation set drawn from real traffic predicts product success far better than a convincing demonstration."
+  },
+
+  {
+    "id": "p8_eval_apply_1",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_staying_current_with_research",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 85,
+    "stem": "A preprint claims a 40% improvement on a benchmark. What should you check first before acting on it?",
+    "options": [
+      { "id": "a", "text": "Whether the authors are from a well-known institution", "misconception": "Affiliation is not evidence, and judging work by its source rather than its method is exactly the shortcut to avoid." },
+      { "id": "b", "text": "How many citations it has", "misconception": "A new preprint has none regardless of quality, so this cannot discriminate." },
+      { "id": "c", "text": "Whether it was posted recently", "misconception": "Recency says nothing about whether the result holds." },
+      { "id": "d", "text": "What the baseline was, whether it was tuned comparably, and whether the gain holds outside the benchmark" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "A relative improvement is measured against something. Ask what.",
+      "A large gain over a weak or undertuned baseline is a common and honest-looking artefact."
+    ],
+    "explanation_after": "Most inflated gains come from a weak or untuned baseline, and most that survive that check still do not transfer off the benchmark. Checking the comparison is the fastest filter available."
   },
   {
     "id": "p8_eval_apply_2",
-    "skill_id": "p8_case_studies_of_real_systems",
-    "format": "mcq",
-    "stem": "Case Studies of Real AI Systems: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "An architecture diagram proves business success."
-      },
-      {
-        "id": "b",
-        "text": "A famous design should be copied regardless of workload."
-      },
-      {
-        "id": "c",
-        "text": "Public reports may omit costs and failures."
-      },
-      {
-        "id": "d",
-        "text": "A postmortem is complete after blaming one operator."
-      }
-    ],
-    "correct_option_id": "c",
-    "explanation_after": "Public reports may omit costs and failures.",
     "phase": "phase_8_mastery",
-    "bloom_level": "apply"
+    "skill_id": "p8_case_studies_of_real_systems",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 90,
+    "stem": "A recommender increases watch time but users report feeling worse about the product. What does that reveal about the objective?",
+    "options": [
+      { "id": "a", "text": "Watch time is a proxy, and optimising it can diverge from the satisfaction it was standing in for" },
+      { "id": "b", "text": "The users are wrong, since the metric improved", "misconception": "Trusts the proxy over the thing it was chosen to approximate." },
+      { "id": "c", "text": "The model needs more training data", "misconception": "More data optimises the same objective harder, which is the problem rather than the fix." },
+      { "id": "d", "text": "Watch time was measured incorrectly", "misconception": "The measurement can be right and still be the wrong target." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask what watch time was chosen to approximate, and whether the two always move together.",
+      "A measure that becomes a target tends to stop being a good measure."
+    ],
+    "explanation_after": "Watch time stands in for value, and the two diverge once the system optimises hard enough — compulsive use raises one and lowers the other. The fix is in the objective, usually a basket including satisfaction and return rate, not in the model."
   },
   {
     "id": "p8_eval_apply_3",
-    "skill_id": "p8_ai_product_strategy",
-    "format": "mcq",
-    "stem": "AI Product Strategy: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "An impressive model demo proves product value."
-      },
-      {
-        "id": "b",
-        "text": "Inference price is the only product cost."
-      },
-      {
-        "id": "c",
-        "text": "Net value includes review, support, model, and error costs."
-      },
-      {
-        "id": "d",
-        "text": "A strategy should continue regardless of failed milestones."
-      }
-    ],
-    "correct_option_id": "c",
-    "explanation_after": "Net value includes review, support, model, and error costs.",
     "phase": "phase_8_mastery",
-    "bloom_level": "apply"
-  },
-  {
-    "id": "p8_eval_analyze_1",
-    "skill_id": "p8_capstone_project",
+    "skill_id": "p8_ai_product_strategy",
+    "bloom_level": "apply",
     "format": "mcq",
-    "stem": "AI Engineering Capstone: which statement is correct?",
+    "difficulty": "medium",
+    "time_target_sec": 90,
+    "stem": "A feature idea needs 99% accuracy to be useful, and the best available model reaches 91%. What is the most productive response?",
     "options": [
-      {
-        "id": "a",
-        "text": "The largest possible scope makes the strongest capstone."
-      },
-      {
-        "id": "b",
-        "text": "A happy-path demo proves production readiness."
-      },
-      {
-        "id": "c",
-        "text": "Code alone explains every design tradeoff."
-      },
-      {
-        "id": "d",
-        "text": "Versioned configuration and evaluation evidence make results traceable."
-      }
+      { "id": "a", "text": "Ship it and warn users it is sometimes wrong", "misconception": "Ships a feature known not to meet its own usefulness threshold, and puts the cost on users." },
+      { "id": "b", "text": "Abandon the idea entirely", "misconception": "Discards the value available at 91% if the interaction can absorb the errors." },
+      { "id": "c", "text": "Keep tuning until 99% is reached", "misconception": "Treats an eight-point gap as a tuning problem, which it rarely is." },
+      { "id": "d", "text": "Redesign so 91% is enough — make the output a suggestion a user confirms, rather than an automatic action" }
     ],
     "correct_option_id": "d",
-    "explanation_after": "Versioned configuration and evaluation evidence make results traceable.",
+    "hints": [
+      "The 99% requirement came from the design, not from nature. Ask what made it so high.",
+      "Ask what changes if a human confirms the output before anything happens."
+    ],
+    "explanation_after": "The accuracy requirement is set by what the output does. Automatic action demands near-perfection; a suggestion a user accepts or rejects makes 91% genuinely useful. Designing around the error rate is usually cheaper than closing the gap."
+  },
+  {
+    "id": "p8_eval_design_apply",
     "phase": "phase_8_mastery",
-    "bloom_level": "analyze"
+    "skill_id": "p8_system_design_ai",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 90,
+    "stem": "A recommendation system must serve in 50 ms but its best model takes 400 ms. Which design resolves this?",
+    "options": [
+      { "id": "a", "text": "Precompute recommendations offline and serve them from a lookup at request time" },
+      { "id": "b", "text": "Run the model on a faster GPU", "misconception": "Hardware may shave latency but rarely by the required factor of eight, and it costs per request forever." },
+      { "id": "c", "text": "Reduce the number of recommendations returned", "misconception": "The cost is in the model's forward pass, not in formatting the output." },
+      { "id": "d", "text": "Cache the model's weights in memory", "misconception": "Weights are already resident; loading is not what takes the 400 ms." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask whether the computation has to happen while the user is waiting.",
+      "Ask how often a given user's recommendations really need to change."
+    ],
+    "explanation_after": "Moving work off the request path is the standard answer when latency and model cost conflict: compute in batch, serve from a store. The cost is freshness, which is why hybrid designs re-rank a precomputed shortlist with a small fast model."
+  },
+  {
+    "id": "p8_eval_mlops_apply",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_mlops",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 90,
+    "stem": "A model performs worse in production than in training, and the features are computed by different code in each. What is this called, and what fixes it?",
+    "options": [
+      { "id": "a", "text": "Concept drift; retrain on recent data", "misconception": "Drift is the world changing over time; here the two paths disagree from day one." },
+      { "id": "b", "text": "Training-serving skew; compute features through one shared implementation, ideally a feature store" },
+      { "id": "c", "text": "Overfitting; add regularisation", "misconception": "Overfitting shows as a training-validation gap offline, before production is involved." },
+      { "id": "d", "text": "Data leakage; remove the leaking feature", "misconception": "Leakage inflates offline scores through a feature that encodes the target, not through duplicated code." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "The clue is that the same feature is computed twice, by two pieces of code.",
+      "Ask what happens when one implementation rounds, fills or time-zones differently from the other."
+    ],
+    "explanation_after": "Two implementations drift apart in rounding, null handling and time windows, so the model sees different inputs in production. One shared path — a feature store or shared library — removes the possibility rather than chasing the discrepancies."
+  },
+  {
+    "id": "p8_eval_agent_apply",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_multi_agent_systems",
+    "bloom_level": "apply",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 90,
+    "stem": "Two agents in a loop keep passing a task back and forth without finishing. Which safeguard addresses this directly?",
+    "options": [
+      { "id": "a", "text": "Give both agents a larger context window", "misconception": "More context does not create a stopping condition." },
+      { "id": "b", "text": "Use a more capable model for both", "misconception": "May reduce the frequency but provides no guarantee the loop terminates." },
+      { "id": "c", "text": "A step budget and an explicit termination condition, with escalation to a human when it is hit" },
+      { "id": "d", "text": "Allow the agents to run until they converge naturally", "misconception": "Describes the failure, since there is nothing forcing convergence." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what in the system is currently responsible for deciding the work is finished.",
+      "Any loop that might not terminate needs something outside it that stops it."
+    ],
+    "explanation_after": "Nothing in a conversational loop guarantees termination, so the limit must be imposed from outside: a budget, a stopping condition, and a path out when it is reached. The escalation matters — a silent abandonment is its own failure."
+  },
+
+  {
+    "id": "p8_eval_analyze_1",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_capstone_project",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 100,
+    "stem": "A capstone scores 94% offline but is rejected in review for having no error analysis. Why does that omission matter so much?",
+    "options": [
+      { "id": "a", "text": "Because reviewers prefer longer reports", "misconception": "Treats a substantive gap as a formatting preference." },
+      { "id": "b", "text": "Because a single aggregate number cannot say which cases fail, whether the failures are concentrated in a group, or whether the errors are costly ones" },
+      { "id": "c", "text": "Because 94% is not a good score", "misconception": "The score may be fine; what is missing is knowledge of what the other 6% are." },
+      { "id": "d", "text": "Because error analysis is required by convention", "misconception": "Appeals to convention instead of saying what the analysis reveals." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what you still do not know about the system after reading 94%.",
+      "Consider two models at 94% where one fails randomly and the other fails on one demographic."
+    ],
+    "explanation_after": "Two models with identical accuracy can be completely different products: scattered minor errors versus failures concentrated on one group or on the highest-stakes cases. The aggregate hides exactly what deployment depends on."
   },
   {
     "id": "p8_eval_analyze_2",
-    "skill_id": "p8_system_design_ai",
-    "format": "mcq",
-    "stem": "AI System Design: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Choosing the largest model completes the entire system design."
-      },
-      {
-        "id": "b",
-        "text": "A successful demo proves every dependency is reliable."
-      },
-      {
-        "id": "c",
-        "text": "Production results need no record of their configuration version."
-      },
-      {
-        "id": "d",
-        "text": "Circuit breakers limit damage from failing dependencies."
-      }
-    ],
-    "correct_option_id": "d",
-    "explanation_after": "Circuit breakers limit damage from failing dependencies.",
     "phase": "phase_8_mastery",
-    "bloom_level": "analyze"
+    "skill_id": "p8_system_design_ai",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "A system is fine at 100 requests per second and collapses at 120, with latency rising sharply rather than gradually. What does that pattern indicate?",
+    "options": [
+      { "id": "a", "text": "A component has reached saturation, so queues build and waiting time grows without bound" },
+      { "id": "b", "text": "The extra 20 requests are unusually large", "misconception": "Would raise latency for those requests, not collapse the system." },
+      { "id": "c", "text": "The network becomes unreliable at that rate", "misconception": "Networks degrade gradually rather than producing a cliff at a specific throughput." },
+      { "id": "d", "text": "The model's accuracy drops under load", "misconception": "Accuracy does not depend on request rate; this conflates quality with capacity." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "A sharp knee rather than a slope is characteristic. Ask what behaves that way.",
+      "Ask what happens to a queue when arrivals exceed service rate even slightly."
+    ],
+    "explanation_after": "Below capacity queues stay short; past it, arrivals outpace service and waiting grows without bound — hence the cliff. Finding which component saturates first is the whole diagnosis, and admission control is what stops the collapse."
   },
   {
     "id": "p8_eval_analyze_3",
+    "phase": "phase_8_mastery",
     "skill_id": "p8_scaling_ai_systems",
+    "bloom_level": "analyze",
     "format": "mcq",
-    "stem": "Scaling AI Systems: which statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "Doubling GPU instances raised throughput by only 20%. What should you investigate?",
     "options": [
-      {
-        "id": "a",
-        "text": "Adding random servers always removes the bottleneck."
-      },
-      {
-        "id": "b",
-        "text": "Every AI request consumes equal compute."
-      },
-      {
-        "id": "c",
-        "text": "Average traffic alone proves burst capacity."
-      },
-      {
-        "id": "d",
-        "text": "Backpressure prevents accepting unfinishable work."
-      }
+      { "id": "a", "text": "Whether the GPUs are faulty", "misconception": "Hardware faults usually show as errors or one slow node, not a uniform ceiling." },
+      { "id": "b", "text": "Whether the model needs retraining", "misconception": "Model quality has no bearing on how throughput scales with instances." },
+      { "id": "c", "text": "Whether the batch size is too small", "misconception": "A real lever on GPU efficiency, but it would not explain why adding instances stopped helping." },
+      { "id": "d", "text": "Whether a shared bottleneck — database, feature service, load balancer — is now the limiting factor rather than GPU compute" }
     ],
     "correct_option_id": "d",
-    "explanation_after": "Backpressure prevents accepting unfinishable work.",
-    "phase": "phase_8_mastery",
-    "bloom_level": "analyze"
+    "hints": [
+      "Adding capacity to one stage only helps while that stage is the constraint.",
+      "Ask what every one of those GPU instances still has to talk to."
+    ],
+    "explanation_after": "Scaling one tier moves the bottleneck elsewhere, and a shared dependency caps everything behind it. Amdahl's argument in operational form: the serial or shared portion sets the ceiling, so the next step is to find what all instances contend for."
   },
   {
-    "id": "p8_eval_evaluate_1",
-    "skill_id": "p8_mlops",
-    "format": "mcq",
-    "stem": "MLOps: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Retraining triggers still require validation and comparison gates."
-      },
-      {
-        "id": "b",
-        "text": "MLOps means copying the newest model file into production."
-      },
-      {
-        "id": "c",
-        "text": "Scheduled retraining makes data validation unnecessary."
-      },
-      {
-        "id": "d",
-        "text": "A model name alone proves which data produced it."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Retraining triggers still require validation and comparison gates.",
+    "id": "p8_eval_ethics_analyze",
     "phase": "phase_8_mastery",
-    "bloom_level": "evaluate"
+    "skill_id": "p8_ai_ethics_bias",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "A hiring model is 92% accurate overall but 96% for one group and 78% for another. Overall accuracy was the only metric reported. What does that reveal?",
+    "options": [
+      { "id": "a", "text": "That the model needs more training epochs", "misconception": "More training on the same imbalanced data typically widens the gap." },
+      { "id": "b", "text": "That the smaller group is inherently harder to predict", "misconception": "Assumes the disparity is a property of the people rather than of the data and the modelling choices." },
+      { "id": "c", "text": "That the aggregate was dominated by the larger group, concealing a disparity that makes the model unusable for hiring" },
+      { "id": "d", "text": "That 78% is acceptable since it is above chance", "misconception": "Compares against the wrong benchmark; the comparison that matters is with the other group." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask how an overall figure of 92% is arrived at when one subgroup sits at 78%.",
+      "Ask what someone in the second group experiences, and whether the headline number represents them."
+    ],
+    "explanation_after": "A weighted average reflects the majority, so a large minority gap can hide behind a healthy headline. Disaggregated reporting is the minimum here — and in hiring the gap is a legal exposure, not only an engineering defect."
+  },
+  {
+    "id": "p8_eval_align_analyze",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 110,
+    "stem": "After RLHF, a model becomes markedly more agreeable and now endorses user claims it previously corrected. What happened?",
+    "options": [
+      { "id": "a", "text": "The model's factual knowledge was erased by the process", "misconception": "The knowledge remains; what changed is which response is preferred." },
+      { "id": "b", "text": "Human raters preferred agreeable responses, so the reward signal selected for agreement rather than for accuracy" },
+      { "id": "c", "text": "Reinforcement learning cannot preserve factual behaviour", "misconception": "Over-generalises from a reward-design problem to the method as a whole." },
+      { "id": "d", "text": "The model is deliberately deceiving users", "misconception": "Attributes intent to a system that is following the gradient it was given." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Ask what the raters were comparing, and what they tended to choose.",
+      "The model optimises what was rewarded. Ask what agreeableness was rewarded as."
+    ],
+    "explanation_after": "Raters reward responses they like, and people like being agreed with, so sycophancy is selected for even though nobody intended it. It is reward hacking with human preferences as the imperfect measure — which is why preference data has to be collected with this in mind."
+  },
+  {
+    "id": "p8_eval_research_analyze",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_staying_current_with_research",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 105,
+    "stem": "A widely cited technique fails to reproduce in your setting, and you find the paper tuned it per dataset while the baselines used defaults. What does that tell you?",
+    "options": [
+      { "id": "a", "text": "The paper is fraudulent", "misconception": "Unequal tuning effort is a common methodological weakness, not evidence of fabrication." },
+      { "id": "b", "text": "Your implementation must be wrong", "misconception": "Possible, but the asymmetry already explains the gap without assuming an error." },
+      { "id": "c", "text": "The technique is useless", "misconception": "Over-corrects; the gain may be real but smaller than reported." },
+      { "id": "d", "text": "Part of the reported gain is tuning effort rather than the method, so the true advantage is smaller and may vanish on a tuned baseline" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "Compare how much effort went into each side of the comparison.",
+      "Ask what you would measure if you tuned the baseline just as hard."
+    ],
+    "explanation_after": "Unequal tuning is one of the most common sources of inflated results, and several well-known advantages have shrunk or disappeared under matched effort. The method may still help — just not by the published margin."
+  },
+
+  {
+    "id": "p8_eval_evaluate_1",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_mlops",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A team wants automatic retraining and deployment whenever drift is detected, with no human involved. Judge that.",
+    "options": [
+      { "id": "a", "text": "Sound — automation removes human delay and error", "misconception": "Also removes the check that would catch a bad retrain before it reaches users." },
+      { "id": "b", "text": "Unsound — models should only ever be deployed manually", "misconception": "Over-corrects; automation with gates is standard and better than manual deployment." },
+      { "id": "c", "text": "Reasonable with gates: the candidate must clear an evaluation threshold, roll out gradually, and roll back automatically on regression" },
+      { "id": "d", "text": "Sound, provided drift detection is accurate", "misconception": "Accurate detection says retraining is warranted; it says nothing about whether the new model is good." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what happens if the data that triggered the retrain was itself corrupted.",
+      "Separate the decision to retrain from the decision to promote."
+    ],
+    "explanation_after": "Automatic retraining is desirable; automatic promotion is where the risk sits. An evaluation gate, a gradual rollout and an automatic rollback let the loop run unattended while bounding what one bad retrain can do."
   },
   {
     "id": "p8_eval_evaluate_2",
-    "skill_id": "p8_multi_agent_systems",
-    "format": "mcq",
-    "stem": "Multi-Agent Systems: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Identical agents do not provide independent evidence automatically."
-      },
-      {
-        "id": "b",
-        "text": "Adding more agents always improves every task."
-      },
-      {
-        "id": "c",
-        "text": "Conversational memory replaces structured workflow state."
-      },
-      {
-        "id": "d",
-        "text": "Every agent should receive all available permissions."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Identical agents do not provide independent evidence automatically.",
     "phase": "phase_8_mastery",
-    "bloom_level": "evaluate"
+    "skill_id": "p8_multi_agent_systems",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A task is currently one prompt doing retrieval, analysis and formatting. A colleague proposes three specialised agents. Assess that.",
+    "options": [
+      { "id": "a", "text": "Always split — specialised agents outperform a single general prompt", "misconception": "Treats decomposition as free, when each handoff adds latency, cost and a place to lose context." },
+      { "id": "b", "text": "Never split — a single prompt is always simpler and therefore better", "misconception": "Simplicity is a real advantage but not an absolute one; some tasks genuinely need separation." },
+      { "id": "c", "text": "Split only if the single prompt is measurably failing, and then only where the stages need different tools, models or error handling" },
+      { "id": "d", "text": "Split, because it makes the system easier to debug", "misconception": "Debuggability improves per stage but the overall system gains failure modes that did not exist." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what the split costs before asking what it buys.",
+      "Is there evidence the current version is failing, and at which stage?"
+    ],
+    "explanation_after": "Each handoff adds latency, cost and context loss, and compounds per-step error. Decomposition earns its place when stages genuinely differ — different tools, different models, different retry behaviour — and when there is evidence the simple version fails."
   },
   {
     "id": "p8_eval_evaluate_3",
-    "skill_id": "p8_ai_ethics_bias",
-    "format": "mcq",
-    "stem": "AI Ethics & Bias: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Intersectional slices can reveal hidden failures."
-      },
-      {
-        "id": "b",
-        "text": "High average accuracy proves equal treatment."
-      },
-      {
-        "id": "c",
-        "text": "Historical labels are always neutral truth."
-      },
-      {
-        "id": "d",
-        "text": "Writing a broad value statement completes governance."
-      }
-    ],
-    "correct_option_id": "a",
-    "explanation_after": "Intersectional slices can reveal hidden failures.",
     "phase": "phase_8_mastery",
-    "bloom_level": "evaluate"
+    "skill_id": "p8_ai_ethics_bias",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 120,
+    "stem": "A lending model cannot satisfy both demographic parity and equal false-negative rates, because approval base rates differ between groups. How should the team proceed?",
+    "options": [
+      { "id": "a", "text": "Choose whichever definition the model already satisfies", "misconception": "Lets the model's current behaviour decide an ethical and legal question." },
+      { "id": "b", "text": "Satisfy both by adjusting thresholds per group", "misconception": "The impossibility result holds whatever the thresholds, when base rates differ and the model is not perfect." },
+      { "id": "c", "text": "Abandon fairness metrics, since they contradict each other", "misconception": "Incompatibility means a choice must be made and defended, not that the question disappears." },
+      { "id": "d", "text": "Decide explicitly which harm matters more in this context, document the reasoning, and report the metric not optimised for" }
+    ],
+    "correct_option_id": "d",
+    "hints": [
+      "This is a proven incompatibility, not an engineering shortfall. Ask what follows from that.",
+      "If you cannot have both, the remaining question is who decides, and whether the decision is visible."
+    ],
+    "explanation_after": "Several fairness criteria are mathematically incompatible when base rates differ, so a choice is unavoidable. What distinguishes responsible practice is making the choice deliberately, with the affected harms named, and publishing what was traded away."
   },
   {
-    "id": "p8_eval_create_1",
-    "skill_id": "p8_ai_safety_alignment_intro",
+    "id": "p8_eval_scale_evaluate",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_scaling_ai_systems",
+    "bloom_level": "evaluate",
     "format": "mcq",
-    "stem": "AI Safety & Alignment: which statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A team wants to serve a 70B model instead of a 7B one, which needs roughly ten times the GPU capacity. How should that be decided?",
     "options": [
-      {
-        "id": "a",
-        "text": "A high benchmark score proves complete alignment."
-      },
-      {
-        "id": "b",
-        "text": "Scalable oversight must give reviewers enough evidence to judge complex work."
-      },
-      {
-        "id": "c",
-        "text": "One safety prompt removes every misuse path."
-      },
-      {
-        "id": "d",
-        "text": "Human approval is meaningful even when the reviewer cannot assess the work."
-      }
+      { "id": "a", "text": "By quality alone — the larger model is better", "misconception": "Ignores a ten-fold cost increase and whether the gain is visible to users." },
+      { "id": "b", "text": "By cost alone — ten times the spend is never justified", "misconception": "Sometimes it plainly is; cost without benefit is only half the comparison." },
+      { "id": "c", "text": "By measuring the quality gain on real tasks, costing it per request, and checking whether routing only hard cases to the large model captures most of it" },
+      { "id": "d", "text": "By benchmark scores published for the two models", "misconception": "Public benchmarks predict your task weakly, as the leaderboard-transfer problem shows." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Both a benefit and a cost have to be measured on your own traffic.",
+      "Ask whether every request actually needs the larger model."
+    ],
+    "explanation_after": "The decision needs the gain measured on your tasks against the cost per request, and it is rarely all-or-nothing: routing by difficulty often captures most of the quality at a fraction of the spend. Published benchmarks are not a substitute for either measurement."
+  },
+  {
+    "id": "p8_eval_capstone_evaluate",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_capstone_project",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "Choosing a capstone: (A) reproduce a known result on a public dataset, or (B) build an end-to-end system on messy data you collected. Which demonstrates more, and why?",
+    "options": [
+      { "id": "a", "text": "A, because reproducing published work proves rigour", "misconception": "Shows care, but skips the data, deployment and evaluation decisions that most real work consists of." },
+      { "id": "b", "text": "B, because the judgment calls on messy data, evaluation design and failure handling are what real work consists of" },
+      { "id": "c", "text": "A, because public datasets allow comparison with published numbers", "misconception": "Comparability is useful but is not the same as demonstrating capability." },
+      { "id": "d", "text": "B, because collecting your own data is harder", "misconception": "Right answer, wrong reason — difficulty alone is not what makes it more demonstrative." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Scalable oversight must give reviewers enough evidence to judge complex work.",
+    "hints": [
+      "Ask which decisions each project forces you to make and defend.",
+      "A clean dataset has already had its hardest problems solved by someone else."
+    ],
+    "explanation_after": "A benchmark arrives with its data cleaned, its target defined and its metric chosen — the three hardest decisions already made. An end-to-end project on messy data makes all of them yours, which is what there is to demonstrate."
+  },
+  {
+    "id": "p8_eval_product_evaluate",
     "phase": "phase_8_mastery",
-    "bloom_level": "create"
+    "skill_id": "p8_ai_product_strategy",
+    "bloom_level": "evaluate",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 115,
+    "stem": "A competitor ships an AI feature and leadership wants the same within a month. How should that be assessed?",
+    "options": [
+      { "id": "a", "text": "Ship a comparable feature quickly, since being behind is the greater risk", "misconception": "Treats parity as the goal without asking whether the feature works or whether users want it." },
+      { "id": "b", "text": "Refuse, since copying competitors is never a sound strategy", "misconception": "Competitive response is often legitimate; the objection is to skipping the evidence." },
+      { "id": "c", "text": "Ask what problem it solves for your users, whether you can meet the quality bar, and what shipping a poor version would cost in trust" },
+      { "id": "d", "text": "Wait to see whether the competitor's feature succeeds", "misconception": "Reasonable patience, but passively; you still learn nothing about your own users." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "A competitor shipping something is evidence about them, not about your users.",
+      "Ask what a visibly poor version costs beyond the engineering time."
+    ],
+    "explanation_after": "Parity is not a goal in itself, and a weak AI feature costs trust that outlasts it. The useful questions are whether the problem is real for your users, whether you can reach a usable quality bar, and what failure would cost."
+  },
+
+  {
+    "id": "p8_eval_create_1",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 130,
+    "stem": "Design the safety approach for an assistant that can read and write files in a user's workspace. Which structure is soundest?",
+    "options": [
+      { "id": "a", "text": "A strong system prompt describing what it must not do", "misconception": "Puts the only control in the channel a user or a document can argue with." },
+      { "id": "b", "text": "Least privilege by default, explicit confirmation for destructive or irreversible actions, and an audit log of everything it did" },
+      { "id": "c", "text": "Full access, with all actions logged for later review", "misconception": "Makes damage visible after the fact without preventing any of it." },
+      { "id": "d", "text": "A second model reviewing each action before it executes", "misconception": "Adds a useful layer, but a model reviewing a model is not a boundary and shares the same failure modes." }
+    ],
+    "correct_option_id": "b",
+    "hints": [
+      "Assume the model will at some point try the wrong thing. Ask what limits the consequences.",
+      "Sort the possible actions by whether they can be undone."
+    ],
+    "explanation_after": "Safety comes from what the system is able to do, not from what it was told. Minimum privilege bounds the worst case, confirmation gates the irreversible actions, and the audit trail makes recovery possible — a prompt does none of these."
   },
   {
     "id": "p8_eval_create_2",
-    "skill_id": "p8_staying_current_with_research",
-    "format": "mcq",
-    "stem": "Staying Current with AI Research: which statement is correct?",
-    "options": [
-      {
-        "id": "a",
-        "text": "The newest paper is automatically the most reliable."
-      },
-      {
-        "id": "b",
-        "text": "An evidence table supports belief updates across differing studies."
-      },
-      {
-        "id": "c",
-        "text": "A title provides enough evidence for an engineering decision."
-      },
-      {
-        "id": "d",
-        "text": "Bookmark count measures research understanding."
-      }
-    ],
-    "correct_option_id": "b",
-    "explanation_after": "An evidence table supports belief updates across differing studies.",
     "phase": "phase_8_mastery",
-    "bloom_level": "create"
+    "skill_id": "p8_staying_current_with_research",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 125,
+    "stem": "Design a sustainable habit for keeping up with AI research while shipping full time. Which plan works best?",
+    "options": [
+      { "id": "a", "text": "Read every new paper in your area as it appears", "misconception": "Unsustainable at current publication rates, and the first habit to collapse under deadline." },
+      { "id": "b", "text": "Follow summary accounts and read only what gets widely shared", "misconception": "Outsources judgment to attention, which selects for surprise rather than for relevance to you." },
+      { "id": "c", "text": "A fixed weekly slot: skim abstracts in a narrow area, read one paper properly, and try one idea against a problem you actually have" },
+      { "id": "d", "text": "Wait for techniques to appear in libraries and learn them then", "misconception": "Reliable but slow, and it forfeits the ability to judge a technique before it is packaged." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "The constraint is time, so the plan has to survive a busy week.",
+      "Ask which plan leaves you able to judge a new claim yourself."
+    ],
+    "explanation_after": "A bounded, narrow, regular slot survives contact with a real workload, where completeness does not. Reading one paper properly builds the judgment to assess claims, and testing an idea against your own problem is what makes the reading stick."
   },
   {
     "id": "p8_eval_create_3",
+    "phase": "phase_8_mastery",
     "skill_id": "p8_case_studies_of_real_systems",
+    "bloom_level": "create",
     "format": "mcq",
-    "stem": "Case Studies of Real AI Systems: which statement is correct?",
+    "difficulty": "hard",
+    "time_target_sec": 130,
+    "stem": "Design the rollout for a model replacing a rules engine that handles 100% of fraud decisions today. Which plan is soundest?",
     "options": [
-      {
-        "id": "a",
-        "text": "An architecture diagram proves business success."
-      },
-      {
-        "id": "b",
-        "text": "General lessons need stated conditions under which they apply."
-      },
-      {
-        "id": "c",
-        "text": "A famous design should be copied regardless of workload."
-      },
-      {
-        "id": "d",
-        "text": "A postmortem is complete after blaming one operator."
-      }
+      { "id": "a", "text": "Shadow the model against the rules first, then take a small percentage of live traffic, expanding as agreement and outcomes hold" },
+      { "id": "b", "text": "Switch fully on a chosen date, with the rules kept ready as a rollback", "misconception": "Exposes all traffic at once and only learns about the failure after it has happened to everyone." },
+      { "id": "c", "text": "Run both and act on whichever flags fraud, to maximise detection", "misconception": "Maximises recall and the false-positive rate together, blocking far more legitimate customers." },
+      { "id": "d", "text": "Let the model handle new customers and the rules handle existing ones", "misconception": "Splits by a variable that correlates with risk, so the two arms are never comparable." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask how much traffic is exposed at the moment you first learn something is wrong.",
+      "You want evidence before exposure, and exposure in increments afterwards."
+    ],
+    "explanation_after": "Shadowing gives comparison without risk, and a percentage rollout bounds the damage from what shadowing could not reveal. A dated switch learns the same lesson at full blast, and splitting by customer type confounds the comparison it was meant to provide."
+  },
+  {
+    "id": "p8_eval_design_create",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_system_design_ai",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 130,
+    "stem": "Design a system that must keep working when the model provider has an outage. Which approach is soundest?",
+    "options": [
+      { "id": "a", "text": "Retry aggressively until the provider recovers", "misconception": "Adds load to a struggling service and leaves users waiting with no answer." },
+      { "id": "b", "text": "Show an error and ask the user to try later", "misconception": "Honest but gives up all function, including what could still be served." },
+      { "id": "c", "text": "A fallback chain: cached results where valid, then a secondary provider or smaller local model, then a clearly degraded mode" },
+      { "id": "d", "text": "Queue every request and process them when the provider returns", "misconception": "Works for asynchronous jobs but not for anything a user is waiting on, and risks a flood on recovery." }
+    ],
+    "correct_option_id": "c",
+    "hints": [
+      "Ask what partial service you could still offer with the model unavailable.",
+      "A good answer has several steps, each worse than the last but better than nothing."
+    ],
+    "explanation_after": "Graceful degradation means naming what still works without the model and falling through in order. Retrying harder makes an outage worse, and a hard failure discards the cached and reduced-quality answers that would have served many users."
+  },
+  {
+    "id": "p8_eval_mlops_create",
+    "phase": "phase_8_mastery",
+    "skill_id": "p8_mlops",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 130,
+    "stem": "Design what must be recorded so any production prediction can be explained six months later. Which set is sufficient?",
+    "options": [
+      { "id": "a", "text": "The input and the output of each prediction", "misconception": "Shows what happened without any way to establish why, since the model behind it is unidentified." },
+      { "id": "b", "text": "Input, output, model version, feature values as computed, and a link from that model version to its training data and code" },
+      { "id": "c", "text": "The model's accuracy at the time of the prediction", "misconception": "An aggregate statistic says nothing about one individual decision." },
+      { "id": "d", "text": "A full copy of the model with every prediction", "misconception": "Enormously wasteful; a version reference plus a registry achieves the same traceability." }
     ],
     "correct_option_id": "b",
-    "explanation_after": "General lessons need stated conditions under which they apply.",
+    "hints": [
+      "Imagine being asked to justify one decision to the person it affected. List what you would need.",
+      "The model that produced it may no longer be the one running."
+    ],
+    "explanation_after": "Explaining a past decision needs the exact inputs, the exact model, and the path back to what produced that model. Feature values must be stored as computed, since recomputing them later gives the values of today rather than of then."
+  },
+  {
+    "id": "p8_eval_agent_create",
     "phase": "phase_8_mastery",
-    "bloom_level": "create"
+    "skill_id": "p8_multi_agent_systems",
+    "bloom_level": "create",
+    "format": "mcq",
+    "difficulty": "hard",
+    "time_target_sec": 130,
+    "stem": "Design error handling for an agent pipeline where any step may fail or produce unusable output. Which approach is soundest?",
+    "options": [
+      { "id": "a", "text": "Validate each step's output against what the next step requires, with bounded retries and a defined path when a step cannot proceed" },
+      { "id": "b", "text": "Let failures propagate and handle them all at the end", "misconception": "Lets a bad intermediate result be processed by every later stage before anyone notices." },
+      { "id": "c", "text": "Retry each failed step until it succeeds", "misconception": "An unbounded retry on a deterministic failure never terminates and costs on every attempt." },
+      { "id": "d", "text": "Have the final agent detect and correct any earlier mistakes", "misconception": "Asks the last stage to find errors it cannot see, with none of the upstream context." }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "Ask where a bad intermediate result is cheapest to catch.",
+      "Every retry needs a limit, and every limit needs something to happen when it is reached."
+    ],
+    "explanation_after": "Validating at each boundary catches a fault while its context is still available and before later stages compound it. Bounded retries handle transient failures, and the defined fallback stops a persistent one becoming a silent hang."
   }
 ]

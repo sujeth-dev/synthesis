@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "orchestrator",
     "explanation_after": "The correct choice is orchestrator."
+  },
+  {
+    "id": "p8_multi_agent_systems_explain1",
+    "skill_id": "p8_multi_agent_systems",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Do Not Add a Team Before There Is Teamwork,” explain Multi-Agent Systems without assuming the listener knows AI engineering.",
+    "explanation_after": "Use multiple agents only when work has distinct roles, parallel branches, or useful independent checks."
   }
 ]

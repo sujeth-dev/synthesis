@@ -237,5 +237,13 @@
     "graph_placement_weight": {
       "p1b_oop_classes": 1
     }
+  },
+  {
+    "id": "p1b_oop_classes_explain1",
+    "skill_id": "p1b_oop_classes",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain the difference between a class and an object using the two-player example. What does `self` point to?",
+    "explanation_after": "When a game needs 100 similar players with separate health, one class can hold the shared rules while each object keeps its own data."
   }
 ]

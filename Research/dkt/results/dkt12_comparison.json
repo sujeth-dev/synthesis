@@ -5,16 +5,49 @@
   "comparison": {
     "n": 95585,
     "dkt": {
-      "auc": 0.7231424093697153,
-      "logLoss": 0.5977858214934308
+      "auc": 0.7253335900622061,
+      "logLoss": 0.5959608674750069
     },
     "bkt": {
       "auc": 0.7175188268371812,
       "logLoss": 0.6095878716221108
     }
   },
+  "growth": {
+    "pairs": 4532,
+    "points": 10,
+    "actualSlope": 0.05374174222364867,
+    "dkt": {
+      "slope": 0.03908802669808826,
+      "slopeRatio": 0.7273308434144483
+    },
+    "bkt": {
+      "slope": 0.04681910242538404,
+      "slopeRatio": 0.8711869114801721
+    }
+  },
   "decision": {
     "recommend": false,
-    "reason": "dkt_not_better"
+    "reason": "dkt_not_better",
+    "checks": {
+      "sampleSize": {
+        "pass": true,
+        "n": 95585,
+        "required": 5000
+      },
+      "ranking": {
+        "pass": false,
+        "aucGain": 0.007814763225024945,
+        "required": 0.02,
+        "logLossOk": true
+      },
+      "growth": {
+        "pass": false,
+        "measured": true,
+        "dktSlopeRatio": 0.7273308434144483,
+        "bktSlopeRatio": 0.8711869114801721,
+        "maxLoss": 0.05
+      }
+    }
   }
 }

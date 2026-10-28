@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "cross_val_score",
     "explanation_after": "The correct choice is cross_val_score."
+  },
+  {
+    "id": "p4_train_test_cross_validation_explain1",
+    "skill_id": "p4_train_test_cross_validation",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Seal the Final Exam” story, explain Train/Test Splits & Cross-Validation without assuming the listener knows machine learning.",
+    "explanation_after": "Training rows teach the model. Test rows stay sealed until the model and its settings are finished."
   }
 ]

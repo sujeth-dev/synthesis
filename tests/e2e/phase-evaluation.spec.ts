@@ -33,11 +33,22 @@ test('the phase evaluation records real attempts and shows an accurate per-Bloom
     const { questions } = await questionsResponse.json() as {
       questions: Array<{ id: string; skill_id: string; bloom_level: string; options: { id: string }[]; correct_option_id: string }>
     }
-    expect(questions.length).toBe(18)
+    // The set size is content-defined (p1 was split, so it is no longer 18); read it, don't hard-code it.
+    expect(questions.length).toBeGreaterThan(0)
 
-    // Answer every 2nd question within each 3-question Bloom-level group incorrectly,
-    // giving a predictable, non-trivial 2/3-per-level result to verify the breakdown against.
-    const shouldBeCorrect = questions.map((_, i) => i % 3 !== 1)
+    // Answer the 2nd question within each Bloom-level group incorrectly, giving a
+    // predictable, non-trivial per-level result to verify the breakdown against.
+    const seenInLevel: Record<string, number> = {}
+    const levelTotal: Record<string, number> = {}
+    const levelCorrect: Record<string, number> = {}
+    const shouldBeCorrect = questions.map(q => {
+      const n = seenInLevel[q.bloom_level] = (seenInLevel[q.bloom_level] ?? -1) + 1
+      const ok = n !== 1
+      levelTotal[q.bloom_level] = (levelTotal[q.bloom_level] ?? 0) + 1
+      levelCorrect[q.bloom_level] = (levelCorrect[q.bloom_level] ?? 0) + (ok ? 1 : 0)
+      return ok
+    })
+    const expectedCorrect = shouldBeCorrect.filter(Boolean).length
 
     await page.goto('/learn/evaluate/phase_1_computer_basics')
     await expect(page.getByRole('heading', { name: /A quick check across every level of thinking/ })).toBeVisible()
@@ -66,9 +77,9 @@ test('the phase evaluation records real attempts and shows an accurate per-Bloom
       await page.getByRole('button', { name: isLast ? 'See results →' : 'Next →' }).click()
     }
 
-    await expect(page.getByText('12 of 18 correct')).toBeVisible()
+    await expect(page.getByText(`${expectedCorrect} of ${questions.length} correct`)).toBeVisible()
     for (const level of BLOOM_LEVELS) {
-      await expect(page.getByTestId(`bloom-score-${level}`)).toHaveText('2/3')
+      await expect(page.getByTestId(`bloom-score-${level}`)).toHaveText(`${levelCorrect[level]}/${levelTotal[level]}`)
     }
 
     // Persistence check: every attempt actually landed in attempt_events, correctly
@@ -83,13 +94,13 @@ test('the phase evaluation records real attempts and shows an accurate per-Bloom
       .select('question_id,correct,session_id,difficulty_tier,question_format')
       .eq('learner_id', learnerId)
     expect(error, error?.message).toBeNull()
-    expect(attempts?.length).toBe(18)
+    expect(attempts?.length).toBe(questions.length)
     for (const attempt of attempts ?? []) {
       expect(attempt.session_id).toBeNull()
       expect(attempt.difficulty_tier).toBe('same')
       expect(attempt.question_format).toBe('mcq')
     }
-    expect(attempts?.filter(a => a.correct).length).toBe(12)
+    expect(attempts?.filter(a => a.correct).length).toBe(expectedCorrect)
   } finally {
     if (learnerId) {
       const db = createClient(

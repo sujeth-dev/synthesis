@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p4_bias_variance_tradeoff": 1
     }
+  },
+  {
+    "id": "p4_bias_variance_tradeoff_explain1",
+    "skill_id": "p4_bias_variance_tradeoff",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Bent Sight or Shaky Hand” story, explain Bias–Variance Tradeoff without assuming the listener knows machine learning.",
+    "explanation_after": "Bias is a consistent miss because the model is too limited. Variance is instability because the model follows small details of its training sample."
   }
 ]

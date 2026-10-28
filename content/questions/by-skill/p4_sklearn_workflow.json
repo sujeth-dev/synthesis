@@ -236,5 +236,13 @@
     "graph_placement_weight": {
       "p4_sklearn_workflow": 1
     }
+  },
+  {
+    "id": "p4_sklearn_workflow_explain1",
+    "skill_id": "p4_sklearn_workflow",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Tell the house-price story from raw rows to unseen predictions. Why must the test rows stay out of `fit`?",
+    "explanation_after": "When tomorrow's house has features but no known price, scikit-learn offers one dependable route: create a model, fit past examples, then predict the unseen case."
   }
 ]

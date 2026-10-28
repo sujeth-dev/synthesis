@@ -177,5 +177,13 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "Computers store numbers with limited detail. If two measured results are almost identical, subtraction can lose the tiny difference we wanted to inspect."
+  },
+  {
+    "id": "p2_calculus_basics_explain1",
+    "skill_id": "p2_calculus_basics",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use the foggy-hill story to explain a derivative, a gradient, and why training moves opposite the gradient of error.",
+    "explanation_after": "A derivative is a tiny test step on a foggy hill; a gradient collects those downhill clues when there are many directions."
   }
 ]

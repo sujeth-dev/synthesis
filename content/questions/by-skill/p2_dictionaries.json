@@ -24,9 +24,9 @@
       }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Dictionaries look up values by key. model_config['heads'] finds the key 'heads' and returns its value: 8. This is O(1) \u2014 instant lookup regardless of dictionary size.",
+    "explanation_after": "Dictionaries look up values by key. model_config['heads'] finds the key 'heads' and returns its value: 8. This is O(1) — instant lookup regardless of dictionary size.",
     "graph_placement_weight": {
-      "p2_dictionaries": 1.0
+      "p2_dictionaries": 1
     }
   },
   {
@@ -38,25 +38,25 @@
     "options": [
       {
         "id": "a",
-        "text": "A list \u2014 because you can loop through words"
+        "text": "A list — because you can loop through words"
       },
       {
         "id": "b",
-        "text": "A dictionary \u2014 maps each word (key) to its ID (value)"
+        "text": "A dictionary — maps each word (key) to its ID (value)"
       },
       {
         "id": "c",
-        "text": "A boolean \u2014 either the word exists or it doesn't"
+        "text": "A boolean — either the word exists or it doesn't"
       },
       {
         "id": "d",
-        "text": "An integer \u2014 IDs are just numbers"
+        "text": "An integer — IDs are just numbers"
       }
     ],
     "correct_option_id": "b",
     "explanation_after": "Tokenizer vocabulary = {'hello': 7592, 'world': 995, ...}. A dictionary is perfect: O(1) lookup. The GPT-2 tokenizer has 50,257 tokens.",
     "graph_placement_weight": {
-      "p2_dictionaries": 1.0,
+      "p2_dictionaries": 1,
       "p6_transformers": 0.3
     }
   },
@@ -67,10 +67,22 @@
     "difficulty_tier": "review",
     "stem": "How does a Python dictionary organise its entries?",
     "options": [
-      { "id": "a", "text": "As row-column pairs" },
-      { "id": "b", "text": "As key-value pairs" },
-      { "id": "c", "text": "As input-output pairs" },
-      { "id": "d", "text": "As index-position pairs only" }
+      {
+        "id": "a",
+        "text": "As row-column pairs"
+      },
+      {
+        "id": "b",
+        "text": "As key-value pairs"
+      },
+      {
+        "id": "c",
+        "text": "As input-output pairs"
+      },
+      {
+        "id": "d",
+        "text": "As index-position pairs only"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Every dictionary entry has a key (what you look up by) and a value (what you get back). Keys must be unique.",
@@ -85,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "What does this code output?\n\nconfig = {'lr': 0.01, 'epochs': 10}\nprint(config.get('batch_size', 32))",
     "options": [
-      { "id": "a", "text": "32" },
-      { "id": "b", "text": "KeyError" },
-      { "id": "c", "text": "None" },
-      { "id": "d", "text": "10" }
+      {
+        "id": "a",
+        "text": "32"
+      },
+      {
+        "id": "b",
+        "text": "KeyError"
+      },
+      {
+        "id": "c",
+        "text": "None"
+      },
+      {
+        "id": "d",
+        "text": "10"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": ".get(key, default) returns the default value when the key is missing instead of raising KeyError. Since 'batch_size' isn't in config, it returns 32. This is safer than config['batch_size'] whenever a key might be optional, like reading hyperparameters that have sensible defaults.",
-    "graph_placement_weight": { "p2_dictionaries": 1.0 }
+    "graph_placement_weight": {
+      "p2_dictionaries": 1
+    }
   },
   {
     "id": "p2_dict_q5",
@@ -101,14 +127,28 @@
     "difficulty_tier": "same",
     "stem": "What does this code print?\n\nscores = {'Alice': 90, 'Bob': 85}\nfor name, score in scores.items():\n    print(name, score)",
     "options": [
-      { "id": "a", "text": "Alice 90\nBob 85" },
-      { "id": "b", "text": "('Alice', 90)\n('Bob', 85)" },
-      { "id": "c", "text": "90 Alice\n85 Bob" },
-      { "id": "d", "text": "AliceBob 90 85" }
+      {
+        "id": "a",
+        "text": "Alice 90\nBob 85"
+      },
+      {
+        "id": "b",
+        "text": "('Alice', 90)\n('Bob', 85)"
+      },
+      {
+        "id": "c",
+        "text": "90 Alice\n85 Bob"
+      },
+      {
+        "id": "d",
+        "text": "AliceBob 90 85"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": ".items() yields (key, value) tuples, and unpacking them into name, score gives each pair directly, so print(name, score) prints them space-separated. Dictionaries preserve insertion order since Python 3.7, so 'Alice' prints before 'Bob'.",
-    "graph_placement_weight": { "p2_dictionaries": 1.0 }
+    "graph_placement_weight": {
+      "p2_dictionaries": 1
+    }
   },
   {
     "id": "p2_dict_q6",
@@ -117,13 +157,36 @@
     "difficulty_tier": "harder",
     "stem": "A bag-of-words model counts word frequency in a document using a dictionary called counts. Which line correctly increments the count for a word that may or may not already be a key?",
     "options": [
-      { "id": "a", "text": "counts[word] += 1" },
-      { "id": "b", "text": "counts[word] = counts.get(word, 0) + 1" },
-      { "id": "c", "text": "counts.add(word)" },
-      { "id": "d", "text": "counts[word] == counts[word] + 1" }
+      {
+        "id": "a",
+        "text": "counts[word] += 1"
+      },
+      {
+        "id": "b",
+        "text": "counts[word] = counts.get(word, 0) + 1"
+      },
+      {
+        "id": "c",
+        "text": "counts.add(word)"
+      },
+      {
+        "id": "d",
+        "text": "counts[word] == counts[word] + 1"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "If word isn't already a key, counts[word] += 1 raises a KeyError because it tries to read counts[word] before it exists. counts.get(word, 0) safely returns 0 for a first-time word, so adding 1 correctly starts the count at 1. This counting dictionary is the first step in building a bag-of-words feature vector — once the vocabulary is fixed in order, the dictionary's values become the numbers in an ML input vector.",
-    "graph_placement_weight": { "p2_dictionaries": 1.0, "p2_math_vectors": 0.3 }
+    "graph_placement_weight": {
+      "p2_dictionaries": 1,
+      "p2_math_vectors": 0.3
+    }
+  },
+  {
+    "id": "p2_dictionaries_explain1",
+    "skill_id": "p2_dictionaries",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "In your own words, explain Dictionaries — what it is and why it matters. Use an example if it helps.",
+    "explanation_after": "A dictionary maps names to values. Instead of remembering positions, you look things up by meaningful keys."
   }
 ]

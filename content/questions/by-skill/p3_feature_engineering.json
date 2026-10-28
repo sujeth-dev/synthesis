@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "When two features carry overlapping information, splits can be made on either one fairly interchangeably, so the importance signal gets divided between them instead of concentrated on one. Judging predictive value from individual feature importance alone can therefore underestimate a correlated group — dropping 'unimportant' correlated features without checking their combined effect can hurt performance."
+  },
+  {
+    "id": "p3_feature_engineering_explain1",
+    "skill_id": "p3_feature_engineering",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is feature engineering and why is it necessary? Explain normalisation, one-hot encoding, and imputation in plain terms. Why should you never fit a scaler on the test set?",
+    "explanation_after": "Raw data is almost never in the right form for a model. Feature engineering is the art of transforming messy real-world data into numbers that capture the signal the model needs."
   }
 ]

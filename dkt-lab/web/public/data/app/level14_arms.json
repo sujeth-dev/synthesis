@@ -1,0 +1,78 @@
+{
+  "synthetic": true,
+  "learners": 300,
+  "seed": 9001,
+  "source": "Arm A from git b71e301; arms B and C from the Level 14 runs of Research/dkt/train_synaptic.py (--epochs 10 --early-stopping [--lambda-r 0.1]) measured by scripts/dkt-compare.ts --sim.",
+  "note": "Early stopping never fired in B or C: validation AUC was still rising at epoch 10, so the A-to-B gain is the epoch budget.",
+  "arms": [
+    {
+      "arm": "A",
+      "config": "8 epochs, lambda_r 0, no early stopping (the model committed before Level 14)",
+      "dkt": {
+        "auc": 0.7231424093697153,
+        "logLoss": 0.5977858214934308,
+        "slopeRatio": 0.6654423906458881
+      },
+      "bkt": {
+        "auc": 0.7175188268371812,
+        "logLoss": 0.6095878716221108,
+        "slopeRatio": 0.8711869114801721
+      },
+      "attempts": 95585,
+      "cohortPairs": 4532,
+      "gate": "dkt_not_better",
+      "heldOutAuc": {
+        "dkt": 0.7224421305927842,
+        "fitted_bkt": 0.7345000375043231,
+        "live_bkt": 0.7167907271142918,
+        "oracle_approx": 0.8385163698975436
+      }
+    },
+    {
+      "arm": "B",
+      "config": "10 epochs + early stopping, lambda_r 0",
+      "dkt": {
+        "auc": 0.7290419428977398,
+        "logLoss": 0.5933102731457487,
+        "slopeRatio": 0.6932505872065479
+      },
+      "bkt": {
+        "auc": 0.7175188268371812,
+        "logLoss": 0.6095878716221108,
+        "slopeRatio": 0.8711869114801721
+      },
+      "attempts": 95585,
+      "cohortPairs": 4532,
+      "gate": "dkt_not_better",
+      "heldOutAuc": {
+        "dkt": 0.7286263467233833,
+        "fitted_bkt": 0.7345000375043231,
+        "live_bkt": 0.7167907271142918,
+        "oracle_approx": 0.8385163698975436
+      }
+    },
+    {
+      "arm": "C",
+      "config": "10 epochs + early stopping, lambda_r 0.1 (the model bundled since Level 14)",
+      "dkt": {
+        "auc": 0.7253335900622061,
+        "logLoss": 0.5959608674750069,
+        "slopeRatio": 0.7273308434144483
+      },
+      "bkt": {
+        "auc": 0.7175188268371812,
+        "logLoss": 0.6095878716221108,
+        "slopeRatio": 0.8711869114801721
+      },
+      "attempts": 95585,
+      "cohortPairs": 4532,
+      "gate": "dkt_not_better",
+      "heldOutAuc": {
+        "dkt": 0.7250481553199718,
+        "fitted_bkt": 0.7345000375043231,
+        "live_bkt": 0.7167907271142918,
+        "oracle_approx": 0.8385163698975436
+      }
+    }
+  ]
+}

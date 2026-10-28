@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "c",
     "explanation_after": "Automation alone doesn't make software AI. A payroll formula is deterministic arithmetic with no judgment involved — the same inputs always produce the same output via simple math. Rule-based expert systems count as AI because their hand-written rules encode human expertise to make judgment calls (e.g. diagnosing a fault, approving a loan) — the kind of task that normally requires human intelligence, even though the rules themselves are written rather than learned from data."
+  },
+  {
+    "id": "p3_what_is_ai_explain1",
+    "skill_id": "p3_what_is_ai",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Without looking at the explanation, describe AI in your own words to a 10-year-old. What makes it different from normal software? Give one example.",
+    "explanation_after": "AI is software that can do tasks that normally require a human — but it learns how to do them from examples, not from rules someone wrote."
   }
 ]

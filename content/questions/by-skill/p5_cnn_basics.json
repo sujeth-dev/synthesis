@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "Conv2d",
     "explanation_after": "The correct choice is Conv2d."
+  },
+  {
+    "id": "p5_cnn_basics_explain1",
+    "skill_id": "p5_cnn_basics",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Slide One Detector Across the Picture” situation, explain CNN Basics without assuming the listener knows deep learning.",
+    "explanation_after": "A convolution slides one small filter across the image. The same filter looks for the same pattern wherever it appears."
   }
 ]

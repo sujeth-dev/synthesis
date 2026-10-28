@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p4_unsupervised_learning": 1
     }
+  },
+  {
+    "id": "p4_unsupervised_learning_explain1",
+    "skill_id": "p4_unsupervised_learning",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Sort the Mystery Drawer” story, explain Unsupervised Learning without assuming the listener knows machine learning.",
+    "explanation_after": "Unsupervised learning searches for patterns without an answer key. Clustering places similar examples together."
   }
 ]

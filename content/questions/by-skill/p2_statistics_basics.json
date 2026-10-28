@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Standardisation rescales each feature to mean 0, std 1. Without it, a feature like income (range in the hundreds of thousands) can dwarf a feature like age (range 0–100) in distance calculations (k-NN, clustering) or gradient magnitudes (gradient descent), causing the model to implicitly overweight large-scale features regardless of their actual importance.",
-    "graph_placement_weight": { "p2_statistics_basics": 1.0, "p4_supervised_learning": 0.3 }
+    "graph_placement_weight": {
+      "p2_statistics_basics": 1,
+      "p4_supervised_learning": 0.3
+    }
   },
   {
     "id": "p2_statistics_basics_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "A high p-value (0.41, far above typical thresholds like 0.05) means that if the two models were truly equally good, a difference this size would be unsurprising due to random sampling in the test set. A small accuracy bump alone doesn't prove one model is genuinely better — this is why rigorous ML evaluation uses significance testing, not just raw metric comparison.",
-    "graph_placement_weight": { "p2_statistics_basics": 1.0, "p4_supervised_learning": 0.3 }
+    "graph_placement_weight": {
+      "p2_statistics_basics": 1,
+      "p4_supervised_learning": 0.3
+    }
+  },
+  {
+    "id": "p2_statistics_basics_explain1",
+    "skill_id": "p2_statistics_basics",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is the difference between mean and median? When would you use each? What does standard deviation tell you that the mean doesn't?",
+    "explanation_after": "Before building any model, you must understand your data. A handful of numbers — mean, median, standard deviation — tell you the most important things about a dataset's centre and spread."
   }
 ]

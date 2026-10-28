@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "cosine_similarity",
     "explanation_after": "The correct choice is cosine_similarity."
+  },
+  {
+    "id": "p6_embeddings_explain1",
+    "skill_id": "p6_embeddings",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Put Meanings on a Map,” explain Embeddings without assuming the listener knows modern AI.",
+    "explanation_after": "An embedding turns an item into a list of numbers. Similar items are trained to land near one another in that number-space."
   }
 ]

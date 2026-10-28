@@ -18,6 +18,8 @@ import { GradeCache } from '../src/lib/nlp/cache'
 
 const CATEGORIES: ExplanationCategory[] = ['gap', 'method-only', 'meaning-included']
 const DELAY_BETWEEN_CALLS_MS = 350
+// Examples graded at once (each worker still pauses between its own calls).
+const CONCURRENCY = Number(process.env.NLP_EVAL_CONCURRENCY) || 6
 
 function loadEnvLocal(): void {
   const envPath = path.join(__dirname, '..', '.env.local')
@@ -87,11 +89,11 @@ async function main() {
   console.log(`Grading ${LABELED_EXAMPLES.length} labeled examples...\n`)
 
   const cache = new GradeCache()
-  const results: ExampleResult[] = []
+  const slots: ExampleResult[] = new Array(LABELED_EXAMPLES.length)
   let fallbackCount = 0
   const servedByCounts: Record<string, number> = {}
 
-  for (let i = 0; i < LABELED_EXAMPLES.length; i++) {
+  async function gradeOne(i: number) {
     const ex = LABELED_EXAMPLES[i]
     const ruleLabel = classifyExplanation(ex.text)
     const llm = await gradeExplanation({ concept: ex.concept, explanationText: ex.text }, { cache })
@@ -99,7 +101,7 @@ async function main() {
     servedByCounts[llm.servedBy] = (servedByCounts[llm.servedBy] ?? 0) + 1
     if (llm.servedBy === 'rule-based-fallback') fallbackCount++
 
-    results.push({
+    slots[i] = {
       id: ex.id,
       concept: ex.concept,
       humanLabel: ex.humanLabel,
@@ -109,7 +111,7 @@ async function main() {
       llmConfidence: llm.confidence,
       llmFromCache: llm.fromCache,
       adversarial: ex.adversarial ?? false,
-    })
+    }
 
     process.stdout.write(
       `[${i + 1}/${LABELED_EXAMPLES.length}] ${ex.id} human=${ex.humanLabel} rule=${ruleLabel} llm=${llm.category} (${llm.servedBy})\n`
@@ -117,6 +119,12 @@ async function main() {
 
     if (!llm.fromCache) await sleep(DELAY_BETWEEN_CALLS_MS)
   }
+
+  let next = 0
+  await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
+    while (next < LABELED_EXAMPLES.length) await gradeOne(next++)
+  }))
+  const results = slots
 
   const humanLabels = results.map(r => r.humanLabel)
   const ruleLabels = results.map(r => r.ruleLabel)

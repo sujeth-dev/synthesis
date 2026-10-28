@@ -15,8 +15,16 @@
     "fsrs:compare": "node scripts/fsrs-shadow-comparison.js",
     "dkt:export": "node scripts/dkt-export-interactions.js",
     "sim": "tsx scripts/sim-run.ts",
+    "sim:latency": "tsx scripts/sim-latency-bug.ts",
+    "sim:walkthrough": "tsx scripts/scheduling-walkthrough.ts",
+    "behaviour:effects": "tsx scripts/behaviour-effects.ts",
+    "curves:compare": "tsx scripts/learning-curves-before-after.ts",
     "dkt:predict": "tsx scripts/dkt-predict.ts",
-    "dkt:compare": "tsx scripts/dkt-compare.ts"
+    "dkt:compare": "tsx scripts/dkt-compare.ts",
+    "bkt:compare": "tsx scripts/bkt-params-compare.ts",
+    "seed:demo": "tsx scripts/seed-demo.ts",
+    "seed:learners": "tsx scripts/seed-demo-learners.ts",
+    "selector:compare": "tsx scripts/selector-compare.ts"
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",

@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p8_ai_safety_alignment_intro": 1
     }
+  },
+  {
+    "id": "p8_ai_safety_alignment_intro_explain1",
+    "skill_id": "p8_ai_safety_alignment_intro",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “The Helper Follows the Wrong Shortcut,” explain AI Safety & Alignment without assuming the listener knows AI engineering.",
+    "explanation_after": "Alignment is the problem of making system behavior match human goals and constraints, including situations not shown in training."
   }
 ]

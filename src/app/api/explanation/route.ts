@@ -18,12 +18,12 @@ export async function GET(req: NextRequest) {
   const depth = chooseDepth(skillState, searchParams.get('force_depth') as ExplanationDepth | null)
 
   try {
-    const explanation: Explanation = require(`@/../content/explanations/${skill_id}/${depth}.json`)
+    const explanation: Explanation = require(`../../../../content/explanations/${skill_id}/${depth}.json`)
     return NextResponse.json({ explanation, depth })
   } catch {
     for (const fallback of ['beginner', 'mid', 'advanced', 'expert'] as ExplanationDepth[]) {
       try {
-        const explanation: Explanation = require(`@/../content/explanations/${skill_id}/${fallback}.json`)
+        const explanation: Explanation = require(`../../../../content/explanations/${skill_id}/${fallback}.json`)
         return NextResponse.json({ explanation, depth: fallback })
       } catch { continue }
     }

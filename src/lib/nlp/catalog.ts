@@ -63,6 +63,9 @@ async function fetchOpenRouterFreeModels(apiKey: string, fetchImpl: typeof fetch
   return models
     .filter(m => isChatCapable(m.id))
     .filter(m => m.pricing && Number(m.pricing.prompt) === 0 && Number(m.pricing.completion) === 0)
+    // Zero price alone also admits free *previews* (e.g. google/lyria-3-*-preview)
+    // that carry no ':free' tier guarantee and can start billing without notice.
+    .filter(m => m.id.endsWith(':free'))
     .sort((a, b) => sizePreferenceScore(b.id) - sizePreferenceScore(a.id))
     .map(m => ({ provider: 'openrouter' as const, model: m.id }))
 }

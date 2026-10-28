@@ -53,26 +53,10 @@ def load(name: str):
     return df, splits, prov, skill_meta
 
 
-def fit_bkt(train_df: pd.DataFrame, skills: list[str], forgetting: bool = False) -> dict:
-    params = {}
-    grouped = {k: g for k, g in train_df.groupby("skill_id")}
-    for s in skills:
-        g = grouped.get(s)
-        seqs = [] if g is None else [x["correct"].to_numpy() for _, x in g.groupby("student_id")]
-        if len(seqs) >= bkt.MIN_TRAIN_SEQUENCES:
-            params[s] = bkt.fit_skill_bkt(seqs, forgetting=forgetting)
-        else:
-            params[s] = dict(bkt.DEFAULT_PARAMS) | {"n_train_sequences": len(seqs), "em_iters": 0,
-                                                     "log_likelihood": None, "default": True}
-    return params
-
-
-def bkt_predict_rows(df: pd.DataFrame, params: dict) -> pd.Series:
-    """Forward-only BKT P(correct) for every row of df (per student x skill)."""
-    out = pd.Series(np.nan, index=df.index)
-    for (_, s), g in df.groupby(["student_id", "skill_id"], sort=False):
-        out.loc[g.index] = bkt.predict_sequence(g["correct"].to_numpy(), params[s])
-    return out
+# Fitting and row-wise prediction live in bkt.py so diagnose.py can use them
+# without importing torch; these aliases keep run.py's call sites unchanged.
+fit_bkt = bkt.fit_all_skills
+bkt_predict_rows = bkt.predict_rows
 
 
 def dkt_predict_rows(model, seqs, cfg) -> pd.Series:

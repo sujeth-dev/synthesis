@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { placeLearner, getAllNodes, getHardPrereqs } from '@/lib/graph'
+import { gradeDiagnosticResults } from '@/lib/diagnostic/grade'
 import { initSkillState } from '@/lib/bkt'
 import { initSM2 } from '@/lib/sm2'
 import { initMotivationState } from '@/lib/motivation'
@@ -8,7 +9,7 @@ import {
   setDiagnosticDone, bulkUpsertSkillStates, bulkUpsertReviewSchedules,
   upsertMotivationState,
 } from '@/lib/db/queries'
-import type { LearnerSkillState } from '@/types'
+import type { LearnerSkillState, Question } from '@/types'
 
 export async function POST(req: NextRequest) {
   const user = await getCurrentUser()
@@ -16,7 +17,12 @@ export async function POST(req: NextRequest) {
 
   const { results } = await req.json()
 
-  const placement = placeLearner(results)
+  // The client sends the learner's raw answer and never a verdict, so the answers
+  // are graded here before placement. Until this existed, placeLearner read an
+  // absent `correct` on every row, scored every skill at the 0.05 floor, and left
+  // every prerequisite-gated skill blocked for every learner.
+  const diagnosticQuestions: Question[] = require('../../../../content/questions/diagnostic/questions.json')
+  const placement = placeLearner(gradeDiagnosticResults(Array.isArray(results) ? results : [], diagnosticQuestions))
   const allNodes  = getAllNodes().filter(n => !n.deprecated)
 
   const tempMap = new Map<string, number>()

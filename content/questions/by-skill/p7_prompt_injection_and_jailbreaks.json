@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_prompt_injection_and_jailbreaks": 1
     }
+  },
+  {
+    "id": "p7_prompt_injection_and_jailbreaks_explain1",
+    "skill_id": "p7_prompt_injection_and_jailbreaks",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “The Document Tries to Give Orders” to explain Prompt Injection & Jailbreaks plainly.",
+    "explanation_after": "Prompt injection is untrusted content trying to change model behavior. A jailbreak is an attempt to bypass intended restrictions."
   }
 ]

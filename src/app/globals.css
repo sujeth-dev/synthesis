@@ -14,9 +14,9 @@
   --bg3:          #202b22;
   --bg4:          #0d140f;
   --text:         #f2efe6;
-  --text-muted:   #b4b4cc;   /* raised from #a8a8c0 — better contrast on dark bg */
-  --text-faint:   #9090b0;   /* raised from #747490 — was failing AA */
-  --text-ghost:   #707090;   /* raised from #545468 — was critically failing AA */
+  --text-muted:   #c3cbc2;   /* warm grey to match the green-black theme (UI pass) */
+  --text-faint:   #a3aea5;   /* warm grey, AA on --bg2 */
+  --text-ghost:   #85918a;   /* warm grey, 5.1:1 on --bg2 */
   --border:       rgba(255,255,255,0.10);   /* raised from 0.07 — cards more distinct */
   --border-hi:    rgba(255,255,255,0.18);   /* raised from 0.13 */
   --purple:       #d96e34;
@@ -41,9 +41,9 @@ html.light {
   --bg3:          #e4ded0;
   --bg4:          #f4f0e6;
   --text:         #1f3a2e;
-  --text-muted:   #3e3c54;   /* raised from #4c4a60 */
-  --text-faint:   #606080;   /* raised from #7c7a90 — was failing AA */
-  --text-ghost:   #8888a8;   /* raised from #aaa8b8 — was critically failing */
+  --text-muted:   #3b4a40;   /* warm, matches the green ink */
+  --text-faint:   #56635a;   /* AA on --bg2 */
+  --text-ghost:   #636e66;   /* 4.9:1 on --bg2 */
   --border:       rgba(0,0,0,0.12);   /* raised from 0.08 — cards visible */
   --border-hi:    rgba(0,0,0,0.20);   /* raised from 0.15 */
   --purple:       #c85f2c;

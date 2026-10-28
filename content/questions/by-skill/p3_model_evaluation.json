@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "ROC AUC depends on the false-positive rate, which is computed over the (enormous) negative class, so it naturally stays low and keeps AUC looking strong even when many actual frauds are missed. On heavily imbalanced problems, Precision-Recall AUC — which focuses on how well the model finds the rare positive class — gives a more honest picture of performance."
+  },
+  {
+    "id": "p3_model_evaluation_explain1",
+    "skill_id": "p3_model_evaluation",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain the train/test split in your own words. Why can't you evaluate a model on the data it trained on? What does it mean for a model to 'overfit' and how do you detect it from the loss curves?",
+    "explanation_after": "A model's score on training data means nothing. The only score that matters is on data it has never seen before."
   }
 ]

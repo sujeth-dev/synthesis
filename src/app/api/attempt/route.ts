@@ -1,24 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/db/session'
 import { bktUpdate, getMasteryTier } from '@/lib/bkt'
+import { fittedParamsProvenance, hasFittedParams, isPerSkillBktEnabled, paramsFor } from '@/lib/bkt/params'
 import { bktToQuality, reconcileBktSm2 } from '@/lib/sm2'
+import { adaptiveFsrsRating, adaptiveQuality, isAdaptiveQualityEnabled, type AttemptBehaviorSignals } from '@/lib/sm2/adaptive'
 import { computeFsrsSchedule, fsrsRatingFromCorrectness, type FsrsSchedule } from '@/lib/fsrs'
 import { activeScheduler, chooseSchedule } from '@/lib/fsrs/scheduler'
 import { buildAttemptBehaviorSnapshot, deriveBehaviorEvidenceModifier, updateMotivationState } from '@/lib/motivation'
 import { classifyExplanation, reasoningQualityFromCategory } from '@/lib/feynman/classifier'
-import { gradeExplanation } from '@/lib/nlp/grader'
+import { gradeExplanation, type GradeExplanationResult } from '@/lib/nlp/grader'
 import { computeUnblocked } from '@/lib/graph'
+import { isOrderAnswerCorrect } from '@/lib/ui/order-answer'
 import {
   getSkillState, upsertSkillState, getReviewSchedule, upsertReviewSchedule,
   getMotivationState, upsertMotivationState, insertAttempt,
   incrementSessionCounts, getSession, getAllSkillStates, schedulePhaseReview,
   getRecentAttemptsForSkill, getSessionBehaviorAttempts,
   getLastFsrsShadowEntry, insertFsrsShadowLog,
-  getAttemptHistory, insertDktShadowLog,
+  getAttemptHistory, insertDktShadowLog, insertExplanationGrade,
+  insertBehaviorQualityShadow, insertBktParamShadow,
+  getQuestionRating, upsertQuestionRating, getLearnerAbility, upsertLearnerAbility,
 } from '@/lib/db/queries'
+import { ELO_START, coldStartQuestionRating, eloExchange } from '@/lib/elo'
 import { DKT_HISTORY_LIMIT, getBundledDktModel, isDktShadowEnabled, predictForAttempt } from '@/lib/dkt/shadow'
 import { getAllNodes } from '@/lib/graph'
-import type { Question, DifficultyTier, QuestionFormat } from '@/types'
+import type { Question, DifficultyTier, QuestionFormat, BehaviorQualityShadowEntry } from '@/types'
 import { canChooseTopicSwitch, getGuidedArcProgress } from '@/lib/session/engine'
 import { computeBktMovementComparison, isFeynmanAttempt } from '@/lib/analytics/bkt-movement'
 
@@ -30,26 +36,32 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
 
   const body = await req.json()
-  const { question_id, skill_id, session_id, latency_ms, client_answer,
+  const { question_id, skill_id, session_id, latency_ms, hesitation_ms, client_answer,
           difficulty_tier, question_format, revision_count } = body
 
   if (!question_id || !skill_id) return NextResponse.json({ error: 'question_id and skill_id required' }, { status: 400 })
 
   // ── Server-side answer verification
   let correct = false
+  // Kept beyond the try so the Elo block below can tell an authored question
+  // (which has a rating) from a synthetic reflection id (which has none).
+  let gradedQuestion: Question | undefined
   const isGuidedReflection = question_format === 'explain' && (
     question_id.endsWith('_explain_back') || question_id.endsWith('_feynman_loop')
   )
   try {
-    const questions: Question[] = require(`@/../content/questions/by-skill/${skill_id}.json`)
+    const questions: Question[] = require(`../../../../content/questions/by-skill/${skill_id}.json`)
     const q = questions.find(q => q.id === question_id)
     if (!q && !isGuidedReflection) return NextResponse.json({ error: 'Unknown question_id' }, { status: 400 })
+    gradedQuestion = q
 
     if (q?.format === 'mcq') correct = client_answer === q.correct_option_id
     else if (q?.format === 'fill') {
       const ans = (client_answer || '').toString().trim().toLowerCase()
       correct = ans === (q.correct_answer || '').trim().toLowerCase() ||
                 (q.keywords || []).some((kw: string) => ans.includes(kw.toLowerCase()))
+    } else if (q?.format === 'order') {
+      correct = isOrderAnswerCorrect((client_answer || '').toString(), q.correct_answer)
     } else {
       correct = typeof body.correct === 'boolean' ? body.correct : false
     }
@@ -67,6 +79,9 @@ export async function POST(req: NextRequest) {
   const safe_latency = Math.min(MAX_LATENCY, Math.max(MIN_LATENCY, latency_ms || 3000))
   const parsedRevisionCount = Number.isFinite(Number(revision_count)) ? Math.trunc(Number(revision_count)) : 0
   const safe_revision_count = Math.min(100, Math.max(0, parsedRevisionCount))
+  // Hesitation is the leading part of the attempt, so it can never exceed it.
+  const parsedHesitation = Number.isFinite(Number(hesitation_ms)) ? Math.trunc(Number(hesitation_ms)) : 0
+  const safe_hesitation = Math.min(safe_latency, Math.max(0, parsedHesitation))
 
   // ── Load current state (parallel)
   const [skillState, motivation] = await Promise.all([
@@ -93,21 +108,55 @@ export async function POST(req: NextRequest) {
   // resolves to the rule-based classifier directly, so a grading failure of any kind can
   // never block the attempt itself from being scored and persisted.
   const explanationText = typeof client_answer === 'string' ? client_answer.trim() : ''
+  const priorExplanation = typeof body.prior_answer === 'string' ? body.prior_answer.trim() : ''
   let reasoningQuality = 1
+  let grade: GradeExplanationResult | null = null
   if (question_format === 'explain' && explanationText) {
     const conceptNode = getAllNodes().find(n => n.id === skill_id)
     try {
-      const graded = await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })
-      reasoningQuality = reasoningQualityFromCategory(graded.category)
+      grade = await gradeExplanation({ concept: conceptNode?.label ?? skill_id, explanationText })
     } catch {
-      reasoningQuality = reasoningQualityFromCategory(classifyExplanation(explanationText))
+      // confidence 0 is the sentinel for "no model produced this grade", so a
+      // re-scoring harness can exclude these rows from model-vs-human comparisons.
+      grade = {
+        category: classifyExplanation(explanationText), confidence: 0,
+        rationale: 'rule-based fallback: the grader threw before producing a grade',
+        servedBy: 'rule-based-fallback', promptVersion: 'none', fromCache: false,
+        attempts: [], latencyMs: 0,
+      }
     }
+    reasoningQuality = reasoningQualityFromCategory(grade.category)
+    // One attempt, one verdict. Free text has no answer key, so the grade above
+    // is the only verification there is: deriving `correct` from the same
+    // category that sets reasoningQuality makes a client-sent verdict (which
+    // used to come from the rule-based classifier while this graded with the
+    // LLM) unable to disagree with it.
+    correct = grade.category === 'meaning-included'
   }
   const behaviorModifier = deriveBehaviorEvidenceModifier(motivation, safe_latency)
-  const updatedState = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, {
-    reasoningQuality,
-    behavior: behaviorModifier,
-  })
+  const evidence = { reasoningQuality, behavior: behaviorModifier }
+  // Level 16, in shadow: the same attempt under this skill's EM-fitted
+  // parameters beside the live global set. bktUpdate reads p_slip, p_guess and
+  // p_transit off the state, so a parameter set enters by swapping those three
+  // fields and nothing inside the model changes. isPerSkillBktEnabled refuses
+  // a parameter file fitted on simulator output whatever the flag says.
+  const fittedParams = paramsFor(skill_id)
+  const applyFitted = isPerSkillBktEnabled()
+  const liveUpdated = bktUpdate(skillState, correct, schedule?.repetitions ?? 0, evidence)
+  const fittedUpdated = hasFittedParams(skill_id)
+    ? bktUpdate({ ...skillState, p_transit: fittedParams.p_transit, p_slip: fittedParams.p_slip, p_guess: fittedParams.p_guess },
+        correct, schedule?.repetitions ?? 0, evidence)
+    : liveUpdated
+  const updatedState = applyFitted ? fittedUpdated : liveUpdated
+  const bktParamShadow = {
+    learner_id: user.id, skill_id, correct, p_know_before: skillState.p_know,
+    live_p_know_after: liveUpdated.p_know, live_p_transit: skillState.p_transit,
+    live_p_slip: skillState.p_slip, live_p_guess: skillState.p_guess,
+    fitted_p_know_after: fittedUpdated.p_know, fitted_p_transit: fittedParams.p_transit,
+    fitted_p_slip: fittedParams.p_slip, fitted_p_guess: fittedParams.p_guess,
+    has_fitted_params: hasFittedParams(skill_id), applied: applyFitted,
+    params_synthetic: fittedParamsProvenance().synthetic,
+  }
 
   // ── Update SM-2, with FSRS alongside (FSRS-3 shadow mode). FSRS is always
   // computed and logged from the same correctness/latency evidence; it only
@@ -115,9 +164,35 @@ export async function POST(req: NextRequest) {
   // (FSRS-5). Any FSRS failure (e.g. migration 004 missing) is isolated and
   // falls back to SM-2's own schedule.
   let fsrsShadow: { sm2_interval_days: number; fsrs_interval_days: number; fsrs_stability: number; fsrs_difficulty: number; fsrs_due_at: string } | null = null
+  // Level 11, in shadow: the behaviour-aware quality is computed from the same
+  // attempt and logged beside the live one, and only sets the live schedule
+  // under ADAPTIVE_QUALITY=1 (a live cutover, so off by default).
+  let behaviorQualityShadow: Omit<BehaviorQualityShadowEntry, 'id' | 'created_at' | 'learner_id' | 'skill_id' | 'attempt_id'> | null = null
   if (schedule) {
-    const quality     = bktToQuality(correct, safe_latency)
-    const sm2Schedule = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, quality)
+    const signals: AttemptBehaviorSignals = {
+      latency_ms: safe_latency, hesitation_ms: safe_hesitation,
+      revision_count: safe_revision_count, guided_reflection: isGuidedReflection,
+    }
+    const liveQuality     = bktToQuality(correct, safe_latency)
+    const behaviorQuality = adaptiveQuality(correct, signals)
+    const applyAdaptive   = isAdaptiveQualityEnabled()
+    // Both schedules come from the same starting point, so the log records the
+    // scheduling consequence of each quality and not only the tier.
+    const liveSchedule     = reconcileBktSm2(updatedState.p_know, wasMastered, schedule, liveQuality)
+    const adaptiveSchedule = behaviorQuality === liveQuality
+      ? liveSchedule
+      : reconcileBktSm2(updatedState.p_know, wasMastered, schedule, behaviorQuality)
+    const sm2Schedule = applyAdaptive ? adaptiveSchedule : liveSchedule
+    behaviorQualityShadow = {
+      correct, latency_ms: safe_latency, hesitation_ms: safe_hesitation,
+      revision_count: safe_revision_count, guided_reflection: isGuidedReflection,
+      live_quality: liveQuality, adaptive_quality: behaviorQuality,
+      live_fsrs_rating: fsrsRatingFromCorrectness(correct, safe_latency),
+      adaptive_fsrs_rating: adaptiveFsrsRating(correct, signals),
+      live_interval_days: liveSchedule.interval_days,
+      adaptive_interval_days: adaptiveSchedule.interval_days,
+      applied: applyAdaptive,
+    }
 
     let fsrsResult: FsrsSchedule | null = null
     try {
@@ -126,7 +201,7 @@ export async function POST(req: NextRequest) {
         previousShadow
           ? { stability: previousShadow.fsrs_stability, difficulty: previousShadow.fsrs_difficulty, last_review: previousShadow.created_at }
           : null,
-        fsrsRatingFromCorrectness(correct, safe_latency),
+        applyAdaptive ? adaptiveFsrsRating(correct, signals) : fsrsRatingFromCorrectness(correct, safe_latency),
       )
       fsrsShadow = {
         sm2_interval_days: sm2Schedule.interval_days,
@@ -145,7 +220,7 @@ export async function POST(req: NextRequest) {
 
   // ── Update motivation
   const updatedMotivation = updateMotivationState(motivation, correct, safe_latency, updatedState)
-  const behaviorSnapshot = buildAttemptBehaviorSnapshot(updatedMotivation, safe_latency, behaviorModifier)
+  const behaviorSnapshot = buildAttemptBehaviorSnapshot(updatedMotivation, behaviorModifier, safe_hesitation)
   await upsertMotivationState(updatedMotivation)
 
   // ── Update skill state
@@ -191,6 +266,38 @@ export async function POST(req: NextRequest) {
   })
   if (session_id) await incrementSessionCounts(session_id, correct)
 
+  if (behaviorQualityShadow) {
+    try {
+      await insertBehaviorQualityShadow({ learner_id: user.id, skill_id, attempt_id, ...behaviorQualityShadow })
+    } catch {
+      // Observational only — see the FSRS and DKT shadow writes below.
+    }
+  }
+
+  try {
+    await insertBktParamShadow({ ...bktParamShadow, attempt_id })
+  } catch {
+    // Observational only; a deployment without migration 008 must not fail an
+    // attempt over a comparison row.
+  }
+
+  if (grade) {
+    try {
+      await insertExplanationGrade({
+        learner_id: user.id, skill_id, attempt_id,
+        explanation_text: explanationText,
+        prior_explanation_text: priorExplanation || null,
+        category: grade.category, confidence: grade.confidence,
+        reasoning_quality: reasoningQuality, rationale: grade.rationale,
+        prompt_version: grade.promptVersion, served_by: grade.servedBy,
+        from_cache: grade.fromCache, grader_latency_ms: Math.round(grade.latencyMs),
+      })
+    } catch {
+      // Fail-open like the shadow logs below: a deployment without migration
+      // 006 loses the grade record, never the attempt that was already scored.
+    }
+  }
+
   if (fsrsShadow) {
     try {
       await insertFsrsShadowLog({ learner_id: user.id, skill_id, attempt_id, ...fsrsShadow })
@@ -215,6 +322,44 @@ export async function POST(req: NextRequest) {
       }
     } catch {
       // Observational only — never affects the learner's attempt.
+    }
+  }
+
+  // ── Elo calibration (SCORE-1): this question's measured difficulty and the
+  // learner's ability in this phase, both moved by this one answer. Practice
+  // questions carry no time target, so the answer scores on correctness alone.
+  // Read only by the shadow scorer; fail-open like every write above.
+  if (gradedQuestion) {
+    try {
+      const node = getAllNodes().find(n => n.id === skill_id)
+      if (node) {
+        const [storedRating, storedAbility] = await Promise.all([
+          getQuestionRating(question_id),
+          getLearnerAbility(user.id, node.phase),
+        ])
+        const exchange = eloExchange(
+          storedAbility
+            ? { rating: storedAbility.rating, plays: storedAbility.plays }
+            : { rating: ELO_START, plays: 0 },
+          storedRating
+            ? { rating: storedRating.rating, plays: storedRating.plays }
+            : { rating: coldStartQuestionRating(node.difficulty_base, gradedQuestion.difficulty_tier), plays: 0 },
+          correct ? 1 : 0,
+        )
+        await Promise.all([
+          upsertQuestionRating({
+            question_id, skill_id, phase: node.phase,
+            rating: exchange.item.rating, plays: exchange.item.plays,
+          }),
+          upsertLearnerAbility({
+            learner_id: user.id, phase: node.phase,
+            rating: exchange.learner.rating, plays: exchange.learner.plays,
+          }),
+        ])
+      }
+    } catch {
+      // Observational only — a deployment without migration 009 loses the
+      // rating, never the attempt.
     }
   }
 

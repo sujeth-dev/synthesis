@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Shadow deployment runs the new model in parallel and compares its predictions to the current model's, without those predictions ever reaching a real user. Canary deployment goes a step further: it exposes a small, real slice of traffic to the new model's actual decisions, so its real-world impact can be measured before a full rollout — a higher-risk, higher-signal step that usually follows a successful shadow test."
+  },
+  {
+    "id": "p3_ai_dev_cycle_explain1",
+    "skill_id": "p3_ai_dev_cycle",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Walk through the 6 steps of an ML project. What is a baseline model and why should you always build one first? Why do practitioners say ML is '80% data, 20% algorithms'?",
+    "explanation_after": "Building an AI model is not a single step — it's a cycle of problem definition, data collection, training, evaluation, and deployment. Most projects spend 80% of time on data, not algorithms."
   }
 ]

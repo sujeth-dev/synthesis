@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "loss.backward()",
     "explanation_after": "The correct choice is loss.backward()."
+  },
+  {
+    "id": "p5_build_your_first_network_explain1",
+    "skill_id": "p5_build_your_first_network",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Assemble the Five Pieces” situation, explain Build Your First Network without assuming the listener knows deep learning.",
+    "explanation_after": "A small project needs data batches, a model, a matching loss, an optimizer, and a loop that repeats prediction and correction."
   }
 ]

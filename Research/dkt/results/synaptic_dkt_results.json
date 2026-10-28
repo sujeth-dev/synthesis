@@ -8,12 +8,12 @@
     "val": 300,
     "test": 300
   },
-  "epochs": 8,
-  "train_seconds": 181.2,
+  "epochs": 10,
+  "train_seconds": 154.4,
   "models": {
     "dkt": {
-      "auc": 0.7224421305927842,
-      "log_loss": 0.5968652519008365,
+      "auc": 0.7250481553199718,
+      "log_loss": 0.5949495724835245,
       "n": 96918
     },
     "fitted_bkt": {

@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "encode",
     "explanation_after": "The correct choice is encode."
+  },
+  {
+    "id": "p6_tokenization_explain1",
+    "skill_id": "p6_tokenization",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Cut a Sentence into Reusable Pieces,” explain Tokenization without assuming the listener knows modern AI.",
+    "explanation_after": "A tokenizer splits text into tokens and assigns each token a number. A token may be a word, part of a word, punctuation, or even a byte."
   }
 ]

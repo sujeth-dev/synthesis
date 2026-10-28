@@ -17,6 +17,7 @@ import '@xyflow/react/dist/style.css'
 import { graphlib, layout as dagreLayout } from '@dagrejs/dagre'
 import type { SkillEdge, SkillNode, MasteryState } from '@/types'
 import { getMasteryTier } from '@/lib/bkt'
+import { MASTERY_COLOUR } from '@/lib/ui/mastery-colour'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -35,13 +36,8 @@ interface Props {
 
 // ─── Mastery colours ─────────────────────────────────────────────────────────
 
-export const MASTERY_COLOUR: Record<MasteryState, string> = {
-  mastered: '#2f5d3a',
-  fragile:  '#e8a84a',
-  learning: '#e8a84a',
-  ready:    '#d96e34',
-  blocked:  '#a8a49c',
-}
+// Re-exported for SkillDetailPanel; the palette itself lives in one place.
+export { MASTERY_COLOUR }
 
 // ─── Layout constants ─────────────────────────────────────────────────────────
 

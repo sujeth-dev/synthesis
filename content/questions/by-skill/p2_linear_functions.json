@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Composing linear functions is still linear: y = W3(W2(W1 x)) = (W3 W2 W1) x = Wx for some single combined matrix W. No matter how many linear layers you stack, the result collapses to one linear function. This is exactly why neural networks insert non-linear activation functions (ReLU, sigmoid, etc.) between layers — without them, a 100-layer network is no more expressive than a single linear layer.",
-    "graph_placement_weight": { "p2_linear_functions": 1.0, "p5_neural_network_basics": 0.4 }
+    "graph_placement_weight": {
+      "p2_linear_functions": 1,
+      "p5_neural_network_basics": 0.4
+    }
   },
   {
     "id": "p2_linear_functions_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "With one input feature, z = wx + b IS y = mx + b. With multiple features, the weight becomes a vector w and wx becomes a dot product w·x, but the role is identical: each weight scales its input like a slope, and the bias shifts the output like an intercept. A neural network's first layer is literally a bundle of linear functions, one per neuron, before non-linear activations are applied.",
-    "graph_placement_weight": { "p2_linear_functions": 1.0, "p5_neural_network_basics": 0.4 }
+    "graph_placement_weight": {
+      "p2_linear_functions": 1,
+      "p5_neural_network_basics": 0.4
+    }
+  },
+  {
+    "id": "p2_linear_functions_explain1",
+    "skill_id": "p2_linear_functions",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is the slope in y = mx + b and what does it tell you? What does R² measure? Why would you use LinearRegression from sklearn instead of np.polyfit?",
+    "explanation_after": "A linear function is y = mx + b. It describes a straight-line relationship between two variables. Linear regression finds the best-fit line through data — the simplest and most widely used predictive model."
   }
 ]

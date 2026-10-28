@@ -16,6 +16,7 @@ import argparse
 import base64
 import json
 import os
+import shutil
 from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +26,24 @@ WEB_DATA = os.path.abspath(os.path.join(HERE, "..", "web", "public", "data"))
 FIXTURE_PATH = os.path.abspath(os.path.join(HERE, "..", "web", "src", "models", "fixtures", "parity.json"))
 
 ORDER = ["assist2009", "assist2015", "synthetic5", "synaptic_sim"]
+
+# Results the Synaptic app itself produced (read-only, like the Scheduling
+# tab's scheduler-comparison.json). Copied byte-for-byte into
+# web/public/data/app/, never recomputed; check_web.py fails if a copy drifts
+# from its source, which is what keeps the "Synaptic app" tab honest after the
+# app's own comparison scripts are re-run.
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+APP_RESULTS = [
+    "Research/dkt/results/dkt12_comparison.json",
+    "Research/dkt/results/level14_arms.json",
+    "Research/dkt/results/learning-curves-before-after.json",
+    "Research/dkt/results/synaptic_dkt_results.json",
+    "Research/sim/results/latency-signal-impact.json",
+    "Research/sim/results/scheduling-walkthrough.json",
+    "Research/sim/results/behaviour-effects.json",
+    "src/lib/nlp/data/eval-results-v1.json",
+    "Research/bkt/results/per-skill-params.json",
+]
 INDEX_KEYS = ("id", "name", "kind", "kind_label", "source_url", "licence", "citation", "notes",
               "downloaded_from", "download_url", "has_timestamps", "skill_trimming")
 
@@ -51,7 +70,7 @@ def export_dataset(name: str) -> dict:
     prov = res["provenance"]
     entry = {k: prov.get(k) for k in INDEX_KEYS}
     write_json(f"{name}/stats.json", {"provenance": entry, "stats": res["stats"]})
-    for part in ("metrics", "curves", "heatmap", "samples", "bkt_params"):
+    for part in ("metrics", "curves", "heatmap", "samples", "bkt_params", "diagnostics"):
         if part in res:
             write_json(f"{name}/{part}.json", res[part])
     weights = os.path.join(DATA_DIR, name, "dkt_weights.json")
@@ -59,6 +78,16 @@ def export_dataset(name: str) -> dict:
         with open(weights) as f:
             write_json(f"{name}/dkt_weights.json", json.load(f))
     return entry
+
+
+def app_result_dest(source: str) -> str:
+    return os.path.join(WEB_DATA, "app", os.path.basename(source))
+
+
+def export_app_results() -> None:
+    os.makedirs(os.path.join(WEB_DATA, "app"), exist_ok=True)
+    for source in APP_RESULTS:
+        shutil.copyfile(os.path.join(REPO, source), app_result_dest(source))
 
 
 def export_all() -> None:
@@ -76,6 +105,7 @@ def export_all() -> None:
         if os.path.exists(p):
             with open(p) as f:
                 write_json(extra, json.load(f))
+    export_app_results()
     print(f"Exported {len(names)} datasets -> {WEB_DATA}")
 
 

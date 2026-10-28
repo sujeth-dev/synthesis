@@ -1,5 +1,6 @@
 'use client'
 import type { Question } from '@/types'
+import { isOrderAnswerCorrect, orderPosition, toggleOrderOption } from '@/lib/ui/order-answer'
 
 interface Props {
   question:     Question
@@ -79,6 +80,42 @@ export function QuestionCard({ question: q, selected, fillAnswer, revealed, onSe
           {revealed && (
             <p className="mt-2.5 text-[13px] text-c-faint font-mono">
               Expected: <span className="text-c-yellow font-semibold">{q.correct_answer}</span>
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Order — tap options into sequence; tap again to remove */}
+      {q.format === 'order' && q.options && (
+        <div className="space-y-3">
+          {q.options.map(opt => {
+            const position = orderPosition(fillAnswer, opt.id)
+            const placed   = position !== null
+
+            let cls = 'w-full text-left px-5 py-4 rounded-xl border transition-all text-[15px] flex items-start gap-4 '
+            if (placed) cls += 'border-c-purple/60 bg-c-purple/[0.10] text-c-purple'
+            else        cls += 'border-[var(--border)] bg-c-bg2 text-c-muted hover:border-[var(--border-hi)] hover:text-c-text cursor-pointer'
+
+            return (
+              <button
+                key={opt.id}
+                data-testid={`order-option-${opt.id}`}
+                className={cls}
+                onClick={() => !revealed && onFillChange(toggleOrderOption(fillAnswer, opt.id))}
+                disabled={revealed}
+              >
+                <span className="font-mono text-[13px] font-semibold mt-0.5 opacity-70 flex-shrink-0 w-5 text-center">
+                  {placed ? position : '·'}
+                </span>
+                <span className="leading-[1.5]">{opt.text}</span>
+              </button>
+            )
+          })}
+          {revealed && (
+            <p className="mt-2.5 text-[13px] text-c-faint font-mono">
+              {isOrderAnswerCorrect(fillAnswer, q.correct_answer)
+                ? 'Correct order'
+                : <>Expected: <span className="text-c-yellow font-semibold">{q.correct_answer}</span></>}
             </p>
           )}
         </div>

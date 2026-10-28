@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Content-based filtering recommends based on an item's own attributes (e.g. genre, audio features, text description) rather than interaction history, so a brand-new item with zero interactions can still be recommended based on its content — unlike pure collaborative filtering, which needs interaction data to work at all. Many production systems combine both approaches (hybrid recommenders) to handle cold-start and mature-catalogue cases together."
+  },
+  {
+    "id": "p3_ai_applications_explain1",
+    "skill_id": "p3_ai_applications",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Name five categories of AI applications and give one real example of each. What is one thing AI does better than humans, and one thing humans still do better than AI?",
+    "explanation_after": "AI is not a single technology — it's a collection of techniques applied to specific problems. Understanding the main application categories helps you identify which AI approach fits which problem."
   }
 ]

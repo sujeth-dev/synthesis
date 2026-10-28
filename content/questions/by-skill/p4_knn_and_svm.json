@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p4_knn_and_svm": 1
     }
+  },
+  {
+    "id": "p4_knn_and_svm_explain1",
+    "skill_id": "p4_knn_and_svm",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Neighbors or a Safety Fence” story, explain K-Nearest Neighbors & Support Vector Machines without assuming the listener knows machine learning.",
+    "explanation_after": "K-nearest neighbors uses the first idea. A support vector machine uses the second, building a boundary from the closest examples."
   }
 ]

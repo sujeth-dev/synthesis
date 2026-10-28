@@ -63,6 +63,7 @@ export function Navbar() {
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/graph',     label: 'Graph' },
     { href: '/learn',     label: 'Study' },
+    { href: '/engine',    label: 'Engine' },
     { href: '/profile',   label: 'Profile' },
   ]
 

@@ -49,6 +49,25 @@ describe('guided explanation contract', () => {
     }
   })
 
+  it('gives every skill one free-text explain question, graded with no answer key', () => {
+    const questionsDirectory = path.join(root, 'content/questions/by-skill')
+    const files = fs.readdirSync(questionsDirectory).filter(file => file.endsWith('.json'))
+    let explainTotal = 0
+
+    for (const file of files) {
+      const questions = JSON.parse(
+        fs.readFileSync(path.join(questionsDirectory, file), 'utf8'),
+      ) as Array<{ id: string; format: string; prompt?: string; options?: unknown[] }>
+      const explains = questions.filter(question => question.format === 'explain')
+      expect(explains.length, file).toBe(1)
+      expect(explains[0].prompt?.trim().length ?? 0, explains[0].id).toBeGreaterThan(20)
+      expect(explains[0].options, explains[0].id).toBeUndefined()
+      explainTotal += explains.length
+    }
+
+    expect(explainTotal).toBe(files.length)
+  })
+
   it('splits prose, headings, and fenced examples into ordered building blocks', () => {
     const steps = splitExplanationSteps([
       '## First idea',

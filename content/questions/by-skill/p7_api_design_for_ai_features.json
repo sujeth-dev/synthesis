@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_api_design_for_ai_features": 1
     }
+  },
+  {
+    "id": "p7_api_design_for_ai_features_explain1",
+    "skill_id": "p7_api_design_for_ai_features",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Expose the Job, Not the Vendor” to explain API Design for AI Features plainly.",
+    "explanation_after": "Design your API around the product job, such as extracting an invoice or drafting a reply. The server can change models behind that contract."
   }
 ]

@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "optimizer.step()",
     "explanation_after": "The correct choice is optimizer.step()."
+  },
+  {
+    "id": "p5_gradient_descent_and_optimizers_explain1",
+    "skill_id": "p5_gradient_descent_and_optimizers",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Walk Downhill in Fog” situation, explain Gradient Descent & Optimizers without assuming the listener knows deep learning.",
+    "explanation_after": "A gradient tells how loss changes around the current weights. Gradient descent moves weights in the opposite direction because that direction lowers loss nearby."
   }
 ]

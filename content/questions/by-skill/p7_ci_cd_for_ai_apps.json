@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "run fast code and schema checks",
     "explanation_after": "Start with run fast code and schema checks."
+  },
+  {
+    "id": "p7_ci_cd_for_ai_apps_explain1",
+    "skill_id": "p7_ci_cd_for_ai_apps",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Test More Than the Code” to explain CI/CD for AI Apps plainly.",
+    "explanation_after": "CI automatically checks each change. For AI apps it should test code plus prompt, schema, retrieval, safety, and evaluation behavior."
   }
 ]

@@ -26,7 +26,24 @@ export interface SimConfig {
   scheduler: SchedulerKind
   skills: SimSkill[]      // in study order; prerequisites must come first
   startDate?: Date
+  // 'crushed' reproduces the client-side latency bug fixed in Level 7: the
+  // schedulers are told every answer took CRUSHED_LATENCY_MS, whatever it
+  // really took. It changes only the evidence they receive, never the clock.
+  latencySignal?: LatencySignal
+  // A second BKT parameter set, traced alongside the live one (Level 16). It
+  // never influences which skill is served or when, so both arms see exactly
+  // the same attempts in the same order; only the parameters differ. Traced
+  // inside the simulator rather than replayed afterwards because the live
+  // engine decays p_know on an overdue load (reconcileBktSm2OnLoad), and a
+  // replay that skipped that would be comparing parameters against decay.
+  shadowBktParams?: (skillId: string) => { p_init: number; p_transit: number; p_slip: number; p_guess: number }
 }
+
+export type LatencySignal = 'measured' | 'crushed'
+
+// What src/app/api/attempt/route.ts's MIN_LATENCY clamp yielded once the client
+// sent ~0.
+export const CRUSHED_LATENCY_MS = 100
 
 export interface SimEvent {
   student_id: string
@@ -37,6 +54,8 @@ export interface SimEvent {
   latency_ms: number
   true_recall: number      // ground-truth P(recall) just before the attempt
   bkt_p_correct: number    // BKT's predicted P(correct) just before the attempt
+  // The same quantity under config.shadowBktParams, when that is set.
+  bkt_shadow_p_correct?: number
   sm2_p_recall: number | null  // SM-2's implied P(recall); null on first exposure
   fsrs_p_recall: number | null // FSRS retrievability; null on first exposure
 }
@@ -63,6 +82,9 @@ export interface SimResult { report: SchedulerReport; events: SimEvent[] }
 interface SkillRecord {
   memory?: TrueSkillMemory
   bkt: LearnerSkillState
+  // The same state under config.shadowBktParams, or null when unused. It is
+  // never read by the selection or scheduling logic.
+  bktShadow: LearnerSkillState | null
   sm2: ReviewSchedule
   fsrs: FsrsCardState | null
   fsrsDueMs: number
@@ -99,8 +121,13 @@ export function simulate(config: SimConfig): SimResult {
     const params = sampleLearnerParams(rng)
     const skills = new Map<string, SkillRecord>()
     for (const skill of config.skills) {
+      const shadowParams = config.shadowBktParams?.(skill.id)
       skills.set(skill.id, {
         bkt: initSkillState(studentId, skill.id),
+        bktShadow: shadowParams
+          ? { ...initSkillState(studentId, skill.id, shadowParams.p_init),
+              p_transit: shadowParams.p_transit, p_slip: shadowParams.p_slip, p_guess: shadowParams.p_guess }
+          : null,
         sm2: initSM2(studentId, skill.id, new Date(start)),
         fsrs: null,
         fsrsDueMs: Infinity,
@@ -123,16 +150,23 @@ export function simulate(config: SimConfig): SimResult {
           (p, id) => p * Math.max(0.05, trueRecallProbability(skills.get(id)?.memory, nowDays)), 1)
 
         const bktPCorrect = record.bkt.p_know * (1 - record.bkt.p_slip) + (1 - record.bkt.p_know) * record.bkt.p_guess
+        const shadowPCorrect = record.bktShadow
+          ? record.bktShadow.p_know * (1 - record.bktShadow.p_slip) + (1 - record.bktShadow.p_know) * record.bktShadow.p_guess
+          : undefined
         const seenBefore = record.lastPracticeDay !== null && record.lastPracticeDay < day
         const sm2Recall = seenBefore ? sm2ImpliedRecall(record.sm2, now) : null
 
         const outcome = practice(rng, params, record.memory, nowDays, prereqRecall)
+        // The learner still really took outcome.latencyMs — the clock below is
+        // unchanged. Only what the schedulers are told about it differs.
+        const signalLatency = config.latencySignal === 'crushed' ? CRUSHED_LATENCY_MS : outcome.latencyMs
 
         const wasMastered = record.bkt.mastery_state === 'mastered'
         record.bkt = bktUpdate(record.bkt, outcome.correct, record.sm2.repetitions)
+        if (record.bktShadow) record.bktShadow = bktUpdate(record.bktShadow, outcome.correct, record.sm2.repetitions)
         record.sm2 = reconcileBktSm2(record.bkt.p_know, wasMastered, record.sm2,
-          bktToQuality(outcome.correct, outcome.latencyMs), now)
-        const fsrs = computeFsrsSchedule(record.fsrs, fsrsRatingFromCorrectness(outcome.correct, outcome.latencyMs), now)
+          bktToQuality(outcome.correct, signalLatency), now)
+        const fsrs = computeFsrsSchedule(record.fsrs, fsrsRatingFromCorrectness(outcome.correct, signalLatency), now)
         const fsrsRecall = seenBefore && record.fsrs ? fsrs.retrievability : null
         record.fsrs = { stability: fsrs.stability, difficulty: fsrs.difficulty, last_review: now.toISOString() }
         record.fsrsDueMs = new Date(fsrs.due_at).getTime()
@@ -143,7 +177,8 @@ export function simulate(config: SimConfig): SimResult {
         events.push({
           student_id: studentId, skill_id: skillId, correct: outcome.correct, timestamp: now.toISOString(),
           is_review: isReview, latency_ms: outcome.latencyMs, true_recall: outcome.recallProbability,
-          bkt_p_correct: bktPCorrect, sm2_p_recall: sm2Recall, fsrs_p_recall: fsrsRecall,
+          bkt_p_correct: bktPCorrect, bkt_shadow_p_correct: shadowPCorrect,
+          sm2_p_recall: sm2Recall, fsrs_p_recall: fsrsRecall,
         })
         clock += outcome.latencyMs + 15_000
       }
@@ -155,6 +190,7 @@ export function simulate(config: SimConfig): SimResult {
         if (!record.introduced) continue
         const reconciled = reconcileBktSm2OnLoad(record.bkt, record.sm2, now)
         record.bkt = reconciled.state
+        if (record.bktShadow) record.bktShadow = reconcileBktSm2OnLoad(record.bktShadow, record.sm2, now).state
       }
       const due = config.skills
         .map(s => ({ id: s.id, due: dueAt(skills.get(s.id)!, config.scheduler) }))

@@ -26,7 +26,7 @@
     "correct_option_id": "b",
     "explanation_after": "An algorithm is a finite, deterministic sequence of steps that takes inputs and produces outputs. Backpropagation, gradient descent, and even the attention mechanism are all algorithms.",
     "graph_placement_weight": {
-      "p2_algorithms_intro": 1.0
+      "p2_algorithms_intro": 1
     }
   },
   {
@@ -34,7 +34,7 @@
     "skill_id": "p2_algorithms_intro",
     "format": "mcq",
     "difficulty_tier": "harder",
-    "stem": "Traditional programming: you write rules \u2192 computer applies them to data. Machine learning: you provide data + answers \u2192 the ______ learns the rules.",
+    "stem": "Traditional programming: you write rules → computer applies them to data. Machine learning: you provide data + answers → the ______ learns the rules.",
     "options": [
       {
         "id": "a",
@@ -56,7 +56,7 @@
     "correct_option_id": "b",
     "explanation_after": "In ML, the training algorithm (like gradient descent) automatically discovers rules from patterns in data. The algorithm does the work of rule-finding.",
     "graph_placement_weight": {
-      "p2_algorithms_intro": 1.0,
+      "p2_algorithms_intro": 1,
       "p3_ai_vs_ml_vs_dl": 0.4
     }
   },
@@ -67,10 +67,22 @@
     "difficulty_tier": "review",
     "stem": "Which property means an algorithm cannot run forever without producing a result?",
     "options": [
-      { "id": "a", "text": "Ambiguity" },
-      { "id": "b", "text": "Termination" },
-      { "id": "c", "text": "Randomness" },
-      { "id": "d", "text": "Recursion" }
+      {
+        "id": "a",
+        "text": "Ambiguity"
+      },
+      {
+        "id": "b",
+        "text": "Termination"
+      },
+      {
+        "id": "c",
+        "text": "Randomness"
+      },
+      {
+        "id": "d",
+        "text": "Recursion"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "Termination is a key property of algorithms. Training loops in ML do terminate (after a set number of epochs or when loss converges).",
@@ -85,14 +97,28 @@
     "difficulty_tier": "same",
     "stem": "Which property of an algorithm means each step must be precisely and unambiguously defined, with no room for interpretation?",
     "options": [
-      { "id": "a", "text": "Definiteness" },
-      { "id": "b", "text": "Termination" },
-      { "id": "c", "text": "Generality" },
-      { "id": "d", "text": "Efficiency" }
+      {
+        "id": "a",
+        "text": "Definiteness"
+      },
+      {
+        "id": "b",
+        "text": "Termination"
+      },
+      {
+        "id": "c",
+        "text": "Generality"
+      },
+      {
+        "id": "d",
+        "text": "Efficiency"
+      }
     ],
     "correct_option_id": "a",
     "explanation_after": "Definiteness means every step is precisely defined — no vagueness about what to do next. It's distinct from termination (the algorithm must eventually finish), but together with finiteness, input, output, and effectiveness, these are the classic properties an algorithm must have.",
-    "graph_placement_weight": { "p2_algorithms_intro": 1.0 }
+    "graph_placement_weight": {
+      "p2_algorithms_intro": 1
+    }
   },
   {
     "id": "p2_alg_q5",
@@ -101,14 +127,28 @@
     "difficulty_tier": "same",
     "stem": "Two different sorting algorithms, bubble sort and quicksort, are both given the same unsorted list. What is necessarily true?",
     "options": [
-      { "id": "a", "text": "They will always take the same amount of time" },
-      { "id": "b", "text": "They will produce the same correctly sorted output, though they may take very different amounts of time to get there" },
-      { "id": "c", "text": "Only one of them can be a valid algorithm" },
-      { "id": "d", "text": "The list must already be sorted before either algorithm can run" }
+      {
+        "id": "a",
+        "text": "They will always take the same amount of time"
+      },
+      {
+        "id": "b",
+        "text": "They will produce the same correctly sorted output, though they may take very different amounts of time to get there"
+      },
+      {
+        "id": "c",
+        "text": "Only one of them can be a valid algorithm"
+      },
+      {
+        "id": "d",
+        "text": "The list must already be sorted before either algorithm can run"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "An algorithm's correctness (does it produce the right output) is separate from its efficiency (how many steps it takes). Different valid algorithms solving the same problem always agree on the final answer but can differ enormously in speed — exactly the distinction Big-O notation is built to measure.",
-    "graph_placement_weight": { "p2_algorithms_intro": 1.0 }
+    "graph_placement_weight": {
+      "p2_algorithms_intro": 1
+    }
   },
   {
     "id": "p2_alg_q6",
@@ -117,13 +157,36 @@
     "difficulty_tier": "harder",
     "stem": "After training, a decision tree model makes predictions by following a fixed sequence of if/else checks on the input features. Before training, the algorithm that built this tree (choosing which feature to split on at each step) was different. What is the key distinction?",
     "options": [
-      { "id": "a", "text": "There is no difference — training and inference use the exact same algorithm" },
-      { "id": "b", "text": "The training algorithm (e.g. greedily picking the best splits from data) runs once to produce the model; the trained model itself is a separate, much simpler algorithm (the fixed if/else steps) that runs every time you make a prediction" },
-      { "id": "c", "text": "Decision trees don't use algorithms at all, only lookup tables" },
-      { "id": "d", "text": "The training algorithm only works during inference, not during training" }
+      {
+        "id": "a",
+        "text": "There is no difference — training and inference use the exact same algorithm"
+      },
+      {
+        "id": "b",
+        "text": "The training algorithm (e.g. greedily picking the best splits from data) runs once to produce the model; the trained model itself is a separate, much simpler algorithm (the fixed if/else steps) that runs every time you make a prediction"
+      },
+      {
+        "id": "c",
+        "text": "Decision trees don't use algorithms at all, only lookup tables"
+      },
+      {
+        "id": "d",
+        "text": "The training algorithm only works during inference, not during training"
+      }
     ],
     "correct_option_id": "b",
     "explanation_after": "The training algorithm (e.g. CART, choosing splits by information gain) is an expensive procedure that runs once to produce a model. That trained model is itself a much simpler, fast algorithm — a fixed sequence of comparisons — used repeatedly at prediction time. This training-vs-inference distinction generalises across ML: gradient descent trains a neural network's weights, and then the forward pass (matrix multiplications) is the fast algorithm used to predict.",
-    "graph_placement_weight": { "p2_algorithms_intro": 1.0, "p4_supervised_learning": 0.3 }
+    "graph_placement_weight": {
+      "p2_algorithms_intro": 1,
+      "p4_supervised_learning": 0.3
+    }
+  },
+  {
+    "id": "p2_algorithms_intro_explain1",
+    "skill_id": "p2_algorithms_intro",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "In your own words, explain What is an Algorithm? — what it is and why it matters. Use an example if it helps.",
+    "explanation_after": "An algorithm is a recipe for solving a problem. Clear steps, definite end, same answer every time."
   }
 ]

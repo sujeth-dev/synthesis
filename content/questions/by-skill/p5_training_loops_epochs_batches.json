@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "zero_grad",
     "explanation_after": "The correct choice is zero_grad."
+  },
+  {
+    "id": "p5_training_loops_epochs_batches_explain1",
+    "skill_id": "p5_training_loops_epochs_batches",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Practice the Deck in Small Hands” situation, explain Training Loops, Epochs & Batches without assuming the listener knows deep learning.",
+    "explanation_after": "A batch is one small group of examples. An epoch is one complete pass through the training dataset."
   }
 ]

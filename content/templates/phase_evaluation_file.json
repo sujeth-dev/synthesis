@@ -1,0 +1,57 @@
+[
+  {
+    "_comment": "TEMPLATE — copy, rename to p{N}_evaluation.json, fill in all fields. One file per phase; 6 questions per Bloom level per phase (36 total).",
+    "_authoring_rules": {
+      "bloom_levels": ["remember", "understand", "apply", "analyze", "evaluate", "create"],
+      "the_hard_rule": "analyze, evaluate and create items MUST NOT be answerable from memory alone. The learner has to work on something — a given scenario, a result, a trade-off, a plan. A prompt verb is not enough: a 2022 study of 940 items found verbs alone do not classify an item's level, which is why every item gets a human pass.",
+      "level_intent": {
+        "remember": "Name or recognise a fact or definition stated in the material.",
+        "understand": "Restate an idea, or recognise it described in unfamiliar words.",
+        "apply": "Use the idea on a concrete case the learner has not been handed the answer for.",
+        "analyze": "Take something apart: given a situation or result, say which part explains it.",
+        "evaluate": "Judge between defensible options against a stated criterion, and say why.",
+        "create": "Choose or assemble a plan for an open goal where more than one option is coherent."
+      },
+      "difficulty": "easy | medium | hard — the authored band. Elo cold-starts from it and sharpens with real answers, so it only has to be roughly right.",
+      "hints": "Exactly two, in order. Hint 1 nudges towards what to think about; hint 2 says how to proceed. NEITHER may contain the correct option's wording — the validator rejects that. No bottom-out hint: a hint that gives the answer is a worked example the learner clicks through to.",
+      "time_target_sec": "What a prepared learner should need. Roughly 30-60 for remember/understand, 60-120 for apply/analyze, 90-180 for evaluate/create. A pace indicator, never a cut-off.",
+      "misconception": "On every distractor, absent on the correct option. Name why someone who has studied would still pick it, so the debrief can say what went wrong rather than only that it was wrong.",
+      "options": "4 options. Distractors must be plausible to a learner who half-knows the material; a joke option teaches nothing and inflates the score."
+    },
+    "id": "pN_eval_TOPIC_LEVEL",
+    "phase": "phase_N_...",
+    "skill_id": "SKILL_ID",
+    "bloom_level": "analyze",
+    "format": "mcq",
+    "difficulty": "medium",
+    "time_target_sec": 90,
+    "stem": "A concrete situation, then the question about it.",
+    "options": [
+      {
+        "id": "a",
+        "text": "The correct option"
+      },
+      {
+        "id": "b",
+        "text": "A plausible wrong option",
+        "misconception": "Why a half-informed learner picks this."
+      },
+      {
+        "id": "c",
+        "text": "A second plausible wrong option",
+        "misconception": "Why a half-informed learner picks this."
+      },
+      {
+        "id": "d",
+        "text": "A third plausible wrong option",
+        "misconception": "Why a half-informed learner picks this."
+      }
+    ],
+    "correct_option_id": "a",
+    "hints": [
+      "A nudge: what is worth looking at first, without naming it.",
+      "How to proceed: the step to take, still without giving the answer."
+    ],
+    "explanation_after": "Why the right answer is right, and what the situation in the stem was actually testing."
+  }
+]

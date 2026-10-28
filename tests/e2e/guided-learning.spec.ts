@@ -29,14 +29,17 @@ test('the guided journey persists, adapts, and completes without repeating or sw
     const diagnostic = await page.request.post('/api/diagnostic', {
       data: {
         results: [
+          // The server grades from the raw answer (a client-sent `correct` is ignored).
           {
+            question_id: 'dq_01',
             skill_id: 'p1_what_is_computer',
-            correct: true,
+            answer: 'b', // correct
             graph_placement_weight: { p1_what_is_computer: 1 },
           },
           {
+            question_id: 'dq_02',
             skill_id: 'p1_binary_numbers',
-            correct: false,
+            answer: 'a', // wrong (correct is 'c')
             graph_placement_weight: { p1_binary_numbers: 1 },
           },
         ],

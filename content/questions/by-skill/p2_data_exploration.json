@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "With 98/2 imbalance, a model predicting 'class 0' for everything scores 98% accuracy while being useless. EDA surfacing this imbalance is what should trigger choosing metrics sensitive to the minority class (precision/recall/F1/AUC) and considering class weights, oversampling (e.g. SMOTE), or undersampling during training — decisions made before modelling because EDA revealed them.",
-    "graph_placement_weight": { "p2_data_exploration": 1.0, "p4_supervised_learning": 0.4 }
+    "graph_placement_weight": {
+      "p2_data_exploration": 1,
+      "p4_supervised_learning": 0.4
+    }
   },
   {
     "id": "p2_data_exploration_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Any statistic computed for preprocessing (mean, std, min/max, PCA components, imputation values) must be fit only on the training set, then applied — transform, not fit — to the test set. Fitting on combined data lets test-set information subtly leak into the numbers used to prepare training data, inflating test performance in a way that won't hold up on truly new, unseen data. This is one of the most common and dangerous mistakes in real ML pipelines.",
-    "graph_placement_weight": { "p2_data_exploration": 1.0, "p4_supervised_learning": 0.4 }
+    "graph_placement_weight": {
+      "p2_data_exploration": 1,
+      "p4_supervised_learning": 0.4
+    }
+  },
+  {
+    "id": "p2_data_exploration_explain1",
+    "skill_id": "p2_data_exploration",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What are the 5 key questions EDA should answer? Why should you always check for missing values before modelling? What does a correlation matrix tell you?",
+    "explanation_after": "Never train a model on data you haven't explored. EDA (Exploratory Data Analysis) finds data quality issues, reveals patterns, and guides feature engineering — all before writing a single model."
   }
 ]

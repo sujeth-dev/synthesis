@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p5_batch_normalization": 1
     }
+  },
+  {
+    "id": "p5_batch_normalization_explain1",
+    "skill_id": "p5_batch_normalization",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Keep the Gauges Readable” situation, explain Batch Normalization without assuming the listener knows deep learning.",
+    "explanation_after": "Batch normalization recenters and rescales a layer’s values using measurements from the current training batch."
   }
 ]

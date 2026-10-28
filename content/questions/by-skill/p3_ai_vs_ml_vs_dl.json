@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "The 'deep' in deep learning refers to having multiple hidden layers that let the network build a hierarchy of learned features. A network with a single hidden layer is a legitimate neural network and a form of ML, but with only one layer it can't build that feature hierarchy — practitioners call this a shallow network, reserving 'deep learning' for architectures with several stacked hidden layers."
+  },
+  {
+    "id": "p3_ai_vs_ml_vs_dl_explain1",
+    "skill_id": "p3_ai_vs_ml_vs_dl",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Draw the three nested circles from memory and explain what makes each one different. Give a real example of something that is ML but NOT deep learning.",
+    "explanation_after": "AI is the big idea. ML is one way to achieve it. Deep Learning is one type of ML that's currently winning."
   }
 ]

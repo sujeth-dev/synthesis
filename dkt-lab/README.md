@@ -5,7 +5,7 @@ A standalone research dashboard comparing **Bayesian Knowledge Tracing (BKT)** a
 interactive, in-browser explainer of how each model works.
 
 Everything lives in `dkt-lab/`. It does not import from, or change, the Synaptic
-app (`src/`, `content/`, `Research/`, `scripts/`, root `package.json`). The style
+app (`src/`, `content/`, `Research/`, `scripts/`, root `package.json`); the Scheduling and Synaptic app tabs only *read* results the app has already committed. The style
 and tab structure follow the *Adaptive Learning System Lab* reference, but with
 real datasets and a static-site architecture instead of a Flask server.
 
@@ -31,13 +31,19 @@ dkt-lab/
 
 1. **Overview** – dataset picker, headline tiles, one-line verdict chosen from the numbers.
 2. **Datasets** – stats table, sequence-length distributions, full provenance, skipped datasets.
-3. **Model comparison** – BKT vs DKT on AUC / log-loss / RMSE / accuracy, ROC curves, per-skill AUC, cross-dataset table (and, from Lab 6, the DKT tuning section).
-4. **Learning curves** – P(correct) by practice opportunity: actual vs BKT vs DKT.
+3. **Model comparison** – opens with a before → after scoreboard for the app's own DKT (synthetic); then BKT vs DKT on AUC / log-loss / RMSE / accuracy, ROC curves, per-skill AUC, cross-dataset table (and, from Lab 6, the DKT tuning section).
+4. **Learning curves** – opens with the original aggregate curve (BKT close to the real rate, DKT far, out to ~30 attempts) and what it turned out to be, then a before → after story for the app (what changed, the curve before and after, growth reproduced) read from `app/learning-curves-before-after.json`; then P(correct) by practice opportunity: actual vs BKT vs DKT. From
+   Lab 7–9: a cohort curve that holds the (student, skill) population fixed, a growth-fidelity
+   table with no-learning baselines for comparison, the aggregate curve extended to each
+   dataset's real maximum with the selection effect quantified, and the mechanism measures.
 5. **Skill heatmap** – predicted P(correct) per skill for 20 held-out students, BKT and DKT side by side.
 6. **How BKT & DKT work** – the live explainer: step through a held-out student or build a sequence; BKT's Bayes update per step vs the LSTM's hidden state, all-skill predictions and transfer; running AUC.
-7. **Scheduling** – SM-2 vs FSRS from `Research/sim/results/scheduler-comparison.json` (copied unchanged; synthetic).
-8. **Report outputs** – `[VALUE]`, `[TABLE]`, `[GRAPH]`, `[TEXT]` placeholders filled with this lab's numbers, copy buttons, graphs as PNG via `canvas.toDataURL`.
-9. **Method & limitations** – pipeline and caveats.
+7. **Scheduling** – the review loop as a conversation (one scripted learner through the app's real SM-2 and FSRS functions, `scheduling-walkthrough.json`), the interval chart, then SM-2 vs FSRS across a population (`scheduler-comparison.json`) and what the broken timing signal cost (`latency-signal-impact.json`). All copied unchanged; synthetic or illustration, labelled as such.
+8. **Behaviours** – one page on the behaviour signals: a timeline of one answer, how each is registered, what it changes in BKT, the review grade and the session, graphs computed by the app's own functions (`behaviour-effects.json`), and where each shows up in the running app (schematics, labelled as such).
+9. **Synaptic app** – what was done with these findings in the application: the retrained DKT, the cutover gate's three conditions, and per-skill BKT. Read from `Research/dkt/results` and `Research/bkt/results`, copied unchanged into `web/public/data/app/` and checked by `check_web.py` (synthetic).
+10. **Real-app guide** – one page for the six asks: state, where in the code, how to see each in the running app, why anything is not live, where each behaviour signal is tracked, and how DKT and FSRS would be promoted.
+11. **Report outputs** – `[VALUE]`, `[TABLE]`, `[GRAPH]`, `[TEXT]` placeholders filled with this lab's numbers, copy buttons, graphs as PNG via `canvas.toDataURL`.
+12. **Method & limitations** – pipeline and caveats.
 
 BKT is always blue and DKT always rust; light and dark themes; works at 400 px; `prefers-reduced-motion` disables animation.
 
@@ -67,6 +73,11 @@ No dataset had more than 300 skills, so no skill trimming was needed (the code p
 BKT: per-skill EM. DKT: LSTM, hidden 100, lr 1e-3, 10 epochs, no tuning. These
 numbers are `pipeline/results/*.json`; `python pipeline/check_web.py` verifies the
 website's JSON equals them exactly.
+
+> **These are ranking metrics, and ranking is not the whole story.** Lab 7–9 found
+> that on ASSISTments 2009 DKT wins every column above while reproducing only 56% of
+> the growth a learner actually shows, against BKT's 82%. AUC cannot see a slope. See
+> [`FINDINGS-CURVES.md`](FINDINGS-CURVES.md) and the Learning curves tab.
 
 ## Lab 6: DKT tuning on the Synaptic simulator
 
@@ -114,7 +125,7 @@ Time features (log1p days since this skill was last practised, log1p days
 since the previous answer, log1p prior attempts on this skill) exist only for
 the simulator; none of the three real/paper datasets has timestamps.
 
-**Conclusion.** DKT now ranks first on the Synaptic simulator, but only narrowly: its best variant (“best A + time features on input + upcoming attempt”) reaches test AUC 0.7356 against 0.7285 for the best BKT (“Per-skill BKT (EM)”), a gain of +0.0071 (95% bootstrap interval over test learners +0.0032 to +0.0109) with log-loss 0.5964 vs 0.5985. That is below the +0.02 AUC the app's gate (src/lib/dkt/compare.ts) requires, so the gate's answer is still “don't switch”. The evidence: the untuned Lab 3 DKT lost (0.7062) mainly because it was under-trained — early stopping with a higher learning rate alone lifted it to 0.7287 (validation 0.7277, level with BKT's 0.7285). Time features, the suspected cause, helped but only a little (0.7356, +0.0055 on validation), because the simulator's learners forget slowly over 60 days and most of the remaining error is elsewhere: on first attempts at a skill (2,801 test answers) BKT scores 0.504 and DKT 0.493; on repeats after a day or more (10,925) 0.638 vs 0.651. DKT+ regularisation did not help (best 0.7276 validation). More data is the lever that matters: per-skill BKT stays flat while DKT keeps improving, so the gap goes +0.0071 at 1,000, +0.0192 at 3,000, +0.0196 at 5,000 learners, flattening between 3,000 and 5,000 and still just short of +0.02 at 5,000. Both models remain far below the simulator's own ground-truth ceiling (0.8438), which knows each learner's hidden memory state; that gap, not BKT vs DKT, is where the headroom is.
+**Conclusion.** DKT now ranks first on the Synaptic simulator, but only narrowly: its best variant (“best A + time features on input + upcoming attempt”) reaches test AUC 0.7356 against 0.7285 for the best BKT (“Per-skill BKT (EM)”), a gain of +0.0071 (95% bootstrap interval over test learners +0.0032 to +0.0109) with log-loss 0.5964 vs 0.5985. That is below the +0.02 AUC the app's gate (src/lib/dkt/compare.ts) requires, so the gate's answer is still “don't switch”. The evidence: the untuned Lab 3 DKT lost (0.7062) mainly because it was under-trained — early stopping with a higher learning rate alone lifted it to 0.7287 (validation 0.7277, level with BKT's 0.7285). Time features, the suspected cause, helped but only a little (0.7356, +0.0055 on validation), because the simulator's learners forget slowly over 60 days and most of the remaining error is elsewhere: on first attempts at a skill (2,801 test answers) BKT scores 0.504 and DKT 0.493; on repeats after a day or more (10,925) 0.638 vs 0.651. DKT+ regularisation did not help (best 0.7276 validation). **[Corrected by Lab 9: that verdict was reached on validation AUC, which cannot see a learning curve. Judged on cohort-curve growth fidelity, DKT+ reconstruction at lambda_r = 0.1 raises the simulator's slope ratio from 0.56 to 0.71 while also improving test AUC from 0.7062 to 0.7193. See FINDINGS-CURVES.md.]** More data is the lever that matters: per-skill BKT stays flat while DKT keeps improving, so the gap goes +0.0071 at 1,000, +0.0192 at 3,000, +0.0196 at 5,000 learners, flattening between 3,000 and 5,000 and still just short of +0.02 at 5,000. Both models remain far below the simulator's own ground-truth ceiling (0.8438), which knows each learner's hidden memory state; that gap, not BKT vs DKT, is where the headroom is.
 
 **App export.** No app-format export: the best DKT variant does not beat tuned BKT by ≥ 0.02 test AUC, so the condition for exporting it to the app's synaptic-dkt.json format is not met. The app is unchanged. If a later variant does pass, the
 app would need: (1) a loader for the `dkt-lab-time-v1` weights format
@@ -142,13 +153,63 @@ python export.py && python export.py --fixture             # web/public/data + p
 python check_web.py                                        # site numbers == results
 python -m pytest -q tests
 python tune.py && python tuning_report.py && python export.py   # Lab 6 (about 15 min on 4 CPUs)
+python diagnose.py && python diagnosis_report.py --write        # Lab 7-8 curve diagnosis (~2 min, no torch)
+python improve.py                                               # Lab 9 fix sweep (about 20 min on 4 CPUs)
 ```
+
+`diagnose.py` needs no training and no torch: it reproduces the committed DKT
+predictions from `web/public/data/<dataset>/dkt_weights.json` with a numpy forward
+pass, and refuses to run if they do not match the committed metrics.
 
 Or everything at once: `python run_all.py --tuning`.
 
 Copied-and-adapted files carry a note at the top saying where they came from
 (`Research/dkt/split.py`, `bkt_baseline.py`, `train_dkt.py`, `evaluate.py`,
 `export_weights.py`, `preprocess.py`); nothing is imported across folders.
+
+## Lab 7-9: learning curves, and what the aggregate metrics hide
+
+`pipeline/diagnose.py` measures whether a model represents *learning*; `pipeline/improve.py`
+tries to fix what it finds; `pipeline/diagnosis_report.py` writes the tables into
+[`FINDINGS-CURVES.md`](FINDINGS-CURVES.md). Everything is on the Learning curves tab.
+
+**The question.** On ASSISTments 2009, DKT beats per-skill BKT by +0.087 AUC while the
+learning curve this lab published for it looked flat. AUC is a pure ranking measure; a
+learning curve is about growth. They were disagreeing and nothing could say which was right.
+
+**The measurement was wrong first.** The old curve stopped at opportunity 20, ended at the
+first thin bucket, and averaged a different population at every point. Measured over
+everyone the observed slope on assist2009 is **-0.0020**; over a fixed cohort it is
+**+0.0123**. Opposite signs: averaged across everyone, learners appear to get *worse* with
+practice, because the ones still answering a skill for the fifteenth time are the ones
+getting it wrong. Judged against that curve, a model is rewarded for predicting a decline
+no individual learner experiences.
+
+**The real defect is smaller and different.** Held to a fixed cohort, DKT does rise — at
+56% of the observed rate against BKT's 82%. It has not merely memorised difficulty either:
+the best no-learning baseline (skill difficulty + student ability, log-odds) reaches AUC
+0.7196 where DKT reaches 0.8167. Those baselines are included on the tab so "flat" has a
+visible reference.
+
+**The fix.** DKT+'s reconstruction penalty at `lambda_r = 0.1` raises the slope ratio by
++0.14 on assist2009 and +0.15 on the simulator, neutral on assist2015, at no meaningful AUC
+cost (it *gains* 0.0131 on the simulator). Lab 6 ran the same configuration and recorded
+that DKT+ "did not help" — selected on AUC, where its difference is -0.002, noise, against
+a slope difference of +0.12. Stronger settings do not generalise: `lambda_r = 1.0` is the
+best variant on assist2009 and the worst on the simulator.
+
+**What it does not fix.** Even with `lambda_r = 0.1`, DKT tracks learning worse than
+per-skill BKT on every dataset tested (0.70 vs 0.82, 0.33 vs 0.43, 0.71 vs 0.89) while
+beating it on AUC on two of three. The gap narrows; it does not close.
+
+**Consequence for the app.** `src/lib/dkt/compare.ts` gates a live cutover on
+`n >= 5000`, `AUC gain >= 0.02` and no worse log-loss. On assist2009 DKT clears that while
+reproducing 56% of observed growth, so the gate cannot see this failure. FINDINGS-CURVES.md
+proposes a do-no-harm growth term. Nothing under `src/` is changed by Labs 7-9.
+
+Also recorded there: Synthetic-5 cannot have a learning curve at all (every (student,
+exercise) pair is answered once), so the single point this lab used to publish as its curve
+was never one.
 
 ## Deploy on Vercel (separately from the Synaptic app)
 

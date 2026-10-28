@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p5_learning_rate_and_hyperparameters": 1
     }
+  },
+  {
+    "id": "p5_learning_rate_and_hyperparameters_explain1",
+    "skill_id": "p5_learning_rate_and_hyperparameters",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Choose the Step Size” situation, explain Learning Rate & Hyperparameters without assuming the listener knows deep learning.",
+    "explanation_after": "The learning rate controls how far weights move on each update. Too high can make loss bounce or explode; too low can make learning crawl."
   }
 ]

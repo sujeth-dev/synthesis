@@ -4,29 +4,29 @@
     "skill_id": "p2_math_matrices",
     "format": "mcq",
     "difficulty_tier": "review",
-    "stem": "What is the shape of the result when multiplying a (3\u00d74) matrix by a (4\u00d75) matrix?",
+    "stem": "What is the shape of the result when multiplying a (3×4) matrix by a (4×5) matrix?",
     "options": [
       {
         "id": "a",
-        "text": "(3\u00d75)"
+        "text": "(3×5)"
       },
       {
         "id": "b",
-        "text": "(4\u00d74)"
+        "text": "(4×4)"
       },
       {
         "id": "c",
-        "text": "(3\u00d74\u00d75)"
+        "text": "(3×4×5)"
       },
       {
         "id": "d",
-        "text": "Error \u2014 they can't be multiplied"
+        "text": "Error — they can't be multiplied"
       }
     ],
     "correct_option_id": "a",
-    "explanation_after": "Matrix multiply rule: (m\u00d7n) \u00d7 (n\u00d7p) = (m\u00d7p). The inner dimensions must match (both 4). Result shape is outer dimensions: 3\u00d75. Most PyTorch errors are shape mismatches.",
+    "explanation_after": "Matrix multiply rule: (m×n) × (n×p) = (m×p). The inner dimensions must match (both 4). Result shape is outer dimensions: 3×5. Most PyTorch errors are shape mismatches.",
     "graph_placement_weight": {
-      "p2_math_matrices": 1.0
+      "p2_math_matrices": 1
     }
   },
   {
@@ -54,9 +54,9 @@
       }
     ],
     "correct_option_id": "b",
-    "explanation_after": "(32\u00d7128) @ (128\u00d764) = (32\u00d764). The inner 128s cancel. You go from 32 examples with 128 features to 32 examples with 64 features. This is every linear layer in every neural network.",
+    "explanation_after": "(32×128) @ (128×64) = (32×64). The inner 128s cancel. You go from 32 examples with 128 features to 32 examples with 64 features. This is every linear layer in every neural network.",
     "graph_placement_weight": {
-      "p2_math_matrices": 1.0,
+      "p2_math_matrices": 1,
       "p5_neural_network_basics": 0.5
     }
   },
@@ -67,13 +67,25 @@
     "difficulty_tier": "review",
     "stem": "Which Python operator performs matrix multiplication in NumPy and PyTorch?",
     "options": [
-      { "id": "a", "text": "*" },
-      { "id": "b", "text": "@" },
-      { "id": "c", "text": "//" },
-      { "id": "d", "text": "**" }
+      {
+        "id": "a",
+        "text": "*"
+      },
+      {
+        "id": "b",
+        "text": "@"
+      },
+      {
+        "id": "c",
+        "text": "//"
+      },
+      {
+        "id": "d",
+        "text": "**"
+      }
     ],
     "correct_option_id": "b",
-    "explanation_after": "The @ symbol is Python's matrix multiplication operator (Python 3.5+). result = A @ B. You'll also see torch.matmul(A, B) or np.dot(A, B) \u2014 they do the same thing.",
+    "explanation_after": "The @ symbol is Python's matrix multiplication operator (Python 3.5+). result = A @ B. You'll also see torch.matmul(A, B) or np.dot(A, B) — they do the same thing.",
     "graph_placement_weight": {
       "p2_math_matrices": 0.9
     }
@@ -85,30 +97,58 @@
     "difficulty_tier": "same",
     "stem": "What is the shape of the transpose of a matrix with shape (5, 3)?",
     "options": [
-      { "id": "a", "text": "(5, 3)" },
-      { "id": "b", "text": "(3, 5)" },
-      { "id": "c", "text": "(8,)" },
-      { "id": "d", "text": "(15,)" }
+      {
+        "id": "a",
+        "text": "(5, 3)"
+      },
+      {
+        "id": "b",
+        "text": "(3, 5)"
+      },
+      {
+        "id": "c",
+        "text": "(8,)"
+      },
+      {
+        "id": "d",
+        "text": "(15,)"
+      }
     ],
     "correct_option_id": "b",
-    "explanation_after": "Transposing swaps rows and columns: a (5, 3) matrix becomes (3, 5). Transposes are used constantly in ML \u2014 for example to align dimensions for multiplication, as in X @ W.T inside a linear layer.",
-    "graph_placement_weight": { "p2_math_matrices": 1.0 }
+    "explanation_after": "Transposing swaps rows and columns: a (5, 3) matrix becomes (3, 5). Transposes are used constantly in ML — for example to align dimensions for multiplication, as in X @ W.T inside a linear layer.",
+    "graph_placement_weight": {
+      "p2_math_matrices": 1
+    }
   },
   {
     "id": "p2_mat_q5",
     "skill_id": "p2_math_matrices",
     "format": "mcq",
     "difficulty_tier": "same",
-    "stem": "For two (2\u00d72) matrices A and B, which correctly distinguishes element-wise multiplication from matrix multiplication?",
+    "stem": "For two (2×2) matrices A and B, which correctly distinguishes element-wise multiplication from matrix multiplication?",
     "options": [
-      { "id": "a", "text": "A * B multiplies corresponding elements; A @ B computes the matrix product (row\u00b7column dot products)" },
-      { "id": "b", "text": "A * B and A @ B always give the same result for square matrices" },
-      { "id": "c", "text": "A * B is matrix multiplication; A @ B is element-wise" },
-      { "id": "d", "text": "Neither operation is defined for matrices" }
+      {
+        "id": "a",
+        "text": "A * B multiplies corresponding elements; A @ B computes the matrix product (row·column dot products)"
+      },
+      {
+        "id": "b",
+        "text": "A * B and A @ B always give the same result for square matrices"
+      },
+      {
+        "id": "c",
+        "text": "A * B is matrix multiplication; A @ B is element-wise"
+      },
+      {
+        "id": "d",
+        "text": "Neither operation is defined for matrices"
+      }
     ],
     "correct_option_id": "a",
-    "explanation_after": "* (or np.multiply) performs Hadamard (element-wise) multiplication \u2014 same-shape arrays, each entry multiplied independently. @ (or np.matmul) performs true matrix multiplication \u2014 row-by-column dot products. Confusing the two is one of the most common bugs when implementing neural network layers by hand.",
-    "graph_placement_weight": { "p2_math_matrices": 1.0 }
+    "explanation_after": "* (or np.multiply) performs Hadamard (element-wise) multiplication — same-shape arrays, each entry multiplied independently. @ (or np.matmul) performs true matrix multiplication — row-by-column dot products. Confusing the two is one of the most common bugs when implementing neural network layers by hand.",
+    "graph_placement_weight": {
+      "p2_math_matrices": 1
+    }
   },
   {
     "id": "p2_mat_q6",
@@ -117,13 +157,36 @@
     "difficulty_tier": "harder",
     "stem": "A dataset has 1000 examples, each with 20 features, stored as matrix X with shape (1000, 20). A linear regression model has weights w with shape (20, 1). What does X @ w compute, and what is its shape?",
     "options": [
-      { "id": "a", "text": "One single prediction for the whole dataset; shape (1,)" },
-      { "id": "b", "text": "A prediction for every example in one matrix multiplication; shape (1000, 1)" },
-      { "id": "c", "text": "It is invalid because X has more rows than w" },
-      { "id": "d", "text": "The sum of all features; shape (20, 1)" }
+      {
+        "id": "a",
+        "text": "One single prediction for the whole dataset; shape (1,)"
+      },
+      {
+        "id": "b",
+        "text": "A prediction for every example in one matrix multiplication; shape (1000, 1)"
+      },
+      {
+        "id": "c",
+        "text": "It is invalid because X has more rows than w"
+      },
+      {
+        "id": "d",
+        "text": "The sum of all features; shape (20, 1)"
+      }
     ],
     "correct_option_id": "b",
-    "explanation_after": "(1000\u00d720) @ (20\u00d71) = (1000\u00d71) \u2014 the inner 20s cancel, leaving one predicted value per example. This is the entire point of representing a dataset as a matrix: one matrix multiplication computes all 1000 predictions (1000 dot products) simultaneously, instead of looping over each row in Python.",
-    "graph_placement_weight": { "p2_math_matrices": 1.0, "p2_big_o_basics": 0.3 }
+    "explanation_after": "(1000×20) @ (20×1) = (1000×1) — the inner 20s cancel, leaving one predicted value per example. This is the entire point of representing a dataset as a matrix: one matrix multiplication computes all 1000 predictions (1000 dot products) simultaneously, instead of looping over each row in Python.",
+    "graph_placement_weight": {
+      "p2_math_matrices": 1,
+      "p2_big_o_basics": 0.3
+    }
+  },
+  {
+    "id": "p2_math_matrices_explain1",
+    "skill_id": "p2_math_matrices",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the drink-machine story, explain what a matrix row means and why the number of columns must match the number of inputs.",
+    "explanation_after": "A matrix is a tidy wall of mixing knobs: each row turns the same inputs into one new result."
   }
 ]

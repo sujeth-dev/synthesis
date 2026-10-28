@@ -2,6 +2,9 @@ import { getDb, generateId } from '@/lib/db'
 import type {
   LearnerProfile, LearnerSkillState, ReviewSchedule,
   AttemptEvent, Session, MotivationState, FsrsShadowLogEntry, DktShadowLogEntry,
+  ExplanationGrade, BehaviorQualityShadowEntry, BktParamShadowEntry,
+  QuestionRating, LearnerAbility, Phase, SelectionShadowEntry,
+  ExamRun, ExamItemEvent,
 } from '@/types'
 
 // ─────────────────────────────────────────────
@@ -289,6 +292,16 @@ export async function getLastFsrsShadowEntry(learnerId: string, skillId: string)
   return data
 }
 
+export async function getFsrsShadowEntries(learnerId: string, limit: number): Promise<FsrsShadowLogEntry[]> {
+  const { data } = await getDb()
+    .from('fsrs_shadow_log')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
 export async function insertFsrsShadowLog(entry: Omit<FsrsShadowLogEntry, 'id' | 'created_at'>): Promise<void> {
   const { error } = await getDb().from('fsrs_shadow_log').insert({
     ...entry,
@@ -313,6 +326,18 @@ export async function getAttemptHistory(learnerId: string, limit: number): Promi
   return (data ?? []).reverse()
 }
 
+// Level 13: /engine reads the shadow logs back. They stay observational — this
+// is a display of what they recorded, never an input to the engine.
+export async function getDktShadowEntries(learnerId: string, limit: number): Promise<DktShadowLogEntry[]> {
+  const { data } = await getDb()
+    .from('dkt_shadow_log')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
 export async function insertDktShadowLog(entry: Omit<DktShadowLogEntry, 'id' | 'created_at'>): Promise<void> {
   const { error } = await getDb().from('dkt_shadow_log').insert({
     ...entry,
@@ -320,6 +345,267 @@ export async function insertDktShadowLog(entry: Omit<DktShadowLogEntry, 'id' | '
     created_at: new Date().toISOString(),
   })
   if (error) throw new Error(`DKT shadow log insert failed: ${error.message}`)
+}
+
+// ─────────────────────────────────────────────
+// BEHAVIOUR QUALITY SHADOW (Level 11 — requires migration 007)
+// ─────────────────────────────────────────────
+
+// Throws on failure; the attempt route swallows it, like the FSRS and DKT
+// shadow writes — an observational log can never fail an attempt.
+export async function insertBehaviorQualityShadow(entry: Omit<BehaviorQualityShadowEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('behavior_quality_shadow').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`Behaviour quality shadow insert failed: ${error.message}`)
+}
+
+export async function getBehaviorQualityShadow(learnerId: string, limit: number): Promise<BehaviorQualityShadowEntry[]> {
+  const { data } = await getDb()
+    .from('behavior_quality_shadow')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+// ─────────────────────────────────────────────
+// PER-SKILL BKT PARAMETERS (Level 16 — requires migration 008)
+// ─────────────────────────────────────────────
+
+export async function insertBktParamShadow(entry: Omit<BktParamShadowEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('bkt_param_shadow').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`BKT parameter shadow insert failed: ${error.message}`)
+}
+
+export async function getBktParamShadow(learnerId: string, limit: number): Promise<BktParamShadowEntry[]> {
+  const { data } = await getDb()
+    .from('bkt_param_shadow')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+// ─────────────────────────────────────────────
+// ELO RATINGS (SCORE-1 — requires migration 009)
+// ─────────────────────────────────────────────
+
+// These four throw on failure; /api/attempt swallows it, like every other
+// observational write — a rating is never worth losing an attempt over.
+
+export async function getQuestionRating(questionId: string): Promise<QuestionRating | null> {
+  const { data } = await getDb()
+    .from('question_ratings')
+    .select('*')
+    .eq('question_id', questionId)
+    .maybeSingle()
+  return data ?? null
+}
+
+export async function upsertQuestionRating(rating: Omit<QuestionRating, 'updated_at'>): Promise<void> {
+  const { error } = await getDb()
+    .from('question_ratings')
+    .upsert({ ...rating, updated_at: new Date().toISOString() }, { onConflict: 'question_id' })
+  if (error) throw new Error(`Question rating upsert failed: ${error.message}`)
+}
+
+export async function getQuestionRatingsForSkills(skillIds: string[]): Promise<QuestionRating[]> {
+  if (skillIds.length === 0) return []
+  const { data } = await getDb()
+    .from('question_ratings')
+    .select('*')
+    .in('skill_id', skillIds)
+  return data ?? []
+}
+
+export async function getLearnerAbility(learnerId: string, phase: Phase): Promise<LearnerAbility | null> {
+  const { data } = await getDb()
+    .from('learner_ability')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .eq('phase', phase)
+    .maybeSingle()
+  return data ?? null
+}
+
+export async function upsertLearnerAbility(ability: Omit<LearnerAbility, 'updated_at'>): Promise<void> {
+  const { error } = await getDb()
+    .from('learner_ability')
+    .upsert({ ...ability, updated_at: new Date().toISOString() }, { onConflict: 'learner_id,phase' })
+  if (error) throw new Error(`Learner ability upsert failed: ${error.message}`)
+}
+
+// ─────────────────────────────────────────────
+// SELECTION SHADOW (SCORE-3 — requires migration 010)
+// ─────────────────────────────────────────────
+
+// Throws on failure; /api/session swallows it — a comparison row can never
+// cost a learner their next task.
+export async function insertSelectionShadow(entry: Omit<SelectionShadowEntry, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('selection_shadow').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`Selection shadow insert failed: ${error.message}`)
+}
+
+export async function getSelectionShadow(learnerId: string, limit: number): Promise<SelectionShadowEntry[]> {
+  const { data } = await getDb()
+    .from('selection_shadow')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+// ─────────────────────────────────────────────
+// DATE-RANGED READS (OLM-2)
+// ─────────────────────────────────────────────
+
+// Every other reader here is `order(desc).limit(n)`, which is right for "what
+// happened lately" and wrong for "how am I doing": /profile's accuracy and
+// activity strip used to be computed over only the last 200 attempts, whatever
+// the learner's history. These read a whole window, a page at a time, because
+// PostgREST caps a single response.
+
+const PAGE_SIZE = 1000
+// A hard stop so a runaway history cannot turn one page view into a scan.
+const MAX_ROWS = 20_000
+
+async function readWindow<T>(table: string, learnerId: string, timeField: string, since: Date, until: Date): Promise<T[]> {
+  const rows: T[] = []
+  for (let from = 0; from < MAX_ROWS; from += PAGE_SIZE) {
+    const { data, error } = await getDb()
+      .from(table)
+      .select('*')
+      .eq('learner_id', learnerId)
+      .gte(timeField, since.toISOString())
+      .lt(timeField, until.toISOString())
+      .order(timeField, { ascending: true })
+      .range(from, from + PAGE_SIZE - 1)
+    if (error || !data) break
+    rows.push(...(data as T[]))
+    if (data.length < PAGE_SIZE) break
+  }
+  return rows
+}
+
+export function getAttemptsBetween(learnerId: string, since: Date, until: Date): Promise<AttemptEvent[]> {
+  return readWindow<AttemptEvent>('attempt_events', learnerId, 'attempted_at', since, until)
+}
+
+export function getBehaviorQualityShadowBetween(learnerId: string, since: Date, until: Date): Promise<BehaviorQualityShadowEntry[]> {
+  return readWindow<BehaviorQualityShadowEntry>('behavior_quality_shadow', learnerId, 'created_at', since, until)
+}
+
+export function getExamItemsBetween(learnerId: string, since: Date, until: Date): Promise<ExamItemEvent[]> {
+  return readWindow<ExamItemEvent>('exam_item_events', learnerId, 'created_at', since, until)
+}
+
+// ─────────────────────────────────────────────
+// EXAM RUNS (EXAM-2 — requires migration 011)
+// ─────────────────────────────────────────────
+
+// These throw: unlike the shadow logs, the exam *is* these rows, so a missing
+// migration has to surface as an error rather than an exam that forgets.
+
+export async function createExamRun(run: Omit<ExamRun, 'id' | 'created_at'>): Promise<ExamRun> {
+  const row = { ...run, id: generateId(), created_at: new Date().toISOString() }
+  const { error } = await getDb().from('exam_runs').insert(row)
+  if (error) throw new Error(`Exam run insert failed: ${error.message}`)
+  return row
+}
+
+export async function getExamRun(runId: string, learnerId: string): Promise<ExamRun | null> {
+  const { data } = await getDb()
+    .from('exam_runs')
+    .select('*')
+    .eq('id', runId)
+    .eq('learner_id', learnerId)
+    .maybeSingle()
+  return data ?? null
+}
+
+export async function updateExamRun(runId: string, patch: Partial<Omit<ExamRun, 'id' | 'learner_id'>>): Promise<void> {
+  const { error } = await getDb().from('exam_runs').update(patch).eq('id', runId)
+  if (error) throw new Error(`Exam run update failed: ${error.message}`)
+}
+
+export async function getExamRuns(learnerId: string, limit: number): Promise<ExamRun[]> {
+  const { data } = await getDb()
+    .from('exam_runs')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+export async function getExamItems(runId: string): Promise<ExamItemEvent[]> {
+  const { data } = await getDb()
+    .from('exam_item_events')
+    .select('*')
+    .eq('run_id', runId)
+    .order('position', { ascending: true })
+  return data ?? []
+}
+
+export async function getLearnerExamItems(learnerId: string, limit: number): Promise<ExamItemEvent[]> {
+  const { data } = await getDb()
+    .from('exam_item_events')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
+}
+
+export async function insertExamItem(item: Omit<ExamItemEvent, 'id' | 'created_at'>): Promise<ExamItemEvent> {
+  const row = { ...item, id: generateId(), created_at: new Date().toISOString() }
+  const { error } = await getDb().from('exam_item_events').insert(row)
+  if (error) throw new Error(`Exam item insert failed: ${error.message}`)
+  return row
+}
+
+export async function updateExamItem(itemId: string, patch: Partial<Omit<ExamItemEvent, 'id' | 'run_id' | 'learner_id'>>): Promise<void> {
+  const { error } = await getDb().from('exam_item_events').update(patch).eq('id', itemId)
+  if (error) throw new Error(`Exam item update failed: ${error.message}`)
+}
+
+// ─────────────────────────────────────────────
+// EXPLANATION GRADES (Level 10 — requires migration 006)
+// ─────────────────────────────────────────────
+
+// Throws on failure; the attempt route swallows it, so a deployment without
+// migration 006 loses the grade record but still scores the attempt.
+export async function insertExplanationGrade(entry: Omit<ExplanationGrade, 'id' | 'created_at'>): Promise<void> {
+  const { error } = await getDb().from('explanation_grades').insert({
+    ...entry,
+    id: generateId(),
+    created_at: new Date().toISOString(),
+  })
+  if (error) throw new Error(`Explanation grade insert failed: ${error.message}`)
+}
+
+export async function getExplanationGrades(learnerId: string, limit: number): Promise<ExplanationGrade[]> {
+  const { data } = await getDb()
+    .from('explanation_grades')
+    .select('*')
+    .eq('learner_id', learnerId)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  return data ?? []
 }
 
 // ─────────────────────────────────────────────

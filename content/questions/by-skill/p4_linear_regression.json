@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "predict",
     "explanation_after": "The correct choice is predict."
+  },
+  {
+    "id": "p4_linear_regression_explain1",
+    "skill_id": "p4_linear_regression",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “Lay a Ruler Through the Dots” story, explain Linear Regression without assuming the listener knows machine learning.",
+    "explanation_after": "Linear regression learns that straight trend. Each input receives a weight that says how strongly it tilts the prediction."
   }
 ]

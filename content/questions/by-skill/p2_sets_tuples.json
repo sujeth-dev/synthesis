@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "The intersection (&) of the train and test ID sets gives exactly the IDs that appear in both. If that intersection is empty, there's no overlap — no data leakage. This set-based check, fast thanks to O(1) hash lookups, is standard practice before trusting any model evaluation.",
-    "graph_placement_weight": { "p2_sets_tuples": 1.0, "p4_supervised_learning": 0.3 }
+    "graph_placement_weight": {
+      "p2_sets_tuples": 1,
+      "p4_supervised_learning": 0.3
+    }
   },
   {
     "id": "p2_sets_tuples_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "b",
     "explanation_after": "Dictionary keys (and set elements) must be hashable — their hash value must never change. Tuples are immutable, so they're hashable and valid as keys. Lists are mutable, so Python disallows them as keys, raising 'unhashable type: list'. This tuple-as-key pattern is exactly how reinforcement learning Q-tables map (state, action) pairs to values.",
-    "graph_placement_weight": { "p2_sets_tuples": 1.0, "p2_dictionaries": 0.3 }
+    "graph_placement_weight": {
+      "p2_sets_tuples": 1,
+      "p2_dictionaries": 0.3
+    }
+  },
+  {
+    "id": "p2_sets_tuples_explain1",
+    "skill_id": "p2_sets_tuples",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is the key difference between a list and a tuple? What is the main advantage of a set over a list for membership testing? What does the `&` operator do with two sets?",
+    "explanation_after": "Tuples store ordered, unchangeable data. Sets store unordered unique items with O(1) membership testing. Choosing the right collection type makes code clearer and faster."
   }
 ]

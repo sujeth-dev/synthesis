@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p5_vanishing_exploding_gradients": 1
     }
+  },
+  {
+    "id": "p5_vanishing_exploding_gradients_explain1",
+    "skill_id": "p5_vanishing_exploding_gradients",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “The Backward Message Fades or Shouts” situation, explain Vanishing & Exploding Gradients without assuming the listener knows deep learning.",
+    "explanation_after": "A vanishing gradient becomes too small as it travels backward. An exploding gradient becomes dangerously large."
   }
 ]

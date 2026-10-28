@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "user_outcome",
     "explanation_after": "The correct choice is user_outcome."
+  },
+  {
+    "id": "p8_ai_product_strategy_explain1",
+    "skill_id": "p8_ai_product_strategy",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Choose a Pain Worth Solving,” explain AI Product Strategy without assuming the listener knows AI engineering.",
+    "explanation_after": "Find a frequent, important user struggle and describe the better outcome. Decide which part needs judgment or generation and which part should stay deterministic."
   }
 ]

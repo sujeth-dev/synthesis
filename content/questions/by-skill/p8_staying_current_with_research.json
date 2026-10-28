@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "ablation",
     "explanation_after": "The correct choice is ablation."
+  },
+  {
+    "id": "p8_staying_current_with_research_explain1",
+    "skill_id": "p8_staying_current_with_research",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using “Start from a Question, Not a Firehose,” explain Staying Current with AI Research without assuming the listener knows AI engineering.",
+    "explanation_after": "Choose a topic and keep a small map of problems, standard methods, evaluation sets, and unresolved claims."
   }
 ]

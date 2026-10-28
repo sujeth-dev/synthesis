@@ -1,11 +1,16 @@
 'use client'
-import { useState, useEffect, useCallback, Suspense } from 'react'
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import type {
   SessionTask, Explanation, ExplanationDepth, SessionPhase, TaskReason, SessionMode,
   ReviewUrgency, GuidedArcProgress, GuidedArcStage,
 } from '@/types'
 import { QuestionCard }     from '@/components/learning/QuestionCard'
+import { canSubmitAnswer }  from '@/lib/ui/answer-readiness'
+import {
+  answerTimingPayload, recordSelection, recordTextEdit, startAnswerTiming,
+  type AnswerTiming,
+} from '@/lib/timing/answer-timing'
 import { FeedbackBanner }   from '@/components/learning/FeedbackBanner'
 import { MotivationBanner } from '@/components/learning/MotivationBanner'
 import { Spinner }          from '@/components/ui/Spinner'
@@ -196,12 +201,30 @@ function LearnPageInner() {
   const [topicPicker,       setTopicPicker]       = useState<UnlockedTopic[] | null>(null)
   const [switchBridge,      setSwitchBridge]      = useState<string | null>(null)
 
+  // How long this question took, how long before the learner first touched the
+  // answer, and how many times they changed it. A ref, not state: recording a
+  // keystroke must not re-render the page. LearnPageInner never unmounts between
+  // questions, so the clock is restarted explicitly whenever a question appears.
+  const timing = useRef<AnswerTiming>(startAnswerTiming())
+  useEffect(() => {
+    if (phase === 'question' || phase === 'feynman') timing.current = startAnswerTiming()
+  }, [phase, task?.question.id])
+
+  const chooseOption = useCallback((id: string) => {
+    timing.current = recordSelection(timing.current, id)
+    setSelected(id)
+  }, [])
+  const editAnswer = useCallback((value: string) => {
+    timing.current = recordTextEdit(timing.current, value)
+    setFillAnswer(value)
+  }, [])
+
   // Keyboard shortcuts
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (phase === 'question' && task?.question.format === 'mcq') {
         const idx = ['1','2','3','4'].indexOf(e.key)
-        if (idx >= 0) { const opt = task.question.options?.[idx]; if (opt) setSelected(opt.id) }
+        if (idx >= 0) { const opt = task.question.options?.[idx]; if (opt) chooseOption(opt.id) }
       }
       if (phase === 'revealing' && e.key === 'Enter') nextQuestion()
     }
@@ -268,8 +291,13 @@ function LearnPageInner() {
     setPhase('question')
   }, [arcAttemptCount, arcSkillId, lessonComplete, seenSkills, seenQuestions, sessionMode, taskLimit, track])
 
-  // Start session
+  // Start session — once. React's development double-invoke ran this twice,
+  // opening two sessions and racing two `next` calls, so the question on
+  // screen could come from either one.
+  const started = useRef(false)
   useEffect(() => {
+    if (started.current) return
+    started.current = true
     async function start() {
       const r = await fetch('/api/session', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -297,12 +325,12 @@ function LearnPageInner() {
     const answer = task.question.format === 'mcq' ? selected : fillAnswer
     if (!answer && task.question.format !== 'explain') return
 
-    const start = Date.now()
+    const measured = answerTimingPayload(timing.current)
     const r = await fetch('/api/attempt', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         question_id: task.question.id, skill_id: task.skill_id, session_id: sessionId,
-        latency_ms: Date.now() - start, client_answer: answer,
+        ...measured, client_answer: answer,
         difficulty_tier: task.difficulty_tier, question_format: task.question.format,
       }),
     })
@@ -333,9 +361,9 @@ function LearnPageInner() {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         question_id: `${task.skill_id}_feynman_loop`, skill_id: task.skill_id,
-        session_id: sessionId, latency_ms: 5000,
-        client_answer: `${result.firstExplanation}\n---\n${result.secondExplanation}`,
-        correct: result.resolved, difficulty_tier: task.difficulty_tier, question_format: 'explain',
+        session_id: sessionId, ...answerTimingPayload(timing.current),
+        client_answer: result.secondExplanation, prior_answer: result.firstExplanation,
+        difficulty_tier: task.difficulty_tier, question_format: 'explain',
       }),
     })
     track({ name: 'feynman_loop_complete', props: { skill_id: task.skill_id, resolved: result.resolved } })
@@ -659,6 +687,7 @@ function LearnPageInner() {
         <FeynmanLoop
           skillLabel={task.skill_label}
           onComplete={completeFeynmanLoop}
+          onAnswerEdit={v => { timing.current = recordTextEdit(timing.current, v) }}
           onSkip={() => setPhase('revealing')}
         />
         <button
@@ -746,8 +775,8 @@ function LearnPageInner() {
                 selected={selected}
                 fillAnswer={fillAnswer}
                 revealed={isRevealed}
-                onSelect={setSelected}
-                onFillChange={setFillAnswer}
+                onSelect={chooseOption}
+                onFillChange={editAnswer}
               />
             </div>
 
@@ -763,7 +792,7 @@ function LearnPageInner() {
               {phase === 'question' && (
                 <button
                   onClick={submit}
-                  disabled={!selected && !fillAnswer.trim() && task.question.format !== 'explain'}
+                  disabled={!canSubmitAnswer(task.question, selected, fillAnswer)}
                   className="w-full py-4 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[15px] font-medium transition-all hover:scale-[1.01] disabled:opacity-40"
                 >
                   Submit

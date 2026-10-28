@@ -5,11 +5,11 @@ let _nodes: SkillNode[] | null = null
 let _edges: SkillEdge[] | null = null
 
 function getNodes(): SkillNode[] {
-  if (!_nodes) _nodes = require('@/../content/graph/nodes.json') as SkillNode[]
+  if (!_nodes) _nodes = require('../../../content/graph/nodes.json') as SkillNode[]
   return _nodes
 }
 function getEdges(): SkillEdge[] {
-  if (!_edges) _edges = require('@/../content/graph/edges.json') as SkillEdge[]
+  if (!_edges) _edges = require('../../../content/graph/edges.json') as SkillEdge[]
   return _edges
 }
 
@@ -70,5 +70,5 @@ function topologicalSort(nodes: SkillNode[], edges: SkillEdge[]): SkillNode[] {
 }
 
 export function getGraphVersion(): string {
-  try { return (require('@/../content/graph/meta.json') as any).graph_version ?? '1.0.0' } catch { return '1.0.0' }
+  try { return (require('../../../content/graph/meta.json') as any).graph_version ?? '1.0.0' } catch { return '1.0.0' }
 }

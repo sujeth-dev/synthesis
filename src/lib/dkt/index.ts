@@ -10,6 +10,10 @@ export interface DktWeightsFile {
   synthetic: boolean          // true when trained on simulated learners
   skills: string[]            // index i ↔ skill id, fixed by content/graph/nodes.json
   hidden_size: number
+  // How this model was trained, when the exporter recorded it. Inference
+  // ignores it; it is here so a shadow prediction can be traced to a
+  // configuration. Absent in models exported before DKT-14.
+  training?: { lambda_r: number; early_stopping: boolean; epochs_budget: number; epochs_run: number; best_val_auc: number }
   // float32 little-endian, base64; PyTorch layouts and gate order (i, f, g, o)
   weight_ih: string           // (4H, 2S)
   weight_hh: string           // (4H, H)
@@ -21,6 +25,7 @@ export interface DktWeightsFile {
 
 export interface DktModel {
   synthetic: boolean
+  training?: DktWeightsFile['training']
   skills: string[]
   skillIndex: Map<string, number>
   H: number
@@ -49,6 +54,7 @@ export function loadDktModel(file: DktWeightsFile): DktModel {
   const biasHh = decode(file.bias_hh, 4 * H, 'bias_hh')
   return {
     synthetic: file.synthetic,
+    training: file.training,
     skills: file.skills,
     skillIndex: new Map(file.skills.map((s, i) => [s, i])),
     H,

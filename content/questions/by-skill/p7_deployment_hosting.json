@@ -178,5 +178,13 @@
     "graph_placement_weight": {
       "p7_deployment_hosting": 1
     }
+  },
+  {
+    "id": "p7_deployment_hosting_explain1",
+    "skill_id": "p7_deployment_hosting",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Use “Move Beyond the Laptop” to explain Deployment & Hosting plainly.",
+    "explanation_after": "Deployment packages code and dependencies into a repeatable runtime and exposes it through controlled infrastructure."
   }
 ]

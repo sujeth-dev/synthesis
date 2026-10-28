@@ -214,5 +214,13 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "Without caching, generating each new token would require recomputing the key/value attention projections for every previous token from scratch — wasteful, since those values don't change once computed. KV caching stores them once and reuses them on later steps, which is why generation speed and memory usage scale with cache size, not just raw model compute."
+  },
+  {
+    "id": "p3_training_vs_inference_explain1",
+    "skill_id": "p3_training_vs_inference",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Explain training and inference to someone who has never studied AI. Use the student/exam analogy. What happens to the model's weights in each phase? Why can't talking to ChatGPT teach it new things?",
+    "explanation_after": "Training is when the model learns — weights change. Inference is when the trained model is used — weights are frozen. Two completely different modes, different costs, different hardware needs."
   }
 ]

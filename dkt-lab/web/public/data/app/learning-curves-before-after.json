@@ -1,0 +1,317 @@
+{
+  "synthetic": true,
+  "learners": 300,
+  "seed": 9001,
+  "attempts": 95585,
+  "cohortPairs": 4532,
+  "source": "scripts/learning-curves-before-after.ts; DKT \"before\" is src/lib/dkt/model/synaptic-dkt.json at git b71e301, \"after\" is the bundled model",
+  "models": {
+    "live_bkt": "Live BKT (one global parameter set)",
+    "per_skill_bkt": "BKT with per-skill fitted parameters (shadow arm, synthetic fit)",
+    "dkt_before": "DKT before Level 14 (8 epochs, no reconstruction term)",
+    "dkt_after": "DKT after Level 14 (10 epochs + early stopping, lambda_r 0.1; the bundled model)"
+  },
+  "cohort": {
+    "minOpportunities": 10,
+    "observedSlope": 0.05374174222364867,
+    "slopes": {
+      "live_bkt": {
+        "slope": 0.04681910242538404,
+        "slopeRatio": 0.8711869114801721
+      },
+      "per_skill_bkt": {
+        "slope": 0.04624917430055002,
+        "slopeRatio": 0.8605819682600166
+      },
+      "dkt_before": {
+        "slope": 0.03576203342277984,
+        "slopeRatio": 0.6654423906458881
+      },
+      "dkt_after": {
+        "slope": 0.03908802669808826,
+        "slopeRatio": 0.7273308434144483
+      }
+    },
+    "points": [
+      {
+        "opportunity": 1,
+        "n": 4532,
+        "actual": 0.19836716681376876,
+        "live_bkt": 0.27424228318561455,
+        "per_skill_bkt": 0.2449963338288099,
+        "dkt_before": 0.38210391397210225,
+        "dkt_after": 0.35021304899355304
+      },
+      {
+        "opportunity": 2,
+        "n": 4532,
+        "actual": 0.3020741394527802,
+        "live_bkt": 0.35322386436863706,
+        "per_skill_bkt": 0.3714106110624168,
+        "dkt_before": 0.41035580877657074,
+        "dkt_after": 0.37814148833463346
+      },
+      {
+        "opportunity": 3,
+        "n": 4532,
+        "actual": 0.39276257722859664,
+        "live_bkt": 0.41426427594459864,
+        "per_skill_bkt": 0.4535668974880297,
+        "dkt_before": 0.4505996485010738,
+        "dkt_after": 0.4419479946605757
+      },
+      {
+        "opportunity": 4,
+        "n": 4532,
+        "actual": 0.4267431597528685,
+        "live_bkt": 0.4747086729372675,
+        "per_skill_bkt": 0.5164150294731352,
+        "dkt_before": 0.49367598041656363,
+        "dkt_after": 0.4927472943200926
+      },
+      {
+        "opportunity": 5,
+        "n": 4532,
+        "actual": 0.4706531332744925,
+        "live_bkt": 0.5186810928624975,
+        "per_skill_bkt": 0.5616002158732827,
+        "dkt_before": 0.529524175433394,
+        "dkt_after": 0.526083906381172
+      },
+      {
+        "opportunity": 6,
+        "n": 4532,
+        "actual": 0.5280229479258606,
+        "live_bkt": 0.5604278713975039,
+        "per_skill_bkt": 0.5986945248529247,
+        "dkt_before": 0.5686287557964658,
+        "dkt_after": 0.5672252062750411
+      },
+      {
+        "opportunity": 7,
+        "n": 4532,
+        "actual": 0.5728155339805825,
+        "live_bkt": 0.6019911142940991,
+        "per_skill_bkt": 0.630136087497574,
+        "dkt_before": 0.6033244709249445,
+        "dkt_after": 0.5999587677135368
+      },
+      {
+        "opportunity": 8,
+        "n": 4532,
+        "actual": 0.6414386584289496,
+        "live_bkt": 0.6387893079765896,
+        "per_skill_bkt": 0.6561487793991394,
+        "dkt_before": 0.6359093650476191,
+        "dkt_after": 0.6325932396206144
+      },
+      {
+        "opportunity": 9,
+        "n": 4532,
+        "actual": 0.677846425419241,
+        "live_bkt": 0.6787846026971247,
+        "per_skill_bkt": 0.6807615772960839,
+        "dkt_before": 0.6683032086847663,
+        "dkt_after": 0.6712639548948639
+      },
+      {
+        "opportunity": 10,
+        "n": 4532,
+        "actual": 0.6981465136804943,
+        "live_bkt": 0.7075764464215586,
+        "per_skill_bkt": 0.697717456422874,
+        "dkt_before": 0.6932711451699205,
+        "dkt_after": 0.6926202928145034
+      }
+    ]
+  },
+  "aggregate": {
+    "maxOpportunity": 20,
+    "points": [
+      {
+        "opportunity": 1,
+        "n": 8068,
+        "actual": 0.2211204759543877,
+        "live_bkt": 0.27320743995670027,
+        "per_skill_bkt": 0.24045873091327954,
+        "dkt_before": 0.41312447566886673,
+        "dkt_after": 0.367948527793863
+      },
+      {
+        "opportunity": 2,
+        "n": 8068,
+        "actual": 0.42947446703024295,
+        "live_bkt": 0.35732894189136566,
+        "per_skill_bkt": 0.3837911275455314,
+        "dkt_before": 0.43906843614196106,
+        "dkt_after": 0.3967943087025404
+      },
+      {
+        "opportunity": 3,
+        "n": 8017,
+        "actual": 0.5351128851191219,
+        "live_bkt": 0.45227280057986036,
+        "per_skill_bkt": 0.49617810506873483,
+        "dkt_before": 0.49636777601646553,
+        "dkt_after": 0.4922648676679142
+      },
+      {
+        "opportunity": 4,
+        "n": 7805,
+        "actual": 0.5705317104420243,
+        "live_bkt": 0.5345794640694854,
+        "per_skill_bkt": 0.5706640310299393,
+        "dkt_before": 0.5439004599471229,
+        "dkt_after": 0.5424433692666535
+      },
+      {
+        "opportunity": 5,
+        "n": 7373,
+        "actual": 0.6123694561236945,
+        "live_bkt": 0.5821106300544814,
+        "per_skill_bkt": 0.6133837850391168,
+        "dkt_before": 0.5817412458884021,
+        "dkt_after": 0.5782557032222851
+      },
+      {
+        "opportunity": 6,
+        "n": 6778,
+        "actual": 0.6431100619651815,
+        "live_bkt": 0.6186583230514789,
+        "per_skill_bkt": 0.642454277325177,
+        "dkt_before": 0.6153071036029054,
+        "dkt_after": 0.6158473752486154
+      },
+      {
+        "opportunity": 7,
+        "n": 6172,
+        "actual": 0.6665586519766689,
+        "live_bkt": 0.6486529588347937,
+        "per_skill_bkt": 0.6628558458898032,
+        "dkt_before": 0.6372698069404987,
+        "dkt_after": 0.6348923953455312
+      },
+      {
+        "opportunity": 8,
+        "n": 5668,
+        "actual": 0.707833450952717,
+        "live_bkt": 0.67291782928015,
+        "per_skill_bkt": 0.6782126641480607,
+        "dkt_before": 0.6620740516501963,
+        "dkt_after": 0.660502413918714
+      },
+      {
+        "opportunity": 9,
+        "n": 5093,
+        "actual": 0.7078342823483212,
+        "live_bkt": 0.6958722147306458,
+        "per_skill_bkt": 0.6914656031897469,
+        "dkt_before": 0.6805569917580393,
+        "dkt_after": 0.6839137416215709
+      },
+      {
+        "opportunity": 10,
+        "n": 4532,
+        "actual": 0.6981465136804943,
+        "live_bkt": 0.7075764464215586,
+        "per_skill_bkt": 0.697717456422874,
+        "dkt_before": 0.6932711451699205,
+        "dkt_after": 0.6926202928145034
+      },
+      {
+        "opportunity": 11,
+        "n": 4002,
+        "actual": 0.7218890554722639,
+        "live_bkt": 0.7099097043019171,
+        "per_skill_bkt": 0.7001560374266512,
+        "dkt_before": 0.7025666145050034,
+        "dkt_after": 0.7020218593398082
+      },
+      {
+        "opportunity": 12,
+        "n": 3460,
+        "actual": 0.7355491329479769,
+        "live_bkt": 0.715481223746565,
+        "per_skill_bkt": 0.7025597182122885,
+        "dkt_before": 0.7103340615496795,
+        "dkt_after": 0.710533223543234
+      },
+      {
+        "opportunity": 13,
+        "n": 2964,
+        "actual": 0.7233468286099866,
+        "live_bkt": 0.7197882453504264,
+        "per_skill_bkt": 0.7040146629623316,
+        "dkt_before": 0.7140561129218544,
+        "dkt_after": 0.7130704775224302
+      },
+      {
+        "opportunity": 14,
+        "n": 2522,
+        "actual": 0.7208564631245044,
+        "live_bkt": 0.7201569813254762,
+        "per_skill_bkt": 0.7030599684962499,
+        "dkt_before": 0.7186256387330235,
+        "dkt_after": 0.7180877600256075
+      },
+      {
+        "opportunity": 15,
+        "n": 2159,
+        "actual": 0.7188513200555813,
+        "live_bkt": 0.7203193884867429,
+        "per_skill_bkt": 0.7022673026794537,
+        "dkt_before": 0.7182033823401238,
+        "dkt_after": 0.7171547926134552
+      },
+      {
+        "opportunity": 16,
+        "n": 1846,
+        "actual": 0.7123510292524377,
+        "live_bkt": 0.7200426473005747,
+        "per_skill_bkt": 0.7016369268987582,
+        "dkt_before": 0.7193793290351616,
+        "dkt_after": 0.7175241116264024
+      },
+      {
+        "opportunity": 17,
+        "n": 1572,
+        "actual": 0.710559796437659,
+        "live_bkt": 0.7151859931156872,
+        "per_skill_bkt": 0.698726798843681,
+        "dkt_before": 0.7167846819131578,
+        "dkt_after": 0.7161323438680514
+      },
+      {
+        "opportunity": 18,
+        "n": 1314,
+        "actual": 0.6948249619482496,
+        "live_bkt": 0.7083822038174922,
+        "per_skill_bkt": 0.6939866453054857,
+        "dkt_before": 0.7126732169125378,
+        "dkt_after": 0.7119959296378285
+      },
+      {
+        "opportunity": 19,
+        "n": 1106,
+        "actual": 0.7124773960216998,
+        "live_bkt": 0.7021291114286442,
+        "per_skill_bkt": 0.6901571629270434,
+        "dkt_before": 0.7078900551617773,
+        "dkt_after": 0.7058842621341801
+      },
+      {
+        "opportunity": 20,
+        "n": 928,
+        "actual": 0.6928879310344828,
+        "live_bkt": 0.701643154519644,
+        "per_skill_bkt": 0.6890002507305181,
+        "dkt_before": 0.7033495974363817,
+        "dkt_after": 0.7060767700961782
+      }
+    ]
+  },
+  "crossCheck": {
+    "against": "compareGrowth() in src/lib/dkt/compare.ts",
+    "maxAbsDifference": 0
+  }
+}

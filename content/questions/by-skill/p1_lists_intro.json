@@ -187,7 +187,10 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "Python lists are general-purpose containers, and looping over them in pure Python is relatively slow. NumPy arrays store numbers in a compact, uniform block of memory and perform operations on the entire array at once using optimized, compiled code — this is called vectorization. That speed difference becomes critical once datasets grow to millions of values, which is why nearly every ML pipeline converts lists into NumPy arrays (or tensors) before real computation begins.",
-    "graph_placement_weight": { "p1_lists_intro": 1.0, "p2_lists_arrays": 0.4 }
+    "graph_placement_weight": {
+      "p1_lists_intro": 1,
+      "p2_lists_arrays": 0.4
+    }
   },
   {
     "id": "p1_lists_intro_q8",
@@ -215,6 +218,17 @@
     ],
     "correct_option_id": "a",
     "explanation_after": "The list has 10 elements, and 80% of 10 is 8. `data[:8]` takes the first 8 elements (indices 0-7) as the training set, and `data[8:]` takes everything from index 8 onward (the last 2 elements) as the test set. This kind of order-preserving slice split is a common, simple technique — especially for time-series data where shuffling would leak future information into training.",
-    "graph_placement_weight": { "p1_lists_intro": 1.0, "p4_data_pipeline": 0.4 }
+    "graph_placement_weight": {
+      "p1_lists_intro": 1,
+      "p4_data_pipeline": 0.4
+    }
+  },
+  {
+    "id": "p1_lists_intro_explain1",
+    "skill_id": "p1_lists_intro",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "What is a list in Python? How does indexing work, including negative indices? What is the difference between append() and extend()?",
+    "explanation_after": "A list stores multiple values in a single variable, in order. You can access, add, remove, and loop over items. Lists are the most used data structure in Python."
   }
 ]

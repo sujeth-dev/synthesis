@@ -233,5 +233,13 @@
     "correct_option_id": "a",
     "correct_answer": "fit",
     "explanation_after": "The correct choice is fit."
+  },
+  {
+    "id": "p4_data_pipeline_explain1",
+    "skill_id": "p4_data_pipeline",
+    "format": "explain",
+    "difficulty_tier": "same",
+    "prompt": "Using the “The Mystery Package Line” story, explain Data → Model → Prediction without assuming the listener knows machine learning.",
+    "explanation_after": "An ML pipeline is the same kind of route: collect data, clean it, train a model, and use that model on new inputs."
   }
 ]

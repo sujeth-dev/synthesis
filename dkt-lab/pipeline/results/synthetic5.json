@@ -7108,5 +7108,385 @@
     "hidden_concept": 3
    }
   ]
+ },
+ "diagnostics": {
+  "question": "DKT wins the aggregate metrics and loses the learning curve. Which of six hypotheses explains it, and what does each measure say?",
+  "protocol": "identical held-out rows to metrics.json (every test interaction except each student's first); DKT reproduced from the committed weights with a numpy forward pass, BKT refitted by EM on the training split",
+  "kind": "public benchmark",
+  "reproduction_check": {
+   "bkt": {
+    "reproduced": {
+     "auc": 0.6312023853827571,
+     "log_loss": 0.6404260031547795,
+     "rmse": 0.47401293058794325,
+     "accuracy": 0.6364965986394557,
+     "n": 29400
+    },
+    "committed": {
+     "auc": 0.6312023853827571,
+     "log_loss": 0.6404260031547795,
+     "rmse": 0.47401293058794325,
+     "accuracy": 0.6364965986394557,
+     "n": 29400
+    },
+    "max_abs_delta": 0.0,
+    "n_matches": true
+   },
+   "dkt": {
+    "reproduced": {
+     "auc": 0.8267188029789976,
+     "log_loss": 0.49273844442694753,
+     "rmse": 0.4053889288332723,
+     "accuracy": 0.7543877551020408,
+     "n": 29400
+    },
+    "committed": {
+     "auc": 0.8267188151968727,
+     "log_loss": 0.4927384454202728,
+     "rmse": 0.40538892907360646,
+     "accuracy": 0.7543877551020408,
+     "n": 29400
+    },
+    "max_abs_delta": 1.2217875156039781e-08,
+    "n_matches": true
+   },
+   "max_abs_delta": 1.2217875156039781e-08,
+   "tolerance": 1e-06,
+   "ok": true
+  },
+  "all_model_scores": {
+   "bkt": {
+    "auc": 0.6312023853827571,
+    "log_loss": 0.6404260031547795,
+    "rmse": 0.47401293058794325,
+    "accuracy": 0.6364965986394557,
+    "n": 29400
+   },
+   "dkt": {
+    "auc": 0.8267188029789976,
+    "log_loss": 0.49273844442694753,
+    "rmse": 0.4053889288332723,
+    "accuracy": 0.7543877551020408,
+    "n": 29400
+   },
+   "global_rate": {
+    "auc": 0.5,
+    "log_loss": 0.6664092595675261,
+    "rmse": 0.48656950168587987,
+    "accuracy": 0.615204081632653,
+    "n": 29400
+   },
+   "skill_rate": {
+    "auc": 0.6312023853827571,
+    "log_loss": 0.6404260031547793,
+    "rmse": 0.47401293058794325,
+    "accuracy": 0.6364965986394557,
+    "n": 29400
+   },
+   "student_rate": {
+    "auc": 0.6309114166860332,
+    "log_loss": 0.9036146285611962,
+    "rmse": 0.4895551408378477,
+    "accuracy": 0.6151700680272109,
+    "n": 29400
+   },
+   "skill_and_student": {
+    "auc": 0.6709843660020697,
+    "log_loss": 0.872277131618334,
+    "rmse": 0.47822930415958215,
+    "accuracy": 0.6419047619047619,
+    "n": 29400
+   }
+  },
+  "baselines_note": "global_rate, skill_rate, student_rate and skill_and_student contain no notion of practice on a skill. They are the control: a model whose curve looks like theirs has not learned learning.",
+  "raw_curve": {
+   "kind": "raw",
+   "note": "every held-out row, bucketed by opportunity. Later buckets average a different, more persistent population than earlier ones \u2014 see the cohort curve.",
+   "max_opportunity_in_data": 1,
+   "min_rows": 30,
+   "points": [
+    {
+     "opportunity": 1,
+     "from": 1,
+     "to": 1,
+     "label": "1",
+     "n": 29400,
+     "actual": 0.615204081632653,
+     "bkt": 0.6150437317784258,
+     "dkt": 0.6203587832151035,
+     "global_rate": 0.6105285714285714,
+     "skill_rate": 0.6150437317784256,
+     "student_rate": 0.559160850669586,
+     "skill_and_student": 0.5721836642353944,
+     "actual_ci": [
+      0.6101,
+      0.62021
+     ]
+    }
+   ]
+  },
+  "cohort_curve": {
+   "kind": "cohort",
+   "note": "only (student, skill) pairs with at least 10 attempts, restricted to their first 10. Same population at every point.",
+   "min_opportunities": 10,
+   "pairs": 0,
+   "min_rows": 30,
+   "points": []
+  },
+  "raw_curve_fidelity": {
+   "n_points": 1,
+   "models": {}
+  },
+  "cohort_curve_fidelity": {
+   "n_points": 0,
+   "models": {}
+  },
+  "per_skill_fidelity": [],
+  "within_pair_spread": {
+   "pairs": 0,
+   "models": {}
+  },
+  "position_slices": {
+   "note": "held-out rows sliced by absolute position in the student's sequence",
+   "bins": [
+    {
+     "from": 1,
+     "to": 4,
+     "n": 2400,
+     "actual": 0.4395833333333333,
+     "bkt": {
+      "auc": 0.5539121549005445,
+      "log_loss": 0.6787820369794492,
+      "mean_pred": 0.4402678571428572,
+      "ece": 0.004375000000000032
+     },
+     "dkt": {
+      "auc": 0.6290734509064642,
+      "log_loss": 0.6597455588506419,
+      "mean_pred": 0.4409360910084604,
+      "ece": 0.018509899370310803
+     }
+    },
+    {
+     "from": 5,
+     "to": 9,
+     "n": 3000,
+     "actual": 0.5616666666666666,
+     "bkt": {
+      "auc": 0.5969412508038948,
+      "log_loss": 0.6723443179728646,
+      "mean_pred": 0.5871428571428572,
+      "ece": 0.0273333333333334
+     },
+     "dkt": {
+      "auc": 0.7828488903431079,
+      "log_loss": 0.5514522386630332,
+      "mean_pred": 0.5949804173015264,
+      "ece": 0.033313750634859716
+     }
+    },
+    {
+     "from": 10,
+     "to": 14,
+     "n": 3000,
+     "actual": 0.5876666666666667,
+     "bkt": {
+      "auc": 0.5654796268028105,
+      "log_loss": 0.6625126433653582,
+      "mean_pred": 0.5777142857142856,
+      "ece": 0.016666666666666618
+     },
+     "dkt": {
+      "auc": 0.7449171898235123,
+      "log_loss": 0.5724744115155413,
+      "mean_pred": 0.5693101108759755,
+      "ece": 0.018526082168135234
+     }
+    },
+    {
+     "from": 15,
+     "to": 19,
+     "n": 3000,
+     "actual": 0.6663333333333333,
+     "bkt": {
+      "auc": 0.5833583624979323,
+      "log_loss": 0.6267189395660329,
+      "mean_pred": 0.663,
+      "ece": 0.009380952380952358
+     },
+     "dkt": {
+      "auc": 0.8366018673672501,
+      "log_loss": 0.464040623831989,
+      "mean_pred": 0.6619550859292813,
+      "ece": 0.02855486842686126
+     }
+    },
+    {
+     "from": 20,
+     "to": 24,
+     "n": 3000,
+     "actual": 0.6396666666666667,
+     "bkt": {
+      "auc": 0.6370973067899321,
+      "log_loss": 0.6230585360267181,
+      "mean_pred": 0.6528571428571429,
+      "ece": 0.013190476190476221
+     },
+     "dkt": {
+      "auc": 0.8470410554371568,
+      "log_loss": 0.4623214500489245,
+      "mean_pred": 0.6610051586269396,
+      "ece": 0.027105814601763045
+     }
+    },
+    {
+     "from": 25,
+     "to": 29,
+     "n": 3000,
+     "actual": 0.6276666666666667,
+     "bkt": {
+      "auc": 0.577021420037265,
+      "log_loss": 0.6508421002054464,
+      "mean_pred": 0.6307857142857144,
+      "ece": 0.0035476190476189553
+     },
+     "dkt": {
+      "auc": 0.8431534851479405,
+      "log_loss": 0.4711568247856318,
+      "mean_pred": 0.634452255460231,
+      "ece": 0.014720492417075185
+     }
+    },
+    {
+     "from": 30,
+     "to": 34,
+     "n": 3000,
+     "actual": 0.6406666666666667,
+     "bkt": {
+      "auc": 0.6685396512213816,
+      "log_loss": 0.6103136915069264,
+      "mean_pred": 0.639357142857143,
+      "ece": 0.013500000000000036
+     },
+     "dkt": {
+      "auc": 0.8541832777004474,
+      "log_loss": 0.45207577621845424,
+      "mean_pred": 0.642501541367567,
+      "ece": 0.02493318365898984
+     }
+    },
+    {
+     "from": 35,
+     "to": 39,
+     "n": 3000,
+     "actual": 0.6533333333333333,
+     "bkt": {
+      "auc": 0.5956632653061223,
+      "log_loss": 0.6331112697127487,
+      "mean_pred": 0.6354285714285715,
+      "ece": 0.01971428571428575
+     },
+     "dkt": {
+      "auc": 0.8482523057299843,
+      "log_loss": 0.45559795880484866,
+      "mean_pred": 0.6421625808032486,
+      "ece": 0.021143173035790372
+     }
+    },
+    {
+     "from": 40,
+     "to": 44,
+     "n": 3000,
+     "actual": 0.6096666666666667,
+     "bkt": {
+      "auc": 0.6168198662874768,
+      "log_loss": 0.6439674707551262,
+      "mean_pred": 0.6146428571428572,
+      "ece": 0.014785714285714357
+     },
+     "dkt": {
+      "auc": 0.8631914234981619,
+      "log_loss": 0.44949930938784627,
+      "mean_pred": 0.627466740876975,
+      "ece": 0.023979226278418395
+     }
+    },
+    {
+     "from": 45,
+     "to": 49,
+     "n": 3000,
+     "actual": 0.6906666666666667,
+     "bkt": {
+      "auc": 0.5814430501930502,
+      "log_loss": 0.6102802322220575,
+      "mean_pred": 0.6742857142857143,
+      "ece": 0.01638095238095243
+     },
+     "dkt": {
+      "auc": 0.8606886982425774,
+      "log_loss": 0.42242171504730336,
+      "mean_pred": 0.6929333114595015,
+      "ece": 0.020996082754669604
+     }
+    }
+   ]
+  },
+  "evidence_response": {
+   "note": "change in the predicted probability for a skill, from just before to just after an answer on that skill. A model that updates on evidence separates correct from wrong; near-zero means the answer changed nothing.",
+   "students_sampled": 150,
+   "dkt": {
+    "after_correct": {
+     "n": 4747,
+     "mean_delta": 0.02315817094006987,
+     "fraction_positive": 0.7375184326943333
+    },
+    "after_wrong": {
+     "n": 2603,
+     "mean_delta": -0.030044491694596272,
+     "fraction_negative": 0.7791010372646946
+    },
+    "separation": 0.053202662634666144
+   },
+   "bkt": {
+    "after_correct": {
+     "n": 4747,
+     "mean_delta": 0.1098061606126116,
+     "fraction_positive": 1.0
+    },
+    "after_wrong": {
+     "n": 2603,
+     "mean_delta": -0.17516960470330314,
+     "fraction_negative": 1.0
+    },
+    "separation": 0.28497576531591473
+   }
+  },
+  "consistency": {
+   "note": "Yeung & Yeung (2018): w1/w2 measure how much the whole prediction vector thrashes between answers; reconstruction_error is the gap between the prediction for the skill just answered and that answer.",
+   "dkt": {
+    "w1": 0.023292681542193626,
+    "w2": 0.03294836968590052,
+    "reconstruction_error": 0.3023611789869475,
+    "n_steps": 7350
+   },
+   "bkt": {
+    "w1": 0.0026590920420973205,
+    "w2": 0.02009493285368124,
+    "reconstruction_error": 0.30855020294539387,
+    "n_steps": 7350
+   }
+  },
+  "dataset_audit": {
+   "max_opportunity": 1,
+   "mean_attempts_per_student_skill": 1.0,
+   "fraction_pairs_with_one_attempt": 1.0,
+   "fraction_eval_rows_at_opportunity_1": 1.0,
+   "max_sequence_length": 50,
+   "has_time": false
+  },
+  "timing": {
+   "bkt_fit_seconds": 6.4,
+   "total_seconds": 12.7
+  }
  }
 }

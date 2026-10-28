@@ -33,6 +33,9 @@ interface Props {
   skillLabel: string
   onComplete: (result: { resolved: boolean; firstExplanation: string; secondExplanation: string }) => void
   onSkip?: () => void
+  // Lets the page time the loop the same way it times a question: when the
+  // learner first types, and how often they rewrite.
+  onAnswerEdit?: (value: string) => void
 }
 
 function RohanTag({ expression }: { expression: RohanExpression }) {
@@ -91,10 +94,12 @@ function TeachingCanvas({
   )
 }
 
-export function FeynmanLoop({ skillLabel, onComplete, onSkip }: Props) {
+export function FeynmanLoop({ skillLabel, onComplete, onSkip, onAnswerEdit }: Props) {
   const [state, setState] = useState<FeynmanLoopState>(() => initFeynmanLoop(skillLabel))
   const [draft1, setDraft1] = useState('')
   const [draft2, setDraft2] = useState('')
+
+  const edit = (set: (v: string) => void) => (value: string) => { onAnswerEdit?.(value); set(value) }
 
   return (
     <div className="rounded-2xl bg-c-bg2 border border-[var(--border)] border-t-4 border-t-c-purple overflow-hidden animate-slide-up">
@@ -123,7 +128,7 @@ export function FeynmanLoop({ skillLabel, onComplete, onSkip }: Props) {
           <TeachingCanvas
             hint={`Explain ${skillLabel} to Rohan — use any words, any example, whatever helps him understand.`}
             value={draft1}
-            onChange={setDraft1}
+            onChange={edit(setDraft1)}
             onSubmit={() => setState(submitFirstExplanation(state, draft1))}
           />
         )}
@@ -156,7 +161,7 @@ export function FeynmanLoop({ skillLabel, onComplete, onSkip }: Props) {
           <TeachingCanvas
             hint="Give Rohan one concrete, real situation where this matters — not the steps, the situation."
             value={draft2}
-            onChange={setDraft2}
+            onChange={edit(setDraft2)}
             onSubmit={() => setState(submitSecondExplanation(state, draft2))}
           />
         )}
