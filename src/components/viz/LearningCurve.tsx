@@ -19,7 +19,7 @@ const B = 28
 
 export function LearningCurve({ points, testId }: { points: CurvePoint[]; testId?: string }) {
   if (points.length < 2) {
-    return <p className="text-[12px] text-c-ghost" data-testid={testId}>Not enough practice yet — a curve needs a second attempt on some skill.</p>
+    return <p className="text-[12px] text-c-ghost" data-testid={testId}>Practise a skill twice to see this.</p>
   }
   const maxOpp = Math.max(...points.map(p => p.opportunity))
   const x = (o: number) => L + ((o - 1) / Math.max(1, maxOpp - 1)) * (W - L - R)

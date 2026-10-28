@@ -16,13 +16,13 @@ export const BLOOM_LABEL: Record<BloomLevel, string> = {
 }
 
 const STOP_SENTENCE: Record<string, string> = {
-  precision: 'The exam stopped once it was confident enough in your result.',
-  max_length: 'The exam reached its 24-item cap before it was fully confident — the bands below are wider for it.',
-  time: 'Time ran out. Unanswered items count as wrong.',
-  bank: 'The exam used every question in this phase.',
+  precision: 'Stopped once it had enough answers.',
+  max_length: 'Reached the 24-question limit.',
+  time: 'Time ran out. Unanswered = wrong.',
+  bank: 'Used every question in this phase.',
 }
 
-const PACE_LABEL = { on_pace: 'On pace', slow: 'Slow', over: 'Well over' } as const
+const PACE_LABEL = { on_pace: 'On pace', slow: 'Slow', over: 'Too slow' } as const
 
 const pct = (theta: number) => pCorrect(theta, ELO_START) * 100
 
@@ -34,7 +34,7 @@ function LevelRow({ level }: { level: LevelResult }) {
     return (
       <div className="grid grid-cols-[96px_1fr_64px] items-center gap-3 py-2" data-testid={`level-${level.level}`}>
         <span className="text-[13px] text-c-text">{BLOOM_LABEL[level.level]}</span>
-        <span className="text-[12px] text-c-faint">not sampled</span>
+        <span className="text-[12px] text-c-faint">no questions</span>
         <span />
       </div>
     )
@@ -84,7 +84,7 @@ export function Debrief({ debrief, skillLabels, phaseLabel, mode, phase }: {
   return (
     <div className="max-w-2xl w-full mx-auto animate-slide-up" data-testid="exam-debrief">
       <p className="font-mono text-[11px] text-c-faint uppercase tracking-[0.14em] mb-3 text-center">
-        {phaseLabel} · {mode === 'checkpoint' ? 'Checkpoint' : 'Practice'} debrief
+        {phaseLabel} · {mode === 'checkpoint' ? 'Checkpoint' : 'Practice'} results
       </p>
       <h1 className="font-serif italic text-[36px] sm:text-[42px] leading-[1.1] text-c-text mb-3 text-center">
         {debrief.correct} of {debrief.n} right
@@ -139,10 +139,8 @@ export function Debrief({ debrief, skillLabels, phaseLabel, mode, phase }: {
       )}
 
       <section className="p-5 rounded-2xl bg-c-bg2 border border-[var(--border)] mb-4">
-        <h2 className="text-[14px] text-c-text font-medium mb-1">By kind of thinking</h2>
-        <p className="text-[12px] text-c-faint mb-3">
-          Dot: your chance on a typical question at that level. Band: ±1 standard error. Dashed line: 50%.
-        </p>
+        <h2 className="text-[14px] text-c-text font-medium mb-1">By question type</h2>
+        <p className="text-[12px] text-c-faint mb-3">Dot = your chance of a right answer. Bar = likely range.</p>
         {debrief.levels.map(l => <LevelRow key={l.level} level={l} />)}
         <div className="grid grid-cols-[96px_1fr_64px] gap-3 mt-1">
           <span />
@@ -155,18 +153,17 @@ export function Debrief({ debrief, skillLabels, phaseLabel, mode, phase }: {
         <h2 className="text-[14px] text-c-text font-medium mb-3">How you worked</h2>
         <div className="grid grid-cols-3 gap-3 mb-4">
           <div><p className="font-mono text-[20px] text-c-text">{answered}/{debrief.n}</p><p className="text-[11px] text-c-faint">answered</p></div>
-          <div><p className="font-mono text-[20px] text-c-text">{debrief.items.filter(i => i.pace === 'on_pace').length}</p><p className="text-[11px] text-c-faint">within time target</p></div>
+          <div><p className="font-mono text-[20px] text-c-text">{debrief.items.filter(i => i.pace === 'on_pace').length}</p><p className="text-[11px] text-c-faint">on time</p></div>
           <div>
             <p className="font-mono text-[20px] text-c-text">{debrief.hints.items_with_hint}</p>
             <p className="text-[11px] text-c-faint">
-              items with a hint{debrief.hints.second_hints > 0 ? ` (${debrief.hints.second_hints} took both)` : ''}
+              used a hint{debrief.hints.second_hints > 0 ? ` (${debrief.hints.second_hints} used both)` : ''}
             </p>
           </div>
         </div>
         {debrief.hints.rapid_requests > 0 && (
           <p className="text-[12px] text-c-yellow mb-3" data-testid="rapid-hints">
-            ⚑ {debrief.hints.rapid_requests} hint{debrief.hints.rapid_requests === 1 ? ' was' : 's were'} asked for within
-            four seconds — before the question could have been read. Hints help most after a real attempt.
+            ⚑ {debrief.hints.rapid_requests} hint{debrief.hints.rapid_requests === 1 ? '' : 's'} asked within 4s. Try the question first.
           </p>
         )}
         <details className="group">
@@ -238,7 +235,7 @@ export function Debrief({ debrief, skillLabels, phaseLabel, mode, phase }: {
       )}
 
       <p className="text-[11px] text-c-faint text-center mb-4">
-        Exam results are a measurement only. They do not change your mastery, review schedule or session.
+        This exam doesn&apos;t change your progress or reviews.
       </p>
       <Link href="/dashboard" className="block w-full py-3 rounded-xl bg-c-purple hover:bg-[var(--purple-hover)] text-white text-[14px] font-medium text-center transition-all">
         Back to dashboard

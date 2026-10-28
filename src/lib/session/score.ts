@@ -268,25 +268,26 @@ export function varietyTerm(skillId: string, recentSkillIds: string[]): number {
 }
 
 function buildReason(terms: ScoreTerm[], input: ScoreCandidateInput, guards: string[]): string {
-  if (guards.includes('blocked')) return 'Prerequisites are not met yet, so this cannot be served.'
+  if (guards.includes('blocked')) return 'Locked until earlier skills are done.'
 
+  // Plain words for the learner; the per-term numbers sit in the bars beside it.
   const ranked = [...terms].sort((a, b) => b.contribution - a.contribution)
   const parts = ranked.slice(0, 2).map(term => {
-    const pct = Math.round(term.raw * 100)
     switch (term.name) {
-      case 'urgency': return `it is drifting past its review date (${pct}% of the way to a full interval overdue)`
-      case 'gain': return `there is more ground still to cover here than almost anywhere else (${pct}%)`
-      case 'behaviour': return `it fits how the session is going (${pct}%)`
-      case 'cognitive': return `the ${input.difficulty_tier} tier matches how well this is already known (${pct}%)`
-      case 'variety': return `it has not come up recently (${pct}%)`
+      case 'urgency': return 'due for review'
+      case 'gain': return 'most left to learn'
+      case 'behaviour': return "it suits how you're doing today"
+      case 'cognitive': return 'right difficulty for you'
+      case 'variety': return 'not seen lately'
     }
   })
 
   const guardNote = guards.includes('wheel_spin')
-    ? ` Held back because this skill has gone wrong ${input.state.consecutive_wrong} times in a row — grinding it further is unlikely to help.`
+    ? ` Paused: wrong ${input.state.consecutive_wrong} times in a row.`
     : ''
 
-  return `Chosen because ${parts.join(', and ')}.${guardNote}`
+  const sentence = parts.join(', and ')
+  return `${sentence.charAt(0).toUpperCase()}${sentence.slice(1)}.${guardNote}`
 }
 
 export function scoreCandidate(input: ScoreCandidateInput, context: ScoreContext): CandidateScore {

@@ -306,8 +306,7 @@ describe('scoring a candidate (SCORE-2)', () => {
 
   it('explains itself in a sentence naming its strongest term', () => {
     const result = scoreCandidate(candidate({ schedule: schedule(20) }), context())
-    expect(result.reason).toMatch(/^Chosen because /)
-    expect(result.reason).toContain('review date')
+    expect(result.reason).toMatch(/^Due for review/)
   })
 })
 
@@ -353,7 +352,7 @@ describe('score invariants that must hold before this can ever go live (SCORE-2)
     const plain = scoreCandidate(unstuck, context())
     expect(penalised.guards).toContain('wheel_spin')
     expect(penalised.score).toBeCloseTo(plain.score * WHEEL_SPIN_PENALTY, 10)
-    expect(penalised.reason).toContain('grinding it further')
+    expect(penalised.reason).toContain('Paused: wrong')
   })
 
   it('does not penalise a skill one wrong answer short of stuck', () => {

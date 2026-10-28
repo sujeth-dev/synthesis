@@ -25,18 +25,19 @@ import type { MasteryState } from '@/types'
 // seen, and whether recent answers bear the belief out — beside each other, so
 // a confident-looking meter on two attempts reads as what it is.
 
-const AGREEMENT_TEXT: Record<Agreement, { text: string; tone: string }> = {
-  agrees:        { text: 'recent answers agree',            tone: 'text-c-faint' },
-  belief_ahead:  { text: 'belief is ahead of recent answers', tone: 'text-c-yellow' },
-  belief_behind: { text: 'doing better than the belief',      tone: 'text-c-green' },
-  thin:          { text: 'too little evidence to judge',      tone: 'text-c-ghost' },
+// Only what is worth saying: a row whose answers agree with the bar says nothing.
+const AGREEMENT_TEXT: Record<Agreement, { text: string; tone: string } | null> = {
+  agrees:        null,
+  belief_ahead:  { text: 'recent answers weaker',   tone: 'text-c-yellow' },
+  belief_behind: { text: 'doing better than shown', tone: 'text-c-green' },
+  thin:          { text: 'too few answers yet',     tone: 'text-c-ghost' },
 }
 
 // The state, not getMasteryTier(p_know): a skill at p_know >= 0.65 reads
 // "Mastered" by tier but stays `fragile` until it survives a first review, and
 // the profile's job is to show what the model actually holds.
 const STATE_LABEL: Record<MasteryState, string> = {
-  mastered: 'Mastered', fragile: 'Fragile', learning: 'Learning',
+  mastered: 'Mastered', fragile: 'Needs review', learning: 'Learning',
   ready: 'Ready', blocked: 'Locked',
 }
 
@@ -103,13 +104,13 @@ export default async function ProfilePage() {
 
   // Group so what needs attention comes first. Every row stays visible: the
   // grouping orders the evidence, it never hides any.
-  const groups: { key: string; title: string; note: string; rows: SkillEvidence[] }[] = [
-    { key: 'attention', title: 'Needs attention', note: 'Belief outruns the evidence, or a skill has not yet survived its first review.', rows: [] },
-    { key: 'learning', title: 'Still learning', note: 'Belief and answers roughly agree; not mastered yet.', rows: [] },
-    { key: 'solid', title: 'Solid', note: 'Mastered, and recent answers bear it out.', rows: [] },
+  const groups: { key: string; title: string; rows: SkillEvidence[] }[] = [
+    { key: 'attention', title: 'Needs attention', rows: [] },
+    { key: 'learning', title: 'Still learning', rows: [] },
+    { key: 'solid', title: 'Solid', rows: [] },
   ]
   for (const e of evidence) {
-    const g = attentionReason(e) ? 0 : e.mastery_state === 'mastered' ? 2 : 1
+    const g = attentionReason(e) || e.mastery_state === 'fragile' ? 0 : e.mastery_state === 'mastered' ? 2 : 1
     groups[g].rows.push(e)
   }
   const attentionCount = groups[0].rows.length
@@ -142,12 +143,12 @@ export default async function ProfilePage() {
           <StatCard value={mastered} label="Mastered" accent={MASTERY_COLOUR.mastered} testId="stat-mastered" />
           <StatCard value={learning} label="Learning" accent={MASTERY_COLOUR.learning} />
           <StatCard value={practice.length} label="Attempts" note={`since ${sinceLabel}`} testId="stat-attempts" />
-          <StatCard value={accuracy === null ? '—' : `${accuracy}%`} label="Accuracy" note={`over all ${practice.length} practice answers`} testId="stat-accuracy" />
+          <StatCard value={accuracy === null ? '—' : `${accuracy}%`} label="Accuracy" testId="stat-accuracy" />
         </div>
 
         <div className="grid lg:grid-cols-[minmax(0,1fr)_360px] gap-5 items-start">
-          <Section title="What Synaptic believes about you"
-            note="Belief: the model's estimate you know the skill (striped until it survives a first review). Evidence: how much it has seen — half-full at 5 attempts. The line is the belief after each attempt."
+          <Section title="Your skills"
+            note="Top bar: how well you know it. Bottom bar: how many answers."
             testId="skill-profile">
             {evidence.length === 0 && <p className="text-[12px] text-c-ghost">Nothing yet — start a session and this fills in.</p>}
             {groups.filter(g => g.rows.length > 0).map(g => (
@@ -155,7 +156,6 @@ export default async function ProfilePage() {
                 <div className="flex items-baseline gap-2 pb-2 border-b border-[var(--border)]">
                   <p className={`text-[14px] font-semibold ${g.key === 'attention' ? 'text-c-yellow' : 'text-c-text'}`}>{g.title}</p>
                   <span className="font-mono text-[11px] text-c-faint">{g.rows.length}</span>
-                  <p className="text-[11px] text-c-faint ml-auto hidden sm:block">{g.note}</p>
                 </div>
                 <div className="divide-y divide-[var(--border)]">
                   {g.rows.map(e => <SkillRow key={e.skill_id} e={e} label={label(e.skill_id)} />)}
@@ -164,7 +164,7 @@ export default async function ProfilePage() {
             ))}
             {untouched.length > 0 && (
               <p className="text-[11px] text-c-faint pt-3 border-t border-[var(--border)]" data-testid="untouched-skills">
-                Open but not practised yet ({untouched.length}), so no evidence either way:{' '}
+                Not started yet ({untouched.length}):{' '}
                 {untouched.map((e, i) => (
                   <span key={e.skill_id}>
                     {i > 0 && ', '}
@@ -176,14 +176,14 @@ export default async function ProfilePage() {
           </Section>
 
           <div className="lg:sticky lg:top-6 flex flex-col">
-            <Section title="Is practice landing?"
-              note="Share of first, second, third… attempts at a skill that were wrong, averaged over the skills that got that far. Falling means learning."
+            <Section title="Are you improving?"
+              note="How often you miss on try 1, 2, 3… Down = improving."
               testId="learning-curve">
               <LearningCurve points={curve} />
             </Section>
 
             {latestByPhase.size > 0 && (
-              <Section title="By kind of thinking" note="From your latest exam in each phase. Exams are a measurement only." testId="bloom-profile">
+              <Section title="By question type" note="Latest exam in each phase." testId="bloom-profile">
                 <div className="space-y-5">
                   {[...latestByPhase.values()].map(r => (
                     <div key={r.phase}>
@@ -197,7 +197,7 @@ export default async function ProfilePage() {
               </Section>
             )}
 
-            <Section title="Last 30 days" note="Practice answers per day." testId="activity">
+            <Section title="Last 30 days" testId="activity">
               <DayBars days={activity} unit="answers" height={48} />
             </Section>
             <Section title="Recent sessions">
@@ -225,9 +225,8 @@ export default async function ProfilePage() {
 
 /** Why a skill belongs in "Needs attention", or null. Belief ahead first, as it is the sharpest. */
 function attentionReason(e: SkillEvidence): string | null {
-  if (e.agreement === 'belief_ahead') return `Belief ahead: ${e.recent.filter(Boolean).length} of last ${e.recent.length} right`
-  if (e.p_know >= 0.7 && e.attempts < 3) return `High belief on ${e.attempts} attempt${e.attempts === 1 ? '' : 's'}`
-  if (e.mastery_state === 'fragile') return 'Awaiting first review'
+  if (e.agreement === 'belief_ahead') return `Only ${e.recent.filter(Boolean).length} of last ${e.recent.length} right`
+  if (e.p_know >= 0.7 && e.attempts < 3) return `Only ${e.attempts} answer${e.attempts === 1 ? '' : 's'} so far`
   return null
 }
 
@@ -251,27 +250,24 @@ function SkillRow({ e, label }: { e: SkillEvidence; label: string }) {
         </span>
       </div>
       <div className="grid grid-cols-[56px_1fr_40px] sm:grid-cols-[56px_1fr_40px_104px] items-center gap-x-3 gap-y-1.5">
-        <span className="text-[10px] font-mono text-c-faint">belief</span>
+        <span className="text-[10px] font-mono text-c-faint">known</span>
         <Meter value={e.p_know} colour={fill} title={`Belief ${Math.round(e.p_know * 100)}%`} testId={`belief-${e.skill_id}`} />
         <span className="font-mono text-[11px] text-c-muted text-right">{Math.round(e.p_know * 100)}%</span>
         <div className="hidden sm:block row-span-2">
           <Sparkline values={e.trajectory} title={`Belief after each of ${e.trajectory.length} attempts`} />
         </div>
-        <span className="text-[10px] font-mono text-c-faint">evidence</span>
+        <span className="text-[10px] font-mono text-c-faint">answers</span>
         <Meter value={e.evidence_strength} title={`${e.attempts} attempts seen`} testId={`evidence-${e.skill_id}`} />
         <span className="font-mono text-[11px] text-c-muted text-right">{e.attempts}</span>
       </div>
       <p className="text-[11px] text-c-faint mt-1.5">
         {e.correct}/{e.attempts} right
         {e.recent.length > 0 && <> · last {e.recent.length}: <span className="font-mono tracking-wider">{e.recent.map(r => r ? '●' : '○').join('')}</span></>}
-        {!reason && <>{' · '}<span className={agree.tone}>{agree.text}</span></>}
-        {e.attempts > 0 && (
-          <span className="text-c-ghost"> · {e.sources.correctness} scored, {e.sources.reasoning} explained
-            {e.sources.discounted > 0 && (
-              <>, <span className="underline decoration-dotted cursor-help"
-                title="Answers given after two misses in a row count 20% less, and answers slower than 15 seconds 15% less: a struggling or distracted answer says less about what you know.">
-                {e.sources.discounted} counted less</span></>
-            )}
+        {!reason && agree && <>{' · '}<span className={agree.tone}>{agree.text}</span></>}
+        {e.sources.discounted > 0 && (
+          <span className="text-c-ghost"> · <span className="underline decoration-dotted cursor-help"
+            title="Counts less after 2 misses in a row, or if slower than 15s.">
+            {e.sources.discounted} counted less</span>
           </span>
         )}
       </p>

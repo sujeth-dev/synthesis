@@ -362,7 +362,7 @@ export default async function Dashboard({
                                     isStudiable ? 'hover:scale-110 cursor-pointer' : 'opacity-50 cursor-default'
                                   }`}
                                   style={{ background: colour + '22', border: `2.5px solid ${colour}` }}
-                                  title={isStudiable ? `Study: ${node.label}` : 'Prerequisites needed'}
+                                  title={isStudiable ? `Study: ${node.label}` : 'Finish earlier skills first'}
                                 >
                                   {mastery === 'mastered' ? (
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={colour} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -391,21 +391,18 @@ export default async function Dashboard({
                       </div>
                     </div>
                   </div>
-                  <p className="px-6 py-3 border-t border-[var(--border)] bg-c-bg4/60 text-[12px] text-c-faint">
-                    Tap any open skill to study it directly, or start the session above and let the engine choose.
-                  </p>
                 </div>
 
                 {/* ── Bloom profile from the latest exam ────────────────────── */}
                 <div className="p-6 rounded-2xl border border-[var(--border)] bg-c-bg2" data-testid="dashboard-bloom">
                   <div className="flex items-baseline justify-between gap-3 mb-1">
-                    <p className="text-[14px] text-c-text font-semibold">By kind of thinking</p>
+                    <p className="text-[14px] text-c-text font-semibold">By question type</p>
                     {latestExam && <Link href={`/learn/exam/${latestExam.phase}`} className="text-[12px] font-mono text-c-faint hover:text-c-text flex-shrink-0">Retake →</Link>}
                   </div>
                   {latestExam ? (
                     <>
                       <p className="text-[12px] text-c-faint mb-4">
-                        Latest exam · {PHASE_SHORT[latestExam.phase] ?? latestExam.phase} · your chance on a medium question at each level
+                        Latest exam · {PHASE_SHORT[latestExam.phase] ?? latestExam.phase} · chance of a right answer
                       </p>
                       <BloomProfile levels={bloomProfile(latestExam.debrief as Debrief)} />
                     </>
@@ -428,7 +425,7 @@ export default async function Dashboard({
                       </Link>
                     )}
                   </div>
-                  <p className="text-[12px] text-c-faint mb-4">Due now, then each of the next 14 days.</p>
+                  <p className="text-[12px] text-c-faint mb-4">Next 14 days</p>
                   <DayBars days={forecast} unit="reviews" height={48} showCounts />
                 </div>
 
@@ -476,11 +473,11 @@ export default async function Dashboard({
               <div className="flex items-baseline justify-between gap-3 mb-4">
                 <div>
                   <p className="text-[14px] font-semibold text-c-text">How you work</p>
-                  <p className="text-[12px] text-c-faint">Not what you know: how you answer, read from every attempt.</p>
+                  <p className="text-[12px] text-c-faint">Last {BEHAVIOUR_WINDOW_DAYS} days</p>
                 </div>
-                <Link href="/profile" className="text-[12px] font-mono text-c-faint hover:text-c-text flex-shrink-0">What the model believes →</Link>
+                <Link href="/profile" className="text-[12px] font-mono text-c-faint hover:text-c-text flex-shrink-0">See your skills →</Link>
               </div>
-              <BehaviourInsights insights={insights} windowDays={BEHAVIOUR_WINDOW_DAYS} />
+              <BehaviourInsights insights={insights} />
             </div>
           </>
         )}

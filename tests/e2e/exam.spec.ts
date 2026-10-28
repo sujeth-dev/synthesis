@@ -145,7 +145,7 @@ test('practice gives a nudge then how to proceed, records hint use, and debriefs
     await page.getByTestId('review-button').click()
     await page.getByTestId('submit-exam').click()
     await expect(page.getByTestId('exam-debrief')).toBeVisible({ timeout: 20_000 })
-    await expect(page.getByText(/items with a hint \(1 took both\)/)).toBeVisible()
+    await expect(page.getByText(/used a hint \(1 used both\)/)).toBeVisible()
     // Both hints were asked for within seconds of each other.
     await expect(page.getByTestId('rapid-hints')).toBeVisible()
 
