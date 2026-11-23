@@ -2,14 +2,9 @@ import { h, clear } from './ui/dom'
 import { initTheme } from './ui/theme'
 import { destroyCharts } from './ui/charts'
 import { renderDatasets } from './tabs/datasets'
-import { renderOverview } from './tabs/overview'
-import { renderModels } from './tabs/models'
 import { renderCurves } from './tabs/curves'
-import { renderHeatmap } from './tabs/heatmap'
 import { renderExplainer } from './tabs/explainer'
 import { renderScheduling } from './tabs/scheduling'
-import { renderReport } from './tabs/report'
-import { renderMethod } from './tabs/method'
 import { loadIndex, type DatasetEntry, type LabIndex } from './data'
 
 export interface TabContext {
@@ -26,15 +21,10 @@ interface TabDef {
 }
 
 const TABS: TabDef[] = [
-  { id: 'overview', label: 'Overview', render: renderOverview, usesDataset: true },
   { id: 'datasets', label: 'Datasets', render: renderDatasets, usesDataset: false },
-  { id: 'models', label: 'Model comparison', render: renderModels, usesDataset: true },
   { id: 'curves', label: 'Learning curves', render: renderCurves, usesDataset: true },
-  { id: 'heatmap', label: 'Skill heatmap', render: renderHeatmap, usesDataset: true },
-  { id: 'explainer', label: 'How BKT & DKT work', render: renderExplainer, usesDataset: true },
   { id: 'scheduling', label: 'Scheduling', render: renderScheduling, usesDataset: false },
-  { id: 'report', label: 'Report outputs', render: renderReport, usesDataset: true },
-  { id: 'method', label: 'Method & limitations', render: renderMethod, usesDataset: false },
+  { id: 'explainer', label: 'How BKT & DKT work', render: renderExplainer, usesDataset: true },
 ]
 
 const main = document.getElementById('main')!
@@ -47,7 +37,7 @@ let datasetId: string | undefined
 
 function readHash(): { tab: string; ds?: string } {
   const [tab, ds] = location.hash.replace(/^#\/?/, '').split('/')
-  return { tab: TABS.some(t => t.id === tab) ? tab : 'overview', ds: ds || undefined }
+  return { tab: TABS.some(t => t.id === tab) ? tab : 'datasets', ds: ds || undefined }
 }
 
 function go(tab: string, ds = datasetId): void {
